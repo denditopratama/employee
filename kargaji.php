@@ -27,9 +27,21 @@
                     
 
                         echo '
-                       
+                       			<div class="col m8">
+                       			<div id="asd" class="input-field col s12" >
+                            <i id="roro" class="material-icons prefix md-prefix" >attach_money</i><label>Penerimaan Lain</label><br/>	
+                            <select class="browser-default" name="tunjukan" id="tunjukan" style="margin-bottom:15px;">';
+					$query = mysqli_query($config,"SELECT * FROM tbl_jenis_penerimaan");	
+							while ($row = mysqli_fetch_array($query)) {											
+								echo "<option id='qq' value='".$row['id']."|".$row['nama']."'>".$row['uraian']."</option>";}
+								echo "</select>";
+							
+								
+			echo'
+					</div>
+                       			</div>
 
-                                <div class="col m8" id="colres">
+                                <div class="col m12" id="colres">
 								<h5>A. Keterangan Presensi</h5>
                                     <table class="bordered" id="tblb">
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
