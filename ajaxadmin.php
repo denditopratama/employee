@@ -1,29 +1,3 @@
-<?php
-    ob_start();
-    //cek session
-	
-    session_start();
-	
-
-    if(empty($_SESSION['admin'])){
-        $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
-        header("Location: ./");
-        die();
-    } else {
-		
-		if($_SESSION['id_user']==10101){include'logout.php';}
-?>
-
-<!doctype html>
-<html lang="en">
-
-<!-- Include Head START -->
-<!-- E-mployee JMP By Dendito Pratama || denditoprtm@gmail.com -->
-<?php include('include/head.php'); ?>
-<!-- Include Head END -->
-
-<!-- Body START -->
-<body id="vv" class="bg">
 
 <!-- Header START -->
 <header>
@@ -395,10 +369,7 @@
                     break;
 				case 'pros':
                     include "proses_gaji.php";
-                    break;
-				case 'files':
-                    include "file_sharing.php";
-                    break;					
+                    break;	
 				
 					
             }
@@ -1198,15 +1169,5 @@ function drawChart() {
 <!-- Main END -->
 
 <!-- Include Footer START -->
-<?php include('include/footer.php'); ?>
+
 <!-- Include Footer END -->
-
-	
-</body>
-<!-- Body END -->
-
-</html>
-
-<?php
-    }
-?>

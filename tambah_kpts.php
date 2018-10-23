@@ -6,6 +6,8 @@
         die();
     } else {
 
+		
+			
         if(isset($_REQUEST['submit'])){
 
             //validasi form kosong
@@ -66,9 +68,11 @@
                                                         
 															
                                                      
-                                                             $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
-																header("Location: ./admin.php?page=kpts"); 
-																	die(); 
+                                                             echo '<script> 
+															 alert(\'File Tidak Boleh Kosong !\');
+															 window.location.href=\'admin.php?page=kpts\';
+															 </script>';
+															
                                                             die();
                                                         
 													}
@@ -138,7 +142,7 @@
                     <div class="row">
                         <div class="input-field col s6">
 						<i class="material-icons prefix md-prefix">assignment</i>
-						<input id="perihal" type="text" class="validate" name="perihal"> 
+						<input id="perihal" type="text" class="validate" name="perihal" required> 
                          <label for="perihal">Perihal</label>
                             
                         

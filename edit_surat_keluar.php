@@ -65,7 +65,7 @@
                                             $x = explode('.', $file);
                                             $eks = strtolower(end($x));
                                             $ukuran = $_FILES['file']['size'];
-                                            $target_dir = "upload/surat/";
+                                            $target_dir = "upload/surat_keluar/";
 											
 
                                             //jika form file tidak kosong akan mengeksekusi script dibawah ini

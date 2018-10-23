@@ -116,6 +116,7 @@ $pages=$_REQUEST['page'];
 <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="asset/js/jquery.simplePagination.js"></script>
 <script data-pace-options='{ "ajax": false }' src='asset/js/pace.min.js'></script>
+<script type="text/javascript" src="js/jquery.paginate.js"></script>
 
 <script type="text/javascript">
 

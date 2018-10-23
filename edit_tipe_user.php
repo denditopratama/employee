@@ -34,6 +34,7 @@
 					$divisi = mysqli_real_escape_string($config,$_REQUEST['divisi']);
 				    $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['username'])));
                     $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['password'])));
+					$status_tugas = mysqli_real_escape_string($config,$_REQUEST['status_tugas']);
 					if($_SESSION['admin']!=1){
 					$password_lama = mysqli_real_escape_string($config, $_REQUEST['password_lama']);}
 					
@@ -68,9 +69,9 @@
 													if($_SESSION['admin']==1){
 														
 													if($password!=""){
-														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',foto='$nfile',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi' WHERE id_user='$id_user'");}
+														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',foto='$nfile',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi',status_tugas='$status_tugas' WHERE id_user='$id_user'");}
 													else{
-														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', nama='$nama', nip='$nip',foto='$nfile',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi' WHERE id_user='$id_user'");}
+														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', nama='$nama', nip='$nip',foto='$nfile',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi',status_tugas='$status_tugas' WHERE id_user='$id_user'");}
 													}
 													else {
 													if($password!=""){
@@ -104,9 +105,9 @@
 													if($_SESSION['admin']==1){
 														
 													if($password!=""){
-														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi' WHERE id_user='$id_user'");}
+														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi',status_tugas='$status_tugas' WHERE id_user='$id_user'");}
 													else{
-														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi' WHERE id_user='$id_user'");}
+														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi',status_tugas='$status_tugas' WHERE id_user='$id_user'");}
 													}
 													else {
 													if($password!=""){
@@ -150,9 +151,9 @@
                                              if($_SESSION['admin']==1){
 														
 													if($password!=""){
-														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi' WHERE id_user='$id_user'");}
+														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi',status_tugas='$status_tugas' WHERE id_user='$id_user'");}
 													else{
-														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi' WHERE id_user='$id_user'");}
+														$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', nama='$nama', nip='$nip',admin='$admins',status_karyawan='$status_karyawan',divisi='$divisi',status_tugas='$status_tugas' WHERE id_user='$id_user'");}
 													}
 													else {
 													if($password!=""){
@@ -247,6 +248,7 @@
                                 <!-- Row in form START -->
                                 <div class="row">
 							<div class="input-field col s6">
+							<div class="card">
 							<?php
 				
 				$querye = mysqli_query($config,"SELECT foto FROM tbl_user WHERE id_user='$id_user'");
@@ -256,6 +258,7 @@
 		   }
 		   else{
 		   echo'<img class="file" src="./upload/foto/'.$rows['foto'].'" style="display:block;width:100%;">'; }} ?>
+					</div>
 					</div>
 					<div class="input-field col s6">
                                         <i class="material-icons prefix md-prefix">text_fields</i>
@@ -322,10 +325,14 @@
 														 else if($row['admin'] == 9) {
                                                             echo 'Koperasi';
                                                         }
+														else if($row['admin'] == 10) {
+                                                            echo 'Komisaris';
+                                                        }
 														 
                                                 echo'  
                                                 </option>
                                     <option value="1">Super Admin</option>
+									<option value="10">Komisaris</option>
                                     <option value="3">Direktur Utama</option>
 									<option value="2">Direktur</option>
 									<option value="4">General Manager</option>
@@ -424,7 +431,27 @@
                                         </div>
 										</div>
 										
-										
+										<div class="input-field col s6">
+                                        <i class="material-icons prefix md-prefix">location_on</i><label>Status Tugas</label><br/>
+                                        <div class="input-field col s11 right">
+                                            <select class="browser-default" name="status_tugas" id="status_tugas" required>
+                                                <option value="'.$row['status_tugas'].'">';
+                                                   
+                                                        if($row['status_tugas'] == 1) {
+                                                            echo 'Penugasan JM';
+                                                        }
+														  else if($row['status_tugas'] == 2) {
+                                                            echo 'JMP';
+                                                        }
+														  
+                                                echo'  
+                                                </option>
+                                    <option value="1">Penugasan JM</option>
+                                    <option value="2">JMP</option>
+									
+                                            </select>
+                                        </div>
+										</div>
 										
                                            
 									';

@@ -106,7 +106,9 @@ th,td {
 						
 						<div class="col m12">
                             <div class="card" id="dda">
+							
                                 <div class="card-content">
+								<div class="col m6">
                                     <span class="card-title black-text"><i class="material-icons md-36" style="margin-top:-11px;!important">golf_course</i> Game</span>
                                     <p class="kata">Mohon untuk memperhatikan beberapa hal berikut sebelum anda mulai bermain :</p><br/>
 									<p><span class="red-text"><strong>*</strong></span> Pastikan atasan anda sedang tidak ada (SPPD, Cuti, Rapat dll.)</p>
@@ -127,10 +129,28 @@ th,td {
 									<div style="text-align:center!important;">
 									<a style="background-color:green!important" href="?page=game" class="btn-large green waves-effect waves-light">PLAY</a>
 									</div>
-									
-									
-									
+				
                                 </div>
+								<div class="col m6">
+								<h5 style="text-align:center!important">CHAMPION</h5>
+								<div class="card">
+								<?php
+				
+				$cempion=mysqli_query($config,"SELECT nama,id_user,foto FROM tbl_user ORDER BY score DESC LIMIT 1");
+				list($juara,$aid,$foto)=mysqli_fetch_array($cempion);
+			 
+		   if($foto==""){
+			echo'<img class="file" src="./upload/foto/batman.jpg" style="display:block;width:100%">';
+		   }
+		   else{
+		   echo'<img class="file" src="./upload/foto/'.$foto.'" style="display:block;width:100%">';}
+				?>
+							</div>
+					<?php echo '<h5 style="text-align:center!important;margin-bottom:30px!important"><strong>'.$juara.'</strong></h5>'; ?>
+								</div>
+							
+								
+								</div>
 								</div>
 								</div>
 								
@@ -152,7 +172,7 @@ th,td {
 								</thead>
 								
 								<?php 
-								$cekscore=mysqli_query($config,"SELECT * FROM tbl_user ORDER BY score DESC LIMIT 4");
+								$cekscore=mysqli_query($config,"SELECT * FROM tbl_user ORDER BY score DESC LIMIT 10");
 								$no=1;
 								while($row=mysqli_fetch_array($cekscore)){
 														if($row['divisi'] == 1) {

@@ -1,3 +1,4 @@
+
 <?php
 
 if(empty($_SESSION['admin'])){
@@ -403,7 +404,7 @@ if(empty($_SESSION['admin'])){
                
 
                 //Ajax for calling php function
-                $.post('subunit.php', { kode_unit: inputValue }, function(data){
+                $.post('./js/subunit.php', { kode_unit: inputValue }, function(data){
                     
                     //do after submission operation in DOM
 					$("#sub_unit").html(data);

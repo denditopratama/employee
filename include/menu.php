@@ -30,12 +30,12 @@
                         <a class="collapsible-header"><i class="material-icons">account_circle</i><?php echo $_SESSION['nama']; ?></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pro">Profil</a></li>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pro&sub=pass">Ubah Password</a></li>
+                                <li><a href="?page=pro">Profil</a></li>
+                                <li><a href="?page=pro&sub=pass">Ubah Password</a></li>
 								<?php echo'
-					<li onmouseover="this.style.backgroundColor=\'#f9c60b\'" onmouseout="this.style.backgroundColor=\'\'"><a href="?page=cv&id_user='.$_SESSION['id_user'].'">Cetak CV</a></li>';?>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=subgem">Game</a></li>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="logout.php">Logout</a></li>
+								<li><a href="?page=cv&id_user='.$_SESSION['id_user'].'">Cetak CV</a></li>';?>
+								<li><a href="?page=subgem">Game</a></li>
+                                <li><a href="logout.php">Logout</a></li>
                             </ul>
                         </div>
                     </li>
@@ -49,14 +49,14 @@
                        <a class="collapsible-header"><i class="material-icons">repeat</i>Transaksi Surat</a>
                         <div class="collapsible-body">
                             <ul>   <?php if($_SESSION['admin'] == 1){ ?>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsmall">Surat Masuk</a></li>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tskall">Surat Keluar</a></li>
+                                <li><a href="?page=tsmall">Surat Masuk</a></li>
+								<li><a href="?page=tskall">Surat Keluar</a></li>
 							<?php } else {?>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsm">Surat Masuk</a></li>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsk">Surat Keluar</a></li>
+								<li><a href="?page=tsm">Surat Masuk</a></li>
+								<li><a href="?page=tsk">Surat Keluar</a></li>
 							<?php } ?>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="#">Nomor Surat</a></li>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=kpts">KPTS</a></li>
+								<li><a href="#">Nomor Surat</a></li>
+								<li><a href="?page=kpts">KPTS</a></li>
 								
                                
 								
@@ -72,10 +72,30 @@
                         <a class="collapsible-header"><i class="material-icons">account_circle</i> Karyawan</a>
                         <div class="collapsible-body">
                             <ul>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=usr">Data Karyawan</a></li>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pres">Presensi</a></li>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=cuti">Cuti</a></li>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sppd">SPPD</a></li>
+								<li><a href="?page=usr">Data Karyawan</a></li>
+                                <li><a href="?page=pres">Presensi</a></li>
+                                <li><a href="?page=cuti">Cuti</a></li>
+                                <li><a href="?page=sppd">SPPD</a></li>
+								<li><a href="?page=files">File</a></li>
+							<?php if($_SESSION['admin']==1) { ?>	
+							<hr>	
+                    <li>
+                        <a class="collapsible-header" data-activates="col"><i class="material-icons">attach_money</i> Gaji</a>
+                        
+                            <ul id="col">
+								<li><a href="?page=loggjh">Proses Gaji</a></li>
+								<li><a href="">Pelaporan Gaji</a></li>
+								<li><a href="">Slip Gaji</a></li>
+								 </ul>
+                        
+                    </li>
+              
+							<?php } ?>	
+								
+								
+								
+								
+								
                             </ul>
                         </div>
                     </li>
@@ -187,7 +207,9 @@
 				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pres">Presensi</a></li>
 				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=cuti">Cuti</a></li>
 				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sppd">SPPD</a></li>
+				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=files">File</a></li>
 				<li><a id="hah" class="dropdown-button" href='#' data-activates='dropdown2' data-alignment="left" onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''">Gaji<span class="right-triangle"></span></a></li>
+				
 				
 				</ul>
 				

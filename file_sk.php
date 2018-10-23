@@ -104,7 +104,7 @@
                             $eks = strtolower(end($x));
 
                             if(in_array($eks, $ekstensi) == true){
-                                echo '<img class="gbr" data-caption="'.date('d M Y', strtotime($row['tgl_catat'])).'" src="./upload/surat/'.$row['file'].'"/>';
+                                echo '<img class="gbr" data-caption="'.date('d M Y', strtotime($row['tgl_catat'])).'" src="./upload/surat_keluar/'.$row['file'].'"/>';
                             } else {
 
                                 if(in_array($eks, $ekstensi2) == true){
@@ -118,7 +118,7 @@
                                                             <p>File lampiran surat keluar ini bertipe <strong>document</strong>, silakan klik link dibawah ini untuk melihat file lampiran tersebut.</p>
                                                         </div>
                                                         <div class="card-action">
-                                                            <strong>Lihat file :</strong> <a class="blue-text" href="./upload/surat/'.$row['file'].'" target="_blank">'.$row['file'].'</a>
+                                                            <strong>Lihat file :</strong> <a class="blue-text" href="./upload/surat_keluar/'.$row['file'].'" target="_blank">'.$row['file'].'</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -140,7 +140,7 @@
                                                           <p>File lampiran surat masuk ini bertipe <strong>PDF atau Lain - Lain</strong>, silakan klik link dibawah ini untuk melihat file lampiran tersebut.</p>
                                                         </div>
                                                         <div class="card-action">
-                                                            <strong>Lihat file :</strong> <a class="blue-text" href="./upload/surat/'.$row['file'].'" target="_blank">'.$row['file'].'</a>
+                                                            <strong>Lihat file :</strong> <a class="blue-text" href="./upload/surat_keluar/'.$row['file'].'" target="_blank">'.$row['file'].'</a>
                                                         </div>
                                                     </div>
                                                 </div>

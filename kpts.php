@@ -115,10 +115,9 @@
                             </div>';
                         unset($_SESSION['succDel']);
                     }
+					
                 ?>
-							<div class="col m12">
-                            
-								</div>
+							
                 <!-- Row form Start -->
                 <div class="row jarak-form">
 

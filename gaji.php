@@ -40,20 +40,7 @@
 				
                
             }
-        } else {
-
-            $query = mysqli_query($config, "SELECT presensi FROM tbl_sett");
-            list($presensi) = mysqli_fetch_array($query);
-
-            //pagging
-            $limit = 99999;
-            $pg = @$_GET['pg'];
-                if(empty($pg)){
-                    $curr = 0;
-                    $pg = 1;
-                } else {
-                    $curr = ($pg - 1) * $limit;
-                }?>
+        } else {?>
 
                 <!-- Row Start -->
                 <div class="row">
@@ -73,7 +60,7 @@
                                         </ul>
                                     </div>
                                     <div class="col m5 hide-on-med-and-down" style="background-color:#39424c"> 
-                                        <form method="post" action="?page=pres">
+                                        <form method="post" action="?page=gjh">
                                             <div class="input-field round-in-box">
                                                 <input id="search" type="search" name="cari" placeholder="Ketik dan tekan enter mencari data..." required>
                                                 <label for="search"><i class="material-icons">search</i></label>
@@ -145,7 +132,7 @@
                         <div class="col s12" style="margin-top: -18px;">
                             <div class="card yellow darken">
                                 <div class="card-content">
-                                <p class="description">Hasil pencarian untuk kata kunci <strong>"'.stripslashes($cari).'"</strong><span class="right"><a href="?page=pres"><i class="material-icons md-36" style="color: #333;">clear</i></a></span></p>
+                                <p class="description">Hasil pencarian untuk kata kunci <strong>"'.stripslashes($cari).'"</strong><span class="right"><a href="?page=gjh"><i class="material-icons md-36" style="color: #333;">clear</i></a></span></p>
                                 </div>
                             </div>
                         </div>
@@ -155,9 +142,8 @@
                                 <thead class="blue lighten-4"style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head"  >
                                      <tr>
 										<th width="1%"style="color:#fff">Nomor</th>
-                                        <th width="25%"style="color:#fff">File Presensi</th>
-                                        <th width="15%"style="color:#fff">Bulan</th>
-										<th width="20%"style="color:#fff">Divisi</th>
+                                        <th width="25%"style="color:#fff">Bulan</th>
+										<th width="20%"style="color:#fff">Status</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
                                 </thead>
 
@@ -165,7 +151,7 @@
                                     <tr>';
 
                                 //script untuk mencari data
-								$query = mysqli_query($config, "SELECT * FROM tbl_bulan_gaji ORDER by id DESC");
+								$query = mysqli_query($config, "SELECT * FROM tbl_bulan_gaji WHERE bulan LIKE '%$cari%' ORDER by id DESC");
 								 
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
@@ -211,7 +197,11 @@
                                         echo '<td style="text-align:center">'.$nm." ".$y.'</td>
 										';
 										
-										echo '<td style="text-align:center">'.$row['status_proses'].'</td>';
+										if($row['status_proses']==0){
+											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji belum selesai di proses">
+                                                    <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
+										}
+										
 										
 										  
 								
@@ -223,10 +213,12 @@
                                           echo'<td style="text-align:center">';
 										  
 										  echo'
-										  <a class="btn small green darken-3 waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik Untuk Mengajukan Lembur" href="?page=lmbr&id='.$row['id'].'">
-                                                    <i class="material-icons"></i> PROSES</a>
-										<a class="btn small green darken-3 waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik Untuk Mengajukan Keterangan" href="?page=pres&act=ketpres&id='.$row['id'].'">
-                                                    <i class="material-icons"></i>HAPUS</a>';
+										  <form method="POST">
+										  <a class="btn small green darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Memproses Gaji" href="?page=pros&id='.$row['id'].'">
+                                                    <i class="material-icons">done_all</i> PROSES</a>
+										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
+                                                    <i class="material-icons">delete</i>HAPUS</button>
+													</form>';
 										
 									
 											
@@ -310,7 +302,7 @@
 										';
 										
 										if($row['status_proses']==0){
-											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik Untuk Mengajukan Keterangan" href="?page=pres&act=ketpres&id='.$row['id'].'">
+											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji belum selesai di proses">
                                                     <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
 										}
 										
@@ -328,7 +320,7 @@
 										  <form method="POST">
 										  <a class="btn small green darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Memproses Gaji" href="?page=pros&id='.$row['id'].'">
                                                     <i class="material-icons">done_all</i> PROSES</a>
-										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus History Gaji" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
+										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
                                                     <i class="material-icons">delete</i>HAPUS</button>
 													</form>';
 										
@@ -350,7 +342,7 @@
                    
             }
         }
-		
-}
+	}
+
 ?>
 <script type="text/javascript" src="asset/js/halamanuser.js"></script>

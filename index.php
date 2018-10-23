@@ -229,11 +229,15 @@
                                 $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['username'])));
                                 $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['password'])));
 
-                                $query = mysqli_query($config, "SELECT id_user, username, nama, nip, admin,role,unit,sub_unit,divisi FROM tabel_role WHERE username=BINARY'$username' AND password=MD5('$password')");
+                                $query = mysqli_query($config, "SELECT id_user, username, nama, nip, admin,role,unit,sub_unit,divisi,status_aktif FROM tabel_role WHERE username=BINARY'$username' AND password=MD5('$password')");
 
                                 if(mysqli_num_rows($query) > 0){
-                                    list($id_user, $username, $nama, $nip, $admin,$role,$unit,$sub_unit,$divisi) = mysqli_fetch_array($query);
-
+                                    list($id_user, $username, $nama, $nip, $admin,$role,$unit,$sub_unit,$divisi,$status_aktif) = mysqli_fetch_array($query);
+									if($status_aktif==0){
+										$_SESSION['errLog'] = '<center>User tidak Aktif!, silahkan hubungi admin</center>';
+										header("Location: ./");
+                                    die();
+									}
                                     session_start();
 
                                     //buat session

@@ -175,7 +175,7 @@
                                       
                                         echo '
                                         <td style="text-align:center">'.$no++.'</td>
-										<td style="text-align:center">'.substr($row['file'],0,200).'<strong>File :</strong>';
+										<td style="text-align:center"><strong>File :</strong>';
 										if(!empty($row['file'])){
                                             echo '<strong><a href="./upload/presensi/'.$row['file'].'">&nbsp'.$row['file'].'</a></strong>';
                                         } else {
