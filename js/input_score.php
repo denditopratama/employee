@@ -1,15 +1,7 @@
 <?php 
 session_start();
 
-$host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "dbjmproperti";
-    $config = mysqli_connect($host, $username, $password, $database);
-
-    if(!$config){
-        die("Koneksi database gagal: " . mysqli_connect_error());
-    }
+require('../include/config.php');
 
 
 												

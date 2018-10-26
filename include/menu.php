@@ -85,7 +85,7 @@
                             <ul id="col">
 								<li><a href="?page=loggjh">Proses Gaji</a></li>
 								<li><a href="">Pelaporan Gaji</a></li>
-								<li><a href="">Slip Gaji</a></li>
+								<li><a href="?page=slip">Slip Gaji</a></li>
 								 </ul>
                         
                     </li>
@@ -219,7 +219,7 @@
 			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=loggjh">Proses Gaji</a></li>
 			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="#!">Pelaporan Gaji</a></li>
 			<li class="divider"></li>
-			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="#!">Slip Gaji</a></li>
+			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=slip">Slip Gaji</a></li>
 			</ul>
 			
 			<li><a class="dropdown-button" href="#!" data-activates="transaksids" style="color:#000!important">Rekapitulasi <i class="material-icons md-18">arrow_drop_down</i></a></li>

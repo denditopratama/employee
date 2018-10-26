@@ -200,6 +200,9 @@
 										if($row['status_proses']==0){
 											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji belum selesai di proses">
                                                     <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
+										} else {
+											echo '<td style="text-align:center"><a class="btn small green waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji sudah selesai di proses">
+                                                    <i class="material-icons">highlight_off</i> SUDAH SELESAI</a></td>';
 										}
 										
 										

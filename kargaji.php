@@ -56,14 +56,18 @@
                                         <tbody>
                                             <tr>';
 									
-                                        $querye = mysqli_query($config, "SELECT * FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
+                                        
 										$jmk = mysqli_query($config, "SELECT gaji_jm,telat,absen FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
 										list($gajipusat,$telatku,$absenku)=mysqli_fetch_array($jmk);
 										
 										$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
 										list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
+										
 										$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
 										list($gajix,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
+										
+										$fay=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
+										list($jumlahx)=mysqli_fetch_array($fay);
 										
 													
 													echo'
@@ -133,7 +137,7 @@
 													
 													$sub1=$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
 													echo'
-													<tr>
+													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
 													<td style="text-align:center" ><strong>Rp '.number_format($sub1 , 0, ',', '.').'</strong></td>
@@ -146,62 +150,176 @@
 													</tr>';
 													
 													if($status_tugas==1){
+														if($sub1>=$gajipusat){
+														$jamgaji=4.54/100*$sub1;
+														$potjamgaji=6.54/100*$gajipusat;	
+														} else {
 														$jamgaji=4.54/100*$gajipusat;
-														$potjamgaji=6.54/100*$gajipusat;
+														$potjamgaji=6.54/100*$gajipusat;}
 													}
 													else {
-														$jamgaji=4.54/100*$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
-														$potjamgaji=6.54/100*$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+														$jamgaji=4.54/100*$sub1;
+														$potjamgaji=6.54/100*$sub1;
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET pen_jamsostek='$jamgaji' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
 													<tr>
 													<td style="text-align:center">-</td>
-													<td style="text-align:center">Jamsostek</td>
+													<td style="text-align:center">Jamsostek (4,54%)</td>
 													<td style="text-align:center">Rp '.number_format($jamgaji , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
 													if($status_tugas==1){
+														if($sub1>=$gajipusat){
+														$bpjspensiun=2/100*$sub1;
+														$potbpjspensiun=3/100*$sub1;	
+														} else {
 														$bpjspensiun=2/100*$gajipusat;
-														$potbpjspensiun=3/100*$gajipusat;
+														$potbpjspensiun=3/100*$gajipusat;}
 													}
 													else {
-														$bpjspensiun=2/100*$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
-														$potbpjspensiun=3/100*$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+														$bpjspensiun=2/100*$sub1;
+														$potbpjspensiun=3/100*$sub1;
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jampes='$bpjspensiun' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
 													<tr>
 													<td style="text-align:center">-</td>
-													<td style="text-align:center">BPJSTK Jaminan Pensiun</td>
+													<td style="text-align:center">BPJSTK Jaminan Pensiun (2%)</td>
 													<td style="text-align:center">Rp '.number_format($bpjspensiun , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
 													if($status_tugas==1){
+														if($sub1>=$gajipusat){
+														$bpjskesehatan=4/100*$sub1;
+														$potbpjskesehatan=5/100*$sub1;	
+														} else {
 														$bpjskesehatan=4/100*$gajipusat;
-														$potbpjskesehatan=5/100*$gajipusat;
+														$potbpjskesehatan=5/100*$gajipusat;}
 													}
 													else {
-														$bpjskesehatan=4/100*$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
-														$potbpjskesehatan=5/100*$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+														$bpjskesehatan=4/100*$sub1;
+														$potbpjskesehatan=5/100*$sub1;
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jamkes='$bpjskesehatan' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
-													<tr>
+													<tr style="border-bottom:1px solid black">
 													<td style="text-align:center">-</td>
-													<td style="text-align:center">BPJSTK Jaminan Kesehatan</td>
+													<td style="text-align:center">BPJSTK Jaminan Kesehatan (4%)</td>
 													<td style="text-align:center">Rp '.number_format($bpjskesehatan , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
 													$sub2=$bpjskesehatan+$bpjspensiun+$jamgaji;
+													
+													$sum1=$sub2+$sub1;
+													
+													$duda=array();
+											   $janda=array();
+											   $kawin=array();
+										   
+											   for ($i=0;$i<10;$i++){
+											   array_push($duda,$i);}
+											   for ($i=11;$i<21;$i++){
+											   array_push($janda,$i);}
+											   for ($i=22;$i<32;$i++){
+											   array_push($kawin,$i);   
+											   }
+											   
+											$satu=($sum1*12)+$jumlahx;
+											$satu1=($sum1*12);
+											$dua=5/100*$satu;
+											$dua2=5/100*$satu1;
+											$tiga=$satu-$dua;
+											$tiga3=$satu1-$dua2;
+											
+											
+											$ambil=mysqli_query($config,"SELECT status_keluarga,jenis_kelamin FROM tbl_identitas WHERE id_user='$id_user'");
+											list($statkel,$jenkel)=mysqli_fetch_array($ambil);
+											if($jenkel=='P'){
+												$ptkp=54000000;
+											}
+
+											else if($jenkel=='L'){
+											if($statkel==32 || $statkel==33){
+												$ptkp=54000000;
+											} else if(in_array($statkel,$duda) || in_array($statkel,$kawin)) {
+												if($statkel==0 || $statkel==23){
+													$ptkp=58500000;
+												} else if($statkel==1 || $statkel==23){
+													$ptkp=63000000;
+												} else if($statkel==2 || $statkel==24){
+													$ptkp=67500000;
+												} else if($statkel==3 || $statkel==25){
+													$ptkp=72000000;
+												} else {
+													$ptkp=72000000;
+												}
+											}
+												
+															}
+															
+											$pkp=$tiga-$ptkp;
+											if($pkp<=47500000){
+												$tunj21=($pkp-0)*5/95+0;
+											} else if($pkp<=217500000){
+												$tunj21=($pkp-47500000)*15/85+2500000;
+											} else if($pkp<=405000000){
+												$tunj21=($pkp-217500000)*25/75+32500000;
+											} else if($pkp>405000000){
+												$tunj21=($pkp-405000000)*30/70+95000000;
+											} 
+											
+											$pkp1=$tiga3-$ptkp;
+											if($pkp1<=47500000){
+												$tunj21tdk=($pkp1-0)*5/95+0;
+											} else if($pkp1<=217500000){
+												$tunj21tdk=($pkp1-47500000)*15/85+2500000;
+											} else if($pkp1<=405000000){
+												$tunj21tdk=($pkp1-217500000)*25/75+32500000;
+											} else if($pkp1>405000000){
+												$tunj21tdk=($pkp1-405000000)*30/70+95000000;
+											}
+											
+											
+											$jang21=floor($tunj21);
+											
+											$jang21tidak=floor($tunj21tdk);
+											$tunpph21tdktetap=$jang21-$jang21tidak;
+											$tunpph21tetap=$jang21tidak/12;
+											$tottunpph21=$tunpph21tdktetap+$tunpph21tetap;
+											
+											
+											$kojag=mysqli_query($config,"UPDATE tbl_gaji SET tun_pph21_tetap='$tunpph21tetap',tun_pph21_tidak='$tunpph21tdktetap' WHERE id_user='$id_user' AND id_gaji='$id'");
+											$jmks = mysqli_query($config, "SELECT tun_pph21_tetap,tun_pph21_tidak,pot_pph21_tetap,pot_pph21_tidak FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
+										list($pph21tetapku,$pph21tidakku,$potpph21tetapku,$potpph21tidakku)=mysqli_fetch_array($jmks);
+													
 													echo'
 													<tr>
+													<td style="text-align:center">-</td>
+													<td style="text-align:center">Tunjangan PPh-21 Tetap</td>
+													<td style="text-align:center">Rp '.number_format($pph21tetapku , 0, ',', '.').'</td>
+													<td style="text-align:center">-</td>
+													</tr>';
+													
+													echo'
+													<tr>
+													<td style="text-align:center">-</td>
+													<td style="text-align:center">Tunjangan PPh-21 Tidak Tetap</td>
+													<td style="text-align:center">Rp '.number_format($pph21tidakku , 0, ',', '.').'</td>
+													<td style="text-align:center">-</td>
+													</tr>';
+													
+													
+													
+													$subtotpenlain=$bpjskesehatan+$bpjspensiun+$jamgaji+$tunpph21tdktetap+$tunpph21tetap;
+													echo'
+													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($sub2 , 0, ',', '.').'</strong></td>
+													<td style="text-align:center" ><strong>Rp '.number_format($subtotpenlain , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 													
@@ -211,209 +329,22 @@
 													</tr>';
 													
 													
+										$queryoz = mysqli_query($config, "SELECT * FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");		
+                                        if(mysqli_num_rows($queryoz) > 0){
+                                           
+                                            while($row = mysqli_fetch_array($queryoz)){
 													
-                                        if(mysqli_num_rows($querye) > 0){
-                                            $no = 0;
-                                            while($row = mysqli_fetch_array($querye)){
-													
-													if($row['gaji_jm']!=0){
-														echo'
-													
+													$paris=mysqli_query($config,"SELECT uraian FROM tbl_jenis_penerimaan WHERE id='".$row['kode_penerimaan']."'");
+													list($uraiterima)=mysqli_fetch_array($paris);
+												echo'
 													<tr>
 													<td style="text-align:center">-</td>
-													<td style="text-align:center">Gaji JM</td>
-													<td style="text-align:center">Rp '.number_format($row['gaji_jm'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=gajijm&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
+													<td style="text-align:center">'.$uraiterima.'</td>
+													<td style="text-align:center">Rp '.number_format($row['jumlah'] , 0, ',', '.').'</td>
+													<td style="text-align:center"><a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&id_user='.$id_user.'&idnya='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
 													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>
-													
-													';}
-													
-													if($row['rapel_lembur']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel Lembur</td>
-													<td style="text-align:center">Rp '.number_format($row['rapel_lembur'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=rapel_lembur&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['rapel_penerimaan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel Penerimaan</td>
-													<td style="text-align:center">Rp '.number_format($row['rapel_penerimaan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=rapel_penerimaan&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['fas_cop']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Fasilitas Karyawan / COP</td>
-													<td style="text-align:center">Rp '.number_format($row['fas_cop'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=fas_cop&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['rapel_honor']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel Honor</td>
-													<td style="text-align:center">Rp '.number_format($row['rapel_honor'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=rapel_honor&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['tam_jamsos']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Tambahan Jamsostek</td>
-													<td style="text-align:center">Rp '.number_format($row['tam_jamsos'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=tam_jamsos&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['jaminan_pensiun']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Jaminan Pensiun</td>
-													<td style="text-align:center">Rp '.number_format($row['jaminan_pensiun'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=jaminan_pensiun&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['bpjsks']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">BPJS Kesehatan</td>
-													<td style="text-align:center">Rp '.number_format($row['bpjsks'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=bpjsks&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['rapel_jaminan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel Jaminan Pensiun</td>
-													<td style="text-align:center">Rp '.number_format($row['rapel_jaminan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=rapel_jaminan&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['rapel_bpjsks']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel BPJS Kesehatan</td>
-													<td style="text-align:center">Rp '.number_format($row['rapel_bpjsks'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=rapel_bpjsks&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['rapel_bpjskt']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel BPJS Ketenagakerjaan</td>
-													<td style="text-align:center">Rp '.number_format($row['rapel_bpjskt'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=rapel_bpjskt&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['penerimaan_lainnya']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Penerimaan Lainnya</td>
-													<td style="text-align:center">Rp '.number_format($row['penerimaan_lainnya'], 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=penerimaan_lainnya&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['lembur']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Lembur</td>
-													<td style="text-align:center">Rp '.number_format($row['lembur'], 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=lembur&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['thr']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">THR</td>
-													<td style="text-align:center">Rp '.number_format($row['thr'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=thr&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['jasprod']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Jasa Produksi</td>
-													<td style="text-align:center">Rp '.number_format($row['jasprod'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=jasprod&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['ongkos_cuti']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Ongkos Cuti</td>
-													<td style="text-align:center">Rp '.number_format($row['ongkos_cuti'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=ongkos_cuti&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['bantuan_pengobatan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Ongkos Cuti</td>
-													<td style="text-align:center">Rp '.number_format($row['bantuan_pengobatan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&nomer=bantuan_pengobatan&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													$fay=mysqli_query($config,"SELECT thr+jasprod+ongkos_cuti+bantuan_pengobatan+lembur+rapel_lembur+rapel_penerimaan+fas_cop+rapel_honor+tam_jamsos+jaminan_pensiun+bpjsks+rapel_jaminan+rapel_bpjsks+rapel_bpjskt+penerimaan_lainnya FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
-													list($jumlahx)=mysqli_fetch_array($fay);
-													echo'
-													<tr>
-													<td style="text-align:center" ><strong></strong></td>
-													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($jumlahx , 0, ',', '.').'</strong></td>
-													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
+													
 													
 									echo'
                                         </tbody>
@@ -423,9 +354,18 @@
                                 }
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada penerimaan lain. <u></u> </p></center></td></tr>';
-                            }
+                            }						
+													$fayg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
+													list($jumlahx2)=mysqli_fetch_array($fayg);
+													echo'
+													<tr style="border-top:2px solid black">
+													<td style="text-align:center" ><strong></strong></td>
+													<td style="text-align:center"><strong>Sub Total</strong></td>
+													<td style="text-align:center" ><strong>Rp '.number_format($jumlahx2 , 0, ',', '.').'</strong></td>
+													<td style="text-align:center" ><strong></strong></td>
+													</tr>';
 													
-													$jumlah=$jumlahx+$sub2+$sub1;
+													$jumlah=$jumlahx+$subtotpenlain+$sub1;
 													$mn=mysqli_query($config,"UPDATE tbl_gaji SET total_penerimaan='$jumlah' WHERE id_user='$id_user' AND id_gaji='$id'");
 														echo'
 													<tr style="background-color:yellow">
@@ -454,8 +394,8 @@
 
                                         <tbody>
                                             <tr>';
+                                        
 									
-                                        $querye = mysqli_query($config, "SELECT * FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
 										
 										
 													echo'
@@ -487,12 +427,72 @@
 													<td style="text-align:center">-</td>
 													</tr>';
 													
+													
+													
 													$sub3=$potbpjskesehatan+$potbpjspensiun+$potjamgaji;
+													
+													
+											   
+											$satuw=($sum1*12)+$jumlahx+$tottunpph21;
+											$duaw=5/100*$satuw;
+						
+											$tigaz=$satuw-$duaw;
+														
+											$pkps=$tigaz-$ptkp;
+											if($pkps<=50000000){
+												$pottunj21=5/100*$pkps;
+											} else if($pkps<=250000000){
+												$pottunj21=(($pkps-50000000)*15/100)+2500000;
+											} else if($pkps<=500000000){
+												$pottunj21=(($pkps-250000000)*25/100)+32500000;
+											} else if($pkps>500000000){
+												$pottunj21=(($pkps-500000000)*30/100)+95000000;
+											} 
+											
+											
+											if($pkp1<=50000000){
+												$pottunj21tidak=5/100*$pkp1;
+											} else if($pkp1<=250000000){
+												$pottunj21tidak=(($pkp1-50000000)*15/100)+2500000;
+											} else if($pkp1<=500000000){
+												$pottunj21tidak=(($pkp1-250000000)*25/100)+32500000;
+											} else if($pkp1>500000000){
+												$pottunj21tidak=(($pkp1-500000000)*30/100)+95000000;
+											}
+											
+											
+											
+											
+											
+											
+											$pottunpph21tetap=$pottunj21tidak/12;
+											$pottunpph21tdktetap=$pottunj21-$pottunj21tidak;
+											$totpotpph21=$pottunpph21tdktetap+$pottunpph21tetap;
+											$kojags=mysqli_query($config,"UPDATE tbl_gaji SET pot_pph21_tetap='$pottunpph21tetap',pot_pph21_tidak='$pottunpph21tdktetap' WHERE id_user='$id_user' AND id_gaji='$id'");
+											
+										
 													echo'
 													<tr>
+													<td style="text-align:center">-</td>
+													<td style="text-align:center">Potongan PPh-21 Tetap</td>
+													<td style="text-align:center">Rp '.number_format($pottunpph21tetap , 0, ',', '.').'</td>
+													<td style="text-align:center">-</td>
+													</tr>';
+													
+													echo'
+													<tr>
+													<td style="text-align:center">-</td>
+													<td style="text-align:center">Potongan PPh-21 Tidak Tetap</td>
+													<td style="text-align:center">Rp '.number_format($pottunpph21tdktetap , 0, ',', '.').'</td>
+													<td style="text-align:center">-</td>
+													</tr>';
+													
+													$subtotpot=$sub3+$totpotpph21;
+													echo'
+													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($sub3 , 0, ',', '.').'</strong></td>
+													<td style="text-align:center" ><strong>Rp '.number_format($subtotpot , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 													
@@ -500,334 +500,21 @@
 													<tr>
 													<td style="text-align:center" colspan="4"><strong>Potongan Lain</strong></td>
 													</tr>';
-		
-                                        if(mysqli_num_rows($querye) > 0){
+											
+										$terimagaji = mysqli_query($config, "SELECT * FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id'");
+                                        if(mysqli_num_rows($terimagaji) > 0){
                                             $no = 0;
-                                            while($row = mysqli_fetch_array($querye)){
-												
-													
-                                            
-													
-													if($row['pot_thr']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">THR</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_thr'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=thr&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_jasprod']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Jasa Produksi</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_jasprod'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=jasprod&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_ongkos_cuti']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Ongkos Cuti</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_ongkos_cuti'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=ongcut&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_bantuan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Bantuan</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_bantuan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=bantuan&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_kesehatan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Kesehatan</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_kesehatan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=kesehatan&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_koperasi']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Koperasi</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_koperasi'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=koperasi&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_koperasi_pusat']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Koperasi Pusat</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_koperasi_pusat'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=koperasipusat&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_iuran_dapen']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Iuran Dapen</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_iuran_dapen'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=dapen&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_iuran_purnakarya']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Iuran Purnakarya</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_iuran_purnakarya'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=purnakarya&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_iuran_tht']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Iuran THT(PNS-JM)</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_iuran_tht'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=tht&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_asuransi_kendaraan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Asuransi Kendaraan</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_asuransi_kendaraan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=kendaraan&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_saham_jasamarga']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Saham Jasa Marga</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_saham_jasamarga'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=jm&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_umr']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">UMR/UMK/UMP Jasa Marga</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_umr'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=umr&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_koperasi_jmb']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Koperasi JMB</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_koperasi_jmb'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=jmb&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_koperasi_cirebon']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Koperasi Cirebon</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_koperasi_cirebon'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=cirebon&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_iuran_dplk']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Iuran DPLK BNI SIMPONI</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_iuran_dplk'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=dplk&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_rapel_jaminan_pensiun']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel Jaminan Pensiun</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_rapel_jaminan_pensiun'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=rapelpensiun&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_jaminan_pensiun']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Jaminan Pensiun</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_jaminan_pensiun'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=jaminanpensiun&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_bpjs_karyawan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">BPJS Karyawan</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_bpjs_karyawan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=bjps&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_jamsostek']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Jamsostek</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_jamsostek'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=jamsostek&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_iuran_pasti']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Iuran Pasti</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_iuran_pasti'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=iuranpasti&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_iuran_skjm']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Iuran SKJM</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_iuran_skjm'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=iuranskjm&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_premi']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Premi Asuransi Multiguna</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_premi'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=premi&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_rapel_bpjs_kesehatan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel BPJS Kesehatan</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_rapel_bpjs_kesehatan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=rapelbpjsks&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_rapel_bpjs_ketenagakerjaan']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Rapel BPJS Ketenagakerjaan</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_rapel_bpjs_ketenagakerjaan'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=rapelbpjskt&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['absen']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Tidak Hadir</td>
-													<td style="text-align:center">Rp '.number_format($row['absen'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=absen&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-												
-													
-													if($row['telat']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Keterlambatan</td>
-													<td style="text-align:center">Rp '.number_format($row['telat'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=telat&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													if($row['pot_lainnya']!=0){
-														echo'
-													<tr>
-													<td style="text-align:center">-</td>
-													<td style="text-align:center">Potongan Lainnya</td>
-													<td style="text-align:center">Rp '.number_format($row['pot_lainnya'] , 0, ',', '.').'</td>
-													<td style="text-align:center">
-													<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&nomer=potlain&id_user='.$id_user.'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-													<i class="material-icons">delete</i> DEL</a></td>
-													</tr>';}
-													
-													$fays=mysqli_query($config,"SELECT pot_thr+telat+absen+pot_jasprod+pot_ongkos_cuti+pot_bantuan+pot_kesehatan+pot_koperasi+pot_koperasi_pusat+pot_iuran_dapen+pot_iuran_purnakarya+pot_iuran_tht+pot_asuransi_kendaraan+pot_saham_jasamarga+pot_umr+pot_koperasi_jmb+pot_koperasi_cirebon+pot_iuran_dplk+pot_rapel_jaminan_pensiun+pot_jaminan_pensiun+pot_bpjs_karyawan+pot_jamsostek+pot_iuran_pasti+pot_iuran_skjm+pot_premi+pot_rapel_bpjs_kesehatan+pot_rapel_bpjs_ketenagakerjaan+pot_lainnya FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
-													list($jumla)=mysqli_fetch_array($fays);
-													
+                                            while($row = mysqli_fetch_array($terimagaji)){
+												$rain=mysqli_query($config,"SELECT uraian FROM tbl_ref_potongan WHERE id='".$row['kode_potongan']."'");
+													list($uraipotong)=mysqli_fetch_array($rain);
 													echo'
 													<tr>
-													<td style="text-align:center" ><strong></strong></td>
-													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($jumla , 0, ',', '.').'</strong></td>
-													<td style="text-align:center" ><strong></strong></td>
+													<td style="text-align:center">-</td>
+													<td style="text-align:center">'.$uraipotong.'</td>
+													<td style="text-align:center">Rp '.number_format($row['jumlah'] , 0, ',', '.').'</td>
+													<td style="text-align:center"><a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&id_user='.$id_user.'&idnya='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
+													<i class="material-icons">delete</i> DEL</a></td>
 													</tr>';
-													
 													
 													echo'
                                         </tbody>
@@ -838,8 +525,9 @@
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
                             }		
-									
-									$notal=$jumla+$sub3;
+									$faygg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id'");
+									list($jumla)=mysqli_fetch_array($faygg);
+									$notal=$jumla+$subtotpot;
 													$mn=mysqli_query($config,"UPDATE tbl_gaji SET total_potongan='$notal' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'<tr style="background-color:yellow">
 													<td style="text-align:center" colspan="2"><strong>Total Potongan</strong></td>
@@ -853,7 +541,7 @@
 							</div>
 							<div class="col s12" style="background-color:yellow">
 							<h6 style="text-align:center"><strong>PENERIMAAN BERSIH :</strong></h6>
-							<h5 style="text-align:center"><strong>Rp'.number_format($penerimaanbersih , 0, ',', '.').'</strong></h5>
+							<h5 style="text-align:center"><strong>Rp'.number_format(ceil($penerimaanbersih) , 0, ',', '.').'</strong></h5>
 							
 							</div>
 							
@@ -982,7 +670,7 @@
 								</div>
 								</div>
 								
-								<div class="col m3">
+								<div class="col m7">
 								<div class="card">
 							
 								';
@@ -1008,27 +696,7 @@
 								</div>
 								</div>
 								
-								<div class="col m2">
-								<div class="card">
-								<div class="input-field col s12">
-								<i class="material-icons prefix md-prefix">attach_money</i>
-								<input id="absen" type="text" class="validate" name="absen" value='.$absenku.'>
-								<label>Absen</label>
-								<button id="absens" class="btn-large green waves-effect waves-light col s12"><i class="material-icons">done</i> SIMPAN</button>
-								</div>
-								</div>
-								</div>
-								
-								<div class="col m2">
-								<div class="card">
-								<div class="input-field col s12">
-								<i class="material-icons prefix md-prefix">attach_money</i>
-								<input id="telat" type="text" class="validate" name="telat" value='.$telatku.'>
-								<label>Terlambat</label>
-								<button id="telats" class="btn-large green waves-effect waves-light col s12"><i class="material-icons">done</i> SIMPAN</button>
-								</div>
-								</div>
-								</div>';?>
+								';?>
 								
 								<script>
 								$(document).ready(function(){
@@ -1047,36 +715,9 @@
 					
 				});}
 				});
+			
 				
-				$('#absens').click(function(){
-				var nilai = $('#absen').val();
-				var input ='anjay1';
-				var ngasal= 99999;
-				
-				$.post('./js/potongan_lain.php', { input : input, nilai : nilai, id_user :<?php echo $id_user; ?>,id_select: ngasal, id_gaji :<?php echo $id; ?> }, function(data){
-                    
-                    
-					$("#absen").val(data);
-					alert('Data Berhasil Di Input !');
-					location.reload();
-					
-				});
-				});
-				
-				$('#telats').click(function(){
-				var nilai = $('#telat').val();
-				var input ='anjay2';
-				var ngasal= 99999;
-				
-				$.post('./js/potongan_lain.php', { input : input, nilai : nilai, id_user :<?php echo $id_user; ?>,id_select: ngasal,id_gaji :<?php echo $id; ?> }, function(data){
-                    
-                    
-					$("#telat").val(data);
-					alert('Data Berhasil Di Input !');
-					location.reload();
-					
-				});
-				});
+			
 		   $('#potongans').click(function(){
                 //Selected value
 				
@@ -1153,12 +794,14 @@
 										
 										if($row['status_gm']==1){										
 											  echo'
-											<a class="btn small light-green waves-effect waves-light");">
+											<a class="btn small light-green waves-effect waves-light tooltipped" href="?page=pres&act=ketpres&sub=managers&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=IuJh" data-position="left" data-tooltip="Klik untuk membatalkan persetujuan" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
 											<i class="material-icons">done</i></a>';} 
 											else {
 											echo'
-											<a class="btn small red waves-effect waves-light");">
+											<a class="btn small red waves-effect waves-light tooltipped" href="?page=pres&act=ketpres&sub=managers&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=OkgJ" data-position="left" data-tooltip="Klik untuk Menyetujui" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
 										<i class="material-icons">highlight_off</i></a>';}
+									
+										
 										
 										
 										echo'</td>';
@@ -1464,5 +1107,10 @@
 				</div>
                     <!-- Row form END -->';
 					
-                   
+                  
+					   
+					
+					
+								
+								
             

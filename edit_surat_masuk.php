@@ -283,21 +283,9 @@
                                 ?>
                             <label for="tgl_surat">Tanggal Surat</label>
                         </div>
-						 <div class="input-field col s6">
-                            <i class="material-icons prefix md-prefix">featured_play_list</i>
-                            <input id="keterangan" type="text" class="validate" name="keterangan" value="<?php echo $keterangan ;?>" required>
-                                <?php
-                                    if(isset($_SESSION['eketerangan'])){
-                                        $eketerangan = $_SESSION['eketerangan'];
-                                        echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$eketerangan.'</div>';
-                                        unset($_SESSION['eketerangan']);
-                                    }
-                                ?>
-                            <label for="keterangan">Keterangan</label>
-                        </div>
-                        <div class="input-field col s6">
+						<div class="input-field col s6">
                             <i class="material-icons prefix md-prefix">description</i>
-                            <textarea id="isi" class="materialize-textarea validate" name="isi" required><?php echo $isi ;?></textarea>
+                            <input type="text" id="isi" class="validate" name="isi" value="<?php echo $isi ;?>" required>
                                 <?php
                                     if(isset($_SESSION['eisi'])){
                                         $eisi = $_SESSION['eisi'];
@@ -305,8 +293,21 @@
                                         unset($_SESSION['eisi']);
                                     }
                                 ?>
-                            <label for="isi">Isi</label>
+                            <label for="isi">Perihal</label>
                         </div>
+						 <div class="input-field col s6">
+                            <i class="material-icons prefix md-prefix">featured_play_list</i>
+                            <textarea id="keterangan" class="materialize-textarea validate" name="keterangan" required><?php echo $keterangan ;?></textarea>
+                                <?php
+                                    if(isset($_SESSION['eketerangan'])){
+                                        $eketerangan = $_SESSION['eketerangan'];
+                                        echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$eketerangan.'</div>';
+                                        unset($_SESSION['eketerangan']);
+                                    }
+                                ?>
+                            <label for="keterangan">Isi Surat</label>
+                        </div>
+                        
                        
                         <div class="input-field col s6">
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Jika tidak ada file/scan gambar surat, biarkan kosong">

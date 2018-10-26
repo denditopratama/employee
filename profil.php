@@ -13,7 +13,7 @@
             if(isset($_REQUEST['submit'])){
 
                 //validasi form kosong
-                if($_REQUEST['username'] == "" || $_REQUEST['password'] == "" || $_REQUEST['nama'] == "" || $_REQUEST['nip'] == ""){
+                if($_REQUEST['username'] == "" || $_REQUEST['password'] == ""){
                     $_SESSION['errEmpty'] = 'ERROR! Semua form wajib diisi';
                     header("Location: ./admin.php?page=pro&sub=pass");
                     die();
@@ -33,17 +33,9 @@
                         die();
                     } else {
 
-                        if(!preg_match("/^[a-zA-Z., ]*$/", $nama)){
-                            $_SESSION['epnama'] = 'Form Nama hanya boleh mengandung karakter huruf, spasi, titik(.) dan koma(,)';
-                            header("Location: ./admin.php?page=pro&sub=pass");
-                            die();
-                        } else {
+                       
 
-                            if(!preg_match("/^[a-zA-Z0-9 -]*$/", $nip)){
-                                $_SESSION['epnip'] = 'Form NIP hanya boleh mengandung karakter angka, huruf, spasi dan minus(-)';
-                                header("Location: ./admin.php?page=pro&sub=pass");
-                                die();
-                            } else {
+                           
 
                                 if(strlen($username) < 5){
                                     $_SESSION['errEpUname5'] = 'Username minimal 5 karakter!';
@@ -68,7 +60,7 @@
                                             //jika form file tidak kosong akan mengeksekusi script dibawah ini
                                             if($file != ""){
 
-                                                $rand = rand(1,10000);
+                                                $rand = rand(1,5000000);
                                                 $nfile = $rand."-".$file;
 
                                                 //validasi file
@@ -87,7 +79,7 @@
 
 															 $query = mysqli_query($config, "SELECT password FROM tbl_user WHERE id_user='$id_user' AND password=MD5('$password_lama')");
 													if(mysqli_num_rows($query) > 0){
-													$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip', foto='$nfile' WHERE id_user='$id_user'");
+													$do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), foto='$nfile' WHERE id_user='$id_user'");
 
                                             if($do == true){
                                                 echo '<script language="javascript">
@@ -115,7 +107,7 @@
 															
 										$query = mysqli_query($config, "SELECT password FROM tbl_user WHERE id_user='$id_user' AND password=MD5('$password_lama')");
                                         if(mysqli_num_rows($query) > 0){
-                                            $do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip',foto='$file' WHERE id_user='$id_user'");
+                                            $do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), foto='$file' WHERE id_user='$id_user'");
 
                                             if($do == true){
                                                 echo '<script language="javascript">
@@ -149,7 +141,7 @@
                                                 //jika form file kosong akan mengeksekusi script dibawah ini
                                                 $query = mysqli_query($config, "SELECT password FROM tbl_user WHERE id_user='$id_user' AND password=MD5('$password_lama')");
                                         if(mysqli_num_rows($query) > 0){
-                                            $do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password'), nama='$nama', nip='$nip' WHERE id_user='$id_user'");
+                                            $do = mysqli_query($config, "UPDATE tbl_user SET username='$username', password=MD5('$password') WHERE id_user='$id_user'");
 
                                             if($do == true){
                                                 echo '<script language="javascript">
@@ -172,8 +164,8 @@
                                             }
                                         }
                                 }
-                            }
-                        }
+                            
+                        
                     }
                 }
             } else {?>
@@ -225,9 +217,9 @@
                 ?>
 
 				<?php
-				$id_user=$_SESSION['id_user'];
-				$queryt = mysqli_query($config, "SELECT foto FROM tbl_user WHERE id_user='$id_user'");
-            list($foto) = mysqli_fetch_array($queryt);?>
+				$id_user=mysqli_real_escape_string($config,$_SESSION['id_user']);
+				$queryt = mysqli_query($config, "SELECT foto,username FROM tbl_user WHERE id_user='$id_user'");
+            list($foto,$usernamef) = mysqli_fetch_array($queryt);?>
                 <!-- Row form Start -->
                 <div class="row jarak-form">
 
@@ -239,7 +231,7 @@
 						
 						<div class="input-field col s6">
 							<?php
-				$id_user=$_SESSION['id_user'];
+				$id_user=mysqli_real_escape_string($config,$_SESSION['id_user']);
 				$querye = mysqli_query($config,"SELECT foto FROM tbl_user WHERE id_user='$id_user'");
            while($row=mysqli_fetch_array($querye)){ 
 		   if($row['foto']==""){
@@ -250,7 +242,7 @@
 					</div>
                             <div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Username minimal 5 karakter [ huruf, angka atau underscore(_) ]">
                                 <i class="material-icons prefix md-prefix">account_circle</i>
-                                <input id="username" type="text" class="validate" name="username" value="<?php echo $_SESSION['username']; ?>" required>
+                                <input id="username" type="text" class="validate" name="username" value="<?php echo $usernamef; ?>" required>
                                     <?php
                                         if(isset($_SESSION['epuname'])){
                                             $epuname = $_SESSION['epuname'];
@@ -266,30 +258,7 @@
                                 <label for="username">Username</label>
                             </div>
 							
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix md-prefix">text_fields</i>
-                                <input id="nama" type="text" class="validate" name="nama" value="<?php echo $_SESSION['nama']; ?>" required>
-                                    <?php
-                                        if(isset($_SESSION['epnama'])){
-                                            $epnama = $_SESSION['epnama'];
-                                            echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$epnama.'</div>';
-                                            unset($_SESSION['epnama']);
-                                        }
-                                    ?>
-                                <label for="nama">Nama</label>
-                            </div>
-							 <div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Jika belum memiliki NIK, isi dengan minus(-)">
-                                <i class="material-icons prefix md-prefix">looks_one</i>
-                                <input id="nip" type="text" class="validate" name="nip" value="<?php echo $_SESSION['nip']; ?>" required autocomplete="off">
-                                    <?php
-                                        if(isset($_SESSION['epnip'])){
-                                            $epnip = $_SESSION['epnip'];
-                                            echo '<div id="alert-message" class="callout bottom z-depth-1 red lighten-4 red-text">'.$epnip.'</div>';
-                                            unset($_SESSION['epnip']);
-                                        }
-                                    ?>
-                                <label for="nip">NIK</label>
-                            </div>
+                            
                             <div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Isikan password lama Anda">
                                 <i class="material-icons prefix md-prefix">lock_outline</i>
                                 <input id="password_lama" type="password" class="validate" name="password_lama" required>
@@ -386,19 +355,19 @@
 					<div class="input-field col s6">
 							<?php
 				$id_user=$_SESSION['id_user'];
-				$querye = mysqli_query($config,"SELECT foto FROM tbl_user WHERE id_user='$id_user'");
-           while($row=mysqli_fetch_array($querye)){ 
-		   if($row['foto']==""){
+				$querye = mysqli_query($config,"SELECT foto,username FROM tbl_user WHERE id_user='$id_user'");
+           list($fotoku,$usernameku)=mysqli_fetch_array($querye);
+		   if($fotoku==""){
 			echo'<img class="file" src="./upload/foto/batman.jpg" style="display:block;width:100%;">';
 		   }
 		   else{
-		   echo'<img class="file" src="./upload/foto/'.$row['foto'].'" style="display:block;width:100%;">'; }} ?>
+		   echo'<img class="file" src="./upload/foto/'.$fotoku.'" style="display:block;width:100%;">'; } ?>
 					</div>
                     <div class="row">
 					
                         <div class="input-field col s6">
                             <i class="material-icons prefix md-prefix">account_circle</i>
-                            <input id="username" type="text" value="<?php echo $_SESSION['username']; ?>" readonly disable>
+                            <input id="username" type="text" value="<?php echo $usernameku; ?>" readonly disable>
                             <label for="username">Username</label>
                         </div>
 						

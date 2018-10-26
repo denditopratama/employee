@@ -97,8 +97,8 @@ if(empty($_SESSION['admin'])){
 													for ($i=22;$i<32;$i++)  
 														{ echo' <option value="'.$i.'">Kawin / Anak '.($i-$z).' </option>';}
 											?>
-												<option value="31">Tidak Kawin</option>
-												<option value="32">Belum Kawin</option>
+												<option value="32">Tidak Kawin</option>
+												<option value="33">Belum Kawin</option>
                                             </select>
                                         </div>
                                           

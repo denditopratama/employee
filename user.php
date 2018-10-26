@@ -188,9 +188,34 @@ th,td,tr{
 											echo'
                                             <td id="oi" >'.$unid.'</td>
 											<td id="oi" >'.$jabatung.'</td>
-											<td id="oi" >'.$row['admin'].'</td>
-											<td id="oi" >'.$unid.'</td>
+											<td id="oi" >'.$row['admin'].'</td>';
+											if($_SESSION['admin']==1){
+											if($row['status_aktif']==1){
+												echo'
+											<td id="oi" ><a class="btn small green waves-effect waves-light" href="?page=usr&act=akt&tak=oila&id='.$row['id_user'].'" onclick="return confirm(\'Anda yakin ingin merubah data?\');">
+                                                 <i class="material-icons">done_all</i> AKTIF</a></td>
+                                            <td id="oi" >';} else {
+												echo'
+											<td id="oi" ><a class="btn small red waves-effect waves-light" href="?page=usr&act=akt&tak=kuyla&id='.$row['id_user'].'" onclick="return confirm(\'Anda yakin ingin merubah data?\');">
+                                                 <i class="material-icons">highlight_off</i> TIDAK AKTIF</a></td>
                                             <td id="oi" >';
+											}
+
+											}
+											else {
+												if($row['status_aktif']==1){
+												echo'
+											<td id="oi" ><a class="btn small green waves-effect waves-light">
+                                                 <i class="material-icons">done_all</i> AKTIF</a></td>
+                                            <td id="oi" >';} else {
+												echo'
+											<td id="oi" ><a class="btn small red waves-effect waves-light">
+                                                 <i class="material-icons">highlight_off</i> TIDAK AKTIF</a></td>
+                                            <td id="oi" >';
+											}
+											}
+											echo'
+                                            ';
 
                                     if($_SESSION['id_user'] != $row['id_user'] && $_SESSION['admin']!=1){
                                         echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
@@ -198,7 +223,7 @@ th,td,tr{
 									else{
                                           echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">edit</i> EDIT</a>
-                                                 <a class="btn small deep-orange waves-effect waves-light" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">delete</i> DEL</a>
+                                                 <a class="btn small deep-orange waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons">delete</i> DEL</a>
 												 <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">print</i> CETAK CV</a>';
                                         
@@ -322,7 +347,7 @@ th,td,tr{
 									else{
                                           echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">edit</i> EDIT</a>
-                                                 <a class="btn small deep-orange waves-effect waves-light" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">delete</i> DEL</a>
+                                                 <a class="btn small deep-orange waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons" >delete</i> DEL</a>
 												 <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">print</i> CETAK CV</a>';
                                         }

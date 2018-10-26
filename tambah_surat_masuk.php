@@ -273,7 +273,7 @@
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix md-prefix">description</i>
-                            <textarea id="isi" class="materialize-textarea validate" name="isi" required></textarea>
+                            <input id="isi" type="text" name="isi" required>
                                 <?php
                                     if(isset($_SESSION['isi'])){
                                         $isi = $_SESSION['isi'];
@@ -285,7 +285,7 @@
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix md-prefix">featured_play_list</i>
-                            <input id="keterangan" type="text" class="validate" name="keterangan" required>
+                            <textarea id="keterangan" type="text" class="materialize-textarea validate" name="keterangan" required></textarea>
                                 <?php
                                     if(isset($_SESSION['keterangan'])){
                                         $keterangan = $_SESSION['keterangan'];

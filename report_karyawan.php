@@ -312,7 +312,7 @@ body
                                                         } else if($status_keluarga == 25) {
                                                             $statkel = 'Kawin / Anak 3';
                                                         } else if($status_keluarga == 26) {
-                                                            echo 'Kawin / Anak 4';
+                                                            $statkel = 'Kawin / Anak 4';
                                                         } else if($status_keluarga == 27) {
                                                             $statkel = 'Kawin / Anak 5';
                                                         } else if($status_keluarga == 28) {
@@ -323,6 +323,10 @@ body
                                                             $statkel = 'Kawin / Anak 8';
                                                         } else if($status_keluarga == 31) {
                                                             $statkel = 'Kawin / Anak 9';
+                                                        } else if($status_keluarga == 32) {
+                                                            $statkel = 'Tidak Kawin';
+                                                        } else if($status_keluarga == 33) {
+                                                            $statkel = 'Belum Kawin';
                                                         } 
 														
 														if($agama == 1){

@@ -16,7 +16,7 @@
                                                     //jika form file tidak kosong akan mengeksekusi script dibawah ini
                                                     if($file != ""){
 
-                                                        $rand = rand(1,10000);
+                                                        $rand = rand(1,100);
                                                         $nfile = $rand."-".$file;
 
                                                         //validasi file
@@ -147,7 +147,7 @@
 						 }}?>
 						
 						<form method="POST" enctype="multipart/form-data">
-						<div class="input-field col m6">
+						<div class="input-field col m4">
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload">
                                 <div class="btn light-green darken-1">
                                     <span>File</span>

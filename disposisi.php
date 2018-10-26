@@ -120,7 +120,8 @@
                             <div class="col s12">
                                 <div class="card yellow darken">
                                     <div class="card-content">
-                                        <p><p class="description">Perihal Surat:</p><strong>'.$row['isi'].'<strong></p>
+                                        <p><p class="description">Perihal Surat:</p><strong>'.$row['isi'].'</strong></p>
+										<p><p class="description">Isi Surat:</p><strong>'.$row['keterangan'].'</strong></p>
                                     </div>
                                 </div>
                             </div>

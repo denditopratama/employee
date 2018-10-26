@@ -1,15 +1,7 @@
 <?php 
 
 
-$host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "dbjmproperti";
-    $config = mysqli_connect($host, $username, $password, $database);
-
-    if(!$config){
-        die("Koneksi database gagal: " . mysqli_connect_error());
-    }
+require('../include/config.php');
 
 
 												
@@ -38,83 +30,13 @@ $host = "localhost";
 												} else {
 												$jumlahthr=$ages/12*$gajih;}
 												
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET thr='$jumlahthr' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
+												$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$jumlahthr')");
 												echo $jumlahthr;}
 												
-												else if($id_select==2){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET jasprod='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
+												else {
+												$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");}	
 													
-												}
 												
-												else if($id_select==3){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET ongkos_cuti='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==4){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET bantuan_pengobatan='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==5){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET lembur='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==6){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET rapel_lembur='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==7){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET rapel_penerimaan='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==8){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET fas_cop='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==9){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET rapel_honor='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==10){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET tam_jamsos='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==11){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET jaminan_pensiun='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==12){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET bpjsks='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==13){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET rapel_jaminan='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==14){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET rapel_bpjsks='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==15){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET rapel_bpjskt='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
-												
-												else if($id_select==16){
-												$kos=mysqli_query($config,"UPDATE tbl_gaji SET penerimaan_lainnya='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");	
-													
-												}
 												if(!empty($_REQUEST['input'])){
 												$input=mysqli_real_escape_string($config,$_REQUEST['input']);
 												if($input=='anjay'){

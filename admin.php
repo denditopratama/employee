@@ -398,6 +398,12 @@
                     break;
 				case 'files':
                     include "file_sharing.php";
+                    break;
+				case 'files':
+                    include "file_sharing.php";
+                    break;	
+				case 'slip':
+                    include "slipgaji.php";
                     break;					
 				
 					
@@ -652,7 +658,7 @@
 			</div>
 			</div>
 			
-			<div id="modald" class="modal-trigger">
+				<div id="modald">
 				<div id="modals" class="modal">
                 <div class="modal-content white">
 				<div class="input-field col s12">
