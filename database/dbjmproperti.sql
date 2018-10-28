@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2018 at 10:23 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Waktu pembuatan: 26 Okt 2018 pada 16.19
+-- Versi server: 10.1.32-MariaDB
+-- Versi PHP: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,8 +25,8 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `tabel_role`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `tabel_role`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `tabel_role` (
 `id_user` bigint(255)
@@ -41,13 +41,16 @@ CREATE TABLE `tabel_role` (
 ,`divisi` int(25)
 ,`sub_unit` varchar(255)
 ,`jabatan` varchar(255)
+,`status_karyawan` int(5)
+,`status_aktif` int(2)
+,`status_tugas` int(2)
 );
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `tabel_surat`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `tabel_surat`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `tabel_surat` (
 `id_surat` int(10)
@@ -71,8 +74,8 @@ CREATE TABLE `tabel_surat` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `tabel_surat_keluar`
--- (See below for the actual view)
+-- Stand-in struktur untuk tampilan `tabel_surat_keluar`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `tabel_surat_keluar` (
 `id_surat` int(10)
@@ -95,7 +98,28 @@ CREATE TABLE `tabel_surat_keluar` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_cuti`
+-- Struktur dari tabel `tbl_bulan_gaji`
+--
+
+CREATE TABLE `tbl_bulan_gaji` (
+  `id` int(11) NOT NULL,
+  `bulan` date NOT NULL,
+  `status` int(25) NOT NULL,
+  `status_proses` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_bulan_gaji`
+--
+
+INSERT INTO `tbl_bulan_gaji` (`id`, `bulan`, `status`, `status_proses`) VALUES
+(3, '2018-10-18', 0, 0),
+(5, '2018-11-25', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_cuti`
 --
 
 CREATE TABLE `tbl_cuti` (
@@ -112,19 +136,21 @@ CREATE TABLE `tbl_cuti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_cuti`
+-- Dumping data untuk tabel `tbl_cuti`
 --
 
 INSERT INTO `tbl_cuti` (`id`, `id_user`, `alasan`, `tgl_awal`, `tgl_akhir`, `status_manager`, `status_gm`, `nama`, `divisi`, `status_sdm`) VALUES
 (1, 10006, 'Tour Direktorat Divisi Keuangan', '2018-09-21', '2018-09-21', 1, 1, 'Sri Rejeki Handayani', 3, 1),
 (2, 10040, 'Tour Direktorat Divisi Keuangan', '2018-09-21', '2018-09-21', 1, 0, 'Gatri Ayuning Lestari', 0, 0),
 (3, 10027, 'Tour Direktorat Divisi Keuangan', '2018-09-21', '2018-09-21', 1, 1, 'Herdwin Nofrian', 3, 1),
-(4, 10037, 'Tour Direktorat Divisi Keuangan', '2018-09-21', '2018-09-21', 1, 1, 'Widyadji Sasono', 0, 1);
+(4, 10037, 'Tour Direktorat Divisi Keuangan', '2018-09-21', '2018-09-21', 1, 1, 'Widyadji Sasono', 0, 1),
+(5, 10012, 'Acara Keluarga', '2018-10-11', '2018-10-13', 1, 0, 'Sumarmi', 2, 0),
+(6, 10012, 'dsadsadas', '2018-12-12', '2018-12-20', 1, 0, 'Sumarmi', 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_department`
+-- Struktur dari tabel `tbl_department`
 --
 
 CREATE TABLE `tbl_department` (
@@ -135,7 +161,7 @@ CREATE TABLE `tbl_department` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_department`
+-- Dumping data untuk tabel `tbl_department`
 --
 
 INSERT INTO `tbl_department` (`id`, `unit_kerja`, `kode_unit`, `kode`) VALUES
@@ -163,7 +189,7 @@ INSERT INTO `tbl_department` (`id`, `unit_kerja`, `kode_unit`, `kode`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_disposisi`
+-- Struktur dari tabel `tbl_disposisi`
 --
 
 CREATE TABLE `tbl_disposisi` (
@@ -180,7 +206,7 @@ CREATE TABLE `tbl_disposisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_disposisi`
+-- Dumping data untuk tabel `tbl_disposisi`
 --
 
 INSERT INTO `tbl_disposisi` (`id_disposisi`, `nama`, `isi_disposisi`, `sifat`, `batas_waktu`, `catatan`, `id_surat`, `dari`, `baca`, `status`) VALUES
@@ -191,7 +217,119 @@ INSERT INTO `tbl_disposisi` (`id_disposisi`, `nama`, `isi_disposisi`, `sifat`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_hukuman`
+-- Struktur dari tabel `tbl_file_sharing`
+--
+
+CREATE TABLE `tbl_file_sharing` (
+  `id` int(11) NOT NULL,
+  `id_user` int(255) NOT NULL,
+  `file` text NOT NULL,
+  `divisi` int(25) NOT NULL,
+  `sharing` int(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_file_sharing`
+--
+
+INSERT INTO `tbl_file_sharing` (`id`, `id_user`, `file`, `divisi`, `sharing`) VALUES
+(39, 10012, '9-Form Checklist Rest Area FORMAT AKHIR.pdf', 2, 0),
+(42, 10012, '47-asd.pdf', 2, 0),
+(43, 10012, '8-presentasi 3-01.png', 2, 0),
+(44, 10012, '77-BIRD-VIEW-AREA-KOMERSIAL-HOTEL-WATERPARK-1.jpg', 2, 0),
+(45, 10012, '2-Form Checklist Rest Area FORMAT AKHIR.pdf', 2, 0),
+(47, 10012, '31-hosts', 2, 1),
+(48, 10012, '36-hosts', 2, 0),
+(49, 6, '99-JMP-207Aa.jpg', 2, 1),
+(50, 6, '77-tes.txt', 2, 0),
+(51, 10012, '69-Doc2.docx', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_gaji`
+--
+
+CREATE TABLE `tbl_gaji` (
+  `id` int(11) NOT NULL,
+  `id_gaji` int(255) NOT NULL,
+  `id_user` int(25) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `absen` int(255) NOT NULL,
+  `thr` int(255) NOT NULL,
+  `telat` int(255) NOT NULL,
+  `gaji_jm` int(255) NOT NULL,
+  `tun_pph21_tetap` int(255) NOT NULL,
+  `tun_pph21_tidak` int(255) NOT NULL,
+  `pot_pph21_tetap` int(255) NOT NULL,
+  `pot_pph21_tidak` int(255) NOT NULL,
+  `status` int(2) NOT NULL,
+  `total_penerimaan` int(255) NOT NULL,
+  `total_potongan` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_gaji`
+--
+
+INSERT INTO `tbl_gaji` (`id`, `id_gaji`, `id_user`, `nama`, `absen`, `thr`, `telat`, `gaji_jm`, `tun_pph21_tetap`, `tun_pph21_tidak`, `pot_pph21_tetap`, `pot_pph21_tidak`, `status`, `total_penerimaan`, `total_potongan`) VALUES
+(242, 5, 10025, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(243, 5, 10012, '', 300000, 0, 25000, 20425317, 1004543, 0, 853861, 143147, 0, 14657371, 3966850),
+(252, 5, 6, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 17500000, 0),
+(253, 5, 4, '', 150000, 0, 78100, 0, 83724, 206017, 79538, 209479, 0, 10821394, 1132336),
+(254, 5, 10, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 11500000, 0),
+(255, 5, 10013, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(256, 5, 7, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(257, 5, 10003, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(258, 5, 10011, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(259, 5, 10002, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(260, 5, 10010, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(261, 5, 2, '', 0, 0, 0, 0, -236842, 0, -225000, -11250, 0, -236842, -236250),
+(262, 5, 1, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(263, 5, 10027, '', 0, 0, 0, 0, -256579, 0, -243750, -12188, 0, -256579, -255938);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_gaji_pokok`
+--
+
+CREATE TABLE `tbl_gaji_pokok` (
+  `id` int(11) NOT NULL,
+  `admin` int(25) NOT NULL,
+  `gaji` int(255) NOT NULL,
+  `status_karyawan` int(25) NOT NULL,
+  `status_tugas` int(2) NOT NULL,
+  `t_jabatan` int(255) NOT NULL,
+  `t_fungsional` int(255) NOT NULL,
+  `t_transportasi` int(255) NOT NULL,
+  `t_utilitas` int(255) NOT NULL,
+  `t_perumahan` int(255) NOT NULL,
+  `t_komunikasi` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_gaji_pokok`
+--
+
+INSERT INTO `tbl_gaji_pokok` (`id`, `admin`, `gaji`, `status_karyawan`, `status_tugas`, `t_jabatan`, `t_fungsional`, `t_transportasi`, `t_utilitas`, `t_perumahan`, `t_komunikasi`) VALUES
+(1, 10, 15592500, 1, 1, 0, 0, 2000000, 0, 0, 2000000),
+(2, 2, 44600000, 2, 2, 10300000, 0, 0, 2000000, 8000000, 1500000),
+(3, 3, 40140000, 2, 1, 9270000, 0, 0, 2000000, 8000000, 1500000),
+(4, 4, 12500000, 3, 1, 5000000, 0, 0, 0, 0, 0),
+(5, 5, 9000000, 3, 1, 2500000, 0, 0, 0, 0, 0),
+(6, 5, 8500000, 5, 2, 2500000, 0, 0, 0, 0, 0),
+(7, 6, 7000000, 3, 1, 0, 1500000, 0, 0, 0, 0),
+(8, 6, 6500000, 5, 2, 0, 1500000, 0, 0, 0, 0),
+(9, 7, 5800000, 4, 2, 0, 500000, 0, 0, 0, 0),
+(10, 7, 5300000, 5, 2, 0, 500000, 0, 0, 0, 0),
+(11, 8, 4300000, 5, 2, 0, 350000, 0, 0, 0, 0),
+(12, 5, 9000000, 4, 2, 2500000, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_hukuman`
 --
 
 CREATE TABLE `tbl_hukuman` (
@@ -208,7 +346,7 @@ CREATE TABLE `tbl_hukuman` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_identitas`
+-- Struktur dari tabel `tbl_identitas`
 --
 
 CREATE TABLE `tbl_identitas` (
@@ -240,53 +378,56 @@ CREATE TABLE `tbl_identitas` (
   `no_ktp` varchar(255) NOT NULL,
   `no_npwp` varchar(255) NOT NULL,
   `no_bpjsks` varchar(255) NOT NULL,
-  `no_bpjskt` varchar(255) NOT NULL
+  `no_bpjskt` varchar(255) NOT NULL,
+  `no_rekening` varchar(255) NOT NULL,
+  `atas_nama` varchar(255) NOT NULL,
+  `jenis_bank` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_identitas`
+-- Dumping data untuk tabel `tbl_identitas`
 --
 
-INSERT INTO `tbl_identitas` (`id_identitas`, `id_user`, `tgl_bakti`, `jabatan`, `KD_UNIT`, `grade`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `status_keluarga`, `agama`, `goldarah`, `alamat`, `kelurahan`, `kecamatan`, `kota`, `propinsi`, `kode_pos`, `no_telpon`, `no_hp`, `KTP`, `KK`, `NPWP`, `BPJSKT`, `BPJSKS`, `no_ktp`, `no_npwp`, `no_bpjsks`, `no_bpjskt`) VALUES
-(5, 10012, '1986-04-01', 'Manager SDM dan Umum', 'KD_UNIT', '', 'P', 'Nganjuk', '1965-08-30', '25', '1', 'AB', 'Jl. Bawang III No. 70 RT.04 RW.03', 'Cibodasari', 'Cibodas', 'Tangerang', 'Banten', 0, '021-5511093', '', '4902-bopak.jpg', '5846-Abot.jpg', '597-Acas.jpg', '5496-anang.jpg', '2081-Akoeng.jpg', '123124124', '42414112444', '124124124124', '24214124241'),
-(6, 4, '2018-07-07', 'Senior Officer IT', 'KD_UNIT', '', 'L', '', '1995-01-16', '32', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(7, 6, '2017-09-20', 'General Manager SDM dan Umum', 'KD_UNIT', '', 'L', '', '1965-09-09', '25', '1', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(8, 10008, '0000-00-00', 'asdasd', 'KD_UNIT', '', 'L', '', '0000-00-00', '24', '1', 'A', 'A', '', '', '', '', 0, '', '', '3229-angga.jpg', '7578-ardiansyah.jpg', '', '', '', '1234', '123', '123', ''),
-(9, 10006, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '22', '1', 'A', 'Asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(10, 2, '0000-00-00', '', '', '', 'P', '', '1988-04-05', '11', '1', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(11, 10013, '0000-00-00', '', '', '', 'L', '', '1975-11-19', '25', '3', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(12, 10093, '0000-00-00', '', '', '', 'L', '', '1968-11-13', '22', '1', 'A', 'Aas', '', '', '', '', 0, '', '', '9532-03_2018Penugasan Karyawan-budi.docx', '', '', '', '', '', '', '', ''),
-(13, 10027, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(14, 10010, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '25', '1', 'A', 'qqq', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(15, 7, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'ghggjghgj', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(16, 7, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'ghggjghgj', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(17, 10025, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '22', '1', 'A', 'ffsafsaf', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(18, 10063, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '22', '1', 'A', 'dsadsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(19, 10015, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '25', '1', 'A', 'asdasd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(20, 10040, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '22', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(21, 10037, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(22, 10026, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(23, 10081, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'f', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(24, 10082, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '31', '1', 'A', 'ffff', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(25, 10003, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '22', '1', 'A', 'asdd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(26, 9, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(27, 10001, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'hh', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(28, 10004, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '23', '1', 'A', 'Asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(29, 10005, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '25', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(30, 10007, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '24', '2', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(31, 10011, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '22', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(32, 10014, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'asdd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(33, 10023, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(34, 10, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(35, 10058, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(36, 10002, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', ''),
-(37, 10052, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '123', '123', '123', ''),
-(38, 10075, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', 'aasd', '', '');
+INSERT INTO `tbl_identitas` (`id_identitas`, `id_user`, `tgl_bakti`, `jabatan`, `KD_UNIT`, `grade`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `status_keluarga`, `agama`, `goldarah`, `alamat`, `kelurahan`, `kecamatan`, `kota`, `propinsi`, `kode_pos`, `no_telpon`, `no_hp`, `KTP`, `KK`, `NPWP`, `BPJSKT`, `BPJSKS`, `no_ktp`, `no_npwp`, `no_bpjsks`, `no_bpjskt`, `no_rekening`, `atas_nama`, `jenis_bank`) VALUES
+(5, 10012, '1986-04-01', 'Manager SDM dan Umum', 'KD_UNIT', '', 'P', 'Nganjuk', '1965-08-30', '25', '1', 'AB', 'Jl. Bawang III No. 70 RT.04 RW.03', 'Cibodasari', 'Cibodas', 'Tangerang', 'Banten', 0, '021-5511093', '', '4902-bopak.jpg', '5846-Abot.jpg', '597-Acas.jpg', '5496-anang.jpg', '2081-Akoeng.jpg', '123124124', '42414112444', '124124124124', '24214124241', '123123124214', 'Sumarmi', '1'),
+(6, 4, '2018-03-05', 'Senior Officer IT', 'KD_UNIT', '', 'L', '', '1995-01-16', '33', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '12341234', '', '', '', '', '1'),
+(7, 6, '2017-09-20', 'General Manager SDM dan Umum', 'KD_UNIT', '', 'L', '', '1965-09-09', '25', '1', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(8, 10008, '0000-00-00', 'asdasd', 'KD_UNIT', '', 'L', '', '0000-00-00', '24', '1', 'A', 'A', '', '', '', '', 0, '', '', '3229-angga.jpg', '7578-ardiansyah.jpg', '', '', '', '1234', '123', '123', '', '', '', ''),
+(9, 10006, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '22', '1', 'A', 'Asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(10, 2, '0000-00-00', '', '', '', 'P', '', '1988-04-05', '11', '1', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(11, 10013, '0000-00-00', '', '', '', 'L', '', '1975-11-19', '25', '3', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(12, 10093, '0000-00-00', '', '', '', 'L', '', '1968-11-13', '22', '1', 'A', 'Aas', '', '', '', '', 0, '', '', '9532-03_2018Penugasan Karyawan-budi.docx', '', '', '', '', '', '', '', '', '', '', ''),
+(13, 10027, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'A', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(14, 10010, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '25', '1', 'A', 'qqq', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(15, 7, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'ghggjghgj', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(16, 7, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'ghggjghgj', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(17, 10025, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '22', '1', 'A', 'ffsafsaf', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(18, 10063, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '22', '1', 'A', 'dsadsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(19, 10015, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '25', '1', 'A', 'asdasd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(20, 10040, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '22', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(21, 10037, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(22, 10026, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(23, 10081, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'f', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(24, 10082, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '31', '1', 'A', 'ffff', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(25, 10003, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '22', '1', 'A', 'asdd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(26, 9, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(27, 10001, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'hh', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(28, 10004, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '23', '1', 'A', 'Asd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(29, 10005, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '25', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(30, 10007, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '24', '2', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(31, 10011, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '22', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(32, 10014, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'asdd', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(33, 10023, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(34, 10, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(35, 10058, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(36, 10002, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(37, 10052, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '123', '123', '123', '', '', '', ''),
+(38, 10075, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', 'aasd', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_instansi`
+-- Struktur dari tabel `tbl_instansi`
 --
 
 CREATE TABLE `tbl_instansi` (
@@ -304,7 +445,7 @@ CREATE TABLE `tbl_instansi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_instansi`
+-- Dumping data untuk tabel `tbl_instansi`
 --
 
 INSERT INTO `tbl_instansi` (`id_instansi`, `institusi`, `nama`, `status`, `alamat`, `kepsek`, `nip`, `website`, `email`, `logo`, `id_user`) VALUES
@@ -313,7 +454,7 @@ INSERT INTO `tbl_instansi` (`id_instansi`, `institusi`, `nama`, `status`, `alama
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_inventaris`
+-- Struktur dari tabel `tbl_inventaris`
 --
 
 CREATE TABLE `tbl_inventaris` (
@@ -328,7 +469,7 @@ CREATE TABLE `tbl_inventaris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_inventaris`
+-- Dumping data untuk tabel `tbl_inventaris`
 --
 
 INSERT INTO `tbl_inventaris` (`id_invent`, `nama_barang`, `tipe_barang`, `kode_jenis_barang`, `no_seri`, `tanggal_invent`, `pj`, `KD_UNIT`) VALUES
@@ -353,7 +494,7 @@ INSERT INTO `tbl_inventaris` (`id_invent`, `nama_barang`, `tipe_barang`, `kode_j
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_jabatan`
+-- Struktur dari tabel `tbl_jabatan`
 --
 
 CREATE TABLE `tbl_jabatan` (
@@ -367,7 +508,7 @@ CREATE TABLE `tbl_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_jabatan`
+-- Dumping data untuk tabel `tbl_jabatan`
 --
 
 INSERT INTO `tbl_jabatan` (`id`, `id_user`, `jabatan`, `file`, `unit_kerja`, `tanggal`, `no_sk`) VALUES
@@ -382,7 +523,41 @@ INSERT INTO `tbl_jabatan` (`id`, `id_user`, `jabatan`, `file`, `unit_kerja`, `ta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_keahlian`
+-- Struktur dari tabel `tbl_jenis_penerimaan`
+--
+
+CREATE TABLE `tbl_jenis_penerimaan` (
+  `id` int(11) NOT NULL,
+  `kode` int(25) NOT NULL,
+  `uraian` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_jenis_penerimaan`
+--
+
+INSERT INTO `tbl_jenis_penerimaan` (`id`, `kode`, `uraian`) VALUES
+(1, 1, 'THR'),
+(2, 2, 'Jasa Produksi'),
+(3, 3, 'Ongkos Cuti'),
+(4, 4, 'Bantuan Pengobatan'),
+(5, 5, 'Lembur'),
+(6, 6, 'Rapel Lembur'),
+(7, 7, 'Penerimaan Rapel'),
+(8, 8, 'Faslt. Kr/COP'),
+(9, 9, 'Rapel Honorarium Direksi/Komisaris'),
+(10, 10, 'Tambahan Jamsostek'),
+(11, 11, 'Jaminan Pensiun Perusahaan'),
+(12, 12, 'BPJS Kesehatan Perusahaan'),
+(13, 13, 'Rapel Jaminan Pensiun'),
+(14, 14, 'Rapel BPJS Kesehatan'),
+(15, 15, 'Rapel BPJS Ketenagakerjaan'),
+(16, 16, 'Penerimaan  Lainnya');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_keahlian`
 --
 
 CREATE TABLE `tbl_keahlian` (
@@ -393,7 +568,7 @@ CREATE TABLE `tbl_keahlian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_keahlian`
+-- Dumping data untuk tabel `tbl_keahlian`
 --
 
 INSERT INTO `tbl_keahlian` (`id`, `id_user`, `jenis_keahlian`, `sertifikat`) VALUES
@@ -402,7 +577,7 @@ INSERT INTO `tbl_keahlian` (`id`, `id_user`, `jenis_keahlian`, `sertifikat`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_keluarga`
+-- Struktur dari tabel `tbl_keluarga`
 --
 
 CREATE TABLE `tbl_keluarga` (
@@ -417,7 +592,7 @@ CREATE TABLE `tbl_keluarga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_keluarga`
+-- Dumping data untuk tabel `tbl_keluarga`
 --
 
 INSERT INTO `tbl_keluarga` (`id`, `id_user`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `usia`, `hubungan_keluarga`) VALUES
@@ -429,7 +604,7 @@ INSERT INTO `tbl_keluarga` (`id`, `id_user`, `nama`, `jenis_kelamin`, `tempat_la
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_keterangan_presensi`
+-- Struktur dari tabel `tbl_keterangan_presensi`
 --
 
 CREATE TABLE `tbl_keterangan_presensi` (
@@ -444,22 +619,22 @@ CREATE TABLE `tbl_keterangan_presensi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_keterangan_presensi`
+-- Dumping data untuk tabel `tbl_keterangan_presensi`
 --
 
 INSERT INTO `tbl_keterangan_presensi` (`id`, `id_presensi`, `id_user`, `keterangan`, `tanggal`, `jam`, `status_gm`, `divisi`) VALUES
 (1, 16, 8, 'Penting', '2018-10-09', '11.10', 1, 0),
 (7, 16, 8, '22', '2018-10-09', '22.22', 0, 0),
 (9, 16, 4, 'badminton', '2018-10-21', '.', 1, 2),
-(10, 16, 4, 'sakit', '2018-10-18', '.', 0, 2),
-(11, 16, 10012, 'sakit', '2018-10-09', '.', 0, 2),
+(10, 16, 4, 'sakit', '2018-10-18', '.', 1, 2),
+(11, 16, 10012, 'sakit', '2018-10-09', '.', 1, 2),
 (12, 16, 10012, 'Penting', '2018-10-16', '.', 1, 2),
 (13, 16, 10012, 'asf', '2018-10-04', '.', 1, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_klasifikasi`
+-- Struktur dari tabel `tbl_klasifikasi`
 --
 
 CREATE TABLE `tbl_klasifikasi` (
@@ -473,7 +648,7 @@ CREATE TABLE `tbl_klasifikasi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kontrak`
+-- Struktur dari tabel `tbl_kontrak`
 --
 
 CREATE TABLE `tbl_kontrak` (
@@ -487,7 +662,7 @@ CREATE TABLE `tbl_kontrak` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_kontrak`
+-- Dumping data untuk tabel `tbl_kontrak`
 --
 
 INSERT INTO `tbl_kontrak` (`id`, `id_user`, `tgl_awal`, `tgl_akhir`, `file`, `hari`, `status`) VALUES
@@ -495,12 +670,12 @@ INSERT INTO `tbl_kontrak` (`id`, `id_user`, `tgl_awal`, `tgl_akhir`, `file`, `ha
 (12, 10072, '0000-00-00', '2018-10-23', '', '27', 'habis'),
 (13, 10073, '0000-00-00', '2018-09-25', '', '29', 'habis'),
 (14, 10072, '2018-09-27', '2019-09-19', '8600-03441.pdf', '', 'habis'),
-(18, 10026, '2018-10-04', '2018-11-02', '', '25', 'mauhabis');
+(18, 10026, '2018-10-04', '2018-11-02', '', '7', 'mauhabis');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kpts`
+-- Struktur dari tabel `tbl_kpts`
 --
 
 CREATE TABLE `tbl_kpts` (
@@ -513,7 +688,7 @@ CREATE TABLE `tbl_kpts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_kpts`
+-- Dumping data untuk tabel `tbl_kpts`
 --
 
 INSERT INTO `tbl_kpts` (`id`, `id_surat`, `nama`, `tgl_surat`, `tgl_berlaku`, `file`) VALUES
@@ -522,7 +697,7 @@ INSERT INTO `tbl_kpts` (`id`, `id_surat`, `nama`, `tgl_surat`, `tgl_berlaku`, `f
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_lembur`
+-- Struktur dari tabel `tbl_lembur`
 --
 
 CREATE TABLE `tbl_lembur` (
@@ -539,7 +714,7 @@ CREATE TABLE `tbl_lembur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_lembur`
+-- Dumping data untuk tabel `tbl_lembur`
 --
 
 INSERT INTO `tbl_lembur` (`id`, `id_presensi`, `id_user`, `tanggal`, `pekerjaan`, `jam_awal`, `jam_akhir`, `status_manager`, `status_gm`, `divisi`) VALUES
@@ -552,12 +727,13 @@ INSERT INTO `tbl_lembur` (`id`, `id_presensi`, `id_user`, `tanggal`, `pekerjaan`
 (38, 16, 8, '', 'asd', '11.11', '11.11', 1, 1, 0),
 (39, 16, 8, '', 'asd', '11.11', '11.11', 0, 0, 0),
 (40, 16, 8, '', 'asd', '11.11', '11.11', 0, 0, 0),
-(41, 16, 8, '', 'asd', '11.11', '11.11', 0, 0, 0);
+(41, 16, 8, '', 'asd', '11.11', '11.11', 0, 0, 0),
+(42, 16, 10012, '2018-10-25', 'dd', '12.12', '12.12', 1, 0, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_notif_kontrak`
+-- Struktur dari tabel `tbl_notif_kontrak`
 --
 
 CREATE TABLE `tbl_notif_kontrak` (
@@ -570,7 +746,7 @@ CREATE TABLE `tbl_notif_kontrak` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_organisasi`
+-- Struktur dari tabel `tbl_organisasi`
 --
 
 CREATE TABLE `tbl_organisasi` (
@@ -584,7 +760,7 @@ CREATE TABLE `tbl_organisasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_organisasi`
+-- Dumping data untuk tabel `tbl_organisasi`
 --
 
 INSERT INTO `tbl_organisasi` (`id`, `id_user`, `nama_organisasi`, `jabatan`, `tanggal_masuk`, `tanggal_keluar`, `nomor_surat`) VALUES
@@ -593,7 +769,7 @@ INSERT INTO `tbl_organisasi` (`id`, `id_user`, `nama_organisasi`, `jabatan`, `ta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pendidikan`
+-- Struktur dari tabel `tbl_pendidikan`
 --
 
 CREATE TABLE `tbl_pendidikan` (
@@ -612,11 +788,11 @@ CREATE TABLE `tbl_pendidikan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pendidikan`
+-- Dumping data untuk tabel `tbl_pendidikan`
 --
 
 INSERT INTO `tbl_pendidikan` (`id`, `id_user`, `jenis`, `tingkat`, `instansi`, `jurusan`, `lulus`, `no_serti`, `uraian`, `tgl_awal`, `tgl_akhir`, `tempat`) VALUES
-(1, '10012', '1', 1, 'SD Ringinanom', '', 1977, 'XIII.Aa 164603', '', '0000-00-00', '0000-00-00', ''),
+(1, '10012', '1', 1, 'SD Ringinanom', '', 1971, 'XIII.Aa 164603', '', '0000-00-00', '0000-00-00', ''),
 (2, '10012', '2', 0, '', '', 0, '', 'Komunikasi Yang efektif', '1995-01-31', '1995-01-31', 'Jakarta'),
 (5, '10012', '2', 0, '', '', 1977, 'XIII.Aa 164603', 'Pelatihan SIM-SDM (biaya gratis,paket kontrak)', '1997-03-26', '1997-03-28', 'Bandung'),
 (20, '10012', '1', 2, 'SMPN 4 Nganjuk', '', 1981, '04.OB.0545324', '', '0000-00-00', '0000-00-00', ''),
@@ -636,7 +812,43 @@ INSERT INTO `tbl_pendidikan` (`id`, `id_user`, `jenis`, `tingkat`, `instansi`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_presensi`
+-- Struktur dari tabel `tbl_penerimaan`
+--
+
+CREATE TABLE `tbl_penerimaan` (
+  `id` int(25) NOT NULL,
+  `id_gaji` int(255) NOT NULL,
+  `id_user` int(255) NOT NULL,
+  `kode_penerimaan` int(255) NOT NULL,
+  `jumlah` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_penerimaan`
+--
+
+INSERT INTO `tbl_penerimaan` (`id`, `id_gaji`, `id_user`, `kode_penerimaan`, `jumlah`) VALUES
+(7, 5, 4, 5, 737000),
+(8, 5, 4, 1, 3383333);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_potongan`
+--
+
+CREATE TABLE `tbl_potongan` (
+  `id` int(11) NOT NULL,
+  `id_gaji` int(255) NOT NULL,
+  `id_user` int(255) NOT NULL,
+  `kode_potongan` int(255) NOT NULL,
+  `jumlah` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_presensi`
 --
 
 CREATE TABLE `tbl_presensi` (
@@ -647,17 +859,42 @@ CREATE TABLE `tbl_presensi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_presensi`
+-- Dumping data untuk tabel `tbl_presensi`
 --
 
 INSERT INTO `tbl_presensi` (`id`, `divisi`, `bulan`, `file`) VALUES
-(16, '2', '2018-10-12', '1025-Form Checklist Rest Area FORMAT AKHIR.pdf'),
+(16, '2', '2018-10-12', '7340-dsa.jpg'),
 (17, '7', '2018-10-12', '60-JMP-207Aa.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_ref_jabatan`
+-- Struktur dari tabel `tbl_ref_bank`
+--
+
+CREATE TABLE `tbl_ref_bank` (
+  `id` int(11) NOT NULL,
+  `kode_bank` int(25) NOT NULL,
+  `nama_bank` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_ref_bank`
+--
+
+INSERT INTO `tbl_ref_bank` (`id`, `kode_bank`, `nama_bank`) VALUES
+(1, 1, 'Bank Mandiri'),
+(2, 2, 'Bank BCA'),
+(3, 3, 'Bank Mandiri Syariah'),
+(4, 4, 'BNI 46'),
+(5, 5, 'Bank Jabar Banten (BJB)'),
+(6, 6, 'BNI Syariah'),
+(7, 7, 'BRI');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_ref_jabatan`
 --
 
 CREATE TABLE `tbl_ref_jabatan` (
@@ -667,7 +904,7 @@ CREATE TABLE `tbl_ref_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_ref_jabatan`
+-- Dumping data untuk tabel `tbl_ref_jabatan`
 --
 
 INSERT INTO `tbl_ref_jabatan` (`id`, `jabatan`, `kode_sub`) VALUES
@@ -798,7 +1035,7 @@ INSERT INTO `tbl_ref_jabatan` (`id`, `jabatan`, `kode_sub`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_ref_jenis_barang`
+-- Struktur dari tabel `tbl_ref_jenis_barang`
 --
 
 CREATE TABLE `tbl_ref_jenis_barang` (
@@ -808,7 +1045,7 @@ CREATE TABLE `tbl_ref_jenis_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_ref_jenis_barang`
+-- Dumping data untuk tabel `tbl_ref_jenis_barang`
 --
 
 INSERT INTO `tbl_ref_jenis_barang` (`id`, `kode_jenis_barang`, `jenis_barang`) VALUES
@@ -823,7 +1060,53 @@ INSERT INTO `tbl_ref_jenis_barang` (`id`, `kode_jenis_barang`, `jenis_barang`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_role`
+-- Struktur dari tabel `tbl_ref_potongan`
+--
+
+CREATE TABLE `tbl_ref_potongan` (
+  `id` int(11) NOT NULL,
+  `uraian` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_ref_potongan`
+--
+
+INSERT INTO `tbl_ref_potongan` (`id`, `uraian`) VALUES
+(1, 'THR'),
+(2, 'Jasa Produksi'),
+(3, 'Ongkos Cuti'),
+(4, 'Bantuan Pengobatan'),
+(5, 'Potongan Kesehatan'),
+(6, 'Potongan Koperasi'),
+(7, ' Koperasi JM Pusat'),
+(8, 'Iuran Dapen JM'),
+(9, 'Iuran Purnakarya JM'),
+(10, 'Iuran THT (PNS-JM)'),
+(11, 'Asuransi Kendaraan'),
+(12, 'Potongan Saham Jasa Marga'),
+(13, 'Potongan UMR/UMK/UMP Jasa Marga'),
+(14, 'Koperasi  JMB 5'),
+(15, 'Potongan Koperasi Cirebon'),
+(16, 'Iuran DPLK BNI SIMPONI'),
+(17, 'Rapel Jaminan Pensiun'),
+(18, 'Jaminan Pensiun Karyawan (1%)'),
+(19, 'BPJS Kesehatan Karyawan (1%)'),
+(20, 'Jamsostek (JHT 2%)'),
+(21, 'Iuran Pasti'),
+(22, 'Iuran SKJM'),
+(23, 'Premi Asuransi Multi Guna'),
+(24, 'Rapel BPJS Kesehatan'),
+(25, 'Rapel BPJS Ketenagakerjaan'),
+(26, 'Rapel Purna Karya'),
+(27, 'Rapel Iuran Pasti'),
+(28, 'Kehadiran'),
+(29, 'Potongan lainnya');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_role`
 --
 
 CREATE TABLE `tbl_role` (
@@ -833,7 +1116,7 @@ CREATE TABLE `tbl_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_role`
+-- Dumping data untuk tabel `tbl_role`
 --
 
 INSERT INTO `tbl_role` (`id`, `admin`, `role`) VALUES
@@ -845,12 +1128,13 @@ INSERT INTO `tbl_role` (`id`, `admin`, `role`) VALUES
 (10, 6, 'Assistant Manager'),
 (11, 7, 'Senior Officer'),
 (12, 8, 'Officer'),
-(13, 9, 'Koperasi');
+(13, 9, 'Koperasi'),
+(14, 10, 'Komisaris');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sett`
+-- Struktur dari tabel `tbl_sett`
 --
 
 CREATE TABLE `tbl_sett` (
@@ -863,7 +1147,7 @@ CREATE TABLE `tbl_sett` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_sett`
+-- Dumping data untuk tabel `tbl_sett`
 --
 
 INSERT INTO `tbl_sett` (`id_sett`, `surat_masuk`, `surat_keluar`, `presensi`, `referensi`, `id_user`) VALUES
@@ -872,7 +1156,7 @@ INSERT INTO `tbl_sett` (`id_sett`, `surat_masuk`, `surat_keluar`, `presensi`, `r
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sppd`
+-- Struktur dari tabel `tbl_sppd`
 --
 
 CREATE TABLE `tbl_sppd` (
@@ -895,7 +1179,7 @@ CREATE TABLE `tbl_sppd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_sppd`
+-- Dumping data untuk tabel `tbl_sppd`
 --
 
 INSERT INTO `tbl_sppd` (`id`, `id_user`, `keberangkatan`, `destinasi`, `maksud`, `tanggal_awal`, `tanggal_akhir`, `deskripsi`, `status_manager`, `status_gm`, `status_direktur`, `status_sdm`, `status_umum`, `file`, `divisi`, `baca`) VALUES
@@ -912,7 +1196,7 @@ INSERT INTO `tbl_sppd` (`id`, `id_user`, `keberangkatan`, `destinasi`, `maksud`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_spring`
+-- Struktur dari tabel `tbl_spring`
 --
 
 CREATE TABLE `tbl_spring` (
@@ -923,7 +1207,7 @@ CREATE TABLE `tbl_spring` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_spring`
+-- Dumping data untuk tabel `tbl_spring`
 --
 
 INSERT INTO `tbl_spring` (`id`, `nomor`, `block`, `status`) VALUES
@@ -1390,7 +1674,7 @@ INSERT INTO `tbl_spring` (`id`, `nomor`, `block`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sub_unit`
+-- Struktur dari tabel `tbl_sub_unit`
 --
 
 CREATE TABLE `tbl_sub_unit` (
@@ -1402,7 +1686,7 @@ CREATE TABLE `tbl_sub_unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_sub_unit`
+-- Dumping data untuk tabel `tbl_sub_unit`
 --
 
 INSERT INTO `tbl_sub_unit` (`id`, `sub_unit`, `kode_unit`, `kode_sub`, `kode`) VALUES
@@ -1468,7 +1752,7 @@ INSERT INTO `tbl_sub_unit` (`id`, `sub_unit`, `kode_unit`, `kode_sub`, `kode`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_surat_keluar`
+-- Struktur dari tabel `tbl_surat_keluar`
 --
 
 CREATE TABLE `tbl_surat_keluar` (
@@ -1489,18 +1773,19 @@ CREATE TABLE `tbl_surat_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_surat_keluar`
+-- Dumping data untuk tabel `tbl_surat_keluar`
 --
 
 INSERT INTO `tbl_surat_keluar` (`id_surat`, `no_agenda`, `asal_surat`, `tujuan`, `no_surat`, `isi`, `kode`, `tgl_surat`, `tgl_catat`, `file`, `keterangan`, `id_user`, `dari`, `status`) VALUES
 (53, '1/2018', NULL, 'Sumarsono', '', 'dsa', '', '2018-10-26', '2018-10-04', '', 'dsa', 8, 'Super Admin', 0),
 (54, '2/2018', NULL, 'SDM', '', 'dasdasdas', '', '2018-10-18', '2018-10-04', '', 'dsa', 8, 'Super Admin', 0),
-(59, '3/2018', NULL, 'Dendito Pratama', 'dsa', 'dasdasd', '', '2018-10-20', '2018-10-04', '', 'dsadsa', 8, 'Super Admin', 0);
+(59, '3/2018', NULL, 'asdasd', 'dsa', 'dasdasd', '', '2018-10-20', '2018-10-19', '4353-TEMPLATE PRESENSI KOSONG.pdf', 'dsadsa', 8, 'Super Admin', 1),
+(60, '4/2018', NULL, 'SDM-UMUM', '123123', 'pemindahan server', '', '2018-10-09', '2018-10-26', '', 'tolong di pidanhakan server agar lebih mantapsss', 8, 'PT Jasa Marga', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_surat_masuk`
+-- Struktur dari tabel `tbl_surat_masuk`
 --
 
 CREATE TABLE `tbl_surat_masuk` (
@@ -1522,18 +1807,30 @@ CREATE TABLE `tbl_surat_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_surat_masuk`
+-- Dumping data untuk tabel `tbl_surat_masuk`
 --
 
 INSERT INTO `tbl_surat_masuk` (`id_surat`, `no_agenda`, `kode`, `asal_surat`, `isi`, `indeks`, `tgl_surat`, `tgl_diterima`, `file`, `keterangan`, `id_user`, `tujuan`, `baca`, `sifat`, `status`) VALUES
 (53, '1/2018', '', 'Super Admin', 'dsa', '', '2018-10-26', '2018-10-04', '', 'dsa', 6, '', 1, NULL, 0),
 (54, '2/2018', '', 'Super Admin', 'dasdasdas', '', '2018-10-18', '2018-10-04', '', 'dsa', 1, '', 1, NULL, 0),
-(59, '3/2018', 'dsa', 'Super Admin', 'dasdasd', '', '2018-10-20', '2018-10-04', '', 'dsadsa', 4, '', 1, NULL, 0);
+(59, '3/2018', 'dsa', 'Super Admin', 'dasdasd', '', '2018-10-20', '2018-10-04', '7846-TEMPLATE PRESENSI KOSONG.pdf', 'dsadsa', 1, '', 1, NULL, 0),
+(60, '4/2018', '123123', 'PT Jasa Marga', 'pemindahan server', '', '2018-10-09', '2018-10-26', '', 'tolong di pidanhakan server agar lebih mantapsss', 1, '', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_user`
+-- Struktur dari tabel `tbl_tunjangan`
+--
+
+CREATE TABLE `tbl_tunjangan` (
+  `id` int(11) NOT NULL,
+  `jenis` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -1554,128 +1851,148 @@ CREATE TABLE `tbl_user` (
   `harikontrak` varchar(255) NOT NULL,
   `status_aktif` int(2) NOT NULL,
   `score` int(11) NOT NULL,
-  `waktugame` varchar(255) NOT NULL
+  `waktugame` varchar(255) NOT NULL,
+  `status_tugas` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_user`
+-- Dumping data untuk tabel `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama`, `nip`, `admin`, `tujuan`, `foto`, `unit`, `sub_unit`, `jabatan`, `status_karyawan`, `cuti`, `divisi`, `harikontrak`, `status_aktif`, `score`, `waktugame`) VALUES
-(1, 'sdm', '13bb8b589473803f26a02e338f949b8c', 'SDM-UMUM', '-', 1, 0, '', '19', '', '', 0, 0, 0, '', 1, 0, '3600'),
-(2, 'PK068', '37d153a06c79e99e4de5889dbe2e7c57', 'Aprillia Hermansyah', 'PK068', 7, 0, '', '19', '55', '114', 5, 0, 2, '', 0, 0, '3600'),
-(4, 'PK060', 'd69ed7e8520a6ee31d5ab1d597726f34', 'Dendito Pratama', 'PK060', 7, 0, '', '19', '57', '123', 5, 12, 2, '', 0, 0, '3600'),
-(6, '10022', '93a27b0bd99bac3e68a440b48aa421ab', 'Sumarsono', '10022', 4, 0, '4805-Sumarsono.jpg', '19', '54', '106', 3, 12, 2, '', 1, 0, '3600'),
-(7, '10001', 'd89f3a35931c386956c1a402a8e09941', 'Hubby Ramdhani', '10001', 4, 0, '8313-Hubby.jpg', '10', '30', '75', 0, 0, 0, '', 1, 0, '3600'),
-(8, 'admin', 'd69ed7e8520a6ee31d5ab1d597726f34', 'Super Admin', '-', 1, 0, '5911-Logo Master JMP video.jpg', '0', '', 'BANG ADMIN', 0, 999998, 0, '', 1, 7, '3392'),
-(9, '10003', 'f5dffc111454b227fbcdf36178dfe6ac', 'Uci Sanusi', '10003', 5, 0, '', '18', '52', '98', 3, 0, 3, '', 0, 0, '3600'),
-(10, '10007', '9cdf26568d166bc6793ef8da5afa0846', 'R.A. Ayu Suzanne P', '10007', 5, 0, '', '5', '15', '62', 4, 0, 4, '', 0, 0, '3600'),
-(9999, 'tampung', 'tampung', '-', 'tampung', 4, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10001, '10010', 'a17479231dc298309a3fda7d7d00111a', 'Irwansyah Rinaldhi', '10010', 5, 0, '', '14', '38', '87', 3, 0, 7, '', 0, 0, '3600'),
-(10002, '10011', 'a2369958a9645eac52b58a8134e2ef5a', 'Dede Ahmad Nurhadi', '10011', 5, 0, '', '12', '48', '87', 3, 0, 7, '', 0, 0, '3600'),
-(10003, '10014', '7b9d31aa17b849b238ab79cef0733041', 'Meta Herlina Puspitaningtyas', '10014', 4, 0, '2366-Meta H.jpg', '3', '6', '32', 3, 0, 5, '', 1, 0, '3600'),
-(10004, '10015', '342b5fe6486788799659c39bbfc3fa02', 'Marlina Ririn Indriyani', '10015', 5, 0, '', '2', '3', '10', 3, 0, 6, '', 0, 0, '3600'),
-(10005, '10016', '1ce9168a60deae4a994dbd5b2d145699', 'Engkun Purkonudin', '10016', 5, 0, '', '11', '33', '87', 3, 0, 7, '', 0, 0, '3600'),
-(10006, '10017', '24064e6576a74af1b8eda89277c6b659', 'Sri Rejeki Handayani', '10017', 4, 0, '', '18', '50', '95', 3, 5, 3, '', 0, 0, '3600'),
-(10007, '10019', '73c730319cf839f143bf40954448ce39', 'Hanna Farida Tampubolon', '10019', 5, 0, '', '10', '32', '83', 3, 0, 7, '', 0, 0, '3600'),
-(10008, '10020', 'c1722a7941d61aad6e651a35b65a9c3e', 'Donny Ikhwan', '10020', 4, 0, '4894-Donny.jpg', '4', 'Office', '46', 3, 0, 4, '', 0, 0, '3600'),
-(10009, '10021', 'f702defbc67edb455949f46babab0c18', 'Roni Wijaya', '10021', 6, 0, '', '6', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10010, '10023', '7b8bc3700ce886e8627f41e799fe764f', 'Imad Zaky Mubarak', '10023', 4, 0, '6673-zaky.jpg', '2', '2', '8', 3, 0, 6, '', 0, 0, '3600'),
-(10011, '10025', '76d0baca6075c45cd8a3a55fa6a23c05', 'Tria Oktaviani', '10025', 5, 0, '', '4', '11', '48', 3, 0, 4, '', 0, 0, '3600'),
-(10012, '10027', '3882c5a9869d86def6b7be879605522e', 'Sumarmi', '10027', 5, 0, '7760-515-2185-sumarmi.jpg', '19', 'SEKSI HR & GENERAL AFFAIR', '108', 3, 10, 2, '3', 0, 0, '3600'),
-(10013, '10029', '6072cd1424d62d9c33c6a7a82cacd40e', 'Edmundus Edy Pancaningtyas', '10029', 5, 0, '7789-edmundus.jpg', '19', '55', '111', 3, 0, 2, '', 0, 0, '3600'),
-(10014, '10030', '08d562c1eedd30b15b51e35d8486d14c', 'Irwan Zaini Luthfi', '10030', 5, 0, '', '13', '35', '87', 3, 0, 7, '', 0, 0, '3600'),
-(10015, '10031', 'd2cb583f4b5bdc51b965ae555ee6bca5', 'Katni', '10031', 6, 0, '', '18', '50', '77', 3, 0, 3, '', 0, 0, '3600'),
-(10016, '10032', 'c63a5650dcd0bf04b35bd712466010bc', 'Muhamad Agus Sunardi', '10032', 7, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10017, '10033', '10fa5eb83300e5f592b9b35a0e07fc3f', 'Setya Prayitno', '10033', 7, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10018, '10034', 'b2fb19fe374529d3658197da0657ab0c', 'Bagus Sugiharto', '10034', 7, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10019, '10035', '329d1ea6acb272924f991d523b2d2b80', 'Karmin', '10035', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10020, '10036', '7c127e0c66f06e58c7c7310a7c6fa488', 'Rudi Tatang', '10036', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10021, '10037', '4ccea3161064506dda8e0c9fd416d1ae', 'Sandy Irawan', '10037', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10022, '10038', '0f6b1f657ac30ab76519ed4c677e9909', 'Irwan Pahala Simanungkalit', '10038', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10023, '10039', '2a8009525763356ad5e3bb48b7475b4d', 'Ade Gustika', '10039', 5, 0, '', '3', '6', '38', 3, 0, 5, '', 0, 0, '3600'),
-(10024, '10040', 'f250daff6a09865ff432821b2adac54f', 'Mintari Yulianingsih', '10040', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10025, 'D0005', 'fed2bb44e5db4d3b34370d2ed061fbbd', 'Irwan Artigyo Sumadiyo', 'D0005', 2, 0, '', '1', '1', '4', 2, 0, 0, '', 1, 0, '3600'),
-(10026, 'H0004', '0553d68e0d99e5c54ce77bc246645348', 'Arief Fauzi', 'H0004', 6, 0, '', '18', '53', '100', 5, 0, 3, '', 0, 0, '3600'),
-(10027, 'PK102', '04e246e949e3a9b2b80c4d7d3bef872d', 'Herdwin Nofrian', 'PK102', 5, 0, '', '18', '53', '101', 5, 5, 3, '', 0, 0, '3600'),
-(10028, 'H0012', '29634b1516cb4eeb0042f601bab5309a', 'Anang Daus Soemantri', 'H0012', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10029, 'H0017', '3e38104dbcb3050bdd6b8447048ff73c', 'Wahju Widodo', 'H0017', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10031, 'PK016', '04ce83bf1967d561285890241abf11eb', 'Handa Rudita', 'PK016', 5, 0, '', '0', '', '', 5, 0, 5, '', 0, 0, '3600'),
-(10032, 'PK018', '5809b0678dc7b34a25b86aa416859b59', 'Mia Restu Oktavia Sutanty', 'PK018', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10033, 'PK019', '88d85dfa2eda0c1db1c2b37fbf7bfba8', 'Rafika Afrianne Ichsan', 'PK019', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10034, 'PK020', 'a349c90fb067eae78defd650c86e942e', 'Ibnu Sarjono', 'PK020', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10035, 'PK021', '942e07c72a2f12ef5368b7dfd5c53116', 'Salmadi', 'PK021', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10036, 'PK022', '189a008966f509fdd63b7e32738df63c', 'Julian Dwi Kusuma Lestari', 'PK022', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10037, 'PK023', 'ff06415acd8ad03505030f2baac4607c', 'Widyadji Sasono', 'PK023', 6, 0, '', '18', '52', '100', 5, 5, 3, '', 0, 0, '3600'),
-(10038, 'PK024', '59332b589a064382226ec34492419cba', 'Riyen Haryani', 'PK024', 7, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600'),
-(10039, 'PK025', 'b07128152c5ecdf73181148efb673d41', 'Risma Nurjannah', 'PK025', 8, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10040, 'PK027', 'dced105c62a12c5b94280160612ad040', 'Gatri Ayuning Lestari', 'PK027', 6, 0, '', '18', '53', '102', 5, 5, 3, '', 0, 0, '3600'),
-(10041, 'PK028', 'bfb3852b4814d2e61598f2ad07d46298', 'Kevin Dwiagy Emerald', 'PK028', 8, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10042, 'PK029', '0792bd88dc6cc0dd49e7cb0939bccbfd', 'Isna Rifai', 'PK029', 6, 0, '', '0', '', '', 5, 0, 7, '', 0, 0, '3600'),
-(10043, 'PK030', '8393df7e9ec7bd6f46cc2662095b147a', 'Resy Alifianti Suprapto', 'PK030', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10044, 'PK031', '3168f142ce3904a787b2ab3f68ae5968', 'Abdurrahman', 'PK031', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10045, 'PK032', '3384d017ec0e7f0f17d2c3d18b608c24', 'Muhammad Fahri', 'PK032', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10046, 'PK033', '14c96390890cda796ba8a0100f647a4f', 'Saipul Anwar', 'PK033', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10047, 'PK034', '1872f655b7c18c6774a606268f9e8397', 'Muhamad Nur Baedi', 'PK034', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10048, 'PK035', '57bf2d8dc369f5238ad508888f101ef9', 'Reza Ahmad Fauzi', 'PK035', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10049, 'PK036', '7cc3666509e65e7209d2517003c984d9', 'Siti Rosmayanti', 'PK036', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10050, 'PK037', '5eb0614e5a420717938116ce87e358fd', 'Maylisa Marsita Anggreina Siahaya', 'PK037', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10051, 'PK038', 'beb1c0c148f8a01a9b7a19e4f7d009c1', 'Adhi Sujana', 'PK038', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10052, 'PK039', '934e01f1ff02e5797dcdf3d387ab25b7', 'Eko Prabowo', 'PK039', 9, 0, '', '0', 'Office', '1', 0, 0, 0, '', 0, 0, '3600'),
-(10053, 'PK040', 'c2797a8ce242cb02cd045f49b1754740', 'Edi Junaedi', 'PK040', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10054, 'PK041', 'e900266bd33ff5bbf04c76871467509a', 'Lucyanna Nilasary', 'PK041', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10055, 'PK043', '3f2fb0a541774e24ac0eefd7c1775299', 'Agus Setyawan', 'PK043', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10056, 'PK044', 'e8c3701613c6192f5578534912bc410f', 'Hendry', 'PK044', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10057, 'PK045', '0e0f18e07ffc9e2d40ac8e0f2d3246fd', 'Andi Rusdiana', 'PK045', 5, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10058, 'PK046', 'fdf1adf0071c444ec897f638453f5d67', 'Rizal Kamaruzzaman', 'PK046', 6, 0, '', '7', '20', '67', 5, 0, 4, '', 0, 0, '3600'),
-(10059, 'PK047', '00ea5c35f3381114e4471f36b26998e1', 'Mustofa', 'PK047', 5, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10060, 'PK048', '064fa76b894021616335263a1c7fe7f2', 'Dian Ika Ningrum', 'PK048', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10061, 'PK049', '712de2419663f92177fbcca44f2f2ca8', 'Sofi Ratna Furi', 'PK049', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10062, 'PK050', '343979a6222fcf5c4f50a8fd4ce710d1', 'Adya Kemara', 'PK050', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10063, 'PK051', '4f4ec923ed72d8d6ffee4f89f1e0e9c4', 'Rizalulloh', 'PK051', 5, 0, '', '5', 'PROJECT RESIDENCE SAWANGAN DAN KAUMSARI', 'PROJECT MANAGER', 5, 0, 4, '', 0, 0, '3600'),
-(10064, 'PK052', '64eb6f33d79221581bfe7df31d065889', 'Ardo Yudha Barnesa', 'PK052', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10065, 'PK053', '0d8b0770c8525638ea63cb1055070155', 'Melly Febriyanti', 'PK053', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10066, 'PK054', '9276d8c623b5f0930f93cf07fae0845f', 'Angga Saputra', 'PK054', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10067, 'PK055', '64fe947dde7170229d95af90ad6d9b68', 'Ayu Ratnasari', 'PK055', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10068, 'PK056', '6ca4d82fbd86555624995d113fde3833', 'Dicky Wahyu Pratama', 'PK056', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10069, 'PK057', 'ae5318388db0dae818a4ddefd1560130', 'Muhamad Rizky Cahyadi', 'PK057', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10070, 'PK059', 'f5264fb5dd9e7a5f0625ead4cf99748a', 'Bimo Firizki Diadi', 'PK059', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10071, 'PK061', 'bbf6eb76300e11c07204fcb6b37c592f', 'Bayu Budi Utomo', 'PK061', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10072, 'PK062', '9c33e65aa7f8d69effd6daaa3804c3d1', 'Nur Asty Pratiwi', 'PK062', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10073, 'PK063', '487e7231a3d8a4c36226385643ea50e0', 'Sholahuddin Triwidinata', 'PK063', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10074, 'PK064', '75245224b08457412ade2c4bdebc14a4', 'Bukry Chamma Siburian', 'PK064', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10075, 'PK065', 'b67923e5a6170f34c52e19086ea1aeed', 'Rizky Ehsy Pangarso', 'PK065', 7, 0, '', '2', '3', '17', 5, 0, 6, '', 0, 2, '3600'),
-(10076, 'PK066', '54a9676df022c0b88a9b43bba829add2', 'Latifah', 'PK066', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10077, 'PK067', '3046f57a2a27fdd1edece2fbb3c9ffae', 'Ramdani Adam', 'PK067', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10078, 'PK069', 'a59eeaf48b22ebf1fee0b715731dc7ca', 'Arsindiany Alambago', 'PK069', 5, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600'),
-(10079, 'PK070', 'dc8734f7a1b8c973d64b78ca4d0b1121', 'Wega Tommy Dwi Pamungkas', 'PK070', 8, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10080, 'PK071', 'ab47cbbc8714426e14ac62e2b8a8e81d', 'Nur Fitria Febriana', 'PK071', 8, 0, '', '0', '', '', 5, 0, 6, '', 0, 0, '3600'),
-(10081, 'PK072', '6b62c56b6c78e81e262fc435b158f880', 'Mohamad Reza Pahlevi', 'PK072', 7, 0, '', '18', '53', '103', 5, 0, 3, '', 0, 0, '3600'),
-(10082, 'PK073', '2e11e90565e64fb4a5b25af3a62044c1', 'Vishnu Damar Sasongko', 'PK073', 5, 0, '', '18', '51', '96', 5, 0, 3, '', 0, 0, '3600'),
-(10083, 'PK074', '1f22e88f5a7dd6969531ddb66f3e828b', 'G. Heryawan Indrayatna', 'PK074', 5, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600'),
-(10084, 'PK075', 'dbfc021d832630aecab6a59665193b0f', 'Ario Seto', 'PK075', 7, 0, '', '0', '', '', 5, 0, 3, '', 0, 0, '3600'),
-(10085, 'PK076', '856adc13bd0c5999ed10315e300e76e3', 'Andi Afriansyah', 'PK076', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10086, 'PK077', '2851d33a29f649700b256aeae59a506f', 'Lowig Caesar Sinaga', 'PK077', 5, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10087, 'PK078', 'f02983334e62f0fe8cc08f8ad629cb47', 'Arif Rahman', 'PK078', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10088, 'PK079', '4d81e61f13169060aaef7103749b888a', 'Antonius Catur Satriono', 'PK079', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10089, 'PK080', 'c11a2864e145cb5f0ec4ae89b12e390f', 'Agus Triwahyudi', 'PK080', 7, 0, '', '0', '', '', 5, 0, 7, '', 0, 0, '3600'),
-(10090, 'PK083', '2b1a48519736b7da7d581e9647443f09', 'Robby Nugraha', 'PK083', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10091, 'PK084', '3cfab66abaf1adf0e948a6e53c599410', 'Tania Intan Sari', 'PK084', 8, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10092, '10041', '6d38b80c1da3bd9d8717ce47fea2acd7', 'Kristiana Live Sonya', '10041', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10093, '10042', '425f116bf53f051c57d1670a04fb4a0c', 'Slamet Purwanto', '10042', 5, 0, '', '19', '57', '122', 3, 0, 0, '', 0, 0, '3600'),
-(10094, '10043', 'd30cfe3deca3ec4de141fcf9c31097a3', 'Indri Kurnia Lestari', '10043', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10095, '10044', '9c16b0e83f09596202f402261f25c8a9', 'Tisa Yuanita', '10044', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10096, '10045', '997e65474a248252883b485717f7d098', 'Evil Ramadhani', '10045', 5, 0, '', '0', '', '', 3, 0, 4, '', 0, 0, '3600'),
-(10097, 'PK087', '1d6fb7061bf8375a0317ff6cce6ee59f', 'Muhammad Rizaq Nuriz Zaman', 'PK087', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600'),
-(10098, 'PK086', '4603cf9abb94f77c71bc767ecea2333a', 'Syamsul Fadly', 'PK086', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10099, 'PK085', '34b4f080b684b4105983b5c7d0ca04a0', 'Bayuaji Prabowo Nugroho', 'PK085', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600'),
-(10100, 'PK095', 'ed3230f53e8c255c8d2a29c3e04a559f', 'Sabila Adinda Puri Andarini', 'PK095', 8, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600');
+INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama`, `nip`, `admin`, `tujuan`, `foto`, `unit`, `sub_unit`, `jabatan`, `status_karyawan`, `cuti`, `divisi`, `harikontrak`, `status_aktif`, `score`, `waktugame`, `status_tugas`) VALUES
+(1, 'sdm', '13bb8b589473803f26a02e338f949b8c', 'SDM-UMUM', '-', 1, 0, '', '19', '', '', 0, 0, 2, '', 1, 0, '3600', 0),
+(2, 'PK068', '37d153a06c79e99e4de5889dbe2e7c57', 'Aprillia Hermansyah', 'PK068', 7, 0, '', '19', '55', '114', 5, 0, 2, '', 0, 0, '3600', 0),
+(4, 'PK060', 'd69ed7e8520a6ee31d5ab1d597726f34', 'Dendito Pratama', 'PK060', 7, 0, '', '19', 'SEKSI INFORMATION TECHNOLOGY', '123', 5, 12, 2, '', 1, 0, '3600', 2),
+(6, '10022', '93a27b0bd99bac3e68a440b48aa421ab', 'Sumarsono', '10022', 4, 0, '4805-Sumarsono.jpg', '19', '54', '106', 3, 12, 2, '', 1, 0, '3600', 1),
+(7, '10001', 'd89f3a35931c386956c1a402a8e09941', 'Hubby Ramdhani', '10001', 4, 0, '8313-Hubby.jpg', '10', '30', '75', 0, 0, 0, '', 1, 0, '3600', 0),
+(8, 'admin', 'd69ed7e8520a6ee31d5ab1d597726f34', 'Super Admin', '-', 1, 0, '5911-Logo Master JMP video.jpg', '0', '', 'BANG ADMIN', 0, 999998, 0, '', 1, 32, '3078', 0),
+(9, '10003', 'f5dffc111454b227fbcdf36178dfe6ac', 'Uci Sanusi', '10003', 5, 0, '', '18', '52', '98', 3, 0, 3, '', 0, 0, '3600', 0),
+(10, '10007', '9cdf26568d166bc6793ef8da5afa0846', 'R.A. Ayu Suzanne P', '10007', 5, 0, '', '5', '15', '62', 4, 0, 4, '', 0, 0, '3600', 2),
+(9999, 'tampung', 'tampung', '-', 'tampung', 4, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10001, '10010', 'a17479231dc298309a3fda7d7d00111a', 'Irwansyah Rinaldhi', '10010', 5, 0, '', '14', '38', '87', 3, 0, 7, '', 0, 0, '3600', 0),
+(10002, '10011', 'a2369958a9645eac52b58a8134e2ef5a', 'Dede Ahmad Nurhadi', '10011', 5, 0, '', '12', '48', '87', 3, 0, 7, '', 0, 0, '3600', 0),
+(10003, '10014', '7b9d31aa17b849b238ab79cef0733041', 'Meta Herlina Puspitaningtyas', '10014', 4, 0, '2366-Meta H.jpg', '3', '6', '32', 3, 0, 5, '', 1, 0, '3600', 0),
+(10004, '10015', '342b5fe6486788799659c39bbfc3fa02', 'Marlina Ririn Indriyani', '10015', 5, 0, '', '2', '3', '10', 3, 0, 6, '', 0, 0, '3600', 0),
+(10005, '10016', '1ce9168a60deae4a994dbd5b2d145699', 'Engkun Purkonudin', '10016', 5, 0, '', '11', '33', '87', 3, 0, 7, '', 0, 0, '3600', 0),
+(10006, '10017', '24064e6576a74af1b8eda89277c6b659', 'Sri Rejeki Handayani', '10017', 4, 0, '', '18', '50', '95', 3, 5, 3, '', 0, 0, '3600', 0),
+(10007, '10019', '73c730319cf839f143bf40954448ce39', 'Hanna Farida Tampubolon', '10019', 5, 0, '', '10', '32', '83', 3, 0, 7, '', 0, 0, '3600', 0),
+(10008, '10020', 'c1722a7941d61aad6e651a35b65a9c3e', 'Donny Ikhwan', '10020', 4, 0, '4894-Donny.jpg', '4', 'Office', '46', 3, 0, 4, '', 0, 0, '3600', 0),
+(10009, '10021', 'f702defbc67edb455949f46babab0c18', 'Roni Wijaya', '10021', 6, 0, '', '6', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10010, '10023', '7b8bc3700ce886e8627f41e799fe764f', 'Imad Zaky Mubarak', '10023', 4, 0, '6673-zaky.jpg', '2', '2', '8', 3, 0, 6, '', 0, 0, '3600', 0),
+(10011, '10025', '76d0baca6075c45cd8a3a55fa6a23c05', 'Tria Oktaviani', '10025', 5, 0, '', '4', '11', '48', 3, 0, 4, '', 0, 0, '3600', 0),
+(10012, '10027', '3882c5a9869d86def6b7be879605522e', 'Sumarmi', '10027', 5, 0, '7760-515-2185-sumarmi.jpg', '19', 'Office', '108', 3, 8, 2, '3', 1, 0, '3600', 1),
+(10013, '10029', '6072cd1424d62d9c33c6a7a82cacd40e', 'Edmundus Edy Pancaningtyas', '10029', 5, 0, '7789-edmundus.jpg', '19', '55', '111', 3, 0, 2, '', 0, 0, '3600', 0),
+(10014, '10030', '08d562c1eedd30b15b51e35d8486d14c', 'Irwan Zaini Luthfi', '10030', 5, 0, '', '13', '35', '87', 3, 0, 7, '', 0, 0, '3600', 0),
+(10015, '10031', 'd2cb583f4b5bdc51b965ae555ee6bca5', 'Katni', '10031', 6, 0, '', '18', '50', '77', 3, 0, 3, '', 0, 0, '3600', 0),
+(10016, '10032', 'c63a5650dcd0bf04b35bd712466010bc', 'Muhamad Agus Sunardi', '10032', 7, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10017, '10033', '10fa5eb83300e5f592b9b35a0e07fc3f', 'Setya Prayitno', '10033', 7, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10018, '10034', 'b2fb19fe374529d3658197da0657ab0c', 'Bagus Sugiharto', '10034', 7, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10019, '10035', '329d1ea6acb272924f991d523b2d2b80', 'Karmin', '10035', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10020, '10036', '7c127e0c66f06e58c7c7310a7c6fa488', 'Rudi Tatang', '10036', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10021, '10037', '4ccea3161064506dda8e0c9fd416d1ae', 'Sandy Irawan', '10037', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10022, '10038', '0f6b1f657ac30ab76519ed4c677e9909', 'Irwan Pahala Simanungkalit', '10038', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10023, '10039', '2a8009525763356ad5e3bb48b7475b4d', 'Ade Gustika', '10039', 5, 0, '', '3', '6', '38', 3, 0, 5, '', 0, 0, '3600', 0),
+(10024, '10040', 'f250daff6a09865ff432821b2adac54f', 'Mintari Yulianingsih', '10040', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10025, 'D0005', 'fed2bb44e5db4d3b34370d2ed061fbbd', 'Irwan Artigyo Sumadiyo', 'D0005', 2, 0, '', '1', '1', '4', 2, 0, 1, '', 1, 0, '3600', 2),
+(10026, 'H0004', '0553d68e0d99e5c54ce77bc246645348', 'Arief Fauzi', 'H0004', 6, 0, '', '18', '53', '100', 5, 0, 3, '', 0, 0, '3600', 0),
+(10027, 'PK102', '04e246e949e3a9b2b80c4d7d3bef872d', 'Herdwin Nofrian', 'PK102', 5, 0, '', '18', '53', '101', 5, 5, 3, '', 0, 0, '3600', 0),
+(10028, 'H0012', '29634b1516cb4eeb0042f601bab5309a', 'Anang Daus Soemantri', 'H0012', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10029, 'H0017', '3e38104dbcb3050bdd6b8447048ff73c', 'Wahju Widodo', 'H0017', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10031, 'PK016', '04ce83bf1967d561285890241abf11eb', 'Handa Rudita', 'PK016', 5, 0, '', '0', '', '', 5, 0, 5, '', 0, 0, '3600', 0),
+(10032, 'PK018', '5809b0678dc7b34a25b86aa416859b59', 'Mia Restu Oktavia Sutanty', 'PK018', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10033, 'PK019', '88d85dfa2eda0c1db1c2b37fbf7bfba8', 'Rafika Afrianne Ichsan', 'PK019', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10034, 'PK020', 'a349c90fb067eae78defd650c86e942e', 'Ibnu Sarjono', 'PK020', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10035, 'PK021', '942e07c72a2f12ef5368b7dfd5c53116', 'Salmadi', 'PK021', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10036, 'PK022', '189a008966f509fdd63b7e32738df63c', 'Julian Dwi Kusuma Lestari', 'PK022', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10037, 'PK023', 'ff06415acd8ad03505030f2baac4607c', 'Widyadji Sasono', 'PK023', 6, 0, '', '18', '52', '100', 5, 5, 3, '', 0, 0, '3600', 0),
+(10038, 'PK024', '59332b589a064382226ec34492419cba', 'Riyen Haryani', 'PK024', 7, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600', 0),
+(10039, 'PK025', 'b07128152c5ecdf73181148efb673d41', 'Risma Nurjannah', 'PK025', 8, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10040, 'PK027', 'dced105c62a12c5b94280160612ad040', 'Gatri Ayuning Lestari', 'PK027', 6, 0, '', '18', '53', '102', 5, 5, 3, '', 0, 0, '3600', 0),
+(10041, 'PK028', 'bfb3852b4814d2e61598f2ad07d46298', 'Kevin Dwiagy Emerald', 'PK028', 8, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10042, 'PK029', '0792bd88dc6cc0dd49e7cb0939bccbfd', 'Isna Rifai', 'PK029', 6, 0, '', '0', '', '', 5, 0, 7, '', 0, 0, '3600', 0),
+(10043, 'PK030', '8393df7e9ec7bd6f46cc2662095b147a', 'Resy Alifianti Suprapto', 'PK030', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10044, 'PK031', '3168f142ce3904a787b2ab3f68ae5968', 'Abdurrahman', 'PK031', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10045, 'PK032', '3384d017ec0e7f0f17d2c3d18b608c24', 'Muhammad Fahri', 'PK032', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10046, 'PK033', '14c96390890cda796ba8a0100f647a4f', 'Saipul Anwar', 'PK033', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10047, 'PK034', '1872f655b7c18c6774a606268f9e8397', 'Muhamad Nur Baedi', 'PK034', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10048, 'PK035', '57bf2d8dc369f5238ad508888f101ef9', 'Reza Ahmad Fauzi', 'PK035', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10049, 'PK036', '7cc3666509e65e7209d2517003c984d9', 'Siti Rosmayanti', 'PK036', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10050, 'PK037', '5eb0614e5a420717938116ce87e358fd', 'Maylisa Marsita Anggreina Siahaya', 'PK037', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10051, 'PK038', 'beb1c0c148f8a01a9b7a19e4f7d009c1', 'Adhi Sujana', 'PK038', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10052, 'PK039', '934e01f1ff02e5797dcdf3d387ab25b7', 'Eko Prabowo', 'PK039', 9, 0, '', '0', 'Office', '1', 0, 0, 0, '', 0, 0, '3600', 0),
+(10053, 'PK040', 'c2797a8ce242cb02cd045f49b1754740', 'Edi Junaedi', 'PK040', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10054, 'PK041', 'e900266bd33ff5bbf04c76871467509a', 'Lucyanna Nilasary', 'PK041', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10055, 'PK043', '3f2fb0a541774e24ac0eefd7c1775299', 'Agus Setyawan', 'PK043', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10056, 'PK044', 'e8c3701613c6192f5578534912bc410f', 'Hendry', 'PK044', 6, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10057, 'PK045', '0e0f18e07ffc9e2d40ac8e0f2d3246fd', 'Andi Rusdiana', 'PK045', 5, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10058, 'PK046', 'fdf1adf0071c444ec897f638453f5d67', 'Rizal Kamaruzzaman', 'PK046', 6, 0, '', '7', '20', '67', 5, 0, 4, '', 0, 0, '3600', 0),
+(10059, 'PK047', '00ea5c35f3381114e4471f36b26998e1', 'Mustofa', 'PK047', 5, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10060, 'PK048', '064fa76b894021616335263a1c7fe7f2', 'Dian Ika Ningrum', 'PK048', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10061, 'PK049', '712de2419663f92177fbcca44f2f2ca8', 'Sofi Ratna Furi', 'PK049', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10062, 'PK050', '343979a6222fcf5c4f50a8fd4ce710d1', 'Adya Kemara', 'PK050', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10063, 'PK051', '4f4ec923ed72d8d6ffee4f89f1e0e9c4', 'Rizalulloh', 'PK051', 5, 0, '', '5', 'PROJECT RESIDENCE SAWANGAN DAN KAUMSARI', 'PROJECT MANAGER', 5, 0, 4, '', 0, 0, '3600', 0),
+(10064, 'PK052', '64eb6f33d79221581bfe7df31d065889', 'Ardo Yudha Barnesa', 'PK052', 7, 0, '', '0', '', '', 5, 0, 6, '', 1, 0, '3600', 0),
+(10065, 'PK053', '0d8b0770c8525638ea63cb1055070155', 'Melly Febriyanti', 'PK053', 7, 0, '', '0', '', '', 5, 0, 6, '', 1, 0, '3600', 0),
+(10066, 'PK054', '9276d8c623b5f0930f93cf07fae0845f', 'Angga Saputra', 'PK054', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10067, 'PK055', '64fe947dde7170229d95af90ad6d9b68', 'Ayu Ratnasari', 'PK055', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10068, 'PK056', '6ca4d82fbd86555624995d113fde3833', 'Dicky Wahyu Pratama', 'PK056', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10069, 'PK057', 'ae5318388db0dae818a4ddefd1560130', 'Muhamad Rizky Cahyadi', 'PK057', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10070, 'PK059', 'f5264fb5dd9e7a5f0625ead4cf99748a', 'Bimo Firizki Diadi', 'PK059', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10071, 'PK061', 'bbf6eb76300e11c07204fcb6b37c592f', 'Bayu Budi Utomo', 'PK061', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10072, 'PK062', '9c33e65aa7f8d69effd6daaa3804c3d1', 'Nur Asty Pratiwi', 'PK062', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10073, 'PK063', '487e7231a3d8a4c36226385643ea50e0', 'Sholahuddin Triwidinata', 'PK063', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10074, 'PK064', '75245224b08457412ade2c4bdebc14a4', 'Bukry Chamma Siburian', 'PK064', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10075, 'PK065', 'b67923e5a6170f34c52e19086ea1aeed', 'Rizky Ehsy Pangarso', 'PK065', 7, 0, '', '2', '3', '17', 5, 0, 6, '', 0, 2, '3600', 0),
+(10076, 'PK066', '54a9676df022c0b88a9b43bba829add2', 'Latifah', 'PK066', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10077, 'PK067', '3046f57a2a27fdd1edece2fbb3c9ffae', 'Ramdani Adam', 'PK067', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10078, 'PK069', 'a59eeaf48b22ebf1fee0b715731dc7ca', 'Arsindiany Alambago', 'PK069', 5, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600', 0),
+(10079, 'PK070', 'dc8734f7a1b8c973d64b78ca4d0b1121', 'Wega Tommy Dwi Pamungkas', 'PK070', 8, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10080, 'PK071', 'ab47cbbc8714426e14ac62e2b8a8e81d', 'Nur Fitria Febriana', 'PK071', 8, 0, '', '0', '', '', 5, 0, 6, '', 0, 0, '3600', 0),
+(10081, 'PK072', '6b62c56b6c78e81e262fc435b158f880', 'Mohamad Reza Pahlevi', 'PK072', 7, 0, '', '18', '53', '103', 5, 0, 3, '', 0, 0, '3600', 0),
+(10082, 'PK073', '2e11e90565e64fb4a5b25af3a62044c1', 'Vishnu Damar Sasongko', 'PK073', 5, 0, '', '18', '51', '96', 5, 0, 3, '', 0, 0, '3600', 0),
+(10083, 'PK074', '1f22e88f5a7dd6969531ddb66f3e828b', 'G. Heryawan Indrayatna', 'PK074', 5, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600', 0),
+(10084, 'PK075', 'dbfc021d832630aecab6a59665193b0f', 'Ario Seto', 'PK075', 7, 0, '', '0', '', '', 5, 0, 3, '', 0, 0, '3600', 0),
+(10085, 'PK076', '856adc13bd0c5999ed10315e300e76e3', 'Andi Afriansyah', 'PK076', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10086, 'PK077', '2851d33a29f649700b256aeae59a506f', 'Lowig Caesar Sinaga', 'PK077', 5, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10087, 'PK078', 'f02983334e62f0fe8cc08f8ad629cb47', 'Arif Rahman', 'PK078', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10088, 'PK079', '4d81e61f13169060aaef7103749b888a', 'Antonius Catur Satriono', 'PK079', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10089, 'PK080', 'c11a2864e145cb5f0ec4ae89b12e390f', 'Agus Triwahyudi', 'PK080', 7, 0, '', '0', '', '', 5, 0, 7, '', 0, 0, '3600', 0),
+(10090, 'PK083', '2b1a48519736b7da7d581e9647443f09', 'Robby Nugraha', 'PK083', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10091, 'PK084', '3cfab66abaf1adf0e948a6e53c599410', 'Tania Intan Sari', 'PK084', 8, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10092, '10041', '6d38b80c1da3bd9d8717ce47fea2acd7', 'Kristiana Live Sonya', '10041', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10093, '10042', '425f116bf53f051c57d1670a04fb4a0c', 'Slamet Purwanto', '10042', 5, 0, '', '19', '57', '122', 3, 0, 0, '', 0, 0, '3600', 0),
+(10094, '10043', 'd30cfe3deca3ec4de141fcf9c31097a3', 'Indri Kurnia Lestari', '10043', 5, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10095, '10044', '9c16b0e83f09596202f402261f25c8a9', 'Tisa Yuanita', '10044', 6, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10096, '10045', '997e65474a248252883b485717f7d098', 'Evil Ramadhani', '10045', 5, 0, '', '0', '', '', 3, 0, 4, '', 0, 0, '3600', 0),
+(10097, 'PK087', '1d6fb7061bf8375a0317ff6cce6ee59f', 'Muhammad Rizaq Nuriz Zaman', 'PK087', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
+(10098, 'PK086', '4603cf9abb94f77c71bc767ecea2333a', 'Syamsul Fadly', 'PK086', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10099, 'PK085', '34b4f080b684b4105983b5c7d0ca04a0', 'Bayuaji Prabowo Nugroho', 'PK085', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
+(10100, 'PK095', 'ed3230f53e8c255c8d2a29c3e04a559f', 'Sabila Adinda Puri Andarini', 'PK095', 8, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600', 0);
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `tbl_view_departemen`
--- (See below for the actual view)
+-- Struktur dari tabel `tbl_user_gaji`
+--
+
+CREATE TABLE `tbl_user_gaji` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_user_gaji`
+--
+
+INSERT INTO `tbl_user_gaji` (`id`, `username`, `password`) VALUES
+(1, 'admingaji', 'c4d121a30f17422e796ab0c91ab9cc4b');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `tbl_view_departemen`
+-- (Lihat di bawah untuk tampilan aktual)
 --
 CREATE TABLE `tbl_view_departemen` (
 `unit_kerja` varchar(255)
@@ -1687,16 +2004,16 @@ CREATE TABLE `tbl_view_departemen` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `tabel_role`
+-- Struktur untuk view `tabel_role`
 --
 DROP TABLE IF EXISTS `tabel_role`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tabel_role`  AS  select `tbl_user`.`id_user` AS `id_user`,`tbl_user`.`username` AS `username`,`tbl_user`.`password` AS `password`,`tbl_user`.`nama` AS `nama`,`tbl_user`.`nip` AS `nip`,`tbl_user`.`admin` AS `admin`,`tbl_user`.`tujuan` AS `tujuan`,`tbl_role`.`role` AS `role`,`tbl_user`.`unit` AS `unit`,`tbl_user`.`divisi` AS `divisi`,`tbl_user`.`sub_unit` AS `sub_unit`,`tbl_user`.`jabatan` AS `jabatan` from (`tbl_role` join `tbl_user` on((`tbl_user`.`admin` = `tbl_role`.`admin`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tabel_role`  AS  select `tbl_user`.`id_user` AS `id_user`,`tbl_user`.`username` AS `username`,`tbl_user`.`password` AS `password`,`tbl_user`.`nama` AS `nama`,`tbl_user`.`nip` AS `nip`,`tbl_user`.`admin` AS `admin`,`tbl_user`.`tujuan` AS `tujuan`,`tbl_role`.`role` AS `role`,`tbl_user`.`unit` AS `unit`,`tbl_user`.`divisi` AS `divisi`,`tbl_user`.`sub_unit` AS `sub_unit`,`tbl_user`.`jabatan` AS `jabatan`,`tbl_user`.`status_karyawan` AS `status_karyawan`,`tbl_user`.`status_aktif` AS `status_aktif`,`tbl_user`.`status_tugas` AS `status_tugas` from (`tbl_role` join `tbl_user` on((`tbl_user`.`admin` = `tbl_role`.`admin`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `tabel_surat`
+-- Struktur untuk view `tabel_surat`
 --
 DROP TABLE IF EXISTS `tabel_surat`;
 
@@ -1705,7 +2022,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `tabel_surat_keluar`
+-- Struktur untuk view `tabel_surat_keluar`
 --
 DROP TABLE IF EXISTS `tabel_surat_keluar`;
 
@@ -1714,7 +2031,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `tbl_view_departemen`
+-- Struktur untuk view `tbl_view_departemen`
 --
 DROP TABLE IF EXISTS `tbl_view_departemen`;
 
@@ -1725,20 +2042,26 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Indexes for table `tbl_cuti`
+-- Indeks untuk tabel `tbl_bulan_gaji`
+--
+ALTER TABLE `tbl_bulan_gaji`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_cuti`
 --
 ALTER TABLE `tbl_cuti`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_department`
+-- Indeks untuk tabel `tbl_department`
 --
 ALTER TABLE `tbl_department`
   ADD PRIMARY KEY (`id`),
   ADD KEY `kode_unit` (`kode_unit`);
 
 --
--- Indexes for table `tbl_disposisi`
+-- Indeks untuk tabel `tbl_disposisi`
 --
 ALTER TABLE `tbl_disposisi`
   ADD PRIMARY KEY (`id_disposisi`),
@@ -1746,25 +2069,43 @@ ALTER TABLE `tbl_disposisi`
   ADD KEY `fasf` (`nama`);
 
 --
--- Indexes for table `tbl_hukuman`
+-- Indeks untuk tabel `tbl_file_sharing`
+--
+ALTER TABLE `tbl_file_sharing`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_gaji`
+--
+ALTER TABLE `tbl_gaji`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_gaji_pokok`
+--
+ALTER TABLE `tbl_gaji_pokok`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_hukuman`
 --
 ALTER TABLE `tbl_hukuman`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_identitas`
+-- Indeks untuk tabel `tbl_identitas`
 --
 ALTER TABLE `tbl_identitas`
   ADD PRIMARY KEY (`id_identitas`);
 
 --
--- Indexes for table `tbl_instansi`
+-- Indeks untuk tabel `tbl_instansi`
 --
 ALTER TABLE `tbl_instansi`
   ADD PRIMARY KEY (`id_instansi`);
 
 --
--- Indexes for table `tbl_inventaris`
+-- Indeks untuk tabel `tbl_inventaris`
 --
 ALTER TABLE `tbl_inventaris`
   ADD PRIMARY KEY (`id_invent`),
@@ -1772,85 +2113,109 @@ ALTER TABLE `tbl_inventaris`
   ADD KEY `sd` (`KD_UNIT`);
 
 --
--- Indexes for table `tbl_jabatan`
+-- Indeks untuk tabel `tbl_jabatan`
 --
 ALTER TABLE `tbl_jabatan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_keahlian`
+-- Indeks untuk tabel `tbl_jenis_penerimaan`
+--
+ALTER TABLE `tbl_jenis_penerimaan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_keahlian`
 --
 ALTER TABLE `tbl_keahlian`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_keluarga`
+-- Indeks untuk tabel `tbl_keluarga`
 --
 ALTER TABLE `tbl_keluarga`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_keterangan_presensi`
+-- Indeks untuk tabel `tbl_keterangan_presensi`
 --
 ALTER TABLE `tbl_keterangan_presensi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_klasifikasi`
+-- Indeks untuk tabel `tbl_klasifikasi`
 --
 ALTER TABLE `tbl_klasifikasi`
   ADD PRIMARY KEY (`id_klasifikasi`);
 
 --
--- Indexes for table `tbl_kontrak`
+-- Indeks untuk tabel `tbl_kontrak`
 --
 ALTER TABLE `tbl_kontrak`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_kpts`
+-- Indeks untuk tabel `tbl_kpts`
 --
 ALTER TABLE `tbl_kpts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_lembur`
+-- Indeks untuk tabel `tbl_lembur`
 --
 ALTER TABLE `tbl_lembur`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_notif_kontrak`
+-- Indeks untuk tabel `tbl_notif_kontrak`
 --
 ALTER TABLE `tbl_notif_kontrak`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_organisasi`
+-- Indeks untuk tabel `tbl_organisasi`
 --
 ALTER TABLE `tbl_organisasi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_pendidikan`
+-- Indeks untuk tabel `tbl_pendidikan`
 --
 ALTER TABLE `tbl_pendidikan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_presensi`
+-- Indeks untuk tabel `tbl_penerimaan`
+--
+ALTER TABLE `tbl_penerimaan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_potongan`
+--
+ALTER TABLE `tbl_potongan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_presensi`
 --
 ALTER TABLE `tbl_presensi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_ref_jabatan`
+-- Indeks untuk tabel `tbl_ref_bank`
+--
+ALTER TABLE `tbl_ref_bank`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_ref_jabatan`
 --
 ALTER TABLE `tbl_ref_jabatan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_ref_jenis_barang`
+-- Indeks untuk tabel `tbl_ref_jenis_barang`
 --
 ALTER TABLE `tbl_ref_jenis_barang`
   ADD PRIMARY KEY (`id`) USING BTREE,
@@ -1859,32 +2224,38 @@ ALTER TABLE `tbl_ref_jenis_barang`
   ADD KEY `jenis_barang` (`jenis_barang`);
 
 --
--- Indexes for table `tbl_role`
+-- Indeks untuk tabel `tbl_ref_potongan`
+--
+ALTER TABLE `tbl_ref_potongan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_role`
 --
 ALTER TABLE `tbl_role`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin` (`admin`);
 
 --
--- Indexes for table `tbl_sett`
+-- Indeks untuk tabel `tbl_sett`
 --
 ALTER TABLE `tbl_sett`
   ADD PRIMARY KEY (`id_sett`);
 
 --
--- Indexes for table `tbl_sppd`
+-- Indeks untuk tabel `tbl_sppd`
 --
 ALTER TABLE `tbl_sppd`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_spring`
+-- Indeks untuk tabel `tbl_spring`
 --
 ALTER TABLE `tbl_spring`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_sub_unit`
+-- Indeks untuk tabel `tbl_sub_unit`
 --
 ALTER TABLE `tbl_sub_unit`
   ADD PRIMARY KEY (`id`),
@@ -1892,21 +2263,27 @@ ALTER TABLE `tbl_sub_unit`
   ADD KEY `sub_unit` (`sub_unit`);
 
 --
--- Indexes for table `tbl_surat_keluar`
+-- Indeks untuk tabel `tbl_surat_keluar`
 --
 ALTER TABLE `tbl_surat_keluar`
   ADD PRIMARY KEY (`id_surat`),
   ADD KEY `bzzcb` (`id_user`);
 
 --
--- Indexes for table `tbl_surat_masuk`
+-- Indeks untuk tabel `tbl_surat_masuk`
 --
 ALTER TABLE `tbl_surat_masuk`
   ADD PRIMARY KEY (`id_surat`),
   ADD KEY `fqwet` (`id_user`);
 
 --
--- Indexes for table `tbl_user`
+-- Indeks untuk tabel `tbl_tunjangan`
+--
+ALTER TABLE `tbl_tunjangan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`),
@@ -1915,201 +2292,273 @@ ALTER TABLE `tbl_user`
   ADD KEY `unit` (`unit`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `tbl_user_gaji`
+--
+ALTER TABLE `tbl_user_gaji`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_cuti`
+-- AUTO_INCREMENT untuk tabel `tbl_bulan_gaji`
+--
+ALTER TABLE `tbl_bulan_gaji`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_cuti`
 --
 ALTER TABLE `tbl_cuti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `tbl_department`
+-- AUTO_INCREMENT untuk tabel `tbl_department`
 --
 ALTER TABLE `tbl_department`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `tbl_disposisi`
+-- AUTO_INCREMENT untuk tabel `tbl_disposisi`
 --
 ALTER TABLE `tbl_disposisi`
   MODIFY `id_disposisi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tbl_hukuman`
+-- AUTO_INCREMENT untuk tabel `tbl_file_sharing`
+--
+ALTER TABLE `tbl_file_sharing`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_gaji`
+--
+ALTER TABLE `tbl_gaji`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_gaji_pokok`
+--
+ALTER TABLE `tbl_gaji_pokok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_hukuman`
 --
 ALTER TABLE `tbl_hukuman`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_identitas`
+-- AUTO_INCREMENT untuk tabel `tbl_identitas`
 --
 ALTER TABLE `tbl_identitas`
   MODIFY `id_identitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT for table `tbl_inventaris`
+-- AUTO_INCREMENT untuk tabel `tbl_inventaris`
 --
 ALTER TABLE `tbl_inventaris`
   MODIFY `id_invent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `tbl_jabatan`
+-- AUTO_INCREMENT untuk tabel `tbl_jabatan`
 --
 ALTER TABLE `tbl_jabatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `tbl_keahlian`
+-- AUTO_INCREMENT untuk tabel `tbl_jenis_penerimaan`
+--
+ALTER TABLE `tbl_jenis_penerimaan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_keahlian`
 --
 ALTER TABLE `tbl_keahlian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tbl_keluarga`
+-- AUTO_INCREMENT untuk tabel `tbl_keluarga`
 --
 ALTER TABLE `tbl_keluarga`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tbl_keterangan_presensi`
+-- AUTO_INCREMENT untuk tabel `tbl_keterangan_presensi`
 --
 ALTER TABLE `tbl_keterangan_presensi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `tbl_klasifikasi`
+-- AUTO_INCREMENT untuk tabel `tbl_klasifikasi`
 --
 ALTER TABLE `tbl_klasifikasi`
   MODIFY `id_klasifikasi` int(5) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_kontrak`
+-- AUTO_INCREMENT untuk tabel `tbl_kontrak`
 --
 ALTER TABLE `tbl_kontrak`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `tbl_kpts`
+-- AUTO_INCREMENT untuk tabel `tbl_kpts`
 --
 ALTER TABLE `tbl_kpts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tbl_lembur`
+-- AUTO_INCREMENT untuk tabel `tbl_lembur`
 --
 ALTER TABLE `tbl_lembur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `tbl_notif_kontrak`
+-- AUTO_INCREMENT untuk tabel `tbl_notif_kontrak`
 --
 ALTER TABLE `tbl_notif_kontrak`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_organisasi`
+-- AUTO_INCREMENT untuk tabel `tbl_organisasi`
 --
 ALTER TABLE `tbl_organisasi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tbl_pendidikan`
+-- AUTO_INCREMENT untuk tabel `tbl_pendidikan`
 --
 ALTER TABLE `tbl_pendidikan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT for table `tbl_presensi`
+-- AUTO_INCREMENT untuk tabel `tbl_penerimaan`
+--
+ALTER TABLE `tbl_penerimaan`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_potongan`
+--
+ALTER TABLE `tbl_potongan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_presensi`
 --
 ALTER TABLE `tbl_presensi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `tbl_ref_jabatan`
+-- AUTO_INCREMENT untuk tabel `tbl_ref_bank`
+--
+ALTER TABLE `tbl_ref_bank`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_ref_jabatan`
 --
 ALTER TABLE `tbl_ref_jabatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
--- AUTO_INCREMENT for table `tbl_ref_jenis_barang`
+-- AUTO_INCREMENT untuk tabel `tbl_ref_jenis_barang`
 --
 ALTER TABLE `tbl_ref_jenis_barang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_role`
+-- AUTO_INCREMENT untuk tabel `tbl_ref_potongan`
 --
-ALTER TABLE `tbl_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `tbl_ref_potongan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `tbl_sppd`
+-- AUTO_INCREMENT untuk tabel `tbl_role`
+--
+ALTER TABLE `tbl_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_sppd`
 --
 ALTER TABLE `tbl_sppd`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `tbl_spring`
+-- AUTO_INCREMENT untuk tabel `tbl_spring`
 --
 ALTER TABLE `tbl_spring`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
 
 --
--- AUTO_INCREMENT for table `tbl_sub_unit`
+-- AUTO_INCREMENT untuk tabel `tbl_sub_unit`
 --
 ALTER TABLE `tbl_sub_unit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
--- AUTO_INCREMENT for table `tbl_surat_keluar`
+-- AUTO_INCREMENT untuk tabel `tbl_surat_keluar`
 --
 ALTER TABLE `tbl_surat_keluar`
-  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table `tbl_surat_masuk`
+-- AUTO_INCREMENT untuk tabel `tbl_surat_masuk`
 --
 ALTER TABLE `tbl_surat_masuk`
-  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT untuk tabel `tbl_tunjangan`
+--
+ALTER TABLE `tbl_tunjangan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10101;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT untuk tabel `tbl_user_gaji`
+--
+ALTER TABLE `tbl_user_gaji`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tbl_disposisi`
+-- Ketidakleluasaan untuk tabel `tbl_disposisi`
 --
 ALTER TABLE `tbl_disposisi`
   ADD CONSTRAINT `fasf` FOREIGN KEY (`nama`) REFERENCES `tbl_user` (`nama`);
 
 --
--- Constraints for table `tbl_inventaris`
+-- Ketidakleluasaan untuk tabel `tbl_inventaris`
 --
 ALTER TABLE `tbl_inventaris`
   ADD CONSTRAINT `ds` FOREIGN KEY (`kode_jenis_barang`) REFERENCES `tbl_ref_jenis_barang` (`kode_jenis_barang`);
 
 --
--- Constraints for table `tbl_surat_keluar`
+-- Ketidakleluasaan untuk tabel `tbl_surat_keluar`
 --
 ALTER TABLE `tbl_surat_keluar`
   ADD CONSTRAINT `bzzcb` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`);
 
 --
--- Constraints for table `tbl_surat_masuk`
+-- Ketidakleluasaan untuk tabel `tbl_surat_masuk`
 --
 ALTER TABLE `tbl_surat_masuk`
   ADD CONSTRAINT `fqwet` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`);
 
 --
--- Constraints for table `tbl_user`
+-- Ketidakleluasaan untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD CONSTRAINT `fsa` FOREIGN KEY (`admin`) REFERENCES `tbl_role` (`admin`);

@@ -57,8 +57,8 @@
                                             <tr>';
 									
                                         
-										$jmk = mysqli_query($config, "SELECT gaji_jm,telat,absen FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
-										list($gajipusat,$telatku,$absenku)=mysqli_fetch_array($jmk);
+										$jmk = mysqli_query($config, "SELECT gaji_jm FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
+										list($gajipusat)=mysqli_fetch_array($jmk);
 										
 										$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
 										list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
@@ -1102,7 +1102,7 @@
                     <div class="input-field col s12">
 				
 				
-				<button type="submit" name="simpanseluruh" href="./" class="btn-large green waves-effect waves-light col s12" onclick="return confirm(\'Anda yakin ingin menyimpan data?\');"><i class="material-icons">done</i> SIMPAN</button>
+				<a name="simpanseluruh" style="line-height:30px!important" href="?page=pros&sub=dada&id='.$id.'&id_user='.$id_user.'" class="btn-large green waves-effect waves-light col s12" onclick="return confirm(\'Anda yakin ingin menyimpan data?\');"><i class="material-icons">done</i> SIMPAN</a>
 			
 				</div>
                     <!-- Row form END -->';

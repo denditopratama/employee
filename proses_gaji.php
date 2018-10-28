@@ -47,6 +47,9 @@ label {
 			break;
 				case 'hahas':
                 include "hapus_keterangan_potongan.php";
+			break;
+			case 'dada':
+                include "update_status_gaji.php";
 			break;}
 			}
 
@@ -142,7 +145,7 @@ label {
 												';} else {
 													echo'
 												<td style="text-align:center!important">
-											<a class="btn small red waves-effect waves-light"><i class="material-icons">done</i> Sudah Selesai</a>
+											<a class="btn small green waves-effect waves-light"><i class="material-icons">done</i> Sudah Selesai</a>
 											</td>
 												';
 												}
