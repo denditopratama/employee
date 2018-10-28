@@ -223,16 +223,19 @@ $pdf->Cell(25,6,'                                    :   '.$npwp,0,1, 'L');
 $pdf->SetFont('Arial','',9);
 $pdf->Cell(12.1,6,' Tanggal Masuk Bekerja',0,0,'L');
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(85,6,'                                    :   '.date('d',strtotime($tgl_bakti)).' - '.$nms.' - '.date('Y',strtotime($tgl_bakti)),0,0, 'L');
+$pdf->Cell(95,6,'                                    :   '.date('d',strtotime($tgl_bakti)).' - '.$nms.' - '.date('Y',strtotime($tgl_bakti)),0,0, 'L');
+
 $pdf->SetFont('Arial','',9);
 $pdf->Cell(10,6,' Status Keluarga',0,0,'L'); 
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(20,6,'            					         :   '.$statkel,0,1, 'L');
+
 $pdf->SetFont('Arial','',9);
 $pdf->Cell(12.1,6,' Masa Kerja Efektif',0,0,'L');
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(85,6,'                                    :   '.date_diff(date_create($tgl_bakti), date_create('now'))->y.' Tahun / '.date_diff(date_create($tgl_bakti), date_create('now'))->m.' Bulan',0,0, 'L');
+$pdf->Cell(95,6,'                                    :   '.date_diff(date_create($tgl_bakti), date_create('now'))->y.' Tahun / '.date_diff(date_create($tgl_bakti), date_create('now'))->m.' Bulan',0,0, 'L');
 $pdf->SetFont('Arial','',9);
+
 $pdf->Cell(10,6,' Status Karyawan',0,0,'L');
 $pdf->SetFont('Arial','B',9); 
 $pdf->Cell(20,6,'                          :   '.$status_karyawan,0,1, 'L');
@@ -258,143 +261,184 @@ $pdf->Cell(10 ,6,'',0,1);
 $pdf->Cell(103 ,6,'     Gaji',0,0);
 $pdf->Cell(10 ,6,'Umum',0,1);
 $pdf->SetFont('Arial','',9);
-$pdf->Cell(81.5 ,6,'     1. Gaji                            :',0,0);
+$pdf->Cell(43.9 ,6,'     1. Gaji',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($gajix , 0, ',', '.').'',0,0,'R');
 
 $queryoz = mysqli_query($config, "SELECT jumlah FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan=28)");
 list($kehadiran)=mysqli_fetch_array($queryoz);
-$pdf->Cell(80 ,6,'           1. Potongan Kehadiran    :',0,0);
-$pdf->Cell(13 ,6,'Rp '.number_format($kehadiran , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(48.9 ,6,'           1. Potongan Kehadiran',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($kehadiran , 0, ',', '.').'',0,1,'R');
 
 
 
 $pdf->Line(68,121,103,121);
-$pdf->Cell(30.6 ,5,'',0,0);
+
+$pdf->Cell(27,6,'',0,0);
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(50 ,6,'Sub Total :',0,0);
+$pdf->Cell(16.8 ,6,'Sub Total',0,0);
+$pdf->Cell(36.5 ,6,':',0,0);
+
 $pdf->Line(161,121,196,121);
 
 
 $pdf->Cell(11 ,6,'Rp '.number_format($gajix , 0, ',', '.').'',0,0,'R');//end of line
-$pdf->Cell(50 ,6,'                                  Sub Total :',0,0);
+$pdf->Cell(49 ,6,'                                  Sub Total',0,0);
+$pdf->Cell(1.2 ,6,':',0,0);
 $pdf->Cell(43,6,'Rp '.number_format($kehadiran , 0, ',', '.').'',0,1,'R');//end of line
 
 
 $pdf->Cell(10 ,6,'     Tunjangan',0,1);
 $pdf->SetFont('Arial','',9);
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    1. Tunjangan Jabatan    :',0,0);
+$pdf->Cell(43.9 ,6,'     1. Tunjangan Jabatan',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_jabatan , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(83 ,6,'           1. Jamsostek                   :',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($pot_jamsostek_kar , 0, ',', '.').'',0,1,'R');
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    2. Tunjangan Fungsional    :',0,0);
+$pdf->Cell(48.9 ,6,'           1. Jamsostek',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($pot_jamsostek_kar , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(43.9 ,6,'     2. Tunjangan Fungsional',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_fungsional , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(83 ,6,'           2. BPJSTK J. Pensiun          :',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($pot_bpjstk_jampes , 0, ',', '.').'',0,1,'R');
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    3. Tunjangan Transport    :',0,0);
+$pdf->Cell(48.9 ,6,'           2. BPJSTK J. Pensiun',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($pot_bpjstk_jampes , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(43.9 ,6,'     3. Tunjangan Transportasi',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_transportasi , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(83 ,6,'           3. BPJSTK J. Kesehatan         :',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($pot_bpjstk_jamkes , 0, ',', '.').'',0,1,'R');
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    4. Tunjangan Utilitas    :',0,0);
+$pdf->Cell(48.9 ,6,'           3. BPJSTK J. Kesehatan',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($pot_bpjstk_jamkes , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(43.9 ,6,'     4. Tunjangan Utilitas',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_utilitas , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(83 ,6,'           4. PPh-21         :',0,1);
+
+$pdf->Cell(48.9 ,6,'           4. PPh-21',0,0);
+$pdf->Cell(29 ,6,':',0,1);
 
 
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    5. Tunjangan Perumahan    :',0,0);
+
+$pdf->Cell(43.9 ,6,'     5. Tunjangan Perumahan',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_perumahan , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(83 ,6,'           - Penghasilan Tetap         :',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($pot_pph21_tetap , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(48.9 ,6,'           - Penghasilan Tetap',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($pot_pph21_tetap , 0, ',', '.').'',0,1,'R');
 
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    6. Tunjangan Komunikasi    :',0,0);
+$pdf->Cell(43.9 ,6,'     6. Tunjangan Komunikasi',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_komunikasi , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(83 ,6,'           - Penghasilan Tidak Tetap         :',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($pot_pph21_tidak , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(48.9 ,6,'           - Penghasilan Tidak Tetap',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($pot_pph21_tidak , 0, ',', '.').'',0,1,'R');
 $pdf->Line(161,169,196,169);
 
 
 $sub1=$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
 $sub2=$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
 $sub3=$pot_jamsostek_kar+$pot_bpjstk_jamkes+$pot_bpjstk_jampes+$pot_pph21_tetap+$pot_pph21_tidak;
-$pdf->Cell(30.6 ,5,'',0,0);
+$pdf->Cell(27,6,'',0,0);
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(25 ,6,'Sub Total :',0,0);
-$pdf->Cell(36 ,6,'Rp '.number_format($sub1 , 0, ',', '.').'',0,0,'R');//end of line
-$pdf->Cell(50 ,6,'                                  Sub Total :',0,0);
+$pdf->Cell(16.8 ,6,'Sub Total',0,0);
+$pdf->Cell(36.5 ,6,':',0,0);
+$pdf->Cell(11.2 ,6,'Rp '.number_format($sub1 , 0, ',', '.').'',0,0,'R');//end of line
+
+$pdf->Cell(48.7 ,6,'                                  Sub Total',0,0);
+$pdf->Cell(1.2 ,6,':',0,0);
 $pdf->Cell(43,6,'Rp '.number_format($sub3 , 0, ',', '.').'',0,1,'R');//end of line
+
 $pdf->Line(68,169,103,169);
 $pdf->Line(68,181,103,181);
 $pdf->Cell(10 ,5,'',0,0);
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(48 ,6,'Jumlah Penghasilan :',0,0);
+$pdf->Cell(33.8 ,6,'Jumlah Penghasilan',0,0);
+$pdf->Cell(14.2 ,6,':',0,0);
 $pdf->Cell(33.5 ,6,'Rp '.number_format($sub2 , 0, ',', '.').'',0,1,'R');//end of line
+
+
 
 
 //TUNJANGAN UMUM
 
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(10 ,5,'     Umum',0,1);
+
 $pdf->SetFont('Arial','',9);
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    1. Jamsostek     :',0,0);
+
+$pdf->Cell(43.9 ,6,'     1. Jamsostek',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($pen_jamsostek , 0, ',', '.').'',0,1,'R');
 
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    2. BPJSTK J. Pensiun    :',0,0);
+$pdf->Cell(43.9 ,6,'     2. BPSTK J. Pensiun',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($bpjstk_jampes , 0, ',', '.').'',0,1,'R');
 
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    3. BPJSTK J. Kesehatan    :',0,0);
+$pdf->Cell(43.9 ,6,'     3. BPSTK J. Kesehatan',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($bpjstk_jamkes , 0, ',', '.').'',0,1,'R');
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    4. Tunjangan PPh-21    :',0,1);
+$pdf->Cell(43.9 ,6,'     4. Tunjangan PPh-21',0,0);
+$pdf->Cell(37.5 ,6,':',0,1);
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    - Penghasilan Tetap   :',0,0);
+
+$pdf->Cell(43.9 ,6,'     - Penghasilan Tetap',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_pph21_tetap , 0, ',', '.').'',0,1,'R');
 
 
-$pdf->Cell(0.8 ,1,'',0,0);
-$pdf->Cell(80.8 ,6,'    - Penghasilan Tidak Tetap    :',0,0);
+$pdf->Cell(43.9 ,6,'     - Penghasilan Tidak Tetap',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($tun_pph21_tidak , 0, ',', '.').'',0,1,'R');
+
+
 
 
 $subpen=$pen_jamsostek+$bpjstk_jampes+$bpjstk_jamkes+$tun_pph21_tetap+$tun_pph21_tidak;
 $faygg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
 	list($jumla)=mysqli_fetch_array($faygg);
-$pdf->Cell(30.6 ,5,'',0,0);
-$pdf->SetFont('Arial','B',9);
 $pdf->Line(68,222,103,222);
-$pdf->Cell(25 ,6,'Sub Total :',0,0);
-$pdf->Cell(36 ,6,'Rp '.number_format($subpen , 0, ',', '.').'',0,1,'R');
-$pdf->Cell(1 ,6,'     Lain - Lain :',0,0);
-$pdf->Cell(82 ,6,'Rp '.number_format($jumla , 0, ',', '.').'',0,0,'R');
+$pdf->Cell(27,6,'',0,0);
+$pdf->SetFont('Arial','B',9);
+$pdf->Cell(16.8 ,6,'Sub Total',0,0);
+$pdf->Cell(36.5 ,6,':',0,0);
+$pdf->Cell(11 ,6,'Rp '.number_format($subpen , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(43.9 ,6,'     Lain - Lain',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
+$pdf->Cell(10 ,6,'Rp '.number_format($jumla , 0, ',', '.').'',0,0,'R');
 $fayggz=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan<>28)");
 list($jumlah)=mysqli_fetch_array($fayggz);
-$pdf->Cell(1 ,6,'                     Lain - Lain :',0,0);
-$pdf->Cell(82 ,6,'Rp '.number_format($jumlah , 0, ',', '.').'',0,1,'R');
+
+$pdf->Cell(48.9 ,6,'           Lain - Lain',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($jumlah , 0, ',', '.').'',0,1,'R');
 $income=$subpen+$jumla+$sub2;
-$pdf->Cell(1 ,6,'     Total Penerimaan :',0,0);
-$pdf->Cell(90 ,6,'Rp '.number_format($income , 0, ',', '.').'',0,0,'R');
+
+$pdf->Cell(43.9 ,6,'     Total Penerimaan',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
+$pdf->Cell(10 ,6,'Rp '.number_format($income , 0, ',', '.').'',0,0,'R');
+
 $outcome=$sub3+$jumlah+$kehadiran;
-$pdf->Cell(1 ,6,'            Total Potongan :',0,0);
-$pdf->Cell(82 ,6,'Rp '.number_format($outcome , 0, ',', '.').'',0,1,'R');
+$pdf->Cell(48.9 ,6,'           Total Potongan',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($outcome , 0, ',', '.').'',0,1,'R');
 
 $pdf->Cell(67 ,1,'',0,1);
 $pdf->Cell(67 ,1,'',0,1);
-$pdf->Cell(64 ,6,' III. PENERIMAAN BERSIH',0,0);
+$pdf->Cell(67 ,6,' III. PENERIMAAN BERSIH',0,0);
 $pdf->SetFillColor(255,255,0);
 $pdf->Cell(28 ,6,'Rp '.number_format($income-$outcome , 0, ',', '.').'',0,1,'C',1);
 $pdf->Cell(67 ,2,'',0,1);
@@ -402,10 +446,10 @@ $pdf->SetFont('Arial','B',9);
 $pdf->Cell(64 ,6,' Keterangan :',0,1);
 $pdf->SetFont('Arial','',9);
 
-$pdf->Cell(80.8 ,5,'    1.Jamsostek merupakan tunjangan yang dibayarkan Perusahaan (4,54 %) dan Karyawan (2 %)    :',0,1);
-$pdf->Cell(80.8 ,5,'    2.PJS Tenaga Kerja Jaminan Pensiun dibayarkan Perusahaan (2%) dan Karyawan (1%), Maks Penghasilan Rp. 7.703.500    :',0,1);
-$pdf->Cell(80.8 ,5,'    3.BPJS Tenaga Kerja Jaminan Kesehatan dibayarkan Perusahaan (4%) dan Karyawan (1%), Maks Penghasilan Rp. 8.000.000    :',0,1);
-$pdf->Cell(80.8 ,5,'    4.PPh 21 adalah jumlah Pajak yang seharusnya disetor ke Kantor Pajak    :',0,1);
+$pdf->Cell(80.8 ,5,'    1.Jamsostek merupakan tunjangan yang dibayarkan Perusahaan (4,54 %) dan Karyawan (2 %)',0,1);
+$pdf->Cell(80.8 ,5,'    2.PJS Tenaga Kerja Jaminan Pensiun dibayarkan Perusahaan (2%) dan Karyawan (1%), Maks Penghasilan Rp. 7.703.500',0,1);
+$pdf->Cell(80.8 ,5,'    3.BPJS Tenaga Kerja Jaminan Kesehatan dibayarkan Perusahaan (4%) dan Karyawan (1%), Maks Penghasilan Rp. 8.000.000',0,1);
+$pdf->Cell(80.8 ,5,'    4.PPh 21 adalah jumlah Pajak yang seharusnya disetor ke Kantor Pajak',0,1);
 
 
 
