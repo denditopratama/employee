@@ -87,7 +87,7 @@
 																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur,divisi)
 																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,0,'".$_SESSION['divisi']."')");
 																}
-																else if($_SESSION['admin']==5){
+																else if($_SESSION['admin']==5 || $_SESSION['admin']==11 ){
 																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,divisi)
 																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,'".$_SESSION['divisi']."')");
 																}

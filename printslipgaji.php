@@ -52,13 +52,13 @@
                                                         } else if($status_keluarga == 5) {
                                                             $statkel = 'Duda / Anak 5';
                                                         } else if($status_keluarga == 6) {
-                                                            $statkel = 'Duda / Anak 1';
+                                                            $statkel = 'Duda / Anak 6';
                                                         } else if($status_keluarga == 7) {
-                                                            $statkel = 'Duda / Anak 1';
+                                                            $statkel = 'Duda / Anak 7';
                                                         } else if($status_keluarga == 8) {
-                                                            $statkel = 'Duda / Anak 1';
+                                                            $statkel = 'Duda / Anak 8';
                                                         } else if($status_keluarga == 9) {
-                                                            $statkel = 'Duda / Anak 1';
+                                                            $statkel = 'Duda / Anak 9';
                                                         } else if($status_keluarga == 11) {
                                                             $statkel = 'Janda / Anak 0';
                                                         } else if($status_keluarga == 12) {
@@ -141,10 +141,11 @@ $pdf->AddPage();
 
 //set font to arial, bold, 14pt
 $pdf->SetFont('Arial','B',14);
-$pdf->Image('./upload/logopdf.png',10,10,-300);
-$pdf->Cell(189 ,23,'',0,1);//end of line
+$pdf->Image('./upload/logopdf.png',10,10,-400);
+$pdf->Cell(189 ,15,'',0,1);//end of line
 $pdf->Cell(57 ,23,'',0,0);//end of line
 $pdf->Multicell(80,6,'Rincian Penghasilan Karyawan '.$nm.' '.$tahuns.'',0,'C');
+$pdf->Cell(189 ,8,'',0,1);//end of line
 $pdf->Line(10,55,200,55);
 $pdf->Line(10,93,200,93);
 $pdf->Line(10,55,10,287);
@@ -258,7 +259,7 @@ $pdf->Cell(96.5 ,6,' I. PENERIMAAN',0,0);
 $pdf->Cell(10 ,6,' II. POTONGAN',0,1);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(10 ,6,'',0,1);
-$pdf->Cell(103 ,6,'     Gaji',0,0);
+$pdf->Cell(101 ,6,'     Gaji',0,0);
 $pdf->Cell(10 ,6,'Umum',0,1);
 $pdf->SetFont('Arial','',9);
 $pdf->Cell(43.9 ,6,'     1. Gaji',0,0);
@@ -372,7 +373,7 @@ $pdf->Cell(33.5 ,6,'Rp '.number_format($sub2 , 0, ',', '.').'',0,1,'R');//end of
 //TUNJANGAN UMUM
 
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(10 ,5,'     Umum',0,1);
+$pdf->Cell(10 ,5,'    Umum',0,1);
 
 $pdf->SetFont('Arial','',9);
 
@@ -416,7 +417,7 @@ $pdf->Cell(16.8 ,6,'Sub Total',0,0);
 $pdf->Cell(36.5 ,6,':',0,0);
 $pdf->Cell(11 ,6,'Rp '.number_format($subpen , 0, ',', '.').'',0,1,'R');
 
-$pdf->Cell(43.9 ,6,'     Lain - Lain',0,0);
+$pdf->Cell(43.8 ,6,'     Lain - Lain',0,0);
 $pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($jumla , 0, ',', '.').'',0,0,'R');
 $fayggz=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan<>28)");
@@ -427,7 +428,7 @@ $pdf->Cell(29 ,6,':',0,0);
 $pdf->Cell(15 ,6,'Rp '.number_format($jumlah , 0, ',', '.').'',0,1,'R');
 $income=$subpen+$jumla+$sub2;
 
-$pdf->Cell(43.9 ,6,'     Total Penerimaan',0,0);
+$pdf->Cell(43.8 ,6,'     Total Penerimaan',0,0);
 $pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($income , 0, ',', '.').'',0,0,'R');
 
@@ -451,7 +452,73 @@ $pdf->Cell(80.8 ,5,'    2.PJS Tenaga Kerja Jaminan Pensiun dibayarkan Perusahaan
 $pdf->Cell(80.8 ,5,'    3.BPJS Tenaga Kerja Jaminan Kesehatan dibayarkan Perusahaan (4%) dan Karyawan (1%), Maks Penghasilan Rp. 8.000.000',0,1);
 $pdf->Cell(80.8 ,5,'    4.PPh 21 adalah jumlah Pajak yang seharusnya disetor ke Kantor Pajak',0,1);
 
+$cekpenerimaan=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
+$cekpotongan=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
+if(mysqli_num_rows($cekpenerimaan)>0 || mysqli_num_rows($cekpotongan)>0){
+	
+$totpotlain=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan<>28)");
+list($totpot)=mysqli_fetch_array($totpotlain);
+$totpenlain=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
+list($totpen)=mysqli_fetch_array($totpenlain);
 
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',9);
+$pdf->SetFillColor(176,224,230);
+$pdf->Cell(95,5,'Rincian Penerimaan Lain - Lain',1,0,'C',1);
+$pdf->Cell(95,5,'Rincian Potongan Lain - Lain',1,1,'C',1);
+$pdf->Cell(95,3,'',0,1);
+
+$x=$pdf->GetX();
+$y=$pdf->GetY();
+
+$pdf->SetFont('Arial','',9);
+if(mysqli_num_rows($cekpenerimaan)>0){
+$kods=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
+while($row=mysqli_fetch_array($kods)){
+	$contal=mysqli_query($config,"SELECT uraian FROM tbl_jenis_penerimaan WHERE id='".$row['kode_penerimaan']."'");
+	list($uraiterima)=mysqli_fetch_array($contal);
+$pdf->Cell(2,3,'',0,0);
+$pdf->MultiCell(95 ,6,'- '.$uraiterima.' : Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,'L');
+
+
+}
+$pdf->Cell(2,3,'',0,0);
+$pdf->SetFont('Arial','B',9);
+$x1=$pdf->GetX();
+$y1=$pdf->GetY();
+$pdf->Line($x1,$y1,$x1+93,$y1);
+$pdf->MultiCell(95 ,6,'  Sub Total : Rp '.number_format($sub3 , 0, ',', '.').'',0,'');
+}
+
+$pdf->SetFont('Arial','',9);
+$pdf->SetXY($x + 98, $y);
+if(mysqli_num_rows($cekpotongan)>0){
+$kodsa=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan<>28)");
+while($row=mysqli_fetch_array($kodsa)){
+	
+	$contals=mysqli_query($config,"SELECT uraian FROM tbl_ref_potongan WHERE id='".$row['kode_potongan']."'");
+	list($uraipotong)=mysqli_fetch_array($contals);
+$y=$pdf->GetY();
+$pdf->SetXY($x + 98, $y);
+$pdf->MultiCell(150 ,6,'- '.$uraipotong.' : Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,'L');	
+
+}
+$pdf->SetFont('Arial','B',9);
+$y=$pdf->GetY();
+$pdf->SetXY($x + 98, $y);
+$pdf->Line($x+98,$y,$x+98+92,$y);
+$pdf->MultiCell(150 ,6,'  Sub Total : Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,'L');	
+
+	
+}
+
+
+
+
+
+
+
+}
 
 
 

@@ -96,7 +96,7 @@ h6 {
 }
 th,td {
 	text-align:center!important;
-	border:2px solid black;
+	
 }
 
 </style>
@@ -160,8 +160,8 @@ th,td {
 								
 								
 								<div class="col m12" id="colres">
-							<table class="highlight" id="dds">
-                            <thead class="blue lighten-4"style="background-color:yellow!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
+							<table class="bordered" id="dds">
+                            <thead class="blue lighten-2" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
 								
 								<tr>
 								<th style="color:black">Ranking</th>
@@ -203,7 +203,7 @@ th,td {
                                                             $row['divisi'] ='Admin';
                                                         }
 									echo'
-								<tbody>
+								<tbody style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 								<tr>
 								<td>'.$no++.'</td>
 								<td>'.$row['nama'].'</td>

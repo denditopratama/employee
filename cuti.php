@@ -356,7 +356,7 @@
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tgl_awal'])).'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tgl_akhir'])).'</td>';
                                      
-									if($_SESSION['admin'] == 5 || $_SESSION['admin']== 1){
+									if($_SESSION['admin'] == 5 || $_SESSION['admin']==11 || $_SESSION['admin']== 1){
 									if($row['status_manager']==1){	
 									echo'
 									<td style="text-align:center">

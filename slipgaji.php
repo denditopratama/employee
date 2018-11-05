@@ -149,7 +149,7 @@
                                  <tr>
 									<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Bulan</th>
-										<th width="20%"style="color:#fff">Status</th>
+										
 										<th width="20%" style="color:#fff">Tindakan</th>
 									
                                 </tr>
@@ -204,13 +204,7 @@
                                         echo '<td style="text-align:center">'.$nm." ".$y.'</td>
 										';
 										
-										if($row['status']==0){
-											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji belum selesai di proses">
-                                                    <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
-										} else {
-											echo '<td style="text-align:center"><a class="btn small green waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji sudah selesai di proses">
-                                                    <i class="material-icons">highlight_off</i> SUDAH SELESAI</a></td>';
-										}
+										
 										
                                           echo'<td style="text-align:center">';
 										  

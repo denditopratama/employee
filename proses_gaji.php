@@ -122,7 +122,7 @@ label {
                                         </thead>
 
                                         <tbody>
-									<?php $jia=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9)");
+									<?php $jia=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1)");
 									$no=1;
 									while($row=mysqli_fetch_array($jia)){
 										echo'
@@ -183,7 +183,7 @@ label {
                             <i id="roro" class="material-icons prefix md-prefix">account_circle</i><p style="margin-left:35px">Pilih Karyawan</p><br/>	
 							<form method="POST">
                             <select class="browser-default" name="karyawan" id="tunjukan" style="margin-bottom:15px;">
-						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND id_user<>8");	
+						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(id_user<>8 AND status_aktif=1)");	
 							while ($row = mysqli_fetch_array($query)) {											
 								echo "<option id='qq' value='".$row['id_user']."'>".$row['nama']."</option>";}
 								echo "</select>";

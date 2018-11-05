@@ -11,7 +11,7 @@
         die();
     } else {
 		
-		if($_SESSION['id_user']==10101){include'logout.php';}
+		
 ?>
 
 <!doctype html>
@@ -404,7 +404,8 @@
                     break;	
 				case 'slip':
                     include "slipgaji.php";
-                    break;					
+                    break;
+									
 				
 					
             }
@@ -441,7 +442,7 @@
                
 
                 //menghitung jumlah pengguna
-                $count5 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_user WHERE id_user <>9999 AND (admin<>1 AND admin<>9 AND status_aktif<>0)"));
+                $count5 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_user WHERE id_user <>9999 AND (admin<>1 AND admin<>9 AND status_aktif=1)"));
 				if($_SESSION['admin']!=1){
 				$count6= mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_sppd WHERE id_user = '".$_SESSION['id_user']."'"));}
 				else {
@@ -694,12 +695,8 @@
 						}
 						}
 						} if($ulangtaun!=""){
-						echo'<marquee style="font-style:sans;font-size:20px;" scrollamount="12"><h6>Selamat Ulang Tahun <strong>'.$ulangtaun.'</strong> !</h6></marquee>';}
+						echo'<marquee style="font-style:sans;font-size:20px;text-align:center" scrollamount="12"><h6>Selamat Ulang Tahun <strong>'.$ulangtaun.'</strong> !</h6></marquee>';}
 						else {echo'';}
-						
-						
-						
-						
 						
 						
 						
@@ -1115,7 +1112,7 @@
 	
 	
 	</div>
-	
+		
 	</div>
 		 <?php
         }

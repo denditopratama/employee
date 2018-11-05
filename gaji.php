@@ -28,7 +28,9 @@
 			header("Location: ./admin.php?page=gjh");
 			die();
 		}}
-
+		
+		
+		
         if(isset($_REQUEST['act'])){
             $act = $_REQUEST['act'];
             switch ($act) {
@@ -36,11 +38,11 @@
                     include "tambah_bulan_gaji.php";
                     break;
 				
-				
-				
-               
             }
-        } else {?>
+			
+        } else { 
+	
+		?>
 
                 <!-- Row Start -->
                 <div class="row">
@@ -105,6 +107,12 @@
                         unset($_SESSION['succDel']);
                     }
                 ?>
+				
+				
+				
+				
+				
+				
 							<div class="col m12">
                             <div class="card">
                                 <div class="card-content">
@@ -115,6 +123,8 @@
 									<p><span class="red-text">*</span> 3.Input presensi (jumlah kehadiran, sakit, izin, cuti dll.)</p>
 									<p><span class="red-text">*</span> 4.Input penerimaan dan potongan lain</p>
 									<p><span class="red-text">*</span> 5.Potongan gaji karyawan</p>
+									<p><span class="red-text">*</span> 6.Klik Menu -> Pelaporan Gaji</p>
+									<br>
 
                                   
 									
@@ -241,7 +251,9 @@
                        
 
                     } else {
-
+						
+						$jia=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1)");
+						list($jumlahuser)=mysqli_fetch_array($jia);
                         echo '
                         <div class="col m12" id="colres">
                         <table class="bordered" id="tblr">
@@ -304,35 +316,108 @@
                                         echo '<td style="text-align:center">'.$nm." ".$y.'</td>
 										';
 										
+										
+						
+							$kio=mysqli_query($config,"SELECT COUNT(*) FROM tbl_gaji WHERE id_gaji='".$row['id']."' AND status=1");
+							list($userproses)=mysqli_fetch_array($kio);
+							
+							if($userproses==$jumlahuser){
+							$querybc=mysqli_query($config,"UPDATE tbl_bulan_gaji SET status_proses=1 WHERE id='".$row['id']."'");
+							}
+							
 										if($row['status_proses']==0){
-											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Gaji belum selesai di proses">
+											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji belum selesai">
                                                     <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
+										} else {
+											echo '<td style="text-align:center"><a class="btn small green waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji sudah selesai">
+                                                    <i class="material-icons">done</i> SUDAH SELESAI</a></td>';
 										}
 										
-										
-										  
-								
-                                        
-									
-											
-                                        
                                                
                                           echo'<td style="text-align:center">';
 										  
 										  echo'
 										  <form method="POST">
-										  <a class="btn small green darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Memproses Gaji" href="?page=pros&id='.$row['id'].'">
+										  <a class="btn small green darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Memproses Gaji" href="?page=pros&id='.$row['id'].'">
                                                     <i class="material-icons">done_all</i> PROSES</a>
 										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
                                                     <i class="material-icons">delete</i>HAPUS</button>
-													</form>';
+													</form>
+																			
+										<button id="lapor'.$row['id'].'" class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji">
+                                                    <i class="material-icons">assignment_turned_in</i> PELAPORAN GAJI</button>
+													';
 										
 									
 											
                                          echo '
                                        
                                     </tr>
-                                </tbody>';
+                                </tbody>
+								
+								<div id="modald">
+								<div id="modals'.$row['id'].'" class="modal" style="background-color:yellow">
+								<div class="modal-content yellow" style="padding-top:1px!important;background-color:#ffff00!important">
+								<div class="input-field col s12">
+								<h5><i class="material-icons" style="margin-bottom:8px">assignment_turned_in</i> Pelaporan Gaji</h5>
+								<small class="blue-text">* Silahkan pilih jenis laporan.</small><br><br>
+								
+									
+									<div class="col m12" id="colres">
+									  <form method="POST" action="printlaporangaji.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI PENGHASILAN BULANAN</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printbank.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI TOTAL PENGHASILAN BERDASARKAN BANK</button>
+									</form>
+											</div>
+											
+										<div class="col m12" id="colres">
+									  <form method="POST" action="printpenerimaanlain.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI TOTAL PENGHASILAN PENERIMAAN LAIN</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printpotonganlain.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI TOTAL PENGHASILAN POTONGAN LAIN</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printlampirangaji.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAMPIRAN NOTA GAJI</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printlaporangaji.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN GAJI KHUSUS SDM</button>
+									</form>
+											</div>
+											<div>
+											</div>
+																
+								
+								</div>
+								</div>
+								</div>
+								</div>';
                                 }
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
@@ -345,6 +430,22 @@
                    
             }
         }
+		
+	
+	echo'<script>
+
+
+$(document).ready(function(){';
+	for ($i=1;$i<=$makskontrak;$i++){
+		echo'
+	$(\'#lapor'.$i.'\').click(function(){
+	$("#modals'.$i.'").openModal()
+	});';}
+	echo'
+						});
+</script>
+';	
+		
 	}
 
 ?>

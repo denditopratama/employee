@@ -292,61 +292,34 @@
                             <input id="password" type="password" class="validate" name="password" placeholder="	             (Kosongkan Jika tidak ingin mengganti Password)"> 
                             <label for="password">Password</label>
 							  </div>
-							  	<?php if($_SESSION['admin']==1){echo'
+							  	<?php if($_SESSION['admin']==1){
+									
+									echo'
 							<div class="input-field col s6">
                                         <i class="material-icons prefix md-prefix">supervisor_account</i><label>Pilih tipe user</label><br/>
                                         <div class="input-field col s11 right">
-                                            <select class="browser-default" name="admin" id="admin" required>
-                                                <option value="'.$row['admin'].'">';
-                                                   
-                                                        if($row['admin'] == 1){
-                                                            echo 'Super Admin';
-                                                        } else if($row['admin'] == 2) {
-                                                            echo 'Direktur Utama';
-                                                        }
-														  else if($row['admin'] == 3) {
-                                                            echo 'Direktur';
-                                                        }
-														  else if($row['admin'] == 4) {
-                                                            echo 'General Manager';
-                                                        }
-														  else if($row['admin'] == 5) {
-                                                            echo 'Manager';
-                                                        }
-														  else if($row['admin'] == 6) {
-                                                            echo 'Assistant Manager';
-                                                        }
-														  else if($row['admin'] == 7) {
-                                                            echo 'Senior Officer';
-                                                        }
-														  else if($row['admin'] == 8) {
-                                                            echo 'Officer / Staff';
-                                                        } 
-														 else if($row['admin'] == 9) {
-                                                            echo 'Koperasi';
-                                                        }
-														else if($row['admin'] == 10) {
-                                                            echo 'Komisaris';
-                                                        }
-														 
-                                                echo'  
-                                                </option>
-                                    <option value="1">Super Admin</option>
-									<option value="10">Komisaris</option>
-                                    <option value="3">Direktur Utama</option>
-									<option value="2">Direktur</option>
-									<option value="4">General Manager</option>
-									<option value="5">Manager</option>
-									<option value="6">Assistant Manager</option>
-									<option value="7">Senior Officer</option>
-									<option value="8">Officer / Staff</option>
-									<option value="9">Koperasi</option>
+                                            <select class="browser-default" name="admin" id="admin" required>';
+											$gompo=mysqli_query($config,"SELECT * FROM tbl_role");
+									while($rowz=mysqli_fetch_array($gompo)){
 									
+												if($row['admin']==$rowz['admin']){
+													echo'
+                                                <option value="'.$rowz['admin'].'" selected>'.$rowz['role'].'</option>';
+												} else {
+													echo'
+                                                <option value="'.$rowz['admin'].'">'.$rowz['role'].'</option>';}
+                                                   
+                                                       
+									}
+                                                echo'  
+                                 
                                             </select>
                                         </div>
                                            
 								</div>
-
+									';
+									
+									echo'
 
 							<div class="input-field col s6">
                                         <i class="material-icons prefix md-prefix">contacts</i><label>Status Karyawan</label><br/>

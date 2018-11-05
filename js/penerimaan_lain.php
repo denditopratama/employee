@@ -19,13 +19,16 @@ require('../include/config.php');
 												list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
 												$ngambil=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
 												list($lama)=mysqli_fetch_array($ngambil);
-												$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
-												list($gaji,$tun_jabatan,$tun_fungsional)=mysqli_fetch_array($gajing);
+												$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
+												list($gaji,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 												$ages = date_diff(date_create($lama), date_create('now'))->m;
-												$gajih=$gaji+$tun_jabatan+$tun_fungsional;
-												if($ages>=12){$ages=1;}
-												if($status_tugas==1){$ages=12;}
-												if($admin==2 && $admin==3 && $admin==10){
+												$gajih=$gaji+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+												if($ages>=12 || $status_tugas==1){$ages=12;}
+												if($ages<=3){
+													$gajih=$gaji*80/100+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+												}
+												
+												if($admin==2 || $admin==3 || $admin==10){
 												$jumlahthr=$ages/12*$gaji;
 												} else {
 												$jumlahthr=$ages/12*$gajih;}
@@ -33,7 +36,7 @@ require('../include/config.php');
 												$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$jumlahthr')");
 												echo $jumlahthr;}
 												
-												else {
+												else if($id_select!=1 && empty($_REQUEST['input'])){
 												$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");}	
 													
 												

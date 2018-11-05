@@ -3,8 +3,8 @@
 				$id_user=mysqli_real_escape_string($config,$_REQUEST['karyawan']);
 				
 
-							$pgntau=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='$id_user'");
-							list($tau)=mysqli_fetch_array($pgntau);
+							$pgntau=mysqli_query($config,"SELECT nama,admin,status_tugas FROM tbl_user WHERE id_user='$id_user'");
+							list($tau,$admin,$status_tugas)=mysqli_fetch_array($pgntau);
 							$ddtd=mysqli_query($config,"SELECT bulan FROM tbl_bulan_gaji WHERE id='$id'");
 					list($bln)=mysqli_fetch_array($ddtd);
 					$blans=date('m',strtotime($bln));
@@ -69,11 +69,23 @@
 										$fay=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
 										list($jumlahx)=mysqli_fetch_array($fay);
 										
-													
+										
+												
 													echo'
 													<tr>
 													<td style="text-align:center" colspan="4"><strong>Penerimaan Gaji</strong></td>
 													</tr>';
+													
+													
+													$ngambil=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
+													list($lama)=mysqli_fetch_array($ngambil);
+													$ages = date_diff(date_create($lama), date_create('now'))->m;
+												
+													
+													 if ($ages<=3 && $status_tugas==2){
+														$gajix=$gajix*80/100;
+														$mb='(80%)';
+													} else {$mb='';}
 													
 													echo'
 													<tr>
@@ -136,10 +148,13 @@
 													</tr>';}
 													
 													$sub1=$gajix+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+													
+													
+												
 													echo'
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
-													<td style="text-align:center"><strong>Sub Total</strong></td>
+													<td style="text-align:center"><strong>Sub Total '.$mb.'</strong></td>
 													<td style="text-align:center" ><strong>Rp '.number_format($sub1 , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
@@ -161,6 +176,7 @@
 														$jamgaji=4.54/100*$sub1;
 														$potjamgaji=6.54/100*$sub1;
 													}
+													
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET pen_jamsostek='$jamgaji' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
 													<tr>
@@ -171,16 +187,21 @@
 													</tr>';
 													
 													if($status_tugas==1){
-														if($sub1>=$gajipusat){
-														$bpjspensiun=2/100*$sub1;
-														$potbpjspensiun=3/100*$sub1;	
-														} else {
-														$bpjspensiun=2/100*$gajipusat;
-														$potbpjspensiun=3/100*$gajipusat;}
+													
+														$bpjspensiun=161880;
+														$potbpjspensiun=242820;	
+													
 													}
 													else {
 														$bpjspensiun=2/100*$sub1;
 														$potbpjspensiun=3/100*$sub1;
+													}
+													
+													if($admin==2 || $admin==3) {
+													
+														$bpjspensiun=0;
+														$potbpjspensiun=0;
+														
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jampes='$bpjspensiun' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
@@ -203,6 +224,11 @@
 														$bpjskesehatan=4/100*$sub1;
 														$potbpjskesehatan=5/100*$sub1;
 													}
+													
+													if($admin==2 || $admin==3) {
+														$bpjskesehatan=0;
+														$potbpjskesehatan=0;
+													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jamkes='$bpjskesehatan' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
 													<tr style="border-bottom:1px solid black">
@@ -212,13 +238,14 @@
 													<td style="text-align:center">-</td>
 													</tr>';
 													
+													
 													$sub2=$bpjskesehatan+$bpjspensiun+$jamgaji;
 													
 													$sum1=$sub2+$sub1;
 													
 													$duda=array();
-											   $janda=array();
-											   $kawin=array();
+													$janda=array();
+													$kawin=array();
 										   
 											   for ($i=0;$i<10;$i++){
 											   array_push($duda,$i);}
@@ -228,10 +255,16 @@
 											   array_push($kawin,$i);   
 											   }
 											   
+											  
 											$satu=($sum1*12)+$jumlahx;
 											$satu1=($sum1*12);
+											
 											$dua=5/100*$satu;
 											$dua2=5/100*$satu1;
+											if($dua>=6000000 || $dua2 >=6000000){
+												$dua=6000000;
+												$dua2=6000000;
+											}
 											$tiga=$satu-$dua;
 											$tiga3=$satu1-$dua2;
 											
@@ -285,10 +318,20 @@
 											
 											
 											$jang21=floor($tunj21);
-											
 											$jang21tidak=floor($tunj21tdk);
+											
 											$tunpph21tdktetap=$jang21-$jang21tidak;
 											$tunpph21tetap=$jang21tidak/12;
+											
+											$fayg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
+											list($jumlahx2)=mysqli_fetch_array($fayg);
+											
+											
+											if($sum1<=4500000){
+												$tunpph21tetap=0;
+												$tunpph21tdktetap=0;
+											
+											}
 											$tottunpph21=$tunpph21tdktetap+$tunpph21tetap;
 											
 											
@@ -315,6 +358,8 @@
 													
 													
 													$subtotpenlain=$bpjskesehatan+$bpjspensiun+$jamgaji+$tunpph21tdktetap+$tunpph21tetap;
+													
+													
 													echo'
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
@@ -355,8 +400,7 @@
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada penerimaan lain. <u></u> </p></center></td></tr>';
                             }						
-													$fayg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
-													list($jumlahx2)=mysqli_fetch_array($fayg);
+													
 													echo'
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
@@ -435,7 +479,9 @@
 											   
 											$satuw=($sum1*12)+$jumlahx+$tottunpph21;
 											$duaw=5/100*$satuw;
-						
+											if($duaw>=6000000){
+												$duaw=6000000;
+											}
 											$tigaz=$satuw-$duaw;
 														
 											$pkps=$tigaz-$ptkp;
@@ -467,7 +513,16 @@
 											
 											$pottunpph21tetap=$pottunj21tidak/12;
 											$pottunpph21tdktetap=$pottunj21-$pottunj21tidak;
+											if($sum1<=4500000){
+												$pottunpph21tetap=0;
+												$pottunpph21tdktetap=0;
+											
+											}
 											$totpotpph21=$pottunpph21tdktetap+$pottunpph21tetap;
+											if($jumlahx==0){
+												$pottunpph21tetap=$pottunpph21tetap+$pottunpph21tdktetap;
+												$pottunpph21tdktetap=0;
+											}
 											$kojags=mysqli_query($config,"UPDATE tbl_gaji SET pot_pph21_tetap='$pottunpph21tetap',pot_pph21_tidak='$pottunpph21tdktetap' WHERE id_user='$id_user' AND id_gaji='$id'");
 											
 										
@@ -527,13 +582,19 @@
                             }		
 									$faygg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id'");
 									list($jumla)=mysqli_fetch_array($faygg);
+									echo' <tr style="border-top:2px solid black">
+													<td style="text-align:center" ><strong></strong></td>
+													<td style="text-align:center"><strong>Sub Total</strong></td>
+													<td style="text-align:center" ><strong>Rp '.number_format($jumla , 0, ',', '.').'</strong></td>
+													<td style="text-align:center" ><strong></strong></td>
+													</tr>';
 									$notal=$jumla+$subtotpot;
 													$mn=mysqli_query($config,"UPDATE tbl_gaji SET total_potongan='$notal' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'<tr style="background-color:yellow">
 													<td style="text-align:center" colspan="2"><strong>Total Potongan</strong></td>
 													<td style="text-align:center" colspan="2"><strong>Rp '.number_format($notal , 0, ',', '.').'</strong></td>
 													</tr>';
-													$penerimaanbersih=$jumlah-$notal;
+													$penerimaanbersih=ceil($jumlah-$notal);
                             echo '</table>';
 							echo'</div>
 							<div class="col s12">
@@ -541,7 +602,9 @@
 							</div>
 							<div class="col s12" style="background-color:yellow">
 							<h6 style="text-align:center"><strong>PENERIMAAN BERSIH :</strong></h6>
-							<h5 style="text-align:center"><strong>Rp'.number_format(ceil($penerimaanbersih) , 0, ',', '.').'</strong></h5>
+							<h5 style="text-align:center"><strong>Rp'.number_format($penerimaanbersih , 0, ',', '.').'</strong></h5>';
+							$fixkeun=mysqli_query($config,"UPDATE tbl_gaji SET penerimaan_bersih='$penerimaanbersih' WHERE id_user='$id_user' AND id_gaji='$id'");
+							echo'
 							
 							</div>
 							

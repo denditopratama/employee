@@ -39,10 +39,7 @@
                 //validasi input data
                  
 
-                    if(!preg_match("/^[a-zA-Z0-9.\/ -]*$/", $no_surat)){
-                        $_SESSION['no_suratk'] = 'Form No Surat hanya boleh mengandung karakter huruf, angka, spasi, titik(.), minus(-) dan garis miring(/)';
-                        echo '<script language="javascript">window.history.back();</script>';
-                    } else {
+                    
 
                         if(!preg_match("/^[a-zA-Z0-9.,() \/ -]*$/", $tujuan)){
                             $_SESSION['tujuan_surat'] = 'Form Tujuan Surat hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), kurung() dan garis miring(/)';
@@ -69,8 +66,7 @@
                                             echo '<script language="javascript">window.history.back();</script>';
                                         } else {
 
-                                            $cek = mysqli_query($config, "SELECT * FROM tbl_surat_keluar WHERE no_surat='$no_surat'");
-                                            $result = mysqli_num_rows($cek);
+                                           
 
                                            
 
@@ -179,7 +175,7 @@
                                 }
                             }
                         }
-                    }
+                    
                 
             }
         } else {?>
@@ -312,7 +308,7 @@
 						<div id="dsa" class="input-field col s6" >
                             <i id="rere" class="material-icons prefix md-prefix">work</i>
                             <input id="ditujukan" type="text" class="" name="ditujukan"> 
-                            <label id="usaha"for="ditujukan">Perusahaan Tujuan</label>
+                            <label id="usaha" for="ditujukan">Perusahaan Tujuan</label>
                         </div>
 						
                

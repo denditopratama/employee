@@ -22,8 +22,8 @@
                     case 'rest':
                         include "restore.php";
                         break;
-                    case 'usr':
-                        include "user.php";
+                    case 'ref':
+                        include "referensis.php";
                         break;
                     }
             } else {

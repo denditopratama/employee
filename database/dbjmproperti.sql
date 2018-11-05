@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Okt 2018 pada 16.19
+-- Waktu pembuatan: 29 Okt 2018 pada 13.28
 -- Versi server: 10.1.32-MariaDB
 -- Versi PHP: 5.6.36
 
@@ -255,38 +255,43 @@ CREATE TABLE `tbl_gaji` (
   `id_gaji` int(255) NOT NULL,
   `id_user` int(25) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `absen` int(255) NOT NULL,
-  `thr` int(255) NOT NULL,
-  `telat` int(255) NOT NULL,
   `gaji_jm` int(255) NOT NULL,
+  `pen_jamsostek` int(255) NOT NULL,
+  `bpjstk_jampes` int(255) NOT NULL,
+  `bpjstk_jamkes` int(255) NOT NULL,
   `tun_pph21_tetap` int(255) NOT NULL,
   `tun_pph21_tidak` int(255) NOT NULL,
+  `pot_jamsostek_kar` int(255) NOT NULL,
+  `pot_bpjstk_jampes` int(255) NOT NULL,
+  `pot_bpjstk_jamkes` int(255) NOT NULL,
   `pot_pph21_tetap` int(255) NOT NULL,
   `pot_pph21_tidak` int(255) NOT NULL,
   `status` int(2) NOT NULL,
   `total_penerimaan` int(255) NOT NULL,
-  `total_potongan` int(255) NOT NULL
+  `total_potongan` int(255) NOT NULL,
+  `penerimaan_bersih` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tbl_gaji`
 --
 
-INSERT INTO `tbl_gaji` (`id`, `id_gaji`, `id_user`, `nama`, `absen`, `thr`, `telat`, `gaji_jm`, `tun_pph21_tetap`, `tun_pph21_tidak`, `pot_pph21_tetap`, `pot_pph21_tidak`, `status`, `total_penerimaan`, `total_potongan`) VALUES
-(242, 5, 10025, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(243, 5, 10012, '', 300000, 0, 25000, 20425317, 1004543, 0, 853861, 143147, 0, 14657371, 3966850),
-(252, 5, 6, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 17500000, 0),
-(253, 5, 4, '', 150000, 0, 78100, 0, 83724, 206017, 79538, 209479, 0, 10821394, 1132336),
-(254, 5, 10, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 11500000, 0),
-(255, 5, 10013, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(256, 5, 7, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(257, 5, 10003, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(258, 5, 10011, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(259, 5, 10002, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(260, 5, 10010, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(261, 5, 2, '', 0, 0, 0, 0, -236842, 0, -225000, -11250, 0, -236842, -236250),
-(262, 5, 1, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(263, 5, 10027, '', 0, 0, 0, 0, -256579, 0, -243750, -12188, 0, -256579, -255938);
+INSERT INTO `tbl_gaji` (`id`, `id_gaji`, `id_user`, `nama`, `gaji_jm`, `pen_jamsostek`, `bpjstk_jampes`, `bpjstk_jamkes`, `tun_pph21_tetap`, `tun_pph21_tidak`, `pot_jamsostek_kar`, `pot_bpjstk_jampes`, `pot_bpjstk_jamkes`, `pot_pph21_tetap`, `pot_pph21_tidak`, `status`, `total_penerimaan`, `total_potongan`, `penerimaan_bersih`) VALUES
+(242, 5, 10025, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(243, 5, 10012, '', 20425317, 927309, 408506, 817013, 1004543, 0, 1335816, 612760, 1021266, 853861, 143147, 1, 14657371, 3966850, 0),
+(252, 5, 6, '', 0, 794500, 350000, 700000, 1694029, 0, 0, 525000, 875000, 1439925, 241399, 0, 21038529, 3081324, 0),
+(253, 5, 4, '', 0, 263320, 116000, 232000, 83724, 0, 379320, 174000, 290000, 79538, 3977, 1, 6495044, 1004935, 0),
+(254, 5, 10, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11500000, 0, 0),
+(255, 5, 10013, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(256, 5, 7, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(257, 5, 10003, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(258, 5, 10011, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(259, 5, 10002, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(260, 5, 10010, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(261, 5, 2, '', 0, 0, 0, 0, -236842, 0, 0, 0, 0, -225000, -11250, 0, -236842, -236250, 0),
+(262, 5, 1, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(263, 5, 10027, '', 0, 0, 0, 0, -256579, 0, 0, 0, 0, -243750, -12188, 0, -256579, -255938, 0),
+(264, 5, 10101, '', 0, 499400, 220000, 440000, 754174, 0, 0, 330000, 550000, 641048, 107470, 0, 12913574, 1628518, 0);
 
 -- --------------------------------------------------------
 
@@ -324,7 +329,8 @@ INSERT INTO `tbl_gaji_pokok` (`id`, `admin`, `gaji`, `status_karyawan`, `status_
 (9, 7, 5800000, 4, 2, 0, 500000, 0, 0, 0, 0),
 (10, 7, 5300000, 5, 2, 0, 500000, 0, 0, 0, 0),
 (11, 8, 4300000, 5, 2, 0, 350000, 0, 0, 0, 0),
-(12, 5, 9000000, 4, 2, 2500000, 0, 0, 0, 0, 0);
+(12, 5, 9000000, 4, 2, 2500000, 0, 0, 0, 0, 0),
+(15, 11, 9000000, 3, 1, 2000000, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -422,7 +428,8 @@ INSERT INTO `tbl_identitas` (`id_identitas`, `id_user`, `tgl_bakti`, `jabatan`, 
 (35, 10058, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (36, 10002, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '32', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (37, 10052, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '23', '1', 'A', 'asd', '', '', '', '', 0, '', '', '', '', '', '', '', '123', '123', '123', '', '', '', ''),
-(38, 10075, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', 'aasd', '', '', '', '', '');
+(38, 10075, '0000-00-00', '', '', '', 'L', '', '0000-00-00', '24', '1', 'A', 'dsa', '', '', '', '', 0, '', '', '', '', '', '', '', '', 'aasd', '', '', '', '', ''),
+(39, 10101, '0000-00-00', '', '', '', 'P', '', '0000-00-00', '13', '1', 'A', '123', '', '', '', '', 0, '', '', '', '', '', '', '', '', '123', '', '', '', '', '1');
 
 -- --------------------------------------------------------
 
@@ -670,7 +677,7 @@ INSERT INTO `tbl_kontrak` (`id`, `id_user`, `tgl_awal`, `tgl_akhir`, `file`, `ha
 (12, 10072, '0000-00-00', '2018-10-23', '', '27', 'habis'),
 (13, 10073, '0000-00-00', '2018-09-25', '', '29', 'habis'),
 (14, 10072, '2018-09-27', '2019-09-19', '8600-03441.pdf', '', 'habis'),
-(18, 10026, '2018-10-04', '2018-11-02', '', '7', 'mauhabis');
+(18, 10026, '2018-10-04', '2018-11-02', '', '4', 'mauhabis');
 
 -- --------------------------------------------------------
 
@@ -823,14 +830,6 @@ CREATE TABLE `tbl_penerimaan` (
   `jumlah` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `tbl_penerimaan`
---
-
-INSERT INTO `tbl_penerimaan` (`id`, `id_gaji`, `id_user`, `kode_penerimaan`, `jumlah`) VALUES
-(7, 5, 4, 5, 737000),
-(8, 5, 4, 1, 3383333);
-
 -- --------------------------------------------------------
 
 --
@@ -844,6 +843,13 @@ CREATE TABLE `tbl_potongan` (
   `kode_potongan` int(255) NOT NULL,
   `jumlah` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_potongan`
+--
+
+INSERT INTO `tbl_potongan` (`id`, `id_gaji`, `id_user`, `kode_potongan`, `jumlah`) VALUES
+(1, 5, 4, 28, 78100);
 
 -- --------------------------------------------------------
 
@@ -1129,7 +1135,9 @@ INSERT INTO `tbl_role` (`id`, `admin`, `role`) VALUES
 (11, 7, 'Senior Officer'),
 (12, 8, 'Officer'),
 (13, 9, 'Koperasi'),
-(14, 10, 'Komisaris');
+(14, 10, 'Komisaris'),
+(15, 11, 'Specialist'),
+(16, 12, 'Advisor');
 
 -- --------------------------------------------------------
 
@@ -1819,17 +1827,6 @@ INSERT INTO `tbl_surat_masuk` (`id_surat`, `no_agenda`, `kode`, `asal_surat`, `i
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_tunjangan`
---
-
-CREATE TABLE `tbl_tunjangan` (
-  `id` int(11) NOT NULL,
-  `jenis` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `tbl_user`
 --
 
@@ -1967,7 +1964,8 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama`, `nip`, `admin
 (10097, 'PK087', '1d6fb7061bf8375a0317ff6cce6ee59f', 'Muhammad Rizaq Nuriz Zaman', 'PK087', 9, 0, '', '0', '', '', 0, 0, 0, '', 0, 0, '3600', 0),
 (10098, 'PK086', '4603cf9abb94f77c71bc767ecea2333a', 'Syamsul Fadly', 'PK086', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
 (10099, 'PK085', '34b4f080b684b4105983b5c7d0ca04a0', 'Bayuaji Prabowo Nugroho', 'PK085', 7, 0, '', '0', '', '', 5, 0, 4, '', 0, 0, '3600', 0),
-(10100, 'PK095', 'ed3230f53e8c255c8d2a29c3e04a559f', 'Sabila Adinda Puri Andarini', 'PK095', 8, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600', 0);
+(10100, 'PK095', 'ed3230f53e8c255c8d2a29c3e04a559f', 'Sabila Adinda Puri Andarini', 'PK095', 8, 0, '', '0', '', '', 5, 0, 0, '', 0, 0, '3600', 0),
+(10101, '10047', 'eccd9f7dc92858b741132fda313130cf', 'Yati Melasari', '10047', 11, 0, '', '19', '55', '109', 3, 0, 2, '', 1, 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -2277,12 +2275,6 @@ ALTER TABLE `tbl_surat_masuk`
   ADD KEY `fqwet` (`id_user`);
 
 --
--- Indeks untuk tabel `tbl_tunjangan`
---
-ALTER TABLE `tbl_tunjangan`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -2335,13 +2327,13 @@ ALTER TABLE `tbl_file_sharing`
 -- AUTO_INCREMENT untuk tabel `tbl_gaji`
 --
 ALTER TABLE `tbl_gaji`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_gaji_pokok`
 --
 ALTER TABLE `tbl_gaji_pokok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_hukuman`
@@ -2353,7 +2345,7 @@ ALTER TABLE `tbl_hukuman`
 -- AUTO_INCREMENT untuk tabel `tbl_identitas`
 --
 ALTER TABLE `tbl_identitas`
-  MODIFY `id_identitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_identitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_inventaris`
@@ -2437,13 +2429,13 @@ ALTER TABLE `tbl_pendidikan`
 -- AUTO_INCREMENT untuk tabel `tbl_penerimaan`
 --
 ALTER TABLE `tbl_penerimaan`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_potongan`
 --
 ALTER TABLE `tbl_potongan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_presensi`
@@ -2461,7 +2453,7 @@ ALTER TABLE `tbl_ref_bank`
 -- AUTO_INCREMENT untuk tabel `tbl_ref_jabatan`
 --
 ALTER TABLE `tbl_ref_jabatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_ref_jenis_barang`
@@ -2473,13 +2465,13 @@ ALTER TABLE `tbl_ref_jenis_barang`
 -- AUTO_INCREMENT untuk tabel `tbl_ref_potongan`
 --
 ALTER TABLE `tbl_ref_potongan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_role`
 --
 ALTER TABLE `tbl_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_sppd`
@@ -2512,16 +2504,10 @@ ALTER TABLE `tbl_surat_masuk`
   MODIFY `id_surat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_tunjangan`
---
-ALTER TABLE `tbl_tunjangan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10101;
+  MODIFY `id_user` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10102;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user_gaji`

@@ -9,7 +9,7 @@
         if(isset($_REQUEST['submit'])){
 
             //validasi form kosong
-            if($_REQUEST['no_surat'] == "" || $_REQUEST['tujuan'] == "" || $_REQUEST['isi'] == ""
+            if($_REQUEST['tujuan'] == "" || $_REQUEST['isi'] == ""
                 || $_REQUEST['tgl_surat'] == ""  || $_REQUEST['keterangan'] == ""){
                     $_SESSION['errEmpty'] = 'ERROR! Semua form wajib diisi';
                     echo '<script language="javascript">window.history.back();</script>';
@@ -30,10 +30,7 @@
                 //validasi input data
                
 
-                    if(!preg_match("/^[a-zA-Z0-9.\/ -]*$/", $no_surat)){
-                        $_SESSION['no_suratk'] = 'Form No Surat hanya boleh mengandung karakter huruf, angka, spasi, titik(.), minus(-) dan garis miring(/)';
-                        echo '<script language="javascript">window.history.back();</script>';
-                    } else {
+                    
 
                         if(!preg_match("/^[a-zA-Z0-9.,() \/ -]*$/", $tujuan)){
                             $_SESSION['tujuan_surat'] = 'Form Tujuan Surat hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-),kurung() dan garis miring(/)';
@@ -190,7 +187,7 @@
                                 }
                             }
                         }
-                    }
+                    
                 
             }
         } else {
@@ -268,6 +265,12 @@
 										document.getElementById("rere").style.color = "green";
 										document.getElementById("ditujukan").disabled = false;	
 										document.getElementById("roro").style.color = "red";
+										document.getElementById("no_surat").disabled = false;	
+										document.getElementById("surat").style.color = "green";
+										document.getElementById("no_surat").style.visibility = "visible";
+										document.getElementById("usaha").style.visibility = "visible";
+										document.getElementById("suraha").style.visibility = "visible";
+										
 									
 										}
 								function tampil2() {
@@ -278,6 +281,11 @@
 										document.getElementById("rere").style.color = "red";
 										document.getElementById("tunjukan").style.visibility = "visible";
 										document.getElementById("ditujukan").style.visibility = "hidden";
+										document.getElementById("no_surat").disabled = true;	
+										document.getElementById("surat").style.color = "red";
+										document.getElementById("no_surat").style.visibility = "hidden";
+										document.getElementById("usaha").style.visibility = "hidden";
+										document.getElementById("suraha").style.visibility = "hidden";
 										
 										}
 							</script>
@@ -294,7 +302,7 @@
                             <div id="asd" class="input-field col s6" >
                             <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label>Ditujukan</label><br/>	
                             <select class="browser-default" name="tunjukan" id="tunjukan" style="margin-bottom:15px;">
-						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user");	
+						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND id_user<>8");	
 							while ($row = mysqli_fetch_array($query)) {											
 								echo "<option id='qq' value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";}
 								echo "</select>";			
@@ -302,7 +310,7 @@
 							</div>
 							
 							 <div class="input-field col s6">
-                            <i class="material-icons prefix md-prefix">looks_two</i>
+                            <i id="surat" class="material-icons prefix md-prefix">looks_two</i>
                             <input id="no_surat" type="text" class="validate" name="no_surat" value="<?php echo $no_surat;?>">
                                 <?php
                                     if(isset($_SESSION['eno_surat'])){
@@ -316,13 +324,13 @@
                                         unset($_SESSION['errDup']);
                                     }
                                 ?>
-                            <label for="no_surat">Nomor Surat</label>
+                            <label id="suraha" for="no_surat">Nomor Surat</label>
                         </div>
 							
 						<div id="dsa" class="input-field col s6" >
                             <i id="rere" class="material-icons prefix md-prefix">work</i>
                             <input id="ditujukan" type="text" class="" name="ditujukan"> 
-                            <label for="ditujukan">Perusahaan Tujuan</label>
+                            <label id="usaha" for="ditujukan">Perusahaan Tujuan</label>
                         </div>
                             <div class="input-field col s6">
                                 <i class="material-icons prefix md-prefix">date_range</i>

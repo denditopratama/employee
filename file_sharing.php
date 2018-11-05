@@ -162,7 +162,7 @@ h11 {
 			}
 		}
 		
-		
+		if(!empty($query)){
         if(mysqli_num_rows($query) > 0){
             while($row = mysqli_fetch_array($query)){
                 
@@ -550,7 +550,7 @@ h11 {
              <h5 style="text-align:center!important"> Tidak ada file. </h5>
              </div>
 			 </div>';
-		} echo '	
+		}} echo '	
 		</ul>';
 		if($_SESSION['admin']==1){
 		$query = mysqli_query($config, "SELECT * FROM tbl_file_sharing");}
@@ -560,7 +560,7 @@ h11 {
                     $cdata = mysqli_num_rows($query);
                     $cpg = ceil($cdata/$limit);
 
-                    echo '<br/><!-- Pagination START -->
+                    echo '<br/>
 					<div class="col m12">
                           <ul class="pagination">';
 

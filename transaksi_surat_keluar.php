@@ -38,12 +38,11 @@
             }
         } else {
 
-            $query = mysqli_query($config, "SELECT surat_keluar FROM tbl_sett");
-            list($surat_keluar) = mysqli_fetch_array($query);
+  
 
             //pagging
-            $limit = 999999;
-            $pg = @$_GET['pg'];
+			$limit = 25;
+            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
                     $pg = 1;
@@ -129,205 +128,30 @@
                 <div class="row jarak-form">
 
                 <?php
-                    if(isset($_REQUEST['submit'])){
-                    $cari = mysqli_real_escape_string($config, $_REQUEST['cari']);
-                        echo '
+                    
+                            if(isset($_REQUEST['submit'])){
+							$cari = mysqli_real_escape_string($config, $_REQUEST['cari']);
+							
+                                //script untuk mencari data
+                                $query = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' AND (isi LIKE '%$cari%' OR nama LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tujuan LIKE '%$cari%' OR no_agenda LIKE '%$cari%') ORDER by id_surat DESC");
+								$queryf = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' AND (isi LIKE '%$cari%' OR nama LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tujuan LIKE '%$cari%' OR no_agenda LIKE '%$cari%')");	
+								echo '
                         <div class="col s12" style="margin-top: -18px;">
                             <div class="card yellow darken">
                                 <div class="card-content">
                                 <p class="description">Hasil pencarian untuk kata kunci <strong>"'.stripslashes($cari).'"</strong><span class="right"><a href="?page=tsk"><i class="material-icons md-36" style="color: #333;">clear</i></a></span></p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col m12" id="colres">
-                            <table class="bordered" id="tblv">
-                                <thead class="blue lighten-4"style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head"  >
-                                     <tr>
-										<th width="1%"style="color:#fff">Nomor Agenda</th>
-                                        <th width="25%"style="color:#fff">Isi Surat<br/><hr style="background-color:#f9f50b">File</hr></th>
-                                        <th width="12%"style="color:#fff">Asal Surat</th>
-										<th width="12%"style="color:#fff">Ditujukan</th>
-										<th width="12%"style="color:#fff">Nomor Surat</th>
-                                        <th width="10%" style="color:#fff">Tanggal Surat</th>
-										<th width="15%" style="color:#fff">Status Surat</th>
-										<th width="12%" style="color:#fff">Tindakan<span class="right tooltipped" data-position="left" data-tooltip="Atur jumlah data yang ditampilkan">
-										<i class="material-icons" style="color:#f9f50b;margin-right:20px;">settings</i></a></span></th>
-                                </thead>
-
-                                <tbody>
-                                    <tr>';
-
-                                //script untuk mencari data
-                                $query = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' AND (isi LIKE '%$cari%' OR nama LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tujuan LIKE '%$cari%') ORDER by id_surat DESC LIMIT $curr, $limit");
-                                if(mysqli_num_rows($query) > 0){
-                                    $no = 1;
-                                    while($row = mysqli_fetch_array($query)){
-                                      
-                                         echo '
-                                        <td style="text-align:center">'.$row['no_agenda'].'</td>
-										<td style="text-align:center">'.substr($row['isi'],0,200).'<br/><br/><strong>File :</strong>';
-										if(!empty($row['file'])){
-                                            echo '<em><strong><a href="?page=gsm&act=fsm&id_surat='.$row['id_surat'].'">'.$row['file'].'</a></strong>';
-                                        } else {
-                                            echo '<em>Tidak ada file yang di upload</em>';
-                                        } echo '</td>
-                                        <td style="text-align:center">'.$row['nama'].'</td>
-										<td style="text-align:center">'.$row['tujuan'].'</td>
-										<td style="text-align:center">'.$row['no_surat'].'</td>';
-                                          
-                                        $y = substr($row['tgl_surat'],0,4);
-                                        $m = substr($row['tgl_surat'],5,2);
-                                        $d = substr($row['tgl_surat'],8,2);
-
-                                        if($m == "01"){
-                                            $nm = "Januari";
-                                        } elseif($m == "02"){
-                                            $nm = "Februari";
-                                        } elseif($m == "03"){
-                                            $nm = "Maret";
-                                        } elseif($m == "04"){
-                                            $nm = "April";
-                                        } elseif($m == "05"){
-                                            $nm = "Mei";
-                                        } elseif($m == "06"){
-                                            $nm = "Juni";
-                                        } elseif($m == "07"){
-                                            $nm = "Juli";
-                                        } elseif($m == "08"){
-                                            $nm = "Agustus";
-                                        } elseif($m == "09"){
-                                            $nm = "September";
-                                        } elseif($m == "10"){
-                                            $nm = "Oktober";
-                                        } elseif($m == "11"){
-                                            $nm = "November";
-                                        } elseif($m == "12"){
-                                            $nm = "Desember";
-                                        }
-									
-										
-                                        echo '<td style="text-align:center">'.$d." ".$nm." ".$y.'</td><td style="text-align:center">
-										';
-										
-										 $tui=mysqli_query($config,"SELECT nama FROM tbl_user WHERE nama='".$row['tujuan']."'");
-										  list($nama) = mysqli_fetch_array($tui);
-										  if($row['tujuan']!=$nama){
-											
-										
-									if($row['status']==1){	
-									
-									echo'
-                                 	<a class="btn small light-green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Belum Di Approve Oleh Admin">
-                                    <i class="material-icons">done</i> APPROVED</a>';
-									} 
-									else {
-										echo'
-										<a class="btn small red waves-effect waves-light tooltipped" data-tooltip="Surat Belum Di Approve Oleh Admin">
-                                    <i class="material-icons">highlight_off</i> APPROVE</a>';}
+                        </div>';
+						$cdata = 0;
+						
+					} else {
+					$query = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' ORDER by id_surat DESC LIMIT $curr, $limit");
+					$queryf = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."'");
+					$cdata = mysqli_num_rows($queryf);}
+								       
 								
-									if(isset($_REQUEST['simpans'])){
-									$querys = mysqli_query($config, "UPDATE tbl_surat_keluar SET status=1 WHERE id_surat='".$row['id_surat']."'");
-									if($query == true){
-                                       header("Location: ./admin.php?page=tskall");
-                                       die();
-                                      }
-									}
-								 } else {
-									 
-										$weq=mysqli_query($config,"SELECT baca FROM tbl_surat_masuk WHERE id_surat='".$row['id_surat']."'");	
-										list($baca) = mysqli_fetch_array($weq);	
-
-										if($baca==1){										
-											  echo'
-                                 	<a class="btn small light-green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Telah Dibaca">
-                                    <i class="material-icons"></i> READ</a>';
-									} 
-									else {
-										echo'
-										<a class="btn small red waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Belum Dibaca">
-                                    <i class="material-icons"></i> UNREAD</a>';}
-											  
-											  
-											  
-											  
-											  
-										  }
-										
-										
-										
-										
-										
-										
-										
-										
-									echo'</td><td style="text-align:center">';
-
-                                        if($_SESSION['id_user'] != $row['id_user']){
-                                            echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
-                                        } else {
-                                          echo '<a class="btn small blue waves-effect waves-light" href="?page=tsk&act=edit&id_surat='.$row['id_surat'].'">
-                                                    <i class="material-icons">edit</i> EDIT</a>
-                                                <a class="btn small deep-orange waves-effect waves-light" href="?page=tsk&act=del&id_surat='.$row['id_surat'].'">
-                                                    <i class="material-icons">delete</i> DEL</a>';
-                                        } echo '
-                                        </td>
-                                    </tr>
-                                </tbody>';
-                                    }
-                                } else {
-                                    echo '<tr><td colspan="12"><center><p class="add">Tidak ada data yang ditemukan</p></center></td></tr>';
-                                }
-                              echo '</table><br/><br/>
-                            </div>
-                        </div>
-                        <!-- Row form END -->';
-
-                        $query = mysqli_query($config, "SELECT * FROM tbl_surat_keluar");
-                        $cdata = mysqli_num_rows($query);
-                        $cpg = ceil($cdata/$limit);
-
-                        echo '<!-- Pagination START -->
-                              <ul class="pagination">';
-
-                        if($cdata > $limit ){
-
-                            //first and previous pagging
-                            if($pg > 1){
-                                $prev = $pg - 1;
-                                echo '<li><a href="?page=tsk&pg=1"><i class="material-icons md-48">first_page</i></a></li>
-                                      <li><a href="?page=tsk&pg='.$prev.'"><i class="material-icons md-48">chevron_left</i></a></li>';
-                            } else {
-                                echo '<li class="disabled"><a href=""><i class="material-icons md-48">first_page</i></a></li>
-                                      <li class="disabled"><a href=""><i class="material-icons md-48">chevron_left</i></a></li>';
-                            }
-
-                            //perulangan pagging
-                            for($i=1; $i <= $cpg; $i++)
-                                if($i != $pg){
-                                    echo '<li class="waves-effect waves-dark"><a href="?page=tsk&pg='.$i.'"> '.$i.' </a></li>';
-                                } else {
-                                    echo '<li class="active waves-effect waves-dark"><a href="?page=tsk&pg='.$i.'"> '.$i.' </a></li>';
-                                }
-
-                            //last and next pagging
-                            if($pg < $cpg){
-                                $next = $pg + 1;
-                                echo '<li><a href="?page=tsk&pg='.$next.'"><i class="material-icons md-48">chevron_right</i></a></li>
-                                      <li><a href="?page=tsk&pg='.$cpg.'"><i class="material-icons md-48">last_page</i></a></li>';
-                            } else {
-                                echo '<li class="disabled"><a href=""><i class="material-icons md-48">chevron_right</i></a></li>
-                                      <li class="disabled"><a href=""><i class="material-icons md-48">last_page</i></a></li>';
-                            }
-                            echo '
-                            </ul>
-                            <!-- Pagination END -->';
-                    } else {
-                        echo '';
-                    }
-
-                    } else {
-
+						
                         echo '
                         <div class="col m12" id="colres">
                         <table class="bordered" id="tblv">
@@ -340,52 +164,9 @@
 										<th width="12%"style="color:#fff">Nomor Surat</th>
                                         <th width="10%" style="color:#fff">Tanggal Surat</th>
 										<th width="15%" style="color:#fff">Status Surat</th>
-										<th width="12%" style="color:#fff">Tindakan<span class="right tooltipped" data-position="left" data-tooltip="Atur jumlah data yang ditampilkan"><a class="modal-trigger" href="#modal">
-										<i class="material-icons" style="color:#f9f50b;margin-right:20px;">settings</i></a></span></th>
+										<th width="12%" style="color:#fff">Tindakan</th>
 
-                                        <div id="modal" class="modal">
-                                            <div class="modal-content white">
-                                                <h5>Jumlah data yang ditampilkan per halaman</h5>';
-                                                $query = mysqli_query($config, "SELECT id_sett,surat_keluar FROM tbl_sett");
-                                                list($id_sett,$surat_keluar) = mysqli_fetch_array($query);
-                                                echo '
-                                                <div class="row">
-                                                    <form method="post" action="">
-                                                        <div class="input-field col s12">
-                                                            <input type="hidden" value="'.$id_sett.'" name="id_sett">
-                                                            <div class="input-field col s1" style="float: left;">
-                                                                <i class="material-icons prefix md-prefix">looks_one</i>
-                                                            </div>
-                                                            <div class="input-field col s11 right" style="margin: -5px 0 20px;">
-                                                                <select class="browser-default validate" name="surat_keluar" required>
-                                                                    <option value="'.$surat_keluar.'">'.$surat_keluar.'</option>
-                                                                    <option value="5">5</option>
-                                                                    <option value="10">10</option>
-                                                                    <option value="20">20</option>
-                                                                    <option value="50">50</option>
-                                                                    <option value="100">100</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="modal-footer white">
-                                                                <button type="submit" class="modal-action waves-effect waves-green btn-flat" name="simpan">Simpan</button>';
-                                                                if(isset($_REQUEST['simpan'])){
-                                                                    $id_sett = "1";
-                                                                    $surat_keluar = $_REQUEST['surat_keluar'];
-                                                                    $id_user = $_SESSION['id_user'];
-
-                                                                    $query = mysqli_query($config, "UPDATE tbl_sett SET surat_keluar='$surat_keluar',id_user='$id_user' WHERE id_sett='$id_sett'");
-                                                                    if($query == true){
-                                                                        header("Location: ./admin.php?page=tsk");
-                                                                        die();
-                                                                    }
-                                                                } echo '
-                                                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Batal</a>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                 </tr>
                             </thead>
@@ -393,9 +174,9 @@
                             <tbody>
                                 <tr>';
 
-                            //script untuk mencari data
-                           $query = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' ORDER by id_surat DESC LIMIT $curr, $limit");
-								 
+                          
+							
+								if(!empty($query)){
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
                                     while($row = mysqli_fetch_array($query)){
@@ -522,21 +303,25 @@
                                 }
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u><a href="?page=tsk&act=add">Tambah data baru</a></u> </p></center></td></tr>';
-                            }
+								}}
                             echo '</table>
                         </div>
                     </div>
+					
                     <!-- Row form END -->';
 
-                    $query = mysqli_query($config, "SELECT * FROM tbl_surat_keluar");
-                    $cdata = mysqli_num_rows($query);
+				
+					
+					
+                    
                     $cpg = ceil($cdata/$limit);
 
-                    echo '<br/><!-- Pagination START -->
+                    echo '<br/>
+						<div class="row">
                           <ul class="pagination">';
 
                     if($cdata > $limit ){
-
+					
                         //first and previous pagging
                         if($pg > 1){
                             $prev = $pg - 1;
@@ -548,12 +333,20 @@
                         }
 
                         //perulangan pagging
-                        for($i=1; $i <= $cpg; $i++)
-                            if($i != $pg){
-                                echo '<li class="waves-effect waves-dark"><a href="?page=tsk&pg='.$i.'"> '.$i.' </a></li>';
+                        echo'
+							<div class="col m4">
+							<select class="browser-default" name="halaman" id="halaman" required>';
+                                     for($i=1; $i <= $cpg; $i++){               
+                               if($i != $pg){
+                                echo '<option value="'.$i.'">'.$i.'</option>';
                             } else {
-                                echo '<li class="active waves-effect waves-dark"><a href="?page=tsk&pg='.$i.'"> '.$i.' </a></li>';
-                            }
+                                echo '<option value="'.$i.'" selected>'.$i.'</option>';
+									 }}
+														  
+                                                echo'  
+												</select>
+											</div>
+												';
 
                         //last and next pagging
                         if($pg < $cpg){
@@ -566,6 +359,7 @@
                         }
                         echo '
                         </ul>
+						</div>
                         <!-- Pagination END -->';
                 } else {
                     echo '';
@@ -573,7 +367,16 @@
             }
         }
     
-}
-?>
 
-<script type="text/javascript" src="asset/js/halamanusers.js"></script>
+?>
+<script>
+$(document).ready(function(){
+$('#halaman').change(function(){
+	var x = $(this).val();
+	window.location.href='admin.php?page=tsk&pg='+ x;
+		});
+	
+	});	
+
+
+</script>

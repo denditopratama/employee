@@ -8,7 +8,7 @@
         <a href="./" class="brand-logo center hide-on-large-only"><img src='upload/screenshot.png' style="margin-top:20px;height:30px"></a>
         <ul id="slide-out" class="side-nav" data-simplebar-direction="vertical" style="background-color:#2a3140!important">
             <li class="no-padding">
-                <div class="logo-side center blue-grey darken-3" style="background-image: url('./asset/img/rumput.png');">
+                <div class="logo-side center blue-grey darken-3" style="background-image: url('./asset/img/backmobile.jpg');margin-left:10px">
                     <?php
 				$id_user=$_SESSION['id_user'];
 				$queryed = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user='$id_user'");
@@ -48,14 +48,13 @@
                     <li>
                        <a class="collapsible-header"><i class="material-icons">repeat</i>Transaksi Surat</a>
                         <div class="collapsible-body">
-                            <ul>   <?php if($_SESSION['admin'] == 1){ ?>
-                                <li><a href="?page=tsmall">Surat Masuk</a></li>
-								<li><a href="?page=tskall">Surat Keluar</a></li>
-							<?php } else {?>
+                            <ul>   
+                               
+							
 								<li><a href="?page=tsm">Surat Masuk</a></li>
 								<li><a href="?page=tsk">Surat Keluar</a></li>
-							<?php } ?>
-								<li><a href="#">Nomor Surat</a></li>
+						
+								
 								<li><a href="?page=kpts">KPTS</a></li>
 								
                                
@@ -77,20 +76,21 @@
                                 <li><a href="?page=cuti">Cuti</a></li>
                                 <li><a href="?page=sppd">SPPD</a></li>
 								<li><a href="?page=files">File</a></li>
-							<?php if($_SESSION['admin']==1) { ?>	
+							
 							<hr>	
                     <li>
                         <a class="collapsible-header" data-activates="col"><i class="material-icons">attach_money</i> Gaji</a>
                         
                             <ul id="col">
+							<?php if($_SESSION['admin']==1) { ?>	
 								<li><a href="?page=loggjh">Proses Gaji</a></li>
-								<li><a href="">Pelaporan Gaji</a></li>
+									<?php } ?>	
 								<li><a href="?page=slip">Slip Gaji</a></li>
 								 </ul>
                         
                     </li>
               
-							<?php } ?>	
+						
 								
 								
 								
@@ -135,6 +135,7 @@
                             <ul>
                               
                                 <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=usr">User</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sett&sub=ref">Tabel Referensi</a></li>
                                 <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sett&sub=back">Backup Database</a></li>
                                 <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sett&sub=rest">Restore Database</a></li>
                             </ul>
@@ -175,19 +176,11 @@
            
             <li><a class="dropdown-button" href="#!" data-activates="transaksiw" style="color:#000!important">Transaksi Surat <i class="material-icons md-18">arrow_drop_down</i></a></li>
                 <ul id='transaksiw' class='dropdown-content' style="background-color:#004689;overflow-y:visible">
-				  <?php
-                if($_SESSION['admin'] == 1 || $_SESSION['admin'] == 8){ ?>
-                    <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsmall">Surat Masuk</a></li>
-					<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tskall">Surat Keluar</a></li>
-					<?php
-                } else {
-            ?>
+				
 					<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsm">Surat Masuk</a></li>
 					<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsk">Surat Keluar</a></li>
-					<?php
-                }
-            ?>
-                  <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="#">Nomor Surat</a></li>  
+				
+                    
 				  <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=kpts">KPTS</a></li>
                 </ul>
 			
@@ -216,9 +209,9 @@
 			
 				<ul id="dropdown2" class="dropdown-content" style="margin-left: 173px !important;
 		margin-top: 1px !important;background-color:#004689;">
+		<?php if($_SESSION['admin']==1){ ?>
 			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=loggjh">Proses Gaji</a></li>
-			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="#!">Pelaporan Gaji</a></li>
-			<li class="divider"></li>
+		<li class="divider"></li> <?php } ?>
 			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=slip">Slip Gaji</a></li>
 			</ul>
 			
@@ -250,6 +243,7 @@
                    
                     <li><a href="?page=usr">User</a></li>
                     <li class="divider"></li>
+					<li><a href="?page=sett&sub=ref">Tabel Referensi</a></li>
                     <li><a href="?page=sett&sub=back">Backup Database</a></li>
                     <li><a href="?page=sett&sub=rest">Restore Database</a></li>
                 </ul>

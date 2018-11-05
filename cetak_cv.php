@@ -164,8 +164,8 @@ body
 		   
 				   $query2 = mysqli_query($config, "SELECT nama,nip,status_karyawan FROM tbl_user WHERE id_user='$id_user'");
                     list($nama,$nip,$status_karyawan) = mysqli_fetch_array($query2);	
-					$query3 = mysqli_query($config, "SELECT tgl_bakti,jabatan,KD_UNIT,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon FROM tbl_identitas WHERE id_user='$id_user'");
-                    list($tgl_bakti,$jabatan,$KD_UNIT,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon) = mysqli_fetch_array($query3);	
+					$query3 = mysqli_query($config, "SELECT tgl_bakti,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon FROM tbl_identitas WHERE id_user='$id_user'");
+                    list($tgl_bakti,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon) = mysqli_fetch_array($query3);	
 					
 						
                 echo '

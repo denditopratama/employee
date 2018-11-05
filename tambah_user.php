@@ -58,9 +58,9 @@
 
                                             $query = mysqli_query($config, "INSERT INTO tbl_user(username,password,nama,nip,admin) VALUES('$username',MD5('$password'),'$nama','$nip','$admin')");
 
-                                            if($query != false){
+                                            if($query ==true){
                                                 $_SESSION['succAdd'] = 'SUKSES! User baru berhasil ditambahkan';
-                                                header("Location: ./admin.php?page=sett&sub=usr");
+                                                header("Location: ./admin.php?page=usr");
                                                 die();
                                             } else {
                                                 $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
@@ -125,7 +125,7 @@
             <div class="row jarak-form">
 
                 <!-- Form START -->
-                <form class="col s12" method="post" action="?page=sett&sub=usr&act=add">
+                <form class="col s12" method="post">
 
                     <!-- Row in form START -->
                     <div class="row">
@@ -191,11 +191,14 @@
                             <i class="material-icons prefix md-prefix">supervisor_account</i><label>Pilih Tipe User</label><br/>
                             <div class="input-field col s11 right">
                                 <select class="browser-default validate" name="admin" id="admin" required>
-                                   <option value="1">Super Admin</option>
-                                    <option value="2">Direktur Utama</option>
-									<option value="3">Direktur</option>
+                                   
+									<option value="10">Komisaris</option>
+                                    <option value="3">Direktur Utama</option>
+									<option value="2">Direktur</option>
 									<option value="4">General Manager</option>
+									<option value="12">Advisor</option>
 									<option value="5">Manager</option>
+									<option value="11">Specialist</option>
 									<option value="6">Assistant Manager</option>
 									<option value="7">Senior Officer</option>
 									<option value="8">Officer / Staff</option>

@@ -147,33 +147,13 @@ th,td,tr{
 
                                 if(mysqli_num_rows($querykeun) > 0){
                                    $no=1;
+								   $z='';
                                     while($row = mysqli_fetch_array($querykeun)){
-										
+										$mhg=mysqli_query($config,"SELECT role FROM tbl_role WHERE admin='".$row['admin']."'");
+										list($rolenyax)=mysqli_fetch_array($mhg);
 										echo '<td id="oi" >'.$no++.'</td>';
 
-														if($row['admin'] == 1){
-                                                            $row['admin'] = 'Super Admin';
-                                                        } else if($row['admin'] == 2) {
-                                                            $row['admin'] = 'Direktur Utama';
-                                                        }
-														  else if($row['admin'] == 3) {
-                                                            $row['admin'] = 'Direktur';
-                                                        }
-														  else if($row['admin'] == 4) {
-                                                            $row['admin'] = 'General Manager';
-                                                        }
-														  else if($row['admin'] == 5) {
-                                                            $row['admin'] = 'Manager';
-                                                        }
-														  else if($row['admin'] == 6) {
-                                                            $row['admin'] = 'Assistant Manager';
-                                                        }
-														  else if($row['admin'] == 7) {
-                                                            $row['admin'] = 'Senior Officer';
-                                                        }
-														  else if($row['admin'] == 8) {
-                                                            $row['admin'] = 'Staff';
-                                                        }
+														
 									
 									
 									echo '<td id="oi" >'.$row['nama'].'</td>
@@ -188,7 +168,7 @@ th,td,tr{
 											echo'
                                             <td id="oi" >'.$unid.'</td>
 											<td id="oi" >'.$jabatung.'</td>
-											<td id="oi" >'.$row['admin'].'</td>';
+											<td id="oi" >'.$rolenyax.'</td>';
 											if($_SESSION['admin']==1){
 											if($row['status_aktif']==1){
 												echo'
@@ -270,34 +250,11 @@ th,td,tr{
                                 if(mysqli_num_rows($querykeunsd) > 0){ 
 								   $no=1;
                                     while($row = mysqli_fetch_array($querykeunsd)){
+										$mhsg=mysqli_query($config,"SELECT role FROM tbl_role WHERE admin='".$row['admin']."'");
+										list($rolenyaxs)=mysqli_fetch_array($mhsg);
 									echo '<td id="oi" >'.$no++.'</td>';
 									
-														if($row['admin'] == 1){
-                                                            $row['admin'] = 'Super Admin';
-                                                        } else if($row['admin'] == 2) {
-                                                            $row['admin'] = 'Direktur Utama';
-                                                        }
-														  else if($row['admin'] == 3) {
-                                                            $row['admin'] = 'Direktur';
-                                                        }
-														  else if($row['admin'] == 4) {
-                                                            $row['admin'] = 'General Manager';
-                                                        }
-														  else if($row['admin'] == 5) {
-                                                            $row['admin'] = 'Manager';
-                                                        }
-														  else if($row['admin'] == 6) {
-                                                            $row['admin'] = 'Assistant Manager';
-                                                        }
-														  else if($row['admin'] == 7) {
-                                                            $row['admin'] = 'Senior Officer';
-                                                        }
-														  else if($row['admin'] == 8) {
-                                                            $row['admin'] = 'Officer';
-                                                        }
-														  else if($row['admin'] == 9) {
-                                                            $row['admin'] = 'Koperasi';
-                                                        }
+														
 									
 									
 									echo '<td id="oi" >'.$row['nama'].'</td>
@@ -312,7 +269,7 @@ th,td,tr{
 											echo'
                                             <td id="oi" >'.$unid.'</td>
 											<td id="oi" >'.$jabatung.'</td>
-											<td id="oi" >'.$row['admin'].'</td>';
+											<td id="oi" >'.$rolenyaxs.'</td>';
 											
 											if($_SESSION['admin']==1){
 											if($row['status_aktif']==1){

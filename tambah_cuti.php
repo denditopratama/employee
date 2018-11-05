@@ -150,7 +150,7 @@
 				$cutiya=$cutiya-1;
 				if($_SESSION['admin']==4 || $_SESSION['admin']==1){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_gm,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."')");	
-				} else if($_SESSION['admin']==5 || $_SESSION['admin']==1){
+				} else if($_SESSION['admin']==5 || $_SESSION['admin']==11 || $_SESSION['admin']==1){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."')");	
 				} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir','".$_SESSION['nama']."','".$_SESSION['divisi']."')");}
