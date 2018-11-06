@@ -146,12 +146,12 @@ $pdf->Cell(189 ,15,'',0,1);//end of line
 $pdf->Cell(57 ,23,'',0,0);//end of line
 $pdf->Multicell(80,6,'Rincian Penghasilan Karyawan '.$nm.' '.$tahuns.'',0,'C');
 $pdf->Cell(189 ,8,'',0,1);//end of line
-$pdf->Line(10,55,200,55);
-$pdf->Line(10,93,200,93);
-$pdf->Line(10,55,10,287);
-$pdf->Line(200,55,200,287);
+$pdf->Line(10,49,200,49);
+$pdf->Line(10,87,200,87);
+$pdf->Line(10,49,10,287);
+$pdf->Line(200,49,200,287);
 $pdf->Line(10,287,200,287);
-$pdf->Line(105,93,105,240);
+$pdf->Line(105,87,105,240);
 
 $pdf->Line(10,234,200,234);
 $pdf->Line(10,240,200,240);
@@ -163,7 +163,7 @@ $pdf->Line(10,250,200,250);
 
 
 //make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,6,'',0,1);//end of line
+
 
 
 
@@ -249,8 +249,8 @@ $pdf->Cell(20,6,'                          :   '.$status_karyawan,0,1, 'L');
 				$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
 					list($gajix,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 					
-					$numpangf=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak FROM tbl_gaji WHERE id_gaji='$id_gaji' AND id_user='$id_user'");
-					list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak)=mysqli_fetch_array($numpangf);
+					$numpangf=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,koreksi_pph21 FROM tbl_gaji WHERE id_gaji='$id_gaji' AND id_user='$id_user'");
+					list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak,$koreksipph)=mysqli_fetch_array($numpangf);
 //summary
 $pdf->Cell(1 ,5,'',0,1);
 $pdf->Cell(1 ,5,'',0,0);
@@ -275,14 +275,14 @@ $pdf->Cell(15 ,6,'Rp '.number_format($kehadiran , 0, ',', '.').'',0,1,'R');
 
 
 
-$pdf->Line(68,121,103,121);
+$pdf->Line(68,115,103,115);
 
 $pdf->Cell(27,6,'',0,0);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(16.8 ,6,'Sub Total',0,0);
 $pdf->Cell(36.5 ,6,':',0,0);
 
-$pdf->Line(161,121,196,121);
+$pdf->Line(161,115,196,115);
 
 
 $pdf->Cell(11 ,6,'Rp '.number_format($gajix , 0, ',', '.').'',0,0,'R');//end of line
@@ -343,7 +343,7 @@ $pdf->Cell(10 ,6,'Rp '.number_format($tun_komunikasi , 0, ',', '.').'',0,0,'R');
 $pdf->Cell(48.9 ,6,'           - Penghasilan Tidak Tetap',0,0);
 $pdf->Cell(29 ,6,':',0,0);
 $pdf->Cell(15 ,6,'Rp '.number_format($pot_pph21_tidak , 0, ',', '.').'',0,1,'R');
-$pdf->Line(161,169,196,169);
+$pdf->Line(161,163,196,163);
 
 
 $sub1=$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
@@ -359,8 +359,8 @@ $pdf->Cell(48.7 ,6,'                                  Sub Total',0,0);
 $pdf->Cell(1.2 ,6,':',0,0);
 $pdf->Cell(43,6,'Rp '.number_format($sub3 , 0, ',', '.').'',0,1,'R');//end of line
 
-$pdf->Line(68,169,103,169);
-$pdf->Line(68,181,103,181);
+$pdf->Line(68,163,103,163);
+$pdf->Line(68,175,103,175);
 $pdf->Cell(10 ,5,'',0,0);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(33.8 ,6,'Jumlah Penghasilan',0,0);
@@ -410,12 +410,18 @@ $pdf->Cell(10 ,6,'Rp '.number_format($tun_pph21_tidak , 0, ',', '.').'',0,1,'R')
 $subpen=$pen_jamsostek+$bpjstk_jampes+$bpjstk_jamkes+$tun_pph21_tetap+$tun_pph21_tidak;
 $faygg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
 	list($jumla)=mysqli_fetch_array($faygg);
-$pdf->Line(68,222,103,222);
+$pdf->Line(68,216,103,216);
 $pdf->Cell(27,6,'',0,0);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(16.8 ,6,'Sub Total',0,0);
 $pdf->Cell(36.5 ,6,':',0,0);
 $pdf->Cell(11 ,6,'Rp '.number_format($subpen , 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(43.8 ,6,'     Koreksi PPh-21',0,0);
+$pdf->Cell(37.5 ,6,':',0,0);
+$pdf->Cell(10 ,6,'Rp '.number_format($koreksipph , 0, ',', '.').'',0,1,'R');
+
 
 $pdf->Cell(43.8 ,6,'     Lain - Lain',0,0);
 $pdf->Cell(37.5 ,6,':',0,0);
@@ -423,19 +429,29 @@ $pdf->Cell(10 ,6,'Rp '.number_format($jumla , 0, ',', '.').'',0,0,'R');
 $fayggz=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan<>28)");
 list($jumlah)=mysqli_fetch_array($fayggz);
 
+
+
+
 $pdf->Cell(48.9 ,6,'           Lain - Lain',0,0);
 $pdf->Cell(29 ,6,':',0,0);
 $pdf->Cell(15 ,6,'Rp '.number_format($jumlah , 0, ',', '.').'',0,1,'R');
-$income=$subpen+$jumla+$sub2;
+$income=$subpen+$jumla+$sub2+$koreksipph;
+
+
+
 
 $pdf->Cell(43.8 ,6,'     Total Penerimaan',0,0);
 $pdf->Cell(37.5 ,6,':',0,0);
 $pdf->Cell(10 ,6,'Rp '.number_format($income , 0, ',', '.').'',0,0,'R');
 
+
 $outcome=$sub3+$jumlah+$kehadiran;
 $pdf->Cell(48.9 ,6,'           Total Potongan',0,0);
 $pdf->Cell(29 ,6,':',0,0);
 $pdf->Cell(15 ,6,'Rp '.number_format($outcome , 0, ',', '.').'',0,1,'R');
+
+
+
 
 $pdf->Cell(67 ,1,'',0,1);
 $pdf->Cell(67 ,1,'',0,1);

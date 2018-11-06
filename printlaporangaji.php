@@ -92,7 +92,8 @@ $this->Cell(2 ,6,'',0,0);
 $this->Cell(14 ,6,'T. Utilitas',0,0,'C');
 $this->Cell(1 ,6,'',0,0);
 $this->Cell(14 ,6,'BPJS Kestn',0,0,'C');
-$this->Cell(15 ,6,'',0,0,'R');
+$this->Cell(1 ,6,'',0,0);
+$this->Cell(15 ,6,'K. PPh-21',0,0,'C');
 $this->Cell(15 ,6,'T.PPh TP',0,0,'C');
 $this->Cell(15 ,6,'',0,0);
 $this->Cell(1 ,6,'',0,0);
@@ -209,7 +210,8 @@ $pdf->Cell(2 ,6,'',0,0);
 $pdf->Cell(14 ,6,'T. Utilitas',0,0,'C');
 $pdf->Cell(1 ,6,'',0,0);
 $pdf->Cell(14 ,6,'BPJS Kestn',0,0,'C');
-$pdf->Cell(15 ,6,'',0,0,'R');
+$pdf->Cell(1 ,6,'',0,0);
+$pdf->Cell(15 ,6,'K. PPh-21',0,0,'C');
 $pdf->Cell(15 ,6,'T.PPh TP',0,0,'C');
 $pdf->Cell(15 ,6,'',0,0);
 $pdf->Cell(1 ,6,'',0,0);
@@ -275,6 +277,7 @@ while($rows=mysqli_fetch_array($hj)){
 	$ngetpotlain=0;
 	$ngetpotpph21tidak=0;
 	$ngentotal=0;
+	$ngenkor=0;
 $pdf->Cell(6 ,6,'',0,1);
 $pdf->Cell(6 ,6,'',0,0);	
 $pdf->SetTextColor(255,69,0);
@@ -293,8 +296,8 @@ while($row=mysqli_fetch_array($gh)){
 	$ghgd=mysqli_query($config,"SELECT status_keluarga,jenis_kelamin,agama,tgl_bakti FROM tbl_identitas WHERE id_user='".$row['id_user']."'");
 	list($status_keluarga,$jenis_kelamin,$agama,$tgl_bakti)=mysqli_fetch_array($ghgd);
 	
-	$ghgd=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,total_penerimaan,total_potongan,penerimaan_bersih FROM tbl_gaji WHERE id_user='".$row['id_user']."' AND id_gaji='$id_gaji'");
-	list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak,$total_penerimaan,$total_potongan,$penerimaanbersih)=mysqli_fetch_array($ghgd);
+	$ghgd=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,total_penerimaan,total_potongan,penerimaan_bersih,koreksi_pph21 FROM tbl_gaji WHERE id_user='".$row['id_user']."' AND id_gaji='$id_gaji'");
+	list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak,$total_penerimaan,$total_potongan,$penerimaanbersih,$koreksipph)=mysqli_fetch_array($ghgd);
 	
 	$kof=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='".$row['admin']."' AND(status_tugas='$status_tugas' AND status_karyawan='$status_karyawan')");
 	list($gajipokok,$t_jabatan,$t_fungsional,$t_transportasi,$t_utilitas,$t_perumahan,$t_komunikasi)=mysqli_fetch_array($kof);
@@ -428,7 +431,7 @@ $pdf->Cell(15 ,6,''.number_format($t_fungsional , 0, ',', '.').'',0,0,'R');
 $pdf->Cell(15 ,6,''.number_format($t_komunikasi , 0, ',', '.').'',0,0,'R');
 $pdf->Cell(15 ,6,''.number_format($t_utilitas , 0, ',', '.').'',0,0,'R');
 $pdf->Cell(15 ,6,''.number_format($bpjstk_jamkes , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(15 ,6,'',0,0,'R');
+$pdf->Cell(15 ,6,''.number_format($koreksipph , 0, ',', '.').'',0,0,'R');
 $pdf->Cell(15 ,6,''.number_format($tun_pph21_tetap , 0, ',', '.').'',0,0,'R');
 $pdf->Cell(15 ,6,'',0,0);
 $pdf->Cell(1 ,6,'',0,0);
@@ -499,6 +502,7 @@ $ngetpotbpjspens=$ngetpotbpjspens+$pot_bpjstk_jampes;
 $ngetpotlain=$ngetpotlain+$jumlahpotlain;
 $ngetpotpph21tidak=$ngetpotpph21tidak+$pot_pph21_tidak;
 $ngentotal=$ngentotal+$total_potongan;
+$ngenkor=$ngenkor+$koreksipph;
 }
 
 //totgaji=mysqli_query($config,"SELECT SUM(
@@ -526,7 +530,8 @@ $pdf->Cell(1 ,6,'',0,0);
 $pdf->Cell(14 ,6,''.number_format($ngetutilitas , 0, ',', '.').'',1,0,'R',1);
 $pdf->Cell(1 ,6,'',0,0);
 $pdf->Cell(14 ,6,''.number_format($ngetbpjskestn , 0, ',', '.').'',1,0,'R',1);
-$pdf->Cell(15 ,6,'',0,0);
+$pdf->Cell(1 ,6,'',0,0);
+$pdf->Cell(14 ,6,''.number_format($ngenkor , 0, ',', '.').'',1,0,'R',1);
 $pdf->Cell(1 ,6,'',0,0);
 $pdf->Cell(14 ,6,''.number_format($ngetpphtp , 0, ',', '.').'',1,0,'R',1);
 $pdf->Cell(15 ,6,'',0,0);
@@ -573,7 +578,34 @@ $pdf->Cell(1 ,6,'',0,0);
 $pdf->Cell(15 ,6,''.number_format($ngentotal , 0, ',', '.').'',1,0,'R',1);
 $pdf->Cell(10 ,6,'',0,1); 
 }
+$man=mysqli_query($config,"SELECT nama,nip FROM tbl_user WHERE jabatan=108 AND status_aktif=1");
+list($manager,$nomornip)=mysqli_fetch_array($man);
+$gman=mysqli_query($config,"SELECT nama,nip FROM tbl_user WHERE jabatan=106 AND status_aktif=1");
+list($genman,$nomornipgm)=mysqli_fetch_array($gman);
+$jabatman=mysqli_query($config,"SELECT jabatan FROM tbl_ref_jabatan WHERE id=108");
+list($managers)=mysqli_fetch_array($jabatman);
+$jabatgen=mysqli_query($config,"SELECT jabatan FROM tbl_ref_jabatan WHERE id=106");
+list($genmans)=mysqli_fetch_array($jabatgen);
 
+$pdf->SetFont('Arial','B',9);
+$pdf->Cell(1 ,6,'',0,1,'C');
+$pdf->Cell(36 ,6,'',0,0,'C');
+$pdf->Cell(34 ,6,'Mengetahui,',0,0,'C');
+$pdf->Cell(125 ,6,'',0,0,'C');
+$pdf->Cell(65 ,6,'Jakarta, '.date('d').' - '.date('F').' - '.date('Y').'',0,1,'C');
+$pdf->Cell(13 ,6,'',0,0,'C');
+$pdf->Cell(85 ,6,''.strtoupper($genmans).'',0,0,'C');
+$pdf->Cell(100 ,1,'',0,0,'C');
+$pdf->Cell(60 ,6,''.strtoupper($managers).'',0,0,'C');
+$pdf->Cell(1 ,26,'',0,1,'C');
+$pdf->Cell(35.5 ,1,'',0,0,'C');
+$pdf->Cell(34 ,6,''.strtoupper($genman).'',0,0,'C');
+$pdf->Cell(140 ,1,'',0,0,'C');
+$pdf->Cell(34 ,6,''.strtoupper($manager).'',0,1,'C');
+$pdf->Cell(35.5 ,1,'',0,0,'C');
+$pdf->Cell(34 ,6,'NIP : '.$nomornipgm.'',0,0,'C');
+$pdf->Cell(140 ,1,'',0,0,'C');
+$pdf->Cell(34 ,6,'NIP : '.$nomornip.'',0,0,'C');
 
 
 

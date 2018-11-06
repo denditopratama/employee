@@ -91,7 +91,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Gaji Pokok</td>
-													<td style="text-align:center">Rp '.number_format($gajix , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($gajix , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													if($tun_jabatan!=0){
@@ -99,7 +99,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan Jabatan</td>
-													<td style="text-align:center">Rp '.number_format($tun_jabatan , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($tun_jabatan , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';}
 													if($tun_fungsional!=0){
@@ -107,7 +107,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan Fungsional</td>
-													<td style="text-align:center">Rp '.number_format($tun_fungsional , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($tun_fungsional , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';}
 													
@@ -116,7 +116,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan Transportasi</td>
-													<td style="text-align:center">Rp '.number_format($tun_transportasi , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($tun_transportasi , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';}
 													
@@ -125,7 +125,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan Utilitas</td>
-													<td style="text-align:center">Rp '.number_format($tun_utilitas , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($tun_utilitas , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';}
 													
@@ -134,7 +134,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan Perumahan</td>
-													<td style="text-align:center">Rp '.number_format($tun_perumahan , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($tun_perumahan , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';}
 													
@@ -143,7 +143,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan Komunikasi</td>
-													<td style="text-align:center">Rp '.number_format($tun_komunikasi , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($tun_komunikasi , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';}
 													
@@ -155,7 +155,7 @@
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total '.$mb.'</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($sub1 , 0, ',', '.').'</strong></td>
+													<td style="text-align:right" ><strong>Rp '.number_format($sub1 , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 													
@@ -182,19 +182,24 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Jamsostek (4,54%)</td>
-													<td style="text-align:center">Rp '.number_format($jamgaji , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($jamgaji , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
-													if($status_tugas==1){
+										
+													
+													if($sub1>= 7703500 || $gajipusat>= 8000000){
 													
 														$bpjspensiun=161880;
 														$potbpjspensiun=242820;	
-													
-													}
-													else {
+													} else {
+														if($sub1>=$gajipusat){
 														$bpjspensiun=2/100*$sub1;
-														$potbpjspensiun=3/100*$sub1;
+														$potbpjspensiun=3/100*$sub1;}
+														else {
+														$bpjspensiun=4.54/100*$gajipusat;
+														$potbpjspensiun=6.54/100*$gajipusat;
+														}
 													}
 													
 													if($admin==2 || $admin==3) {
@@ -208,34 +213,65 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">BPJSTK Jaminan Pensiun (2%)</td>
-													<td style="text-align:center">Rp '.number_format($bpjspensiun , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($bpjspensiun , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
+												
+													if(isset($_REQUEST['bpjstidaknol'])){
+													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjs_nol=0 WHERE id_user='$id_user' AND id_gaji='$id'");	
+													}
+													$wakds=mysqli_query($config,"SELECT bpjs_nol FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
+													list($bpjsnols)=mysqli_fetch_array($wakds);
 													
-													if($status_tugas==1){
+													if($bpjsnols==1){
+														$bpjskesehatan=0;
+														$potbpjskesehatan=0;
+													} else {
+													if(isset($_REQUEST['bpjsnol'])){
+														$bpjskesehatan=0;
+													$potbpjskesehatan=0;
+													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjs_nol=1 WHERE id_user='$id_user' AND id_gaji='$id'");
+													} else {
+													
+													
+												if ($sub1>= 7703500 || $gajipusat>= 8000000){
+														$bpjskesehatan=320000;
+														$potbpjskesehatan=400000;
+													}
+													else {
 														if($sub1>=$gajipusat){
 														$bpjskesehatan=4/100*$sub1;
 														$potbpjskesehatan=5/100*$sub1;	
 														} else {
 														$bpjskesehatan=4/100*$gajipusat;
 														$potbpjskesehatan=5/100*$gajipusat;}
-													}
-													else {
-														$bpjskesehatan=4/100*$sub1;
-														$potbpjskesehatan=5/100*$sub1;
-													}
+													}}}
 													
 													if($admin==2 || $admin==3) {
 														$bpjskesehatan=0;
 														$potbpjskesehatan=0;
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jamkes='$bpjskesehatan' WHERE id_user='$id_user' AND id_gaji='$id'");
+													
 													echo'
 													<tr style="border-bottom:1px solid black">
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">BPJSTK Jaminan Kesehatan (4%)</td>
-													<td style="text-align:center">Rp '.number_format($bpjskesehatan , 0, ',', '.').'</td>
-													<td style="text-align:center">-</td>
+													<td style="text-align:right">Rp '.number_format($bpjskesehatan , 0, ',', '.').'</td>
+													<td style="text-align:center">
+													<form method="POST" action="">
+													<input type="hidden" name="submitd">
+													<input type="hidden" name="karyawan" value="'.$id_user.'">
+													<input type="hidden" value="'.$id.'">
+													<button type="submit" name="bpjsnol" class="btn large green waves-effect waves-light"><i class="material-icons">error</i> Nol</button>
+													</form>
+													<form method="POST" action="">
+													<input type="hidden" name="submitd">
+													<input type="hidden" name="karyawan" value="'.$id_user.'">
+													<input type="hidden" value="'.$id.'">
+													<button type="submit" name="bpjstidaknol" class="btn small red waves-effect waves-light"><i class="material-icons">error</i> Tidak Nol</button>
+													</form>
+													</td>
 													</tr>';
 													
 													
@@ -343,7 +379,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan PPh-21 Tetap</td>
-													<td style="text-align:center">Rp '.number_format($pph21tetapku , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($pph21tetapku , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
@@ -351,7 +387,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Tunjangan PPh-21 Tidak Tetap</td>
-													<td style="text-align:center">Rp '.number_format($pph21tidakku , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($pph21tidakku , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
@@ -364,7 +400,7 @@
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($subtotpenlain , 0, ',', '.').'</strong></td>
+													<td style="text-align:right" ><strong>Rp '.number_format($subtotpenlain , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 													
@@ -385,7 +421,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">'.$uraiterima.'</td>
-													<td style="text-align:center">Rp '.number_format($row['jumlah'] , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($row['jumlah'] , 0, ',', '.').'</td>
 													<td style="text-align:center"><a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=haha&id_user='.$id_user.'&idnya='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
 													<i class="material-icons">delete</i> DEL</a></td>
 													</tr>';
@@ -405,14 +441,14 @@
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($jumlahx2 , 0, ',', '.').'</strong></td>
+													<td style="text-align:right" ><strong>Rp '.number_format($jumlahx2 , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 													
 													$jumlah=$jumlahx+$subtotpenlain+$sub1;
 													$mn=mysqli_query($config,"UPDATE tbl_gaji SET total_penerimaan='$jumlah' WHERE id_user='$id_user' AND id_gaji='$id'");
 														echo'
-													<tr style="background-color:yellow">
+													<tr style="background-color:rgba(255,255,0,0.9)">
 													<td style="text-align:center" colspan="2"><strong>Total Penerimaan</strong></td>
 													<td style="text-align:center" colspan="2"><strong>Rp '.number_format($jumlah , 0, ',', '.').'</strong></td>
 													</tr>';
@@ -451,7 +487,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Jamsostek</td>
-													<td style="text-align:center">Rp '.number_format($potjamgaji , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($potjamgaji , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET pot_bpjstk_jampes='$potbpjspensiun' WHERE id_user='$id_user' AND id_gaji='$id'");
@@ -459,7 +495,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">BPJSTK Jaminan Pensiun</td>
-													<td style="text-align:center">Rp '.number_format($potbpjspensiun , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($potbpjspensiun , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET pot_bpjstk_jamkes='$potbpjskesehatan' WHERE id_user='$id_user' AND id_gaji='$id'");
@@ -467,7 +503,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">BPJSTK Jaminan Kesehatan</td>
-													<td style="text-align:center">Rp '.number_format($potbpjskesehatan , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($potbpjskesehatan , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
@@ -523,6 +559,7 @@
 												$pottunpph21tetap=$pottunpph21tetap+$pottunpph21tdktetap;
 												$pottunpph21tdktetap=0;
 											}
+										
 											$kojags=mysqli_query($config,"UPDATE tbl_gaji SET pot_pph21_tetap='$pottunpph21tetap',pot_pph21_tidak='$pottunpph21tdktetap' WHERE id_user='$id_user' AND id_gaji='$id'");
 											
 										
@@ -530,7 +567,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Potongan PPh-21 Tetap</td>
-													<td style="text-align:center">Rp '.number_format($pottunpph21tetap , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($pottunpph21tetap , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
@@ -538,7 +575,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Potongan PPh-21 Tidak Tetap</td>
-													<td style="text-align:center">Rp '.number_format($pottunpph21tdktetap , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($pottunpph21tdktetap , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
@@ -547,7 +584,7 @@
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($subtotpot , 0, ',', '.').'</strong></td>
+													<td style="text-align:right" ><strong>Rp '.number_format($subtotpot , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 													
@@ -566,7 +603,7 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">'.$uraipotong.'</td>
-													<td style="text-align:center">Rp '.number_format($row['jumlah'] , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($row['jumlah'] , 0, ',', '.').'</td>
 													<td style="text-align:center"><a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Data" href="?page=pros&id='.$id.'&sub=hahas&id_user='.$id_user.'&idnya='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
 													<i class="material-icons">delete</i> DEL</a></td>
 													</tr>';
@@ -585,25 +622,42 @@
 									echo' <tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
 													<td style="text-align:center"><strong>Sub Total</strong></td>
-													<td style="text-align:center" ><strong>Rp '.number_format($jumla , 0, ',', '.').'</strong></td>
+													<td style="text-align:right" ><strong>Rp '.number_format($jumla , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
 									$notal=$jumla+$subtotpot;
 													$mn=mysqli_query($config,"UPDATE tbl_gaji SET total_potongan='$notal' WHERE id_user='$id_user' AND id_gaji='$id'");
-													echo'<tr style="background-color:yellow">
+													echo'<tr style="background-color:rgba(255,255,0,0.9)">
 													<td style="text-align:center" colspan="2"><strong>Total Potongan</strong></td>
 													<td style="text-align:center" colspan="2"><strong>Rp '.number_format($notal , 0, ',', '.').'</strong></td>
 													</tr>';
-													$penerimaanbersih=ceil($jumlah-$notal);
+													$penerimaanbersih=$jumlah-$notal;
                             echo '</table>';
 							echo'</div>
-							<div class="col s12">
-							<h1></h1>
+							
+							<div class="col s12" style="text-align:center;background-color:rgba(255,255,0,0.9)">
+							<h6><strong>Koreksi PPh-21 :</strong></h6>';
+							$kor1=$tunpph21tdktetap+$tunpph21tetap;
+							$kor2=$pottunpph21tdktetap+$pottunpph21tetap;
+							$koreksis=$kor2-$kor1;
+							if($koreksis>0){
+								$koreksiz=$koreksis;
+							} else {
+								$koreksiz=0;
+							}
+							$cu=mysqli_query($config,"UPDATE tbl_gaji SET koreksi_pph21='$koreksiz' WHERE id_user='$id_user' AND id_gaji='$id'");
+							$kong=mysqli_query($config,"SELECT koreksi_pph21 FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
+							list($koreksi)=mysqli_fetch_array($kong);
+							echo'
+							<h5><strong>Rp '.$koreksi.'</strong></h5>
+							<hr style="background-color:black">
 							</div>
-							<div class="col s12" style="background-color:yellow">
-							<h6 style="text-align:center"><strong>PENERIMAAN BERSIH :</strong></h6>
-							<h5 style="text-align:center"><strong>Rp'.number_format($penerimaanbersih , 0, ',', '.').'</strong></h5>';
-							$fixkeun=mysqli_query($config,"UPDATE tbl_gaji SET penerimaan_bersih='$penerimaanbersih' WHERE id_user='$id_user' AND id_gaji='$id'");
+							<div class="col s12" style="background-color:rgba(255,255,0,0.9)">
+							<h6 style="text-align:center"><strong>PENERIMAAN BERSIH :</strong></h6>';
+							$penerimaanbersihs=$penerimaanbersih+$koreksi;
+							echo'
+							<h5 style="text-align:center"><strong>Rp'.number_format($penerimaanbersihs , 0, ',', '.').'</strong></h5>';
+							$fixkeun=mysqli_query($config,"UPDATE tbl_gaji SET penerimaan_bersih='$penerimaanbersihs' WHERE id_user='$id_user' AND id_gaji='$id'");
 							echo'
 							
 							</div>

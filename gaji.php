@@ -123,7 +123,7 @@
 									<p><span class="red-text">*</span> 3.Input presensi (jumlah kehadiran, sakit, izin, cuti dll.)</p>
 									<p><span class="red-text">*</span> 4.Input penerimaan dan potongan lain</p>
 									<p><span class="red-text">*</span> 5.Potongan gaji karyawan</p>
-									<p><span class="red-text">*</span> 6.Klik Menu -> Pelaporan Gaji</p>
+									<p><span class="red-text">*</span> 6.Klik Pelaporan Gaji</p>
 									<br>
 
                                   

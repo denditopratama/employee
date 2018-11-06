@@ -75,6 +75,11 @@ $totaltransportasi=0;
 $totalutilitas=0;
 $totalperumahan=0;
 $jamsostek=0;
+$koreksipph=0;
+$bpjsjamkes=0;
+$bpjsjampes=0;
+$tunpph21ttp=0;
+$tunpph21tt=0;
 //summary
 $yok=mysqli_query($config,"SELECT SUM(total_penerimaan) FROM tbl_gaji WHERE id_gaji='$id_gaji'");
 list($totalpenerimaan)=mysqli_fetch_array($yok);
@@ -93,10 +98,17 @@ while($row=mysqli_fetch_array($yoks)){
 	$totalutilitas=$totalutilitas+$totalutilitass;
 	$totalperumahan=$totalperumahan+$totalperumahans;
 	$jamsostek=$jamsostek+$row['pen_jamsostek'];
+	$koreksipph=$koreksipph+$row['koreksi_pph21'];
+	$bpjsjamkes=$bpjsjamkes+$row['bpjstk_jamkes'];
+	$bpjsjampes=$bpjsjampes+$row['bpjstk_jampes'];
+	$tunpph21ttp=$tunpph21ttp+$row['tun_pph21_tetap'];
+	$tunpph21tt=$tunpph21tt+$row['tun_pph21_tidak'];
 	
+	$waduh=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_gaji='$id_gaji'");
+	list($jumpenlain)=mysqli_fetch_array($waduh);
 }
 
-$pdf->Cell(10 ,6,'Umum',0,1);
+$pdf->Cell(10 ,6,'',0,1);
 $pdf->SetFont('Arial','',9);
 $pdf->Cell(71.4 ,6,'     1. Gaji',0,0);
 $pdf->Cell(20 ,6,'Rp '.number_format($totalpenerimaan , 0, ',', '.').'',0,1,'R');
@@ -104,57 +116,131 @@ $pdf->Cell(20 ,6,'Rp '.number_format($totalpenerimaan , 0, ',', '.').'',0,1,'R')
 
 
 
-$pdf->Cell(81.5 ,6,'     2. Tunjangan Jabatan',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($totaljabatan , 0, ',', '.').'',0,1,'R');
+$pdf->Cell(71.4 ,6,'     2. Tunjangan Jabatan',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($totaljabatan , 0, ',', '.').'',0,1,'R');
 
 
 
-$pdf->Cell(81.4 ,6,'     4. Tunjangan Fungsional',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($totalfungsional , 0, ',', '.').'',0,1,'R');
+$pdf->Cell(71.4 ,6,'     3. Tunjangan Fungsional',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($totalfungsional , 0, ',', '.').'',0,1,'R');
 
 
 
-$pdf->Cell(81.4 ,6,'     6. Tunjangan Transportasi',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($totaltransportasi , 0, ',', '.').'',0,1,'R');
+$pdf->Cell(71.4 ,6,'     4. Tunjangan Transportasi',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($totaltransportasi , 0, ',', '.').'',0,1,'R');
 
 
 
-$pdf->Cell(81.4 ,6,'     8. Tunjangan Utilitas',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($totalutilitas , 0, ',', '.').'',0,1,'R');
+$pdf->Cell(71.4 ,6,'     5. Tunjangan Utilitas',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($totalutilitas , 0, ',', '.').'',0,1,'R');
+
+
+
+$pdf->Cell(71.4 ,6,'     6. Tunjangan Perumahan',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($totalperumahan , 0, ',', '.').'',0,1,'R');
+
+
+
+$pdf->Cell(71.4 ,6,'     7. Tunjangan Komunikasi',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($totalkomunikasi, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'     8. Jamsostek',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($jamsostek, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'     9. BPJSTK Jaminan Kesehatan',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($bpjsjamkes, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'    10. BPJSTK Jaminan Pensiun',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($bpjsjampes, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'    11. Penerimaan Lainnya',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($jumpenlain, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'    12. Tunjangan PPh-21',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($tunpph21tt+$tunpph21ttp, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'    13. Koreksi PPh-21',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($koreksipph, 0, ',', '.').'',0,1,'R');
+
+$pdf->Line(71,134,101,134);
+
+$pdf->SetFont('Arial','B',9);
+$pdf->Cell(8.5 ,6,'',0,0);
+$pdf->Cell(53 ,6,'Total Penerimaan',0,0);
+$pdf->Cell(30 ,6,'Rp '.number_format($totalpenerimaan+$totaljabatan+$totalfungsional+$totaltransportasi+$totalutilitas+$totalperumahan+$totalkomunikasi+$jamsostek+$bpjsjamkes+$bpjsjampes+$jumpenlain+$tunpph21tt+$tunpph21ttp+$koreksipph, 0, ',', '.').'',0,1,'R');
+
+
+
+
+//POTONGANNNNNNNNNNNNNNNNNNNNNNNNN
+
+$gv=mysqli_query($config,"SELECT SUM(pot_jamsostek_kar),SUM(pot_bpjstk_jampes),SUM(pot_bpjstk_jamkes),SUM(pot_pph21_tetap),SUM(pot_pph21_tidak) FROM tbl_gaji WHERE id_gaji='$id_gaji'");
+list($potjamsostek,$potbpjsjampes,$potbpjsjamkes,$potpph21ttp,$potpph21tdk)=mysqli_fetch_array($gv);
+
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(10 ,5,'',0,1);
+$pdf->Cell(100 ,1,'B. Potongan :',0,1);
+$pdf->Cell(10 ,5,'',0,1);
+
+
+$pdf->SetFont('Arial','',9);
+
+$pdf->Cell(71.4 ,6,'     1. Jamsostek',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($potjamsostek, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'     2. BPJSTK Jaminan Kesehatan',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($potbpjsjamkes, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'     3. BPJSTK Jaminan Pensiun',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($potbpjsjampes, 0, ',', '.').'',0,1,'R');
+
+
+$pdf->Cell(71.4 ,6,'     4. PPh-21',0,0);
+$pdf->Cell(20 ,6,'Rp '.number_format($potpph21ttp+$potpph21tdk, 0, ',', '.').'',0,1,'R');
 
 
 
 
 
-$pdf->Cell(81.4 ,6,'     5. Tunjangan Perumahan',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($totalperumahan , 0, ',', '.').'',0,1,'R');
 
 
-
-
-$pdf->Cell(81.4 ,6,'     6. Tunjangan Komunikasi',0,0);
-$pdf->Cell(10 ,6,'Rp '.number_format($totalkomunikasi, 0, ',', '.').'',0,1,'R');
 
 $pdf->SetY(56);
 $pdf->SetX(110.2);
+$pdf->SetFont('Arial','',9);
 $jarak=6;
+$no=1;
 $mh=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id_gaji' GROUP BY kode_penerimaan");
 while($row=mysqli_fetch_array($mh)){
 	$anjos=mysqli_query($config,"SELECT uraian FROM tbl_jenis_penerimaan WHERE id='".$row['kode_penerimaan']."'");
 	list($uraiterima)=mysqli_fetch_array($anjos);
 	$noy=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_gaji='$id_gaji' AND kode_penerimaan='".$row['kode_penerimaan']."' GROUP BY kode_penerimaan");
 	list($jumlahpen)=mysqli_fetch_array($noy);
-$pdf->Cell(57 ,6,''.$uraiterima.'',0,0);
+$pdf->Cell(57 ,6,''.$no++.'. '.$uraiterima.'',0,0);
 $pdf->Cell(30 ,6,'Rp '.number_format($jumlahpen, 0, ',', '.').'',0,0,'R');
 $pdf->SetY(56+$jarak);
 $pdf->SetX(110.2);
 $jarak=$jarak+6;
 }
+
+
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(57 ,6,'Jumlah Penerimaan Lain :',0,0);
+$pdf->Cell(57 ,6,'Jumlah Penerimaan Lain',0,0);
+$pdf->Cell(30 ,6,'Rp '.number_format($jumpenlain, 0, ',', '.').'',0,0,'R');
 
-
-
+$y=$pdf->GetY();
+$x=$pdf->GetX();
+$pdf->SetXY($x, $y-20);
+$pdf->Line($x-30,$y,$x,$y);
 
 
 

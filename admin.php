@@ -784,7 +784,7 @@
 				
 			
 				$timegame=date('H');
-				if($timegame=08){
+				if($timegame=8){
 					$tambahgame=mysqli_query($config,"UPDATE tbl_user SET waktugame=3600");
 				}
 				

@@ -193,6 +193,22 @@
 					$ngampung=mysqli_query($config,"DELETE FROM tbl_gaji_pokok WHERE id='$i'");
 				}
 			}
+			
+			$maksjabat=mysqli_query($config,"SELECT MAX(id) FROM tbl_ref_jabatan");
+			list($maksimaljabat)=mysqli_fetch_array($maksjabat);
+			for($i=1;$i<=$maksimaljabat;$i++){
+				if(isset($_REQUEST['simpanjabat'.$i.''])){
+					
+					$editjabat=mysqli_real_escape_string($config,$_REQUEST['editjabat'.$i.'']);
+					$jabatsub=mysqli_real_escape_string($config,$_REQUEST['jabatsub'.$i.'']);
+				
+				$simpang=mysqli_query($config,"UPDATE tbl_ref_jabatan SET jabatan='$editjabat',kode_sub='$jabatsub' WHERE id='$i'");}
+				
+				if(isset($_REQUEST['hapusjabat'.$i.''])){
+					
+					$ngampung=mysqli_query($config,"DELETE FROM tbl_ref_jabatan WHERE id='$i'");
+				}
+			}
 		
 		?>
 		
@@ -482,16 +498,31 @@
                             
 							<?php $mo=mysqli_query($config,"SELECT * FROM tbl_ref_jabatan");
 							$no=1;
-							while($row=mysqli_fetch_array($mo)){
-								$lp=mysqli_query($config,"SELECT sub_unit FROM tbl_sub_unit WHERE kode_sub='".$row['kode_sub']."'");
-								list($lpk)=mysqli_fetch_array($lp);
+							while($rowd=mysqli_fetch_array($mo)){
+								
 								echo'
                             <tbody>
 							<tr>
 							<td style="text-align:center" >'.$no++.'</td>
-							<td style="text-align:center" >'.$row['jabatan'].'</td>
-							<td style="text-align:center" >'.$lpk.'</td>
-							<td style="text-align:center" >-</td>
+							<td style="text-align:center" ><input style="text-align:center" type="text" name="editjabat'.$rowd['id'].'" value="'.$rowd['jabatan'].'"></input></td>
+							<td style="text-align:center" ><select class="browser-default" name="jabatsub'.$rowd['id'].'">';
+								
+								$gkz=mysqli_query($config,"SELECT * FROM tbl_sub_unit");
+								while($row=mysqli_fetch_array($gkz)){
+								if($row['kode_sub']==$rowd['kode_sub']){
+							echo' 
+								<option value="'.$row['kode_sub'].'" selected>'.$row['sub_unit'].'</option>';}
+								else {
+							echo' 
+								<option value="'.$row['kode_sub'].'">'.$row['sub_unit'].'</option>';	
+								}	
+								}
+								echo'
+								</select></td>
+							<td style="text-align:center" >
+							<button type="submit" name="simpanjabat'.$rowd['id'].'" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin mengubah data ini?\');">EDIT</button>
+							<button type="submit" name="hapusjabat'.$rowd['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+							</td>
 							</tr>
 							</tbody>';} ?>
 							

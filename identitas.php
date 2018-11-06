@@ -437,36 +437,24 @@ if(empty($_SESSION['admin'])){
 													
 														$jios=mysqli_query($config,"SELECT jabatan FROM tbl_user WHERE id_user='$id_user'");
 														list($jabatan)=mysqli_fetch_array($jios);
-                                               $departement=mysqli_query($config,"SELECT * FROM tbl_ref_jabatan");
+														$koyi=mysqli_query($config,"SELECT * FROM tbl_department");
+														while($data=mysqli_fetch_array($koyi)){
+                                               $departement=mysqli_query($config,"SELECT * FROM tbl_ref_jabatan WHERE kode_unit='".$data['kode_unit']."'");
 											   while($row=mysqli_fetch_array($departement)){
 												  if($row['id']==$jabatan){
 													  
-										    if($row['kode_sub']==99 || 
-												  $row['kode_sub']==999 || 
-												  $row['kode_sub']==9999 || 
-												  $row['kode_sub']==99999 || 
-												  $row['kode_sub']==999999 ||
-												  $row['kode_sub']==9999999 || 
-												  $row['kode_sub']==99999999 || 
-												  $row['kode_sub']==999999999){
+										    if (preg_match('/-/',$row['jabatan'])){
 													echo '<option style="background-color:yellow;font-weight:bold!important;" value="'.$row['id'].'" disabled>'.$row['jabatan'].'</option>';
 												}else{											   
 												  echo '<option value="'.$row['id'].'" selected>'.$row['jabatan'].'</option>';}}
 												  else {
-											if($row['kode_sub']==99 || 
-												  $row['kode_sub']==999 || 
-												  $row['kode_sub']==9999 || 
-												  $row['kode_sub']==99999 || 
-												  $row['kode_sub']==999999 ||
-												  $row['kode_sub']==9999999 || 
-												  $row['kode_sub']==99999999 || 
-												  $row['kode_sub']==999999999){
+											 if (preg_match('/-/',$row['jabatan'])){
 													echo '<option style="background-color:yellow;font-weight:bold!important;" value="'.$row['id'].'" disabled>'.$row['jabatan'].'</option>';
 												}else{											   
 												  echo '<option value="'.$row['id'].'">'.$row['jabatan'].'</option>';}
 												  }
 											   }
-														
+														}
 														?>
 														
 											
