@@ -136,7 +136,7 @@
                                         unset($_SESSION['tujuan']);
                                     }
 									
-									 $query = mysqli_query($config,"SELECT * FROM tbl_user");
+									 $query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9)");
 									
 									
 										echo "<select class='browser-default' name='idsuser' select id='idsuser'>";

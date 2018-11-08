@@ -16,7 +16,6 @@
             } else {
 
                 $id_surat = $_REQUEST['id_surat'];
-                
                 $no_surat = $_REQUEST['no_surat'];
                 $tujuan = $_REQUEST['tujuan'];
                 $isi = $_REQUEST['isi'];
@@ -63,6 +62,7 @@
                                             $eks = strtolower(end($x));
                                             $ukuran = $_FILES['file']['size'];
                                             $target_dir = "upload/surat_keluar/";
+											$target_dir2 = "upload/surat_masuk/";
 											
 
                                             //jika form file tidak kosong akan mengeksekusi script dibawah ini
@@ -84,6 +84,7 @@
 															$id_surat = $_REQUEST['id_surat'];
                                                             unlink($target_dir.$file);
                                                             move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
+															copy($target_dir.$nfile, $target_dir2.$nfile);
 
 															
 
@@ -302,9 +303,14 @@
                             <div id="asd" class="input-field col s6" >
                             <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label>Ditujukan</label><br/>	
                             <select class="browser-default" name="tunjukan" id="tunjukan" style="margin-bottom:15px;">
-						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND id_user<>8");	
-							while ($row = mysqli_fetch_array($query)) {											
-								echo "<option id='qq' value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";}
+						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9)");	
+							while ($row = mysqli_fetch_array($query)) {		
+									if($tujuan==$row['nama']){
+									echo "<option value='".$row['id_user'].".".$row['nama']."' selected>".$row['nama']."</option>";	
+									} else {
+									echo "<option value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";}
+								
+								}
 								echo "</select>";			
 						?>
 							</div>
@@ -329,7 +335,7 @@
 							
 						<div id="dsa" class="input-field col s6" >
                             <i id="rere" class="material-icons prefix md-prefix">work</i>
-                            <input id="ditujukan" type="text" class="" name="ditujukan"> 
+                            <input id="ditujukan" type="text" class="" name="ditujukan" value="<?php echo $tujuan; ?>"> 
                             <label id="usaha" for="ditujukan">Perusahaan Tujuan</label>
                         </div>
                             <div class="input-field col s6">
@@ -410,12 +416,32 @@
 
                     </form>
                     <!-- Form END -->
-
+				
                 </div>
                 <!-- Row form END -->
 
 <?php
             }
         }
+		
+		
+		
     }
+	
 ?>
+
+<script>
+$(document).ready(function(){
+	<?php 
+	$kunyuk=mysqli_query($config,"SELECT nama FROM tbl_user WHERE nama='$tujuan'");
+	if(mysqli_num_rows($kunyuk)>0){
+		echo'tampil2();
+		$("#kedua").prop("checked", true);';
+	} else {
+		echo'tampil1();
+		$("#kesatu").prop("checked", true);';
+	}
+	?>
+	
+});
+</script>

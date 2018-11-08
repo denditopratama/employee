@@ -41,10 +41,27 @@
 		ob_start();
 	require('./fpdf/fpdf.php');
 
-$pdf = new FPDF('P','mm','A4');
+class enjoy extends FPDF
+{
+	function Footer(){
+		$this->SetLineWidth(0.4);
+		$this->SetFont('Arial','',7);
+	$this->Cell(1,1,'',0,1);
+	$this->Line(11,280,199,280);
+	  $this->SetY(-17);
+	  $this->SetX(-344);
+        $this->SetFont('Arial','',7);
+        $this->Cell(0,7,'PT Jasamarga Properti : '.date('d').' - '.date('M').' - '.date('Y').'',0,0,'C');
+	   $this->SetX(182);
+        $this->SetFont('Arial','I',7);
+        $this->Cell(0,7,'Halaman '.$this->PageNo().'/{nb}',0,0,'C');
+	}
+}	
+	
+$pdf = new enjoy('P','mm','A4');
 
 $pdf->AddPage();
-
+$pdf->AliasNbPages();
 //set font to arial, bold, 14pt
 $pdf->SetFont('Arial','B',10);
 $pdf->Image('./upload/logopdf.png',10,10,-400);
@@ -55,9 +72,6 @@ $pdf->Cell(189 ,8,'',0,1);
 $pdf->Line(10,45,200,45);
 
 
-$pdf->Line(10,234,200,234);
-$pdf->Line(10,240,200,240);
-$pdf->Line(10,250,200,250);
 
 
 
@@ -103,7 +117,6 @@ while($row=mysqli_fetch_array($yoks)){
 	$bpjsjampes=$bpjsjampes+$row['bpjstk_jampes'];
 	$tunpph21ttp=$tunpph21ttp+$row['tun_pph21_tetap'];
 	$tunpph21tt=$tunpph21tt+$row['tun_pph21_tidak'];
-	
 	$waduh=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_gaji='$id_gaji'");
 	list($jumpenlain)=mysqli_fetch_array($waduh);
 }
@@ -173,7 +186,8 @@ $pdf->Line(71,134,101,134);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(8.5 ,6,'',0,0);
 $pdf->Cell(53 ,6,'Total Penerimaan',0,0);
-$pdf->Cell(30 ,6,'Rp '.number_format($totalpenerimaan+$totaljabatan+$totalfungsional+$totaltransportasi+$totalutilitas+$totalperumahan+$totalkomunikasi+$jamsostek+$bpjsjamkes+$bpjsjampes+$jumpenlain+$tunpph21tt+$tunpph21ttp+$koreksipph, 0, ',', '.').'',0,1,'R');
+$totpen=$totalpenerimaan+$totaljabatan+$totalfungsional+$totaltransportasi+$totalutilitas+$totalperumahan+$totalkomunikasi+$jamsostek+$bpjsjamkes+$bpjsjampes+$jumpenlain+$tunpph21tt+$tunpph21ttp+$koreksipph;
+$pdf->Cell(30 ,6,'Rp '.number_format($totpen, 0, ',', '.').'',0,1,'R');
 
 
 
@@ -207,13 +221,102 @@ $pdf->Cell(20 ,6,'Rp '.number_format($potbpjsjampes, 0, ',', '.').'',0,1,'R');
 $pdf->Cell(71.4 ,6,'     4. PPh-21',0,0);
 $pdf->Cell(20 ,6,'Rp '.number_format($potpph21ttp+$potpph21tdk, 0, ',', '.').'',0,1,'R');
 
+$moi=mysqli_query($config,"SELECT * FROM tbl_potongan GROUP BY kode_potongan");
+$nos=5;
+$jumlahpotong=0;
+while($row=mysqli_fetch_array($moi)){
+	$jil=mysqli_query($config,"SELECT uraian,jenis_bank,atas_nama,no_rekening FROM tbl_ref_potongan WHERE id='".$row['kode_potongan']."'");
+	list($namapotong,$jenbank,$an,$norek)=mysqli_fetch_array($jil);
+	$mnb=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE kode_potongan='".$row['kode_potongan']."'");
+	list($jumpotong)=mysqli_fetch_array($mnb);
+	$bl=mysqli_query($config,"SELECT nama_bank FROM tbl_ref_bank WHERE kode_bank='".$jenbank."'");
+	list($jenisbank)=mysqli_fetch_array($bl);
+	
+	if($nos<10){
+	$pdf->Cell(71.4 ,6,'     '.$nos++.'. '.$namapotong.'',0,0);
+	$pdf->Cell(20 ,6,'Rp '.number_format($jumpotong, 0, ',', '.').'',0,0,'R');
+	$pdf->Cell(21 ,6,'',0,0,'R');
+	$pdf->Cell(20 ,6,''.$jenisbank.'',0,0,'R');
+	$pdf->Cell(15 ,6,'',0,0,'R');
+	$pdf->Cell(20 ,6,''.$an.'',0,0,'R');
+	
+	$pdf->Cell(20 ,6,''.$norek.'',0,1,'R');
+	}
+	else if ($nos>=10){
+	$pdf->Cell(71.4 ,6,'    '.$nos++.'. '.$namapotong.'',0,0);
+	$pdf->Cell(20 ,6,'Rp '.number_format($jumpotong, 0, ',', '.').'',0,0,'R');
+	$pdf->Cell(21 ,6,'',0,0,'R');
+	$pdf->Cell(20 ,6,''.$jenisbank.'',0,0,'R');
+	$pdf->Cell(15 ,6,'',0,0,'R');
+	$pdf->Cell(20 ,6,''.$an.'',0,0,'R');
+	
+	$pdf->Cell(20 ,6,''.$norek.'',0,1,'R');
+	}
+	$jumlahpotong=$jumlahpotong+$jumpotong;
+}
+
+$pdf->SetFont('Arial','B',9);
+$y=$pdf->GetY();
+$x=$pdf->GetX();
+
+$pdf->Line($x+61,$y,$x+91,$y);
+$pdf->Cell(8.5 ,6,'',0,0);
+$pdf->Cell(53 ,6,'Total Potongan',0,0);
+$pdf->Cell(30 ,6,'Rp '.number_format($jumlahpotong+$potjamsostek+$potbpjsjamkes+$potbpjsjampes+$potpph21ttp+$potpph21tdk, 0, ',', '.').'',0,1,'R');
+$gjd=$jumlahpotong+$potjamsostek+$potbpjsjamkes+$potbpjsjampes+$potpph21ttp+$potpph21tdk+$totpen;
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(10 ,5,'',0,1);
+$pdf->Cell(60 ,6,'C. Gaji Yang Dibayarkan (A-B) :',0,0);
+$pdf->SetFillColor(255,255,0);
+$pdf->Cell(40 ,6,'Rp '.number_format($gjd, 0, ',', '.').'',0,1,'C',1);
+$pdf->SetFont('Arial','',9);
+$pdf->Cell(4.5 ,1,'',0,0);
+
+function terbilang($nilai) {
+	if($nilai<0) {
+		$hasil = "minus ". trim(penyebut($nilai));
+	} else {
+		$hasil = trim(penyebut($nilai));
+	}     		
+	return $hasil;
+}
+
+function penyebut($nilai) {
+		$nilai = abs($nilai);
+		$huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
+		$temp = "";
+		if ($nilai < 12) {
+			$temp = " ". $huruf[$nilai];
+		} else if ($nilai <20) {
+			$temp = penyebut($nilai - 10). " belas";
+		} else if ($nilai < 100) {
+			$temp = penyebut($nilai/10)." puluh". penyebut($nilai % 10);
+		} else if ($nilai < 200) {
+			$temp = " seratus" . penyebut($nilai - 100);
+		} else if ($nilai < 1000) {
+			$temp = penyebut($nilai/100) . " ratus" . penyebut($nilai % 100);
+		} else if ($nilai < 2000) {
+			$temp = " seribu" . penyebut($nilai - 1000);
+		} else if ($nilai < 1000000) {
+			$temp = penyebut($nilai/1000) . " ribu" . penyebut($nilai % 1000);
+		} else if ($nilai < 1000000000) {
+			$temp = penyebut($nilai/1000000) . "juta" . penyebut($nilai % 1000000);
+		} else if ($nilai < 1000000000000) {
+			$temp = penyebut($nilai/1000000000) . " milyar" . penyebut(fmod($nilai,1000000000));
+		} else if ($nilai < 1000000000000000) {
+			$temp = penyebut($nilai/1000000000000) . " trilyun" . penyebut(fmod($nilai,1000000000000));
+		}     
+		return $temp;
+	}
+
+$pdf->Cell(60 ,6,'(Terbilang : '.terbilang($gjd).' rupiah)',0,0);
 
 
 
 
 
 
-
+//RINCIAN PENERIMANA LAIN
 $pdf->SetY(56);
 $pdf->SetX(110.2);
 $pdf->SetFont('Arial','',9);

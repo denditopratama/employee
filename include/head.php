@@ -6,7 +6,7 @@
 
 <head>
 
-    <title>E-mployee JMP v3.0</title>
+    <title>E-mployee JMP</title>
 
     <!-- Meta START -->
 	<!-- E-mployee JMP By Dendito Pratama || denditoprtm@gmail.com -->

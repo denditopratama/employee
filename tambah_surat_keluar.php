@@ -76,6 +76,7 @@
                                                 $eks = strtolower(end($x));
                                                 $ukuran = $_FILES['file']['size'];
                                                 $target_dir = "upload/surat_keluar/";
+												$target_dir2 = "upload/surat_masuk/";
 											
 
                                                 //jika form file tidak kosong akan mengekse
@@ -87,7 +88,7 @@
                                                         if($ukuran < 25000000000000000000000){
 
                                                             move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
-															
+															copy($target_dir.$nfile, $target_dir2.$nfile);
 
 															  if($_POST['tujuan']==2){
 														

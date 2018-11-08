@@ -137,12 +137,16 @@
                                   <?php
                                    
 									
-									 $query = mysqli_query($config,"SELECT * FROM tbl_user");
+									 $query = mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999)");
 									
 									
 										echo "<select class='browser-default' name='idzuser' select id='idzuser'>";
-										while ($row = mysqli_fetch_array($query)) {											
-										echo "<option value='" . $row['nama'] . "'selected>" . $row['nama'] . "</option>";
+										while ($row = mysqli_fetch_array($query)) {
+												if($rows['nama']==$row['nama']){
+												echo "<option value='" . $row['nama'] . "'selected>" . $row['nama'] . "</option>";}
+												else
+													{
+												echo "<option value='" . $row['nama'] . "'>" . $row['nama'] . "</option>";}
 												}
 										echo "</select>";
                                     if(isset($_SESSION['eno_surat'])){

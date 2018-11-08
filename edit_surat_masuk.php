@@ -231,11 +231,18 @@
                                 <?php
                                    
 									
-									$query = mysqli_query($config,"SELECT * FROM tbl_user");
+									$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user!=9999)");
 					
-										while ($row = mysqli_fetch_array($query)) {											
-										echo "<option value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";
+										while ($row = mysqli_fetch_array($query)) {	
+											if($id_user==$row['id_user']){
+											echo "<option value='".$row['id_user'].".".$row['nama']."' selected>".$row['nama']."</option>";	
+											} else {
+											echo "<option value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";}
+										
 												}
+												
+												
+												
 										echo "</select>";
                                    
                                 ?>

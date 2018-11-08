@@ -119,7 +119,10 @@
                     if(!empty($row['file'])){
 
                         unlink("upload/surat_keluar/".$row['file']);
+						unlink("upload/surat_masuk/".$row['file']);
                         $query = mysqli_query($config, "DELETE FROM tbl_surat_keluar WHERE id_surat='$id_surat'");
+						$query1 = mysqli_query($config, "DELETE FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
+						$query2 = mysqli_query($config, "DELETE FROM tbl_disposisi WHERE id_surat='$id_surat'");
 
                 		if($query == true){
 							if($_SESSION['admin']==1){
@@ -140,8 +143,9 @@
                 	} else {
 
                         //jika tidak ada file akan mengekseskusi script dibawah ini
-                        $query = mysqli_query($config, "DELETE FROM tbl_surat_keluar WHERE id_surat='$id_surat'");
-						$querys = mysqli_query($config, "DELETE FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
+							$query = mysqli_query($config, "DELETE FROM tbl_surat_keluar WHERE id_surat='$id_surat'");
+							$query1 = mysqli_query($config, "DELETE FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
+							$query2 = mysqli_query($config, "DELETE FROM tbl_disposisi WHERE id_surat='$id_surat'");
 
                        	if($query == true){
 							if($_SESSION['admin']==1){

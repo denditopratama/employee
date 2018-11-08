@@ -11,7 +11,7 @@
         die();
     } else {
 		
-		
+							
 ?>
 
 <!doctype html>
@@ -430,8 +430,11 @@
 				else{
                 $count1 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_surat_masuk WHERE tujuan='".$_SESSION['nama']."' OR id_user='".$_SESSION['id_user']."'"));
 				}
+				
                 //menghitung jumlah surat masuk
-                $count2 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_surat_keluar WHERE id_user='".$_SESSION['id_user']."'"));
+				if($_SESSION['admin']==1){$count2 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_surat_keluar WHERE id_user<>9999 "));}
+				else{
+                $count2 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_surat_keluar WHERE id_user='".$_SESSION['id_user']."'"));}
 
 				if($_SESSION['admin']==1){
                 //menghitung jumlah surat masuk
@@ -452,6 +455,7 @@
 				list($cutay)=mysqli_fetch_array($LP);
 				$count7=$cutay;
 				$count8 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_surat_masuk WHERE id_user='".$_SESSION['id_user']."'"));
+	
 				$count9 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_kpts"));
 				
             ?>
@@ -613,14 +617,16 @@
 					   $querbroz=mysqli_query($config,"SELECT COUNT(*) as jumlah FROM tbl_surat_masuk WHERE baca=0 AND id_user='".$_SESSION['id_user']."'");   
 					   $rows=mysqli_fetch_array($querbroz);
 					   if($rows['jumlah']==0){
+						   
 					   echo'<i class="fa fa-newspaper-o" style="font-size:29px;"></i>&nbsp Presensi / Surat Masuk';}
 						   else{
+						if($_SESSION['admin']==1){	   
 					   echo'
 					
 					 <i class="hvr-icon-buzz4" style="font-size:29px"></i> Presensi / Surat Masuk
 					 <span class="buttona__badge">'.$row['jumlah'].'</span>
 					
-					';
+						';} else {echo'<i class="fa fa-newspaper-o" style="font-size:29px;"></i>&nbsp Presensi / Surat Masuk';}
 					   }
 					 
 					 ?>
@@ -664,7 +670,7 @@
                 <div class="modal-content white">
 				<div class="input-field col s12">
 				</div>
-				<h5 style="text-align:center;">Selamat Datang Di Dashboard Karyawan E-mployee JMP v3.0</h5>
+				<h5 style="text-align:center;">Selamat Datang Di Dashboard Karyawan E-mployee JMP v3.1</h5>
 				<h6 style="text-align:center;"></h6>
 				<h6 style="text-align:center;"></h6>
 				<h6 style="text-align:center;"></h6>

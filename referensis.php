@@ -210,6 +210,41 @@
 				}
 			}
 		
+		
+			$maksje=mysqli_query($config,"SELECT MAX(id) FROM tbl_jenis_penerimaan");
+			list($maksjenispenerimaan)=mysqli_fetch_array($maksje);
+			for($i=1;$i<=$maksjenispenerimaan;$i++){
+				if(isset($_REQUEST['editpen'.$i.''])){
+					
+					$uraiterima=mysqli_real_escape_string($config,$_REQUEST['uraiterima'.$i.'']);
+					
+				
+				$simpangx=mysqli_query($config,"UPDATE tbl_jenis_penerimaan SET uraian='$uraiterima' WHERE id='$i'");}
+				
+				if(isset($_REQUEST['hapuspen'.$i.''])){
+					
+					$ngampunz=mysqli_query($config,"DELETE FROM tbl_jenis_penerimaan WHERE id='$i'");
+				}
+			}
+			
+		
+			$maksjabatb=mysqli_query($config,"SELECT MAX(id) FROM tbl_ref_potongan");
+			list($makspotong)=mysqli_fetch_array($maksjabatb);
+			for($i=1;$i<=$makspotong;$i++){
+				if(isset($_REQUEST['editpotong'.$i.''])){
+					
+					$uraipotong=mysqli_real_escape_string($config,$_REQUEST['uraipotong'.$i.'']);
+					$jenisbank=mysqli_real_escape_string($config,$_REQUEST['jenis_bank'.$i.'']);
+					$atasnama=mysqli_real_escape_string($config,$_REQUEST['atas_nama'.$i.'']);
+					$nomerek=mysqli_real_escape_string($config,$_REQUEST['nomerek'.$i.'']);
+				
+				$simpangx=mysqli_query($config,"UPDATE tbl_ref_potongan SET uraian='$uraipotong',jenis_bank='$jenisbank',atas_nama='$atasnama',no_rekening='$nomerek' WHERE id='$i'");}
+				
+				if(isset($_REQUEST['hapuspotong'.$i.''])){
+					
+					$ngampunxg=mysqli_query($config,"DELETE FROM tbl_ref_potongan WHERE id='$i'");
+				}
+			}
 		?>
 		
 				<style>
@@ -467,7 +502,7 @@
                                  <tr>
 										<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Jabatan</th>
-										<th width="25%"style="color:#fff">Sub Unit</th>
+										<th width="25%"style="color:#fff">Unit Kerja</th>
 										<th width="20%"style="color:#fff">Tindakan</th>	
                                 </tr>
 								</thead>
@@ -491,7 +526,7 @@
 								<tr style="background-color:#39424c!important;">
 										<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Jabatan</th>
-										<th width="25%"style="color:#fff">Sub Unit</th>
+										<th width="25%"style="color:#fff">Unit Kerja</th>
 										<th width="20%"style="color:#fff">Tindakan</th>
                                 </tr>
 								</tbody>
@@ -507,14 +542,14 @@
 							<td style="text-align:center" ><input style="text-align:center" type="text" name="editjabat'.$rowd['id'].'" value="'.$rowd['jabatan'].'"></input></td>
 							<td style="text-align:center" ><select class="browser-default" name="jabatsub'.$rowd['id'].'">';
 								
-								$gkz=mysqli_query($config,"SELECT * FROM tbl_sub_unit");
+								$gkz=mysqli_query($config,"SELECT * FROM tbl_department");
 								while($row=mysqli_fetch_array($gkz)){
-								if($row['kode_sub']==$rowd['kode_sub']){
+								if($row['kode_unit']==$rowd['kode_unit']){
 							echo' 
-								<option value="'.$row['kode_sub'].'" selected>'.$row['sub_unit'].'</option>';}
+								<option value="'.$row['kode_unit'].'" selected>'.$row['unit_kerja'].'</option>';}
 								else {
 							echo' 
-								<option value="'.$row['kode_sub'].'">'.$row['sub_unit'].'</option>';	
+								<option value="'.$row['kode_unit'].'">'.$row['unit_kerja'].'</option>';	
 								}	
 								}
 								echo'
@@ -723,8 +758,15 @@
 							<tr>
 							<td style="text-align:center" >'.$no++.'</td>
 							<td style="text-align:center" >'.$row['id'].'</td>
-							<td style="text-align:center" disabled>'.$row['uraian'].'</td>
-							<td style="text-align:center" >-</td>
+							<td style="text-align:center" >
+							<form method="POST">
+							<input type="text" name="uraiterima'.$row['id'].'" value="'.$row['uraian'].'"></td>
+							<td style="text-align:center" >
+							
+							<button type="submit" name="editpen'.$row['id'].'" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin merubah data ini?\');">EDIT</button>
+							<button type="submit" name="hapuspen'.$row['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+							</form>
+							</td>
 							</tr>
 							</tbody>';} ?>
 							
@@ -739,7 +781,7 @@
 				</div>
 				
 				<div id="modald7">
-				<div id="modals7" class="modal" style="background-color:white">
+				<div id="modals7" class="modal" style="background-color:white;width:90%">
                 <div class="modal-content white">
 				<div class="input-field col s12">
 				<h5><i class="material-icons" style="margin-bottom:8px">lock</i> Tabel Referensi Potongan Lain</h5>
@@ -753,23 +795,33 @@
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
 										<th width="1%"style="color:#fff">Nomor</th>
-                                        <th width="25%"style="color:#fff">Kode</th>
+                                        <th width="10%"style="color:#fff">Kode</th>
 										<th width="25%"style="color:#fff">Uraian</th>
-										<th width="20%"style="color:#fff">Tindakan</th>	
+										<th width="25%"style="color:#fff">Jenis Bank</th>
+										<th width="25%"style="color:#fff">Atas Nama</th>
+										<th width="20%"style="color:#fff">Nomor Rekening</th>
+										<th width="20%"style="color:#fff">Tindakan</th>										
                                 </tr>
 								</thead>
 								<tr>
 								<td style="text-align:center" >-</td>
 								<td style="text-align:center"><input style="text-align:center" type="text" placeholder="Otomatis"></td>
 								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
-								<td><button type="submit" name="tambahpotongan" style="width:100%;color:white!important" class="btn small green waves-effect waves-light" onclick="return confirm('Anda yakin ingin menambah data ini?');">TAMBAH</button></td>
+								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
+								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
+								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
+								<td><button type="submit" name="tambahpotongan" style="width:100%;color:white!important" class="btn small green waves-effect waves-light" onclick="return confirm('Anda yakin ingin menambah data ini?');">TAMBAH</button>
+								</td>
 								</tr>
 								
 								<tbody>
 								<tr style="background-color:#39424c!important;">
 										<th width="1%"style="color:#fff">Nomor</th>
-                                        <th width="25%"style="color:#fff">Kode</th>
+                                        <th width="10%"style="color:#fff">Kode</th>
 										<th width="25%"style="color:#fff">Uraian</th>
+										<th width="25%"style="color:#fff">Jenis Bank</th>
+										<th width="25%"style="color:#fff">Atas Nama</th>
+										<th width="20%"style="color:#fff">Nomor Rekening</th>
 										<th width="20%"style="color:#fff">Tindakan</th>
                                 </tr>
 								</tbody>
@@ -780,10 +832,28 @@
 								echo'
                             <tbody>
 							<tr>
+							<form method="POST">
 							<td style="text-align:center" >'.$no++.'</td>
 							<td style="text-align:center" >'.$row['id'].'</td>
-							<td style="text-align:center" disabled>'.$row['uraian'].'</td>
-							<td style="text-align:center" >-</td>
+							<td style="text-align:center" ><input type="text" name="uraipotong'.$row['id'].'" value="'.$row['uraian'].'"></td>
+							<td style="text-align:center" >
+							<select class="browser-default" name="jenis_bank'.$row['id'].'">';
+							$kgm=mysqli_query($config,"SELECT * FROM tbl_ref_bank");
+							while($data=mysqli_fetch_array($kgm)){
+								if($row['jenis_bank']==$data['kode_bank']){
+								echo' <option value="'.$data['kode_bank'].'" selected>'.$data['nama_bank'].'</option>';}
+								else { echo' <option value="'.$data['kode_bank'].'">'.$data['nama_bank'].'</option>';}
+							}
+							echo'
+							</select>
+							</td>
+							<td style="text-align:center" ><input type="text" name="atas_nama'.$row['id'].'" value="'.$row['atas_nama'].'"></td>
+							<td style="text-align:center" ><input type="text" name="nomerek'.$row['id'].'" value="'.$row['no_rekening'].'"></td>
+							<td style="text-align:center" >
+							<button type="submit" name="editpotong'.$row['id'].'" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin merubah data ini?\');">EDIT</button>
+							<button type="submit" name="hapuspotong'.$row['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+							</td>
+							</form>
 							</tr>
 							</tbody>';} ?>
 							

@@ -8,6 +8,7 @@
         die();
     }
     require('include/config.php');
+	
 ?>
 
 <!doctype html>
@@ -16,7 +17,7 @@
 <!-- Head START -->
 <head>
 
-    <title>E-mployee JMP v3.0</title>
+    <title>E-mployee JMP</title>
 
     <!-- Meta START -->
 	<!-- E-mployee JMP By Dendito Pratama || denditoprtm@gmail.com -->
@@ -218,16 +219,16 @@
                     ?>
 
                     <?php
-                        if(isset($_REQUEST['submit'])){
+                        if(isset($_POST['submit'])){
 
                             //validasi form kosong
-                            if($_REQUEST['username'] == "" || $_REQUEST['password'] == ""){
+                            if($_POST['username'] == "" || $_POST['password'] == ""){
                                 echo '<div class="upss red-text"><i class="material-icons">error_outline</i> <strong>ERROR!</strong> Username dan Password wajib diisi.
                                 <a class="btn-large waves-effect waves-light blue-grey col s11" href="./" style="margin: 20px 0 0 5px;"><i class="material-icons md-24">arrow_back</i> Kembali ke login form</a></div>';
                             } else {
 
-                                $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['username'])));
-                                $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['password'])));
+                                $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['username'])));
+                                $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['password'])));
 
                                 $query = mysqli_query($config, "SELECT id_user, username, nama, nip, admin,role,unit,sub_unit,divisi,status_aktif FROM tabel_role WHERE username=BINARY'$username' AND password=MD5('$password')");
 
@@ -240,7 +241,15 @@
 									}
                                     session_start();
 
+									
+									
+									
+									
+									
+									
+									
                                     //buat session
+								
                                     $_SESSION['id_user'] = $id_user;
                                     $_SESSION['username'] = $username;
                                     $_SESSION['nama'] = $nama;
@@ -267,6 +276,8 @@
 
                     <!-- Form START -->
                     <form class="col s12 m12 offset-4 offset-4" method="POST" action="" >
+					
+
                         <div class="row">
                             <?php
                                 if(isset($_SESSION['errLog'])){
@@ -292,9 +303,11 @@
                             <i class="material-icons prefix md-prefix">lock</i>
                             <input id="password" type="password" class="validate" name="password" required autocomplete="off" oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
                             <label for="password">Password</label>
+
                         </div>
                         <div class="input-field col s12">
                             <button id="bn" type="submit" class="btn-large waves-effect waves-light blue-grey col s12" name="submit">LOGIN</button>
+							
                         </div>
                     </form>
                     <!-- Form END -->
