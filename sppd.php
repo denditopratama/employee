@@ -413,7 +413,7 @@
 									<a name="approveadmin" style="margin-left:150px;margin-top:20px;"class="btn small deep-orange waves-effect waves-light tooltipped" href="?page=sppd&act=update&id='.$row['id'].'" data-position="left" data-tooltip="Klik untuk approve SPPD">
                                     <i class="material-icons">clear</i> Approve Sebagai General Manager</a>';}}
 									/*kondisi manager*/
-									else if($_SESSION['admin']==5 || $_SESSION['admin']==11){
+									else if($_SESSION['admin']==5){
 										if($row['status_manager']==1){
 											echo'
 									<a name="approveadmin" style="margin-left:190px;margin-top:20px;"class="btn small green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Telah Di Approve">
@@ -667,7 +667,7 @@
 									<a name="approveadmin" style="margin-left:150px;margin-top:20px;"class="btn small deep-orange waves-effect waves-light tooltipped" href="?page=sppd&act=update&id='.$row['id'].'" data-position="left" data-tooltip="Klik untuk approve SPPD">
                                     <i class="material-icons">clear</i> Approve Sebagai General Manager</a>';}}
 									/*kondisi manager*/
-									else if($_SESSION['admin']==5 || $_SESSION['admin']==11){
+									else if($_SESSION['admin']==5){
 										if($row['status_manager']==1){
 											echo'
 									<a name="approveadmin" style="margin-left:190px;margin-top:20px;"class="btn small green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Telah Di Approve">

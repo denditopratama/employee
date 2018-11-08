@@ -164,7 +164,7 @@ function Footer(){
    $this->SetLineWidth(0.4);
 	$this->SetFont('Arial','',7);
 	$this->Cell(1,1,'',0,1);
-	$this->Line(14,198,285,198);
+	$this->Line(11,198,287,198);
 	  $this->SetY(-13);
 	  $this->SetX(-510);
         $this->SetFont('Arial','',7);
@@ -192,7 +192,15 @@ $pdf->SetFont('Arial','B',9);
 $pdf->Cell(46 ,2,'',0,1);
 $pdf->Cell(46 ,6,'Asal Instansi : PT Jasa Marga (Persero) Tbk.',0,1);
 $no=1;
-$jmgaji=0;
+$gatot=0;
+$ga1=0;
+$ga2=0;
+$ga3=0;
+$totprem=0;
+$totpresh=0;
+$totkary=0;
+$totjum2=0;
+$totjumtot=0;
 
 $moki=0;
 while($row=mysqli_fetch_array($hj)){
@@ -240,7 +248,7 @@ $pdf->Cell(10 ,6,''.$row['nip'].'',1,0,'C');
 $pdf->Cell(1 ,6,'',0,0,'C');
 $pdf->Cell(59 ,6,''.$row['nama'].'',1,'L');
 $pdf->Cell(1 ,6,'',0,0,'C');
-$pdf->Cell(45 ,6,''.$nobpjs.'',1,0,'R');
+$pdf->Cell(45 ,6,''.$nobpjs.'',1,0,'C');
 $pdf->Cell(1 ,6,'',0,0,'C');
 $pdf->Cell(15 ,6,''.number_format($duitgaji , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
@@ -256,32 +264,49 @@ $pdf->Cell(15 ,6,''.number_format($prsh , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
 $pdf->Cell(15 ,6,''.number_format($kary , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
-
+$jumlah2=$prsh+$kary;
 $pdf->SetFillColor(176,224,230);
-$pdf->Cell(15 ,6,''.number_format($jumlahperorg , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(15 ,6,''.number_format($jumlah2 , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
-$pdf->Cell(24 ,6,''.number_format($jumlahperorg , 0, ',', '.').'',1,1,'R');
+$jumlahtot=$jumlahprem+$jumlah2;
+$pdf->Cell(24 ,6,''.number_format(round($jumlahtot) , 0, ',', '.').'',1,1,'R');
 
-$jmgaji=$jmgaji+$duitgaji;
-$moki=$moki+$jumlahperorg;
+$gatot=$gatot+$duitgaji;
+$ga1=$ga1+$a1;
+$ga2=$ga2+$a2;
+$ga3=$ga3+$a3;
+$totprem=$totprem+$jumlahprem;
+$totpresh=$totpresh+$prsh;
+$totkary=$totkary+$kary;
+$totjum2=$totjum2+$jumlah2;
+$totjumtot=$totjumtot+$jumlahtot;
 }
 
 $jumlahorg=mysqli_num_rows($hj);
-$q=$pdf->GetX();
-$w=$pdf->GetY();
-$pdf->Line($q,$w+1,$q+277.8,$w+1);
-$pdf->Line($q,$w+8,$q+277.8,$w+8);
-$pdf->Cell(52 ,1,'',0,0,'R');
-$pdf->Cell(40 ,8.5,'Jumlah Karyawan : '.$jumlahorg.' Orang',0,0,'L');
-$pdf->Cell(49 ,1,'',0,0,'R');
-$pdf->Cell(21 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(21 ,8.5,''.number_format($moki , 0, ',', '.').'',0,1,'R');
+$pdf->SetFont('Arial','B',7);
+$pdf->Cell(52 ,1,'',0,1,'R');
+$pdf->Cell(125 ,6,'JUMLAH',1,0,'C');
+$pdf->Cell(1 ,1,'',0,0,'R');
+$pdf->Cell(15 ,6,''.number_format($gatot , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($ga1 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($ga2 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($ga3 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($totprem , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($totpresh , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($totkary , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+
+$pdf->SetFillColor(176,224,230);
+$pdf->Cell(15 ,6,''.number_format($totjum2 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(24 ,6,''.number_format($totjumtot , 0, ',', '.').'',1,1,'R');
+
 
 
 
@@ -304,9 +329,17 @@ $pdf->Cell(21 ,7,'',0,1,'R');
 $hjf=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999 AND status_aktif=1 AND status_tugas=2)");
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(46 ,2,'',0,1);
-$pdf->Cell(46 ,6,'Asal Instansi : PT Jasamarga Properti.',0,1);
+$pdf->Cell(46 ,6,'Asal Instansi : PT Jasamarga Properti',0,1);
 $no=1;
-$jmgaji=0;
+$gatot=0;
+$ga1=0;
+$ga2=0;
+$ga3=0;
+$totprem=0;
+$totpresh=0;
+$totkary=0;
+$totjum2=0;
+$totjumtot=0;
 
 $moki=0;
 while($row=mysqli_fetch_array($hjf)){
@@ -354,7 +387,7 @@ $pdf->Cell(10 ,6,''.$row['nip'].'',1,0,'C');
 $pdf->Cell(1 ,6,'',0,0,'C');
 $pdf->Cell(59 ,6,''.$row['nama'].'',1,'L');
 $pdf->Cell(1 ,6,'',0,0,'C');
-$pdf->Cell(45 ,6,''.$nobpjs.'',1,0,'R');
+$pdf->Cell(45 ,6,''.$nobpjs.'',1,0,'C');
 $pdf->Cell(1 ,6,'',0,0,'C');
 $pdf->Cell(15 ,6,''.number_format($duitgaji , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
@@ -370,36 +403,80 @@ $pdf->Cell(15 ,6,''.number_format($prsh , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
 $pdf->Cell(15 ,6,''.number_format($kary , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
-
+$jumlah2=$prsh+$kary;
 $pdf->SetFillColor(176,224,230);
-$pdf->Cell(15 ,6,''.number_format($jumlahperorg , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(15 ,6,''.number_format($jumlah2 , 0, ',', '.').'',1,0,'R');
 $pdf->Cell(1 ,6,'',0,0,'C');
-$pdf->Cell(24 ,6,''.number_format($jumlahperorg , 0, ',', '.').'',1,1,'R');
+$jumlahtot=$jumlahprem+$jumlah2;
+$pdf->Cell(24 ,6,''.number_format(round($jumlahtot) , 0, ',', '.').'',1,1,'R');
 
-$jmgaji=$jmgaji+$duitgaji;
-$moki=$moki+$jumlahperorg;
+$gatot=$gatot+$duitgaji;
+$ga1=$ga1+$a1;
+$ga2=$ga2+$a2;
+$ga3=$ga3+$a3;
+$totprem=$totprem+$jumlahprem;
+$totpresh=$totpresh+$prsh;
+$totkary=$totkary+$kary;
+$totjum2=$totjum2+$jumlah2;
+$totjumtot=$totjumtot+$jumlahtot;
 }
 
 $jumlahorg=mysqli_num_rows($hj);
-$q=$pdf->GetX();
-$w=$pdf->GetY();
-$pdf->Line($q,$w+1,$q+277.8,$w+1);
-$pdf->Line($q,$w+8,$q+277.8,$w+8);
-$pdf->Cell(52 ,1,'',0,0,'R');
-$pdf->Cell(40 ,8.5,'Jumlah Karyawan : '.$jumlahorg.' Orang',0,0,'L');
-$pdf->Cell(49 ,1,'',0,0,'R');
-$pdf->Cell(21 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(16 ,8.5,''.number_format(123 , 0, ',', '.').'',0,0,'R');
-$pdf->Cell(21 ,8.5,''.number_format($moki , 0, ',', '.').'',0,1,'R');
+$pdf->SetFont('Arial','B',7);
+$pdf->Cell(52 ,1,'',0,1,'R');
+$pdf->Cell(125 ,6,'JUMLAH',1,0,'C');
+$pdf->Cell(1 ,1,'',0,0,'R');
+$pdf->Cell(15 ,6,''.number_format($gatot , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($ga1 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($ga2 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($ga3 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($totprem , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($totpresh , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(15 ,6,''.number_format($totkary , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+
+$pdf->SetFillColor(176,224,230);
+$pdf->Cell(15 ,6,''.number_format($totjum2 , 0, ',', '.').'',1,0,'R');
+$pdf->Cell(1 ,6,'',0,0,'C');
+$pdf->Cell(24 ,6,''.number_format($totjumtot , 0, ',', '.').'',1,1,'R');
 
 
 
 
+
+//tandatangan
+$man=mysqli_query($config,"SELECT nama,nip FROM tbl_user WHERE jabatan=108 AND status_aktif=1");
+list($manager,$nomornip)=mysqli_fetch_array($man);
+$pdf->SetFont('Arial','B',9);
+
+$pdf->Cell(1 ,6,'',0,1,'C');
+$pdf->Cell(210 ,6,'CATATAN :',0,0,'L');
+$pdf->Cell(34 ,6,'Jakarta, '.date('d').' - '.date('F').' - '.date('Y').'',0,0,'C');
+$pdf->Cell(1 ,6,'',0,1,'C');
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(210 ,6,'Ditransfer melalui Bank Bukopin, Capem Kebon Sirih, Jakarta',0,0,'L');
+$pdf->SetFont('Arial','B',9);
+$pdf->Cell(34 ,6,'MANAGER HR & GENERAL AFFAIR',0,1,'C');
+
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(130 ,6,'No Rekening : 1018193015',0,1,'L');
+$pdf->Cell(130 ,6,'Atas Nama : PT Jamsostek (Persero) Cabang Kebon Sirih',0,1,'L');
+$pdf->Cell(1 ,6,'',0,1,'C');
+$pdf->Cell(1 ,6,'',0,1,'C');
+$pdf->Cell(210 ,8,'',0,0,'C');
+$pdf->SetFont('Arial','B',9);
+$pdf->Cell(34 ,4,''.strtoupper($manager).'',0,1,'C');
+$pdf->Cell(210 ,1,'',0,0,'C');
+$pdf->Cell(34 ,6,'NIP : '.$nomornip.'',0,1,'C');
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(130 ,6,'Nomor Kepesertaan Jamsostek PT Jasamarga Properti : xxxxxxxxxxxxxxxx',0,1,'L');
+$pdf->Cell(130 ,6,'Nomor Pendaftaran Perusahaan Jamsostek PT Jasamarga Properti : xxxxxxx, No. Virtual Account : xxxxx',0,1,'L');
 
 
 
