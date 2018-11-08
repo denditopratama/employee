@@ -176,8 +176,8 @@ body
 		   
 				   $query2 = mysqli_query($config, "SELECT nama,nip,status_karyawan FROM tbl_user WHERE id_user='$id_user'");
                     list($nama,$nip,$status_karyawan) = mysqli_fetch_array($query2);	
-					$query3 = mysqli_query($config, "SELECT tgl_bakti,jabatan,KD_UNIT,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon FROM tbl_identitas WHERE id_user='$id_user'");
-                    list($tgl_bakti,$jabatan,$KD_UNIT,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon) = mysqli_fetch_array($query3);	
+					$query3 = mysqli_query($config, "SELECT tgl_bakti,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon FROM tbl_identitas WHERE id_user='$id_user'");
+                    list($tgl_bakti,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon) = mysqli_fetch_array($query3);	
 					$current_album='';
 					$dptmn=mysqli_query($config,"SELECT * FROM tbl_department");
 					
@@ -208,7 +208,7 @@ body
 								<th id="gelo" style="width:1%!important;"><strong>Agama</strong></th>
 								
 								</tbody><tbody>';
-							$niks=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$row['kode_unit']."' AND(id_user<>9999 AND admin<>1 AND admin<>9) ORDER BY sub_unit,admin");
+							$niks=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$row['kode_unit']."' AND(id_user<>9999 AND admin<>1 AND admin<>9) ORDER BY sub_unit,kelas_jabatan");
 						while($rowb=mysqli_fetch_array($niks)){
 							echo'
 							
@@ -239,23 +239,8 @@ body
 							$agess = date_diff(date_create($bakti), date_create('now'))->y;
 							$agesbulan = date_diff(date_create($bakti), date_create('now'))->m;
 							
-														if($rowb['status_karyawan'] == 1){
-                                                            $fasf = 'Komisaris';
-                                                        } else if($rowb['status_karyawan'] == 2) {
-                                                            $fasf = 'Direksi';
-                                                        }
-														  else if($rowb['status_karyawan'] == 3) {
-                                                            $fasf = 'Karyawan Perbantuan';
-                                                        }
-														  else if($rowb['status_karyawan'] == 4) {
-                                                            $fasf = 'Karyawan Tetap';
-                                                        }
-														  else if($rowb['status_karyawan'] == 5) {
-                                                            $fasf = 'PKWT';
-                                                        }
-														  else if($rowb['status_karyawan'] == 6) {
-                                                            $fasf = 'Koperasi';
-                                                        } else {$fasf='';}
+														$mbf=mysqli_query($config,"SELECT status_karyawan FROM tbl_ref_status_karyawan WHERE kode='".$rowb['status_karyawan']."'");
+														list($fasf)=mysqli_fetch_array($mbf);
 														
 														if($jenkel=='L'){
 															$jenkel='Laki - Laki';
@@ -376,7 +361,7 @@ body
 							echo'<td id="gelo">'.$ages.'</td>';
 							echo'<td id="gelo">'.$baktis.'</td>';
 							echo'<td id="gelo">'.$agess.' Tahun / '.$agesbulan.' Bulan</td>';
-							echo'<td id="gelo">'.($rowb['admin']-1).'</td>';}
+							echo'<td id="gelo">'.($rowb['kelas_jabatan']).'</td>';}
 							echo'<td id="gelo">'.$fasf.'</td>';
 							echo'<td id="gelo">'.$jenkel.'</td>';
 							if($_SESSION['admin']==1){

@@ -324,82 +324,48 @@
 							<div class="input-field col s6">
                                         <i class="material-icons prefix md-prefix">contacts</i><label>Status Karyawan</label><br/>
                                         <div class="input-field col s11 right">
-                                            <select class="browser-default" name="statkaryawan" id="statkaryawan" required>
-                                                <option value="'.$row['status_karyawan'].'">';
+                                            <select class="browser-default" name="statkaryawan" id="statkaryawan" required>';
+											
+											$yogs=mysqli_query($config,"SELECT * FROM tbl_ref_status_karyawan");
+											while($data=mysqli_fetch_array($yogs)){
+												if($row['status_karyawan']==$data['id']){
+												echo'
+                                                <option value="'.$data['kode'].'" selected>'.$data['status_karyawan'].'';}
+												else {
+												echo'
+                                                <option value="'.$data['kode'].'">'.$data['status_karyawan'].'';	
+												}
                                                    
-                                                        if($row['status_karyawan'] == 1){
-                                                            echo 'Komisaris';
-                                                        } else if($row['status_karyawan'] == 2) {
-                                                            echo 'Direksi';
-                                                        }
-														  else if($row['status_karyawan'] == 3) {
-                                                            echo 'Karyawan Perbantuan';
-                                                        }
-														  else if($row['status_karyawan'] == 4) {
-                                                            echo 'Karyawan Tetap';
-                                                        }
-														  else if($row['status_karyawan'] == 5) {
-                                                            echo 'PKWT';
-                                                        }
-														  else if($row['status_karyawan'] == 6) {
-                                                            echo 'Koperasi';
-                                                        }
+                                              
 														
-														 
+											} 
                                                 echo'  
-                                                </option>
-                                    <option value="1">Komisaris</option>
-                                    <option value="2">Direksi</option>
-									<option value="3">Karyawan Perbantuan</option>
-									<option value="4">Karyawan Tetap</option>
-									<option value="5">PKWT</option>
-									<option value="6">Koperasi</option>
+                               
                                             </select>
                                         </div>
 										</div>
 										<div class="input-field col s6">
                                         <i class="material-icons prefix md-prefix">account_balance</i><label>Divisi</label><br/>
                                         <div class="input-field col s11 right">
-                                            <select class="browser-default" name="divisi" id="divisi" required>
-                                                <option value="'.$row['divisi'].'">';
+                                            <select class="browser-default" name="divisi" id="divisi" required>';
+											$yda=mysqli_query($config,"SELECT * FROM tbl_ref_divisi");
+											while($data=mysqli_fetch_array($yda)){
+												if($row['divisi']==$data['kode']){
+												echo'
+                                                <option value="'.$data['kode'].'" selected>'.$data['uraian'].'';}
+												else {
+												echo'
+                                                <option value="'.$data['kode'].'">'.$data['uraian'].'';	
+												}
                                                    
-                                                        if($row['divisi'] == 1) {
-                                                            echo 'Direktur';
-                                                        }
-														  else if($row['divisi'] == 2) {
-                                                            echo 'SDM dan Umum';
-                                                        }
-														  else if($row['divisi'] == 3) {
-                                                            echo 'Keuangan';
-                                                        }
-														  else if($row['divisi'] == 4) {
-                                                            echo 'Teknik';
-                                                        }
-														  else if($row['divisi'] == 5) {
-                                                            echo 'Pengembangan Bisnis';
-                                                        }
-														  else if($row['divisi'] == 6) {
-                                                            echo 'Marketing';
-                                                        }
-														  else if($row['divisi'] == 7) {
-                                                            echo 'TIP';
-                                                        }
-														 else if($row['divisi'] == 8) {
-                                                            echo 'Koperasi';
-                                                        }
+                                              
+														
+											}
 														  
 														
 														 
                                                 echo'  
-                                                </option>
-                                    <option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>
+                                               
                                             </select>
                                         </div>
 										</div>

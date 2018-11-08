@@ -1,5 +1,12 @@
 <?php 
-
+session_start();
+if(empty($_SESSION['admin'])){
+	echo '
+	<script>
+	alert(\'ACCESS DENIED WOI!\');
+	window.location.href=\'../\';
+	</script>';
+} else {
 require('../include/config.php');
 
 
@@ -9,5 +16,6 @@ require('../include/config.php');
 											   while($row=mysqli_fetch_array($departement)){
 												   echo '<option value="'.$row['id'].'">'.$row['sub_unit'].'</option>';
 											 
-													}		
+													}	
+}													
 											?>

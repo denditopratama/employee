@@ -184,25 +184,26 @@ body
 					$totalkonghucu=array();
                 echo '
 					
-					<table style="stroke:rgba(0,0,0,0);border:0px!important;!important;">
+					<table style="stroke:rgba(0,0,0,0);border:0px!important;!important;">';
+					$zz=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");
+					echo'
 						
 								<tr>
 								<th id="gelo" style="width:1%!important;" rowspan="2"><strong>No.</strong></th>
 								<th id="gelo" style="width:15%!important;" rowspan="2"><strong>Unit Kerja</strong></th>
 								
-								<th id="gelo" style="width:15%!important;" rowspan="1" colspan="6"><strong>Kelas Jabatan</strong></th>
+								<th id="gelo" style="width:15%!important;" rowspan="1" colspan="'.mysqli_num_rows($zz).'"><strong>Kelas Jabatan</strong></th>
 								
 								</tr>
 								
-								<tr>
+								<tr>';
 								
-								<th id="gelo" style="width:7.5%!important;"><strong>01</strong></th>
-								<th id="gelo" style="width:7.5%!important;"><strong>02</strong></th>
-								<th id="gelo" style="width:7.5%!important;"><strong>03</strong></th>
-								<th id="gelo" style="width:7.5%!important;"><strong>04</strong></th>
-								<th id="gelo" style="width:7.5%!important;"><strong>05</strong></th>
-								<th id="gelo" style="width:7.5%!important;"><strong>06</strong></th>
+								while($data=mysqli_fetch_array($zz)){
+									echo'
 								
+								<th id="gelo" style="width:7.5%!important;"><strong>'.$data['kelas_jabatan'].'</strong></th>
+								';}
+								echo'
 								
 								</tr>';
 								$satus=array();
@@ -220,63 +221,27 @@ body
 							<tr>
 							<td id="gelo" style="text-align:center!important">'.$no++.'</td>
 							<td id="gelo">'.$rowb['unit_kerja'].'</td>';
-							$huhu=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin=2 AND admin=3 AND id_user<>9999)");
+							
+							$bz=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");
+							while($rowz=mysqli_fetch_array($bz)){
+							$huhu=mysqli_query($config,"SELECT COUNT(kelas_jabatan) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin<>1 AND admin <>9 AND id_user<>9999 AND kelas_jabatan='".$rowz['kelas_jabatan']."' AND status_aktif=1)");
 							list($satu)=mysqli_fetch_array($huhu);
-							array_push($satus,$satu);
 							
 							
-							$huhuz=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin=4 AND id_user<>9999)");
-							list($dua)=mysqli_fetch_array($huhuz);
-							array_push($duas,$dua);
-							
-							$huhud=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin=5 AND id_user<>9999)");
-							list($tiga)=mysqli_fetch_array($huhud);
-							array_push($tigas,$tiga);
-							
-							$huhur=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin=6 AND id_user<>9999)");
-							list($empat)=mysqli_fetch_array($huhur);
-							array_push($empats,$empat);
-							
-							$huhurs=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin=7 AND id_user<>9999)");
-							list($lima)=mysqli_fetch_array($huhurs);
-							array_push($limas,$lima);
-							
-							$huhursd=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE unit='".$rowb['kode_unit']."' AND(admin=8 AND id_user<>9999)");
-							list($enam)=mysqli_fetch_array($huhursd);
-							array_push($enams,$enam);
 							
 							if($satu==0){
 								$satu='-';
 							}
-							if($dua==0){
-								$dua='-';
-							}
-							if($tiga==0){
-								$tiga='-';
-							}
-							if($empat==0){
-								$empat='-';
-							}
-							if($lima==0){
-								$lima='-';
-							}
-							if($enam==0){
-								$enam='-';
-							}
 							
-							echo'<td id="gelo" style="text-align:center!important">'.$satu.'</td>';
-							echo'<td id="gelo" style="text-align:center!important">'.$dua.'</td>';
-							echo'<td id="gelo" style="text-align:center!important">'.$tiga.'</td>';
-							echo'<td id="gelo" style="text-align:center!important">'.$empat.'</td>';
-							echo'<td id="gelo" style="text-align:center!important">'.$lima.'</td>';
-							echo'<td id="gelo" style="text-align:center!important">'.$enam.'</td>';
+							echo'<td id="gelo" style="text-align:center!important">'.$satu.'</td>';}
 							
 							
 							
 							
-							echo'</tr>';}
+							
+							echo'</tr>';
 								
-							
+						}
 						
 						
 						
@@ -287,31 +252,30 @@ body
 						echo'
 						
 						<tr>';
-							$q=array_sum($satus);
-							$qq=array_sum($duas);
-							$qqq=array_sum($tigas);
-							$qqqq=array_sum($empats);
-							$qqqqq=array_sum($limas);
-							$qqqqqq=array_sum($enams);
+						
 							echo'
 							<tr>
-						<td id="gelo" width="15%" style="text-align:center!important;background-color:yellow!important" colspan="2" rowspan="2"><strong>TOTAL</strong></td>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$q.'</td>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$qq.'</td>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$qqq.'</td>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$qqqq.'</td>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$qqqqq.'</td>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$qqqqqq.'</td>
-												
+						<td id="gelo" width="15%" style="text-align:center!important;background-color:yellow!important" colspan="2" rowspan="2"><strong>TOTAL</strong></td>';
+						$bzg=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");
+						$nenc=0;
+							while($rowz=mysqli_fetch_array($bzg)){
+								$yoy=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE kelas_jabatan='".$rowz['kelas_jabatan']."'");
+								list($jum)=mysqli_fetch_array($yoy);
+							echo'
+							<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$jum.'</td>';
+							$nenc=$nenc+$jum;
+							}
+							echo'
+										
 						</tr>
 						<tr>
-						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1" colspan="6">'.($q+$qq+$qqq+$qqqq+$qqqqq+$qqqqqq).'</td>
+						<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1" colspan="'.mysqli_num_rows($zz).'">'.$nenc.'</td>
 						</tr>
 						</tbody>
 						</table>
 					
 					';
-					$huhuz=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9)");
+					$huhuz=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9 AND status_aktif=1)");
 					list($halah)=mysqli_fetch_array($huhuz);
 				echo'<h6 style="text-align:right!important"><p>*</p>JUMLAH KESELURUHAN : <strong>'.$halah.'</strong> KARYAWAN</h6>';
 					

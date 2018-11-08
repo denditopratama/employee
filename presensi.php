@@ -126,7 +126,9 @@
                             <div class="card">
                                 <div class="card-content">
                                     <span class="card-title black-text"><i class="material-icons md-36" >note</i> Presensi</span>
-                                    <p class="kata">Untuk Presensi Pekerjaan Proyek silahkan langsung kirimkan ke admin SDM. <strong><a href="?page=tsk&act=add">Klik Disini</a></strong></p>
+                                    
+									<p class="kata">Untuk Presensi Pekerjaan Proyek silahkan Download Template presensi Kosong <strong><a class="btn small" href="./asset/TEMPLATE PRESENSI KOSONG.pdf" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">cloud_download</i> Klik Disini</a></strong></p>
+									<p class="kata"> Lalu kirimkan ke admin SDM. <strong><a class="btn small" href="?page=tsk&act=add" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">cloud_download</i> Klik Disini</a></strong></p>
 									<p><span class="red-text">*</span> (Khusus Karyawan Proyek), jika ingin mengajukan lembur, silahkan mengirimkan presensi terlebih dahulu, lalu klik lembur pada presensi terkait yang telah di tambahkan oleh admin pada tabel di bawah ini</p>
 
                                   
@@ -218,34 +220,10 @@
 										
                                         echo '<td style="text-align:center">'.$nm." ".$y.'</td>
 										';
+										
 										$divisi=$row['divisi'];
-										if($divisi==1){
-											$uit="Direktur";
-										} 
-										else if ($divisi==2){
-											$uit="SDM dan Umum";
-										}
-										else if ($divisi==3){
-											$uit="Keuangan";
-										}
-										else if ($divisi==4){
-											$uit="Teknik";
-										}
-										else if ($divisi==5){
-											$uit="Pengembangan Bisnis";
-										}
-										else if ($divisi==6){
-											$uit="Marketing";
-										}
-										else if ($divisi==7){
-											$uit="TIP";
-										}
-										else if ($divisi==8){
-											$uit="Koperasi";
-										}
-										else if ($divisi==9){
-											$uit="Proyek";
-										}
+										$gadeng=mysqli_query($config,"SELECT uraian FROM tbl_ref_divisi WHERE kode='$divisi'");
+										list($uit)=mysqli_fetch_array($gadeng);
 										echo '<td style="text-align:center">'.$uit.'</td>';
 										
 										  

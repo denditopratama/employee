@@ -136,7 +136,7 @@ th,td,tr{
                                         <th id="oi" width="10%">NIP</th>
 										<th id="oi" width="15%">Unit Kerja</th>
 										<th id="oi" width="15%">Jabatan</th>
-                                        <th id="oi" width="12%">Level</th>
+                                        <th id="oi" width="12%">Kelas Jabatan</th>
 										<th id="oi" width="10%">Status</th>
                                         <th id="oi" width="16%">Tindakan</th>
 										
@@ -149,7 +149,7 @@ th,td,tr{
                                    $no=1;
 								   $z='';
                                     while($row = mysqli_fetch_array($querykeun)){
-										$mhg=mysqli_query($config,"SELECT role FROM tbl_role WHERE admin='".$row['admin']."'");
+										$mhg=mysqli_query($config,"SELECT uraian_jabatan FROM tbl_kelas_jabatan WHERE kelas_jabatan='".$row['kelas_jabatan']."'");
 										list($rolenyax)=mysqli_fetch_array($mhg);
 										echo '<td id="oi" >'.$no++.'</td>';
 
@@ -239,7 +239,7 @@ th,td,tr{
                                         <th id="oi"  width="10%">NIP</th>
 										<th id="oi"  width="15%">Unit Kerja</th>
 										<th id="oi"  width="15%">Jabatan</th>
-                                        <th id="oi"  width="12%">Level</th>
+                                        <th id="oi"  width="12%">Kelas Jabatan</th>
 										<th id="oi"  width="10%">Status</th>
                                         <th id="oi"  width="16%">Tindakan</th>
                                     </tr>
@@ -250,7 +250,7 @@ th,td,tr{
                                 if(mysqli_num_rows($querykeunsd) > 0){ 
 								   $no=1;
                                     while($row = mysqli_fetch_array($querykeunsd)){
-										$mhsg=mysqli_query($config,"SELECT role FROM tbl_role WHERE admin='".$row['admin']."'");
+										$mhsg=mysqli_query($config,"SELECT uraian_jabatan FROM tbl_kelas_jabatan WHERE kelas_jabatan='".$row['kelas_jabatan']."'");
 										list($rolenyaxs)=mysqli_fetch_array($mhsg);
 									echo '<td id="oi" >'.$no++.'</td>';
 									

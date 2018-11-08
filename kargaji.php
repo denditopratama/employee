@@ -3,8 +3,8 @@
 				$id_user=mysqli_real_escape_string($config,$_REQUEST['karyawan']);
 				
 
-							$pgntau=mysqli_query($config,"SELECT nama,admin,status_tugas FROM tbl_user WHERE id_user='$id_user'");
-							list($tau,$admin,$status_tugas)=mysqli_fetch_array($pgntau);
+							$pgntau=mysqli_query($config,"SELECT nama,kelas_jabatan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
+							list($tau,$kelas_jabatan,$status_tugas)=mysqli_fetch_array($pgntau);
 							$ddtd=mysqli_query($config,"SELECT bulan FROM tbl_bulan_gaji WHERE id='$id'");
 					list($bln)=mysqli_fetch_array($ddtd);
 					$blans=date('m',strtotime($bln));
@@ -60,10 +60,10 @@
 										$jmk = mysqli_query($config, "SELECT gaji_jm FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
 										list($gajipusat)=mysqli_fetch_array($jmk);
 										
-										$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
-										list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
+										$numpang=mysqli_query($config,"SELECT status_karyawan,status_tugas,kelas_jabatan FROM tbl_user WHERE id_user='$id_user'");
+										list($status_karyawan,$status_tugas,$kelas_jabatan)=mysqli_fetch_array($numpang);
 										
-										$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
+										$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='$kelas_jabatan' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
 										list($gajix,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 										
 										$fay=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
@@ -164,6 +164,8 @@
 													<td style="text-align:center" colspan="4"><strong>Penerimaan Umum</strong></td>
 													</tr>';
 													
+													
+													
 													if($status_tugas==1){
 														if($sub1>=$gajipusat){
 														$jamgaji=4.54/100*$sub1;
@@ -175,6 +177,10 @@
 													else {
 														$jamgaji=4.54/100*$sub1;
 														$potjamgaji=6.54/100*$sub1;
+													}
+													if($kelas_jabatan==1){
+														$jamgaji=0;
+														$potjamgaji=0;
 													}
 													
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET pen_jamsostek='$jamgaji' WHERE id_user='$id_user' AND id_gaji='$id'");
@@ -202,7 +208,7 @@
 														}
 													}
 													
-													if($admin==2 || $admin==3) {
+													if($kelas_jabatan==2 || $kelas_jabatan==3) {
 													
 														$bpjspensiun=0;
 														$potbpjspensiun=0;
@@ -247,7 +253,7 @@
 														$potbpjskesehatan=5/100*$gajipusat;}
 													}}}
 													
-													if($admin==2 || $admin==3) {
+													if($kelas_jabatan==2 || $kelas_jabatan==3) {
 														$bpjskesehatan=0;
 														$potbpjskesehatan=0;
 													}
@@ -861,7 +867,11 @@
 					</div>
 
 
-			<?php echo'
+			<?php 
+			
+			
+			
+			echo'
 								<div class="col m12" id="colres">
 								<ul class="collapsible">
 								<li>
@@ -869,6 +879,7 @@
 								 <div class="collapsible-body" style="background-color:transparent!important">
                                 <div class="col m12" id="colres">
 									<h6 style="line-height:20px!important"><i class="material-icons prefix md-prefix">assignment_late</i><strong>&nbspFILE PRESENSI : </strong><a href="./upload/presensi/'.$file.'">'.$file.'</a></h6>
+									
                                     <table class="bordered" id="tblb">
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                             <tr>

@@ -82,6 +82,10 @@ if(empty($_SESSION['admin'])){
                                                             echo 'Kawin / Anak 8';
                                                         } else if($status_keluarga == 31) {
                                                             echo 'Kawin / Anak 9';
+                                                        } else if($status_keluarga == 32) {
+                                                            echo 'Tidak Kawin';
+                                                        } else if($status_keluarga == 33) {
+                                                            echo 'Belum Kawin';
                                                         } 
 														
 														 
@@ -462,6 +466,57 @@ if(empty($_SESSION['admin'])){
                                         </div>
                                           
                                     </div>	
+									
+									
+									
+									<div class="input-field col s6">
+                                        <i class="material-icons prefix md-prefix">star</i><label>Kelas Jabatan</label><br/>
+                                        <div class="input-field col s11 right">
+                                            <select class="browser-default" name="keljab" id="keljab" style="margin-bottom:24px;" required>
+											
+											<?php
+														
+														$jios=mysqli_query($config,"SELECT kelas_jabatan FROM tbl_user WHERE id_user='$id_user'");
+														list($kel)=mysqli_fetch_array($jios);
+														
+														
+                                               $kelaz=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan ORDER BY kelas_jabatan");
+											   while($row=mysqli_fetch_array($kelaz)){
+												   if($row['kelas_jabatan']==$kel){
+												   echo '<option value="'.$row['kelas_jabatan'].'" selected>'.$row['kelas_jabatan'].' - '.$row['uraian_jabatan'].'</option>';
+												   }else{
+												   echo '<option value="'.$row['kelas_jabatan'].'">'.$row['kelas_jabatan'].' - '.$row['uraian_jabatan'].'</option>';}
+											   }
+											   
+														?>
+														
+														
+											
+                                            </select>
+                                        </div>
+                                          
+                                    </div>
+								<script type="text/javascript">
+								
+            $(document).ready(function(){
+				
+            $('#keljab').change(function(){
+                //Selected value
+				
+                var inputValue = $(this).val();
+               
+
+                //Ajax for calling php function
+                $.post('./js/kelas_jabatan.php', { input : inputValue , id_user : <?php echo $id_user; ?>}, function(data){
+                    
+                    //do after submission operation in DOM
+					$("#keljab").html(data);
+                });
+            });
+        });
+									
+								</script>	
+									
 					<?php } ?>
 									<div class="input-field col s6" style="width:100%;text-align:center">
 						<h5><u><i class="material-icons md-36">attach_file</i>Attachment</u></h5><br>
