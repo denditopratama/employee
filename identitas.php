@@ -516,6 +516,57 @@ if(empty($_SESSION['admin'])){
         });
 									
 								</script>	
+								
+								
+								<div class="input-field col s6">
+                                        <i class="material-icons prefix md-prefix">directions</i><label>JMP / JMRB</label><br/>
+                                        <div class="input-field col s11 right">
+                                            <select class="browser-default" name="jmrb" id="jmrb" style="margin-bottom:24px;" required>
+											
+											<?php
+														
+														$jiv=mysqli_query($config,"SELECT jmrb FROM tbl_user WHERE id_user='$id_user'");
+														list($jmrb)=mysqli_fetch_array($jiv);
+														
+														
+                                               if($jmrb==0){
+												   echo ' <option value="0" selected>JMP</option>';
+												   echo ' <option value="1">JMRB</option>';
+											   } else {
+												   echo ' <option value="0">JMP</option>';
+												   echo ' <option value="1" selected>JMRB</option>';
+											   }
+											   
+														?>
+														
+														
+											
+                                            </select>
+                                        </div>
+                                          
+                                    </div>
+								<script type="text/javascript">
+								
+            $(document).ready(function(){
+			
+            $('#jmrb').change(function(){
+                //Selected value
+				
+                var inputValue = $(this).val();
+				var nilai = $("#jmrb option:selected").text();	
+               
+				var x = confirm('Apa anda yakin? akan merubah status kerja karyawan tersebut menjadi ' +nilai+ '?');
+				if(x == true){
+                $.post('./js/jmrb.php', { input : inputValue , id_user : <?php echo $id_user; ?>}, function(data){
+                    
+                    //do after submission operation in DOM
+					$("#jmrb").html(data);
+                });}
+				
+            });
+        });
+									
+								</script>
 									
 					<?php } ?>
 									<div class="input-field col s6" style="width:100%;text-align:center">
