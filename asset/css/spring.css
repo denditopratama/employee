@@ -1,0 +1,266 @@
+
+	  
+#overlay {
+    position: absolute;
+    display: block;
+    width: 2.2%;
+    height: 5.2%;
+	margin-top:249px;
+	
+	margin-left:213px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay2 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.2%;
+	margin-top:249px;
+	
+	margin-left:240px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay3 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.2%;
+	margin-top:249px;
+	
+	margin-left:260px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay4 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.2%;
+	margin-top:249px;
+	
+	margin-left:279px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay5 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.0%;
+	margin-top:248px;
+	
+	margin-left:295px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay6 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.0%;
+	margin-top:248px;
+	
+	margin-left:315px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay7 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.0%;
+	margin-top:248px;
+	
+	margin-left:335px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay8 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.0%;
+	margin-top:248px;
+	
+	margin-left:351px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay9 {
+    position: absolute;
+    display: block;
+    width: 1.55%;
+    height: 5.0%;
+	margin-top:248px;
+	
+	margin-left:370px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay10 {
+    position: absolute;
+    display: block;
+    width: 2.15%;
+    height: 5.0%;
+	margin-top:248px;
+	border-radius:13%;
+	
+	margin-left:390px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay11 {
+    position: absolute;
+    display: block;
+    width: 1.45%;
+    height: 4.3%;
+	margin-top:282px;
+	border-radius:13%;
+	
+	margin-left:240px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay12 {
+    position: absolute;
+    display: block;
+    width: 1.45%;
+    height: 4.3%;
+	margin-top:282px;
+	border-radius:13%;
+	
+	margin-left:260px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay13 {
+    position: absolute;
+    display: block;
+    width: 1.45%;
+    height: 4.3%;
+	margin-top:282px;
+	border-radius:13%;
+	
+	margin-left:279px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay14 {
+    position: absolute;
+    display: block;
+    width: 1.45%;
+    height: 4.3%;
+	margin-top:282px;
+	border-radius:13%;
+	
+	margin-left:296px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay15 {
+    position: absolute;
+    display: block;
+    width: 1.45%;
+    height: 4.3%;
+	margin-top:282px;
+	border-radius:13%;
+	
+	margin-left:315px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+#overlay16 {
+    position: absolute;
+    display: block;
+    width: 1.45%;
+    height: 4.3%;
+	margin-top:282px;
+	border-radius:13%;
+	
+	margin-left:335px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+
