@@ -376,7 +376,12 @@ while($row=mysqli_fetch_array($gh)){
                                                         } else if($status_keluarga == 33) {
                                                             $statkel = 'TK';
                                                         }
-														
+											
+
+
+											if($status_karyawan==0){
+												$statkar='';
+											}											
 											if($status_karyawan==1){
 												$statkar='KM';
 											}
