@@ -100,10 +100,10 @@ list($totalpenerimaan)=mysqli_fetch_array($yok);
 
 $yoks=mysqli_query($config,"SELECT * FROM tbl_gaji WHERE id_gaji='$id_gaji' AND status=1");
 while($row=mysqli_fetch_array($yoks)){
-	$jis=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas FROM tbl_user WHERE id_user='".$row['id_user']."'");
+	$jis=mysqli_query($config,"SELECT kelas_jabatan,status_karyawan,status_tugas FROM tbl_user WHERE id_user='".$row['id_user']."'");
 	list($admin,$statkar,$statugas)=mysqli_fetch_array($jis);
 	
-	$jiz=mysqli_query($config,"SELECT t_jabatan,t_fungsional,t_komunikasi,t_transportasi,t_utilitas,t_perumahan FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$statkar' AND status_tugas='$statugas')");
+	$jiz=mysqli_query($config,"SELECT t_jabatan,t_fungsional,t_komunikasi,t_transportasi,t_utilitas,t_perumahan FROM tbl_gaji_pokok WHERE kelas_jabatan='$admin' AND(status_karyawan='$statkar' AND status_tugas='$statugas')");
 	list($totaljabatans,$totalfungsionals,$totalkomunikasis,$totaltransportasis,$totalutilitass,$totalperumahans)=mysqli_fetch_array($jiz);
 	$totaljabatan=$totaljabatan+$totaljabatans;
 	$totalfungsional=$totalfungsional+$totalfungsionals;

@@ -206,10 +206,10 @@ $moki=0;
 while($row=mysqli_fetch_array($hj)){
 $jabax=mysqli_query($config,"SELECT no_bpjskt FROM tbl_identitas WHERE id_user='".$row['id_user']."'");	
 list($nobpjs)=mysqli_fetch_array($jabax);
-$gajix=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_perumahan,t_utilitas,t_transportasi,t_komunikasi FROM tbl_gaji_pokok WHERE admin='".$row['admin']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
+$gajix=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_perumahan,t_utilitas,t_transportasi,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='".$row['kelas_jabatan']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
 list($duitd,$t_jabatan,$t_fungsional,$t_perumahan,$t_utilitas,$t_transport,$t_komunikasi)=mysqli_fetch_array($gajix);
 
-$ngejum=mysqli_query($config,"SELECT SUM(gaji)+SUM(t_jabatan)+SUM(t_fungsional)+SUM(t_perumahan)+SUM(t_utilitas)+SUM(t_transportasi)+SUM(t_komunikasi) FROM tbl_gaji_pokok WHERE admin='".$row['admin']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
+$ngejum=mysqli_query($config,"SELECT SUM(gaji)+SUM(t_jabatan)+SUM(t_fungsional)+SUM(t_perumahan)+SUM(t_utilitas)+SUM(t_transportasi)+SUM(t_komunikasi) FROM tbl_gaji_pokok WHERE kelas_jabatan='".$row['kelas_jabatan']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
 list($jumlahperorg)=mysqli_fetch_array($ngejum);
 
 $pdf->SetFont('Arial','',10);
@@ -345,10 +345,10 @@ $moki=0;
 while($row=mysqli_fetch_array($hjf)){
 $jabax=mysqli_query($config,"SELECT no_bpjskt FROM tbl_identitas WHERE id_user='".$row['id_user']."'");	
 list($nobpjs)=mysqli_fetch_array($jabax);
-$gajix=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_perumahan,t_utilitas,t_transportasi,t_komunikasi FROM tbl_gaji_pokok WHERE admin='".$row['admin']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
+$gajix=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_perumahan,t_utilitas,t_transportasi,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='".$row['kelas_jabatan']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
 list($duitd,$t_jabatan,$t_fungsional,$t_perumahan,$t_utilitas,$t_transport,$t_komunikasi)=mysqli_fetch_array($gajix);
 
-$ngejum=mysqli_query($config,"SELECT SUM(gaji)+SUM(t_jabatan)+SUM(t_fungsional)+SUM(t_perumahan)+SUM(t_utilitas)+SUM(t_transportasi)+SUM(t_komunikasi) FROM tbl_gaji_pokok WHERE admin='".$row['admin']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
+$ngejum=mysqli_query($config,"SELECT SUM(gaji)+SUM(t_jabatan)+SUM(t_fungsional)+SUM(t_perumahan)+SUM(t_utilitas)+SUM(t_transportasi)+SUM(t_komunikasi) FROM tbl_gaji_pokok WHERE kelas_jabatan='".$row['kelas_jabatan']."' AND(status_karyawan='".$row['status_karyawan']."' AND status_tugas='".$row['status_tugas']."')");
 list($jumlahperorg)=mysqli_fetch_array($ngejum);
 
 $pdf->SetFont('Arial','',10);

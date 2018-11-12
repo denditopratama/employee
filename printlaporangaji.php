@@ -284,7 +284,7 @@ $pdf->SetTextColor(255,69,0);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(46 ,6,'UNIT KERJA : '.$rows['unit_kerja'].' ',0,1);
 $pdf->SetTextColor(0,0,0);
-$gh=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$rows['kode_unit']."' AND(status_aktif=1 AND id_user<>9999 AND admin<>9 AND admin<>1) ORDER BY status_karyawan,admin ASC");
+$gh=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$rows['kode_unit']."' AND(status_aktif=1 AND id_user<>9999 AND admin<>9 AND admin<>1) ORDER BY status_karyawan,kelas_jabatan ASC");
 $no=1;
 while($row=mysqli_fetch_array($gh)){
 	$ghg=mysqli_query($config,"SELECT nama,nip,unit,status_karyawan,status_tugas,admin,jabatan FROM tbl_user WHERE id_user='".$row['id_user']."'");
@@ -299,7 +299,7 @@ while($row=mysqli_fetch_array($gh)){
 	$ghgd=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,total_penerimaan,total_potongan,penerimaan_bersih,koreksi_pph21 FROM tbl_gaji WHERE id_user='".$row['id_user']."' AND id_gaji='$id_gaji'");
 	list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak,$total_penerimaan,$total_potongan,$penerimaanbersih,$koreksipph)=mysqli_fetch_array($ghgd);
 	
-	$kof=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='".$row['admin']."' AND(status_tugas='$status_tugas' AND status_karyawan='$status_karyawan')");
+	$kof=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='".$row['kelas_jabatan']."' AND(status_tugas='$status_tugas' AND status_karyawan='$status_karyawan')");
 	list($gajipokok,$t_jabatan,$t_fungsional,$t_transportasi,$t_utilitas,$t_perumahan,$t_komunikasi)=mysqli_fetch_array($kof);
 	
 	$jgm=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='".$row['id_user']."' AND id_gaji='$id_gaji'");

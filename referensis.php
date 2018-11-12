@@ -92,7 +92,8 @@
 		if(isset($_REQUEST['nambahjabat'])){
 			$tambahjabatan=mysqli_real_escape_string($config,$_REQUEST['tambahjabatan']);
 			$tambahsub=mysqli_real_escape_string($config,$_REQUEST['tambahsub']);
-			$mx=mysqli_query($config,"INSERT INTO tbl_ref_jabatan(jabatan,kode_sub) VALUES('$tambahjabatan','$tambahsub')");
+			$tambahsubunit=mysqli_real_escape_string($config,$_REQUEST['tambahsubunit']);
+			$mx=mysqli_query($config,"INSERT INTO tbl_ref_jabatan(jabatan,kode_unit,kode_sub) VALUES('$tambahjabatan','$tambahsub','$tambahsubunit')");
 			echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
@@ -124,7 +125,7 @@
 			$tukimans=mysqli_query($config,"SELECT * FROM tbl_department WHERE kode_unit='$kodeunit'");
 			
 				if(mysqli_num_rows($tukimans)<=0){
-					$mxz=mysqli_query($config,"INSERT INTO tbl_department(unit_kerja,kode_unit) VALUES('$unitnya','$kode_unit')");
+					$mxz=mysqli_query($config,"INSERT INTO tbl_department(unit_kerja,kode_unit) VALUES('$unitnya','$kodeunit')");
 					echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
@@ -201,8 +202,9 @@
 					
 					$editjabat=mysqli_real_escape_string($config,$_REQUEST['editjabat'.$i.'']);
 					$jabatsub=mysqli_real_escape_string($config,$_REQUEST['jabatsub'.$i.'']);
+					$subsub=mysqli_real_escape_string($config,$_REQUEST['subsub'.$i.'']);
 				
-				$simpang=mysqli_query($config,"UPDATE tbl_ref_jabatan SET jabatan='$editjabat',kode_sub='$jabatsub' WHERE id='$i'");}
+				$simpang=mysqli_query($config,"UPDATE tbl_ref_jabatan SET jabatan='$editjabat',kode_unit='$jabatsub',kode_sub='$subsub' WHERE id='$i'");}
 				
 				if(isset($_REQUEST['hapusjabat'.$i.''])){
 					
@@ -346,10 +348,10 @@
 								<td style="text-align:center">
 								<select name="kjabatan" class="browser-default">
 								<?php 
-								$kj=mysqli_query($config,"SELECT * FROM tbl_role");
+								$kj=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");
 								while($row=mysqli_fetch_array($kj)){
 									echo' 
-									<option value="'.$row['admin'].'">'.$row['role'].'</option>';
+									<option value="'.$row['kelas_jabatan'].'">'.$row['uraian_jabatan'].'</option>';
 									
 								}
 								?>
@@ -412,14 +414,14 @@
 							<td style="text-align:center" >'.$no++.'</td>
 							<td style="text-align:center" >
 							<select name="keljab'.$row['id'].'" class="browser-default" style="width:100px!important">';
-							$co=mysqli_query($config,"SELECT * FROM tbl_role");
+							$co=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");
 							while($rows=mysqli_fetch_array($co)){
-								if($row['admin']==$rows['admin']){
+								if($row['kelas_jabatan']==$rows['kelas_jabatan']){
 							echo' 
-								<option value="'.$rows['admin'].'" selected>'.$rows['role'].'</option>';}
+								<option value="'.$rows['kelas_jabatan'].'" selected>'.$rows['uraian_jabatan'].'</option>';}
 								else {
 							echo' 
-								<option value="'.$rows['admin'].'">'.$rows['role'].'</option>';	
+								<option value="'.$rows['kelas_jabatan'].'">'.$rows['uraian_jabatan'].'</option>';	
 								}
 							}
 							echo'
@@ -503,6 +505,7 @@
 										<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Jabatan</th>
 										<th width="25%"style="color:#fff">Unit Kerja</th>
+										<th width="25%"style="color:#fff">Sub Unit</th>
 										<th width="20%"style="color:#fff">Tindakan</th>	
                                 </tr>
 								</thead>
@@ -512,9 +515,19 @@
 								<td style="text-align:center">
 								<select class="browser-default" name="tambahsub">
 								<?php 
-								$gk=mysqli_query($config,"SELECT * FROM tbl_sub_unit");
+								$gk=mysqli_query($config,"SELECT * FROM tbl_department");
 								while($row=mysqli_fetch_array($gk)){
-								echo '<option value="'.$row['kode_sub'].'">'.$row['sub_unit'].'</option>';	
+								echo '<option value="'.$row['kode_unit'].'">'.$row['unit_kerja'].'</option>';	
+								}
+								?>
+								</select>
+								</td>
+								<td style="text-align:center">
+								<select class="browser-default" name="tambahsubunit">
+								<?php 
+								$gkd=mysqli_query($config,"SELECT * FROM tbl_sub_unit");
+								while($row=mysqli_fetch_array($gkd)){
+								echo '<option value="'.$row['id'].'">'.$row['sub_unit'].'</option>';	
 								}
 								?>
 								</select>
@@ -527,6 +540,7 @@
 										<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Jabatan</th>
 										<th width="25%"style="color:#fff">Unit Kerja</th>
+										<th width="25%"style="color:#fff">Sub Unit</th>
 										<th width="20%"style="color:#fff">Tindakan</th>
                                 </tr>
 								</tbody>
@@ -550,6 +564,20 @@
 								else {
 							echo' 
 								<option value="'.$row['kode_unit'].'">'.$row['unit_kerja'].'</option>';	
+								}	
+								}
+								echo'
+								</select></td>
+								<td style="text-align:center" ><select class="browser-default" name="subsub'.$rowd['id'].'">';
+								
+								$gkzd=mysqli_query($config,"SELECT * FROM tbl_sub_unit");
+								while($row=mysqli_fetch_array($gkzd)){
+								if($row['id']==$rowd['kode_sub']){
+							echo' 
+								<option value="'.$row['id'].'" selected>'.$row['sub_unit'].'</option>';}
+								else {
+							echo' 
+								<option value="'.$row['id'].'">'.$row['sub_unit'].'</option>';	
 								}	
 								}
 								echo'

@@ -166,11 +166,6 @@ body
 				echo '<hr style="display:block;margin-top:-5px;text-align:right"></hr>';?>
 				
 				
-				
-				
-	
-				
-
 			<?php
 		   
 				 
@@ -265,12 +260,6 @@ body
 							echo'</tr>';}
 								
 							
-						
-						
-						
-						
-							
-						
 						
 						echo'
 						

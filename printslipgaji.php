@@ -243,10 +243,10 @@ $pdf->Cell(20,6,'                          :   '.$status_karyawan,0,1, 'L');
 
 //Numbers are right-aligned so we give 'R' after new line parameter
 
-				$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
+				$numpang=mysqli_query($config,"SELECT kelas_jabatan,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
 					list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
 										
-				$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
+				$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
 					list($gajix,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 					
 					$numpangf=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,koreksi_pph21 FROM tbl_gaji WHERE id_gaji='$id_gaji' AND id_user='$id_user'");

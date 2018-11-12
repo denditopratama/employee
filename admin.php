@@ -405,6 +405,9 @@
 				case 'slip':
                     include "slipgaji.php";
                     break;
+				case 'rekap':
+                    include "rekapitulasi.php";
+                    break;
 									
 				
 					
@@ -1124,7 +1127,6 @@
         }
     ?>		
 		
-	
 	
 	
 	

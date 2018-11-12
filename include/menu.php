@@ -103,20 +103,9 @@
 				
 			<ul class="collapsible collapsible-accordion">
                     <li>
-                        <a class="collapsible-header"><i class="material-icons">folder</i> Rekapitulasi</a>
+                        <a class="collapsible-header" href="?page=rekap"><i class="material-icons">folder</i> Rekapitulasi</a>
                         <div class="collapsible-body">
                             <ul>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=report">Rincian Karyawan</a></li>
-								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=jenkel\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Jenis Kelamin</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=agama\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Agama</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=statkar\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Status Karyawan</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=keljab\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Kelas Jabatan</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=usia\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Usia</a></li>
                                 
                             </ul>
                         </div>
@@ -215,21 +204,8 @@
 			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=slip">Slip Gaji</a></li>
 			</ul>
 			
-			<li><a class="dropdown-button" href="#!" data-activates="transaksids" style="color:#000!important">Rekapitulasi <i class="material-icons md-18">arrow_drop_down</i></a></li>
+			<li><a class="dropdown-button" href="#!" data-activates="transaksids" onClick="window.location='?page=rekap'" style="color:#000!important">Rekapitulasi</a></li>
                 <ul id='transaksids' class='dropdown-content' style="background-color:#004689;">
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=report">Rincian Karyawan</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=jenkel\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Jenis Kelamin</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=agama\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Agama</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=statkar\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Status Karyawan</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=keljab\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Kelas Jabatan</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a <?php if($_SESSION['admin']==1)
-				{echo 'onClick="window.location=\'?page=usia\'"';} else {echo 'onclick="alert(\'Hanya Untuk Admin\')"';}?>>Usia</a></li>
-				
-				
 				
 				
 				</ul>
