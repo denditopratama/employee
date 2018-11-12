@@ -329,7 +329,7 @@ h11 {
 												
 												echo'
                                                         <div class="card-content">
-														<img id="gambarz" style="width:100%" class="file" src="./asset/img/jpg.png"><br>
+														<img id="gambarz" style="width:100%" class="file" src="./upload/file_sharing/'.$row['file'].'"><br>
 														
                                                             <strong>file :</strong> <a style="font-size:80%;text-align:left;" class="blue-text" href="./upload/file_sharing/'.$row['file'].'" target="_blank">'.$string.'</a>
 															
