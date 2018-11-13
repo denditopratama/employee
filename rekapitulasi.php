@@ -157,7 +157,7 @@ h11 {
 												
 												echo'
                                                         <div class="card-content">
-														<img id="gambarz" src="./asset/img/rekapunit.jpg"><br>
+														<img id="gambarz" src="./asset/img/rekapusia.jpg"><br>
                                                             <h6 style="text-align:center">REKAPITULASI<br>USIA</h6>
 															
 															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapusia.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
@@ -176,7 +176,7 @@ h11 {
 												
 												echo'
                                                         <div class="card-content">
-														<img id="gambarz" src="./asset/img/rekapunit.jpg"><br>
+														<img id="gambarz" src="./asset/img/rekapjmrb.jpg"><br>
                                                             <h6 style="text-align:center">REKAPITULASI KARYAWAN JMP / JMRB</h6>
 															
 															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapjmrb.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
