@@ -1006,11 +1006,11 @@
 									if($statback==0){
 								
 									$nyarwa=date("D");
-									if($nyarwa=='Fri'){
+									if($nyarwa=='Sat'){
 										include 'autobackup.php';
 										$sudback=mysqli_query($config,"UPDATE tbl_handle_backup SET statback=1 WHERE id=1");
 									}} else {
-										if($nyarwa!='Fri'){
+										if($nyarwa!='Sat'){
 											$sudback=mysqli_query($config,"UPDATE tbl_handle_backup SET statback=0 WHERE id=1");
 										}
 										

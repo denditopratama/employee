@@ -164,7 +164,8 @@ h11 {
 		
         if(mysqli_num_rows($query) > 0){
             while($row = mysqli_fetch_array($query)){
-                
+                $namaoleh=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
+					list($oleh)=mysqli_fetch_array($namaoleh);
 
                             $ekstensi = array('jpg','png','jpeg','gif');
                             $ekstensi2 = array('doc','docx');
@@ -190,7 +191,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%;">';
 												if($row['sharing']==1){
@@ -218,7 +219,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -247,7 +248,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -276,7 +277,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -306,7 +307,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -336,7 +337,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -366,7 +367,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -396,7 +397,7 @@ h11 {
 									echo '
 									
 											<li>
-                                            <div class="col m2">
+                                             <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';

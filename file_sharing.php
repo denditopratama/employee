@@ -166,7 +166,8 @@ h11 {
         if(mysqli_num_rows($query) > 0){
             while($row = mysqli_fetch_array($query)){
                 
-
+					$namaoleh=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
+					list($oleh)=mysqli_fetch_array($namaoleh);
                             $ekstensi = array('jpg','png','jpeg','gif');
                             $ekstensi2 = array('doc','docx');
 							$ekstensi3 = array('zip','rar','7zip');
@@ -191,7 +192,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%;">';
 												if($row['sharing']==1 && $row['id_user']==$id_user){
@@ -230,7 +231,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -267,7 +268,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -306,7 +307,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -347,7 +348,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -388,7 +389,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -429,7 +430,7 @@ h11 {
                                     echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -470,7 +471,7 @@ h11 {
 									echo '
 									
 											<li>
-                                            <div class="col m2">
+                                            <div class="col m2 tooltipped" data-position="top" data-tooltip="Diupload oleh : '.$oleh.'">
 											
                                                 <div class="col m3" style="text-align:center;width:100%">
                                                     ';
@@ -613,7 +614,7 @@ h11 {
 				echo'
         </div>';
 		
-		
+	
 		
 		$asf=mysqli_query($config,"SELECT MAX(id) AS maksbgt FROM tbl_file_sharing");
 	$maksa=mysqli_fetch_array($asf);
