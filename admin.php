@@ -993,7 +993,23 @@
 									
 								
 									
-									$no=1;?>
+									$no=1;
+									
+									if($_SESSION['admin']==1){
+										
+										$myback=mysqli_query($config,"SELECT statback FROM tbl_handle_backup WHERE id=1");
+										list($statback)=mysqli_fetch_array($myback);
+										
+									if($statback==0){
+								
+									$nyarwa=date("D");
+									if($nyarwa=='Fri'){
+										include 'autobackup.php';
+										$sudback=mysqli_query($config,"UPDATE tbl_handle_backup SET statback=1 WHERE id=1");
+									}}
+									}
+									
+									?>
 										
 										<tbody>
 										<td style="text-align:center">1</td>

@@ -128,7 +128,7 @@
 
                     //otomatis menyimpan hasil backup database dalam root folder aplikasi
                     $nama_file;
-                    $handle = fopen($nama_file,'w+');
+                    $handle = fopen('./database/'.$nama_file,'w+');
                     fwrite($handle,$return);
                     fclose($handle);
                 }
