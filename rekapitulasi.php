@@ -79,7 +79,7 @@ h11 {
 														<img id="gambarz" src="./asset/img/rekapunit.jpg"><br>
                                                             <h6 style="text-align:center">REKAPITULASI KARYAWAN PER UNIT KERJA</h6>
 															
-															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./statkar.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
+															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapunitkerja.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
 															
 															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" onclick="window.location.href=\'./admin.php?page=report\';"><i class="material-icons">print</i> PRINT</a>
                                                         </div>
@@ -93,7 +93,7 @@ h11 {
 												echo'
                                                         <div class="card-content">
 														<img id="gambarz" src="./asset/img/rekapjenkel.jpg"><br>
-                                                            <h6 style="text-align:center">REKAPITULASI JENIS KELAMIN</h6>
+                                                            <h6 style="text-align:center">REKAPITULASI<br>JENIS KELAMIN</h6>
 															
 															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapjenkel.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
 															
@@ -109,7 +109,7 @@ h11 {
 												echo'
                                                         <div class="card-content">
 														<img id="gambarz" src="./asset/img/rekapagama.jpg"><br>
-                                                            <h6 style="text-align:center">REKAPITULASI AGAMA</h6>
+                                                            <h6 style="text-align:center">REKAPITULASI<br>AGAMA</h6>
 															
 															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapagama.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
 															
@@ -128,7 +128,7 @@ h11 {
 														<img id="gambarz" src="./asset/img/rekapstatus.jpg"><br>
                                                             <h6 style="text-align:center">REKAPITULASI STATUS KARYAWAN</h6>
 															
-															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./statkar.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
+															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapstatkar.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
 															
 															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" onclick="window.location.href=\'./admin.php?page=statkar\';"><i class="material-icons">print</i> PRINT</a>
                                                         </div>
@@ -141,10 +141,10 @@ h11 {
 												
 												echo'
                                                         <div class="card-content">
-														<img id="gambarz" src="./asset/img/rekapunit.jpg"><br>
+														<img id="gambarz" src="./asset/img/rekapkeljab.jpg" style="height:217px!important"><br>
                                                             <h6 style="text-align:center">REKAPITULASI KELAS JABATAN</h6>
 															
-															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./statkar.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
+															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapkeljab.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
 															
 															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" onclick="window.location.href=\'./admin.php?page=keljab\';"><i class="material-icons">print</i> PRINT</a>
                                                         </div>
@@ -158,11 +158,30 @@ h11 {
 												echo'
                                                         <div class="card-content">
 														<img id="gambarz" src="./asset/img/rekapunit.jpg"><br>
-                                                            <h6 style="text-align:center">REKAPITULASI USIA</h6>
+                                                            <h6 style="text-align:center">REKAPITULASI<br>USIA</h6>
 															
-															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./statkar.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
+															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapusia.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
 															
 															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" onclick="window.location.href=\'./admin.php?page=usia\';"><i class="material-icons">print</i> PRINT</a>
+                                                        </div>
+												</div>
+												</div>';
+												
+												
+												
+												
+												echo'
+											<div class="col m3">
+												<div class="card col m12">';
+												
+												echo'
+                                                        <div class="card-content">
+														<img id="gambarz" src="./asset/img/rekapunit.jpg"><br>
+                                                            <h6 style="text-align:center">REKAPITULASI KARYAWAN JMP / JMRB</h6>
+															
+															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapjmrb.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>
+															
+															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" onclick="window.location.href=\'\';"><i class="material-icons">print</i> PRINT</a>
                                                         </div>
 												</div>
 												</div>';

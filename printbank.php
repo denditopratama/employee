@@ -5,7 +5,7 @@
 	   include 'logout.php';
    }
 		 require('include/config.php');
-		 
+		 date_default_timezone_set("Asia/Bangkok");
 		$id_gaji=mysqli_real_escape_string($config,$_REQUEST['id_gaji']);
 		$asf=mysqli_query($config,"SELECT bulan FROM tbl_bulan_gaji WHERE id='$id_gaji'");
 		list($bulan)=mysqli_fetch_array($asf);

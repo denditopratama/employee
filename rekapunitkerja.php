@@ -1,169 +1,26 @@
+
 <?php
 
-
-    //cek session
-    if(empty($_SESSION['admin'])){
-        $_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
-        header("Location: ./");
-        die();
-	
-		
-    } else {
-		
-		echo'<style>
-		table {
-                background: #fff;
-                padding: 5px;
-				border:0.5px solid black!important;
-            }
-            tr, td{
-                border: table-cell;
-                border: 0px  solid rgba(0,0,0,0);
-            }
-            tr,td {
-                vertical-align: top!important;
-				
-            }
-			tbody:hover{background-color:transparent!important;}
-            #right {
-                border-right: none !important;
-				 border-left: none !important;
-				  border-top: none !important;
-					border-bottom: none !important;
-					}
-			#kanan {
-                border-right: none !important;
-				 border-left: none !important;
-				  border-top: none !important;
-					border-bottom: none !important;
-					width:30%
-					}
-				#kanans {
-                border-right: none !important;
-				 border-left: none !important;
-				  border-top: none !important;
-					border-bottom: none !important;
-					width:10%
-					}
-					
-					
-		@media print{
-            
-              table {
-                background: transparent;
-                padding: 0px!important;
-				font-size:9px!important;
-				
-				
-            }
-			#row:nth-of-type(even) {
-				background-color:#F0F0F0!important;
-				}
-            tr, td {
-                border: table-cell;
-                border: 0px  solid rgba(0,0,0,0)!important;
-				width:10%;
-				vertical-align:middle!important;
-				text-align:left!important;
-				 page-break-after:auto;
-				
-            }
-			
-			th{
-				border: table-cell;
-				border:0.5px solid black!important;	
-				background-color:#c5e3ed!important;
-				text-align:center!important;
-				
-					}
-			#gelo{
-					width:1px!important;
-					
-					border:0.5px solid black!important;
-					}
-			#gelos{width:33%!important;}
-					
-            #right {
-                border-right: none !important;
-				 border-left: none !important;
-				  border-top: none !important;
-				   border-bottom: none !important;
-			}
-			#kanan {
-                border-right: none !important;
-				 border-left: none !important;
-				  border-top: none !important;
-					border-bottom: none !important;
-					width:30%
-					}
-			#kanans {
-                border-right: none !important;
-				 border-left: none !important;
-				  border-top: none !important;
-					border-bottom: none !important;
-					width:10%;
-
-					}
-			p {
-				color:red!important;
-				display:inline!important;
-					}
-					
-					
-		}
-	@media print and (color) {				
-   th {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-   }
-   tr {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-   }
-   #row {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-   }
-   p {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-   }
-   
-   
-}
-
-@page  
-{ 
-    size: auto;   /* auto is the initial value */ 
-
-    /* this affects the margin in the printer settings */ 
-    margin: 12mm;
-} 
-
-body  
-{ 
-    /* this affects the margin on the content before sending to printer */ 
-    margin: 0px;  
-} 
-
+header("Content-type: application/vnd-ms-excel");
  
-			
-					
-			
-		
-		
-		</style>
+// Mendefinisikan nama file ekspor "hasil-export.xls"
+header("Content-Disposition: attachment; filename=report_kar_unit_kerja.xls");
 
-    
-       
+session_start();
+ 
+require('./include/config.php');
 
-        <body onload="window.print()">
 
+		   
+
+
+  
+	echo'
         <!-- Container START -->
         <div class="container">
             <div id="colres">
                 <div class="disp">';
-				echo'<h1 style="font-weight:100;font-family:sans-serif;margin-top:20px;"><img class="logodisp" src="./asset/img/screenshots.png"/ style="width:25%;vertical-align:middle">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRincian Data Karyawan</img></h1>';
+				echo'<h1 style="font-weight:100;font-family:sans-serif;margin-top:20px;">Rincian Data Karyawan</h1>';
 				echo '<hr style="display:block;margin-top:-5px;text-align:right"></hr>';?>
 				
 				
@@ -174,10 +31,7 @@ body
 
 			<?php
 		   
-				   $query2 = mysqli_query($config, "SELECT nama,nip,status_karyawan FROM tbl_user WHERE id_user='$id_user'");
-                    list($nama,$nip,$status_karyawan) = mysqli_fetch_array($query2);	
-					$query3 = mysqli_query($config, "SELECT tgl_bakti,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon FROM tbl_identitas WHERE id_user='$id_user'");
-                    list($tgl_bakti,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon) = mysqli_fetch_array($query3);	
+				   	
 					$current_album='';
 					$dptmn=mysqli_query($config,"SELECT * FROM tbl_department");
 					
@@ -186,7 +40,7 @@ body
                 echo '
 					<h5>- UNIT KERJA : '.$row['unit_kerja'].'</h5>
 					
-					<table style="stroke:rgba(0,0,0,0);border:0px!important;!important;">
+					<table border="1">
 				<tbody>
 								<th id="gelo" style="width:1%!important;"><strong>No.</strong></th>
 								<th id="gelo" style="width:8%!important;"><strong>Seksi</strong></th>
@@ -401,14 +255,20 @@ body
 				echo'<h6 style="text-align:right!important"><p>*</p> JUMLAH KESELURUHAN : <strong>'.$totalseluruh.'</strong> KARYAWAN</h6>';
 					
 					
-					echo'
-    </div>
-    <!-- Container END -->
+	
 
-    </body>';
-    }
+		
+
+
+
+					
+					
+				
+
 
 		
 
 
 ?>
+
+
