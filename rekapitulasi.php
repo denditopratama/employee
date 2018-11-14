@@ -186,17 +186,81 @@ h11 {
 												</div>
 												</div>';
 												
+											echo'
+											<div class="col m3">
+												<div class="card col m12">';
 												
+												echo'
+                                                        <div class="card-content">
+														<img id="gambarz" src="./asset/img/rekapsppd.jpg"><br>
+                                                            <h6 style="text-align:center">REKAPITULASI SPPD <br>KARYAWAN</h6>
+															
+															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" id="wayaw" ><i class="material-icons">cloud_download</i> EXCEL</a>
+															
+															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" id="wayaw2" onclick="window.location.href=\'./admin.php?page=reportsppd\';"><i class="material-icons">print</i> PRINT</a>
+                                                        </div>
+												</div>
+												</div>	
 												
-			
+												<div id="modald">
+								<div id="modals" class="modal" style="background-color:yellow">
+								<div class="modal-content yellow" style="padding-top:1px!important;background-color:#ffff00!important">
+								<div class="input-field col s12">
+								<h5><i class="material-icons" style="margin-bottom:8px">assignment_turned_in</i> Pelaporan SPPD</h5>
+								<small class="blue-text">* Silahkan pilih bulan dan tahun.</small><br><br>
+								
+								<div class="col m12">
+								<div class="col m6">
+								<h5><strong>Bulan :</strong></h5>
+								<select class="browser-default"name="bulansppd">
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								<option value="1">Januari</option>
+								</select>
+								</div>
+								<div class="col m6">
+								<h5><strong>Tahun :</strong></h5>
+								<input value="'.date("Y").'" type="number" min="2018" max="2100" name="tahunsppd">
+								</div>
+								
+								</div>
+								
+								</div>
+								</div>
+								</div>';
 
 											
 												echo'
 												</div>
 												';
 									
-		
+		//onclick="window.location.href=\'./rekapsppd.php\';"
 
 
 	} 
 	}	?>
+	
+	<script>
+
+
+$(document).ready(function(){
+	
+	$('#wayaw').click(function(){
+	$("#modals").openModal()
+	});
+	
+	$('#wayaw2').click(function(){
+	$("#modals").openModal()
+	});
+	
+						});
+</script>

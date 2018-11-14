@@ -408,6 +408,9 @@
 				case 'rekap':
                     include "rekapitulasi.php";
                     break;
+				case 'reportsppd':
+                    include "report_sppd.php";
+                    break;
 									
 				
 					
