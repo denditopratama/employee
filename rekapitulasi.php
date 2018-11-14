@@ -197,7 +197,7 @@ h11 {
 															
 															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" id="wayaw" ><i class="material-icons">cloud_download</i> EXCEL</a>
 															
-															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" id="wayaw2" onclick="window.location.href=\'./admin.php?page=reportsppd\';"><i class="material-icons">print</i> PRINT</a>
+															<a style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light" id="wayaw2"><i class="material-icons">print</i> PRINT</a>
                                                         </div>
 												</div>
 												</div>	
@@ -208,32 +208,78 @@ h11 {
 								<div class="input-field col s12">
 								<h5><i class="material-icons" style="margin-bottom:8px">assignment_turned_in</i> Pelaporan SPPD</h5>
 								<small class="blue-text">* Silahkan pilih bulan dan tahun.</small><br><br>
-								
-								<div class="col m12">
-								<div class="col m6">
+								<form method="POST" action="?page=reportsppd">
+								<div class="col s12">
+								<div class="col s6">
 								<h5><strong>Bulan :</strong></h5>
 								<select class="browser-default"name="bulansppd">
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
-								<option value="1">Januari</option>
+								<option value="01">Januari</option>
+								<option value="02">Februari</option>
+								<option value="03">Maret</option>
+								<option value="04">April</option>
+								<option value="05">Mei</option>
+								<option value="06">Juni</option>
+								<option value="07">Juli</option>
+								<option value="08">Agustus</option>
+								<option value="09">September</option>
+								<option value="10">Oktober</option>
+								<option value="11">November</option>
+								<option value="12">Desember</option>
 								</select>
 								</div>
-								<div class="col m6">
+								<div class="col s6">
 								<h5><strong>Tahun :</strong></h5>
 								<input value="'.date("Y").'" type="number" min="2018" max="2100" name="tahunsppd">
 								</div>
 								
+								<div class="col s12">
+								<button style="width:100%;color:white!important" class="btn small blue lighten-1 waves-effect waves-light"><i class="material-icons">cloud_download</i> CETAK DATA</button>
 								</div>
 								
+								</div>
+								
+								</form>
+								</div>
+								</div>
+								</div>
+								
+								<div id="modald">
+								<div id="modals2" class="modal" style="background-color:yellow">
+								<div class="modal-content yellow" style="padding-top:1px!important;background-color:#ffff00!important">
+								<div class="input-field col s12">
+								<h5><i class="material-icons" style="margin-bottom:8px">assignment_turned_in</i> Pelaporan SPPD</h5>
+								<small class="blue-text">* Silahkan pilih bulan dan tahun.</small><br><br>
+								<form method="POST" action="rekapsppd.php">
+								<div class="col s12">
+								<div class="col s6">
+								<h5><strong>Bulan :</strong></h5>
+								<select class="browser-default"name="bulansppd">
+								<option value="01">Januari</option>
+								<option value="02">Februari</option>
+								<option value="03">Maret</option>
+								<option value="04">April</option>
+								<option value="05">Mei</option>
+								<option value="06">Juni</option>
+								<option value="07">Juli</option>
+								<option value="08">Agustus</option>
+								<option value="09">September</option>
+								<option value="10">Oktober</option>
+								<option value="11">November</option>
+								<option value="12">Desember</option>
+								</select>
+								</div>
+								<div class="col s6">
+								<h5><strong>Tahun :</strong></h5>
+								<input value="'.date("Y").'" type="number" min="2018" max="2100" name="tahunsppd">
+								</div>
+								
+								<div class="col s12">
+								<button action="./?page=reportsppd" style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light"><i class="material-icons">cloud_download</i> CETAK DATA EXCEL</button>
+								</div>
+								
+								</div>
+								
+								</form>
 								</div>
 								</div>
 								</div>';
@@ -255,7 +301,7 @@ h11 {
 $(document).ready(function(){
 	
 	$('#wayaw').click(function(){
-	$("#modals").openModal()
+	$("#modals2").openModal()
 	});
 	
 	$('#wayaw2').click(function(){
