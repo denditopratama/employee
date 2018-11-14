@@ -34,7 +34,7 @@ th,td,tr{
 
             //pagging
             $limit = 1150000;
-            $pg = @$_GET['pg'];
+            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
                     $pg = 1;
@@ -169,7 +169,7 @@ th,td,tr{
                                             <td id="oi" >'.$unid.'</td>
 											<td id="oi" >'.$jabatung.'</td>
 											<td id="oi" >'.$rolenyax.'</td>';
-											if($_SESSION['admin']==1){
+											if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 											if($row['status_aktif']==1){
 												echo'
 											<td id="oi" ><a class="btn small green waves-effect waves-light" href="?page=usr&act=akt&tak=oila&id='.$row['id_user'].'" onclick="return confirm(\'Anda yakin ingin merubah data?\');">
@@ -197,9 +197,11 @@ th,td,tr{
 											echo'
                                             ';
 
-                                    if($_SESSION['id_user'] != $row['id_user'] && $_SESSION['admin']!=1){
+                                    if($_SESSION['id_user'] != $row['id_user'] && $_SESSION['admin']!=1 ){
                                         echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
-                                    }
+                                    } else if($_SESSION['admin']==1 && $_SESSION['divisi']!=2){
+										 echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+									}
 									else{
                                           echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">edit</i> EDIT</a>
@@ -271,7 +273,7 @@ th,td,tr{
 											<td id="oi" >'.$jabatung.'</td>
 											<td id="oi" >'.$rolenyaxs.'</td>';
 											
-											if($_SESSION['admin']==1){
+											if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 											if($row['status_aktif']==1){
 												echo'
 											<td id="oi" ><a class="btn small green waves-effect waves-light" href="?page=usr&act=akt&tak=oila&id='.$row['id_user'].'" onclick="return confirm(\'Anda yakin ingin merubah data?\');">
@@ -298,9 +300,11 @@ th,td,tr{
 											}
 
                                       
-										if($_SESSION['id_user'] != $row['id_user'] && $_SESSION['admin']!=1){
+										if($_SESSION['id_user'] != $row['id_user'] && $_SESSION['admin']!=1 ){
                                         echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
-                                    }
+                                    } else if($_SESSION['admin']==1 && $_SESSION['divisi']!=2){
+										 echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+									}
 									else{
                                           echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">edit</i> EDIT</a>

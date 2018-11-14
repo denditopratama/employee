@@ -191,18 +191,13 @@
                             <i class="material-icons prefix md-prefix">supervisor_account</i><label>Pilih Tipe User</label><br/>
                             <div class="input-field col s11 right">
                                 <select class="browser-default validate" name="admin" id="admin" required>
-                                   
-									<option value="10">Komisaris</option>
-                                    <option value="3">Direktur Utama</option>
-									<option value="2">Direktur</option>
-									<option value="4">General Manager</option>
-									<option value="12">Advisor</option>
-									<option value="5">Manager</option>
-									<option value="11">Specialist</option>
-									<option value="6">Assistant Manager</option>
-									<option value="7">Senior Officer</option>
-									<option value="8">Officer / Staff</option>
-									<option value="9">Koperasi</option>
+                                   <?php 
+								   $mbn=mysqli_query($config,"SELECT * FROM tbl_role");
+								   while($row=mysqli_fetch_array($mbn)){
+									   echo'<option value="'.$row['admin'].'">'.$row['role'].'</option>';
+								   }
+									
+                                 ?>
 									
                                             </select>
                             </div>

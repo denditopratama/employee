@@ -3,6 +3,8 @@
     if(!empty($_SESSION['admin'])){
 ?>
 
+
+
 <nav class="blue-grey darken-1" style="background-color:#fff!important;opacity:1;">
     <div class="nav-wrapper" >
         <a href="./" class="brand-logo center hide-on-large-only"><img src='upload/screenshot.png' style="margin-top:20px;height:30px"></a>

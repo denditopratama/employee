@@ -11,8 +11,8 @@
 </style>
 <?php
     //cek session
-    if(empty($_SESSION['admin'])){
-        $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
+    if(empty($_SESSION['admin']) || $_SESSION['admin']==1 && $_SESSION['divisi']!=2){
+        $_SESSION['err'] = '<center>Anda harus login terlebih dahulu! / Akses Ditolak !</center>';
         header("Location: ./");
         die();
     } else {

@@ -231,7 +231,7 @@
 
                             //script untuk mencari data
 							$id_user=mysqli_real_escape_string($config,$_SESSION['id_user']);
-							if($_SESSION['admin']==1){
+							if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 							$way=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE nama LIKE '%$cari%'");
 							list($namanya)=mysqli_fetch_array($way);
 							$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user LIKE '%$namanya%' ORDER by id DESC");
@@ -239,7 +239,7 @@
 							else
 							{
 								$way=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE nama LIKE '%$cari%'");
-							list($namanya)=mysqli_fetch_array($way);
+								list($namanya)=mysqli_fetch_array($way);
 								$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='$divisi' AND (destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user LIKE '%$namanya%') ORDER by id");}
 								 
                                 if(mysqli_num_rows($query) > 0){
@@ -492,7 +492,7 @@
                             //script untuk mencari data
 							
 							$id_user=mysqli_real_escape_string($config,$_SESSION['id_user']);
-							if($_SESSION['admin']==1){
+							if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 							$query = mysqli_query($config, "SELECT * FROM tbl_sppd ORDER by id DESC LIMIT $curr, $limit");}
 							else
 							{	
