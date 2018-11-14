@@ -176,8 +176,11 @@
 						<i class="material-icons prefix md-prefix" style="margin-top:-8px;">group</i>&nbsp&nbsp<a style="color:#000000!important;font-size:1.1rem;">Karyawan</a>
 						<select class="browser-default" name="karyawan" id="karyawan"  required>
 									<?php
-                                	
-									$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999)");
+                                	if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
+									$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999)");}
+									else {
+									$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999 AND divisi='".$_SESSION['divisi']."')");	
+									}
 					
 										while ($row = mysqli_fetch_array($query)) {											
 										echo "<option value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";
