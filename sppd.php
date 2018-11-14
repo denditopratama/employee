@@ -95,14 +95,15 @@
             
 
             //pagging
-            $limit = 99999999999;
-            $pg = @$_GET['pg'];
+            $limit = 10;
+            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
                     $pg = 1;
                 } else {
                     $curr = ($pg - 1) * $limit;
-                }?>
+                }
+				$divisi=mysqli_real_escape_string($config,$_SESSION['divisi']);?>
 
                 <!-- Row Start -->
                 <div class="row">
@@ -231,9 +232,15 @@
                             //script untuk mencari data
 							$id_user=mysqli_real_escape_string($config,$_SESSION['id_user']);
 							if($_SESSION['admin']==1){
-							$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' ORDER by id DESC LIMIT $curr, $limit");}
+							$way=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE nama LIKE '%$cari%'");
+							list($namanya)=mysqli_fetch_array($way);
+							$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user LIKE '%$namanya%' ORDER by id DESC");
+							}
 							else
-							{$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='".$_SESSION['divisi']."' AND (destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%') ORDER by id DESC LIMIT $curr, $limit");}
+							{
+								$way=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE nama LIKE '%$cari%'");
+							list($namanya)=mysqli_fetch_array($way);
+								$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='$divisi' AND (destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user LIKE '%$namanya%') ORDER by id");}
 								 
                                 if(mysqli_num_rows($query) > 0){
 									
@@ -428,11 +435,15 @@
 									</div></td></tr>
                                 </tbody>';
                                 }
+								echo' <script type="text/javascript" src="asset/js/halamanuser.js"></script> ';
                             } else {
                                     echo '<tr><td colspan="12"><center><p class="add">Tidak ada data yang ditemukan</p></center></td></tr>';
                                 }
                               echo '</table><br/><br/>
-                            </div>
+                            </div>';
+						
+				echo'
+							
                         </div>
                         <!-- Row form END -->';
 
@@ -459,7 +470,7 @@
 								</div>
 								</div>
                         <div class="col m12" id="colres">
-                        <table class="bordered" id="tblr">
+                        <table class="bordered" id="tbl">
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
 										<th width="1%"style="color:#fff">No.</th>
@@ -479,12 +490,13 @@
                                 <tr>';
 
                             //script untuk mencari data
+							
 							$id_user=mysqli_real_escape_string($config,$_SESSION['id_user']);
-							if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){
+							if($_SESSION['admin']==1){
 							$query = mysqli_query($config, "SELECT * FROM tbl_sppd ORDER by id DESC LIMIT $curr, $limit");}
 							else
 							{	
-								$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='".$_SESSION['divisi']."' ORDER by id DESC LIMIT $curr, $limit");}
+								$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='$divisi' ORDER by id DESC LIMIT $curr, $limit");}
 								 
                                 if(mysqli_num_rows($query) > 0){
 									
@@ -689,15 +701,85 @@
                             echo '</table>';
 						
 							echo'
-                        </div>
+                        </div>';
+						if($_SESSION['admin']==1){
+		$query = mysqli_query($config, "SELECT * FROM tbl_sppd");}
+		else {
+		$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='$divisi'");	
+		}
+                    $cdata = mysqli_num_rows($query);
+                    $cpg = ceil($cdata/$limit);
+
+                    echo '<br/>
+					<div class="col m12">
+                          <ul class="pagination">';
+
+                    if($cdata > $limit ){
+							
+                        //first and previous pagging
+                        if($pg > 1){
+                            $prev = $pg - 1;
+                            echo '<li><a href="?page=sppd&pg=1"><i class="material-icons md-48">first_page</i></a></li>
+                                  <li><a href="?page=sppd&pg='.$prev.'"><i class="material-icons md-48">chevron_left</i></a></li>';
+                        } else {
+                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">first_page</i></a></li>
+                                  <li class="disabled"><a href=""><i class="material-icons md-48">chevron_left</i></a></li>';
+                        }
+
+                        //perulangan pagging
+                       echo'
+							<div class="col m4">
+							<select class="browser-default" name="halaman" id="halaman" required>';
+                                     for($i=1; $i <= $cpg; $i++){               
+                                                        if($i != $pg){
+                                echo '<option value="'.$i.'">'.$i.'</option>';
+                            } else {
+                                echo '<option value="'.$i.'" selected>'.$i.'</option>';
+									 }}
+														  
+                                                echo'  
+                                              
+												
+												</select>
+												</div>';
+							
+                            
+
+                        //last and next pagging
+                        if($pg < $cpg){
+                            $next = $pg + 1;
+                            echo '<li><a href="?page=sppd&pg='.$next.'"><i class="material-icons md-48">chevron_right</i></a></li>
+                                  <li><a href="?page=sppd&pg='.$cpg.'"><i class="material-icons md-48">last_page</i></a></li>';
+                        } else {
+                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">chevron_right</i></a></li>
+                                  <li class="disabled"><a href=""><i class="material-icons md-48">last_page</i></a></li>';
+                        }
+                        echo '
+					</ul>
+					</div>'; }
+					else {
+                    echo '';
+                } echo'
+						
                     </div>
 					
                     <!-- Row form END -->';
 
                    
             }
+			
         }
-    
+		
 }
 ?>
-<script type="text/javascript" src="asset/js/halamanuser.js"></script>
+<script>
+$(document).ready(function(){
+$('#halaman').change(function(){
+	var x = $(this).val();
+	window.location.href='admin.php?page=sppd&pg='+ x;
+		});
+	
+	});	
+
+
+</script>

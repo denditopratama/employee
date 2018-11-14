@@ -37,7 +37,7 @@ function sort($p) {
 	** to be displayed on the selected page,
 	** ($s) the start point .. the first row in each page, Do The Math
 	*/
-	var $n=10;
+	var $n=16;
 	var $rows = $th,$s = (($n * $p)-$n);
 	for ($i = $s; $i < ($s+$n) && $i < $tr.length; $i++)
 		$rows += $tr[$i];
