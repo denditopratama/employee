@@ -153,10 +153,56 @@ body
 			
 		
 		
-		</style>
+		</style>';
+		
+		if($bulan=='01'){
+			$blans='Januari';
+		} else 
+			if($bulan=='02'){
+			$blans='Februari';
+		} else
+		if($bulan=='03'){
+			$blans='Maret';
+		}
+		else
+		if($bulan=='04'){
+			$blans='April';
+		}
+		else
+		if($bulan=='05'){
+			$blans='Mei';
+		}
+		else
+		if($bulan=='06'){
+			$blans='Juni';
+		}
+		else
+		if($bulan=='07'){
+			$blans='Juli';
+		}
+		else
+		if($bulan=='08'){
+			$blans='Agustus';
+		}
+		else
+		if($bulan=='09'){
+			$blans='September';
+		}
+		else
+		if($bulan=='10'){
+			$blans='Oktober';
+		}
+		else
+		if($bulan=='11'){
+			$blans='November';
+		}
+		else
+		if($bulan=='12'){
+			$blans='Desember';
+		}
 
     
-       
+       echo'
 
         <body onload="window.print()">
 
@@ -164,7 +210,7 @@ body
         <div class="container">
             <div id="colres">
                 <div class="disp">';
-				echo'<h1 style="font-weight:100;font-family:sans-serif;margin-top:20px;"><img class="logodisp" src="./asset/img/screenshots.png"/ style="width:25%;vertical-align:middle">&nbsp&nbsp&nbsp&nbspRekapitulasi SPPD Bulan : '.date("F",$bulan).' '.$tahun.'</img></h1>';
+				echo'<h1 style="font-weight:100;font-family:sans-serif;margin-top:20px;"><img class="logodisp" src="./asset/img/screenshots.png"/ style="width:25%;vertical-align:middle">&nbsp&nbsp&nbsp&nbspRekapitulasi SPPD Bulan : '.$blans.' '.$tahun.'</img></h1>';
 				echo '<hr style="display:block;margin-top:-5px;text-align:right"></hr>';?>
 				
 				
