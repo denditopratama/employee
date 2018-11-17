@@ -168,7 +168,7 @@
                     <nav class="secondary-nav">
                         <div class="nav-wrapper blue-grey darken-1">
                             <ul class="left">
-                                <li class="waves-effect waves-light"><a href="?page=pres&act=add" class="judul"><i class="material-icons">beach_access</i> Tambah Cuti</a></li>
+                                <li class="waves-effect waves-light"><a href="?page=cuti&act=edit&id=<?php echo $id; ?>" class="judul"><i class="material-icons">beach_access</i> Edit Cuti</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -216,20 +216,22 @@
             <div class="row jarak-form">
 			<?php 
 				$id=mysqli_real_escape_string($config,$_REQUEST['id']);
-				$showcuti=mysqli_query($config,"SELECT alasan,tgl_awal,tgl_akhir FROM tbl_cuti WHERE id='$id'");
-				  list($alasans,$tgl_awals,$tgl_akhirs)=mysqli_fetch_array($showcuti);?>
+				$showcuti=mysqli_query($config,"SELECT alasan,tgl_awal,tgl_akhir,file FROM tbl_cuti WHERE id='$id'");
+				  list($alasans,$tgl_awals,$tgl_akhirs,$file)=mysqli_fetch_array($showcuti);?>
                 <!-- Form START -->
                 <form method="POST" enctype="multipart/form-data">
-				<div class="row col s6">
+				<div class="row col s12">
                     <!-- Row in form START -->
+					<?php if($file==''){?>
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix md-prefix">featured_play_list</i>
+							
                             <input id="alasan" type="text" class="validate" name="alasan" value="<?php echo $alasans;?>" required>
                             <label for="alasan">Alasan</label>
 							
                         </div>
-
+					<?php } ?>
 						 </div>
 					 <div class="row">
 						<div class="input-field col s12">
@@ -255,27 +257,7 @@
 					    </form>
 						</div>
 						
-						<div class="row col s6">
-			<div id="slideshow">
-   <div>
-     <img id="gambar" src="./upload/pantai.jpg">
-   </div>
-   <div>
-     <img id="gambar" src="./upload/puncak.jpg">
-   </div>
-   <div>
-     <img id="gambar" src="./upload/keluarga.jpg">
-   </div>
-   <div>
-     <img id="gambar" src="./upload/bayi.jpg">
-   </div>
-   <div>
-     <img id="gambar" src="./upload/taman.jpg">
-   </div>
-   
-</div>
-						
-						</div>
+					
 <?php
         }
     }

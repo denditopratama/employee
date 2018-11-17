@@ -15,30 +15,10 @@ h11 {
         header("Location: ./");
         die();
     } else {
-		if(isset($_REQUEST['sub'])){
-			$sub=$_REQUEST['sub'];
-			switch($sub){
-				case 'del';
-				include 'hapus_file_sharing.php';
-				break;
-				case 'private';
-				include 'private_file_sharing.php';
-				break;
-				
-				
-			}
-		} else {
 		
 		
 		
-		$limit = 24;
-            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
-                if(empty($pg)){
-                    $curr = 0;
-                    $pg = 1;
-                } else {
-                    $curr = ($pg - 1) * $limit;
-                }
+	
 				
 		
 		
@@ -292,7 +272,7 @@ h11 {
 		//onclick="window.location.href=\'./rekapsppd.php\';"
 
 
-	} 
+	 
 	}	?>
 	
 	<script>

@@ -46,12 +46,11 @@
             }
         } else {
 
-            $query = mysqli_query($config, "SELECT presensi FROM tbl_sett");
-            list($presensi) = mysqli_fetch_array($query);
+          
 
             //pagging
-            $limit = 99999;
-            $pg = @$_GET['pg'];
+            $limit = 15;
+            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
                     $pg = 1;
@@ -168,7 +167,7 @@
 
                                 //script untuk mencari data
 								if($_SESSION['admin']==1){
-							$querys = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE bulan LIKE '%$cari%' ORDER by id DESC LIMIT $curr, $limit");}
+							$querys = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE bulan LIKE '%$cari%' ORDER by id DESC");}
 							else{
 							$querys = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE divisi='".$_SESSION['divisi']."' AND(bulan LIKE '%$cari%') ORDER by id DESC");}
                                 if(mysqli_num_rows($querys) > 0){
@@ -257,8 +256,8 @@
                             </div>
                         </div>
                         <!-- Row form END -->';
-
-                       
+					echo'
+                       <script type="text/javascript" src="asset/js/halamanuser.js"></script>';
 
                     } else {
 
@@ -396,14 +395,93 @@
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
                             }
                             echo '</table>
-                        </div>
+                        </div>';
+						
+						
+						if($_SESSION['admin']==1){
+		$query = mysqli_query($config, "SELECT * FROM tbl_presensi");}
+		else {
+		$query = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE divisi='$divisi'");	
+		}
+                    $cdata = mysqli_num_rows($query);
+                    $cpg = ceil($cdata/$limit);
+
+                    echo '<br/>
+					<div class="col m12">
+                          <ul class="pagination">';
+
+                    if($cdata > $limit ){
+							
+                        //first and previous pagging
+                        if($pg > 1){
+                            $prev = $pg - 1;
+                            echo '<li><a href="?page=pres&pg=1"><i class="material-icons md-48">first_page</i></a></li>
+                                  <li><a href="?page=pres&pg='.$prev.'"><i class="material-icons md-48">chevron_left</i></a></li>';
+                        } else {
+                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">first_page</i></a></li>
+                                  <li class="disabled"><a href=""><i class="material-icons md-48">chevron_left</i></a></li>';
+                        }
+
+                        //perulangan pagging
+                       echo'
+							<div class="col m4">
+							<select class="browser-default" name="halaman" id="halaman" required>';
+                                     for($i=1; $i <= $cpg; $i++){               
+                                                        if($i != $pg){
+                                echo '<option value="'.$i.'">'.$i.'</option>';
+                            } else {
+                                echo '<option value="'.$i.'" selected>'.$i.'</option>';
+									 }}
+														  
+                                                echo'  
+                                              
+												
+												</select>
+												</div>';
+							
+                            
+
+                        //last and next pagging
+                        if($pg < $cpg){
+                            $next = $pg + 1;
+                            echo '<li><a href="?page=pres&pg='.$next.'"><i class="material-icons md-48">chevron_right</i></a></li>
+                                  <li><a href="?page=pres&pg='.$cpg.'"><i class="material-icons md-48">last_page</i></a></li>';
+                        } else {
+                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">chevron_right</i></a></li>
+                                  <li class="disabled"><a href=""><i class="material-icons md-48">last_page</i></a></li>';
+                        }
+                        echo '
+					</ul>
+					</div>'; }
+					else {
+                    echo '';
+                } echo'
+						
                     </div>
+					
                     <!-- Row form END -->';
 
+                   
+            
+						
+						
+						
+						echo'
+                    </div>
+                    <!-- Row form END -->';
+				
                    
             }
         }
 		
 }
 ?>
-<script type="text/javascript" src="asset/js/halamanuser.js"></script>
+<script>
+$(document).ready(function(){
+$('#halaman').change(function(){
+	var x = $(this).val();
+	window.location.href='admin.php?page=pres&pg='+ x;
+		});
+	
+	});	
+</script>

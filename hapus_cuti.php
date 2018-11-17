@@ -9,21 +9,50 @@
 	date_default_timezone_set("Asia/Bangkok");
 	$id=mysqli_real_escape_string($config,$_REQUEST['id']);
 	
-	$select=mysqli_query($config,"SELECT tgl_awal FROM tbl_cuti WHERE id='$id'");
-	list($tgl_awalcuti)=mysqli_fetch_array($select);
+	$select=mysqli_query($config,"SELECT id_user,tgl_awal,tgl_akhir,file FROM tbl_cuti WHERE id='$id'");
+	list($id_user,$tgl_awalcuti,$tgl_akhircuti,$file)=mysqli_fetch_array($select);
 	$oik=mysqli_query($config,"SELECT cuti FROM tbl_user WHERE id_user='$id_user'");
 	list($cutiya)=mysqli_fetch_array($oik);
-	$tglhapus = date('Y',strtotime($tgl_awalcuti));
-	$hapuskrg = date('Y');
-	if($hapuskrg==$tglhapus){
-		$cutiya=$cutiya+1;
-		$pluscuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$cutiya' WHERE id_user='".$_SESSION['id_user']."'");
 	
-	}
+	
+	$hapuskrg = date('Y-m-d');
+	
+	$perbedaan2 = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhircuti), date_create($tgl_awalcuti))->d);
+	$cutiyas=$cutiya+$perbedaan2;
+	
+	if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
+		if($file==''){
+		$cutiya=$cutiya+$perbedaan2;
+		$pluscuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$cutiyas' WHERE id_user='$id_user'");
+		$hapuscuti=mysqli_query($config,"DELETE FROM tbl_cuti WHERE id='$id'");
+	$_SESSION['succAdd']="SUKSES! data berhasil di hapus";
+		header("Location: ./admin.php?page=cuti");}
+		else {
+		$files='./upload/surat_sakit/'.$file.'';
+		unlink($files);	
 	$hapuscuti=mysqli_query($config,"DELETE FROM tbl_cuti WHERE id='$id'");
 	$_SESSION['succAdd']="SUKSES! data berhasil di hapus";
 		header("Location: ./admin.php?page=cuti");
+		}} else {
+	if(strtotime($hapuskrg)<strtotime($tgl_awalcuti)){
+		if($file==''){
+		$pluscuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$cutiyas' WHERE id_user='$id_user'");
+		$hapuscuti=mysqli_query($config,"DELETE FROM tbl_cuti WHERE id='$id'");
+	$_SESSION['succAdd']="SUKSES! data berhasil di hapus";
+		header("Location: ./admin.php?page=cuti");}
+		else {
+		$files='./upload/surat_sakit/'.$file.'';
+		unlink($files);	
+	$hapuscuti=mysqli_query($config,"DELETE FROM tbl_cuti WHERE id='$id'");
+	$_SESSION['succAdd']="SUKSES! data berhasil di hapus";
+		header("Location: ./admin.php?page=cuti");
+		}} else {
+		$_SESSION['errs']="GAGAL, cuti anda sudah tidak bisa dihapus";
+		header("Location: ./admin.php?page=cuti");
+	}
+	}
 	
 	
 	}
+	
 	?>

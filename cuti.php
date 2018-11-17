@@ -47,7 +47,7 @@
            
 
             //pagging
-            $limit = 999999999999;
+            $limit = 20;
             $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
@@ -228,7 +228,7 @@
 
                                 //script untuk mencari data
 								if($_SESSION['admin']==1){
-							$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE alasan LIKE '%$cari%' OR tgl_awal LIKE '%$cari%' OR tgl_akhir LIKE '%$cari%' OR nama LIKE '%$cari%' ORDER by id DESC LIMIT $curr, $limit");}
+							$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE alasan LIKE '%$cari%' OR tgl_awal LIKE '%$cari%' OR tgl_akhir LIKE '%$cari%' OR nama LIKE '%$cari%' ORDER by id DESC");}
 							else
 							{$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' AND(alasan LIKE '%$cari%' OR tgl_awal LIKE '%$cari%' OR tgl_akhir LIKE '%$cari%' OR nama LIKE '%$cari%') ORDER by id DESC");}
 								 
@@ -240,7 +240,11 @@
                                       echo '
                                         <td style="text-align:center">'.$no++.'</td>
 										<td style="text-align:center">'.$nama.'</td>
-										<td style="text-align:center">'.$row['alasan'].'</td>
+										<td style="text-align:center">'.$row['alasan'].'';
+										if(!empty($row['file'])){
+                                            echo '<em><strong><br>Lampiran : <a href="./upload/surat_sakit/'.$row['file'].'">'.$row['file'].'</a></strong>';
+                                        }
+										echo'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tgl_awal'])).'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tgl_akhir'])).'</td>';
                                         
@@ -311,7 +315,8 @@
                             </div>
                         </div>
                         <!-- Row form END -->';
-
+						echo'
+						<script type="text/javascript" src="asset/js/halamans.js"></script>';
                        
 
                     } else {
@@ -342,7 +347,7 @@
 							if($_SESSION['admin']==1){
 							$query = mysqli_query($config, "SELECT * FROM tbl_cuti ORDER by id DESC LIMIT $curr, $limit");}
 							else
-							{$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' ORDER by id DESC");}
+							{$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' ORDER by id DESC LIMIT $curr, $limit");}
 								 
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
@@ -352,7 +357,11 @@
                                       echo '
                                         <td style="text-align:center">'.$no++.'</td>
 										<td style="text-align:center">'.$nama.'</td>
-										<td style="text-align:center">'.$row['alasan'].'</td>
+										<td style="text-align:center">'.$row['alasan'].'';
+										if(!empty($row['file'])){
+                                            echo '<em><strong><br>Lampiran : <a href="./upload/surat_sakit/'.$row['file'].'">'.$row['file'].'</a></strong>';
+                                        }
+										echo'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tgl_awal'])).'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tgl_akhir'])).'</td>';
                                      
@@ -455,7 +464,73 @@
                                 echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
                             }
                             echo '</table>
-                        </div>
+                        </div>';
+						if($_SESSION['admin']==1){
+		$query = mysqli_query($config, "SELECT * FROM tbl_cuti");}
+		else {
+		$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."'");	
+		}
+                    $cdata = mysqli_num_rows($query);
+                    $cpg = ceil($cdata/$limit);
+
+                    echo '<br/>
+					<div class="col m12">
+                          <ul class="pagination">';
+
+                    if($cdata > $limit ){
+							
+                        //first and previous pagging
+                        if($pg > 1){
+                            $prev = $pg - 1;
+                            echo '<li><a href="?page=cuti&pg=1"><i class="material-icons md-48">first_page</i></a></li>
+                                  <li><a href="?page=cuti&pg='.$prev.'"><i class="material-icons md-48">chevron_left</i></a></li>';
+                        } else {
+                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">first_page</i></a></li>
+                                  <li class="disabled"><a href=""><i class="material-icons md-48">chevron_left</i></a></li>';
+                        }
+
+                        //perulangan pagging
+                       echo'
+							<div class="col m4">
+							<select class="browser-default" name="halaman" id="halaman" required>';
+                                     for($i=1; $i <= $cpg; $i++){               
+                                                        if($i != $pg){
+                                echo '<option value="'.$i.'">'.$i.'</option>';
+                            } else {
+                                echo '<option value="'.$i.'" selected>'.$i.'</option>';
+									 }}
+														  
+                                                echo'  
+                                              
+												
+												</select>
+												</div>';
+							
+                            
+
+                        //last and next pagging
+                        if($pg < $cpg){
+                            $next = $pg + 1;
+                            echo '<li><a href="?page=cuti&pg='.$next.'"><i class="material-icons md-48">chevron_right</i></a></li>
+                                  <li><a href="?page=cuti&pg='.$cpg.'"><i class="material-icons md-48">last_page</i></a></li>';
+                        } else {
+                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">chevron_right</i></a></li>
+                                  <li class="disabled"><a href=""><i class="material-icons md-48">last_page</i></a></li>';
+                        }
+                        echo '
+					</ul>
+					</div>'; }
+					else {
+                    echo '';
+                } echo'
+						
+                    </div>
+					
+                    <!-- Row form END -->';
+
+                   
+            
+						echo'
                     </div>
                     <!-- Row form END -->';
 
@@ -465,4 +540,14 @@
     
 }
 ?>
-<script type="text/javascript" src="asset/js/halamans.js"></script>
+<script>
+$(document).ready(function(){
+$('#halaman').change(function(){
+	var x = $(this).val();
+	window.location.href='admin.php?page=cuti&pg='+ x;
+		});
+	
+	});	
+
+
+</script>

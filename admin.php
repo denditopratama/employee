@@ -1013,6 +1013,8 @@
 										include 'autobackup.php';
 										$sudback=mysqli_query($config,"UPDATE tbl_handle_backup SET statback=1 WHERE id=1");
 									}} else {
+										
+										$nyarwa=date("D");
 										if($nyarwa!='Sat'){
 											$sudback=mysqli_query($config,"UPDATE tbl_handle_backup SET statback=0 WHERE id=1");
 										}

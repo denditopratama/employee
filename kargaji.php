@@ -192,7 +192,10 @@
 													<td style="text-align:center">-</td>
 													</tr>';
 													
-										
+													$jo=mysqli_query($config,"SELECT bpjs_jampes_nol,bpjs_jamkes_nol FROM tbl_identitas WHERE id_user='$id_user'");
+													list($jampesnol,$jamkesnol)=mysqli_fetch_array($jo);
+													
+													if($jampesnol==0){
 													
 													if($sub1>= 7703500 || $gajipusat>= 8000000){
 													
@@ -213,6 +216,9 @@
 														$bpjspensiun=0;
 														$potbpjspensiun=0;
 														
+													} } else {
+														$bpjspensiun=0;
+														$potbpjspensiun=0;
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jampes='$bpjspensiun' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
@@ -223,23 +229,9 @@
 													<td style="text-align:center">-</td>
 													</tr>';
 												
-													if(isset($_REQUEST['bpjstidaknol'])){
-													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjs_nol=0 WHERE id_user='$id_user' AND id_gaji='$id'");	
-													}
-													$wakds=mysqli_query($config,"SELECT bpjs_nol FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
-													list($bpjsnols)=mysqli_fetch_array($wakds);
-													
-													if($bpjsnols==1){
-														$bpjskesehatan=0;
-														$potbpjskesehatan=0;
-													} else {
-													if(isset($_REQUEST['bpjsnol'])){
-														$bpjskesehatan=0;
-													$potbpjskesehatan=0;
-													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjs_nol=1 WHERE id_user='$id_user' AND id_gaji='$id'");
-													} else {
 													
 													
+													if($jamkesnol==0){
 												if ($sub1>= 7703500 || $gajipusat>= 8000000){
 														$bpjskesehatan=320000;
 														$potbpjskesehatan=400000;
@@ -251,12 +243,16 @@
 														} else {
 														$bpjskesehatan=4/100*$gajipusat;
 														$potbpjskesehatan=5/100*$gajipusat;}
-													}}}
+													}
 													
 													if($kelas_jabatan==2 || $kelas_jabatan==3) {
 														$bpjskesehatan=0;
 														$potbpjskesehatan=0;
+													} } else {
+														$bpjskesehatan=0;
+														$potbpjskesehatan=0;
 													}
+													
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jamkes='$bpjskesehatan' WHERE id_user='$id_user' AND id_gaji='$id'");
 													
 													echo'
@@ -265,18 +261,7 @@
 													<td style="text-align:center">BPJSTK Jaminan Kesehatan (4%)</td>
 													<td style="text-align:right">Rp '.number_format($bpjskesehatan , 0, ',', '.').'</td>
 													<td style="text-align:center">
-													<form method="POST" action="">
-													<input type="hidden" name="submitd">
-													<input type="hidden" name="karyawan" value="'.$id_user.'">
-													<input type="hidden" value="'.$id.'">
-													<button type="submit" name="bpjsnol" class="btn large green waves-effect waves-light"><i class="material-icons">error</i> Nol</button>
-													</form>
-													<form method="POST" action="">
-													<input type="hidden" name="submitd">
-													<input type="hidden" name="karyawan" value="'.$id_user.'">
-													<input type="hidden" value="'.$id.'">
-													<button type="submit" name="bpjstidaknol" class="btn small red waves-effect waves-light"><i class="material-icons">error</i> Tidak Nol</button>
-													</form>
+													
 													</td>
 													</tr>';
 													

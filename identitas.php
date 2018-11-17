@@ -361,14 +361,111 @@ if(empty($_SESSION['admin'])){
                                           
                                     </div>
 									
+									<div class="input-field col s6">
+                                        <i class="material-icons prefix md-prefix">not_interested</i><label>BPJS Jaminan Pensiun Di-nolkan</label><br/>
+                                        <div class="input-field col s11 right">
+                                            <select class="browser-default" name="bpjsjampesnol" id="bpjsjampesnol" style="margin-bottom:24px;" required>
+											
+											<?php
+														
+														$jios=mysqli_query($config,"SELECT bpjs_jampes_nol FROM tbl_identitas WHERE id_user='$id_user'");
+														list($kel)=mysqli_fetch_array($jios);
+														
+												   if($kel==0){
+												   echo '<option value="0" selected>Tidak</option>';
+												   echo '<option value="1">Ya</option>';
+												   }else{
+												   echo '<option value="0">Tidak</option>';
+												   echo '<option value="1" selected>Ya</option>';}
+											   
+											   
+														?>
+														
+														
+											
+                                            </select>
+                                        </div>
+                                          
+                                    </div>
+									
+									<div class="input-field col s6">
+                                        <i class="material-icons prefix md-prefix">not_interested</i><label>BPJS Jaminan Kesehatan Di-nolkan</label><br/>
+                                        <div class="input-field col s11 right">
+                                            <select class="browser-default" name="bpjsjamkesnol" id="bpjsjamkesnol" style="margin-bottom:24px;" required>
+											
+											<?php
+														
+														$jiosd=mysqli_query($config,"SELECT bpjs_jamkes_nol FROM tbl_identitas WHERE id_user='$id_user'");
+														list($keld)=mysqli_fetch_array($jiosd);
+														
+												   if($keld==0){
+												   echo '<option value="0" selected>Tidak</option>';
+												   echo '<option value="1">Ya</option>';
+												   }else{
+												   echo '<option value="0">Tidak</option>';
+												   echo '<option value="1" selected>Ya</option>';}
+											   
+											   
+														?>
+														
+														
+											
+                                            </select>
+                                        </div>
+                                          
+                                    </div>
+									
+									
+								<script type="text/javascript">
+								
+            $(document).ready(function(){
+				
+            $('#bpjsjampesnol').change(function(){
+                //Selected value
+				
+                var inputValue = $(this).val();
+                var jampes = 'jampes';
+
+                //Ajax for calling php function
+                $.post('./js/bpjsnol.php', { bpjs : jampes , input : inputValue , id_user : <?php echo $id_user; ?>}, function(data){
+                    
+                    //do after submission operation in DOM
+					$("#keljab").html(data);
+                });
+            });
+			
+			$('#bpjsjamkesnol').change(function(){
+                //Selected value
+				
+                var inputValue = $(this).val();
+				var jamkes = 'jamkes';
+
+                //Ajax for calling php function
+                $.post('./js/bpjsnol.php', { bpjs : jamkes , input : inputValue , id_user : <?php echo $id_user; ?>}, function(data){
+                    
+                    //do after submission operation in DOM
+					$("#keljab").html(data);
+                });
+            });
+        });
+									
+								</script>	
+									
 									
 									<?php if($_SESSION['admin']==1){?>
+									
+									 <div class="row">
+									<div class="col s12 m12">
+									  <div class="card blue-grey darken-1" style="background-color:white!important">
+										<div class="card-content black-text">
 									<div class="input-field col s6" style="width:100%;text-align:center">
 						<h5><u><i class="material-icons md-36">account_balance</i>Departemen</u></h5><br>
 						</div>
 						
 						
 					
+		
+		
 									<div class="input-field col s6">
                                         <i class="material-icons prefix md-prefix">account_balance</i><label>Unit Kerja</label><br/>
                                         <div class="input-field col s11 right">
@@ -567,6 +664,10 @@ if(empty($_SESSION['admin'])){
         });
 									
 								</script>
+								</div>
+		</div>
+		</div>
+		
 									
 					<?php } ?>
 									<div class="input-field col s6" style="width:100%;text-align:center">

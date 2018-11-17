@@ -95,7 +95,7 @@
             
 
             //pagging
-            $limit = 10;
+            $limit = 15;
             $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
