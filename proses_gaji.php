@@ -228,3 +228,4 @@ label {
 		
 
 <script type="text/javascript" src="asset/js/halamangaji.js"></script>
+

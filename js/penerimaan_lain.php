@@ -14,7 +14,7 @@ require('../include/config.php');
 												$id_select=mysqli_real_escape_string($config,$_REQUEST['id_select']);
 												$id_user=mysqli_real_escape_string($config,$_REQUEST['id_user']);
 												$id_gaji=mysqli_real_escape_string($config,$_REQUEST['id_gaji']);
-												$nilai=mysqli_real_escape_string($config,$_REQUEST['nilai']);
+												$nilai=mysqli_real_escape_string($config,str_replace('.', '', $_POST['nilai']));
 												
 												
 							

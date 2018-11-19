@@ -196,7 +196,15 @@ $(document).ready(function(){
 	
 </script>
 <!-- Javascript END -->
+<script type="text/javascript" src="asset/js/jquery.maskMoney.js"></script>
 
+					<script>
+					$(document).ready(function(){
+								$('#terima').maskMoney({thousands:'.',precision :0});
+								$('#potong').maskMoney({thousands:'.',precision :0});
+								$('#gajijm').maskMoney({thousands:'.',precision :0});
+					});
+								</script>
 <?php
     } else {
         header("Location: ../");
