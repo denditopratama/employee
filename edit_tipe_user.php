@@ -524,9 +524,9 @@
 																	else if($i==2){
 																$query = mysqli_query($config, "UPDATE tbl_identitas SET NPWP='$nfile' WHERE id_user='$id_user'");}
 																	else if($i==3){
-																$query = mysqli_query($config, "UPDATE tbl_identitas SET BPJSKS='$nfile' WHERE id_user='$id_user'");}
-																	else if($i==4){
 																$query = mysqli_query($config, "UPDATE tbl_identitas SET BPJSKT='$nfile' WHERE id_user='$id_user'");}
+																	else if($i==4){
+																$query = mysqli_query($config, "UPDATE tbl_identitas SET BPJSKS='$nfile' WHERE id_user='$id_user'");}
 																
                                                                 
 																
