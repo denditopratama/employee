@@ -174,10 +174,7 @@ body
 
 			<?php
 		   
-				   $query2 = mysqli_query($config, "SELECT nama,nip,status_karyawan FROM tbl_user WHERE id_user='$id_user'");
-                    list($nama,$nip,$status_karyawan) = mysqli_fetch_array($query2);	
-					$query3 = mysqli_query($config, "SELECT tgl_bakti,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon FROM tbl_identitas WHERE id_user='$id_user'");
-                    list($tgl_bakti,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon) = mysqli_fetch_array($query3);	
+				   
 					$current_album='';
 					$dptmn=mysqli_query($config,"SELECT * FROM tbl_department");
 					
@@ -208,7 +205,7 @@ body
 								<th id="gelo" style="width:1%!important;"><strong>Agama</strong></th>
 								
 								</tbody><tbody>';
-							$niks=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$row['kode_unit']."' AND(id_user<>9999 AND admin<>1 AND admin<>9) ORDER BY sub_unit,kelas_jabatan");
+							$niks=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$row['kode_unit']."' AND(id_user<>9999 AND admin<>1 AND admin<>9 AND status_aktif=1) ORDER BY sub_unit,kelas_jabatan");
 						while($rowb=mysqli_fetch_array($niks)){
 							echo'
 							
@@ -218,7 +215,7 @@ body
 							$fh=mysqli_query($config,"SELECT id FROM tbl_sub_unit WHERE kode_unit='".$row['kode_unit']."'");
 							list($idaja)=mysqli_fetch_array($fh);
 							
-							$seksi=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='$idaja'");
+							$seksi=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='$idaja' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 							list($seksih)=mysqli_fetch_array($seksi);
 							
 							
@@ -338,7 +335,7 @@ body
 							$hjg=mysqli_query($config,"SELECT sub_unit FROM tbl_sub_unit WHERE id='".$rowb['sub_unit']."'");
 							list($rowku)=mysqli_fetch_array($hjg);
 							
-							$waw=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='".$rowb['sub_unit']."'");
+							$waw=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='".$rowb['sub_unit']."' AND (admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 							list($wawaw)=mysqli_fetch_array($waw);
 							
 							if ($current_album != $rowku) {
