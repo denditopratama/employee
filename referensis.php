@@ -102,21 +102,16 @@
 		if(isset($_REQUEST['nambahsub'])){
 			$ketsub=mysqli_real_escape_string($config,$_REQUEST['ketsub']);
 			$nyub=mysqli_real_escape_string($config,$_REQUEST['nyub']);
-			$kodsub=mysqli_real_escape_string($config,$_REQUEST['kodsub']);
-			$tukiman=mysqli_query($config,"SELECT * FROM tbl_sub_unit WHERE kode_sub='$kodsub'");
 			
-				if(mysqli_num_rows($tukiman)<=0){
-					$mxz=mysqli_query($config,"INSERT INTO tbl_sub_unit(sub_unit,kode_unit,kode_sub) VALUES('$ketsub','$nyub','$kodsub')");
+		
+			
+				
+					$mxz=mysqli_query($config,"INSERT INTO tbl_sub_unit(sub_unit,kode_unit) VALUES('$ketsub','$nyub')");
 					echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
-						</script>';}
-					else {
-						echo'<script>
-						alert(\'Kode Sub Tidak Boleh sama (harus unik) !\');
-						window.location.href="./admin.php?page=sett&sub=ref";
 						</script>';
-					}
+					
 		}
 					
 		if(isset($_REQUEST['nambahunit'])){
@@ -159,7 +154,37 @@
 		if(isset($_REQUEST['tambahpotongan'])){
 			
 			$uraianpotongan=mysqli_real_escape_string($config,$_REQUEST['uraianpotongan']);
-			$mvsd=mysqli_query($config,"INSERT INTO tbl_ref_potongan(uraian) VALUES('$uraianpotongan')");
+			$jenis_bankpotong=mysqli_real_escape_string($config,$_REQUEST['jenis_bankpotong']);
+			$atasnama=mysqli_real_escape_string($config,$_REQUEST['atasnama']);
+			$norek=mysqli_real_escape_string($config,$_REQUEST['norek']);
+			$gjz=mysqli_query($config,"SELECT * FROM tbl_ref_potongan WHERE uraian='$uraianpotongan'");
+			if(mysqli_num_rows($gjz)>0){
+				echo'<script>
+				alert(\'Error Uraian sudah ada !\');
+				window.location.href="./admin.php?page=sett&sub=ref";
+				</script>';	
+			} else {
+
+			$mvsd=mysqli_query($config,"INSERT INTO tbl_ref_potongan(uraian,jenis_bank,atas_nama,no_rekening) VALUES('$uraianpotongan','$jenis_bankpotong','$atasnama','$norek')");
+				if($mvsd==true){
+					echo'<script>
+				window.location.href="./admin.php?page=sett&sub=ref";
+				</script>';}
+					else {
+						echo'<script>
+						alert(\'Error !\');
+						window.location.href="./admin.php?page=sett&sub=ref";
+						</script>';
+					}}
+		}
+
+		if(isset($_POST['tambahbank'])){
+			
+			$uraibank=mysqli_real_escape_string($config,$_REQUEST['uraibank']);
+			$ngecek=mysqli_query($config,"SELECT kode_bank FROM tbl_ref_bank ORDER BY kode_bank DESC LIMIT 1");
+			list($ngecek)=mysqli_fetch_array($ngecek);
+			$cekcok=$ngecek+1;
+			$mvsd=mysqli_query($config,"INSERT INTO tbl_ref_bank(kode_bank,nama_bank) VALUES('$cekcok','$uraibank')");
 				if($mvsd==true){
 					echo'<script>
 				window.location.href="./admin.php?page=sett&sub=ref";
@@ -247,6 +272,42 @@
 					$ngampunxg=mysqli_query($config,"DELETE FROM tbl_ref_potongan WHERE id='$i'");
 				}
 			}
+
+
+			$maksbank=mysqli_query($config,"SELECT MAX(id) FROM tbl_ref_bank");
+			list($maksjenisbank)=mysqli_fetch_array($maksbank);
+			for($i=1;$i<=$maksjenisbank;$i++){
+				if(isset($_REQUEST['editbank'.$i.''])){
+					
+					$uraianbank=mysqli_real_escape_string($config,$_REQUEST['uraianbank'.$i.'']);
+					
+				
+				$simpangx=mysqli_query($config,"UPDATE tbl_ref_bank SET nama_bank='$uraianbank' WHERE id='$i'");}
+				
+				if(isset($_REQUEST['hapusbank'.$i.''])){
+					
+					$ngampunz=mysqli_query($config,"DELETE FROM tbl_ref_bank WHERE id='$i'");
+				}
+			}
+
+			$makssub=mysqli_query($config,"SELECT MAX(id) FROM tbl_sub_unit");
+			list($maksub)=mysqli_fetch_array($makssub);
+			for($i=1;$i<=$maksub;$i++){
+				if(isset($_REQUEST['editsubunit'.$i.''])){
+					
+					$subunits=mysqli_real_escape_string($config,$_REQUEST['subunits'.$i.'']);
+					$jenis_unit=mysqli_real_escape_string($config,$_REQUEST['jenis_unit'.$i.'']);
+					
+				
+				$simpangx=mysqli_query($config,"UPDATE tbl_sub_unit SET sub_unit='$subunits',kode_unit='$jenis_unit' WHERE id='$i'");}
+				
+				if(isset($_REQUEST['hapussubunit'.$i.''])){
+					
+					$ngampunz=mysqli_query($config,"DELETE FROM tbl_sub_unit WHERE id='$i'");
+				}
+			}
+
+
 		?>
 		
 				<style>
@@ -618,7 +679,7 @@
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
 										<th width="1%"style="color:#fff">Nomor</th>
-										<th width="25%"style="color:#fff">Kode Sub</th>
+										
                                         <th width="25%"style="color:#fff">Sub Unit</th>
 										<th width="25%"style="color:#fff">Unit Kerja</th>
 										<th width="20%"style="color:#fff">Tindakan</th>	
@@ -626,7 +687,7 @@
 								</thead>
 								<tr>
 								<td style="text-align:center" >-</td>
-								<td style="text-align:center"><input style="text-align:center" type="text" name="kodsub"></td>
+								
 								<td style="text-align:center"><input style="text-align:center" type="text" name="ketsub"></td>
 								<td style="text-align:center">
 								<select class="browser-default" name="nyub">
@@ -644,7 +705,7 @@
 								<tbody>
 								<tr style="background-color:#39424c!important;">
 										<th width="1%"style="color:#fff">Nomor</th>
-										<th width="25%"style="color:#fff">Kode Sub</th>
+										
                                         <th width="25%"style="color:#fff">Sub Unit</th>
 										<th width="25%"style="color:#fff">Unit Kerja</th>
 										<th width="20%"style="color:#fff">Tindakan</th>
@@ -654,16 +715,28 @@
 							<?php $mo=mysqli_query($config,"SELECT * FROM tbl_sub_unit");
 							$no=1;
 							while($row=mysqli_fetch_array($mo)){
-								$lpz=mysqli_query($config,"SELECT unit_kerja FROM tbl_department WHERE kode_unit='".$row['kode_unit']."'");
-								list($lpkz)=mysqli_fetch_array($lpz);
+								
 								echo'
                             <tbody>
 							<tr>
 							<td style="text-align:center" >'.$no++.'</td>
-							<td style="text-align:center" >'.$row['kode_sub'].'</td>
-							<td style="text-align:center" >'.$row['sub_unit'].'</td>
-							<td style="text-align:center" >'.$lpkz.'</td>
-							<td style="text-align:center" >-</td>
+							
+							<td style="text-align:center" ><input type="text" name="subunits'.$row['id'].'" value="'.$row['sub_unit'].'"></td>
+							<td style="text-align:center" >
+							<select class="browser-default" name="jenis_unit'.$row['id'].'">';
+							$kgsm=mysqli_query($config,"SELECT * FROM tbl_department");
+							while($data=mysqli_fetch_array($kgsm)){
+								if($row['kode_unit']==$data['kode_unit']){
+								echo' <option value="'.$data['kode_unit'].'" selected>'.$data['unit_kerja'].'</option>';}
+								else { echo' <option value="'.$data['kode_unit'].'">'.$data['unit_kerja'].'</option>';}
+							}
+							echo'
+							</select
+							></td>
+							<td style="text-align:center" >
+							<button type="submit" name="editsubunit'.$row['id'].'" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin merubah data ini?\');">EDIT</button>
+							<button type="submit" name="hapussubunit'.$row['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+							</td>
 							</tr>
 							</tbody>';} ?>
 							
@@ -726,9 +799,12 @@
                             <tbody>
 							<tr>
 							<td style="text-align:center" >'.$no++.'</td>
-							<td style="text-align:center" >'.$row['unit_kerja'].'</td>
-							<td style="text-align:center" >'.$row['kode_unit'].'</td>
-							<td style="text-align:center" >-</td>
+							<td style="text-align:center" ><input type="text" min="0" name="unitku'.$row['id'].'" value="'.$row['unit_kerja'].'"></td>
+							<td style="text-align:center" ><input type="number" min="0"  name="kodeku'.$row['id'].'" value="'.$row['kode_unit'].'"></td>
+							<td style="text-align:center" >
+							<button type="submit" name="editunitkerja'.$row['id'].'" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin merubah data ini?\');">EDIT</button>
+							<button type="submit" name="hapusunitkerja'.$row['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+							</td>
 							</tr>
 							</tbody>';} ?>
 							
@@ -835,9 +911,19 @@
 								<td style="text-align:center" >-</td>
 								<td style="text-align:center"><input style="text-align:center" type="text" placeholder="Otomatis"></td>
 								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
-								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
-								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
-								<td style="text-align:center"><input style="text-align:center" type="text" name="uraianpotongan"></td>
+								<td style="text-align:center" >
+							<select class="browser-default" name="jenis_bankpotong">
+							<?php
+							$kgm=mysqli_query($config,"SELECT * FROM tbl_ref_bank");
+							while($data=mysqli_fetch_array($kgm)){
+								if($row['jenis_bank']==$data['kode_bank']){
+								echo' <option value="'.$data['kode_bank'].'" selected>'.$data['nama_bank'].'</option>';}
+								else { echo' <option value="'.$data['kode_bank'].'">'.$data['nama_bank'].'</option>';}
+							}?>
+							
+							</select>
+								<td style="text-align:center"><input style="text-align:center" type="text" name="atasnama"></td>
+								<td style="text-align:center"><input style="text-align:center" type="text" name="norek"></td>
 								<td><button type="submit" name="tambahpotongan" style="width:100%;color:white!important" class="btn small green waves-effect waves-light" onclick="return confirm('Anda yakin ingin menambah data ini?');">TAMBAH</button>
 								</td>
 								</tr>
@@ -896,6 +982,79 @@
 				</div>
 				
 				
+
+
+
+
+					<div id="modald8">
+				<div id="modals8" class="modal" style="background-color:white">
+                <div class="modal-content white">
+				<div class="input-field col s12">
+				<h5><i class="material-icons" style="margin-bottom:8px">lock</i> Tabel Referensi Jenis Bank</h5>
+				<small class="red-text">* Klik Tambah untuk menambah Data.</small><br>
+				<small class="red-text">* Tambah Data dilakukan <strong>HANYA JIKA</strong> ada jenis Bank baru.</small><br>
+				<small class="red-text">* <strong> HATI - HATI</strong> dalam mengubah dan menambah data karena dapat merubah kestabilan sistem.</small><br>
+				<small class="red-text">* Kode harus unik / Tidak Boleh Sama !.</small>
+				<form method="POST">
+					<div class="col m12" id="colres">
+                        <table class="bordered">
+                            <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
+                                 <tr>
+										<th width="1%"style="color:#fff">Nomor</th>
+                                        <th width="10%"style="color:#fff">Kode Bank</th>
+										<th width="25%"style="color:#fff">Nama Bank</th>
+										<th width="20%"style="color:#fff">Tindakan</th>										
+                                </tr>
+								</thead>
+								<tr>
+								<td style="text-align:center" >-</td>
+								<td style="text-align:center"><input style="text-align:center" type="text" placeholder="Otomatis"></td>
+								<td style="text-align:center"><input style="text-align:center" type="text" name="uraibank"></td>
+								<td><button type="submit" name="tambahbank" style="width:100%;color:white!important" class="btn small green waves-effect waves-light" onclick="return confirm('Anda yakin ingin menambah data ini?');">TAMBAH</button>
+								</td>
+								</tr>
+								
+								<tbody>
+								<tr style="background-color:#39424c!important;">
+										<th width="1%"style="color:#fff">Nomor</th>
+                                        <th width="10%"style="color:#fff">Kode Bank</th>
+										<th width="25%"style="color:#fff">Nama Bank</th>
+										<th width="20%"style="color:#fff">Tindakan</th>	
+                                </tr>
+								</tbody>
+                            
+							<?php $moyed=mysqli_query($config,"SELECT * FROM tbl_ref_bank");
+							$no=1;
+							while($row=mysqli_fetch_array($moyed)){
+								echo'
+                            <tbody>
+							<tr>
+							<form method="POST">
+							<td style="text-align:center" >'.$no++.'</td>
+							<td style="text-align:center" >'.$row['kode_bank'].'</td>
+							<td style="text-align:center" ><input type="text" name="uraianbank'.$row['id'].'" value="'.$row['nama_bank'].'"></td>
+							<td style="text-align:center" >
+							<button type="submit" name="editbank'.$row['id'].'" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin merubah data ini?\');">EDIT</button>
+							<button type="submit" name="hapusbank'.$row['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+							</td>
+							</form>
+							</tr>
+							</tbody>';} ?>
+							
+							</table>
+							</div>
+												
+				
+				</form>
+				</div>
+				</div>
+				</div>
+				</div>		
+
+
+
+
+
 				
 				
 				
@@ -944,6 +1103,13 @@
 				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refpotongan" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Referensi Potongan Lain</a>
+				
+				</div>
+				</div>
+
+				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card-content" style="text-align:center!important">
+				<a style="background-color: #39424c!important;color:white" id="refbank" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Referensi Bank</a>
 				
 				</div>
 				</div>
@@ -1003,6 +1169,16 @@ $(document).ready(function(){
 	$("#modals7").openModal()}
 						});
 					
-						
+	$("#refbank").click(function(){
+	var xd = confirm('anda yakin?');
+	if(xd == true){
+	alert('Harap berhati - hati dalam melakukan penambahan data!');
+	$("#modals8").openModal()}
 						});
+
+
+						});
+
+
+
 						</script>
