@@ -286,7 +286,7 @@ to {
 									$_SESSION['unit'] = $unit;
 									$_SESSION['divisi'] = $divisi;
 									$_SESSION['sub_unit'] = $sub_unit;
-                                    session_regenerate_id(true);
+                                    session_regenerate_id();
 										header("Location: ./admin.php");
                                     die();
                                 } else {
