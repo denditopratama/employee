@@ -307,6 +307,23 @@
 				}
 			}
 
+			$makssub=mysqli_query($config,"SELECT MAX(id) FROM tbl_sub_unit");
+			list($maksub)=mysqli_fetch_array($makssub);
+			for($i=1;$i<=$maksub;$i++){
+				if(isset($_REQUEST['editsubunit'.$i.''])){
+					
+					$subunits=mysqli_real_escape_string($config,$_REQUEST['subunits'.$i.'']);
+					$jenis_unit=mysqli_real_escape_string($config,$_REQUEST['jenis_unit'.$i.'']);
+					
+				
+				$simpangx=mysqli_query($config,"UPDATE tbl_sub_unit SET sub_unit='$subunits',kode_unit='$jenis_unit' WHERE id='$i'");}
+				
+				if(isset($_REQUEST['hapussubunit'.$i.''])){
+					
+					$ngampunz=mysqli_query($config,"DELETE FROM tbl_sub_unit WHERE id='$i'");
+				}
+			}
+
 
 		?>
 		

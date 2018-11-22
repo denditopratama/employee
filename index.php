@@ -187,7 +187,7 @@
             <div class="col s12 m6 offset-m3 offset-m3" style="padding-top:100px">
 
                 <!-- Box START -->
-                <div class="card-panel z-depth-2" id="login">
+                <div class="card-panel z-depth-2" id="login" style="display:none">
 				
                     <!-- Row Form START -->
                     <div class="row">
@@ -216,6 +216,7 @@
                     <!-- Logo and title END -->
                     <?php
                         }
+                       
                     ?>
 
                     <?php
@@ -227,8 +228,8 @@
                                 <a class="btn-large waves-effect waves-light blue-grey col s11" href="./" style="margin: 20px 0 0 5px;"><i class="material-icons md-24">arrow_back</i> Kembali ke login form</a></div>';
                             } else {
 
-                                $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['username'])));
-                                $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['password'])));
+                                $username = trim(stripslashes(strip_tags(htmlspecialchars(mysqli_real_escape_string($config, $_POST['username'])))));
+                                $password = trim(stripslashes(strip_tags(htmlspecialchars(mysqli_real_escape_string($config, $_POST['password'])))));
 
                                 $query = mysqli_query($config, "SELECT id_user, username, nama, nip, admin,role,unit,sub_unit,divisi,status_aktif FROM tabel_role WHERE username=BINARY'$username' AND password=MD5('$password')");
 
@@ -259,7 +260,7 @@
 									$_SESSION['unit'] = $unit;
 									$_SESSION['divisi'] = $divisi;
 									$_SESSION['sub_unit'] = $sub_unit;
-									
+                                    session_regenerate_id(true);
 										header("Location: ./admin.php");
                                     die();
                                 } else {
@@ -362,7 +363,11 @@
 ]);
 
 									
-							
+$(document).ready(function(){
+
+$('#login').fadeIn(1500);
+
+});							
 								
 
     </script>
