@@ -74,14 +74,30 @@
             .container {
                 width: 60%!important;
             }
+            #dasar {
+                padding-top:90px!important;
+            }
         }
         .container {
             max-width: 100%;
             margin-top: 2.5rem;
         }
+        @-webkit-keyframes spin {  
+from {  
+    -webkit-transform: rotate(0deg);  
+}  
+to {  
+    -webkit-transform: rotate(360deg);  
+    } 
+}
         #logo {
             display: block;
-            margin: 0px auto -5px;
+            margin: auto;
+            -webkit-animation-name: spin; 
+    -webkit-animation-iteration-count: 1; 
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-duration: 1.5s; 
+    animation-timing-function: ease;
         }
         img {
      border-radius: 0%; 
@@ -162,6 +178,15 @@
         .input-field label.active {
             font-size: 1rem;
         }
+
+
+  
+
+
+   
+
+  
+
 	
     </style>
 	  <!-- Bootstrap core CSS -->
@@ -184,7 +209,7 @@
         <!-- Row START -->
         <div class="row">
             <!-- Col START -->
-            <div class="col s12 m6 offset-m3 offset-m3" style="padding-top:100px">
+            <div class="col s12 m6 offset-m3 offset-m3" id="dasar" style="padding-top:50px">
 
                 <!-- Box START -->
                 <div class="card-panel z-depth-2" id="login" style="display:none">
@@ -197,16 +222,17 @@
                         while($data = mysqli_fetch_array($query)){
                     ?>
                     <!-- Logo and title START -->
-                    <div class="col s12">
+                    <div class="col s12" style="text-align:center!important">
                         <div class="card-content">
                            
-                            <?php
-                                if(!empty($data['logo'])){
-                                    echo '<img id="logo" src="./upload/screenshots.png" style="margin-top:30px;"/>';
-                                } else {
-                                    echo '<img id="logo" src="./asset/img/logo.png"/>';
-                                }
-                            ?>
+                        
+                                  
+                                    <img id="logo" src="./upload/screenshots3.png" style="margin-top:30px;display:inline-block;width:50px"/>
+                                 
+                                
+                                            <img src="./upload/screenshots2.png" style="margin-top:30px;width:150px;display:inline-block"/>
+                                       
+                           
                             <h4 class="center" id="smk">
                            
                             </h4>
@@ -366,6 +392,7 @@
 $(document).ready(function(){
 
 $('#login').fadeIn(1500);
+
 
 });							
 								
