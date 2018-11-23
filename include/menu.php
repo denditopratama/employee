@@ -35,7 +35,7 @@
          list($berita,$tgl_akhir)=mysqli_fetch_array($mobzc);
          date_default_timezone_set("Asia/Bangkok");
          if(!empty($berita) || !empty($tgl_akhir)){
-         if( strtotime($tgl_akhir)<=strtotime('now') ){
+         if( strtotime($tgl_akhir)>=strtotime('now') ){
             echo $berita; 
          } else { echo ''; }}
         ?>
