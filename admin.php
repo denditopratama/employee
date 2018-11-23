@@ -698,7 +698,7 @@
 					if($bulan==$bulansekarang && $hari==$harisekarang){
 						$koit=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
 						while($kis=mysqli_fetch_array($koit)){
-							if(count($kis['nama'])>=1){
+							if(count($kis['nama'])>1){
 							
 							$ulangtaun=$ulangtaun.$kis['nama'].' , ';}
 							else{$ulangtaun=$ulangtaun.$kis['nama'];}

@@ -2,13 +2,45 @@
     //cek session
     if(!empty($_SESSION['admin'])){
 ?>
+<style>header, main, footer {
+  padding-left: 260px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+
+}
 
 
 
-<nav class="blue-grey darken-1" style="background-color:#fff!important;opacity:1;">
-    <div class="nav-wrapper" >
+ ul.side-nav.fixed a {
+    color:#fff!important;
+}
+
+
+
+
+
+</style>
+
+
+<nav style="background-color:#fff!important;opacity:1;">
+   <div class="nav-wrapper">
         <a href="./" class="brand-logo center hide-on-large-only"><img src='upload/screenshot.png' style="margin-top:20px;height:30px"></a>
-        <ul id="slide-out" class="side-nav" data-simplebar-direction="vertical" style="background-color:#2a3140!important">
+        <marquee class="hide-on-small-only" style="color:black" behavior="scroll" scrollamount="10" direction="left"><strong>BERITA HARI INI : </strong>
+        <?php
+         $mobzc=mysqli_query($config,"SELECT berita,tgl_akhir FROM tbl_berita ORDER BY id DESC LIMIT 1");
+         list($berita,$tgl_akhir)=mysqli_fetch_array($mobzc);
+         date_default_timezone_set("Asia/Bangkok");
+         if(!empty($berita) || !empty($tgl_akhir)){
+         if( strtotime($tgl_akhir)<=strtotime('now') ){
+            echo $berita; 
+         } else { echo ''; }}
+        ?>
+        </marquee>
+        <ul id="slide-out" class="side-nav fixed" data-simplebar-direction="vertical" style="background-color:#2a3140!important">
             <li class="no-padding">
                 <div class="logo-side center blue-grey darken-3" style="background-image: url('./asset/img/backmobile.jpg');margin-left:10px">
                     <?php
@@ -55,8 +87,6 @@
 							
 								<li><a href="?page=tsm">Surat Masuk</a></li>
 								<li><a href="?page=tsk">Surat Keluar</a></li>
-						
-								
 								<li><a href="?page=kpts">KPTS</a></li>
 								
                                
@@ -160,99 +190,7 @@
 		
 		
         <!-- Menu on large screen START -->
-        <ul class="center hide-on-med-and-down" id="nv" >
-            <li><a href="./" class="ams hide-on-med-and-down"><img src='upload/screenshots.png' width="195px" height="47px" style="margin-top:10px;"></a></li>
-            <li><div class="grs"></></li>
-            <li><a href="./"style="color:#000!important"><i class="material-icons"></i>&nbsp; Beranda</a></li>
-           
-            <li><a class="dropdown-button" href="#!" data-activates="transaksiw" style="color:#000!important">Transaksi Surat <i class="material-icons md-18">arrow_drop_down</i></a></li>
-                <ul id='transaksiw' class='dropdown-content' style="background-color:#004689;overflow-y:visible">
-				
-					<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsm">Surat Masuk</a></li>
-					<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsk">Surat Keluar</a></li>
-				
-                    
-				  <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=kpts">KPTS</a></li>
-                </ul>
-			
-   <style>
-   .right-triangle {
-			float: right;
-		}
-		
-		
-		
-		
-		</style>
-			
-			  <li><a class="dropdown-button" href="#!" data-activates="transaksi" style="color:#000!important">Karyawan <i class="material-icons md-18">arrow_drop_down</i></a></li>
-                <ul id='transaksi' class='dropdown-content' style="background-color:#004689;">
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=usr">Data Karyawan</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pres">Presensi</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=cuti">Cuti</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sppd">SPPD</a></li>
-				<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=files">File</a></li>
-				<li><a id="hah" class="dropdown-button" href='#' data-activates='dropdown2' data-alignment="left" onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''">Gaji<span class="right-triangle"></span></a></li>
-				
-				
-				</ul>
-				
-			
-				<ul id="dropdown2" class="dropdown-content" style="margin-left: 173px !important;
-		margin-top: 1px !important;background-color:#004689;">
-		<?php if($_SESSION['admin']==1){ ?>
-			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=loggjh">Proses Gaji</a></li>
-		<li class="divider"></li> <?php } ?>
-			<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=slip">Slip Gaji</a></li>
-			</ul>
-			
-			<li><a class="dropdown-button" href="#!" data-activates="transaksids" onClick="window.location='?page=rekap'" style="color:#000!important">Rekapitulasi</a></li>
-                <ul id='transaksids' class='dropdown-content' style="background-color:#004689;">
-				
-				
-				</ul>
-				
-			 
-          
-            <?php
-                if($_SESSION['id_user']==8){ ?>
-            <li><a class="dropdown-button" href="#!" data-activates="pengaturan" style="color:#000!important;">Pengaturan <i class="material-icons md-18">arrow_drop_down</i></a></li>
-                <ul id='pengaturan' class='dropdown-content'style="background-color:#004689;">
-                   
-                    <li><a href="?page=usr">User</a></li>
-                    <li class="divider"></li>
-					<li><a href="?page=sett&sub=ref">Tabel Referensi</a></li>
-                    <li><a href="?page=sett&sub=back">Backup Database</a></li>
-                    <li><a href="?page=sett&sub=rest">Restore Database</a></li>
-                </ul>
-            <?php
-                }
-            ?>
-            
-            <li class="right" style="margin-right: 10px;"><a class="dropdown-button" href="#!" data-activates="logout"style="color:#000!Important;">
-	
-			<?php
-				$id_user=$_SESSION['id_user'];
-				$queryed = mysqli_query($config,"SELECT foto FROM tbl_user WHERE id_user='$id_user'");
-           while($row=mysqli_fetch_array($queryed)){ 
-		   if($row['foto']==""){
-			echo'
-				<img class="imgs" src="./upload/foto/batman.jpg" style="width:50px;height:50px;border-radius:50%;vertical-align:middle;margin-right:5px">';}
-		   else{
-		   echo'<img class="imgs" src="./upload/foto/'.$row['foto'].'" style="width:50px;height:50px;border-radius:50%;vertical-align:middle;margin-right:5px">'; }} ?>
-			
-			<?php echo $_SESSION['nama']; ?><i class="material-icons md-18">arrow_drop_down</i></a></li>
-                <ul id='logout' class='dropdown-content'style="background-color:#004689;">
-				
-                    <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pro"style="color:#fff;">Profil</a></li>
-                    <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pro&sub=pass"style="color:#fff;">Ubah Password</a></li><?php echo'
-					<li onmouseover="this.style.backgroundColor=\'#f9c60b\'" onmouseout="this.style.backgroundColor=\'\'"><a href="?page=cv&id_user='.$_SESSION['id_user'].'">Cetak CV</a></li>';?>
-                    <li class="divider"></li>
-					<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=subgem"style="color:#fff;">Game</a></li>
-                    <li><a href="logout.php"style="color:#fff;"><i class="material-icons"style="color:#fff;">settings_power</i> Logout</a></li>
-                </ul>
-        </ul>
-        <!-- Menu on large screen END -->
+        
        
 
 
@@ -264,10 +202,10 @@
 
 
 
-	   <a href="#" data-activates="slide-out" class="button-collapse" id="menu"><i class="material-icons" style="color:#000;">menu</i></a>
-    </div>
+	   <a style="color:black!important" href="#" data-activates="slide-out" class="button-collapse show-on-small-only" id="menu"><i class="material-icons" style="color:#000!important;">menu</i></a>
+   
 </nav>
-
+</div>
 <?php
     } else {
         header("Location: ../");
