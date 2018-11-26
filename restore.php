@@ -90,9 +90,9 @@
                 // proses restore database dilakukan oleh fungsi
                 function restore($file){
                 	global $rest_dir;
-
+                    require('./include/config.php');
                     //konfigurasi database
-                	$koneksi=mysqli_connect("localhost","root","root","ams");
+                	$koneksi=$config;
 
                 	$nama_file	= $file['name'];
                 	$ukrn_file	= $file['size'];
@@ -104,7 +104,7 @@
                         die();
                     } else {
 
-                        $password = $_REQUEST['password'];
+                        $password = mysqli_real_escape_string($config,$_REQUEST['password']);
                         $id_user = $_SESSION['id_user'];
 
                         $query = mysqli_query($koneksi, "SELECT password FROM tbl_user WHERE id_user='$id_user' AND password=MD5('$password')");
