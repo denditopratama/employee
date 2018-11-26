@@ -12,6 +12,9 @@
 		$tahun=mysqli_real_escape_string($config,$_POST['tahunsppd']);
 		$bulan=mysqli_real_escape_string($config,$_POST['bulansppd']);
 		echo'<style>
+		header, main {
+			padding-left: 0;
+		  }
 		table {
                 background: #fff;
                 padding: 5px;

@@ -519,10 +519,10 @@ if(empty($_SESSION['admin'])){
                                         <div class="input-field col s11 right">
 										<?php $jio=mysqli_query($config,"SELECT sub_unit FROM tbl_user WHERE id_user='$id_user'");
 														list($unit)=mysqli_fetch_array($jio);
-														$ghgod=mysqli_query($config,"SELECT sub_unit FROM tbl_sub_unit WHERE id='$unit'");
-														list($goblok)=mysqli_fetch_array($ghgod);?>
+														$ghgod=mysqli_query($config,"SELECT id,sub_unit FROM tbl_sub_unit WHERE id='$unit'");
+														list($idgoblok,$goblok)=mysqli_fetch_array($ghgod);?>
                                             <select class="browser-default" name="sub_unit" id="sub_unit" style="margin-bottom:24px;" required>
-												<option value="<?php echo $goblok; ?>"><?php echo $goblok; ?></option>
+												<option value="<?php echo $idgoblok; ?>"><?php echo $goblok; ?></option>
 											
                                             </select>
                                         </div>

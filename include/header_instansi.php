@@ -24,7 +24,7 @@
                           
 						  if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
                              echo '<strong>NOTIFIKASI :</strong><br>';
-                             echo '<button id="beritakeun" class="btn-small green" style="color:white">TAMBAH BERITA</button>';  
+                             echo '<button id="beritakeun" class="btn-small green" style="color:white"><i class="material-icons">add</i>TAMBAH BERITA</button>';  
 						  }
 						  
 						  if($_SESSION['admin']==1){

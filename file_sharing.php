@@ -180,7 +180,7 @@ h11 {
                             $eks = strtolower(end($x));
 							
                             $string = strip_tags($row['file']);
-							if (strlen($string) > 16) { $stringCut = substr($string, 0, 16);
+							if (strlen($string) > 16) { $stringCut = substr($string, 0, 12);
 							$endPoint = strrpos($stringCut, ' ');
 
     //if the string doesn't contain any space then it will cut without word basis.

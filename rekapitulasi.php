@@ -121,7 +121,7 @@ h11 {
 												
 												echo'
                                                         <div class="card-content">
-														<img id="gambarz" src="./asset/img/rekapkeljab.jpg" style="height:217px!important"><br>
+														<img id="gambarz" src="./asset/img/rekapkeljab.jpg"><br>
                                                             <h6 style="text-align:center">REKAPITULASI KELAS JABATAN</h6>
 															
 															<a style="width:100%;color:white!important" class="btn small green lighten-1 waves-effect waves-light" onclick="window.location.href=\'./rekapkeljab.php\';"><i class="material-icons">cloud_download</i> EXCEL</a>

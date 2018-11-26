@@ -230,7 +230,7 @@ to {
                                     <img id="logo" src="./upload/screenshots3.png" style="margin-top:30px;display:inline-block;width:50px"/>
                                  
                                 
-                                            <img src="./upload/screenshots2.png" style="margin-top:30px;width:150px;display:inline-block"/>
+                                            <img src="./upload/screenshots2.jpg" style="margin-top:30px;width:150px;display:inline-block"/>
                                        
                            
                             <h4 class="center" id="smk">

@@ -11,6 +11,9 @@
     } else {
 		
 		echo'<style>
+		header, main {
+			padding-left: 0;
+		  }
 		table {
                 background: #fff;
                 padding: 5px;
