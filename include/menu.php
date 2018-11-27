@@ -144,6 +144,34 @@
                     </li>
                 </ul>
             
+
+
+            <li class="no-padding">
+            
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header"><i class="material-icons">location_city</i> Aplikasi</a>
+                    <div class="collapsible-body">
+                        <ul>
+                          
+                            <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a  <?php if($_SESSION['id_user']!=8){ echo 'onclick="belumjadi();"';} else {echo 'href="indextm.php"';}?> >Tenancy Management</a></li>
+                            
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+      <script>
+      function belumjadi(){
+          alert('Sedang dalam tahap pembangunan');
+          location.reload('./');
+      }
+      </script>
+      
+        </li>
+
+
+
+
 			<?php
                 if($_SESSION['admin'] == 1){ ?>
             
@@ -163,12 +191,19 @@
                         </div>
                     </li>
                 </ul>
+          
+          
+            </li>
             <?php
                 }
             ?>
-          
-            </li>
+
+
+            
         </ul>
+
+
+        
         <!-- Menu on medium and small screen END -->
 
 		

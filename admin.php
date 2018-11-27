@@ -624,15 +624,15 @@
 					   $rows=mysqli_fetch_array($querbroz);
 					   if($rows['jumlah']==0){
 						   
-					   echo'<i class="fa fa-newspaper-o" style="font-size:29px;"></i>&nbsp Presensi / Surat Masuk';}
+					   echo'<i class="fa fa-newspaper-o" style="font-size:29px;"></i>&nbsp Presensi Masuk';}
 						   else{
 						if($_SESSION['admin']==1){	   
 					   echo'
 					
-					 <i class="hvr-icon-buzz4" style="font-size:29px"></i> Presensi / Surat Masuk
+					 <i class="hvr-icon-buzz4" style="font-size:29px"></i> Presensi Masuk
 					 <span class="buttona__badge">'.$row['jumlah'].'</span>
 					
-						';} else {echo'<i class="fa fa-newspaper-o" style="font-size:29px;"></i>&nbsp Presensi / Surat Masuk';}
+						';} else {echo'<i class="fa fa-newspaper-o" style="font-size:29px;"></i>&nbsp Presensi Masuk';}
 					   }
 					 
 					 ?>
@@ -640,8 +640,8 @@
 					 </span>
 						</div><?php
 						if($_SESSION['admin']==1){
-						echo '<h6 class="white-text link">'.$count8.' Presensi / Surat Masuk</h6>';} 
-						else { echo '<h6 class="white-text link">- Presensi / Surat Masuk</h6>';}  ?>
+						echo '<h6 class="white-text link">'.$count8.' Presensi Surat Masuk</h6>';} 
+						else { echo '<h6 class="white-text link">- Presensi Surat Masuk</h6>';}  ?>
                     </div>
                 </div>
 				
@@ -869,15 +869,30 @@
      <div class="card-content">
 	 
 	<?php  
-	
+			$rekapkel=0;
+			$rekapkels=0;
+			$nbmb=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(status_aktif=1 AND id_user<>9999 AND admin<>9)");
+			while($dab=mysqli_fetch_array($nbmb)){
+				$rekapjenkel=mysqli_query($config,"SELECT jenis_kelamin FROM tbl_identitas WHERE jenis_kelamin='L' AND id_user='".$dab['id_user']."'");
+				list($rekapkelb)=mysqli_fetch_array($rekapjenkel);
+				$rekapbz=count($rekapkelb);
+				$rekapkel+=$rekapbz;
+			}
 			
-			$rekapjenkel=mysqli_query($config,"SELECT COUNT(jenis_kelamin) FROM tbl_identitas WHERE jenis_kelamin='L'");
-			list($rekapkel)=mysqli_fetch_array($rekapjenkel);
-			$rekapjenkels=mysqli_query($config,"SELECT COUNT(jenis_kelamin) FROM tbl_identitas WHERE jenis_kelamin='P'");
-			list($rekapkels)=mysqli_fetch_array($rekapjenkels);?> 		
+			$nbmbf=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(status_aktif=1 AND id_user<>9999 AND admin<>9)");
+			while($dabs=mysqli_fetch_array($nbmbf)){
+				$rekapjenkels=mysqli_query($config,"SELECT jenis_kelamin FROM tbl_identitas WHERE jenis_kelamin='P' AND id_user='".$dabs['id_user']."'");
+				list($rekapkelsd)=mysqli_fetch_array($rekapjenkels);
+				$rekapbzd=count($rekapkelsd);
+				$rekapkels+=$rekapbzd;
+			}
+
+		
+			
+			?> 		
 			<div style="text-align:center"><i class="material-icons prefix md-prefix">wc</i><p style="text-align:center;display:inline"><strong> Jumlah Kelamin</strong></p></div>
-			<div id="chart_wrap">
-			<div id="piechart"></div>
+			<div id="chart_wrap" style="height:270px!important">
+			<div id="piechart" style="text-align:center"></div>
 			</div>
 	</div>
 	</div>
@@ -888,21 +903,21 @@
 	<?php  
 	
 			
-			$rekapjenkel1=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='1'");
+			$rekapjenkel1=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='1' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($komisarisv)=mysqli_fetch_array($rekapjenkel1);
-			$rekapjenkel2=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='2'");
+			$rekapjenkel2=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='2' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($direksiv)=mysqli_fetch_array($rekapjenkel2);
-			$rekapjenkel3=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='3'");
+			$rekapjenkel3=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='3' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($karyawanbantuv)=mysqli_fetch_array($rekapjenkel3);
-			$rekapjenkel4=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='4'");
+			$rekapjenkel4=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='4' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($karyawantetapv)=mysqli_fetch_array($rekapjenkel4);
-			$rekapjenkel5=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='5'");
+			$rekapjenkel5=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='5' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($pkwtv)=mysqli_fetch_array($rekapjenkel5);
 			
 			?> 		
 			<div style="text-align:center"><i class="material-icons prefix md-prefix">people</i><p style="text-align:center;display:inline"><strong> Status Karyawan</strong></p></div>
-			<div id="chart_wraps">
-			<div id="piechartsd"></div>
+			<div id="chart_wraps" style="height:270px!important">
+			<div id="piechartsd" style="text-align:center"></div>
 			</div>
 	</div>
 	</div>
@@ -931,17 +946,17 @@
 										</thead>
 										
 									<?php 
-									$dir=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=2");
+									$dir=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=2 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 									list($dirut)=mysqli_fetch_array($dir);
-									$disr=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=3");
+									$disr=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=3 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 									list($dirsi)=mysqli_fetch_array($disr);									
-									$kosv=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=4");
+									$kosv=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=4 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 									list($aba)=mysqli_fetch_array($kosv);
 									
 									$managers=array();
 									$mgv=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%MANAGER%'"); 
 									while($row=mysqli_fetch_array($mgv)){									
-									$mg=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=5"); 
+									$mg=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=5 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($mg)){
 										array_push($managers,$rowa['id_user']);
 									}
@@ -950,7 +965,7 @@
 									$pm=array();
 									$mgvd=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%PROJECT%'"); 
 									while($row=mysqli_fetch_array($mgvd)){									
-									$mgd=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=5"); 
+									$mgd=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=5 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($mgd)){
 										array_push($pm,$rowa['id_user']);
 									}
@@ -959,7 +974,7 @@
 									$sm=array();
 									$smtown=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%SITE%'"); 
 									while($row=mysqli_fetch_array($smtown)){									
-									$smsm=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=6"); 
+									$smsm=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=6 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($smsm)){
 										array_push($sm,$rowa['id_user']);
 									}
@@ -969,7 +984,7 @@
 									$asmand=array();
 									$azmen=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%ASSISTANT%' OR jabatan LIKE '%BENDAHARA%'"); 
 									while($row=mysqli_fetch_array($azmen)){									
-									$asb=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=6"); 
+									$asb=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=6 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($asb)){
 										array_push($asmand,$rowa['id_user']);
 									}
@@ -978,7 +993,7 @@
 									$so=array();
 									$soke=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%SENIOR%'"); 
 									while($row=mysqli_fetch_array($soke)){									
-									$sokap=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=7"); 
+									$sokap=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=7 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($sokap)){
 										array_push($so,$rowa['id_user']);
 									}
@@ -987,7 +1002,7 @@
 									$of=array();
 									$ofa=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%OFFICER%'"); 
 									while($row=mysqli_fetch_array($ofa)){									
-									$sokaps=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=8"); 
+									$sokaps=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=8 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($sokaps)){
 										array_push($of,$rowa['id_user']);
 									}

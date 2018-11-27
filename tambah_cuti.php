@@ -104,6 +104,8 @@
 	width: 310px; 
     height: 240px; 
 }
+
+
 #slideshow { 
    
     position: relative; 
