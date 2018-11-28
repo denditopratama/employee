@@ -782,25 +782,25 @@
 								<div class="card">
 							
 								';
+								$wowoy=mysqli_query($config,"SELECT gaji_jm FROM tbl_identitas WHERE id_user='$id_user'");
+								list($gajidia)=mysqli_fetch_array($wowoy);
 								if($status_tugas==1){
 									echo'
 								<div class="input-field col s12">
 								<i class="material-icons prefix md-prefix">attach_money</i>
-								<input id="gajijm" type="text" class="validate" name="gaji_jm" value='.$gajipusat.'>
+								<input id="gajijma" type="text" class="validate" name="gaji_jm" value='.number_format($gajidia , 0, ',', '.').' disabled>
 								<label>Gaji JM</label>
 								</div>';}
 								else{
 									echo'
 								<div class="input-field col s12">
 								<i class="material-icons prefix md-prefix">attach_money</i>
-								<input id="gajijm" type="text" class="validate" name="gaji_jm" value="Bukan Karyawan Perbantuan" disabled>
+								<input id="gajijma" type="text" class="validate" name="gaji_jm" value="0" disabled>
 								<label>Gaji JM</label>
 								</div>';
 								}
 								echo'
-								<div class="col s12">
-								<button id="gajipusat" class="btn-large green waves-effect waves-light col s12"><i class="material-icons">done</i> SIMPAN</button>
-								</div>
+							
 								</div>
 								</div>
 								
@@ -808,21 +808,12 @@
 								
 								<script>
 								$(document).ready(function(){
-            $('#gajipusat').click(function(){
-				var nilai = $('#gajijm').val();
+           
+				var nilai = $('#gajijma').val();
 				var input ='anjay';
-				if(nilai==''){
-					alert('Data Tidak Boleh Kosong !');
-				} else {
-				$.post('./js/penerimaan_lain.php', { input : input, nilai : nilai, id_user :<?php echo $id_user; ?>,id_gaji :<?php echo $id; ?> }, function(data){
-                    
-                    
-					$("#gajipusat").val(data);
-					alert('Data Berhasil Di Input !');
-					location.reload();
-					
-				});}
-				});
+				
+				$.post('./js/penerimaan_lain.php', { input : input, nilai : nilai, id_user :<?php echo $id_user; ?>,id_gaji :<?php echo $id; ?> });
+				
 			
 				
 			

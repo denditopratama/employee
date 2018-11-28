@@ -7,8 +7,8 @@ if(empty($_SESSION['admin'])){
         die();
     } else { 
 	$id_user=mysqli_real_escape_string($config,$_REQUEST['id_user']);
-	$menampung=mysqli_query($config,"SELECT tgl_bakti,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon,KTP,KK,NPWP,BPJSKT,BPJSKS,no_ktp,no_npwp,no_bpjsks,no_bpjskt,no_rekening,atas_nama,jenis_bank FROM tbl_identitas WHERE id_user='$id_user'");
-	list($tgl_bakti,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon,$ktp,$kk,$npwp,$bpjskt,$bpjsks,$noktp,$nonpwp,$nobpjsks,$nobpjskt,$no_rekening,$atas_nama,$jenis_bank)=mysqli_fetch_array($menampung);
+	$menampung=mysqli_query($config,"SELECT tgl_bakti,jenis_kelamin,tempat_lahir,tanggal_lahir,status_keluarga,agama,goldarah,alamat,kelurahan,kecamatan,kota,propinsi,kode_pos,no_telpon,KTP,KK,NPWP,BPJSKT,BPJSKS,no_ktp,no_npwp,no_bpjsks,no_bpjskt,no_rekening,atas_nama,jenis_bank,gaji_jm FROM tbl_identitas WHERE id_user='$id_user'");
+	list($tgl_bakti,$jenis_kelamin,$tempat_lahir,$tanggal_lahir,$status_keluarga,$agama,$goldarah,$alamat,$kelurahan,$kecamatan,$kota,$propinsi,$kode_pos,$no_telpon,$ktp,$kk,$npwp,$bpjskt,$bpjsks,$noktp,$nonpwp,$nobpjsks,$nobpjskt,$no_rekening,$atas_nama,$jenis_bank,$gaji_jm)=mysqli_fetch_array($menampung);
 		
 	?>
 			
@@ -412,9 +412,24 @@ if(empty($_SESSION['admin'])){
 											
                                             </select>
                                         </div>
+
+                                       	
                                           
                                     </div>
-									
+									<div class="input-field col s6">
+                                        <i class="material-icons prefix md-prefix">attach_money</i>
+                                        <label for="gaji_jm">Gaji Jasa Marga</label>
+                                        <?php
+                                        $ngz=mysqli_query($config,"SELECT status_tugas FROM tbl_user WHERE id_user='$id_user'");
+                                        list($sb)=mysqli_fetch_array($ngz);
+                                        if($sb==1){
+                                            echo '<input id="gajijm" type="text" name="gaji_jm" value="'.$gaji_jm.'">';
+                                        } else {
+                                            echo '<input id="gajijm" type="text" name="gaji_jm" value="Bukan Karyawan Perbantuan" disabled>';
+                                        }
+                                        ?>
+                                        
+                                    </div>
 									
 								<script type="text/javascript">
 								
