@@ -47,6 +47,12 @@ else {
 					border-bottom: none !important;
 					width:10%
 					}
+					header, main {
+						padding-left: 0;
+					  }
+					  head {
+						  display:none;
+					  }
 					
 					
 		@media print{

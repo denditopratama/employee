@@ -117,6 +117,26 @@
   
 }
 
+@media (min-width: 1268px) {
+  
+  #gambar{
+	 width: 540px; 
+	 height: 340px; 
+ }
+ 
+ 
+ #slideshow { 
+	
+	 position: relative; 
+	 width: 540px; 
+	 height: 340px; 
+	 
+	 box-shadow: 0 0 20px rgba(0,0,0,0.4); 
+ }
+   
+ }
+ 
+
 
 
 

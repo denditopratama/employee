@@ -28,7 +28,7 @@
 
 <nav style="background-color:#fff!important;opacity:1;">
    <div class="nav-wrapper">
-        <a href="./" class="brand-logo center hide-on-large-only"><img src='upload/screenshot.png' style="margin-top:20px;height:30px"></a>
+        <a href="./"  class="brand-logo center hide-on-large-only"><img id="dendibrow" src='upload/screenshot.png' style="margin-top:20px;height:30px"></a>
         <marquee class="hide-on-small-only" style="color:black" behavior="scroll" scrollamount="10" direction="left"><strong>BERITA HARI INI : </strong>
         <?php
          $mobzc=mysqli_query($config,"SELECT berita,tgl_akhir FROM tbl_berita ORDER BY id DESC LIMIT 1");
@@ -75,7 +75,7 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="./"><i class="material-icons middle">dashboard</i> Beranda</a></li>
+            <li><a href="./"><i class="material-icons middle">dashboard</i>Beranda</a></li>
             <li class="no-padding">
                
                 <ul class="collapsible collapsible-accordion">
@@ -154,7 +154,7 @@
                     <div class="collapsible-body">
                         <ul>
                           
-                            <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a  <?php if($_SESSION['id_user']!=8){ echo 'onclick="belumjadi();"';} else {echo 'href="indextm.php"';}?> >Tenancy Management</a></li>
+                            <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a  <?php if($_SESSION['id_user']!=8){ echo 'onclick="belumjadi();"';} else {echo 'href="indexnyatm.php"';}?> >Tenancy Management</a></li>
                             
                         </ul>
                     </div>
