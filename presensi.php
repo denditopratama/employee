@@ -56,7 +56,9 @@
                     $pg = 1;
                 } else {
                     $curr = ($pg - 1) * $limit;
-                }?>
+                }
+                $divisi=mysqli_real_escape_string($config,$_SESSION['divisi']);
+                ?>
 
                 <!-- Row Start -->
                 <div class="row">
@@ -169,7 +171,7 @@
 								if($_SESSION['admin']==1){
 							$querys = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE bulan LIKE '%$cari%' ORDER by id DESC");}
 							else{
-							$querys = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE divisi='".$_SESSION['divisi']."' AND(bulan LIKE '%$cari%') ORDER by id DESC");}
+							$querys = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE divisi='$divisi' AND(bulan LIKE '%$cari%') ORDER by id DESC");}
                                 if(mysqli_num_rows($querys) > 0){
                                     $no = 1;
                                     while($row = mysqli_fetch_array($querys)){
@@ -282,7 +284,7 @@
 							if($_SESSION['admin']==1){
 							$query = mysqli_query($config, "SELECT * FROM tbl_presensi ORDER by id DESC LIMIT $curr, $limit");}
 							else
-							{$query = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE divisi='".$_SESSION['divisi']."' ORDER by id DESC");}
+							{$query = mysqli_query($config, "SELECT * FROM tbl_presensi WHERE divisi='$divisi' ORDER by id DESC");}
 								 
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
