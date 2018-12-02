@@ -21,11 +21,11 @@ require('../include/config.php');
 												
 												
 												if($id_select==1){
-												$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
-												list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
+												$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas,kelas_jabatan FROM tbl_user WHERE id_user='$id_user'");
+												list($admin,$status_karyawan,$status_tugas,$kelas_jabatan)=mysqli_fetch_array($numpang);
 												$ngambil=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
 												list($lama)=mysqli_fetch_array($ngambil);
-												$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE admin='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
+												$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='$kelas_jabatan' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
 												list($gaji,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 												$ages = date_diff(date_create($lama), date_create('now'))->m;
 												$gajih=$gaji+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;

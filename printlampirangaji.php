@@ -190,7 +190,37 @@ $totpen=$totalpenerimaan+$totaljabatan+$totalfungsional+$totaltransportasi+$tota
 $pdf->Cell(30 ,6,'Rp '.number_format($totpen, 0, ',', '.').'',0,1,'R');
 
 
+//RINCIAN PENERIMANA LAIN
+$pdf->SetY(56);
+$pdf->SetX(110.2);
+$pdf->SetFont('Arial','',9);
+$jarak=6;
+$no=1;
+$mh=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id_gaji' GROUP BY kode_penerimaan");
+while($row=mysqli_fetch_array($mh)){
+	$anjos=mysqli_query($config,"SELECT uraian FROM tbl_jenis_penerimaan WHERE id='".$row['kode_penerimaan']."'");
+	list($uraiterima)=mysqli_fetch_array($anjos);
+	$noy=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_gaji='$id_gaji' AND kode_penerimaan='".$row['kode_penerimaan']."' GROUP BY kode_penerimaan");
+	list($jumlahpen)=mysqli_fetch_array($noy);
+$pdf->Cell(57 ,6,''.$no++.'. '.$uraiterima.'',0,0);
+$pdf->Cell(30 ,6,'Rp '.number_format($jumlahpen, 0, ',', '.').'',0,0,'R');
+$pdf->SetY(56+$jarak);
+$pdf->SetX(110.2);
+$jarak=$jarak+6;
+}
 
+
+$pdf->SetFont('Arial','B',9);
+$pdf->Cell(57 ,6,'Jumlah Penerimaan Lain',0,0);
+$pdf->Cell(30 ,6,'Rp '.number_format($jumpenlain, 0, ',', '.').'',0,0,'R');
+
+$y=$pdf->GetY();
+$x=$pdf->GetX();
+$pdf->SetXY($x, $y-20);
+$pdf->Line($x-30,$y,$x,$y);
+$y=$pdf->GetY();
+$x=$pdf->GetX();
+$pdf->SetXY($x, $y+103);
 
 //POTONGANNNNNNNNNNNNNNNNNNNNNNNNN
 
@@ -235,22 +265,24 @@ while($row=mysqli_fetch_array($moi)){
 	if($nos<10){
 	$pdf->Cell(71.4 ,6,'     '.$nos++.'. '.$namapotong.'',0,0);
 	$pdf->Cell(20 ,6,'Rp '.number_format($jumpotong, 0, ',', '.').'',0,0,'R');
-	$pdf->Cell(21 ,6,'',0,0,'R');
-	$pdf->Cell(20 ,6,''.$jenisbank.'',0,0,'R');
-	$pdf->Cell(15 ,6,'',0,0,'R');
-	$pdf->Cell(20 ,6,''.$an.'',0,0,'R');
-	
-	$pdf->Cell(20 ,6,''.$norek.'',0,1,'R');
+	$pdf->Cell(9 ,6,'',0,0,'R');
+	$yzd=$pdf->GetY();
+	$xzd=$pdf->GetX();
+	$pdf->MultiCell(62 ,4,''.$an.'',0,'L');
+	$pdf->SetXY($xzd+63,$yzd);
+	$pdf->Cell(25 ,6,''.$norek.'',0,1,'R');
+	$pdf->Cell(9 ,4,'',0,1,'R');
 	}
 	else if ($nos>=10){
-	$pdf->Cell(71.4 ,6,'    '.$nos++.'. '.$namapotong.'',0,0);
-	$pdf->Cell(20 ,6,'Rp '.number_format($jumpotong, 0, ',', '.').'',0,0,'R');
-	$pdf->Cell(21 ,6,'',0,0,'R');
-	$pdf->Cell(20 ,6,''.$jenisbank.'',0,0,'R');
-	$pdf->Cell(15 ,6,'',0,0,'R');
-	$pdf->Cell(20 ,6,''.$an.'',0,0,'R');
-	
-	$pdf->Cell(20 ,6,''.$norek.'',0,1,'R');
+		$pdf->Cell(71.4 ,6,'    '.$nos++.'. '.$namapotong.'',0,0);
+		$pdf->Cell(20 ,6,'Rp '.number_format($jumpotong, 0, ',', '.').'',0,0,'R');
+		$pdf->Cell(9 ,6,'',0,0,'R');
+		$yzd=$pdf->GetY();
+		$xzd=$pdf->GetX();
+		$pdf->MultiCell(62 ,4,''.$an.'',0,'L');
+		$pdf->SetXY($xzd+63,$yzd);
+		$pdf->Cell(25 ,6,''.$norek.'',0,1,'R');
+		$pdf->Cell(9 ,4,'',0,1,'R');
 	}
 	$jumlahpotong=$jumlahpotong+$jumpotong;
 }
@@ -316,34 +348,7 @@ $pdf->Cell(60 ,6,'(Terbilang : '.terbilang($gjd).' rupiah)',0,0);
 
 
 
-//RINCIAN PENERIMANA LAIN
-$pdf->SetY(56);
-$pdf->SetX(110.2);
-$pdf->SetFont('Arial','',9);
-$jarak=6;
-$no=1;
-$mh=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id_gaji' GROUP BY kode_penerimaan");
-while($row=mysqli_fetch_array($mh)){
-	$anjos=mysqli_query($config,"SELECT uraian FROM tbl_jenis_penerimaan WHERE id='".$row['kode_penerimaan']."'");
-	list($uraiterima)=mysqli_fetch_array($anjos);
-	$noy=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_gaji='$id_gaji' AND kode_penerimaan='".$row['kode_penerimaan']."' GROUP BY kode_penerimaan");
-	list($jumlahpen)=mysqli_fetch_array($noy);
-$pdf->Cell(57 ,6,''.$no++.'. '.$uraiterima.'',0,0);
-$pdf->Cell(30 ,6,'Rp '.number_format($jumlahpen, 0, ',', '.').'',0,0,'R');
-$pdf->SetY(56+$jarak);
-$pdf->SetX(110.2);
-$jarak=$jarak+6;
-}
 
-
-$pdf->SetFont('Arial','B',9);
-$pdf->Cell(57 ,6,'Jumlah Penerimaan Lain',0,0);
-$pdf->Cell(30 ,6,'Rp '.number_format($jumpenlain, 0, ',', '.').'',0,0,'R');
-
-$y=$pdf->GetY();
-$x=$pdf->GetX();
-$pdf->SetXY($x, $y-20);
-$pdf->Line($x-30,$y,$x,$y);
 
 
 
