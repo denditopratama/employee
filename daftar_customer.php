@@ -110,7 +110,8 @@ font-size:14px!important;
     <!-- container START -->
     <div class="container">
     <?php
-        
+                $tokeneditcustomer = bin2hex(mt_rand(0,9999));
+                $_SESSION['tokeneditcustomer']=$tokeneditcustomer;
                 
                 if(isset($_POST['tambahcustomer'])){
                     $nama_depan=mysqli_real_escape_string($configtm,$_POST['nama_depan']); 
@@ -149,7 +150,7 @@ font-size:14px!important;
         <div class="row">
         
         <div class="col s12" style="text-align:right!important">
-        <a class="btn" style="margin-top:50px" id="tambah" role="button"><i class="fa fa-plus"></i> Tambah Data</a>
+        <a class="btn grey" style="margin-top:50px" id="tambah" role="button"><i class="fa fa-plus"></i> Tambah Data</a>
         </div>
             <div class="col m12" id="colres">
               
@@ -212,17 +213,34 @@ font-size:14px!important;
 
           <td style="text-align:center">
            <?php 
-           if($row['status']==0){
-               echo '<a class="btn btn-primary red btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">error</i> tidak aktif</a>';
+
+           if($_SESSION['admin']==1){
+            if($row['status']==0){
+                echo '<a href="./tm/hapus_customer.php?id='.$row['id'].'&aktif=yYy&token='.$tokeneditcustomer.'" onclick="return confirm(\'anda yakin?\');" class="btn btn-primary red btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">error</i> tidak aktif</a>';
+            } else {
+                echo '<a href="./tm/hapus_customer.php?id='.$row['id'].'&aktif=nNn&token='.$tokeneditcustomer.'" onclick="return confirm(\'anda yakin?\');" class="btn btn-primary green btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">done_all</i> aktif</a>';
+            }
            } else {
-               echo '<a class="btn btn-primary green btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">done_all</i> aktif</a>';
+            if($row['status']==0){
+                echo '<a class="btn btn-primary red btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">error</i> tidak aktif</a>';
+            } else {
+                echo '<a class="btn btn-primary green btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">done_all</i> aktif</a>';
+            }
            }
+           
            ?>
            </td>                            
 
-          <td style="text-align:center"><a data-id="<?php echo $row['id'];?>" class="btn blue"><i class="material-icons" style="font-size:24px;line-height:11px">create</i> edit</a>                              
-
-              <a onclick="return confirm('Apakah benar akan menghapus data ini ?')" href="modul/customer/proses_data.php?action=delete&id=<?php echo $row['id'];?>"  class="btn btn-primary orange btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">delete_forever</i> delete</a>                                 																										
+          <td style="text-align:center"><a data-id="<?php echo $row['id'];?>" class="btn blue"><i class="material-icons" style="font-size:24px;line-height:11px">create</i> edit</a> 
+          <?php                             
+          if($_SESSION['admin']==1){
+              echo '
+              <a onclick="return confirm(\'Apakah benar akan menghapus data ini ?\')" href="./tm/hapus_customer.php?id='.$row['id'].'&hapus=yYy&token='.$tokeneditcustomer.'"  class="btn btn-primary orange btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">delete_forever</i> delete</a>';                                																										
+          } else {
+            echo '
+            <a class="btn btn-primary orange btn-md"><i class="material-icons" style="font-size:24px;line-height:11px">delete_forever</i> delete</a>';      
+          }
+          ?>
 
           </td>
 
@@ -280,7 +298,8 @@ font-size:14px!important;
 
 $(document).ready(function() {
    
- 
+  
+    
   
         $('.blue').click(function(){
             $('#modaledit').openModal();

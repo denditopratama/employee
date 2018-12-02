@@ -212,7 +212,7 @@
                                 <?php
                                    
 									
-									 $query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND id_user<>8");
+									 $query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(id_user<>8 AND status_aktif=1)");
 		
 										while ($row = mysqli_fetch_array($query)) {											
 										echo "<option value='".$row['id_user']."'>".$row['nama']."</option>";

@@ -56,7 +56,7 @@
                                             echo '<script language="javascript">window.history.back();</script>';
                                         } else {
 
-											$ekstensi = array('jpg','png','jpeg','doc','docx','pdf','mp4','xls','xlsx','mov','rar','zip','ppt');
+											$ekstensi = array('jpg','png','jpeg','doc','docx','pdf','mp4','xls','xlsx','mov','rar','zip','ppt','pptx','exe','iso','mp3','avi','vid');
                                             $file = $_FILES['file']['name'];
                                             $x = explode('.', $file);
                                             $eks = strtolower(end($x));
@@ -89,14 +89,14 @@
 															
 
                                                             if($_POST['tujuan']==2){
-                                                           $result_explode = explode('.', $tunjukan);
+                                                           $result_explode = explode('|', $tunjukan);
 													
                                                             $query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='".$result_explode[1]."',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),file='$nfile',keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE id_surat='$id_surat' ");
 	
-															$queryzz = mysqli_query($config, "UPDATE tbl_surat_masuk SET kode='$no_surat',asal_surat='".$_SESSION['nama']."',isi='$isi',tgl_surat='$tgl_surat',tgl_diterima=NOW(),file='$nfile',keterangan='$keterangan',id_user='".$result_explode[0]."' WHERE kode='$no_surat'");
+															$queryzz = mysqli_query($config, "UPDATE tbl_surat_masuk SET kode='$no_surat',asal_surat='".$_SESSION['nama']."',isi='$isi',tgl_surat='$tgl_surat',tgl_diterima=NOW(),file='$nfile',keterangan='$keterangan',id_user='".$result_explode[0]."' WHERE id_surat='$id_surat'");
 															}
 															else{
-															$query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='$ditujukan',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),file='$nfile',keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE no_surat='$no_surat' ");
+															$query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='$ditujukan',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),file='$nfile',keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE id_surat='$id_surat' ");
 															
 															}
 
@@ -120,7 +120,7 @@
 
                                                           if($_POST['tujuan']==2){
 														
-														$result_explode = explode('.', $tunjukan);
+														$result_explode = explode('|', $tunjukan);
 													
                                                             $query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='".$result_explode[1]."',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),file='$nfile',keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE id_surat='$id_surat' ");
 	
@@ -158,14 +158,14 @@
 
 															if($_POST['tujuan']==2){
 														
-															$result_explode = explode('.', $tunjukan);
+															$result_explode = explode('|', $tunjukan);
 													
                                                             $query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='".$result_explode[1]."',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE id_surat='$id_surat' ");
 	
-															$queryzz = mysqli_query($config, "UPDATE tbl_surat_masuk SET kode='$no_surat',asal_surat='".$_SESSION['nama']."',isi='$isi',tgl_surat='$tgl_surat',tgl_diterima=NOW(),keterangan='$keterangan',id_user='".$result_explode[0]."' WHERE kode='$no_surat'");
+															$queryzz = mysqli_query($config, "UPDATE tbl_surat_masuk SET kode='$no_surat',asal_surat='".$_SESSION['nama']."',isi='$isi',tgl_surat='$tgl_surat',tgl_diterima=NOW(),keterangan='$keterangan',id_user='".$result_explode[0]."' WHERE id_surat='$id_surat'");
 															}
 															else{
-															$query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='$ditujukan',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE no_surat='$no_surat' ");
+															$query = mysqli_query($config, "UPDATE tbl_surat_keluar SET tujuan='$ditujukan',no_surat='$no_surat',isi='$isi',kode='$kode',tgl_surat='$tgl_surat',tgl_catat=NOW(),keterangan='$keterangan',id_user='$id_user',dari='".$_SESSION['nama']."' WHERE id_surat='$id_surat' ");
 															
 															}
 
@@ -258,44 +258,26 @@
                         <div class="row">
                           <script>
 
-								function tampil1() {
-									
-										document.getElementById("tunjukan").style.visibility = "hidden";
-										document.getElementById("ditujukan").style.visibility = "visible";
-										document.getElementById("tunjukan").disabled = true;
-										document.getElementById("rere").style.color = "green";
-										document.getElementById("ditujukan").disabled = false;	
-										document.getElementById("roro").style.color = "red";
-										document.getElementById("no_surat").disabled = false;	
-										document.getElementById("surat").style.color = "green";
-										document.getElementById("no_surat").style.visibility = "visible";
-										document.getElementById("usaha").style.visibility = "visible";
-										document.getElementById("suraha").style.visibility = "visible";
-										
-									
-										}
-								function tampil2() {
-									
-										document.getElementById("ditujukan").disabled = true;
-										document.getElementById("roro").style.color = "green";
-										document.getElementById("tunjukan").disabled = false;	
-										document.getElementById("rere").style.color = "red";
-										document.getElementById("tunjukan").style.visibility = "visible";
-										document.getElementById("ditujukan").style.visibility = "hidden";
-										document.getElementById("no_surat").disabled = true;	
-										document.getElementById("surat").style.color = "red";
-										document.getElementById("no_surat").style.visibility = "hidden";
-										document.getElementById("usaha").style.visibility = "hidden";
-										document.getElementById("suraha").style.visibility = "hidden";
-										
-										}
+								 $(document).ready(function(){
+                                            $('#kedua').click(function() {
+                                                        $('#asd').show('slow');
+                                                        $('#dsa').hide();
+                                                        $('#suratjing').hide();
+                                                });
+                                                $('#kesatu').click(function() {
+                                                        $('#dsa').show('slow');
+                                                        $('#suratjing').show('slow');
+                                                        $('#asd').hide();
+
+                                                });
+                                            });
 							</script>
                           
                           <div class="input-field col s6">
                             <i class="material-icons prefix md-prefix">place</i>
-                            <input id="kesatu" type="radio" class="validate" name="tujuan" value="1" onclick="tampil1()" required>
+                            <input id="kesatu" type="radio" class="validate" name="tujuan" value="1">
                             <label id="kk" for="kesatu" style="margin-left:25px">Institusi / Perusahaan Luar</label>
-							<input id="kedua" type="radio" class="validate" name="tujuan" value="2" onclick="tampil2()">
+							<input id="kedua" type="radio" class="validate" name="tujuan" value="2">
 						    <label id ="gogo" for="kedua"style="margin-left:25px">Karyawan Internal</label>
 							
 
@@ -303,19 +285,19 @@
                             <div id="asd" class="input-field col s6" >
                             <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label>Ditujukan</label><br/>	
                             <select class="browser-default" name="tunjukan" id="tunjukan" style="margin-bottom:15px;">
-						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9)");	
+						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(id_user<>8 AND status_aktif=1)");	
 							while ($row = mysqli_fetch_array($query)) {		
 									if($tujuan==$row['nama']){
-									echo "<option value='".$row['id_user'].".".$row['nama']."' selected>".$row['nama']."</option>";	
+									echo "<option value='".$row['id_user']."|".$row['nama']."' selected>".$row['nama']."</option>";	
 									} else {
-									echo "<option value='".$row['id_user'].".".$row['nama']."'>".$row['nama']."</option>";}
+									echo "<option value='".$row['id_user']."|".$row['nama']."'>".$row['nama']."</option>";}
 								
 								}
 								echo "</select>";			
 						?>
 							</div>
 							
-							 <div class="input-field col s6">
+							 <div class="input-field col s6" id="suratjing">
                             <i id="surat" class="material-icons prefix md-prefix">looks_two</i>
                             <input id="no_surat" type="text" class="validate" name="no_surat" value="<?php echo $no_surat;?>">
                                 <?php
@@ -435,11 +417,16 @@ $(document).ready(function(){
 	<?php 
 	$kunyuk=mysqli_query($config,"SELECT nama FROM tbl_user WHERE nama='$tujuan'");
 	if(mysqli_num_rows($kunyuk)>0){
-		echo'tampil2();
-		$("#kedua").prop("checked", true);';
+        echo'
+        $("#kedua").click();
+        $("#kedua").prop("checked", true);
+        $("#kk").hide();';
+        
 	} else {
-		echo'tampil1();
-		$("#kesatu").prop("checked", true);';
+        echo'
+        $("#kesatu").click();
+        $("#kesatu").prop("checked", true);
+        $("#gogo").hide();';
 	}
 	?>
 	

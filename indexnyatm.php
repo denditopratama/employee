@@ -49,8 +49,8 @@
         if(isset($_REQUEST['page'])){
             $page = $_REQUEST['page'];
             switch ($page) {
-                case 'tsm':
-                    include "transaksi_surat_masuk.php";
+                case 'kontrak':
+                    include "kontrak.php";
                     break;
                
 					
@@ -59,12 +59,6 @@
     ?>
        
            
-			
-				
-							
-				
-	
-	
         <!-- Row END -->
    
     
@@ -102,6 +96,16 @@
 	display:inline;
 	margin:0 auto;
 		}
+
+        	#columnchart{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+	display:inline;
+	margin: auto;
+		}
 		
 		</style>
 	
@@ -110,64 +114,27 @@
 	<div class="card yellow">
      <div class="card-content">
 	 
-	<?php  
-			$rekapkel=0;
-			$rekapkels=0;
-			$nbmb=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(status_aktif=1 AND id_user<>9999 AND admin<>9)");
-			while($dab=mysqli_fetch_array($nbmb)){
-				$rekapjenkel=mysqli_query($config,"SELECT jenis_kelamin FROM tbl_identitas WHERE jenis_kelamin='L' AND id_user='".$dab['id_user']."'");
-				list($rekapkelb)=mysqli_fetch_array($rekapjenkel);
-				$rekapbz=count($rekapkelb);
-				$rekapkel+=$rekapbz;
-			}
-			
-			$nbmbf=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(status_aktif=1 AND id_user<>9999 AND admin<>9)");
-			while($dabs=mysqli_fetch_array($nbmbf)){
-				$rekapjenkels=mysqli_query($config,"SELECT jenis_kelamin FROM tbl_identitas WHERE jenis_kelamin='P' AND id_user='".$dabs['id_user']."'");
-				list($rekapkelsd)=mysqli_fetch_array($rekapjenkels);
-				$rekapbzd=count($rekapkelsd);
-				$rekapkels+=$rekapbzd;
-			}
-
-		
-			
-			?> 		
+	
 			<div style="text-align:center"><i class="material-icons prefix md-prefix">wc</i><p style="text-align:center;display:inline"><strong> Jumlah Kelamin</strong></p></div>
 			<div id="chart_wrap" style="height:270px!important">
 			<div id="piechart" style="text-align:center"></div>
 			</div>
-	</div>
+            </div>
+            </div>
+
 	</div>
 	
-	<div class="card" style="background-color:#0099bf!important;">
-     <div class="card-content">
-	 
-	<?php  
-	
-			
-			$rekapjenkel1=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='1' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
-			list($komisarisv)=mysqli_fetch_array($rekapjenkel1);
-			$rekapjenkel2=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='2' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
-			list($direksiv)=mysqli_fetch_array($rekapjenkel2);
-			$rekapjenkel3=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='3' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
-			list($karyawanbantuv)=mysqli_fetch_array($rekapjenkel3);
-			$rekapjenkel4=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='4' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
-			list($karyawantetapv)=mysqli_fetch_array($rekapjenkel4);
-			$rekapjenkel5=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='5' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
-			list($pkwtv)=mysqli_fetch_array($rekapjenkel5);
-			
-			?> 		
-			<div style="text-align:center"><i class="material-icons prefix md-prefix">people</i><p style="text-align:center;display:inline"><strong> Status Karyawan</strong></p></div>
-			<div id="chart_wraps" style="height:270px!important">
-			<div id="piechartsd" style="text-align:center"></div>
+                <div class="col s12 m8">
+                <div class="card white">
+                <div class="card-content">
+			<div id="chart_wrap">
+			<div id="columnchart" style="text-align:center"></div>
 			</div>
-	</div>
-	</div>
-	
-	</div>
-	
-	    
-	
+            </div>
+            </div>
+            </div>
+            </div>
+           
 
 		
 		 <?php
@@ -201,6 +168,13 @@
                 </div>
 
 
+<?php  
+     
+
+		
+			
+			?> 		
+
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 // Load google charts
@@ -210,10 +184,17 @@ google.charts.setOnLoadCallback(drawChart);
 // Draw the chart and set the chart values
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
-  ['Gender', 'Number'],
-	<?php 
-		echo"['Laki - Laki',".$rekapkel."],";
-		echo"['Perempuan',".$rekapkels."],";
+  ['Tenant', 'Number'],
+    <?php 
+    
+    $yongkru=mysqli_query($configtm,"SELECT * FROM tbl_unit");
+    while($row=mysqli_fetch_array($yongkru)){
+        $m=mysqli_query($configtm,"SELECT COUNT(id) FROM tbl_customer WHERE unit='".$row['id']."'");
+        list($unitko)=mysqli_fetch_array($m);
+        echo"['".$row['unit']."',".$unitko."],";
+    }
+		
+	
 	
   ?>
  
@@ -227,6 +208,26 @@ function drawChart() {
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
   chart.draw(data, options);
 }
+
+function drawCharts() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+                
+               ['Year', 'Tenant'],
+               ['2012',  900],
+               ['2013',  1000],
+               ['2014',  1170],
+               ['2015',  1250],
+               ['2016',  3530]
+            ]);
+
+            var options = {title: 'Jumlah Tenant per bulan',backgroundColor : 'transparent'}; 
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(drawCharts);
 </script>
 
 

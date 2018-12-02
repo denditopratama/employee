@@ -10,6 +10,9 @@
 
         echo '
         <style type="text/css">
+        header, main {
+			padding-left: 0;
+		  }
 			h6 {
 				font-size: 1.875em;
 				font-family: "Sans", Times, serif;

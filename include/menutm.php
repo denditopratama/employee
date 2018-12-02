@@ -130,7 +130,7 @@ a {
                                
 							
 								<li><a href="daftar_customer.php">Prospective Customer</a></li>
-								<li><a href="?page=tsk">Perjanjian</a></li>
+								<li><a href="indexnyatm.php?page=kontrak">Perjanjian</a></li>
 								<li><a href="?page=kpts">Invoice</a></li>
                                 <li><a href="?page=kpts">Pembayaran</a></li>
 								

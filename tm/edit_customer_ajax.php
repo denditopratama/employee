@@ -10,7 +10,8 @@ if(empty($_SESSION['admin'])){
 } else {
 require('../include/config.php');
 
-
+            $tokeneditcustomer = bin2hex(mt_rand(0,9999));
+           $_SESSION['tokeneditcustomer']=$tokeneditcustomer;
 			$id=mysqli_real_escape_string($configtm,$_POST['datake']);
 			$laks=mysqli_query($configtm,"SELECT nama,alamat,hp,phone,email,pic,npwp,status,kota,propinsi,kodepos,namab,unit FROM tbl_customer WHERE id='$id'");
 			list($nama,$alamat,$hp,$phone,$email,$pic,$npwp,$status,$kota,$propinsi,$kodepos,$namab,$unit)=mysqli_fetch_array($laks);
@@ -30,14 +31,14 @@ echo'
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">perm_identity</i>
-<input type="text" name="nama_depan" id="nama_depan" value="'.$nama.'" required>
+<input type="text" name="nama_depan" id="nama_depand" value="'.$nama.'" required>
 
 <label for="nama_depan" class="active">Nama Depan</label>
 </div>
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">perm_identity</i>
-<input type="text" name="nama_belakang" id="nama_belakang" value="'.$namab.'" required>
+<input type="text" name="nama_belakang" id="nama_belakangd" value="'.$namab.'" required>
 
 <label for="nama_belakang" class="active">Nama Belakang</label>
 </div>
@@ -111,7 +112,7 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 
 <div class="input-field col s6">
     <i class="material-icons prefix md-prefix">place</i>
-    <input type="text" name="alamat" id="alamat" value="'.$alamat.'"  required>    
+    <input type="text" name="alamat" id="alamatd" value="'.$alamat.'"  required>    
     <label for="alamat" class="active" >Alamat</label>
   
       
@@ -120,20 +121,20 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 <div class="input-field col s6">
     <i class="material-icons prefix md-prefix">looks_one</i><label class="active">Kode Pos</label>
    
-    <input type="number" class="validate" name="kode_pos" id="kode_pos"  value="'.$kodepos.'">   
+    <input type="number" class="validate" name="kode_pos" id="kode_posd"  value="'.$kodepos.'">   
       
 </div>
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">phone_iphone</i>
-<input type="number" min ="0" name="nomorhp" id="nomorhp" value="'.$hp.'" required>
+<input type="number" min ="0" name="nomorhp" id="nomorhpd" value="'.$hp.'" required>
 
 <label for="nomorhp" class="active">Nomor HP</label>
 </div>
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">phone</i>
-<input type="number" min="0" name="telepon"  id="telepon" value="'.$phone.'" required>
+<input type="number" min="0" name="telepon"  id="telepond" value="'.$phone.'" required>
 
 <label for="telepon" class="active">No. Telpon</label>
 </div>
@@ -141,7 +142,7 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">email</i>
-<input type="email" id="email" class="validate" name="email" id="email" value="'.$email.'" required>
+<input type="email" class="validate" name="email" id="emaild" value="'.$email.'" required>
 <label for="email" class="active">E-mail</label>
 
 </div>
@@ -149,14 +150,14 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">card_membership</i>
-<input type="text" name="npwp" id="npwp" value="'.$npwp.'" required>
+<input type="text" name="npwp" id="npwpd" value="'.$npwp.'" required>
 <label for="npwp" class="active">NPWP</label>
 </div>
 
 <div class="input-field col s6">
     <i class="material-icons prefix md-prefix">verified_user</i><label>Status Aktif</label><br/>
     <div class="input-field col s11 right">
-		<select class="browser-default" name="stataktif" id="stataktif" style="margin-bottom:24px;" required>';
+		<select class="browser-default" name="stataktif" id="stataktifd" style="margin-bottom:24px;" required>';
 		
       
         if($status==1){
@@ -178,7 +179,7 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 <div class="input-field col s6">
     <i class="material-icons prefix md-prefix">work</i><label>Unit</label><br/>
     <div class="input-field col s11 right">
-		<select class="browser-default" name="unit" id="unit" style="margin-bottom:24px;" required>';
+		<select class="browser-default" name="unit" id="unitd" style="margin-bottom:24px;" required>';
 		
         
         $eliji=mysqli_query($configtm,"SELECT * FROM tbl_unit");
@@ -199,7 +200,7 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 
 <div class="input-field col s6">
 <i class="material-icons prefix md-prefix">perm_identity</i>
-<input type="text" name="pic" id="pic" value="'.$pic.'" required>
+<input type="text" name="pic" id="picd" value="'.$pic.'" required>
 
 <label for="pic" class="active">PIC</label>
 </div>
@@ -216,7 +217,36 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 
     
 <div class="input-field col s6" style="width:100%;text-align:left">	
-<button type="submit" name="tambahcustomer" class="btn-large green waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
-</div>';
-	}
+<button type="submit" id="simpancustomer" class="btn-large green waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
+</div>
+<script>
+$(\'#simpancustomer\').click(function(){
+    var id = '.$id.';
+    var token = '.$tokeneditcustomer.';
+    var nama_depan = $(\'#nama_depand\').val();
+    var nama_belakang = $(\'#nama_belakangd\').val();
+    var provinsi = $(\'#propinsis\').val();
+    var kota = $(\'#kotay\').val();
+    var alamat = $(\'#alamatd\').val();
+    var kodepos = $(\'#kode_posd\').val();
+    var nomorhp = $(\'#nomorhpd\').val();
+    var telepon = $(\'#telepond\').val();
+    var email = $(\'#emaild\').val();
+    var npwp = $(\'#npwpd\').val();
+    var stataktif = $(\'#stataktifd\').val();
+    var unit = $(\'#unitd\').val();
+    var pic = $(\'#picd\').val();
+    $.post(\'./tm/simpan_customer_ajax.php\', { id : id, token : token, nama_depan : nama_depan, 
+        nama_belakang : nama_belakang, provinsi : provinsi,
+    kota : kota, alamat : alamat, kode_pos : kodepos, nomorhp : nomorhp, telepon : telepon, email : email, npwp : npwp, 
+    stataktif : stataktif, unit : unit, pic : pic }, function(){
+    alert(\'Sukses ! Data Berhasil diubah\');
+    location.reload();
+});
+
+   });
+   </script>';
+    }
+    
+   
 ?>

@@ -70,7 +70,7 @@
 
                                            
 
-                                                $ekstensi = array('jpg','png','jpeg','doc','docx','pdf','mp4','xls','xlsx','mov','rar','zip','ppt');
+                                                $ekstensi = array('jpg','png','jpeg','doc','docx','pdf','mp4','xls','xlsx','mov','rar','zip','ppt','pptx','exe','iso','mp3','avi','vid');
                                                 $file = $_FILES['file']['name'];
                                                 $x = explode('.', $file);
                                                 $eks = strtolower(end($x));
@@ -93,13 +93,17 @@
 															  if($_POST['tujuan']==2){
 														
 												
-														$result_explode = explode('|', $tunjukan);
-														
-                                                            $query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,tgl_catat,file,keterangan,id_user,dari)
-															VALUES('$no_agenda','".$result_explode[1]."','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$nfile','$keterangan','$id_user','".$_SESSION['nama']."')");
-	
-															$queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
-															VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$nfile','$keterangan','".$result_explode[0]."')");
+													
+                                                            foreach ($_POST['tunjukan'] as $menunjukans){
+                                                                $menunjukan=mysqli_real_escape_string($config,$menunjukans);
+                                                                $hasil_explode = explode('|', $menunjukan);
+                                                                $query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,tgl_catat,file,keterangan,id_user,dari)
+                                                                VALUES('$no_agenda','$hasil_explode[1]','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$nfile','$keterangan','$id_user','".$_SESSION['nama']."')");
+        
+                                                                $queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
+                                                                VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$nfile','$keterangan','$hasil_explode[0]')");
+                                                            }     
+                                                           
 															}
 															else{
 															$query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,
@@ -136,14 +140,16 @@
                                                     if($_POST['tujuan']==2){
 														
 												
-														$result_explode = explode('|', $tunjukan);
+														foreach ($_POST['tunjukan'] as $menunjukans){
+                                                            $menunjukan=mysqli_real_escape_string($config,$menunjukans);
+                                                            $hasil_explode = explode('|', $menunjukan);
 														
                                                             $query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,tgl_catat,file,keterangan,id_user,dari)
-															VALUES('$no_agenda','".$result_explode[1]."','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$file','$keterangan','$id_user','".$_SESSION['nama']."')");
+															VALUES('$no_agenda','$hasil_explode[1]','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$file','$keterangan','$id_user','".$_SESSION['nama']."')");
 	
 															$queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
-															VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$file','$keterangan','".$result_explode[0]."')");
-															}
+															VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$file','$keterangan','$hasil_explode[0]')");
+															}}
 															else{
 																
 															$query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,
@@ -234,62 +240,67 @@
 
                     <!-- Row in form START -->
                     <div class="row">
-                       	<script>
-
-								function tampil1() {
-									
-										document.getElementById("tunjukan").style.visibility = "hidden";
-										document.getElementById("ditujukan").style.visibility = "visible";
-										document.getElementById("tunjukan").disabled = true;
-										document.getElementById("rere").style.color = "green";
-										document.getElementById("ditujukan").disabled = false;	
-										document.getElementById("roro").style.color = "red";
-										document.getElementById("no_surat").disabled = false;	
-										document.getElementById("surat").style.color = "green";
-										document.getElementById("no_surat").style.visibility = "visible";
-										document.getElementById("usaha").style.visibility = "visible";
-										document.getElementById("suraha").style.visibility = "visible";
-										
-									
-										}
-								function tampil2() {
-									
-										document.getElementById("ditujukan").disabled = true;
-										document.getElementById("roro").style.color = "green";
-										document.getElementById("tunjukan").disabled = false;	
-										document.getElementById("rere").style.color = "red";
-										document.getElementById("tunjukan").style.visibility = "visible";
-										document.getElementById("ditujukan").style.visibility = "hidden";
-										document.getElementById("no_surat").disabled = true;	
-										document.getElementById("surat").style.color = "red";
-										document.getElementById("no_surat").style.visibility = "hidden";
-										document.getElementById("usaha").style.visibility = "hidden";
-										document.getElementById("suraha").style.visibility = "hidden";
-										
-										}
-							</script>
+                       	
 					<div class="input-field col s6">
                             <i class="material-icons prefix md-prefix">place</i>
-                            <input id="kesatu" type="radio" class="validate" name="tujuan" value="1" onclick="tampil1()" required>
+                            <input id="kesatu" type="radio" class="validate" name="tujuan" value="1" required>
                             <label for="kesatu" style="margin-left:25px">Institusi / Perusahaan Luar</label>
-							<input id="kedua" type="radio" class="validate" name="tujuan" value="2" onclick="tampil2()">
+							<input id="kedua" type="radio" class="validate" name="tujuan" value="2">
 						    <label for="kedua"style="margin-left:25px">Karyawan Internal</label>
 							
 
 					</div>
-						<div id="asd" class="input-field col s6" >
-                            <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label>Ditujukan</label><br/>	
-                            <select class="browser-default" name="tunjukan" id="tunjukan" style="margin-bottom:15px;">
-						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND id_user<>8");	
-							while ($row = mysqli_fetch_array($query)) {											
-								echo "<option id='qq' value='".$row['id_user']."|".$row['nama']."'>".$row['nama']."</option>";}
-								echo "</select>";
+                                       
+
+						<div id="asd">
+                        <div id="modol" class="modal">
+                        <div class="modal-content">
+                        <div class="input-field col s12">
+                            <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label style="margin-top:-10px">Ditujukan</label><br/>	
+                           
+                            <div>
+                            <?php
+                            $gm=mysqli_query($config,"SELECT * FROM tbl_ref_divisi");
+                            while($data=mysqli_fetch_array($gm)){
+                                echo '<input type="checkbox" value='.$data['id'].' id="checkd'.$data['id'].'">
+                                <label for="checkd'.$data['id'].'" style="background-color:yellow">'.$data['uraian'].'</label><br>';
+                                
+                                $query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(status_aktif=1 AND id_user<>8 AND divisi='".$data['id']."') ORDER BY divisi,admin ASC");	
+                                while ($row = mysqli_fetch_array($query)) {											
+                                    echo '<input type="checkbox" name="tunjukan[]" value="'.$row['id_user'].'|'.$row['nama'].'" id="check'.$row['id_user'].'" cin="'.$data['id'].'">
+                                    <label for="check'.$row['id_user'].'">'.$row['nama'].'</label><br>';
+                                }
+                            }
+                         
 							
-								
 					?>
+                          
+                            </div>
+						
 					</div>
+                    </div>
+                    </div>
+                    </div>
 					
-					         <div class="input-field col s6">
+
+ <script>
+                                        $(document).ready(function(){
+                                            $('#kedua').click(function() {
+                                                        $('#modol').openModal();
+                                                        $('#dsa').hide();
+                                                        $('#suratjing').hide();
+                                                });
+                                                $('#kesatu').click(function() {
+                                                        $('#dsa').show('slow');
+                                                        $('#suratjing').show('slow');
+                                                        
+
+                                                });
+                                            });
+                                            </script>
+
+
+					         <div class="input-field col s6" id="suratjing" style="display:none">
                             <i id="surat" class="material-icons prefix md-prefix">looks_two</i>
                             <input id="no_surat" type="text" class="validate" name="no_surat">
                                 <?php
@@ -306,7 +317,7 @@
                                 ?>
                             <label id="suraha"for="no_surat">Nomor Surat</label>
                         </div>
-						<div id="dsa" class="input-field col s6" >
+						<div id="dsa" class="input-field col s6" style="display:none" >
                             <i id="rere" class="material-icons prefix md-prefix">work</i>
                             <input id="ditujukan" type="text" class="" name="ditujukan"> 
                             <label id="usaha" for="ditujukan">Perusahaan Tujuan</label>
@@ -400,3 +411,22 @@
         }
     }
 ?>
+ <script>
+        
+                           for(i=1;i<=<?php echo mysqli_num_rows($gm); ?>;i++)  
+                         { 
+                       
+                            $('#checkd'+i).click({i},function(event){
+                                var i = event.data.i;
+                                if($('#checkd'+i).is(':checked')){
+                                    $('input[type="checkbox"][cin='+i+']').prop('checked', true);
+                                } else {
+                                    $('input[type="checkbox"][cin='+i+']').prop('checked', false); 
+                                }
+                              
+                               
+                            })
+                                 
+                            
+                         }
+                           </script>
