@@ -36,7 +36,7 @@
                 // download file hasil backup
                 if(isset($_REQUEST['nama_file'])){
 
-                    $back_dir = "./";
+                    $back_dir = "./database/";
                 	$file = $back_dir.$_REQUEST['nama_file'];
 
                     $x = explode('.', $file);
