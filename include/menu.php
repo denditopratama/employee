@@ -61,7 +61,7 @@
             <li class="no-padding blue-grey darken-4">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                        <a class="collapsible-header"><i class="material-icons">account_circle</i><?php echo $_SESSION['nama']; ?></a>
+                        <a style="text-align:left!important" class="collapsible-header"><i class="material-icons">account_circle</i><?php echo $_SESSION['nama']; ?></a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="?page=pro">Profil</a></li>
