@@ -43,6 +43,8 @@ if(empty($_SESSION['admin'])){
 										<option value="4">S1</option>
 										<option value="5">S2</option>
 										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>
 										</select>
 										</td>
 										
