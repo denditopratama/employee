@@ -136,7 +136,14 @@
                         window.alert("ERROR! Anda tidak diperbolehkan mengedit akun lain");
                         window.location.href="./admin.php?page=cuti";
                       </script>';
-		}
+        }
+
+                   $showcutid=mysqli_query($config,"SELECT tgl_awal,tgl_akhir FROM tbl_cuti WHERE id='$id'");
+                  list($tgl_awald,$tgl_akhird)=mysqli_fetch_array($showcutid);
+                  $perbedaanawal = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhird), date_create($tgl_awald))->d);
+
+				
+        
 		
         if(isset($_REQUEST['submits'])){
 
@@ -144,14 +151,21 @@
            
 
                 $id=mysqli_real_escape_string($config,$_REQUEST['id']);
-               	$alasan=mysqli_real_escape_string($config,$_REQUEST['alasan']);
-				$tgl_awal=mysqli_real_escape_string($config,$_REQUEST['tgl_awal']);
-				$tgl_akhir=mysqli_real_escape_string($config,$_REQUEST['tgl_akhir']);
-				
-				$cutikeuns=mysqli_query($config,"UPDATE tbl_cuti SET alasan='$alasan',tgl_awal='$tgl_awal',tgl_akhir='$tgl_akhir' WHERE id='$id'");
-			
+               	$alasan=mysqli_real_escape_string($config,$_POST['alasan']);
+				$tgl_awal=mysqli_real_escape_string($config,$_POST['tgl_awal']);
+                $tgl_akhir=mysqli_real_escape_string($config,$_POST['tgl_akhir']);
+                $perbedaanakhir = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d);
+                if($perbedaanakhir != $perbedaanawal){
+                    echo '<script>
+                    alert(\'Jumlah Cuti yang anda ambil tidak sama !\');
+                    window.location.href="./admin.php?page=cuti";
+                    </script>';
+                } else {
+                    $cutikeuns=mysqli_query($config,"UPDATE tbl_cuti SET alasan='$alasan',tgl_awal='$tgl_awal',tgl_akhir='$tgl_akhir' WHERE id='$id'");
+                
 					$_SESSION['succAdd']="SUKSES Data Berhasil di Edit";
-					 header("Location: ./admin.php?page=cuti");
+                     header("Location: ./admin.php?page=cuti");
+                    }
 			
                 //validasi input data
                

@@ -115,7 +115,7 @@
      <div class="card-content">
 	 
 	
-			<div style="text-align:center"><i class="material-icons prefix md-prefix">wc</i><p style="text-align:center;display:inline"><strong> Jumlah Kelamin</strong></p></div>
+			<div style="text-align:center"><i class="material-icons prefix md-prefix">people</i><p style="text-align:center;display:inline"><strong> Segment Tenant</strong></p></div>
 			<div id="chart_wrap" style="height:270px!important">
 			<div id="piechart" style="text-align:center"></div>
 			</div>
@@ -187,11 +187,11 @@ function drawChart() {
   ['Tenant', 'Number'],
     <?php 
     
-    $yongkru=mysqli_query($configtm,"SELECT * FROM tbl_unit");
+    $yongkru=mysqli_query($configtm,"SELECT * FROM branch");
     while($row=mysqli_fetch_array($yongkru)){
         $m=mysqli_query($configtm,"SELECT COUNT(id) FROM tbl_customer WHERE unit='".$row['id']."'");
         list($unitko)=mysqli_fetch_array($m);
-        echo"['".$row['unit']."',".$unitko."],";
+        echo"['".$row['description']."',".$unitko."],";
     }
 		
 	

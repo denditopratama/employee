@@ -141,9 +141,9 @@
                                        <div class="input-field col s11 right">
                                            <select class="browser-default" name="unit" id="unit" style="margin-bottom:24px;" required>
                                            <?php 
-                                           $eliji=mysqli_query($configtm,"SELECT * FROM tbl_unit");
+                                           $eliji=mysqli_query($configtm,"SELECT * FROM branch");
                                            while($row=mysqli_fetch_array($eliji)){
-                                               echo '<option value="'.$row['id'].'">'.$row['unit'].'</option>';
+                                               echo '<option value="'.$row['id'].'">'.$row['description'].'</option>';
                                            }
 
                                            ?>

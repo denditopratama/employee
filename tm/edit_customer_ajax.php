@@ -182,12 +182,12 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
 		<select class="browser-default" name="unit" id="unitd" style="margin-bottom:24px;" required>';
 		
         
-        $eliji=mysqli_query($configtm,"SELECT * FROM tbl_unit");
+        $eliji=mysqli_query($configtm,"SELECT * FROM branch");
         while($row=mysqli_fetch_array($eliji)){
             if($row['id']==$unit){
-                echo '<option value="'.$row['id'].'" selected>'.$row['unit'].'</option>';
+                echo '<option value="'.$row['id'].'" selected>'.$row['description'].'</option>';
             } else {
-                echo '<option value="'.$row['id'].'">'.$row['unit'].'</option>';
+                echo '<option value="'.$row['id'].'">'.$row['description'].'</option>';
             }
             
         }

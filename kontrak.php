@@ -24,7 +24,7 @@
             $act = $_REQUEST['act'];
             switch ($act) {
                 case 'add':
-                    include "tambah_surat_keluar.php";
+                    include "tambah_kontrak.php";
                     break;
                 case 'edit':
                     include "edit_surat_keluar.php";
@@ -32,9 +32,7 @@
                 case 'del':
                     include "hapus_surat_keluar.php";
                     break;
-				case 'dtjkn':
-                    include "ditujukan.php";
-                    break;	
+				
             }
         } else {
 

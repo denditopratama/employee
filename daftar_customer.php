@@ -201,9 +201,9 @@ font-size:14px!important;
           <td style="text-align:center"><?php echo $no; ?></td>               
 
           <td style="text-align:center"><?php 
-          $koya=mysqli_query($configtm,"SELECT kode_unit FROM tbl_unit WHERE id='".$row['unit']."'");
-          list($unitlokasi)=mysqli_fetch_array($koya);
-          echo $unitlokasi.$row['id']; ?></td>        							
+          $koya=mysqli_query($configtm,"SELECT description,kode_unit FROM branch WHERE id='".$row['unit']."'");
+          list($unitlokasi,$kode_unit)=mysqli_fetch_array($koya);
+          echo $kode_unit.$row['id']; ?></td>        							
 
           <td style="text-align:center"><?php echo $row['nama'].' '.$row['namab']; ?></td>        
 
