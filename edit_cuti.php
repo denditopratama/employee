@@ -157,7 +157,7 @@
                 $perbedaanakhir = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d);
                 if($perbedaanakhir != $perbedaanawal){
                     echo '<script>
-                    alert(\'Jumlah Cuti yang anda ambil tidak sama !\');
+                    alert(\'Jumlah Hari cuti yang anda ambil tidak sama !\');
                     window.location.href="./admin.php?page=cuti";
                     </script>';
                 } else {

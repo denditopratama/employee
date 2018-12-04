@@ -86,27 +86,98 @@ if(empty($_SESSION['admin'])){
 										
 										if($data['tingkat']==1){
 											echo'
-										<option value="1">SD</option>';}
+										<option value="1" selected>SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5">S2</option>
+										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>';}
 										
 										else if($data['tingkat']==2){
 											echo'
-										<option value="2">SMP</option>';}
+										
+										<option value="1">SD</option>
+										<option value="2" selected>SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5">S2</option>
+										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>';}
 										
 										else if($data['tingkat']==3){
 											echo'
-										<option value="3">SMA/SMU/SMK</option>';}
+										
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3" selected>SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5">S2</option>
+										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>';}
 										
 										else if($data['tingkat']==4){
 											echo'
-										<option value="4">S1</option>';}
+										
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4" selected>S1</option>
+										<option value="5">S2</option>
+										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>';}
 										
 										else if($data['tingkat']==5){
 											echo'
-										<option value="5">S2</option>';}
+										
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5" selected>S2</option>
+										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>';}
 										
 										else if($data['tingkat']==6){
 											echo'
-										<option value="6">S3</option>';}
+										
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5">S2</option>
+										<option value="6" selected>S3</option>
+										<option value="7">D3</option>
+										<option value="8">D1</option>';}
+
+										else if($data['tingkat']==7){
+											echo'
+										
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5">S2</option>
+										<option value="6">S3</option>
+										<option value="7" selected>D3</option>
+										<option value="8">D1</option>';}
+
+										else if($data['tingkat']==8){
+											echo'
+										
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA/SMU/SMK</option>
+										<option value="4">S1</option>
+										<option value="5">S2</option>
+										<option value="6">S3</option>
+										<option value="7">D3</option>
+										<option value="8" selected>D1</option>';}
 								
 										echo'
 										</select>
