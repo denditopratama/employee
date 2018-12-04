@@ -265,15 +265,7 @@ function drawChart() {
 
 
   
-    if(sessionStorage.getItem("keyd")!=='true'){
-	$(document).ready(function(){
-	$("#modaltm").openModal()
-                        });
-    
-    $('#tutup').click(function(){
-        $('#modaltm').closeModal();
-    });
-sessionStorage.setItem('keyd', 'true');}     
+       
 
 </script>
 	
@@ -297,3 +289,14 @@ sessionStorage.setItem('keyd', 'true');}
 <?php
     }
 ?>
+<script>
+ if(sessionStorage.getItem("keyd")!=='true'){
+	$(document).ready(function(){
+	$("#modaltm").openModal()
+                        });
+    
+    $('#tutup').click(function(){
+        $('#modaltm').closeModal();
+    });
+sessionStorage.setItem('keyd', 'true');} 
+</script>
