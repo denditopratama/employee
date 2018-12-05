@@ -116,6 +116,7 @@ $pages=$_REQUEST['page'];
 <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="asset/js/jquery.simplePagination.js"></script>
 <script data-pace-options='{ "ajax": false }' src='asset/js/pace.min.js'></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 
@@ -203,8 +204,14 @@ $(document).ready(function(){
 								$('#terima').maskMoney({thousands:'.',precision :0});
 								$('#potong').maskMoney({thousands:'.',precision :0});
 								$('#gajijm').maskMoney({thousands:'.',precision :0});
+                                $('#datatable').dataTable();
+                                
 					});
 								</script>
+                                  <script>
+
+
+
 <?php
     } else {
         header("Location: ../");

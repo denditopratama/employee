@@ -10,6 +10,8 @@
 
 </style>
 
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
 <?php
     //cek session
     if(empty($_SESSION['admin'])){
@@ -39,7 +41,7 @@
   
 
             //pagging
-			$limit = 25;
+			$limit = 10;
             $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
@@ -144,24 +146,28 @@
 						$cdata = 0;
 						
 					} else {
-					$query = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' ORDER by id_surat DESC LIMIT $curr, $limit");
-					$queryf = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."'");
-					$cdata = mysqli_num_rows($queryf);}
+					$query = mysqli_query($configtm, "SELECT perjanjian.*, tbl_customer.nama, tbl_customer.namab
+
+                    from perjanjian 
+
+                    left join tbl_customer on perjanjian.customer=tbl_customer.id ORDER by id DESC LIMIT $curr, $limit");
+					
+					$cdata = mysqli_num_rows($query);}
 								       
 								
 						
                         echo '
-                        <div class="col m12" id="colres">
-                        <table class="bordered" id="tblv">
-                            <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
+                        <div class="col m12">
+                        <table id="datatables" >
+                            <thead>
                                  <tr>
-									<th width="1%"style="color:#fff">Nomor Agenda</th>
-                                        <th width="25%"style="color:#fff">Isi Surat<br/><hr style="background-color:#f9f50b">File</hr></th>
-                                        <th width="12%"style="color:#fff">Asal Surat</th>
-										<th width="12%"style="color:#fff">Ditujukan</th>
-										<th width="12%"style="color:#fff">Nomor Surat</th>
-                                        <th width="10%" style="color:#fff">Tanggal Surat</th>
-										<th width="15%" style="color:#fff">Status Surat</th>
+								    	<th>No.</th>
+                                        <th>Nomor Kontrak</th>
+                                        <th width="12%"style="color:#fff">Tenant</th>
+										<th width="12%"style="color:#fff">Tanggal Awal</th>
+										<th width="12%"style="color:#fff">Tanggal Akhir</th>
+                                        <th width="10%" style="color:#fff">Unit</th>
+										<th width="15%" style="color:#fff">Status Aktif</th>
 										<th width="12%" style="color:#fff">Tindakan</th>
 
                                         
@@ -180,104 +186,18 @@
                                     while($row = mysqli_fetch_array($query)){
 										
                                       echo '
-                                        <td style="text-align:center">'.$row['no_agenda'].'</td>
-										<td style="text-align:center">'.substr($row['isi'],0,200).'<br/><br/><strong>File :</strong>';
-										if(!empty($row['file'])){
-                                            echo '<em><strong><a href="?page=gsm&act=fsm&id_surat='.$row['id_surat'].'">'.$row['file'].'</a></strong>';
-                                        } else {
-                                            echo '<em>Tidak ada file yang di upload</em>';
-                                        } echo '</td>
+                                        <td>'.$no++.'</td>
+										<td style="text-align:center">'.$row['noperj'].'</td>
                                         <td style="text-align:center">'.$row['nama'].'</td>
-										<td style="text-align:center">'.$row['tujuan'].'</td>
-										<td style="text-align:center">'.$row['no_surat'].'</td>';
-                                        
-										
-                                      
-
-                                        $y = substr($row['tgl_surat'],0,4);
-                                        $m = substr($row['tgl_surat'],5,2);
-                                        $d = substr($row['tgl_surat'],8,2);
-
-                                        if($m == "01"){
-                                            $nm = "Januari";
-                                        } elseif($m == "02"){
-                                            $nm = "Februari";
-                                        } elseif($m == "03"){
-                                            $nm = "Maret";
-                                        } elseif($m == "04"){
-                                            $nm = "April";
-                                        } elseif($m == "05"){
-                                            $nm = "Mei";
-                                        } elseif($m == "06"){
-                                            $nm = "Juni";
-                                        } elseif($m == "07"){
-                                            $nm = "Juli";
-                                        } elseif($m == "08"){
-                                            $nm = "Agustus";
-                                        } elseif($m == "09"){
-                                            $nm = "September";
-                                        } elseif($m == "10"){
-                                            $nm = "Oktober";
-                                        } elseif($m == "11"){
-                                            $nm = "November";
-                                        } elseif($m == "12"){
-                                            $nm = "Desember";
-                                        }
-									
-										
-                                        echo '<td style="text-align:center">'.$d." ".$nm." ".$y.'</td><td style="text-align:center">
+										<td style="text-align:center">'.date('d',strtotime($row['sdate'])).' '.date('M',strtotime($row['sdate'])).' '.date('Y',strtotime($row['sdate'])).'</td>
+										<td style="text-align:center">'.date('d',strtotime($row['edate'])).' '.date('M',strtotime($row['edate'])).' '.date('Y',strtotime($row['edate'])).'</td>';
+                                        echo '<td style="text-align:center"></td><td style="text-align:center">
 										';
-										  $tui=mysqli_query($config,"SELECT nama FROM tbl_user WHERE nama='".$row['tujuan']."'");
-										  list($nama) = mysqli_fetch_array($tui);
-										  if($row['tujuan']!=$nama){
-											
 										
-									if($row['status']==1){	
-									
 									echo'
                                  	<a class="btn small light-green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Belum Di Approve Oleh Admin">
                                     <i class="material-icons">done</i> APPROVED</a>';
-									} 
-									else {
-										echo'
-										<a class="btn small red waves-effect waves-light tooltipped" data-tooltip="Surat Belum Di Approve Oleh Admin">
-                                    <i class="material-icons">highlight_off</i> APPROVE</a>';}
-								
-									if(isset($_REQUEST['simpans'])){
-									$querys = mysqli_query($config, "UPDATE tbl_surat_keluar SET status=1 WHERE id_surat='".$row['id_surat']."'");
-									if($query == true){
-                                       header("Location: ./admin.php?page=kontrakall");
-                                       die();
-                                      }
-									}
-								 } else {
-									 
-										$weq=mysqli_query($config,"SELECT baca FROM tbl_surat_masuk WHERE id_surat='".$row['id_surat']."'");	
-										list($baca) = mysqli_fetch_array($weq);	
-
-										if($baca==1){										
-											  echo'
-                                 	<a class="btn small light-green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Telah Dibaca">
-                                    <i class="material-icons"></i> READ</a>';
-									} 
-									else {
-										echo'
-										<a class="btn small red waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Belum Dibaca">
-                                    <i class="material-icons"></i> UNREAD</a>';}
-											  
-											  
-											  
-											  
-											  
-										  }
-										
-										
-										
-										
-										
-										
-										
-										
+									
 									echo'</td><td style="text-align:center">';
                                         
 									
@@ -288,11 +208,11 @@
                                           echo '
 										  
 										  
-												<a class="btn small light-blue waves-effect waves-light tooltipped" data-position="left" data-tooltip="Pilih EDIT untuk merubah surat" href="?page=kontrak&act=edit&id_surat='.$row['id_surat'].'">
+												<a class="btn small light-blue waves-effect waves-light tooltipped" data-position="left" data-tooltip="Pilih EDIT untuk merubah surat" href="?page=kontrak&act=edit">
                                                     <i class="material-icons">edit</i> EDIT</a>
                                                
                                                
-                                                <a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Pilih Delete untuk menghapus surat" href="?page=kontrak&act=del&id_surat='.$row['id_surat'].'">
+                                                <a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Pilih Delete untuk menghapus surat" href="?page=kontrak&act=del">
                                                     <i class="material-icons">delete</i> DEL</a>';
                                          echo '
                                         </td>
@@ -309,7 +229,17 @@
                     <!-- Row form END -->';
 
 				
-					
+                    echo '<table id="datatable">
+                    <thead>
+                    <tr>
+                    <th>anj</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>1</td></tr>
+                    <tr><td>2</td></tr>
+                    </tbody>
+                    </table>';
 					
                     
                     $cpg = ceil($cdata/$limit);
@@ -367,6 +297,7 @@
     
 
 ?>
+
 <script>
 $(document).ready(function(){
 $('#halaman').change(function(){

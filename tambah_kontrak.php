@@ -6,185 +6,35 @@
         die();
     } else {
 
-        if(isset($_REQUEST['submit'])){
+        if(isset($_POST['submit'])){
 			
+            $no_kontrak=mysqli_real_escape_string($configtm,$_POST['no_kontrak']);
+            $tgl_kontrak=mysqli_real_escape_string($configtm,$_POST['tgl_kontrak']);
+            $unit=mysqli_real_escape_string($configtm,$_POST['unit']);
+            $tenant=mysqli_real_escape_string($configtm,$_POST['tenant']);
+            $objek=mysqli_real_escape_string($configtm,$_POST['objek']);
+            $lokasi=mysqli_real_escape_string($configtm,$_POST['lokasi']);
+            $namausaha=mysqli_real_escape_string($configtm,$_POST['namausaha']);
+            $jenisusaha=mysqli_real_escape_string($configtm,$_POST['jenisusaha']);
+            $tgl_awal=mysqli_real_escape_string($configtm,$_POST['tgl_awal']);
+            $tgl_akhir=mysqli_real_escape_string($configtm,$_POST['tgl_akhir']);
+            $periode=mysqli_real_escape_string($configtm,$_POST['periode']);
+            $jenisgto=mysqli_real_escape_string($configtm,$_POST['jenisgto']);
+            $nilaikontrak=mysqli_real_escape_string($configtm,$_POST['nilaikontrak']);
+            $sewabulan=mysqli_real_escape_string($configtm,$_POST['sewabulan']);
+            $servicecharge=mysqli_real_escape_string($configtm,$_POST['servicecharge']);
+            $listrik=mysqli_real_escape_string($configtm,$_POST['listrik']);
+            $nosurat=mysqli_real_escape_string($configtm,$_POST['nosurat']);
+            $tglminat=mysqli_real_escape_string($configtm,$_POST['tglminat']);
+            $nonego=mysqli_real_escape_string($configtm,$_POST['nonego']);
+            $nonegodirut=mysqli_real_escape_string($configtm,$_POST['nonegodirut']);
+            $tglnegodirut=mysqli_real_escape_string($configtm,$_POST['tglnegodirut']);
 
-            //validasi form kosong
-            if($_REQUEST['tujuan'] == "" || $_REQUEST['isi'] == ""
-                || $_REQUEST['tgl_surat'] == ""  || $_REQUEST['keterangan'] == ""){
-                $_SESSION['errEmpty'] = 'ERROR! Semua form wajib diisi';
-                echo '<script language="javascript">window.history.back();</script>';
-            } else {
+            //$kuy=mysqli_query($configtm,"INSERT INTO perjanjian() VALUES()");
+            echo '<script>alert(\'Kontrak Berhasil ditambah ! \');</script>';
+            header("Location: ./indexnyatm.php?page=kontrak");
+            
 
-                
-                $no_surat = $_REQUEST['no_surat'];
-                $tujuan = $_REQUEST['tujuan'];
-                $isi = $_REQUEST['isi'];
-				$kode=$_POST['nomor_surat'];
-                $tgl_surat = $_REQUEST['tgl_surat'];
-                $keterangan = $_REQUEST['keterangan'];
-                $id_user = $_SESSION['id_user'];
-				$ditujukan= mysqli_real_escape_string($config,$_POST['ditujukan']);
-				$tunjukan= mysqli_real_escape_string($config,$_POST['tunjukan']);
-				$nuhun=mysqli_query($config,"SELECT no_agenda FROM tbl_surat_keluar ORDER BY id_surat DESC LIMIT 1");
-				list($no_agendas)=mysqli_fetch_array($nuhun);
-				$tahuns=date('Y');
-				$pemisah=explode("/",$no_agendas);
-				if($pemisah[1]!=$tahuns){
-					$no_agendas=0;
-				}
-				$no_agendas=$no_agendas+1;
-				$no_agenda=$no_agendas .'/'. $tahuns;
-
-                //validasi input data
-                 
-
-                    
-
-                        if(!preg_match("/^[a-zA-Z0-9.,() \/ -]*$/", $tujuan)){
-                            $_SESSION['tujuan_surat'] = 'Form Tujuan Surat hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), kurung() dan garis miring(/)';
-                            echo '<script language="javascript">window.history.back();</script>';
-                        } else {
-
-                            if(!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $isi)){
-                                $_SESSION['isik'] = 'Form Isi Ringkas hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
-                                echo '<script language="javascript">window.history.back();</script>';
-                            } else {
-
-                                if(!preg_match("/^[a-zA-Z0-9., ]*$/", $kode)){
-                                    $_SESSION['kodek'] = 'Form Kode Klasifikasi hanya boleh mengandung karakter huruf, angka, spasi, titik(.) dan koma(,)';
-                                    echo '<script language="javascript">window.history.back();</script>';
-                                } else {
-
-                                    if(!preg_match("/^[0-9.-]*$/", $tgl_surat)){
-                                        $_SESSION['tgl_suratk'] = 'Form Tanggal Surat hanya boleh mengandung angka dan minus(-)';
-                                        echo '<script language="javascript">window.history.back();</script>';
-                                    } else {
-
-                                        if(!preg_match("/^[a-zA-Z0-9.,()\/ -]*$/", $keterangan)){
-                                            $_SESSION['keterangank'] = 'Form Keterangan hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), dan kurung()';
-                                            echo '<script language="javascript">window.history.back();</script>';
-                                        } else {
-
-                                           
-
-                                           
-
-                                                $ekstensi = array('jpg','png','jpeg','doc','docx','pdf','mp4','xls','xlsx','mov','rar','zip','ppt','pptx','exe','iso','mp3','avi','vid');
-                                                $file = $_FILES['file']['name'];
-                                                $x = explode('.', $file);
-                                                $eks = strtolower(end($x));
-                                                $ukuran = $_FILES['file']['size'];
-                                                $target_dir = "upload/surat_keluar/";
-												$target_dir2 = "upload/surat_masuk/";
-											
-
-                                                //jika form file tidak kosong akan mengekse
-                                                if($file != ""){
-
-                                                    $rand = rand(1,10000);
-                                                    $nfile = $rand."-".$file;
-                                                    if(in_array($eks, $ekstensi) == true){
-                                                        if($ukuran < 25000000000000000000000){
-
-                                                            move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
-															copy($target_dir.$nfile, $target_dir2.$nfile);
-
-															  if($_POST['tujuan']==2){
-														
-												
-													
-                                                            foreach ($_POST['tunjukan'] as $menunjukans){
-                                                                $menunjukan=mysqli_real_escape_string($config,$menunjukans);
-                                                                $hasil_explode = explode('|', $menunjukan);
-                                                                $query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,tgl_catat,file,keterangan,id_user,dari)
-                                                                VALUES('$no_agenda','$hasil_explode[1]','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$nfile','$keterangan','$id_user','".$_SESSION['nama']."')");
-        
-                                                                $queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
-                                                                VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$nfile','$keterangan','$hasil_explode[0]')");
-                                                            }     
-                                                           
-															}
-															else{
-															$query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,
-                                                                tgl_catat,file,keterangan,id_user,dari)
-															VALUES('$no_agenda','$ditujukan','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$nfile','$keterangan','$id_user','".$_SESSION['nama']."')");
-															
-															$queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
-															VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$nfile','$keterangan','9999')");
-															
-															}
-
-                                                        if($query == true){
-														if($_SESSION['admin']==1){
-                                                        $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
-                                                        header("Location: ./admin.php?page=tskall");}
-														else {
-														 $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
-                                                        header("Location: ./admin.php?page=tsk");	
-														}
-                                                        die();
-                                                            } else {
-                                                                $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
-                                                                echo '<script language="javascript">window.history.back();</script>';
-                                                            }
-                                                        } else {
-                                                            $_SESSION['errSize'] = 'Ukuran file yang diupload terlalu besar!';
-                                                            echo '<script language="javascript">window.history.back();</script>';
-                                                        }
-                                                    } 
-                                                } else {
-													
-														
-													
-                                                    if($_POST['tujuan']==2){
-														
-												
-														foreach ($_POST['tunjukan'] as $menunjukans){
-                                                            $menunjukan=mysqli_real_escape_string($config,$menunjukans);
-                                                            $hasil_explode = explode('|', $menunjukan);
-														
-                                                            $query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,tgl_catat,file,keterangan,id_user,dari)
-															VALUES('$no_agenda','$hasil_explode[1]','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$file','$keterangan','$id_user','".$_SESSION['nama']."')");
-	
-															$queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
-															VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$file','$keterangan','$hasil_explode[0]')");
-															}}
-															else{
-																
-															$query = mysqli_query($config, "INSERT INTO tbl_surat_keluar(no_agenda,tujuan,no_surat,isi,kode,tgl_surat,
-                                                                tgl_catat,file,keterangan,id_user,dari)
-															VALUES('$no_agenda','$ditujukan','$no_surat','$isi','$kode','$tgl_surat',NOW(),'$file','$keterangan','$id_user','".$_SESSION['nama']."')");
-															
-														$queryzz = mysqli_query($config, "INSERT INTO tbl_surat_masuk(no_agenda,kode,asal_surat,isi,tgl_surat,tgl_diterima,file,keterangan,id_user)
-															VALUES('$no_agenda','$no_surat','".$_SESSION['nama']."','$isi','$tgl_surat',NOW(),'$file','$keterangan','9999')");
-															
-															}
-
-
-                                                    if($query == true){
-														if($_SESSION['admin']==1){
-                                                        $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
-                                                        header("Location: ./admin.php?page=tskall");}
-														else {
-														 $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
-                                                        header("Location: ./admin.php?page=tsk");	}
-														
-                                                        die();
-                                                    } else {
-                                                        $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
-                                                        echo '<script language="javascript">window.history.back();</script>';
-                                                    }
-                                                }
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    
-                
-            }
         } else {?>
 
             <!-- Row Start -->
@@ -236,11 +86,11 @@
             <div class="row jarak-form">
 
                 <!-- Form START -->
-                <form class="col s12" method="POST" enctype="multipart/form-data">
-
+                <form class="col s12" method="POST">
+                <small class="blue-text">*Kosongkan yang tidak perlu</small>
                     <!-- Row in form START -->
                     <div class="row">
-
+                        
 					         <div class="input-field col s6">
                             <i id="surat" class="material-icons prefix md-prefix">looks_two</i>
                             <input id="no_kontrak" type="text" class="validate" name="no_kontrak">
@@ -261,7 +111,7 @@
                             <select class="browser-default" name="unit" id="unit" >
 						<?php	$query = mysqli_query($configtm,"SELECT * FROM branch");	
 							while ($row = mysqli_fetch_array($query)) {		
-									echo "<option value='".$row['id']."'>".$row['description']."</option>";	
+                                    echo "<option value='".$row['id']."' data-jenis='".$row['jenis']."'>".$row['description']."</option>";	
                                 }
                                 $tokeneditcustomer = bin2hex(mt_rand(0,9999));
                                 $_SESSION['tokeneditcustomer']=$tokeneditcustomer;
@@ -275,7 +125,19 @@
                                 $("#unit").change(function(){
                                 var id = $('#unit').val();
                                 var token = <?php echo $tokeneditcustomer; ?>;
-                                
+                                var x = $('option:selected', this).attr('data-jenis');
+                                if(x==1){
+                                    $('#cas').hide();
+                                    $('#nyetrum').hide();
+                                    $('#jenisgto').show('slow');
+                                    
+                                } else {
+                                    $('#cas').show('slow');
+                                    $('#nyetrum').show('slow');
+                                    $('#jenisgto').hide();  
+                                   
+                                }
+
                                 $.post("./tm/pilih_tenant.php",
                                 {
                                     id: id,
@@ -293,8 +155,24 @@
                                 function(data){
                                     $('#lokasi').html(data);
                                 });
-                                
+                               
                             });
+                            
+                            var element = $('#unit').find('option:selected'); 
+                             var myTag = element.attr("data-jenis"); 
+                                if(myTag==1){
+                                    $('#cas').hide();
+                                    $('#nyetrum').hide();
+                                    $('#jenisgto').show();
+                                 
+                                } else {
+                                    $('#cas').show();
+                                    $('#nyetrum').show(); 
+                                    $('#jenisgto').hide();
+                                  
+                                }
+                            
+                            
                             });
                           
                             </script>
@@ -306,9 +184,9 @@
                         </select>
 							</div>
                       
-                        <div class="input-field col s6" style="margin-top:46.5px">
+                        <div class="input-field col s6" id="sewas" style="margin-top:46.5px">
                             <i class="material-icons prefix md-prefix">featured_play_list</i>
-                            <input id="objek" type="text" class="validate" name="objek" required>
+                            <input id="objek" type="text" class="validate" name="objek">
                             <label for="objek">Objek Sewa</label>
                         </div>
                      
@@ -322,10 +200,10 @@
 
                             <div class="input-field col s6" style="margin-top:40px">
                             <i class="material-icons prefix md-prefix">featured_play_list</i>
-                            <input id="jenisusaha" type="text" class="validate" name="jenisusaha" required>
+                            <input id="jenisusaha" type="text" class="validate" name="jenisusaha">
                             <label for="jenisusaha">Jenis Usaha</label>
                         </div>
-                        <div class="input-field col s6" style="margin-top:-60px">
+                        <div class="input-field col s6" id="usaha" style="margin-top:-60px">
                             <i class="material-icons prefix md-prefix">featured_play_list</i>
                             <input id="namausaha" type="text" class="validate" name="namausaha" required>
                             <label for="namausaha">Nama Usaha</label>
@@ -354,6 +232,20 @@
                             <input id="periode" type="number" class="validate" name="periode" min="1" required>
                             <label for="periode">Jumlah Periode</label>
                         </div>
+                        
+                        </div>
+                        <div class="row" id="jenisgto">
+                        <div class="input-field col s6" >
+                            <i class="material-icons prefix md-prefix" >people</i><label>Jenis</label><br/>	
+                            <select class="browser-default" name="jenisgto"  >
+                        <?php 
+                        $ko=mysqli_query($configtm,"SELECT * FROM jenisgto");
+                        while($row=mysqli_fetch_array($ko)){
+                            echo '<option value="'.$row['id'].'">'.$row['description'].'</option>';
+                        }
+                        ?>
+                        </select>
+							</div>
                         </div>
                         <div class="row">
                         <div class="input-field col s6">
@@ -368,13 +260,13 @@
                             <label for="sewabulan" id="gow">Harga Sewa Perbulan</label>
                         </div>
 
-                        <div class="input-field col s6">
+                        <div class="input-field col s6" id="cas">
                             <i class="material-icons prefix md-prefix">attach_money</i>
                             <input id="servicecharge" type="text" class="validate" name="servicecharge" min="0">
                             <label for="servicecharge">Service Charge Perbulan</label>
                         </div>
 
-                         <div class="input-field col s6">
+                         <div class="input-field col s6" id="nyetrum">
                             <i class="material-icons prefix md-prefix">attach_money</i>
                             <input id="listrik" type="text" class="validate" name="listrik" min="0">
                             <label for="listrik">Deposit Air dan Listrik</label>
@@ -394,13 +286,51 @@
                             <button type="submit" name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
                         </div>
                         <div class="col 6">
-						<?php if ($_SESSION['admin']==1){ echo'
-						<a href="?page=tskall" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>';}
-						else {echo '<a href="?page=tsk" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>';}
-						?>
-							
+						
+						<a href="?page=kontrak" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>
+						
                         </div>
                     </div>
+
+                    <div id="modald">
+				<div id="modalkontrak" class="modal" style="height:100%">
+                <div class="modal-content white" style="height:100%">
+               
+                <div class="col s12" style="text-align:center!important">
+                <h4>Nomor dan Tanggal Berita Acara</h4>
+                <small class="blue-text">* Kosongkan yang tidak perlu</small>
+				        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">looks_two</i>
+                            <input type="text" class="validate" name="nosurat">
+                            <label for="nosurat">Nomor Surat Pernyataan Minat Pihak Kedua</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">date_range</i>
+                            <input id="tgl_surat" type="text" class="datepicker" name="tglminat">
+                            <label id="tgl_surat" for="tglminat">Tanggal Surat Pernyataan Minat Pihak Kedua</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">looks_two</i>
+                            <input type="text" class="validate" name="nonego">
+                            <label for="nonego">Nomor Berita Acara Negosiasi Harga Sewa</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">attach_money</i>
+                            <input type="text" class="validate" name="nonegodirut">
+                            <label for="nonegodirut">Nomor Surat Persetujuan Hasil Negosiasi Direktur Utama</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">date_range</i>
+                            <input id="tgl_surat" type="text" class="datepicker" name="tglnegodirut">
+                            <label id="tgl_surat" for="tglnegodirut">Tgl Surat Persetujuan Hasil Negosiasi Direktur Utama</label>
+                        </div>
+                </div>
+               
+                <br>
+                </div>
+                </div>
+                </div>
+           
 
                 </form>
                 <!-- Form END -->
@@ -409,8 +339,8 @@
             <!-- Row form END -->
 
 <?php
-        }
-    }
+        
+    }}
 ?>
 <script type="text/javascript" src="asset/js/jquery.maskMoney.js"></script>
 
@@ -428,7 +358,11 @@ $(document).ready(function(){
              var y = $('#nilaikontrak').val();
              var number = y.split('.').join('');
              var zd = number/x;
-            var z = zd.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+             var z = formatCurrency(zd);
+            if(z=='Infinity'){
+               var z=0;
+            }
+
              $('#sewabulan').val(z);
              
              $('#gow').addClass("active");
@@ -439,7 +373,7 @@ $(document).ready(function(){
              var y = $('#nilaikontrak').val();
              var number = y.split('.').join('');
              var zd = number/x;
-            var z = zd.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+            var z = formatCurrency(zd);
             
             if(z=='Infinity'){
                var z=0;
@@ -448,7 +382,47 @@ $(document).ready(function(){
              
              $('#gow').addClass("active");
          });
+         
+         $('#berita').click(function(){
+             $('#modalkontrak').openModal();
+         });
 
+         $('#tutup').click(function(){
+             $('#modalkontrak').closeModal();
+         });
 
 });
+
+function formatCurrency(num) {    
+
+num = num.toString().replace(/\$|\,/g,'');
+
+if(isNaN(num))
+
+num = "0";
+
+sign = (num == (num = Math.abs(num)));
+
+num = Math.floor(num*100+0.50000000001);
+
+cents = num%100;
+
+num = Math.floor(num/100).toString();
+
+if(cents<10)
+
+cents = "0" + cents;
+
+for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+
+num = num.substring(0,num.length-(4*i+3))+'.'+
+
+num.substring(num.length-(4*i+3));
+
+//return (((sign)?'':'-') + 'Rp' + num + '.' + cents);
+
+return (((sign)?'':'-') + num );
+
+}
             </script>
+            

@@ -297,7 +297,17 @@
     <div class="container">
 
     <?php
+	
         if(isset($_REQUEST['page'])){
+			if($_SESSION['admin']!=1){
+				if($_GET['page']!='usr' || $_GET['page']==''){
+					echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+					alert("Silahkan isi data anda terlebih dahulu");</script>';
+				} 
+			}
+			
+			
+			
             $page = $_REQUEST['page'];
             switch ($page) {
                 case 'tsm':

@@ -15,7 +15,7 @@ require('../include/config.php');
                                                 $token=mysqli_real_escape_string($configtm,$_POST['token']);
                                                 if($token==$_SESSION['tokeneditcustomer']){
 
-                                                    $unittenant=mysqli_query($configtm,"SELECT * FROM tbl_customer WHERE unit='$id'");
+                                                    $unittenant=mysqli_query($configtm,"SELECT * FROM tbl_customer WHERE unit='$id' ORDER BY nama");
                                                     while($row=mysqli_fetch_array($unittenant)){
                                                         echo '<option value="'.$row['id'].'">'.$row['nama'].' '.$row['nama'].'</option>';
                                                 }
