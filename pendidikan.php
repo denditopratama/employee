@@ -36,7 +36,7 @@ if(empty($_SESSION['admin'])){
 										
 										<td style="text-align:center">
 										<select name="tingkat" class="browser-default" style="margin-top:-13px;">
-										<option value="'.$data['tingkat'].'">SD</option>
+										
 										<option value="1">SD</option>
 										<option value="2">SMP</option>
 										<option value="3">SMA/SMU/SMK</option>
