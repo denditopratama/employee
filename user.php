@@ -5,7 +5,11 @@ th,td,tr{
 #oi{
 	text-align:center!important;
 }
+
 </style>
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
 <?php
     //session
     if(empty($_SESSION['admin'])){
@@ -53,8 +57,11 @@ th,td,tr{
                                         <div class="col m7">
                                             <ul class="left">
                                                 <li class="waves-effect waves-light hide-on-small-only"><a href="?page=usr" class="judul"><i class="material-icons">people</i> Manajemen User</a></li>
-                                                <li class="waves-effect waves-light">
-                                                    <a href="?page=usr&act=add"><i class="material-icons md-24">person_add</i> Tambah User</a>
+                                                <li class="waves-effect waves-light">';
+                                                if($_SESSION['admin']==1){
+                                                   echo '<a href="?page=usr&act=add"><i class="material-icons md-24">person_add</i> Tambah User</a>'; 
+                                                }
+                                                  echo'  
                                                 </li>
                                             </ul>
 											
@@ -120,7 +127,7 @@ th,td,tr{
 					
 					if(isset($_REQUEST['submit'])){
 						$cari=mysqli_real_escape_string($config,$_REQUEST['cari']);
-						$querykeun=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(nama LIKE '%$cari%' OR nip LIKE '%$cari%')");
+						$querykeun=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(nama LIKE '%$cari%' OR nip LIKE '%$cari%' AND admin<>1) ORDER BY kelas_jabatan ASC");
 						
 						echo '
                     <!-- Row form Start -->
@@ -248,7 +255,7 @@ th,td,tr{
                                 </thead>
                                 <tbody>
                                     <tr id="oi">';
-								$querykeunsd=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 ORDER by admin ASC");			
+								$querykeunsd=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND admin<> 1 ORDER by kelas_jabatan ASC");			
                                 if(mysqli_num_rows($querykeunsd) > 0){ 
 								   $no=1;
                                     while($row = mysqli_fetch_array($querykeunsd)){

@@ -42,13 +42,16 @@
 					
 				    $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['username'])));
 					$password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['password'])));
-					if(strlen($_POST['password'])<5){
-						echo '<script language="javascript">
-                                        window.alert("ERROR! Password Minimal 5 Karakter");
-										window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
-									  </script>';
-									  die();
+					if(!empty($_POST['password'])){
+						if(strlen($_POST['password'])<5){
+							echo '<script language="javascript">
+											window.alert("ERROR! Password Minimal 5 Karakter");
+											window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+										  </script>';
+										  die();
+						}
 					}
+					
 					if(!empty($_POST['status_tugas'])){
 						$status_tugas = mysqli_real_escape_string($config,$_POST['status_tugas']);
 					}

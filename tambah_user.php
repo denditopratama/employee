@@ -4,8 +4,15 @@
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
         die();
-    } else {
-        if(isset($_REQUEST['submit'])){
+    } else if ($_SESSION['admin']!=1 || $_SESSION['admin']==1 && $_SESSION['divisi']!=2){
+        echo '<script>
+        alert("Akses Dilarang !");
+        </script>';
+        header("Location: ./");
+        die(); 
+    }
+        else {
+        if(isset($_POST['submit'])){
 
             //validasi form kosong
             if($_REQUEST['username'] == "" || $_REQUEST['password'] == "" || $_REQUEST['nama'] == "" || $_REQUEST['nip'] == "" || $_REQUEST['admin'] == ""){
@@ -14,11 +21,11 @@
                 die();
             } else {
 
-                $username = $_REQUEST['username'];
-                $password = $_REQUEST['password'];
-                $nama = $_REQUEST['nama'];
-                $nip = $_REQUEST['nip'];
-                $admin = mysqli_real_escape_string($config,$_REQUEST['admin']);
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $nama = $_POST['nama'];
+                $nip = $_POST['nip'];
+                $admin = mysqli_real_escape_string($config,$_POST['admin']);
 
                 //validasi input data
                 if(!preg_match("/^[a-zA-Z0-9_]*$/", $username)){
@@ -83,7 +90,7 @@
                     <nav class="secondary-nav">
                         <div class="nav-wrapper blue-grey darken-1">
                             <ul class="left">
-                                <li class="waves-effect waves-light"><a href="?page=sett&sub=usr&act=add" class="judul"><i class="material-icons">person_add</i> Tambah User</a></li>
+                                <li class="waves-effect waves-light"><a href="?page=usr&act=add" class="judul"><i class="material-icons">person_add</i> Tambah User</a></li>
                             </ul>
                         </div>
                     </nav>
