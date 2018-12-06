@@ -286,8 +286,8 @@
                         </div>
                                    <div class="input-field col s6">
 								<i class="material-icons prefix md-prefix">account_circle</i>
-								<input id="username" type="text" class="validate" name="username" value="<?php echo $row['username'];?>">
-								
+								<input id="username" type="text" class="validate" name="usernames" value="<?php echo $row['username'];?>" disabled>
+								<input type="hidden" name="username" value="<?php echo $row['username'];?>">
 								<label for="username">Username</label>
 								</div>
 						<?php if($_SESSION['admin']!=1){
