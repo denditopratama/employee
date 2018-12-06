@@ -28,7 +28,7 @@ if(empty($_SESSION['admin'])){
 										
 										</tr>
 										</thead>
-										<?php if($_SESSION['admin']==1){?>
+										
 										<form method="POST" enctype="multipart/form-data">
 										<tbody style="background-color:rgba(255,255,0,0.7)">
 										<td style="text-align:center">-</td>
@@ -83,7 +83,7 @@ if(empty($_SESSION['admin'])){
 										</tr>
 										</thead>
 										<?php 
-										}$query=mysqli_query($config,"SELECT * FROM tbl_jabatan WHERE id_user='".$_REQUEST['id_user']."'");
+										$query=mysqli_query($config,"SELECT * FROM tbl_jabatan WHERE id_user='".$_REQUEST['id_user']."'");
 										$no=0;
 										while($data=mysqli_fetch_array($query)){
 											$no++;

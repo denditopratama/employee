@@ -41,14 +41,7 @@
   
 
             //pagging
-			$limit = 10;
-            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
-                if(empty($pg)){
-                    $curr = 0;
-                    $pg = 1;
-                } else {
-                    $curr = ($pg - 1) * $limit;
-                }?>
+			?>
 
                 <!-- Row Start -->
                 <div class="row">
@@ -150,25 +143,25 @@
 
                     from perjanjian 
 
-                    left join tbl_customer on perjanjian.customer=tbl_customer.id ORDER by id DESC LIMIT $curr, $limit");
+                    left join tbl_customer on perjanjian.customer=tbl_customer.id ORDER by id DESC");
 					
 					$cdata = mysqli_num_rows($query);}
 								       
 								
 						
                         echo '
-                        <div class="col m12">
-                        <table id="datatables" >
+                        <div class="col m12" id="colres">
+                        <table id="datatable" >
                             <thead>
                                  <tr>
 								    	<th>No.</th>
                                         <th>Nomor Kontrak</th>
-                                        <th width="12%"style="color:#fff">Tenant</th>
-										<th width="12%"style="color:#fff">Tanggal Awal</th>
-										<th width="12%"style="color:#fff">Tanggal Akhir</th>
-                                        <th width="10%" style="color:#fff">Unit</th>
-										<th width="15%" style="color:#fff">Status Aktif</th>
-										<th width="12%" style="color:#fff">Tindakan</th>
+                                        <th>Tenant</th>
+										<th>Tanggal Awal</th>
+										<th>Tanggal Akhir</th>
+                                        <th>Unit</th>
+										<th>Status Aktif</th>
+										<th>Tindakan</th>
 
                                         
 
@@ -180,7 +173,7 @@
 
                           
 							
-								if(!empty($query)){
+							
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
                                     while($row = mysqli_fetch_array($query)){
@@ -190,22 +183,19 @@
 										<td style="text-align:center">'.$row['noperj'].'</td>
                                         <td style="text-align:center">'.$row['nama'].'</td>
 										<td style="text-align:center">'.date('d',strtotime($row['sdate'])).' '.date('M',strtotime($row['sdate'])).' '.date('Y',strtotime($row['sdate'])).'</td>
-										<td style="text-align:center">'.date('d',strtotime($row['edate'])).' '.date('M',strtotime($row['edate'])).' '.date('Y',strtotime($row['edate'])).'</td>';
-                                        echo '<td style="text-align:center"></td><td style="text-align:center">
-										';
+										<td style="text-align:center">'.date('d',strtotime($row['edate'])).' '.date('M',strtotime($row['edate'])).' '.date('Y',strtotime($row['edate'])).'</td>
+                                       <td style="text-align:center"></td>
 										
-									echo'
-                                 	<a class="btn small light-green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Belum Di Approve Oleh Admin">
-                                    <i class="material-icons">done</i> APPROVED</a>';
+										
+                                  
+                                    <td style="text-align:center">
+                                 	<a class="btn small orange waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Klik untuk cetak kontrak">
+                                    <i class="material-icons">print</i> CETAK</a></td>
 									
-									echo'</td><td style="text-align:center">';
+									<td style="text-align:center">
                                         
-									
-										
-                                       
-                                       
 											
-                                          echo '
+                                       
 										  
 										  
 												<a class="btn small light-blue waves-effect waves-light tooltipped" data-position="left" data-tooltip="Pilih EDIT untuk merubah surat" href="?page=kontrak&act=edit">
@@ -213,87 +203,23 @@
                                                
                                                
                                                 <a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Pilih Delete untuk menghapus surat" href="?page=kontrak&act=del">
-                                                    <i class="material-icons">delete</i> DEL</a>';
-                                         echo '
+                                                    <i class="material-icons">delete</i> DEL</a>
+                                    
                                         </td>
                                     </tr>
-                                </tbody>';
+                                ';
                                 }
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u><a href="?page=kontrak&act=add">Tambah data baru</a></u> </p></center></td></tr>';
-								}}
-                            echo '</table>
+								}
+                            echo '</tbody></table>
                         </div>
-                    </div>
+                    </div>';
 					
-                    <!-- Row form END -->';
-
-				
-                    echo '<table id="datatable">
-                    <thead>
-                    <tr>
-                    <th>anj</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr><td>1</td></tr>
-                    <tr><td>2</td></tr>
-                    </tbody>
-                    </table>';
-					
-                    
-                    $cpg = ceil($cdata/$limit);
-
-                    echo '<br/>
-						<div class="row">
-                          <ul class="pagination">';
-
-                    if($cdata > $limit ){
-					
-                        //first and previous pagging
-                        if($pg > 1){
-                            $prev = $pg - 1;
-                            echo '<li><a href="?page=kontrak&pg=1"><i class="material-icons md-48">first_page</i></a></li>
-                                  <li><a href="?page=kontrak&pg='.$prev.'"><i class="material-icons md-48">chevron_left</i></a></li>';
-                        } else {
-                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">first_page</i></a></li>
-                                  <li class="disabled"><a href=""><i class="material-icons md-48">chevron_left</i></a></li>';
-                        }
-
-                        //perulangan pagging
-                        echo'
-							<div class="col m4">
-							<select class="browser-default" name="halaman" id="halaman" required>';
-                                     for($i=1; $i <= $cpg; $i++){               
-                               if($i != $pg){
-                                echo '<option value="'.$i.'">'.$i.'</option>';
-                            } else {
-                                echo '<option value="'.$i.'" selected>'.$i.'</option>';
-									 }}
-														  
-                                                echo'  
-												</select>
-											</div>
-												';
-
-                        //last and next pagging
-                        if($pg < $cpg){
-                            $next = $pg + 1;
-                            echo '<li><a href="?page=kontrak&pg='.$next.'"><i class="material-icons md-48">chevron_right</i></a></li>
-                                  <li><a href="?page=kontrak&pg='.$cpg.'"><i class="material-icons md-48">last_page</i></a></li>';
-                        } else {
-                            echo '<li class="disabled"><a href=""><i class="material-icons md-48">chevron_right</i></a></li>
-                                  <li class="disabled"><a href=""><i class="material-icons md-48">last_page</i></a></li>';
-                        }
-                        echo '
-                        </ul>
-						</div>
-                        <!-- Pagination END -->';
-                } else {
-                    echo '';
-                }
+                 
+                } 
             }
-        }
+        
     
 
 ?>
