@@ -26,17 +26,28 @@
                 if(isset($_REQUEST['submit'])){
 
                     $id_user = mysqli_real_escape_string($config,$_REQUEST['id_user']);
-                    $admin = mysqli_real_escape_string($config,$_SESSION['admin']);
-					$admins=mysqli_real_escape_string($config,$_REQUEST['admin']);
+					$admin = mysqli_real_escape_string($config,$_SESSION['admin']);
+					if(!empty($_POST['admin'])){
+						$admins=mysqli_real_escape_string($config,$_POST['admin']);
+					}
+					
 					$nip = mysqli_real_escape_string($config,$_REQUEST['nip']);
-					$nama = mysqli_real_escape_string($config,$_REQUEST['nama']);
-					$status_karyawan = mysqli_real_escape_string($config,$_REQUEST['statkaryawan']);
-					$divisi = mysqli_real_escape_string($config,$_REQUEST['divisi']);
-				    $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['username'])));
-                    $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['password'])));
-					$status_tugas = mysqli_real_escape_string($config,$_REQUEST['status_tugas']);
+					$nama = mysqli_real_escape_string($config,$_POST['nama']);
+					if(!empty($_POST['statkaryawan'])){
+						$status_karyawan = mysqli_real_escape_string($config,$_POST['statkaryawan']);
+					}
+					if(!empty($_POST['divisi'])){
+						$divisi = mysqli_real_escape_string($config,$_POST['divisi']);
+					}
+					
+				    $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['username'])));
+					$password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['password'])));
+					if(!empty($_POST['status_tugas'])){
+						$status_tugas = mysqli_real_escape_string($config,$_POST['status_tugas']);
+					}
+					
 					if($_SESSION['admin']!=1){
-					$password_lama = mysqli_real_escape_string($config, $_REQUEST['password_lama']);}
+					$password_lama = mysqli_real_escape_string($config, $_POST['password_lama']);}
 					
 
                    
