@@ -105,7 +105,7 @@
 								<form method="POST">
             		                <button type="submit" name="submit" class="btn-large deep-orange waves-effect waves-light white-text">HAPUS <i class="material-icons">delete</i></button>
 									</form>
-            		                <a href="?page=sett&sub=usr" class="btn-large blue waves-effect waves-light white-text">BATAL <i class="material-icons">clear</i></a>
+            		                <a href="?page=usr" class="btn-large blue waves-effect waves-light white-text">BATAL <i class="material-icons">clear</i></a>
 									
             		            </div>
                             </div>
