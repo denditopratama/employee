@@ -65,7 +65,7 @@ if(empty($_SESSION['admin'])){
 										</td>
 										
 										<td style="text-align:center">
-										<button id="tambah" type="submit" name="pendidikanformal" class="btn-large" style="text-align:center;">TAMBAH DATA</button>
+										<button id="tambah" type="submit" name="pendidikanformal" class="btn-large" style="text-align:center;">TAMBAH </button>
 										</td>
 										</form>
 										</tbody>
