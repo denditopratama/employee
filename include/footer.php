@@ -79,7 +79,7 @@ $pages=$_REQUEST['page'];
             <div class="right">
                 <?php
                     if(!empty($data['website'])){
-                        echo '<i class="material-icons md-12">public</i> https://jasamargaproperti.co.id &nbsp;&nbsp;';
+                        echo '<i class="material-icons md-12">public</i> <a style="color:white" href="https://jasamargaproperti.co.id">https://jasamargaproperti.co.id</a> &nbsp;&nbsp;';
                     } else {
                         echo '<i class="material-icons md-12">public</i>  &nbsp;&nbsp;';
                     }
@@ -205,6 +205,8 @@ $(document).ready(function(){
 								$('#potong').maskMoney({thousands:'.',precision :0});
 								$('#gajijm').maskMoney({thousands:'.',precision :0});
                                 $('#datatable').dataTable();
+                               
+                            
                                 
 					});
 								</script>
