@@ -228,7 +228,7 @@ require('./include/config.php');
 						
 						
 						$total=mysqli_num_rows($niks);
-						$ngitungdoang=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user <> 9999 AND (admin<>1 AND admin<>9)");
+						$ngitungdoang=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user <> 9999 AND (admin<>1 AND admin<>9 AND status_aktif=1)");
 						$totalseluruh=mysqli_num_rows($ngitungdoang);
 						
 						

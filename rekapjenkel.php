@@ -104,7 +104,7 @@ require('./include/config.php');
 						</table>
 					
 					';
-					$huhuz=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9)");
+					$huhuz=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9 AND status_aktif=1)");
 					list($halah)=mysqli_fetch_array($huhuz);
 				echo'<h6>- JUMLAH KESELURUHAN : <strong>'.$halah.'</strong> KARYAWAN</h6>';
 					
