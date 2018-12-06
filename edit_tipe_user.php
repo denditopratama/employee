@@ -42,6 +42,13 @@
 					
 				    $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['username'])));
 					$password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_POST['password'])));
+					if(strlen($_POST['password'])<5){
+						echo '<script language="javascript">
+                                        window.alert("ERROR! Password Minimal 5 Karakter");
+										window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+									  </script>';
+									  die();
+					}
 					if(!empty($_POST['status_tugas'])){
 						$status_tugas = mysqli_real_escape_string($config,$_POST['status_tugas']);
 					}
@@ -300,8 +307,8 @@
 							
 							  <div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Password minimal 5 karakter">
                             <i class="material-icons prefix md-prefix">lock</i>
-                            <input id="password" type="password" class="validate" name="password" placeholder="	             (Kosongkan Jika tidak ingin mengganti Password)"> 
-                            <label for="password">Password</label>
+                            <input id="password" type="password" class="validate" name="password" placeholder="	                       (Kosongkan Jika tidak ingin mengganti Password)"> 
+                            <label for="password">Password Baru</label>
 							  </div>
 							  	<?php if($_SESSION['admin']==1){
 									
