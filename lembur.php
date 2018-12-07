@@ -1,15 +1,10 @@
 <?php
-    //cek session
-	
-/* 		$queryd = mysqli_query($config, "SELECT nama FROM tbl_disposisi WHERE id='".$_REQUEST['id']."'");
-	while($row = mysqli_fetch_array($queryd)){
-		if($_SESSION['admin']!=1 && $_SESSION['nama']!=$row['nama']){	
-			header("Location: ./");
-			die();
-		}
-		
-	} */
-	?>
+   if(empty($_SESSION['admin'])){
+	echo '<script language="javascript">
+			window.alert("ERROR! Anda tidak memiliki hak akses untuk melihat data ini");
+			window.location.href="./admin.php?page=pres";
+		  </script>';
+} else { ?>
 <style>
 .td{
 	text-align:center!important;
@@ -25,8 +20,10 @@
 	$cekdiv=mysqli_query($config,"SELECT divisi FROM tbl_presensi WHERE id='$id'");
 	list($divisis)=mysqli_fetch_array($cekdiv);
 	if($divisis!=$_SESSION['divisi']){
-	$_SESSION['err'] = '<center>Anda dilarang untuk melihat data selain divisi anda!</center>';
-        header("Location: ./admin.php?page=pres");
+	echo '<script>
+	alert("Anda dilarang untuk melihat data selain divisi anda!");
+	window.location.href="./admin.php?page=pres";
+	</script>';
       
 	}}
     if(empty($_SESSION['admin'])){
@@ -55,7 +52,7 @@
 			
 				$id=mysqli_real_escape_string($config,$_REQUEST['id']);
 				
-				if(isset($_REQUEST['accept'])){
+				if(isset($_POST['accept'])){
 					if($_SESSION['admin']==4){
 					$itj=mysqli_query($config,"UPDATE tbl_lembur SET status_gm=1 WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");}
 					else if($_SESSION['admin']==1){
@@ -64,7 +61,7 @@
 				}
 				
 				
-				if(isset($_REQUEST['tambahlembur'])){
+				if(isset($_POST['tambahlembur'])){
 				$tanggallembur=mysqli_real_escape_string($config,$_REQUEST['tanggallembur']);
 				$deskripsi=mysqli_real_escape_string($config,$_REQUEST['deskripsi']);
 				$jamawal=mysqli_real_escape_string($config,$_REQUEST['jamawal']);
@@ -79,7 +76,7 @@
 				}
             //pagging
             $limit = 99999999;
-            $pg = @$_GET['pg'];
+            $pg = mysqli_real_escape_string($config,@$_GET['pg']);
                 if(empty($pg)){
                     $curr = 0;
                     $pg = 1;
@@ -94,12 +91,7 @@
 				$bulans=date('M Y',strtotime($bulan));
                 
 
-                    if(empty($_SESSION['admin'])){
-                        echo '<script language="javascript">
-                                window.alert("ERROR! Anda tidak memiliki hak akses untuk melihat data ini");
-                                window.location.href="./admin.php?page=tsm";
-                              </script>';
-                    } else {
+                 
 
                       echo '<!-- Row Start -->
                             <div class="row">
@@ -258,138 +250,81 @@
 										</form>
 									
                                 
-						   </div>';}
+						   </div>';} ?>
+						    <div class="row jarak-form">
+
+<div class="col m12" id="colres">
+    <table class="bordered" id="tblb">
+        <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
+            <tr>
+                <th width="1%">No</th>
+                <th width="20%">Nama</th>
+                <th width="10%">Tindakan</th>
+            </tr>
+            
+        </thead>
+
+        <tbody>
+            <?php
+            $tokenlembur = bin2hex(mt_rand(0,9999));
+            $_SESSION['tokenlembur']=$tokenlembur;
+            $nos=1;
+            if($_SESSION['admin']==1){
+                $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id'");  
+            } else if ($_SESSION['admin']==5 || $_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
+                $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");
+            } else {
+                $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id' AND id_user='".$_SESSION['id_user']."'");
+			}
+			if(mysqli_num_rows($gk)<=0){
+				echo '<tr>
+				<td style="text-align:center!important" colspan="3"><h5>Tidak ada data untuk ditampilkan</h5></td>
+				</tr>';	
+			}
+            
+            while($row=mysqli_fetch_array($gk)){
+                $ku=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
+                list($namaz)=mysqli_fetch_array($ku);
+                echo '<tr>
+                <td style="text-align:center!important">'.$nos++.'</td>
+                <td style="text-align:center!important">'.$namaz.'</td>
+                <td style="text-align:center!important"><a id="ket'.$row['id_user'].'" data-pres="'.$id.'" class="btn green">lihat</a></td>
+                </tr>
+                </tbody>
+                <script>
+$(document).ready(function(){
+$(\'#ket'.$row['id_user'].'\').click(function(){
+    var token = '.$tokenlembur.';
+    var idz = $(this).data("pres");
+    $.post(\'./js/ajaxlembur.php\', {idz : idz, user : '.$row['id_user'].', token : token}, function(data){
+        $("#anjas").html(data);
+    });
+$(\'#modals\').openModal();
+});
+});
+</script>';
+            }
+            ?>
+       
+        </table>
+        </div>
+        </div>
+
+
+
+
+                           <?php
 						   
 						   
 						   echo '
-                            <!-- Row form Start -->
-                            <div class="row jarak-form">
-
-                                <div class="col m12" id="colres">
-                                    <table class="bordered" id="tblb">
-                                        <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
-                                            <tr>
-                                                <th width="1%" rowspan="2">No</th>
-                                                <th width="20%" rowspan="2">Nama</th>
-                                                <th width="15%" rowspan="2">Tanggal</th>
-												<th width="16%" rowspan="2">Deskripsi Pekerjaan</th>
-                                                <th width="14%" colspan="2" style="border-bottom:1px solid black">Jam Lembur</th>
-												<th width="14%" rowspan="2">Status Manager</th>
-												<th width="14%" rowspan="2">Status GM</th>
-                                                <th width="10%" rowspan="2">Tindakan</th>
-                                            </tr>
-											<tr>
-											 <th width="7%">Awal</th>
-                                                <th width="7%">Akhir</th>
-											</tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <tr>';
-										if($_SESSION['admin']==1){
-                                        $query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id'");}
-										else if($_SESSION['admin']==4){
-										$query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");	
-										}
-										else if($_SESSION['admin']==5){
-										$query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");	
-										}
-										else{
-										$query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND id_user='".$_SESSION['id_user']."'");
-										}
-										
-									
-
-                                        if(mysqli_num_rows($query2) > 0){
-                                            $no = 0;
-                                            while($row = mysqli_fetch_array($query2)){
-												$titit=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
-												list($namas)=mysqli_fetch_array($titit);
-                                            $no++;
-                                             echo ' <td style="text-align:center">'.$no.'</td>
-                                                    <td style="text-align:center">'.$namas.'</td>
-                                                    <td style="text-align:center">'.$row['tanggal'].'</td>
-													<td style="text-align:center">'.$row['pekerjaan'].'</td>
-													<td style="text-align:center">'.$row['jam_awal'].'</td>
-													<td style="text-align:center">'.$row['jam_akhir'].'</td>';
-
-										
-										echo'
-										<td style="text-align:center">';
-										if($_SESSION['admin']==1 || $_SESSION['admin']==5){
-										if($row['status_manager']==1){										
-											  echo'
-											<a class="btn small light-green waves-effect waves-light tooltipped" href="?page=lmbr&sub=manager&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=mMyu" data-position="left" data-tooltip="Klik untuk membatalkan persetujuan" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
-											<i class="material-icons">done</i></a>';} 
-											else {
-											echo'
-											<a class="btn small red waves-effect waves-light tooltipped" href="?page=lmbr&sub=manager&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=NnsJ" data-position="left" data-tooltip="Klik untuk Menyetujui" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
-										<i class="material-icons">highlight_off</i></a>';}}
-										else {
-											if($row['status_manager']==1){										
-											  echo'
-											<a class="btn small light-green waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik untuk membatalkan persetujuan">
-											<i class="material-icons">done</i></a>';} 
-											else {
-											echo'
-											<a class="btn small red waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik untuk Menyetujui">
-										<i class="material-icons">highlight_off</i></a>';}
-										}
-										
-										
-										
-										echo'</td>';
-										
-										
-										echo'
-										<td style="text-align:center">';
-										
-										if($_SESSION['admin']==1 || $_SESSION['admin']==4){
-										if($row['status_gm']==1){										
-											  echo'
-											<a class="btn small light-green waves-effect waves-light tooltipped" href="?page=lmbr&sub=manager&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=IuJh" data-position="left" data-tooltip="Klik untuk membatalkan persetujuan" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
-											<i class="material-icons">done</i></a>';} 
-											else {
-											echo'
-											<a class="btn small red waves-effect waves-light tooltipped" href="?page=lmbr&sub=manager&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=OkgJ" data-position="left" data-tooltip="Klik untuk Menyetujui" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
-										<i class="material-icons">highlight_off</i></a>';}}
-										else{
-										if($row['status_gm']==1){										
-											  echo'
-											<a class="btn small light-green waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik untuk membatalkan persetujuan">
-											<i class="material-icons">done</i></a>';} 
-											else {
-											echo'
-											<a class="btn small red waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik untuk Menyetujui">
-										<i class="material-icons">highlight_off</i></a>';}	
-										}
-										
-										echo'</td>';
-										
-													
-										echo'
-										<td style="text-align:center">';
-										if($row['id_user']!=$_SESSION['id_user'] && $_SESSION['admin']!=1){
-											echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
-										}
-										else{
-										echo'
-										<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Lembur" href="?page=lmbr&sub=del&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
-										<i class="material-icons">delete</i> DEL</a></td>';}
-
-											echo'
-													
-                                            </tr>
-                                        </tbody>';
-                                            }
-                                        } else {
-                                            echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
-                                        }
-                                echo '</table>
-                                </div>
+							<!-- Row form Start -->
+							<div id="modals" class="modal" style="width:80%">
+                            <div class="modal-content" id="anjas">
+                           
                             </div>
+							</div>';
 							
-                            <!-- Row form END -->';
+                        
                     }
                 
             
