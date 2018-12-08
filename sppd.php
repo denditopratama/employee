@@ -9,7 +9,7 @@
 }
  .containers {
       width: 600px;
-     margin-left:300px; 
+     margin-left:270px; 
 	 
   }
   .progressbar {
@@ -234,13 +234,13 @@
 							if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 							$way=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE nama LIKE '%$cari%'");
 							list($namanya)=mysqli_fetch_array($way);
-							$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user LIKE '%$namanya%' ORDER by id DESC");
+							$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE destinasi LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user ='$namanya' ORDER by id DESC");
 							}
 							else
 							{
 								$way=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE nama LIKE '%$cari%'");
 								list($namanya)=mysqli_fetch_array($way);
-								$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='$divisi' AND (destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user LIKE '%$namanya%') ORDER by id");}
+								$query = mysqli_query($config, "SELECT * FROM tbl_sppd WHERE divisi='$divisi' AND (destinasi LIKE '%$cari%' OR id_user LIKE '%$cari%' OR tanggal_awal LIKE '%$cari%' OR tanggal_akhir LIKE '%$cari%' OR id_user ='$namanya') ORDER by id");}
 								 
                                 if(mysqli_num_rows($query) > 0){
 									
@@ -777,6 +777,9 @@ $(document).ready(function(){
 $('#halaman').change(function(){
 	var x = $(this).val();
 	window.location.href='admin.php?page=sppd&pg='+ x;
+		});
+		$('.deep-orange').click(function(){
+			return confirm('Anda Yakin ini menyetujui SPPD?');
 		});
 	
 	});	
