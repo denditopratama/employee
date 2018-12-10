@@ -28,12 +28,7 @@
                 case 'add':
                     include "tambah_kontrak.php";
                     break;
-                case 'edit':
-                    include "edit_surat_keluar.php";
-                    break;
-                case 'del':
-                    include "hapus_surat_keluar.php";
-                    break;
+                
 				
             }
         } else {
@@ -58,15 +53,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col m5 hide-on-med-and-down" style="background-color:#39424c"> 
-                                        <form method="post" action="?page=kontrak">
-                                            <div class="input-field round-in-box">
-                                                <input id="search" type="search" name="cari" placeholder="Ketik dan tekan enter mencari data..." required>
-                                                <label for="search"><i class="material-icons">search</i></label>
-                                                <input type="submit" name="submit" class="hidden">
-                                            </div>
-                                        </form>
-                                    </div>
+                                  
                                 </div>
                             </nav>
                         </div>
@@ -122,30 +109,14 @@
 
                 <?php
                     
-                            if(isset($_REQUEST['submit'])){
-							$cari = mysqli_real_escape_string($config, $_REQUEST['cari']);
-							
-                                //script untuk mencari data
-                                $query = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' AND (isi LIKE '%$cari%' OR nama LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tujuan LIKE '%$cari%' OR no_agenda LIKE '%$cari%') ORDER by id_surat DESC");
-								$queryf = mysqli_query($config, "SELECT * FROM tabel_surat_keluar WHERE id_user='".$_SESSION['id_user']."' AND (isi LIKE '%$cari%' OR nama LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tujuan LIKE '%$cari%' OR no_agenda LIKE '%$cari%')");	
-								echo '
-                        <div class="col s12" style="margin-top: -18px;">
-                            <div class="card yellow darken">
-                                <div class="card-content">
-                                <p class="description">Hasil pencarian untuk kata kunci <strong>"'.stripslashes($cari).'"</strong><span class="right"><a href="?page=kontrak"><i class="material-icons md-36" style="color: #333;">clear</i></a></span></p>
-                                </div>
-                            </div>
-                        </div>';
-						$cdata = 0;
 						
-					} else {
 					$query = mysqli_query($configtm, "SELECT perjanjian.*, tbl_customer.nama, tbl_customer.namab
 
                     from perjanjian 
 
                     left join tbl_customer on perjanjian.customer=tbl_customer.id ORDER by id DESC");
 					
-					$cdata = mysqli_num_rows($query);}
+					$cdata = mysqli_num_rows($query);
 								       
 								
 						

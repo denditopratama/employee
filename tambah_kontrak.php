@@ -13,26 +13,35 @@
             $unit=mysqli_real_escape_string($configtm,$_POST['unit']);
             $tenant=mysqli_real_escape_string($configtm,$_POST['tenant']);
             $objek=mysqli_real_escape_string($configtm,$_POST['objek']);
-            $lokasi=mysqli_real_escape_string($configtm,$_POST['lokasi']);
+            if(!empty($_POST['lokasi'])){
+                $lokasi=mysqli_real_escape_string($configtm,$_POST['lokasi']);
+            } else { $lokasi = 0;}
+            
             $namausaha=mysqli_real_escape_string($configtm,$_POST['namausaha']);
             $jenisusaha=mysqli_real_escape_string($configtm,$_POST['jenisusaha']);
             $tgl_awal=mysqli_real_escape_string($configtm,$_POST['tgl_awal']);
             $tgl_akhir=mysqli_real_escape_string($configtm,$_POST['tgl_akhir']);
             $periode=mysqli_real_escape_string($configtm,$_POST['periode']);
             $jenisgto=mysqli_real_escape_string($configtm,$_POST['jenisgto']);
-            $nilaikontrak=mysqli_real_escape_string($configtm,$_POST['nilaikontrak']);
-            $sewabulan=mysqli_real_escape_string($configtm,$_POST['sewabulan']);
-            $servicecharge=mysqli_real_escape_string($configtm,$_POST['servicecharge']);
-            $listrik=mysqli_real_escape_string($configtm,$_POST['listrik']);
+            $nilaikontrak=mysqli_real_escape_string($configtm,str_replace('.', '', $_POST['nilaikontrak']));
+            $sewabulan=mysqli_real_escape_string($configtm,str_replace('.', '', $_POST['sewabulan']));
+            $servicecharge=mysqli_real_escape_string($configtm,str_replace('.', '', $_POST['servicecharge']));
+            $listrik=mysqli_real_escape_string($configtm,str_replace('.', '', $_POST['listrik']));
             $nosurat=mysqli_real_escape_string($configtm,$_POST['nosurat']);
             $tglminat=mysqli_real_escape_string($configtm,$_POST['tglminat']);
             $nonego=mysqli_real_escape_string($configtm,$_POST['nonego']);
             $nonegodirut=mysqli_real_escape_string($configtm,$_POST['nonegodirut']);
             $tglnegodirut=mysqli_real_escape_string($configtm,$_POST['tglnegodirut']);
+            $tglbanego=mysqli_real_escape_string($configtm,$_POST['tglbanego']);
 
-            //$kuy=mysqli_query($configtm,"INSERT INTO perjanjian() VALUES()");
-            echo '<script>alert(\'Kontrak Berhasil ditambah ! \');</script>';
-            header("Location: ./indexnyatm.php?page=kontrak");
+            $kuy=mysqli_query($configtm,"INSERT INTO perjanjian(noperj,tglperj,customer,lokasi,sdate,edate,luas,
+            harga,jenis,total,periode,branch,usaha,nolokasi,surat1,suratd1,surat2,suratd2,surat3,suratd3,obyek,jenisusaha) 
+            VALUES('$no_kontrak','$tgl_kontrak','$tenant','$lokasi','$tgl_awal','$tgl_akhir','0','$sewabulan','$jenisgto','$nilaikontrak','$periode','$unit','$namausaha','',
+            '$nosurat','$tglminat','$nonego','$tglbanego','$nonegodirut','$tglnegodirut','$objek','$jenisusaha')");
+            echo '<script>alert(\'Kontrak Berhasil ditambah ! \');
+            window.location.href="./indexnyatm.php?page=kontrak";
+            </script>';
+           
             
 
         } else {?>
@@ -179,7 +188,7 @@
 						
                             <div class="input-field col s6" >
                             <i class="material-icons prefix md-prefix" >people</i><label>Nama Tenant</label><br/>	
-                            <select class="browser-default" name="tenant" id="tenant" >
+                            <select class="browser-default" name="tenant" id="tenant" required>
 						
                         </select>
 							</div>
@@ -278,7 +287,52 @@
                     
                     <!-- Row in form END -->
 
-                    <div class="row">
+                    
+
+                    <div id="modald">
+				<div id="modalkontrak" class="modal" style="height:120%">
+                <div class="modal-content white" style="height:120%">
+            
+                <div class="col s12" style="text-align:center!important">
+                <h4>Nomor dan Tanggal Berita Acara</h4>
+                <small class="blue-text">* Kosongkan yang tidak perlu</small>
+				        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">looks_two</i>
+                            <input type="text" class="validate" name="nosurat">
+                            <label for="nosurat">Nomor Surat Pernyataan Minat Pihak Kedua</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">date_range</i>
+                            <input id="tgl_surat" type="date" name="tglminat">
+                            <label for="tglminat">Tanggal Surat Pernyataan Minat Pihak Kedua</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">looks_two</i>
+                            <input type="text" class="validate" name="nonego">
+                            <label for="nonego">Nomor Berita Acara Negosiasi Harga Sewa</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">date_range</i>
+                            <input id="tgl_akhir" type="text" class="datepicker" name="tglbanego">
+                            <label for="tglbanego">Tanggal Berita Acara Negosiasi Harga Sewa</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">attach_money</i>
+                            <input type="text" class="validate" name="nonegodirut">
+                            <label for="nonegodirut">Nomor Surat Persetujuan Hasil Negosiasi Direktur Utama</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix md-prefix">date_range</i>
+                            <input id="tgl_awal" type="text" class="datepicker" name="tglnegodirut">
+                            <label for="tglnegodirut">Tgl Surat Persetujuan Hasil Negosiasi Direktur Utama</label>
+                        </div>
+                </div>
+               
+                <br>
+                </div>
+                </div>
+                </div>
+                <div class="row">
                     <div class="col 6">
 						<a id="berita" class="btn-large orange waves-effect waves-light">BERITA ACARA <i class="material-icons">add</i></a>
                         </div>
@@ -291,46 +345,6 @@
 						
                         </div>
                     </div>
-
-                    <div id="modald">
-				<div id="modalkontrak" class="modal" style="height:100%">
-                <div class="modal-content white" style="height:100%">
-               
-                <div class="col s12" style="text-align:center!important">
-                <h4>Nomor dan Tanggal Berita Acara</h4>
-                <small class="blue-text">* Kosongkan yang tidak perlu</small>
-				        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">looks_two</i>
-                            <input type="text" class="validate" name="nosurat">
-                            <label for="nosurat">Nomor Surat Pernyataan Minat Pihak Kedua</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">date_range</i>
-                            <input id="tgl_surat" type="text" class="datepicker" name="tglminat">
-                            <label id="tgl_surat" for="tglminat">Tanggal Surat Pernyataan Minat Pihak Kedua</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">looks_two</i>
-                            <input type="text" class="validate" name="nonego">
-                            <label for="nonego">Nomor Berita Acara Negosiasi Harga Sewa</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">attach_money</i>
-                            <input type="text" class="validate" name="nonegodirut">
-                            <label for="nonegodirut">Nomor Surat Persetujuan Hasil Negosiasi Direktur Utama</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix md-prefix">date_range</i>
-                            <input id="tgl_surat" type="text" class="datepicker" name="tglnegodirut">
-                            <label id="tgl_surat" for="tglnegodirut">Tgl Surat Persetujuan Hasil Negosiasi Direktur Utama</label>
-                        </div>
-                </div>
-               
-                <br>
-                </div>
-                </div>
-                </div>
-           
 
                 </form>
                 <!-- Form END -->
