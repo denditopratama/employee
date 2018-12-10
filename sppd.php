@@ -779,7 +779,7 @@ $('#halaman').change(function(){
 	window.location.href='admin.php?page=sppd&pg='+ x;
 		});
 		$('.deep-orange').click(function(){
-			return confirm('Anda Yakin ini menyetujui SPPD?');
+			return confirm('Anda Yakin untuk menyetujui SPPD?');
 		});
 	
 	});	

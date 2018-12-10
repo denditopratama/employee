@@ -94,9 +94,8 @@ $id = mysqli_real_escape_string($config, $_REQUEST['id']);
 				            </div>
 								
                             <div class="card-action">
-							<a href="?page=sppd&act=del&submit=yes&id='.$row['id'].'" class="btn-large deep-orange waves-effect waves-light white-text">HAPUS <i class="material-icons">delete</i></a>';
-
-							
+							<a id="gk" href="?page=sppd&act=del&submit=yes&id='.$row['id'].'" class="btn-large orange waves-effect waves-light white-text">HAPUS <i class="material-icons">delete</i></a>';
+                                       					
 							 echo'
 							<a href="?page=sppd" class="btn-large blue waves-effect waves-light white-text">BATAL <i class="material-icons">clear</i></a>';
 						 
