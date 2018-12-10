@@ -131,13 +131,15 @@ else {
     size: auto;   /* auto is the initial value */ 
 
     /* this affects the margin in the printer settings */ 
-    margin: 22.5mm;
+	margin: 18mm;
+	
 } 
 
 body  
 { 
     /* this affects the margin on the content before sending to printer */ 
-    margin: 0px;  
+	margin: 0px;  
+	
 } 
 
  
@@ -157,7 +159,7 @@ body
         <div class="container">
             <div id="colres">
                 <div class="disp">';
-				echo'<h1 style="font-weight:100;font-family:sans-serif;margin-top:20px;"><img class="logodisp" src="./asset/img/screenshots.png"/ style="width:25%;vertical-align:middle">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDaftar Riwayat Hidup</img></h1>';
+				echo'<h1 style="font-weight:100;font-family:sans-serif;margin-top:5px;"><img class="logodisp" src="./asset/img/screenshots.png"/ style="width:25%;vertical-align:middle">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDaftar Riwayat Hidup</img></h1>';
 				echo '<hr style="display:block;margin-top:-5px;text-align:right"></hr>';
 				
 				
