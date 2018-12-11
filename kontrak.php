@@ -10,7 +10,7 @@
 
 </style>
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="asset/css/jquery.dataTables.css">
 
 <?php
     //cek session
@@ -160,7 +160,7 @@
 										
                                   
                                     <td style="text-align:center">
-                                 	<a class="btn small orange waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Klik untuk cetak kontrak">
+                                 	<a class="btn small orange waves-effect waves-light tooltipped" href="./tm/spk.php?noperj='.$row['id'].'" data-position="left" data-tooltip="Klik untuk cetak kontrak">
                                     <i class="material-icons">print</i> CETAK</a></td>
 									
 									<td style="text-align:center">

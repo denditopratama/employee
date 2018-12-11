@@ -269,7 +269,7 @@ function drawChart() {
 
 </script>
 	
-	
+
 	
     <!-- container END -->
 
@@ -278,25 +278,31 @@ function drawChart() {
 
 <!-- Include Footer START -->
 <?php include('include/footer.php'); ?>
+<script>
+$("#modaltm").openModal();
+</script>
 <!-- Include Footer END -->
+<script>
+ if(sessionStorage.getItem("keyd")!=='true'){
 
+	$("#modaltm").openModal();
+                      
+    $('#tutup').click(function(){
+        $('#modaltm').closeModal();
+    });
+
+    
+sessionStorage.setItem('keyd', 'true');}
+
+</script>
 	
 </body>
 <!-- Body END -->
 
 </html>
 
+
+
 <?php
     }
 ?>
-<script>
- if(sessionStorage.getItem("keyd")!=='true'){
-	$(document).ready(function(){
-	$("#modaltm").openModal()
-                        });
-    
-    $('#tutup').click(function(){
-        $('#modaltm').closeModal();
-    });
-sessionStorage.setItem('keyd', 'true');} 
-</script>

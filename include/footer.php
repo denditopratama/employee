@@ -116,7 +116,7 @@ $pages=$_REQUEST['page'];
 <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="asset/js/jquery.simplePagination.js"></script>
 <script data-pace-options='{ "ajax": false }' src='asset/js/pace.min.js'></script>
-<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="asset/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 
@@ -157,7 +157,9 @@ $('.button-collapse').sideNav({
 //jquery datepicker
 $('#tgl_surat,#batas_waktu,#dari_tanggal,#sampai_tanggal,#tgl_awal,#tgl_akhir').pickadate({
     selectMonths: true,
-    selectYears: 150,
+    selectYears: 200,
+    min: new Date(1940,1,1),
+    max : true,
     format: "yyyy-mm-dd"
 });
 

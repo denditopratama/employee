@@ -261,9 +261,9 @@ if(empty($_SESSION['admin'])){
                                     </div>	
 							<div class="input-field col s6">
                                 <i class="material-icons prefix md-prefix">cake</i>
-                                <input id="tgl_surat" type="text" name="tanggal_lahir" class="datepicker" value="<?php echo $tanggal_lahir ;?>" required>
+                                <input id="tgl_awal" type="text" name="tanggal_lahir" class="datepicker" value="<?php echo $tanggal_lahir ;?>" required>
                                     
-                                <label for="tgl_lahir" id="tgl_surat">Tanggal Lahir</label>
+                                <label for="tgl_lahir" id="tgl_awal">Tanggal Lahir</label>
                             </div>
 									
 									<div class="input-field col s6">
