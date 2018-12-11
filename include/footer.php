@@ -158,8 +158,8 @@ $('.button-collapse').sideNav({
 $('#tgl_surat,#batas_waktu,#dari_tanggal,#sampai_tanggal,#tgl_awal,#tgl_akhir').pickadate({
     selectMonths: true,
     selectYears: 200,
-    min: new Date(1940,1,1),
-    max : true,
+    min: [1945,1,1],
+  max: [2050,1,1],
     format: "yyyy-mm-dd"
 });
 
