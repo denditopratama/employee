@@ -262,7 +262,7 @@ body
 						$bzg=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");
 						$nenc=0;
 							while($rowz=mysqli_fetch_array($bzg)){
-								$yoy=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE kelas_jabatan='".$rowz['kelas_jabatan']."'");
+								$yoy=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE kelas_jabatan='".$rowz['kelas_jabatan']."' AND(admin<>1 AND admin<>9 AND status_aktif=1)");
 								list($jum)=mysqli_fetch_array($yoy);
 							echo'
 							<td id="gelo" style="background-color:yellow!important;font-weight:bold!important;text-align:center!important" rowspan="1">'.$jum.'</td>';
