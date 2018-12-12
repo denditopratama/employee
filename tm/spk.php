@@ -16,7 +16,7 @@ session_start();
 
   
 
-  $id=$_GET['noperj'];
+  $id=mysqli_escape_string($configtm,$_GET['noperj']);
 
   
 
@@ -26,7 +26,7 @@ session_start();
 
   from branch, perjanjian, tbl_customer 
 
-  where perjanjian.id='$id' and perjanjian.branch=branch.id and perjanjian.customer=tbl_customer.id";  
+  where perjanjian.id='$id' and perjanjian.customer=tbl_customer.id";  
 
   $sql1 = mysqli_query($configtm,$sql);			
 
@@ -72,7 +72,7 @@ session_start();
 
 	
 
-	$periode=$r2[periode];
+	$periode=$r2['periode'];
 
 	$sdate=tgl_indo($r2['sdate']);	
 
@@ -136,7 +136,34 @@ session_start();
 
 	}
 
-	
+	$hariw=date('d');
+	$bulaw=date('m');
+	if($bulaw=1){
+		$bulans='Januari';
+	} else if($bulaw=2){
+		$bulans='Febuari';
+	} else if($bulaw=3){
+		$bulans='Maret';
+	} else if($bulaw=4){
+		$bulans='April';
+	} else if($bulaw=5){
+		$bulans='Mei';
+	} else if($bulaw=6){
+		$bulans='Juni';
+	} else if($bulaw=7){
+		$bulans='Juli';
+	} else if($bulaw=8){
+		$bulans='Agustus';
+	} else if($bulaw=9){
+		$bulans='September';
+	} else if($bulaw=10){
+		$bulans='Oktober';
+	} else if($bulaw=11){
+		$bulans='November';
+	} else if($bulaw=12){
+		$bulans='Desember';
+	}
+	$tahunw=date('Y');
 
 	$dt=explode("-",$r2['tglperj']);
 
@@ -161,6 +188,7 @@ $content = "<table>";
 			  .fulljustify {
 
 			  text-align: justify;
+			  
 
 			}
 
@@ -173,56 +201,23 @@ $content = "<table>";
 			  width: 100%;
 
 			}
+			
 
 			</style>";
 
-	
+	echo '<style>
+	td{
+		line-height:115%;
+	}';
 
-            $content .= "<tr height='20'>
+            $content .= "<table width='630'><tr height='20'>
 
-            <td align='center'><font style='font-family: arial; font-size: 15px;'><b>PERJANJIAN SEWA MENYEWA<br>
-
-			UNIT OBJEK SEWA PADA
-
-			".strtoupper($namatol)."
-
-			</td>
+            <td align='center'><font style='font-family: tahoma; font-size: 12px;'><b>PERJANJIAN SEWA MENYEWA</b></td>
 
 			</tr>
 
-			<tr height='20'><td><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			</u></td></tr>
-
-			<tr height='20'><td align='center'><b><font style='font-family: arial; font-size: 15px;'>Nomor : ".$noperj."</b></td></tr>
+			
+			<tr><td align='center'><font style='font-family: tahoma; font-size: 12px;'>Nomor : ".$noperj."</td></tr>
 
 			</table>
 
@@ -232,48 +227,39 @@ $content = "<table>";
 
 			<tr height='20'>            
 
-            <td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Pada hari ini <b>".$hari."</b>, tanggal <b>".$tanggal."</b> bulan 
-
-			<b>".$bulan." </b>tahun  <b>".$tahun."</b>, telah disepakati Perjanjian Sewa Menyewa Unit Objek Sewa Pada Global Terpadu Office 
-
-			".ucwords($namatol)." (selanjutnya disebut Perjanjian) oleh dan diantara :</td>              
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 10.5px;'>Perjanjian Sewa Menyewa (Kententuan Umum Sewa Menyewa) ini dibuat
+			dan ditandatangani pada hari <b>".$hari."</b> tanggal <b>".$hariw."</b> <b>".$bulans."</b> <b>".$tahunw."</b> oleh dan antara : </td>              
 
             </tr>";
 
-			$mrk=mysqli_query($config,"SELECT tbl_user.nama,tbl_user.jabatan,tbl_ref_jabatan.jabatan FROM tbl_user,tbl_ref_jabatan
-			WHERE ")
+			$mrk=mysqli_query($config,"SELECT tbl_user.nama,tbl_ref_jabatan.jabatan FROM tbl_user,tbl_ref_jabatan
+			WHERE tbl_user.admin=4 AND(tbl_user.divisi=6 AND tbl_user.jabatan=tbl_ref_jabatan.id)");
+			list($namas,$jabatung)=mysqli_fetch_array($mrk);
+
 
 			$content .= "</table>
 
-			<br><br>
+			<br>
 
 			<table>
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'><b>I.</b></td><td class='fulljustify'><font style='font-family: arial; font-size: 15px;'><b>PT JASAMARGA PROPERTI</b>, 
+			<td align='left' width='30'><font style='font-family: tahoma; font-size: 10.5px;'><b>1.</b></td><td class='fulljustify'><font style='font-family: tahoma; font-size: 10.5px;'><b>PT JASAMARGA PROPERTI</b>, 
 			suatu perseroan terbatas yang didirikan dan tunduk berdasarkan hukum dan peraturan perundang-undangan Republik Indonesia, 
-			berkedudukan di Graha Simatupang Tower 2b, Jl. TB Simatupang Kav. 38 RT/RW 04/08, Kec. Pasar Minggu, Kel. Jatipadang, Jakarta, Indonesia,
-			dalam perbuatan hukum ini diwakili oleh 
-			Umum Pemegang Saham akta Nomor 02 tanggal 05 Januari 2016, yang keduanya dibuat dihadapan 
-			Windalina Sarjana Hukum Notaris di Jakarta yang telah mendapat pengesahan dari Menteri Hukum 
-			Dan Hak Asasi Manusia Republik Indonesia serta surat penerimaan pemberitahuan Menteri 
-			Hukum dan HAM Republik Indonesia, Nomor AHU-02309.AH.01.01 tanggal 23 Januari 2013 
-			dan Nomor AHU-AH-01.03-0919595 tanggal 08 Juli 2015, yang diwakili oleh MOHAMAD AGUS SETIAWAN 
-			selaku Direktur Utama berdasarkan Akta Keputusan Pemegang Saham Diluar Rapat Umum Pemegang Saham 
-			PT Jasamarga Properti  No. 02 tanggal 05 Januari 2016 yang dibuat di hadapan Windalina SH 
-			Notaris di Jakarta yang telah mendapat Surat Penerimaan Pemberitahuan dari Menteri Hukum dan Hak 
-			Asasi Manusia Nomor AHU-0000246.AH.01.02 tanggal 07 Januari 2016 untuk selanjutnya disebut <b>PIHAK PERTAMA</b>.</td>     
+			berkedudukan di Graha Simatupang Tower 2b, Jl. TB Simatupang Kav. 38 RT/RW 04/08, Kec. Pasar Minggu, Kel. Jatipadang, Pasar Minggu
+			dalam perbuatan hukum ini diwakili oleh <b>".strtoupper($namas)."</b> dalam jabatannya sebagai <i><u>".ucwords(strtolower($jabatung))."</u></i><b> PT JASAMARGA PROPERTI</b>,
+			dengan demikian berhak dan berwenang bertindak secara sah untuk dan atas nama <b>PT JASAMARGA PROPERTI</b>.<br>
+			(Untuk selanjutnya disebut <b><i>\"PIHAK PERTAMA\"</i></b>).</td>     
             </tr>
 			<tr height='20'><td colspan='2'></td></tr>
 			<tr valign='top'>   
-			<td align='right'><font style='font-family: arial; font-size: 15px;'><b>II.</b></td><td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>
-
-			<b>".$nama."</b>, Pemilik Usaha ".$obyek." dengan nama usaha '".$usaha."', 
-
-			beralamat di ".$alamat.", 
-
-			dalam hal ini bertindak untuk dan atas nama '".$usaha."', dan selanjutnya disebut sebagai <b>'Pihak Kedua'</b>.
+			<td align='left' width='30'><font style='font-family: tahoma; font-size: 10.5px;'><b>2.</b></td><td class='fulljustify'><font style='font-family: tahoma; font-size: 10.5px;'>
+			<b>".strtoupper($usaha)."</b> suatu perseroan terbatas yang sudah terdaftar sebagai perseroan terbuka, didirikan dan tunduk berdasarkan hukum dan peraturan perundang-undangan Republik Indonesia, 
+			berkedudukan di Graha Simatupang Tower 2b, Jl. TB Simatupang Kav. 38 RT/RW 04/08, Kec. Pasar Minggu, Kel. Jatipadang, Pasar Minggu
+			dalam perbuatan hukum ini diwakili oleh <b>".strtoupper($nama)."</b> dalam jabatannya sebagai <i><u>Direktur Utama</u></i> <b>".strtoupper($usaha)."</b>,
+			dengan demikian berhak dan berwenang bertindak secara sah untuk dan atas nama <b>".strtoupper($usaha)."</b>.<br>
+			(Untuk selanjutnya disebut <b><i>\"PIHAK KEDUA\"</i></b>).
 
 			</td>              
 
@@ -283,7 +269,7 @@ $content = "<table>";
 
 			<tr valign='top'>   
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Para Pihak masing masing dalam kedudukan tersebut diatas menerangkan terlebih dahulu:
 
@@ -293,7 +279,7 @@ $content = "<table>";
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>1.</td><td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>1.</td><td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>
 
 			BAHWA,  <b>Pihak Pertama</b>  berdasarkan  Surat Keputusan Direktur Utama PT Jasamarga Properti Nomor : 007/KPTS-JMP/2016 tanggal 25 April 2016 tentang Tarif, Kewenangan, serta dasar Aturan Kontrak Sewa Tanah, 
 
@@ -309,7 +295,7 @@ $content = "<table>";
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>2.</td><td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>2.</td><td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>
 
 			BAHWA,  <b>Pihak Kedua</b>  adalah penyewa ".$obyek." dengan nama usaha ".$usaha." pada ".ucwords($namatol)."
 
@@ -321,7 +307,7 @@ $content = "<table>";
 
 			<tr valign='top'>   
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Berdasarkan :
 
@@ -335,67 +321,33 @@ $content = "<table>";
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td colspan='3'><font style='font-family: arial; font-size: 15px;'>Surat Pernyataan Minat Pihak Kedua</td>              
-
-            </tr>
-
-			<tr valign='top'>   
-
-			<td align='right'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Nomor</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td><font style='font-family: arial; font-size: 15px;'>".$surat1."</td>
+			<td colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Surat Pernyataan Minat Pihak Kedua</td>              
 
             </tr>
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'></td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Tanggal</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Nomor</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td><font style='font-family: arial; font-size: 15px;'>".$suratd1."</td>
-
-            </tr>
-
-			
-
-			<tr valign='top'>   
-
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>2.</td>
-
-			<td colspan='3'><font style='font-family: arial; font-size: 15px;'>Berita Acara Negosiasi Harga Sewa</td>              
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$surat1."</td>
 
             </tr>
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'></td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Nomor</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Tanggal</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td><font style='font-family: arial; font-size: 15px;'>".$surat2."</td>
-
-            </tr>
-
-			<tr valign='top'>   
-
-			<td align='right'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Tanggal</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td><font style='font-family: arial; font-size: 15px;'>".$suratd2."</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$suratd1."</td>
 
             </tr>
 
@@ -403,33 +355,67 @@ $content = "<table>";
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td colspan='3'><font style='font-family: arial; font-size: 15px;'>Surat Persetujuan Hasil Negosiasi Direktur Utama</td>              
-
-            </tr>
-
-			<tr valign='top'>   
-
-			<td align='right'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Nomor</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td><font style='font-family: arial; font-size: 15px;'>".$surat3."</td>
+			<td colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Berita Acara Negosiasi Harga Sewa</td>              
 
             </tr>
 
 			<tr valign='top'>   
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'></td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Tanggal</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Nomor</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td><font style='font-family: arial; font-size: 15px;'>".$suratd3."</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$surat2."</td>
+
+            </tr>
+
+			<tr valign='top'>   
+
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Tanggal</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$suratd2."</td>
+
+            </tr>
+
+			
+
+			<tr valign='top'>   
+
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>3.</td>
+
+			<td colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Surat Persetujuan Hasil Negosiasi Direktur Utama</td>              
+
+            </tr>
+
+			<tr valign='top'>   
+
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Nomor</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$surat3."</td>
+
+            </tr>
+
+			<tr valign='top'>   
+
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Tanggal</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$suratd3."</td>
 
             </tr>
 
@@ -439,7 +425,7 @@ $content = "<table>";
 
 			<tr height='20'><td></td></tr>
 
-			<tr height='20'><td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>
+			<tr height='20'><td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>
 
 			<b>PARA PIHAK</b> telah setuju dan sepakat untuk mengadakan suatu Perjanjian Sewa-Menyewa  
 
@@ -459,13 +445,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 1</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 1</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>POKOK PERJANJIAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>POKOK PERJANJIAN</b></td>
 
 			</tr>			
 
@@ -473,9 +459,9 @@ $content = "<table>";
 
 			<tr valign='top'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Lokasi yang disewakan oleh <b>Pihak Pertama</b> kepada <b>Pihak Kedua</b> adalah sebagai berikut (denah terlampir):</td></tr>
 
@@ -483,27 +469,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Obyek Sewa</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Obyek Sewa</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td><font style='font-family: arial; font-size: 15px;'>".$obyek."</td> 
-
-			</tr>
-
-			
-
-			<tr height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Jenis Usaha</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td><font style='font-family: arial; font-size: 15px;'>".$jenisusaha."</td> 
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$obyek."</td> 
 
 			</tr>
 
@@ -511,27 +483,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Nomor</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Jenis Usaha</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td><font style='font-family: arial; font-size: 15px;'>".$nolokasi."</td> 
-
-			</tr>
-
-			
-
-			<tr height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Luas</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td><font style='font-family: arial; font-size: 15px;'><u>+</u>".$luas."</td> 
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$jenisusaha."</td> 
 
 			</tr>
 
@@ -539,9 +497,37 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td valign='top'><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Nomor</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'>".$nolokasi."</td> 
+
+			</tr>
+
+			
+
+			<tr height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Luas</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'><u>+</u>".$luas."</td> 
+
+			</tr>
+
+			
+
+			<tr height='20'>
+
+			<td valign='top'><font style='font-family: tahoma; font-size: 15px;'>2.</td>
+
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			<b>Pihak Kedua</b> hanya berhak untuk mendapatkan hak sewa atas objek tersebut di ayat 1 dan tidak diperbolehkan 
 
@@ -551,9 +537,9 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td valign='top'><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td valign='top'><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			<b>Pihak Pertama</b> berhak memindahkan <b>Pihak Kedua</b> dari objek tersebut di ayat 1 ke objek yang lain yang masih dalam lokasi 
 
@@ -571,13 +557,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 2</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 2</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>JANGKA WAKTU PERJANJIAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>JANGKA WAKTU PERJANJIAN</b></td>
 
 			</tr>			
 
@@ -585,9 +571,9 @@ $content = "<table>";
 
 			<tr valign='top'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Perjanjian ini berlaku ".$periode." bulan terhitung 
 
@@ -597,9 +583,9 @@ $content = "<table>";
 
 			<tr valign='top'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Apabila dikehendaki oleh <b>Para Pihak</b>, sewa Tempat Usaha sebagaimana dimaksud dalam ayat (1) Pasal ini dapat 
 
@@ -611,9 +597,9 @@ $content = "<table>";
 
 			<tr valign='top'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Untuk maksud sebagaimana ayat (2) tersebut, maka <b>Pihak Kedua</b> harus mengajukan permohonan secara 
 
@@ -625,9 +611,9 @@ $content = "<table>";
 
 			<tr valign='top'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>4.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>4.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Terhadap perpanjangan jangka waktu sebagaimana dimaksud dalam ayat 2 dan ayat 3 Pasal ini, maka <b>Pihak Kedua</b> akan 
 
@@ -645,13 +631,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 3</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 3</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>BIAYA SEWA MENYEWA DAN <i>SERVICE CHARGE</i><br>UNIT OBJEK SEWA  </b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>BIAYA SEWA MENYEWA DAN <i>SERVICE CHARGE</i><br>UNIT OBJEK SEWA  </b></td>
 
 			</tr>			
 
@@ -659,9 +645,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Atas Objek Sewa ".$obyek."
 
@@ -669,83 +655,83 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='30'><font style='font-family: arial; font-size: 15px;'>Sewa ".$obyek." (Rp.".$harga."X".$periode." bulan)</td>
+			<td width='30'><font style='font-family: tahoma; font-size: 15px;'>Sewa ".$obyek." (Rp.".$harga."X".$periode." bulan)</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>=&nbsp;Rp</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>=&nbsp;Rp</td>
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>".$total."</td>
-
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='30'><font style='font-family: arial; font-size: 15px;'>Service Charge (Rp.".$harga."X".$periode." bulan)</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>=&nbsp;Rp</td>
-
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>".format_rp($totalsc)."</td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>".$total."</td>
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='30'><font style='font-family: arial; font-size: 15px;'>Jumlah</td>
+			<td width='30'><font style='font-family: tahoma; font-size: 15px;'>Service Charge (Rp.".$harga."X".$periode." bulan)</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>=&nbsp;Rp</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>=&nbsp;Rp</td>
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>".format_rp($jumlah)."</td>
-
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='30'><font style='font-family: arial; font-size: 15px;'>PPN 10%</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>=&nbsp;Rp</td>
-
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>".format_rp($ppn)."</td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>".format_rp($totalsc)."</td>
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='30'><font style='font-family: arial; font-size: 15px;'>Total Biaya Sewa Yang Harus Dibayarkan</td>
+			<td width='30'><font style='font-family: tahoma; font-size: 15px;'>Jumlah</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>=&nbsp;Rp</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>=&nbsp;Rp</td>
 
-			<td align='right'><font style='font-family: arial; font-size: 15px;'>".format_rp($totalsewa)."</td>
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>".format_rp($jumlah)."</td>
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td colspan='4'><font style='font-family: arial; font-size: 15px;'></td>			
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='30'><font style='font-family: tahoma; font-size: 15px;'>PPN 10%</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>=&nbsp;Rp</td>
+
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>".format_rp($ppn)."</td>
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='30'><font style='font-family: tahoma; font-size: 15px;'>Total Biaya Sewa Yang Harus Dibayarkan</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>=&nbsp;Rp</td>
+
+			<td align='right'><font style='font-family: tahoma; font-size: 15px;'>".format_rp($totalsewa)."</td>
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td colspan='4'><font style='font-family: tahoma; font-size: 15px;'></td>			
 
 			</tr>			
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='30' colspan='3'><font style='font-family: arial; font-size: 15px;'>Terbilang : ".$terbilang."</td>			
+			<td width='30' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Terbilang : ".$terbilang."</td>			
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2</td>
 
-			<td width='30' colspan='3'><font style='font-family: arial; font-size: 15px;'>Biaya sewa menyewa dan service charge unit Tempat Usaha sebagaimana 
+			<td width='30' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Biaya sewa menyewa dan service charge unit Tempat Usaha sebagaimana 
 
 			dimaksud ayat 1 Pasal  ini belum termasuk biaya pemakaian Listrik dan Air yang dibebankan kepada <b>Pihak Kedua</b> setiap bulannya.</td>			
 
@@ -763,13 +749,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 4</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 4</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>TATA CARA PEMBAYARAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>TATA CARA PEMBAYARAN</b></td>
 
 			</tr>			
 
@@ -777,9 +763,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Biaya sewa sebagaimana dimaksud ayat 1 Pasal 4 Perjanjian ini, dibayarkan oleh <b>Pihak Kedua</b> 
 
@@ -789,9 +775,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Pembayaran biaya listrik dan air sebagaimana dimaksud ayat 2 pasal 4 perjanjian ini, dibayarkan selambat-lambatnya tanggal 10 bulan 
 
@@ -799,9 +785,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Pembayaran dilakukan dalam Rupiah dan dapat dinyatakan sah apabila sudah masuk ke rekening <b>Pihak Pertama</b> sebagai berikut :</td></tr>
 
@@ -817,13 +803,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 5</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 5</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PERUBAHAN, PENAMBAHAN DAN PERALIHAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PERUBAHAN, PENAMBAHAN DAN PERALIHAN</b></td>
 
 			</tr>			
 
@@ -831,9 +817,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Semua perubahan, penambahan dan Peralihan yang dilakukan atas ruangan hanya dapat dilakukan apabila 
 
@@ -841,13 +827,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='5'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' width='5'><font style='font-family: tahoma; font-size: 15px;'>
 
 			a.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Perubahan dan atau penambahan luasan harus seijin Pihak Pertama;</td>
 
@@ -855,13 +841,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='5'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' width='5'><font style='font-family: tahoma; font-size: 15px;'>
 
 			b.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Pihak Kedua tidak diperkenankan untuk memindahtangankan kepada pihak lain tanpa seijin Pihak Pertama;</td>
 
@@ -869,9 +855,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Segala biaya biaya, resiko dan akibat hukum yang timbul sehubungan dengan perubahan dan atau penambahan 
 
@@ -893,13 +879,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 6</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 6</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PENGGUNAAN TEMPAT USAHA</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PENGGUNAAN TEMPAT USAHA</b></td>
 
 			</tr>			
 
@@ -907,9 +893,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			<b>Pihak Kedua</b> hanya diperkenankan untuk menggunakan Tempat Usaha dengan objek sewa ".$obyek."
 
@@ -921,9 +907,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			<b>Pihak Kedua</b> wajib mendapatkan persetujuan terlebih dahulu dari <b>Pihak Pertama</b>, jika <b>Pihak Kedua</b> 
 
@@ -931,9 +917,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Jika <b>Pihak Kedua</b> menggunakan Tempat Usaha menyimpang dari tujuan yang diuraikan pada ayat 2 Pasal ini 
 
@@ -947,9 +933,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>4.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>4.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Dalam hal sebagaimana diatur Pasal 4 Perjanjian ini, <b>Pihak Kedua</b> 
 
@@ -967,13 +953,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 7</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 7</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>KLAIM DARI PIHAK KETIGA</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>KLAIM DARI PIHAK KETIGA</b></td>
 
 			</tr>			
 
@@ -981,7 +967,7 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>			
 
-			<td class='fulljustify' colspan='4'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='4'><font style='font-family: tahoma; font-size: 15px;'>
 
 			<b>Pihak Kedua</b> menjamin dan membebaskan <b>Pihak Pertama</b> dari tuntutan ataupun dakwaan dari <b>Pihak Ketiga</b> yang 
 
@@ -999,13 +985,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 8</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 8</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>HAK DAN KEWAJIBAN PARA PIHAK</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>HAK DAN KEWAJIBAN PARA PIHAK</b></td>
 
 			</tr>			
 
@@ -1013,9 +999,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Hak dan Kewajiban <b>Pihak Pertama</b> :</td></tr>
 
@@ -1023,37 +1009,11 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>a.</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>a.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Pihak Pertama berhak :</td>			
-
-			</tr>
-
-			
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
-
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menerima Pendapatan dari Hasil Objek Sewa.</td>			
-
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
-
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menegur, memberi peringatan dan memutuskan kontrak kepada Pihak Kedua apabila melanggar kesepakatan Kontrak.</td>			
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Pihak Pertama berhak :</td>			
 
 			</tr>
 
@@ -1061,11 +1021,25 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>b.</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Pihak Pertama Wajib :</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
+
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menerima Pendapatan dari Hasil Objek Sewa.</td>			
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
+
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menegur, memberi peringatan dan memutuskan kontrak kepada Pihak Kedua apabila melanggar kesepakatan Kontrak.</td>			
 
 			</tr>
 
@@ -1073,25 +1047,37 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>b.</td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Pihak Pertama Wajib :</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menyediakan Fasilitas Objek Sewa, Listrik dan Air.</td>			
+			</tr>
+
+			
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
+
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menyediakan Fasilitas Objek Sewa, Listrik dan Air.</td>			
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Memelihara Fasilitas umum yang berada diluar Objek Sewa agar dapat berfungsi
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Memelihara Fasilitas umum yang berada diluar Objek Sewa agar dapat berfungsi
 
             dengan baik.</td>			
 
@@ -1099,13 +1085,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menjaga Kebersihan Lingkungan di wilayah Objek Sewa.</td>
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menjaga Kebersihan Lingkungan di wilayah Objek Sewa.</td>
 
 			</tr>
 
@@ -1113,89 +1099,89 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Hak dan Kewajiban para Pihak Kedua</td></tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>a.</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>a.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Pihak Kedua berhak :</td>			
-
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
-
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menerima Objek Sewa dengan kondisi siap diserah terimakan.</td>
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Pihak Kedua berhak :</td>			
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Mendapatkan Fasilitas Listrik dan Air.</td>
-
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
-
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menerima informasi dengan jelas dari Pihak Pengelola.</td>
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menerima Objek Sewa dengan kondisi siap diserah terimakan.</td>
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>b.</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Pihak Kedua wajib :</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
-
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Membayar Uang sewa, Listrik dan Air  tepat waktu.</td>
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Mendapatkan Fasilitas Listrik dan Air.</td>
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Memelihara Objek Sewa dari kerusakan, baik yang diakibatkan karena
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menerima informasi dengan jelas dari Pihak Pengelola.</td>
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>b.</td>
+
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Pihak Kedua wajib :</td>			
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
+
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Membayar Uang sewa, Listrik dan Air  tepat waktu.</td>
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
+
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Memelihara Objek Sewa dari kerusakan, baik yang diakibatkan karena
 
 			kesengajaan maupun tidak disengaja.</td>
 
@@ -1203,37 +1189,37 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Mencantumkan daftar harga produk yang dijual.</td>
-
-			</tr>
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
-
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Menjaga Kebersihan Lingkungan di wilayah Objek Sewa.</td>
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Mencantumkan daftar harga produk yang dijual.</td>
 
 			</tr>
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'></td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>-</td>			
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Mentaati peraturan yang telah ditetapkan <b>Pihak Pertama</b>.</td>
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Menjaga Kebersihan Lingkungan di wilayah Objek Sewa.</td>
+
+			</tr>
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>-</td>			
+
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Mentaati peraturan yang telah ditetapkan <b>Pihak Pertama</b>.</td>
 
 			</tr>
 
@@ -1249,13 +1235,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 9</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 9</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>BERAKHIRNYA PERJANJIAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>BERAKHIRNYA PERJANJIAN</b></td>
 
 			</tr>			
 
@@ -1265,7 +1251,7 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>			
 
-			<td class='fulljustify' colspan='4'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='4'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Perjanjian ini berakhir apabila :</td></tr>
 
@@ -1273,9 +1259,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>
 
 			Berakhirnya jangka waktu Perjanjian ini</td></tr>
 
@@ -1283,19 +1269,19 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Diakhiri lebih awal karena :</td></tr>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Diakhiri lebih awal karena :</td></tr>
 
 			
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>a.</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>a.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'><b>Pihak Kedua </b>menghendaki pengakhiran; atau</td>			
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'><b>Pihak Kedua </b>menghendaki pengakhiran; atau</td>			
 
 			</tr>
 
@@ -1303,11 +1289,11 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>b.</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>b.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Kelalaian yang yang dirinci dalam Pasal 9 Perjanjian ini.</td>			
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Kelalaian yang yang dirinci dalam Pasal 9 Perjanjian ini.</td>			
 
 			</tr>
 
@@ -1315,9 +1301,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila Perjanjian ini berakhir maka <b>Pihak Pertama</b> 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila Perjanjian ini berakhir maka <b>Pihak Pertama</b> 
 
 			mempunyai hak untuk melakukan segala tindakan yang diperlukan untuk kepentingan <b>Pihak Pertama</b>.</td></tr>
 
@@ -1333,13 +1319,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 10</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 10</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>DEPOSIT UNTUK LISTRIK DAN AIR</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>DEPOSIT UNTUK LISTRIK DAN AIR</b></td>
 
 			</tr>			
 
@@ -1349,9 +1335,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Kepada para penyewa dikenakan Deposit untuk Listrik 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Kepada para penyewa dikenakan Deposit untuk Listrik 
 
 			dan Air sebesar Rp. ".$deposit."</td></tr>
 
@@ -1359,9 +1345,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Deposit sebagaimana dimaksud ayat 1 pasal ini akan 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Deposit sebagaimana dimaksud ayat 1 pasal ini akan 
 
 			dikembalikan kepada <b>Pihak Kedua</b> apabila setelah berakhirnya masa sewa tidak terdapat tunggakan pembayaran listrik dan air</td></tr>
 
@@ -1377,13 +1363,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 11</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 11</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>KELALAIAN DAN SANKSI</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>KELALAIAN DAN SANKSI</b></td>
 
 			</tr>			
 
@@ -1393,9 +1379,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila <b>PIHAK KEDUA</b> tidak dapat 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila <b>PIHAK KEDUA</b> tidak dapat 
 
 			membayar kewajiban kepada <b>PIHAK PERTAMA</b>  tepat pada waktunya, maka <b>PIHAK KEDUA</b> akan diberikan teguran 
 
@@ -1405,9 +1391,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Atas kelalaian sebagaimana dimaksud dalam ayat 1 pasal ini, 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Atas kelalaian sebagaimana dimaksud dalam ayat 1 pasal ini, 
 
 			maka <b>Pihak Pertama</b> akan melakukan penutupan Objek Sewa.</td></tr>
 
@@ -1415,9 +1401,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila <b>Pihak Kedua</b> tidak 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila <b>Pihak Kedua</b> tidak 
 
 			memperbaiki kelalaiannya sesuai dengan jangka waktu yang ditentukan sebagaimana dimaksud dalam ayat 2 pasal ini, 
 
@@ -1427,9 +1413,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>4.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>4.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Untuk melaksanakan pemutusan sebagaimana 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Untuk melaksanakan pemutusan sebagaimana 
 
 			dimaksud ayat 3 pasal ini <b>Pihak Pertama</b> cukup memberitahukan maksud pengakhiran Perjanjian ini 
 
@@ -1439,9 +1425,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>5.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>5.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Bahwa atas pemutusan Perjanjian tersebut di atas, 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Bahwa atas pemutusan Perjanjian tersebut di atas, 
 
 			maka <b>Pihak Kedua</b> setuju untuk melepaskan berlakunya ketentuan pasal 1266 & 1267 Kitab Undang Undang Hukum Perdata.</td></tr>
 
@@ -1449,9 +1435,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>6.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>6.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila Pihak Kedua menghendaki berakhirnya masa sewa sebelum 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila Pihak Kedua menghendaki berakhirnya masa sewa sebelum 
 
 			waktu Perjanjian ini berakhir maka <b>Pihak Pertama</b> tidak dapat mengembalikan uang yang telah dibayarkan.</td></tr>
 
@@ -1459,9 +1445,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>7.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>7.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila Pihak Pertama menghendaki berakhirnya masa 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila Pihak Pertama menghendaki berakhirnya masa 
 
 			sewa sebelum waktu Perjanjian ini berakhir yang diakibatkan oleh kesalahan <b>Pihak Kedua</b>, 
 
@@ -1481,13 +1467,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 12</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 12</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>KEADAAN MEMAKSA ( FORCE MAJEURE )</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>KEADAAN MEMAKSA ( FORCE MAJEURE )</b></td>
 
 			</tr>			
 
@@ -1497,9 +1483,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Setiap peristiwa diluar kekuasaan Para Pihak 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Setiap peristiwa diluar kekuasaan Para Pihak 
 
 			( atau akibatnya ) yang mengakibatkan Para Pihak tidak dapat memenuhi kewajibannya berdasarkan Perjanjian ini adalah meliputi :</td></tr>
 
@@ -1507,11 +1493,11 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>a.</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>a.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Perang, permusuhan 
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Perang, permusuhan 
 
 			( baik diumumkan maupun tidak ), invasi, serbuan musuh Negara asing, 
 
@@ -1523,11 +1509,11 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>b.</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>b.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Ionisasi, radiasi atau pencemaran radio aktif 
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Ionisasi, radiasi atau pencemaran radio aktif 
 
 			dari limbah nuklir, dari pembuangan bahan bakar nuklir, ledakan toksik radioaktif, atau jenis ledakan yang membahayakan 
 
@@ -1537,11 +1523,11 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>c.</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>c.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Bencana alam, termasuk tetapi tidak terbatas pada gempa bumi, banjir, guntur, 
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Bencana alam, termasuk tetapi tidak terbatas pada gempa bumi, banjir, guntur, 
 
 			tanah longsor, dan perubahan cuaca yang sangat buruk;</td></tr>
 
@@ -1549,11 +1535,11 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>d.</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>d.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Kerusuhan massa, pemogokan, 
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Kerusuhan massa, pemogokan, 
 
 			<i>lock out ( penutupan perusahaan oleh pengusaha )</i>, 
 
@@ -1563,23 +1549,23 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>e.</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>e.</td>
 
-			<td class='fulljustify' colspan='2'><font style='font-family: arial; font-size: 15px;'>Terjadinya keadaan-keadaan di bawah ini :</td></tr>
+			<td class='fulljustify' colspan='2'><font style='font-family: tahoma; font-size: 15px;'>Terjadinya keadaan-keadaan di bawah ini :</td></tr>
 
 			
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'></td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>(i)</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>(i)</td>
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Adanya tindakan Pemerintah atau badan-badan yang bernaung dibawahnya 
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Adanya tindakan Pemerintah atau badan-badan yang bernaung dibawahnya 
 
 			yang berdampak negatif terhadap kesanggupan <b>Pihak Kedua</b> untuk melaksanakan Perjanjian 
 
@@ -1591,13 +1577,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'></td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td class='fulljustify' width='3'><font style='font-family: arial; font-size: 15px;'>(ii)</td>
+			<td class='fulljustify' width='3'><font style='font-family: tahoma; font-size: 15px;'>(ii)</td>
 
-			<td class='fulljustify'><font style='font-family: arial; font-size: 15px;'>Suatu perubahan pada hukum, peraturan atau kebijaksanaan 
+			<td class='fulljustify'><font style='font-family: tahoma; font-size: 15px;'>Suatu perubahan pada hukum, peraturan atau kebijaksanaan 
 
 			yang terkait ( selain daripada alasan-alasan yang merupakan kelalaian <b>Pihak Kedua</b> ) yang dapat menjadi tidak mungkin 
 
@@ -1611,9 +1597,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Jika terjadi Keadaan Kahar <i>(Force Majeure)</i>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Jika terjadi Keadaan Kahar <i>(Force Majeure)</i>
 
 			yang mengakibatkan salah satu pihak tidak dapat melaksanakan kewajibannya berdasarkan Perjanjian, maka pihak yang 
 
@@ -1623,9 +1609,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila waktu 14 (Empat belas) hari sebagaimana 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila waktu 14 (Empat belas) hari sebagaimana 
 
 			dimaksud dalam ayat 2 terlampaui, maka Keadaan Kahar <i>(Force Majeure)</i> dianggap tidak pernah ada</td></tr>
 
@@ -1633,9 +1619,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>4.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>4.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Apabila pemberitahuan disampaikan oleh salah satu 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Apabila pemberitahuan disampaikan oleh salah satu 
 
 			pihak, maka pihak lainnya akan melakukan pemeriksaan terlebih dahulu, dan akan menyetujui atau 
 
@@ -1649,9 +1635,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>5.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>5.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Sebagai akibat adanya Keadaan Kahar <i>( Force Majeure )</i>, 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Sebagai akibat adanya Keadaan Kahar <i>( Force Majeure )</i>, 
 
 			Perjanjian sewa menyewa ini diakhiri berdasarkan persetujuan kedua belah pihak, maka kerugian yang 
 
@@ -1671,13 +1657,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 13</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 13</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PERSELISIHAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PERSELISIHAN</b></td>
 
 			</tr>			
 
@@ -1687,9 +1673,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Jika terjadi Perselisihan antara 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Jika terjadi Perselisihan antara 
 
 			<b>PIHAK PERTAMA</b> dengan <b>PIHAK KEDUA</b>, maka Perselisihan tersebut akan diselesaikan 
 
@@ -1699,9 +1685,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Jika dimaksud peselisihan ayat (1) 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Jika dimaksud peselisihan ayat (1) 
 
 			pasal ini tidak dapat dicapai, maka penyelesaiannya kepada penengah yaitu <b>PIHAK KETIGA</b> yang ditunjuk bersama 
 
@@ -1711,9 +1697,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Jika penyelesaian dengan kedua belah pihak cara dimaksud ayat (1) 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Jika penyelesaian dengan kedua belah pihak cara dimaksud ayat (1) 
 
 			dan ayat (2) pasal ini tidak juga tercapai maka kedua belah pihak memilih penyelesaian melalui 
 
@@ -1731,13 +1717,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 14</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 14</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PEMBERITAHUAN</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PEMBERITAHUAN</b></td>
 
 			</tr>			
 
@@ -1747,9 +1733,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Semua pemberitahuan dan surat menyurat 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Semua pemberitahuan dan surat menyurat 
 
 			berdasarkan Perjanjian Sewa Menyewa ini hanya dianggap telah diterima apabila dibuat secara tertulis 
 
@@ -1759,27 +1745,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Pihak Pertama</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Pihak Pertama</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'><b>PT. Jasamarga Properti</b></td>
-
-			</tr>
-
-			
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Alamat</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'></td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'><b>PT. Jasamarga Properti</b></td>
 
 			</tr>
 
@@ -1787,21 +1759,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Telp/Fax</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Alamat</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'></td>
-
-			</tr>
-
-			
-
-			<tr valign='top' height='20'>
-
-			<td colspan='4'><font style='font-family: arial; font-size: 15px;'></td>			
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'></td>
 
 			</tr>
 
@@ -1809,27 +1773,13 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Pihak Kedua</td>
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Telp/Fax</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'><b>".$nama."</b></td>
-
-			</tr>
-
-			
-
-			<tr valign='top' height='20'>
-
-			<td><font style='font-family: arial; font-size: 15px;'></td>
-
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Alamat</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
-
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>".$alamat."</td>
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'></td>
 
 			</tr>
 
@@ -1837,13 +1787,49 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'></td>
+			<td colspan='4'><font style='font-family: tahoma; font-size: 15px;'></td>			
 
-			<td width='20'><font style='font-family: arial; font-size: 15px;'>Telp/Fax</td>
+			</tr>
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>:</td>
+			
 
-			<td width='5'><font style='font-family: arial; font-size: 15px;'>".$phone."</td>
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Pihak Kedua</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'><b>".$nama."</b></td>
+
+			</tr>
+
+			
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Alamat</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>".$alamat."</td>
+
+			</tr>
+
+			
+
+			<tr valign='top' height='20'>
+
+			<td><font style='font-family: tahoma; font-size: 15px;'></td>
+
+			<td width='20'><font style='font-family: tahoma; font-size: 15px;'>Telp/Fax</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>:</td>
+
+			<td width='5'><font style='font-family: tahoma; font-size: 15px;'>".$phone."</td>
 
 			</tr>
 
@@ -1861,13 +1847,13 @@ $content = "<table>";
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>PASAL 15</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>PASAL 15</b></td>
 
 			</tr>			
 
 			<tr height='20'>
 
-			<td colspan='4' align='center'><font style='font-family: arial; font-size: 15px;'><b>LAIN-LAIN DAN PENUTUP</b></td>
+			<td colspan='4' align='center'><font style='font-family: tahoma; font-size: 15px;'><b>LAIN-LAIN DAN PENUTUP</b></td>
 
 			</tr>			
 
@@ -1877,9 +1863,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Pihak Kedua dan / atau karyawan / pekerja / mitra 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Pihak Kedua dan / atau karyawan / pekerja / mitra 
 
 			yang memiliki hubungan dengan Pihak Kedua wajib mengikuti tata tertib yang berlaku di TIP.</td></tr>
 
@@ -1887,9 +1873,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>1.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>1.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'><b>Pihak Kedua</b> dan / atau karyawan / pekerja / mitra 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'><b>Pihak Kedua</b> dan / atau karyawan / pekerja / mitra 
 
 			yang memiliki hubungan dengan <b>Pihak Kedua</b> wajib mengikuti tata tertib yang berlaku di TIP.</td></tr>
 
@@ -1897,9 +1883,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>2.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>2.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'><b>Pihak Kedua</b>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'><b>Pihak Kedua</b>
 
 			tidak berhak mengatur dan melakukan keberatan atas kebijakan <b>Pihak Pertama</b> yang berhubungan 
 
@@ -1909,9 +1895,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>3.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>3.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'><b>Pihak Kedua</b>
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'><b>Pihak Kedua</b>
 
 			harus mematuhi ketentuan/peraturan lalu lintas, sesuai dengan ketentuan dan perundang-undangan yang berlaku.</td></tr>
 
@@ -1919,9 +1905,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>4.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>4.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Hal-hal yang belum cukup diatur 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Hal-hal yang belum cukup diatur 
 
 			dalam perjanjian ini akan diatur lebih lanjut dalam perjanjian tambahan atau addendum berdasarkan kesepakatan <b>Para Pihak</b>.</td></tr>
 
@@ -1929,9 +1915,9 @@ $content = "<table>";
 
 			<tr valign='top' height='20'>
 
-			<td><font style='font-family: arial; font-size: 15px;'>5.</td>
+			<td><font style='font-family: tahoma; font-size: 15px;'>5.</td>
 
-			<td class='fulljustify' colspan='3'><font style='font-family: arial; font-size: 15px;'>Perjanjian ini dibuat dalam rangkap 2 (dua) 
+			<td class='fulljustify' colspan='3'><font style='font-family: tahoma; font-size: 15px;'>Perjanjian ini dibuat dalam rangkap 2 (dua) 
 
 			yang masing-masing bermaterai cukup dan mempunyai hukum sama-sama asli.</b></td></tr>
 
@@ -1953,17 +1939,17 @@ $content = "<table>";
 
 			<tr height='100' valign='top'>
 
-			<td align='center' width='290'><font style='font-family: arial; font-size: 15px;'><b>PIHAK KEDUA</b></td>
+			<td align='center' width='290'><font style='font-family: tahoma; font-size: 15px;'><b>PIHAK KEDUA</b></td>
 
-			<td align='center' width='290'><font style='font-family: arial; font-size: 15px;'><b>PIHAK PERTAMA</b></td>
+			<td align='center' width='290'><font style='font-family: tahoma; font-size: 15px;'><b>PIHAK PERTAMA</b></td>
 
 			</tr>									
 
 			<tr valign='top'>
 
-			<td align='center'><font style='font-family: arial; font-size: 15px;'><b><u>".$nama."</b></td>
+			<td align='center'><font style='font-family: tahoma; font-size: 15px;'><b><u>".$nama."</b></td>
 
-			<td align='center'><font style='font-family: arial; font-size: 15px;'><b><u>".$ttd."</b></td>
+			<td align='center'><font style='font-family: tahoma; font-size: 15px;'><b><u>".$ttd."</b></td>
 
 			</tr>									
 
@@ -1971,7 +1957,7 @@ $content = "<table>";
 
 $content .= "</table>";
 
-	header("Content-type: application/x-msdownload");
+	header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
 
 	header("Content-Disposition: attachment; filename=kontrak.doc");
 
