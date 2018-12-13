@@ -324,12 +324,6 @@
                 case 'tsk':
                     include "transaksi_surat_keluar.php";
                     break;
-                case 'asm':
-                    include "agenda_surat_masuk.php";
-                    break;
-                case 'ask':
-                    include "agenda_surat_keluar.php";
-                    break;
                 case 'ref':
                     include "referensi.php";
                     break;
