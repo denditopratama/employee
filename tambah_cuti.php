@@ -581,7 +581,7 @@
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
 				} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs','".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");}
-				if($query == true){
+				if($cutikeun == true){
                         $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
 						header("Location: ./admin.php?page=cuti"); 
                         die();

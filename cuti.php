@@ -441,7 +441,8 @@
 										}
 
 
-										echo'<td style="text-align:center">';
+                                        echo'<td style="text-align:center">';
+                                        if($row['file']!='-'){
 										if($row['status_sdm']==1){
 										if($_SESSION['admin']==1){echo'
 										  <a class="btn small blue waves-effect waves-light" href="?page=cuti&act=edit&id='.$row['id'].'"><i class="material-icons">edit</i> EDIT</a>
@@ -457,7 +458,25 @@
                                         else {
                                             echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
                                         }
-										}
+										}} else {
+                                            if($row['status_sdm']!=1){
+                                            if($_SESSION['admin']==1 || $row['id_user']==$_SESSION['id_user']){
+                                                echo'
+                                                <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
+                                              <i class="material-icons">delete</i> DEL</a>';  
+                                            } else {
+                                                echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+                                            }
+                                            } else {
+                                                if($_SESSION['admin']==1){
+                                                    echo'
+                                                <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
+                                              <i class="material-icons">delete</i> DEL</a>'; 
+                                                } else {
+                                                    echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+                                                }
+                                            }
+                                        }
 											
                                          echo '
                                        </td>

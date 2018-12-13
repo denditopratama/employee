@@ -294,17 +294,22 @@
 				</style>
 
     <!-- container START -->
-    <div class="container">
+    <div class="container" id="conta" style="display:none">
+	<script>
+	$(document).ready(function(){
+		$('#conta').fadeIn(250);
+	});
+	</script>
 
     <?php
 	
         if(isset($_REQUEST['page'])){
-			if($_SESSION['admin']!=1){
-				if($_GET['page']!='usr'){
-					echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
-					alert("Silahkan isi data anda terlebih dahulu");</script>';
-				} 
-			}
+			// if($_SESSION['admin']!=1){
+			// 	if($_GET['page']!='usr'){
+			// 		echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+			// 		alert("Silahkan isi data anda terlebih dahulu");</script>';
+			// 	} 
+			// }
 			
 			
 			
@@ -581,7 +586,8 @@
             
         
             </div>
-
+			
+		
             <div class="col s12 m4">
                 <div class="card lime darken-1" <?php if($_SESSION['admin']==1)
 				{echo 'onclick="window.location=\'?page=tskall\'"';} else {echo 'onclick="window.location=\'?page=tsk\'"';} ?> >

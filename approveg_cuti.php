@@ -16,7 +16,7 @@
 		$querys = mysqli_query($config, "UPDATE tbl_cuti SET status_gm=0 WHERE id='$id'");
 		}
 	
-			if($query == true){
+			if($querys == true){
 				 $_SESSION['succEdit'] = 'SUKSES! Data Berhasil Diubah';
 			header("Location: ./admin.php?page=cuti");
 	die();}}
