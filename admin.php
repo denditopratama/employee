@@ -304,12 +304,12 @@
     <?php
 	
         if(isset($_REQUEST['page'])){
-			// if($_SESSION['admin']!=1){
-			// 	if($_GET['page']!='usr'){
-			// 		echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
-			// 		alert("Silahkan isi data anda terlebih dahulu");</script>';
-			// 	} 
-			// }
+			if($_SESSION['admin']!=1){
+				if($_GET['page']!='usr'){
+					echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+					alert("Silahkan isi data anda terlebih dahulu");</script>';
+				} 
+			}
 			
 			
 			
