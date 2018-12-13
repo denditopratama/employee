@@ -324,9 +324,7 @@
                 case 'tsk':
                     include "transaksi_surat_keluar.php";
                     break;
-                case 'ref':
-                    include "referensi.php";
-                    break;
+               
                 case 'sett':
                     include "pengaturan.php";
                     break;
