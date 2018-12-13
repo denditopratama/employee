@@ -474,6 +474,7 @@
 	
 				$count9 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_kpts"));
 				
+				
             ?>
 
             <!-- Info Statistic START -->

@@ -14,7 +14,10 @@ if(empty($_SESSION['admin'])){
 										</div>
 										
 										
-							<div class="col m12" id="colres">		
+							<div class="col m12" id="colres">	
+							<?php $yow=mysqli_query($config,"SELECT status FROM tbl_akses_user WHERE id=1");
+										list($akses)=mysqli_fetch_array($yow);
+										if($akses!=1 || $_SESSION['admin']==1 && $_SESSION['divisi']==2){?>
                             <table class="bordered" id="tbls">
                                 <thead class="blue lighten-4" id="head" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"><small class="green-text">*Kosongkan yang tidak diketahui datanya<br>*Klik Tambah data di tabel baris pertama untuk menambahkan data</small>
                                     <tr>
@@ -87,7 +90,7 @@ if(empty($_SESSION['admin'])){
 										</tbody>
 										</form>
 										</table>
-										
+											<?php } ?>
 										 <table class="bordered" id="tbls">
                                 <thead class="blue lighten-4" id="head" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                     <tr>
@@ -182,11 +185,17 @@ if(empty($_SESSION['admin'])){
 										</select>
 										</td>
 										
-										<td style="text-align:center">
+										<td style="text-align:center">';
+										if($akses!=1 || $_SESSION['admin']==1 && $_SESSION['divisi']==2){
+											echo'
 										<button type="submit" name="simpankeluarga'.$data['id'].'" class="btn small blue waves-effect waves-light">
                                                     <i class="material-icons">edit</i> SIMPAN</button>
 										<button type="submit" name="hapuskeluarga'.$data['id'].'" class="btn small deep-orange waves-effect waves-light">
-                                                    <i class="material-icons">delete</i> DEL</button>
+													<i class="material-icons">delete</i> DEL</button>';}
+													else {
+														echo '<a class="btn small blue-grey"><i class="material-icons">error</i></a>';
+													}
+													echo'
 										</td>
 										</form>
 										</tbody>';}

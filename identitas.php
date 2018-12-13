@@ -763,7 +763,10 @@ if(empty($_SESSION['admin'])){
                         </div>
 										
 									<div class="input-field col s6" style="width:100%;text-align:left">	
-									<?php 
+                                    <?php 
+                                    $yow=mysqli_query($config,"SELECT status FROM tbl_akses_user WHERE id=1");
+                                    list($akses)=mysqli_fetch_array($yow);
+                                    if($akses!=1 || $_SESSION['admin']==1 && $_SESSION['divisi']==2){
 									$id_user=mysqli_real_escape_string($config,$_REQUEST['id_user']);
 									$oij=mysqli_query($config,"SELECT * FROM tbl_identitas WHERE id_user='$id_user'");
 									if(mysqli_num_rows($oij)>0){
@@ -772,10 +775,22 @@ if(empty($_SESSION['admin'])){
 									else {
 										echo'
                                     <button type="submit" name="tambahidentitas" class="btn-large green waves-effect waves-light">TAMBAH <i class="material-icons">add</i></button>';}
+                                    } else {
+                                        echo'
+                                    <a class="btn-large grey waves-effect waves-light">no action <i class="material-icons">error</i></a>';
+                                    }
 									?>
                                 </div>
 									</form>
 									
 						<?php } ?>
+                        <script>
+                        <?php if($akses==1 && $_SESSION['admin']!=1 || $_SESSION['divisi']!=2){
+                            echo'
+                        $(document).ready(function(){
+                            $(\'#tgl_surat,#status_keluarga,#tgl_bakti,#agama,#goldarah,#jenis_kelamin,#tempat_lahir,#tgl_awal,#alamat,#kelurahan,#kecamatan,#kota,#propinsi,#kodepos,#telepon,#noktp,#nonpwp,#nobpjsks,#nobpjskt,#norekening,#atasnama,#jenisbank,#bpjsjampesnol,#bpjsjamkesnol,#gajijm\').prop(\'disabled\',true);
+                        });';}
+                        ?>
+                        </script>
 						
 					

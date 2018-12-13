@@ -2,7 +2,7 @@
     //cek session
   
             echo '
-                <div class="col s12" id="header-instansi" >
+                <div class="col s12"  >
                     <div class="card blue-grey black-text"style="background-color:transparent!important" >
                         <div class="card-content"style="background-color:transparent">';
                             if(!empty($data['logo'])){
@@ -10,8 +10,13 @@
                             } else {
                                 echo '<div class="circle left"><img class="logo" src="./asset/img/screenshot.png"/></div>'; */
                             }
+                            
+                            if($_SESSION['admin']!=1){
+                                echo '<h4 style="font-weight:bold;line-height:30px;">Dashboard Karyawan</h4><hr>';
+                            } else {
+                                echo '<h4 style="font-weight:bold;line-height:30px;">Dashboard Karyawan</h4>';
+                            }
 							
-						echo '<h4 style="font-weight:bold;line-height:20px;">Dashboard Karyawan</h4>';	
                            
 
     // output data of each row
@@ -23,11 +28,59 @@
                                echo 'Anda Login Sebagai <i><strong>'.$kok.'</strong></i><br>';  
                           
 						  if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
-                             echo '<strong>NOTIFIKASI :</strong><br>';
-                             echo '<button id="beritakeun" class="btn-small green" style="color:white"><i class="material-icons">add</i>TAMBAH BERITA</button><br>';  
+                            
+                             echo '<button id="beritakeun" class="btn-small green" style="color:white"><i class="material-icons">add</i>TAMBAH BERITA</button>';
+                            
+                             $yow=mysqli_query($config,"SELECT status FROM tbl_akses_user WHERE id=1");
+                             list($akses)=mysqli_fetch_array($yow);
+                             if($akses==1){
+                                 echo '&nbsp<button id="bukaakses" class="btn-small green" style="color:white"><i class="material-icons">error</i> BUKA AKSES ISI DATA</button>
+                                 <script>
+                                 $(document).ready(function(){
+                                     $("#bukaakses").click(function(){
+                                        var x = confirm("Apakah anda yakin ingin membuka akses user untuk mengisi, menghapus, mengubah data karyawan ?");
+                                        if(x==true){
+                                            var y = confirm("Sekali lagi anda yakin ?");
+                                            if (y==true){
+                                        var gas = 0;
+                                        $.post(\'./js/akses.php\',{gas : gas},function(data){
+                                            alert("Sukses ! akses user untuk mengisi, menghapus, mengubah data karyawan telah dibuka");
+                                            location.reload();
+                                        });
+                                            }
+                                        }
+                                         
+                                     });
+                                 });
+                                 </script>';
+                             } else {
+                                echo '&nbsp<button id="tutupakses" class="btn-small red" style="color:white"><i class="material-icons">warning</i> TUTUP AKSES ISI DATA</button>
+                                <script>
+                                $(document).ready(function(){
+                                    $("#tutupakses").click(function(){
+                                       var x = confirm("Apakah anda yakin ingin menutup akses user untuk mengisi, menghapus, mengubah data karyawan ?");
+                                       if(x==true){
+                                           var y = confirm("Sekali lagi anda yakin ?");
+                                           if (y==true){
+                                       var gas = 1;
+                                       $.post(\'./js/akses.php\',{gas : gas},function(data){
+                                           alert("Sukses ! akses user untuk mengisi, menghapus, mengubah data karyawan telah ditutup");
+                                           location.reload();
+                                       });
+                                           }
+                                       }
+                                        
+                                    });
+                                });
+                                </script>';
+                             }
+                             
+
+                             echo'
+                             <br><hr><strong>NOTIFIKASI :</strong><br>';  
 						  }
 						  
-						  if($_SESSION['admin']==1){
+						  if($_SESSION['admin']==1  && $_SESSION['divisi']==2){
                           $cekkontrak=mysqli_query($config,"SELECT * FROM tbl_kontrak WHERE status='mauhabis'");
 						  if(mysqli_num_rows($cekkontrak)>0){
 						  while($rowf=mysqli_fetch_array($cekkontrak)){

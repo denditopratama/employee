@@ -16,7 +16,8 @@ if(empty($_SESSION['admin'])){
 										</div>
 										
 										
-							<div class="col m12" id="colres">		
+							<div class="col m12" id="colres">	
+							
                             <table class="bordered" id="tbls">
                                 <thead class="blue lighten-4" id="head" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"><h6 style="font-size:18px"><b>A. Formal</b></h6><small class="green-text">*Kosongkan yang tidak diketahui datanya<br>*Klik Tambah data di tabel baris pertama untuk menambahkan data</small>
                                     <tr>
@@ -31,6 +32,9 @@ if(empty($_SESSION['admin'])){
 										</tr>
 										</thead>
 										<form method="POST">
+										<?php $yow=mysqli_query($config,"SELECT status FROM tbl_akses_user WHERE id=1");
+										list($akses)=mysqli_fetch_array($yow);
+										if($akses!=1)	{ ?>
 										<tbody style="background-color:rgba(255,255,0,0.7)">
 										<td style="text-align:center">-</td>
 										
@@ -69,11 +73,12 @@ if(empty($_SESSION['admin'])){
 										</td>
 										</form>
 										</tbody>
-										
+										<?php } ?>
 										
 										<?php 
 										$querschool=mysqli_query($config,"SELECT * FROM tbl_pendidikan WHERE jenis=1 AND id_user='".$_REQUEST['id_user']."'");
 										$no=0;
+										
 										while($data=mysqli_fetch_array($querschool)){
 											$no++;
 										echo'
@@ -199,11 +204,18 @@ if(empty($_SESSION['admin'])){
 										<input type="text" name="no_serti'.$data['id'].'" value="'.$data['no_serti'].'" style="text-align:center;">
 										</td>
 										
-										<td style="text-align:center">
+										<td style="text-align:center">';
+										
+										if($akses!=1){
+										echo'
 										<button type="submit" name="simpans'.$data['id'].'" class="btn small blue waves-effect waves-light">
                                                     <i class="material-icons">edit</i> SIMPAN</button>
 										<button type="submit" name="hapuss'.$data['id'].'" class="btn small deep-orange waves-effect waves-light">
-                                                    <i class="material-icons">delete</i> DEL</button>
+													<i class="material-icons">delete</i> DEL</button>';}
+													else {
+														echo '<a class="btn small blue-grey waves-effect wave-light"><i class="material-icons">error</i> No Action</a>';
+													}
+													echo'
 										</td>
 										</form>
 										</tbody>';}

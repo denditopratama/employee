@@ -16,6 +16,9 @@ if(empty($_SESSION['admin'])){
 										
 							<div class="col m12" id="colres">		
                             <table class="bordered" id="tbls">
+							<?php $yow=mysqli_query($config,"SELECT status FROM tbl_akses_user WHERE id=1");
+										list($akses)=mysqli_fetch_array($yow);
+										if($akses!=1)	{ ?>
                                 <thead class="blue lighten-4" id="head" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"><small class="green-text">*Kosongkan yang tidak diketahui datanya<br>*Klik Tambah data di tabel baris pertama untuk menambahkan data</small>
                                     <tr>
 										<th width="5%" style="color:#fff;text-align:center">Nomor</th>
@@ -68,7 +71,7 @@ if(empty($_SESSION['admin'])){
 										</tbody>
 										</form>
 										</table>
-										
+										<?php } ?>
 										 <table class="bordered" id="tbls">
                                 <thead class="blue lighten-4" id="head" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                     <tr>
@@ -102,8 +105,12 @@ if(empty($_SESSION['admin'])){
 										<td>
 										<div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload SK">
 										<div class="btn light-green darken-1" style="text-align:left!important">
-										<span>File</span>
-										<input type="file" id="file" name="file'.$data['id'].'">
+										<span>File</span>';
+										if($akses!=1){
+											echo '<input type="file" id="file" name="file'.$data['id'].'">';
+										} else {}
+											echo'
+										
 										</div>
 										 <div class="file-path-wrapper">
 										<input class="file-path validate" type="text" placeholder="Upload SK" disabled>
@@ -125,11 +132,16 @@ if(empty($_SESSION['admin'])){
 										<input type="text" name="no_sk'.$data['id'].'" value="'.$data['no_sk'].'" style="text-align:center;">
 										</td>
 										
-										<td style="text-align:center">
-										<button type="submit" name="simpanjabatan'.$data['id'].'" class="btn small blue waves-effect waves-light">
-                                                    <i class="material-icons">edit</i> SIMPAN</button>
-										<button type="submit" name="hapusjabatan'.$data['id'].'" class="btn small deep-orange waves-effect waves-light">
-                                                    <i class="material-icons">delete</i> DEL</button>
+										<td style="text-align:center">';
+										if($akses!=1){
+											echo '<button type="submit" name="simpanjabatan'.$data['id'].'" class="btn small blue waves-effect waves-light">
+											<i class="material-icons">edit</i> SIMPAN</button>
+								<button type="submit" name="hapusjabatan'.$data['id'].'" class="btn small deep-orange waves-effect waves-light">
+											<i class="material-icons">delete</i> DEL</button>';
+										} else {
+											echo '<a class="btn small blue-grey"><i class="material-icons">error</i></a>';
+										}
+										echo'
 										</td>
 										</form>
 										</tbody>';}
