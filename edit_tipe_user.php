@@ -290,8 +290,11 @@
 									
 								<div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Jika belum memiliki NIP, isi dengan minus(-)">
                             <i class="material-icons prefix md-prefix">looks_one</i>
+							<?php if ($_SESSION['admin']==1){ ?>
                             <input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip'] ;?>" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
-                               
+							<?php } else {?>
+								<input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip'] ;?>" disabled>
+							<?php } ?>
                             <label for="nip">NIP</label>
                         </div>
                                    <div class="input-field col s6">
