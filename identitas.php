@@ -785,7 +785,7 @@ if(empty($_SESSION['admin'])){
 									
 						<?php } ?>
                         <script>
-                        <?php if($akses==1 && $_SESSION['admin']!=1 || $_SESSION['divisi']!=2){
+                        <?php if($akses==1){
                             echo'
                         $(document).ready(function(){
                             $(\'#tgl_surat,#status_keluarga,#tgl_bakti,#agama,#goldarah,#jenis_kelamin,#tempat_lahir,#tgl_awal,#alamat,#kelurahan,#kecamatan,#kota,#propinsi,#kodepos,#telepon,#noktp,#nonpwp,#nobpjsks,#nobpjskt,#norekening,#atasnama,#jenisbank,#bpjsjampesnol,#bpjsjamkesnol,#gajijm\').prop(\'disabled\',true);
