@@ -14,6 +14,7 @@
 	<meta name="author" content="Dendito Pratama">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 	
    <link rel="icon" href="./upload/logo.png" type="image/x-icon">
     
