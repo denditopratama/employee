@@ -291,8 +291,8 @@
 								<div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Jika belum memiliki NIP, isi dengan minus(-)">
                             <i class="material-icons prefix md-prefix">looks_one</i>
 							
-							<input id="nip" type="text" class="validate" name="nips" value="<?php echo $row['nip'];?>" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">';
-							<input type="hidden" name="nip" value="<?php echo $row['nip'];?>">
+							<input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip'];?>" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">';
+							
                             <label for="nip">NIP</label>
                         </div>
                                    <div class="input-field col s6">
