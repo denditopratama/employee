@@ -290,20 +290,25 @@
 									
 								<div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Jika belum memiliki NIP, isi dengan minus(-)">
                             <i class="material-icons prefix md-prefix">looks_one</i>
-							<?php if ($_SESSION['admin']==1){ ?>
-                            <input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip'] ;?>" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
-							<?php } else {?>
-								<input id="nip" type="text" class="validate" name="nip" value="<?php echo $row['nip'] ;?>" disabled>
-							<?php } ?>
+							
+							<input id="nip" type="text" class="validate" name="nips" value="<?php echo $row['nip'];?>" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">';
+							<input type="hidden" name="nip" value="<?php echo $row['nip'];?>">
                             <label for="nip">NIP</label>
                         </div>
                                    <div class="input-field col s6">
 								<i class="material-icons prefix md-prefix">account_circle</i>
-								<input id="username" type="text" class="validate" name="usernames" value="<?php echo $row['username'];?>" disabled>
+								<input id="username" type="text" class="validate" name="usernames" value="<?php echo $row['username'];?>">
 								<input type="hidden" name="username" value="<?php echo $row['username'];?>">
 								<label for="username">Username</label>
 								</div>
+								
 						<?php if($_SESSION['admin']!=1){
+							echo '
+							<script>
+							$(document).ready(function(){
+								$("#nip,#username").prop(\'disabled\',\'true\');
+							});
+							</script>';
 									echo'
 							<div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Isikan password lama Anda">
                                 <i class="material-icons prefix md-prefix">lock_outline</i>
