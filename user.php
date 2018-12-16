@@ -209,14 +209,19 @@ th,td,tr{
                                     } else if($_SESSION['admin']==1 && $_SESSION['divisi']!=2){
 										 echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
 									}
-									else{
+									else if($_SESSION['id_user'] == $row['id_user']) {
+                                        echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
+                                               <i class="material-icons">edit</i> EDIT</a>
+                                               
+                                               <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
+                                               <i class="material-icons">print</i> CETAK CV</a>';
+                                      } else {
                                           echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
-                                                 <i class="material-icons">edit</i> EDIT</a>
-                                                 <a class="btn small deep-orange waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons">delete</i> DEL</a>
-												 <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
-                                                 <i class="material-icons">print</i> CETAK CV</a>';
-                                        
-                                    } echo '</td>
+                                          <i class="material-icons">edit</i> EDIT</a>
+                                          <a class="btn small deep-orange waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons" >delete</i> DEL</a>
+                                          <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
+                                          <i class="material-icons">print</i> CETAK CV</a>';
+                                      } echo '</td>
                                     </tr>
                                 </tbody>';
                                     }
@@ -312,12 +317,18 @@ th,td,tr{
                                     } else if($_SESSION['admin']==1 && $_SESSION['divisi']!=2){
 										 echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
 									}
-									else{
+									else if($_SESSION['id_user'] == $row['id_user']) {
                                           echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">edit</i> EDIT</a>
-                                                 <a class="btn small deep-orange waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons" >delete</i> DEL</a>
+                                                 
 												 <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
                                                  <i class="material-icons">print</i> CETAK CV</a>';
+                                        } else {
+                                            echo ' <a class="btn small blue waves-effect waves-light" href="?page=usr&act=edit&id_user='.$row['id_user'].'">
+                                            <i class="material-icons">edit</i> EDIT</a>
+                                            <a class="btn small deep-orange waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');" href="?page=usr&act=del&id_user='.$row['id_user'].'"><i class="material-icons" >delete</i> DEL</a>
+                                            <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
+                                            <i class="material-icons">print</i> CETAK CV</a>';
                                         }
                                      echo '</td>
                                     </tr>
@@ -334,14 +345,8 @@ th,td,tr{
                     <!-- Row form END -->';
 					
 
-                    $query = mysqli_query($config, "SELECT * FROM tbl_user");
-                    $cdata = mysqli_num_rows($query);
-                    $cpg = ceil($cdata/$limit);
-					$batas=10;
-					$tes=1;
-					$qwe=1%10;
-                    echo '<!-- Pagination START -->
-                          <ul class="pagination">';
+                    
+                    
 
                     
                 }
