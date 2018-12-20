@@ -15,6 +15,7 @@ echo'
 <table border="1">
 <tr>
 <th>No.</th>
+<th>NIK</th>
 <th>Nama</th>
 <th>Jabatan</th>
 <th>Status Aktif</th>
@@ -55,6 +56,7 @@ echo'
 <table border="1">
 <tr>
 <th>No.</th>
+<th>NIK</th>
 <th>Nama</th>
 <th>Jabatan</th>
 <th>Status Aktif</th>
