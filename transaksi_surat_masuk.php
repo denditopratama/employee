@@ -154,8 +154,7 @@
 										
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>';
+                            <tbody>';
 								
                     if(isset($_REQUEST['submit'])){
                     $cari = mysqli_real_escape_string($config, $_REQUEST['cari']);
@@ -178,7 +177,6 @@
 								$cdata=0;}
 					else {
                          
-
                                 //script untuk menampilkan data
 								
 								$queroy=mysqli_query($config, "SELECT nama,id_surat FROM tbl_disposisi WHERE nama='".$_SESSION['nama']."'");
@@ -191,13 +189,16 @@
 								 if(!empty($query)){
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
-									$baca=1;
-									$bacang=mysqli_real_escape_string($config,$baca);
-									$querbroy=mysqli_query($config,"UPDATE tabel_surat SET baca='$bacang' WHERE id_user='".$_SESSION['id_user']."' OR tujuan='".$_SESSION['nama']."'");
+									
 									
                                     while($row = mysqli_fetch_array($query)){
-										
-                                      echo '
+										if($row['baca']==0){
+                                            echo '<tr class="tooltipped" style="background-color:rgba(255,235,59,0.7)" data-position="bottom" data-tooltip="Surat Belum dibaca">';
+                                        } else {
+                                            echo '<tr>';
+                                        }
+                                      
+                                      echo'
                                         <td style="text-align:center">'.$row['no_agenda'].'</td>
 										<td style="text-align:center">'.substr($row['isi'],0,200).'<br/><br/><strong>File :</strong>';
 										if(!empty($row['file'])){
@@ -293,7 +294,9 @@
 
                                         
 									
-										
+									$baca=1;
+									$bacang=mysqli_real_escape_string($config,$baca);
+									$querbroy=mysqli_query($config,"UPDATE tabel_surat SET baca='$bacang' WHERE id_user='".$_SESSION['id_user']."' OR tujuan='".$_SESSION['nama']."'");
                                        
                                        
 											

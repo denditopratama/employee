@@ -56,7 +56,10 @@ $user=mysqli_real_escape_string($config,$_POST['user']);
                                             $no++;
                                              echo ' <td style="text-align:center">'.$no.'</td>
                                                     <td style="text-align:center">'.$namas.'</td>
-                                                    <td style="text-align:center">'.$row['tanggal'].'</td>
+													<td style="text-align:center">';
+													$x=explode('-',$row['tanggal']);
+													$x[1]=date('M',strtotime($row['tanggal']));
+													echo ''.$x[2].' - '.$x[1].' - '.$x[0].'</td>
 													<td style="text-align:center">'.$row['pekerjaan'].'</td>
 													<td style="text-align:center">'.$row['jam_awal'].'</td>
 													<td style="text-align:center">'.$row['jam_akhir'].'</td>';

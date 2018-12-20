@@ -140,9 +140,9 @@
 
                    $showcutid=mysqli_query($config,"SELECT tgl_awal,tgl_akhir FROM tbl_cuti WHERE id='$id'");
                   list($tgl_awald,$tgl_akhird)=mysqli_fetch_array($showcutid);
-                  $perbedaanawal = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhird), date_create($tgl_awald))->d);
+                  $perbedaanawal = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhird), date_create($tgl_awald))->d)+1;
 
-				
+                
         
 		
         if(isset($_REQUEST['submits'])){
@@ -154,11 +154,11 @@
                	$alasan=mysqli_real_escape_string($config,$_POST['alasan']);
 				$tgl_awal=mysqli_real_escape_string($config,$_POST['tgl_awal']);
                 $tgl_akhir=mysqli_real_escape_string($config,$_POST['tgl_akhir']);
-                $perbedaanakhir = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d);
-                if($perbedaanakhir != $perbedaanawal){
+                $perbedaanakhir = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d)+1;
+                if($perbedaanakhir != $perbedaanawal || strtotime($tgl_awal) > strtotime($tgl_akhir)){
                     echo '<script>
-                    alert(\'Jumlah Hari cuti yang anda ambil tidak sama !\');
-                    window.location.href="./admin.php?page=cuti";
+                    alert(\'Jumlah Hari cuti yang anda ambil tidak sama / hari tidak bisa diundur !\');
+                    window.location.href="./admin.php?page=cuti&act=edit&id='.$id.'";
                     </script>';
                 } else {
                     $cutikeuns=mysqli_query($config,"UPDATE tbl_cuti SET alasan='$alasan',tgl_awal='$tgl_awal',tgl_akhir='$tgl_akhir' WHERE id='$id'");
@@ -193,7 +193,13 @@
 
             <?php
 			
-				
+            echo '<div class ="col m12">
+            <div class="card">
+            <div class="card-content">
+            <h5> Jumlah Cuti yang anda ambil adalah : <b>'.$perbedaanawal.' Hari</b></h5>
+            </div>
+            </div>
+            </div>';
 			
 			
                 if(isset($_SESSION['errQ'])){

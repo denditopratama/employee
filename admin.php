@@ -293,6 +293,7 @@
 
 				</style>
 
+
     <!-- container kuysss -->
     <div class="container" id="conta" style="display:none">
 	<script>
@@ -304,12 +305,12 @@
     <?php
 	
         if(isset($_REQUEST['page'])){
-			if($_SESSION['admin']!=1){
-				if($_GET['page']!='usr'){
-					echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
-					alert("Silahkan isi data anda terlebih dahulu");</script>';
-				} 
-			}
+			// if($_SESSION['admin']!=1){
+			// 	if($_GET['page']!='usr'){
+			// 		echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+			// 		alert("Silahkan isi data anda terlebih dahulu");</script>';
+			// 	} 
+			// }
 			
 			
 			
@@ -732,35 +733,43 @@
 			</div>';
 			
 								//script cuti//
-									$bakti=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='".$_SESSION['id_user']."'");
-									list($tgl_bakti)=mysqli_fetch_array($bakti);
 									date_default_timezone_set("Asia/Bangkok");
-									
-									
-									$haribakti=date('d',strtotime($tgl_bakti));
+									$rox=mysqli_query($config,"SELECT cuti FROM tbl_handle");
+									list($kuti)=mysqli_fetch_array($rox);
+									$bakti=mysqli_query($config,"SELECT * FROM tbl_identitas");
+									while($datz=mysqli_fetch_array($bakti)){
+									$hk=mysqli_query($config,"SELECT status_karyawan FROM tbl_user WHERE id_user='".$datz['id_user']."' AND admin<>1 ");
+									list($nigga)=mysqli_fetch_array($hk);
+									$haribakti=date('d',strtotime($datz['tgl_bakti']));
 									$harisekarang=date('d');
 									
-									$bulanbakti=date('m',strtotime($tgl_bakti));
+									$bulanbakti=date('m',strtotime($datz['tgl_bakti']));
 									$bulansekarang=date('m');
 										
-									$tahunbakti=date('Y',strtotime($tgl_bakti));
+									$tahunbakti=date('Y',strtotime($datz['tgl_bakti']));
 									$tahunsekarang=date('Y');
-									if($tahunsekarang-$tahunbakti ==1){
-										if($bulansekarang-$bulanbakti==0){
-											if($bulanbakti<=6){
-												$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti=6 WHERE id_user='".$_SESSION['id_user']."'");
+									if($nigga==5){
+										if($tahunsekarang-$tahunbakti ==1){
+											if($bulansekarang-$bulanbakti==0){
+											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$_datz['id_user']."' AND admin<>1");
 											}
-											else if($bulanbakti>6){
-												if($bulansekarang==1){
-													$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti=6 WHERE id_user='".$_SESSION['id_user']."'");
-												}
+										} else if ($tahunsekarang-$tahunbakti>1){
+											if($bulansekarang==1){
+												$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$_datz['id_user']."' AND admin<>1");
 											}
 										}
-									} else if ($tahunsekarang-$tahunbakti>1){
+									} else {
 										if($bulansekarang==1){
-											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti=6 WHERE id_user='".$_SESSION['id_user']."'");
+											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$_datz['id_user']."' AND admin<>1");
 										}
 									}
+									
+									}
+									
+									
+									
+									
+									
 									
 												   
 			 
@@ -914,7 +923,7 @@
 			
 			$rekapjenkel1=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='1' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($komisarisv)=mysqli_fetch_array($rekapjenkel1);
-			$rekapjenkel2=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='2' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
+			$rekapjenkel2=mysqli_query($config,"SELECT COUNT(admin) FROM tbl_user WHERE admin=2 OR admin=3 AND(id_user<>9999 AND status_aktif=1)");
 			list($direksiv)=mysqli_fetch_array($rekapjenkel2);
 			$rekapjenkel3=mysqli_query($config,"SELECT COUNT(status_karyawan) FROM tbl_user WHERE status_karyawan='3' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 			list($karyawanbantuv)=mysqli_fetch_array($rekapjenkel3);
@@ -1222,7 +1231,7 @@ function drawChart() {
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
-// Load google charts
+
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 

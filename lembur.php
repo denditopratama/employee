@@ -16,16 +16,7 @@
 </style>
 <?php
 	$id=mysqli_real_escape_string($config,$_REQUEST['id']);
-	if($_SESSION['admin']!=1){
-	$cekdiv=mysqli_query($config,"SELECT divisi FROM tbl_presensi WHERE id='$id'");
-	list($divisis)=mysqli_fetch_array($cekdiv);
-	if($divisis!=$_SESSION['divisi']){
-	echo '<script>
-	alert("Anda dilarang untuk melihat data selain divisi anda!");
-	window.location.href="./admin.php?page=pres";
-	</script>';
-      
-	}}
+
     if(empty($_SESSION['admin'])){
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
@@ -215,19 +206,19 @@
 										
 										
 										<td style="text-align:center">
-										<input type="number" name="jamawal" style="text-align:center" min="00" max="23" required>
+										<input type="number" name="jamawal" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										<td style="text-align:center">
-										<input type="number" name="menitawal" style="text-align:center" min="00" max="59" required>
+										<input type="number" name="menitawal" style="text-align:center" min="00" max="59" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										<td style="text-align:center">
-										<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" required>
+										<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										<td style="text-align:center">
-										<input type="number" name="menitakhir" style="text-align:center" min="00" max="59" required>
+										<input type="number" name="menitakhir" style="text-align:center" min="00" max="59" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										
@@ -332,4 +323,3 @@ $(\'#modals\').openModal();
     }
 	
 ?>
-<script type="text/javascript" src="asset/js/halamanlembur.js"></script>

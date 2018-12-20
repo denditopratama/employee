@@ -17,16 +17,7 @@
 </style>
 <?php
 	$id=mysqli_real_escape_string($config,$_REQUEST['id']);
-	if($_SESSION['admin']!=1){
-	$cekdiv=mysqli_query($config,"SELECT divisi FROM tbl_presensi WHERE id='$id'");
-	list($divisis)=mysqli_fetch_array($cekdiv);
-	if($divisis!=$_SESSION['divisi']){
-        echo '<script>
-        alert("Anda dilarang untuk melihat data selain divisi anda!");
-        window.location.href="./admin.php?page=pres";
-        </script>';
-        
-	}}
+
     if(empty($_SESSION['admin'])){
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
@@ -46,6 +37,9 @@
 				case 'managers':
                     include "lembur_managers.php";
                     break;
+                case 'approval':
+                    include "./js/approvalpres.php";
+                    break;
 				
             }
         } else {
@@ -53,30 +47,47 @@
 			
 				$id=mysqli_real_escape_string($config,$_REQUEST['id']);
 				
-				if(isset($_REQUEST['accept'])){
-					if($_SESSION['admin']==4 || $_SESSION['admin']==5){
-					$itj=mysqli_query($config,"UPDATE tbl_keterangan_presensi SET status_gm=1 WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");}
+				if(isset($_POST['accept'])){
+					if($_SESSION['admin']==4){
+                        $wa=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE divisi='".$_SESSION['divisi']."' ");
+                        while($dats=mysqli_fetch_array($wa)){
+                            $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_gm=1 WHERE id_presensi='$id' AND id_user='".$dats['id_user']."' ");
+
+                        }
+					} else if($_SESSION['admin']==5){
+                        
+                            $wa=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE divisi='".$_SESSION['divisi']."' ");
+                            while($dats=mysqli_fetch_array($wa)){
+                                $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager=1 WHERE id_presensi='$id' AND id_user='".$dats['id_user']."' ");
+                            }
+                            
+                    }
 					else if($_SESSION['admin']==1){
-					$itj=mysqli_query($config,"UPDATE tbl_keterangan_presensi SET status_gm=1 WHERE id_presensi='$id'");
-					}
+                    $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_gm=1 WHERE id_presensi='$id'");
+                            
+                    }
+                    if($itj==true){
+                        $_SESSION['succAdd']='Semua Data Berhasil disetujui';
+                        header("Location: ./admin.php?page=pres&act=ketpres&id=$id");
+                        die(); 
+                    }
+                 
 				}
 				
+				if(isset($_POST['simpanket'])){
+                    $ti=count($_POST['keter']);
+                    for($i=0;$i<$ti;$i++){
+                        $bzx = mysqli_real_escape_string($config,$_POST['keter'][$i]);
+                        $kts= mysqli_real_escape_string($config,$_POST['aid'][$i]);
+                        $naif = mysqli_real_escape_string($config,$_POST['naip'][$i]);
+                        $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+    
+                    }
+                    $_SESSION['succAdd']='Keterangan telah disimpan';
+                    header("Location: ./admin.php?page=pres&act=ketpres&id=$id");
+                    die();
+                }
 				
-				if(isset($_POST['tambahketerangan'])){
-				$tanggal=mysqli_real_escape_string($config,$_POST['tanggal']);
-				$keterangan=mysqli_real_escape_string($config,$_POST['keterangan']);
-				$jam=mysqli_real_escape_string($config,$_POST['jam']);
-				$menit=mysqli_real_escape_string($config,$_POST['menit']);
-				if($_SESSION['admin']==4 || $_SESSION['admin']==5 || $_SESSION['admin']==3 || $_SESSION['admin']==2){
-				$tambahketeranganr=mysqli_query($config,"INSERT INTO tbl_keterangan_presensi (id_presensi,id_user,keterangan,tanggal,jam,status_gm,divisi) VALUES('$id','".$_SESSION['id_user']."','$keterangan','$tanggal','$jam.$menit',1,'".$_SESSION['divisi']."')");}
-				else {
-				$tambahketeranganr=mysqli_query($config,"INSERT INTO tbl_keterangan_presensi (id_presensi,id_user,keterangan,tanggal,jam,divisi) VALUES('$id','".$_SESSION['id_user']."','$keterangan','$tanggal','$jam.$menit','".$_SESSION['divisi']."')");}
-				
-				
-				$_SESSION['succEdit'] = 'SUKSES ! Keterangan berhasil diinput';
-                                header("Location: ./admin.php?page=pres&act=ketpres&id=".$id."");
-                                die();
-				}
             //pagging
             $limit = 99999999;
             $pg = mysqli_real_escape_string($config,@$_GET['pg']);
@@ -174,51 +185,7 @@
                                 unset($_SESSION['succDel']);
                             }?>
 							
-							<div class="col m12" id="colres">		
-                            <table class="bordered" id="tblp">
-                                <thead class="blue lighten-4" id="head" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-bottom:2px solid black">
-                                   <tr>
-                                               
-                                                <th width="15%">Keterangan</th>
-												<th width="16%">Tanggal</th>
-                                                <th width="14%" colspan="2">Jam</th>
-												<th width="16%">Tindakan</th>
-                                            </tr>
-											
-										</thead>
-										
-										<form method="POST">
-										<tbody style="background-color:rgba(255,255,0,0.7);box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
-										<tr>
-										<td style="text-align:center">
-										<input type="text" name="keterangan" style="text-align:center" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
-										
-										</td>
-										<td style="text-align:center">
-										<input id="tgl_surat" class="datepicker" type="text" name="tanggal" style="text-align:center">
-										</td>
-										
-										
-										<td style="text-align:center">
-										<input type="number" name="jam" style="text-align:center" min="00" max="23">
-										</td>
-										
-										<td style="text-align:center">
-										<input type="number" name="menit" style="text-align:center" min="00" max="59">
-										</td>
-										
-										
-										
-										
-										
-										<td style="text-align:center">
-										<button id="tambah" type="submit" name="tambahketerangan" class="btn-large" style="text-align:center;">TAMBAH</button>
-										</td>
-										</tr>
-										</tbody>
-										</form>
-										</table>
-										</div>
+							
                            <?php 
 						   if($_SESSION['admin']==1 || $_SESSION['admin']==4 || $_SESSION['admin']==5){
 						   echo'<div class="col m12" style="text-align:center;margin-top:34px">
@@ -248,14 +215,20 @@
         <tbody>
             <?php
             $tokenpresensi = bin2hex(mt_rand(0,9999));
-            $_SESSION['tokenpresensi']=$tokenpresensi;
+            $_SESSION['tokent']=$tokenpresensi;
             $nos=1;
             if($_SESSION['admin']==1){
-                $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_keterangan_presensi WHERE id_presensi='$id'");  
-            } else if ($_SESSION['admin']==5 || $_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
-                $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_keterangan_presensi WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                tbl_status_keterangan_presensi.id_user=tbl_user.id_user");  
+            } else if ($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."'");  
+            } else if ($_SESSION['admin']==5) {
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND(tbl_user.divisi='".$_SESSION['divisi']."' AND tbl_user.admin<>4)");  
             } else {
-                $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_keterangan_presensi WHERE id_presensi='$id' AND id_user='".$_SESSION['id_user']."'");
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND 
+                tbl_status_keterangan_presensi.id_user='".$_SESSION['id_user']."'");  
             }
             if(mysqli_num_rows($gk)<=0){
 				echo '<tr>
@@ -276,8 +249,8 @@
 $(document).ready(function(){
 $(\'#ket'.$row['id_user'].'\').click(function(){
     var token = '.$tokenpresensi.';
-    var idz = $(this).data("pres");
-    $.post(\'./js/ajaxketpres.php\', {idz : idz, user : '.$row['id_user'].', token : token}, function(data){
+    var id = $(this).data("pres");
+    $.post(\'./js/ajaxpresensi.php\', {id : id, user : '.$row['id_user'].', token : token}, function(data){
         $("#anjas").html(data);
     });
 $(\'#modals\').openModal();
@@ -315,4 +288,3 @@ $(\'#modals\').openModal();
     }
 	
 ?>
-<script type="text/javascript" src="asset/js/halamanlembur.js"></script>

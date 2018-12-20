@@ -62,7 +62,7 @@ require('./include/config.php');
 								<th id="gelo" style="width:1%!important;"><strong>Agama</strong></th>
 								
 								</tbody><tbody>';
-							$niks=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$row['kode_unit']."' AND(id_user<>9999 AND admin<>1 AND admin<>9) ORDER BY sub_unit,kelas_jabatan");
+							$niks=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$row['kode_unit']."' AND(id_user<>9999 AND admin<>1 AND admin<>9 AND status_aktif=1) ORDER BY sub_unit,kelas_jabatan");
 						while($rowb=mysqli_fetch_array($niks)){
 							echo'
 							

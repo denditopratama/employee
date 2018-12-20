@@ -6,23 +6,19 @@
         die();
     } else {
 
-        if(isset($_REQUEST['submit'])){
-
-            //validasi form kosong
-           
-
+        if(isset($_POST['submit'])){
+            
                 $tanggal = mysqli_real_escape_string($config,$_REQUEST['bulangaji']);
-				
-               
-
-                //validasi input data
-               
-
-
-                                                  $query = mysqli_query($config, "INSERT INTO tbl_bulan_gaji(bulan)
-                                                            VALUES('$tanggal')");
-															$_SESSION['succg']='SUKSES ! Tanggal / Bulan telah ditambahkan';
-															header("Location: ./admin.php?page=gjh");
+                  $query = mysqli_query($config, "INSERT INTO tbl_bulan_gaji(bulan)
+                    VALUES('$tanggal')");
+                    $hah=mysqli_query($config,"SELECT MAX(id) FROM tbl_bulan_gaji");
+                    list($kow)=mysqli_fetch_array($hah);
+                    $yozw=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND (admin<>9 AND id_user<>9999 AND status_aktif=1)");
+                    while($row=mysqli_fetch_array($yozw)){
+                        $dota=mysqli_query($config,"INSERT INTO tbl_gaji(id_gaji,id_user) VALUES('$kow','".$row['id_user']."')");
+                    }
+					$_SESSION['succg']='SUKSES ! Tanggal / Bulan telah ditambahkan';
+					header("Location: ./admin.php?page=gjh");
                                                 
                                             
                                         

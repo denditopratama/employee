@@ -23,7 +23,8 @@
 		
 		for($i=1;$i<=$makskontrak;$i++){
 		if(isset($_REQUEST['submitz'.$i.''])){
-			$piceun=mysqli_query($config,"DELETE FROM tbl_bulan_gaji WHERE id='$i'");
+            $piceun=mysqli_query($config,"DELETE FROM tbl_bulan_gaji WHERE id='$i'");
+            $mpus=mysqli_query($config,"DELETE FROM tbl_gaji WHERE id_gaji='$i'");
 			$_SESSION['succg'] = 'SUKSES ! Data Berhasil di Hapus';
 			header("Location: ./admin.php?page=gjh");
 			die();

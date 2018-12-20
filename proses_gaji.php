@@ -53,7 +53,7 @@ label {
 			break;}
 			}
 
-            //pagging
+			
           ?>
 
                 <!-- Row Start -->
@@ -104,6 +104,7 @@ label {
 							</div>
 					</div>
 					
+
 					<div class="col m12" id="colres">
 								<ul class="collapsible" style="background-color:rgb(230,230,250)">
 								<li>
@@ -114,6 +115,7 @@ label {
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                                             <tr>
                                                 <th style="width:1%">No.</th>
+												<th>NIK</th>
                                                 <th>Nama</th>
 												<th>Status Proses</th>
 												<th>Status Selesai</th>
@@ -121,21 +123,22 @@ label {
 											
                                         </thead>
 
-                                        <tbody>
-									<?php $jia=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1)");
+                                       
+									<?php $jia=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1) ORDER BY nip");
 									$no=1;
 									while($row=mysqli_fetch_array($jia)){
 										echo'
+										<tbody>
                                             <tr>
 											<td style="text-align:center!important">'.$no++.'</td>
+											<td style="text-align:center!important">'.$row['nip'].'</td>
 											<td style="text-align:center!important">'.$row['nama'].'</td>
 											';
 										$way=mysqli_query($config,"SELECT status FROM tbl_gaji WHERE id_user='".$row['id_user']."' AND id_gaji='$id'");
 										list($statis)=mysqli_fetch_array($way);
-										if(mysqli_num_rows($way)>0){
 											echo'
 											<td style="text-align:center!important">
-											<a class="btn small green waves-effect waves-light"><i class="material-icons">done</i> Sudah Di Proses</a>
+											<a href="?page=pros&gjj=1&id='.$id.'&karyawan='.$row['id_user'].'" class="btn small green waves-effect waves-light"><i class="material-icons">add</i> Proses</a>
 											</td>';
 											if($statis==0){
 												echo'
@@ -149,81 +152,33 @@ label {
 											</td>
 												';
 												}
-										} else if(mysqli_num_rows($way)<=0){
-											echo'
-											<td style="text-align:center!important">
-											<a class="btn small red waves-effect waves-light"><i class="material-icons">highlight_off</i> Belum Di Proses</a>
-											</td>
-											<td style="text-align:center!important">
-											<a class="btn small red waves-effect waves-light"><i class="material-icons">highlight_off</i> Belum Di Proses</a>
-											</td>
-											';
-										}	
-											
-												
 											
 											echo'
 											
-											</tr>';}?>
+											</tr>
+											</tbody>
 										 </tbody>	
+											</tbody>
+											';}?>
+											
 									</table>
-								 </div>
-								 </div>
+							</div>
+							</div>
+							</li>
+							</ul>
 								 
-								 </li>
-								 </ul>
-								 
 								 </div>
 					
 					
-					<div class="col m12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div id="asd" class="input-field col s12" >
-                            <i id="roro" class="material-icons prefix md-prefix">account_circle</i><p style="margin-left:35px">Pilih Karyawan</p><br/>	
-							<form method="POST">
-                            <select class="browser-default" name="karyawan" id="tunjukan" style="margin-bottom:15px;">
-						<?php	$query = mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");	
-							while ($row = mysqli_fetch_array($query)) {											
-								echo "<option id='qq' value='".$row['id_user']."'>".$row['nama']."</option>";}
-								echo "</select>";
-							
-								
-					?>
-					</div>
-					
-
-                                  
-								<div class="input-field col s12">
-								
-                            <button type="submit" class="btn-large waves-effect waves-light blue col s12" name="submitd">PILIH</button>
-							</form>
-                        </div>	
-									
-                                </div>
-								</div>
-								</div>
+				
                     <!-- Secondary Nav END -->
                 </div>
-				
 				<?php
-					if(isset($_REQUEST['submitd'])){
-           
-			$ceking=mysqli_query($config,"SELECT * FROM tbl_gaji WHERE id_user='".$_REQUEST['karyawan']."' AND id_gaji='$id'");
-			$tjgk=mysqli_num_rows($ceking);
-			if($tjgk<=0){
-			$dota=mysqli_query($config,"INSERT INTO tbl_gaji(id_gaji,id_user) VALUES('$id','".$_REQUEST['karyawan']."')");}
-		include 'kargaji.php';
-        } 
-		
-		?>
-                <!-- Row END -->
-				
-               
+					if(isset($_GET['gjj'])==1){
+						include 'kargaji.php';
+						} ?>
 			
-						
-                <!-- Row form Start -->
-       
+            
 		<?php } ?>
 		
 

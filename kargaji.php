@@ -664,7 +664,23 @@
 				
 			
 		
-					
+					$numpang=mysqli_query($config,"SELECT admin,status_karyawan,status_tugas,kelas_jabatan FROM tbl_user WHERE id_user='$id_user'");
+												list($admin,$status_karyawan,$status_tugas,$kelas_jabatan)=mysqli_fetch_array($numpang);
+												$ngambil=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
+												list($lama)=mysqli_fetch_array($ngambil);
+												$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='$kelas_jabatan' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
+												list($gaji,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
+												$ages = date_diff(date_create($lama), date_create('now'))->m;
+												$gajih=$gaji+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+												if($ages>=12 || $status_tugas==1){$ages=12;}
+												if($ages<=3){
+													$gajih=$gaji*80/100+$tun_jabatan+$tun_fungsional+$tun_transportasi+$tun_utilitas+$tun_perumahan+$tun_komunikasi;
+												}
+												
+												if($admin==2 || $admin==3 || $admin==10){
+												$jumlahthr=$ages/12*$gaji;
+												} else {
+												$jumlahthr=$ages/12*$gajih;}
 				
 				
 				$querye = mysqli_query($config,"SELECT foto FROM tbl_user WHERE id_user='$id_user'");
@@ -697,28 +713,29 @@
 								</div>";
 								?>
 								
+
 								<script>
 								$(document).ready(function(){
-									
-				$('#terima').attr('value', 'THR Otomatis, silahkan klik simpan');
-				$('#terima').prop('disabled',true);
-				$('#penerimaan').change(function(){	
-				var inputValue = $('#penerimaan').val();
-				if(inputValue==1){
-				$('#terima').attr('value', 'THR Otomatis, silahkan klik simpan');
-				$('#terima').prop('disabled',true);}
-				else {
-					$('#terima').attr('value', '');
-				$('#terima').prop('disabled',false);}
-					 });
-           
+				
+				 $('#terima').val(<?php echo $jumlahthr; ?>);
+				 $('#penerimaan').change(function(){
+				var kuy = $('#penerimaan').val();
+				if (kuy!=1){
+					$('#terima').val('');
+				} else {
+					$('#terima').val(<?php echo $jumlahthr; ?>);
+				}
+			});	 
+		   
+
+					 
 		   $('#penerimaans').click(function(){
                 //Selected value
 				
                 var inputValue = $('#penerimaan').val();
 				var nilai = $('#terima').val();
 				
-				if(inputValue!=1){
+				
 				if(nilai==''){
 					alert('Data Tidak Boleh Kosong !');
 				} else {
@@ -733,16 +750,7 @@
 				}
 				
 				
-				} else {
-              
-                $.post('./js/penerimaan_lain.php', { nilai : nilai, id_user :<?php echo $id_user; ?>,id_select: inputValue,id_gaji :<?php echo $id; ?> }, function(data){
-                    
-                    
-					$("#terima").val(data);
-					alert('Data Berhasil Di Input !');
-					location.reload();
-					
-				});}
+				
            
         });
 		 });
@@ -854,17 +862,14 @@
 								 <div class="collapsible-header" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Ket. Presensi</h5></div>
 								 <div class="collapsible-body" style="background-color:transparent!important">
                                 <div class="col m12" id="colres">
-									<h6 style="line-height:20px!important"><i class="material-icons prefix md-prefix">assignment_late</i><strong>&nbspFILE PRESENSI : </strong><a href="./upload/presensi/'.$file.'">'.$file.'</a></h6>
 									
                                     <table class="bordered" id="tblb">
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                             <tr>
-                                                <th width="1%">No</th>
-                                                <th width="20%">Nama</th>
-												<th width="16%">Keterangan</th>
-                                                <th width="15%">Tanggal</th>
-												<th width="15%" colspan"2">Jam</th>
-												<th width="10%">Status Manager</th>
+											<th width="1%"style="color:#fff">Nomor</th>
+											<th width="25%"style="color:#fff">Presensi</th>
+											<th width="15%"style="color:#fff">Bulan</th>
+											<th width="15%"style="color:#fff">Keterlambatan</th>
                                                 
                                             </tr>
 											
@@ -872,47 +877,24 @@
 
                                         <tbody>
                                             <tr>';
-									
-                                        $query2 = mysqli_query($config, "SELECT * FROM tbl_keterangan_presensi WHERE id_user='$id_user' AND(MONTH(tanggal)='$blan' AND YEAR(tanggal)='$than')");
+										 $sekut=mysqli_query($config,"SELECT id,bulan FROM tbl_presensi WHERE MONTH(bulan)='$blan' AND YEAR(bulan)='$than'");
+										 list($sikux,$bulanc)=mysqli_fetch_array($sekut);
+										 $titit=mysqli_query($config,"SELECT nip,nama FROM tbl_user WHERE id_user='$id_user'");
+										 list($nyusu,$namas)=mysqli_fetch_array($titit);
+                                         $query2 = mysqli_query($config, "SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE nik='$nyusu' AND id_presensi='$sikux'");
 										
-										
-									
-
                                         if(mysqli_num_rows($query2) > 0){
                                             $no = 0;
                                             while($row = mysqli_fetch_array($query2)){
-												$titit=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
-												list($namas)=mysqli_fetch_array($titit);
+												
                                             $no++;
                                              echo ' <tr>
 													<td style="text-align:center">'.$no.'</td>
-                                                    <td style="text-align:center">'.$namas.'</td>
-                                                    <td style="text-align:center">'.$row['keterangan'].'</td>
-													<td style="text-align:center">'.$tanggals = date('d M Y ', strtotime($row['tanggal'])).'</td>
-													<td style="text-align:center">'.$row['jam'].'</td>';
+                                                    <td style="text-align:center"><button id="tots" class="btn green">LIHAT</button></td>
+													<td style="text-align:center">'. date('M Y ', strtotime($bulanc)).'</td>
+													<td style="text-align:center"><h6 id="hoak"></h6></td>';
 										
-										
-										echo'
-										<td style="text-align:center">';
-										
-										
-										if($row['status_gm']==1){										
-											  echo'
-											<a class="btn small light-green waves-effect waves-light tooltipped" href="?page=pres&act=ketpres&sub=managers&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=IuJh" data-position="left" data-tooltip="Klik untuk membatalkan persetujuan" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
-											<i class="material-icons">done</i></a>';} 
-											else {
-											echo'
-											<a class="btn small red waves-effect waves-light tooltipped" href="?page=pres&act=ketpres&sub=managers&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'&tak=OkgJ" data-position="left" data-tooltip="Klik untuk Menyetujui" onclick="return confirm(\'Anda yakin ingin mengubah data?\');">
-										<i class="material-icons">highlight_off</i></a>';}
 									
-										
-										
-										
-										echo'</td>';
-										
-													
-										
-										
 
 											echo'
 													
@@ -921,7 +903,35 @@
 										</tr>';
                                             
 										
-                                }
+								}
+								$tokent = bin2hex(mt_rand(0,9999));
+								$_SESSION['tokent']=$tokent;
+								$nnngj=mysqli_query($config,"SELECT menit_telat FROM tbl_handle");
+								list($mkgg)=mysqli_fetch_array($nnngj);
+								echo '
+                                          <script>
+                                          $(document).ready(function(){
+                                          $(\'#tots\').click(function(){
+                                              var token = '.$tokent.';
+                                              var user = '.$id_user.';
+                                              $.post(\'./js/ajaxpresensi.php\', {id : '.$sikux.', token : token, user : user}, function(data){
+												  $("#anjas").html(data);
+												  var num = $("#telatbos").val()/'.$mkgg.'*'.$sub1.';
+												  var xz = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+												 
+											$("#hoak").html("Rp " + xz);
+                                              });
+                                          $(\'#modalsz\').openModal();
+                                          });
+                                          });
+										  </script>';
+										  echo '<div id="modalsz" class="modal" style="width:80%">
+        
+										  <div class="modal-content" id="anjas">
+										  
+										  </div>
+										
+										  </div>';     	
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
                             }

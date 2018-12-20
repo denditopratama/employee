@@ -118,6 +118,7 @@ $pages=$_REQUEST['page'];
 <script data-pace-options='{ "ajax": false }' src='asset/js/pace.min.js'></script>
 <script type="text/javascript" src="asset/js/jquery.dataTables.min.js"></script>
 
+
 <script type="text/javascript">
 
 function openCity(evt, cityName) {
@@ -207,6 +208,7 @@ $(document).ready(function(){
 								$('#potong').maskMoney({thousands:'.',precision :0});
 								$('#gajijm').maskMoney({thousands:'.',precision :0});
                                 $('#datatable').dataTable();
+                                $('#presku').dataTable();
                                
                             
                                 

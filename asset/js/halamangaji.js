@@ -3,7 +3,7 @@
 // get the table element
 var $table = document.getElementById("ketpen"),
 // number of rows per page
-$n = 5,
+$n = 30,
 // number of rows of the table
 $rowCount = $table.rows.length,
 // get the first cell's tag name (in the first row)
@@ -16,7 +16,7 @@ $tr = [],
 $i,$ii,$j = ($hasHead)?1:0,
 // holds the first row if it has a (<TH>) & nothing if (<TD>)
 $th = ($hasHead?$table.rows[(0)].outerHTML:"");
-var $n=10;
+var $n=30;
 // count the number of pages
 var $pageCount = Math.ceil($rowCount / $n);
 // if we had one page only, then we have nothing to do ..
@@ -37,7 +37,7 @@ function sort($p) {
 	** to be displayed on the selected page,
 	** ($s) the start point .. the first row in each page, Do The Math
 	*/
-	var $n=10;
+	var $n=30;
 	var $rows = $th,$s = (($n * $p)-$n);
 	for ($i = $s; $i < ($s+$n) && $i < $tr.length; $i++)
 		$rows += $tr[$i];

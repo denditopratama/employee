@@ -1,79 +1,147 @@
 <?php
     //cek session
-    if(empty($_SESSION['admin'])){
+    if(empty($_SESSION['admin']) || $_SESSION['admin']!=1){
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
         die();
     } else {
+require_once('vendor/php-excel-reader/excel_reader2.php');
+require_once('vendor/SpreadsheetReader.php');
 
-        if(isset($_REQUEST['submit'])){
+        if(isset($_POST['submit'])){
+            $tanggal=mysqli_real_escape_string($config,$_POST['tanggal']);
 
-            //validasi form kosong
-           
+                    $file = $_FILES['file']['tmp_name'];
+    
+                    if($file == ""){
+                        $_SESSION['errEmpty'] = 'ERROR! Form File tidak boleh kosong';
+                        header("Location: ./admin.php?page=pres");
+                        die();
+                    } else {
+    
+                        $x = explode('.', $_FILES['file']['name']);
+                        $eks = strtolower(end($x));
+    
+                        if($eks == 'csv' || $eks == 'xls' || $eks == 'xlsx'){
+                            $m=mysqli_query($config,"INSERT INTO tbl_presensi(bulan) VALUES('$tanggal')");
+                            $x=mysqli_query($config,"SELECT MAX(id) FROM tbl_presensi");
+                            list($ng)=mysqli_fetch_array($x);
 
-                $tanggal = mysqli_real_escape_string($config,$_REQUEST['tanggal']);
-				$divisi = mysqli_real_escape_string($config,$_REQUEST['divisi']);
-               
 
-                //validasi input data
-               
+                            $targetPath = 'upload/presensi/'.$_FILES['file']['name'];
+                            move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
 
+                            $nampang=0;
+                            $nampung=1;
+                            $Reader = new SpreadsheetReader($targetPath);
+        
+                            $sheetCount = count($Reader->sheets());
+                            
+                            for($i=0;$i<$sheetCount;$i++)
+                            {
+                                $Reader->ChangeSheet($i);
+                              
 
-                                                    $ekstensi = array('jpg','png','jpeg','doc','docx','pdf');
-                                                    $file = $_FILES['file']['name'];
-                                                    $x = explode('.', $file);
-                                                    $eks = strtolower(end($x));
-                                                    $ukuran = $_FILES['file']['size'];
-                                                    $target_dir = "upload/presensi/";
-												
+                                foreach ($Reader as $Row)
+                                {
+                            
+                                    $nik = "";
+                                    if(isset($Row[0])) {
+                                        $nik = mysqli_real_escape_string($config,$Row[0]);
+                                    }
+                                    
+                                    $nama = "";
+                                    if(isset($Row[1])) {
+                                        $nama = mysqli_real_escape_string($config,$Row[1]);
+                                    }
 
-                                                    //jika form file tidak kosong akan mengeksekusi script dibawah ini
-                                                    if($file != ""){
+                                    $tanggal = "";
+                                    if(isset($Row[2])) {
+                                        $tanggal = mysqli_real_escape_string($config,$Row[2]);
+                                    }
 
-                                                        $rand = rand(1,10000);
-                                                        $nfile = $rand."-".$file;
+                                    $jam_masuk = "";
+                                    if(isset($Row[3])) {
+                                        $jam_masuk = mysqli_real_escape_string($config,$Row[3]);
+                                    }
 
-                                                        //validasi file
-                                                        if(in_array($eks, $ekstensi) == true){
-                                                            if($ukuran < 250000000){
+                                    $jam_pulang = "";
+                                    if(isset($Row[4])) {
+                                        $jam_pulang = mysqli_real_escape_string($config,$Row[4]);
+                                    }
 
-                                                                move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
-																
+                                    $terlambat = "";
+                                    if(isset($Row[5])) {
+                                        $terlambat = mysqli_real_escape_string($config,$Row[5]);
+                                    }
+                                    if($nampang < $nampung){
 
-                                                                $query = mysqli_query($config, "INSERT INTO tbl_presensi(divisi,bulan,file)
-                                                                        VALUES('$divisi','$tanggal','$nfile')");
-																
-                                                                if($query == true){
-                                                                    $_SESSION['succg'] = 'SUKSES! Data berhasil ditambahkan';
-																	header("Location: ./admin.php?page=pres"); 
-                                                                    die();
-                                                                } else {
-                                                                    $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
-                                                                    echo '<script language="javascript">window.history.back();</script>';
-                                                                }
-                                                            } else {
-                                                                $_SESSION['errSize'] = 'Ukuran file yang diupload terlalu besar!';
-                                                                echo '<script language="javascript">window.history.back();</script>';
-                                                            }
-                                                        } else {
-                                                            $_SESSION['errFormat'] = 'Format file yang diperbolehkan hanya *.JPG, *.PNG, *.DOC, *.DOCX atau *.PDF!';
-                                                            echo '<script language="javascript">window.history.back();</script>';
-                                                        }
-                                                    } else {
+                                    } else {
+                                        if($nik!='' || $nama!='' || $tanggal!=''){
+                                            $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$ng','$nik','$nama','$tanggal','$jam_masuk','$jam_pulang','$terlambat','')");
+                                        }
+                                        
+                                    }
+                                       $nampang++; 
+                                       
+                                 }
+                            
+                             }
+                                 $mogo=mysqli_query($config,"SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE id_presensi='$ng'");
+                                     while($datang=mysqli_fetch_array($mogo)){
+                                         $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='".$datang['nik']."' ");
+                                         list($nyj,$aiduser)=mysqli_fetch_array($yj);
+                                         if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                             $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                             VALUES('$ng','$aiduser','1','1')");
+                                         } else if($nyj==5){
+                                             $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                             VALUES('$ng','$aiduser','1','0')");
+                                         } else {
+                                             $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                             VALUES('$ng','$aiduser','0','0')");
+                                         }
+                                         
+                                     }
+                                     unlink($targetPath);
+                                     header("Location: ./admin.php?page=pres");
+                                    die();
+                      }
 
-                                                        //jika form file kosong akan mengeksekusi script dibawah ini
-                                                        $query = mysqli_query($config, "INSERT INTO tbl_presensi(divisi,bulan)
-                                                            VALUES('$divisi','$tanggal')");
-															
-                                                        if($query == true){
-                                                            $_SESSION['succg'] = 'SUKSES! Data berhasil ditambahkan';
-																header("Location: ./admin.php?page=pres"); 
-                                                            die();
-                                                        } else {
-                                                            $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
-                                                            echo '<script language="javascript">window.history.back();</script>';
-                                                        }
-                                                    }
+                            
+                        //         $handle = fopen($file, "r");
+                        //         fgetcsv($handle, 10000, ",");
+                        //         while(($data = fgetcsv($handle, 10000, ",")) !== FALSE){
+                        //             $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$ng','$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','')");
+                        //         }
+                        //         $mogo=mysqli_query($config,"SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE id_presensi='$ng'");
+                        //         while($datang=mysqli_fetch_array($mogo)){
+                        //             $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='".$datang['nik']."' ");
+                        //             list($nyj,$aiduser)=mysqli_fetch_array($yj);
+                        //             if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                        //                 $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                        //                 VALUES('$ng','$aiduser','1','1')");
+                        //             } else if($nyj==5){
+                        //                 $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                        //                 VALUES('$ng','$aiduser','1','0')");
+                        //             } else {
+                        //                 $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                        //                 VALUES('$ng','$aiduser','0','0')");
+                        //             }
+                                    
+                        //         }
+                        //         fclose($handle);
+                        //         header("Location: ./admin.php?page=pres");
+                        //         die();
+                           
+    
+                        // } else {
+                        //     $_SESSION['errFormat'] = 'ERROR! Format file yang diperbolehkan hanya *.CSV';
+                        //     header("Location: ./admin.php?page=pres&act=add");
+                        //     die();
+                        // }
+                    }
+                
                                                 
                                             
                                         
@@ -139,21 +207,7 @@
 
                     <!-- Row in form START -->
                     <div class="row">
-                        <div class="row col s6" data-position="top">
-						<i class="material-icons prefix md-prefix" style="margin-top:-8px;">group</i>&nbsp&nbsp<a style="color:#000000!important;font-size:1.1rem;">Divisi</a>
-						<select class="browser-default" name="divisi" id="divisi"  required>
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>
-									</select>
-                            
-                        
-						</div>
+                       
                  
                         <div class="row col s6">
 						

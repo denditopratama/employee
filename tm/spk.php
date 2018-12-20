@@ -180,8 +180,10 @@ session_start();
   }
 
 
-
-$content = "<table>";            
+echo '<div id="export-content">
+<h2 style="font-family: tahoma; font-size: 12px;">Perjanjian Sewa Menyewa</h2>
+<img src="../upload/screenshots.png" width="300" height="80"/>';
+$content = '<table>';            
 
 			$content .= "<style type='text/css'>
 
@@ -1955,17 +1957,19 @@ $content = "<table>";
 
 			";
 
-$content .= "</table>";
+$content .= '</table>';
 
-	header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
 
-	header("Content-Disposition: attachment; filename=kontrak.doc");
-
-	header("Pragma: no-cache");
-
-	header("Expires: 0");
 
 	echo $content;
-
+echo '</div>';
 ?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#export-content").wordExport();
+});
+</script>
 
+<script type="text/javascript" src="../asset/js/Filesaver.js"></script>
+<script type="text/javascript" src="../asset/js/jquery.wordexport.js"></script>

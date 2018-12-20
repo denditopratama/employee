@@ -17,7 +17,7 @@
 	
 	$hapuskrg = date('Y-m-d');
 	
-	$perbedaan2 = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhircuti), date_create($tgl_awalcuti))->d);
+	$perbedaan2 = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhircuti), date_create($tgl_awalcuti))->d)+1;
 	$cutiyas=$cutiya+$perbedaan2;
 	
 	if($_SESSION['admin']==1 && $_SESSION['divisi']==2){

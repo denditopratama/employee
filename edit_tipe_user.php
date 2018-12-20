@@ -9,12 +9,7 @@
     } else {
 	
 
-        if($_REQUEST['id_user'] == 8){
-            echo '<script language="javascript">
-                    window.alert("ERROR! Super Admin tidak boleh diedit");
-                    window.location.href="./admin.php?page=usr";
-                  </script>';
-        } else {
+     
 
             if($_SESSION['id_user'] != $_REQUEST['id_user'] && $_SESSION['admin']!=1){
                 echo '<script language="javascript">
@@ -1317,7 +1312,7 @@
                         }
                     }
                 
-            }
+            
         }
 	  
    

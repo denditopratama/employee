@@ -1,89 +1,185 @@
 <?php
     //cek session
-    if(empty($_SESSION['admin'])){
+    if(empty($_SESSION['admin'] || $_SESSION['admin']!=1)){
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
         die();
     } else {
-		
+        require_once('vendor/php-excel-reader/excel_reader2.php');
+        require_once('vendor/SpreadsheetReader.php');	
 		
 		$id = mysqli_real_escape_string($config,$_REQUEST['id']);
-        if(isset($_REQUEST['submit'])){
+        if(isset($_POST['submit'])){
+            $tanggal=mysqli_real_escape_string($config,$_POST['tanggal']);
 
-            //validasi form kosong
-           
+                    $file = $_FILES['file']['tmp_name'];
+    
+                    if($file == ""){
+                        $_SESSION['errEmpty'] = 'ERROR! Form File tidak boleh kosong';
+                        header("Location: ./admin.php?page=pres&act=edit&id=$id");
+                        die();
+                    } else {
+    
+                        $x = explode('.', $_FILES['file']['name']);
+                        $eks = strtolower(end($x));
+    
+                        if($eks == 'csv' || $eks == 'xls' || $eks == 'xlsx'){
+                            $m=mysqli_query($config,"UPDATE tbl_presensi(bulan) SET bulan='$tanggal' WHERE id='$id");
+                            $targetPath = 'upload/presensi/'.$_FILES['file']['name'];
+                            move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
 
-                $tanggal = mysqli_real_escape_string($config,$_REQUEST['tanggal']);
-				$divisi = mysqli_real_escape_string($config,$_REQUEST['divisi']);
-               
+                            $nampang=0;
+                            $nampung=1;
+                            $Reader = new SpreadsheetReader($targetPath);
+        
+                            $sheetCount = count($Reader->sheets());
+                            
+                            for($i=0;$i<$sheetCount;$i++)
+                            {
+                                $Reader->ChangeSheet($i);
+                              
 
-                //validasi input data
-               
+                                foreach ($Reader as $Row)
+                                {
+                            
+                                    $nik = "";
+                                    if(isset($Row[0])) {
+                                        $nik = mysqli_real_escape_string($config,$Row[0]);
+                                    }
+                                    
+                                    $nama = "";
+                                    if(isset($Row[1])) {
+                                        $nama = mysqli_real_escape_string($config,$Row[1]);
+                                    }
 
+                                    $tanggals = "";
+                                    if(isset($Row[2])) {
+                                        $tanggals = mysqli_real_escape_string($config,$Row[2]);
+                                    }
 
-                                                    $ekstensi = array('jpg','png','jpeg','doc','docx','pdf');
-                                                    $file = $_FILES['file']['name'];
-                                                    $x = explode('.', $file);
-                                                    $eks = strtolower(end($x));
-                                                    $ukuran = $_FILES['file']['size'];
-                                                    $target_dir = "upload/presensi/";
-												
+                                    $jam_masuk = "";
+                                    if(isset($Row[3])) {
+                                        $jam_masuk = mysqli_real_escape_string($config,$Row[3]);
+                                    }
 
-                                                    //jika form file tidak kosong akan mengeksekusi script dibawah ini
-                                                    if($file != ""){
+                                    $jam_pulang = "";
+                                    if(isset($Row[4])) {
+                                        $jam_pulang = mysqli_real_escape_string($config,$Row[4]);
+                                    }
 
-                                                        $rand = rand(1,10000);
-                                                        $nfile = $rand."-".$file;
+                                    $terlambat = "";
+                                    if(isset($Row[5])) {
+                                        $terlambat = mysqli_real_escape_string($config,$Row[5]);
+                                    }
+                                    if($nampang < $nampung){
 
-                                                        //validasi file
-                                                        if(in_array($eks, $ekstensi) == true){
-                                                            if($ukuran < 250000000){
-
-                                                                move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
-																
-
-                                                                $query = mysqli_query($config, "UPDATE tbl_presensi SET divisi='$divisi',bulan='$tanggal',file='$nfile' WHERE id='$id'");
-																
-                                                                if($query == true){
-                                                                    $_SESSION['succg'] = 'SUKSES! Data berhasil diubah';
-																	header("Location: ./admin.php?page=pres"); 
-                                                                    die();
-                                                                } else {
-                                                                    $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
-                                                                    echo '<script language="javascript">window.history.back();</script>';
-                                                                }
+                                    } else {
+                                        $kom=mysqli_query($config,"SELECT * FROM tbl_presensi_karyawan WHERE nik='$nik' AND(tanggal='$tanggals' AND id_presensi='$id') ");
+                                   if(mysqli_num_rows($kom)<=0){
+                                    if($nik!='' || $nama!='' || $tanggals!=''){
+                                     $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$id','$nik','$nama','$tanggals','$jam_masuk','$jam_pulang','$terlambat','')");  
+                                    }              
+                                    } else {
+                                    $gi=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET nik='$nik',nama='$nama',tanggal='$tanggals',jam_masuk='$jam_masuk',jam_pulang='$jam_pulang',terlambat='$terlambat' WHERE nik='$nik' AND(tanggal='$tanggals' AND id_presensi='$id')");
+                                     }
+                                       
+                                    }
+                                       $nampang++; 
+                                       
+                                 }
+                            
+                             }
+                                 $mogo=mysqli_query($config,"SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE id_presensi='$id'");
+                                     while($datang=mysqli_fetch_array($mogo)){
+                                        $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='".$datang['nik']."'");
+                                                        list($nyj,$aiduser)=mysqli_fetch_array($yj);
+                                                        $kjd=mysqli_query($config,"SELECT * FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$aiduser'");
+                                                        if(mysqli_num_rows($kjd)<=0){
+                                                            if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                                                $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                                                VALUES('$id','$aiduser','1','1')");
+                                                            } else if($nyj==5){
+                                                                $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                                                VALUES('$id','$aiduser','1','0')");
                                                             } else {
-                                                                $_SESSION['errSize'] = 'Ukuran file yang diupload terlalu besar!';
-                                                                echo '<script language="javascript">window.history.back();</script>';
+                                                                $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                                                VALUES('$id','$aiduser','0','0')");
                                                             }
                                                         } else {
-                                                            $_SESSION['errFormat'] = 'Format file yang diperbolehkan hanya *.JPG, *.PNG, *.DOC, *.DOCX atau *.PDF!';
-                                                            echo '<script language="javascript">window.history.back();</script>';
-                                                        }
-                                                    } else {
+                                                            if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                                                $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='1' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                                            } else if($nyj==5){
+                                                                $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                                            } else {
+                                                                $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='0',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                                            }
+                                         
+                                     }
+                                    }
+                                    unlink($targetPath);
+                                    header("Location: ./admin.php?page=pres");
+                                   die();
+                                }
+                                     
 
-                                                        //jika form file kosong akan mengeksekusi script dibawah ini
-                                                        $query = mysqli_query($config, "UPDATE tbl_presensi SET divisi='$divisi',bulan='$tanggal' WHERE id='$id'");
-															
-                                                        if($query == true){
-                                                            $_SESSION['succg'] = 'SUKSES! Data berhasil diubah';
-																header("Location: ./admin.php?page=pres"); 
-                                                            die();
-                                                        } else {
-                                                            $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
-                                                            echo '<script language="javascript">window.history.back();</script>';
-                                                        }
-                                                    }
-                                                
-                                            
-                                        
-                                    
+                    //             $handle = fopen($file, "r");
+                               
                                 
-                            
-                        
-                    
+                    //             fgetcsv($handle, 10000, ",");
+                    //             while(($data = fgetcsv($handle, 10000, ",")) !== FALSE){
+                    //                 $kom=mysqli_query($config,"SELECT * FROM tbl_presensi_karyawan WHERE nik='".$data[0]."' AND(tanggal='".$data[2]."' AND id_presensi='$id') ");
+                    //                if(mysqli_num_rows($kom)<=0){
+                    //                 $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$id','$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','')");
+                                   
+                    //                } else {
+                    //                    $gi=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET nik='".$data[0]."',nama='".$data[1]."',tanggal='".$data[2]."',jam_masuk='".$data[3]."',jam_pulang='".$data[4]."',terlambat='".$data[5]."' WHERE nik='".$data[0]."' AND(tanggal='".$data[2]."' AND id_presensi='$id')");
+                                      
+                    //                }
+                                   
+                                    
+                    //             }
+                                
+                    //             $mogo=mysqli_query($config,"SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE id_presensi='$id'");
+                    //             while($datang=mysqli_fetch_array($mogo)){
+                    //                 $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='".$datang['nik']."'");
+                    //                 list($nyj,$aiduser)=mysqli_fetch_array($yj);
+                    //                 $kjd=mysqli_query($config,"SELECT * FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$aiduser'");
+                    //                 if(mysqli_num_rows($kjd)<=0){
+                    //                     if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                    //                         $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                    //                         VALUES('$id','$aiduser','1','1')");
+                    //                     } else if($nyj==5){
+                    //                         $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                    //                         VALUES('$id','$aiduser','1','0')");
+                    //                     } else {
+                    //                         $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                    //                         VALUES('$id','$aiduser','0','0')");
+                    //                     }
+                    //                 } else {
+                    //                     if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                    //                         $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET id_presensi='$id',id_user='$aiduser',status_manager='1',status_gm='1'");
+                    //                     } else if($nyj==5){
+                    //                         $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET id_presensi='$id',id_user='$aiduser',status_manager='1',status_gm='0'");
+                    //                     } else {
+                    //                         $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET id_presensi='$id',id_user='$aiduser',status_manager='0',status_gm='0'");
+                    //                     }
+                    //                 }
+                                
+                           
+    
+                    //     }
+                           
+                    //     fclose($handle);
+                    //     header("Location: ./admin.php?page=pres");
+                    //     die();
+                    // } else {
+                    //         $_SESSION['errFormat'] = 'ERROR! Format file yang diperbolehkan hanya *.CSV';
+                    //         header("Location: ./admin.php?page=pres&act=edit&id=$id");
+                    //         die();
+                    //     }
+                    }
                 
-            
+                                 
         } else {?>
 
             <!-- Row Start -->
@@ -140,102 +236,7 @@
 
                     <!-- Row in form START -->
                     <div class="row">
-                        <div class="row col s6" data-position="top">
-						<i class="material-icons prefix md-prefix" style="margin-top:-8px;">group</i>&nbsp&nbsp<a style="color:#000000!important;font-size:1.1rem;">Divisi</a>
-						<select class="browser-default" name="divisi" id="divisi" required>
-						<?php 	if($divisi==1){
-							echo'
-									<option value="1" selected>Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==2){
-							echo'
-							
-									<option value="1">Direktur</option>
-									<option value="2" selected>SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==3){
-							echo'
-							
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3" selected>Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==4){
-							echo'
-							
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4" selected>Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==5){
-							echo'
-							
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5" selected>Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==6){
-							echo'
-							
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6" selected>Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==7){
-							echo'
-							
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7" selected>TIP</option>
-									<option value="8">Koperasi</option>';
-						} else if($divisi==8){
-							echo'
-							
-									<option value="1">Direktur</option>
-                                    <option value="2">SDM dan Umum</option>
-									<option value="3">Keuangan</option>
-									<option value="4">Teknik</option>
-									<option value="5">Pengembangan Bisnis</option>
-									<option value="6">Marketing</option>
-									<option value="7">TIP</option>
-									<option value="8" selected>Koperasi</option>';
-						} ?>
-									
-									</select>
-                            
-                        
-						</div>
+                      
                  
                         <div class="row col s6">
 						
@@ -262,7 +263,7 @@
                                     <input type="file" id="file" name="file">
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Upload File Presensi" value="<?php echo $file; ?>" disabled> 
+                                    <input class="file-path validate" type="text" placeholder="Upload File Presensi" disabled> 
                                         <?php
                                             if(isset($_SESSION['errSize'])){
                                                 $errSize = $_SESSION['errSize'];
