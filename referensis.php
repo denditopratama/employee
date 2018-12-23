@@ -62,27 +62,27 @@
         die();
     } else {
 		if(isset($_REQUEST['tambahjabat'])){
-			$tambahkelas=mysqli_real_escape_string($config,$_REQUEST['tambahkelas']);
-			$tambahadmin=mysqli_real_escape_string($config,$_REQUEST['tambahadmin']);
+			$tambahkelas=mysqli_real_escape_string($config,$_POST['tambahkelas']);
+			$tambahadmin=mysqli_real_escape_string($config,$_POST['tambahadmin']);
 			$koig=mysqli_query($config,"INSERT INTO tbl_role(admin,role) VALUES('$tambahadmin','$tambahkelas')");
 			echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
 						</script>';
 		}
-		if(isset($_REQUEST['tambahgaji'])){
-			$kjabatan=mysqli_real_escape_string($config,$_REQUEST['kjabatan']);
-			$statkar=mysqli_real_escape_string($config,$_REQUEST['statkar']);
-			$stattug=mysqli_real_escape_string($config,$_REQUEST['stattug']);
-			$gaji=mysqli_real_escape_string($config,$_REQUEST['gaji']);
-			$tunjab=mysqli_real_escape_string($config,$_REQUEST['tunjab']);
-			$tunfung=mysqli_real_escape_string($config,$_REQUEST['tunfung']);
-			$tuntrans=mysqli_real_escape_string($config,$_REQUEST['tuntrans']);
-			$tunut=mysqli_real_escape_string($config,$_REQUEST['tunut']);
-			$tunper=mysqli_real_escape_string($config,$_REQUEST['tunper']);
-			$tunkom=mysqli_real_escape_string($config,$_REQUEST['tunkom']);
+		if(isset($_POST['tambahgaji'])){
+			$kjabatan=mysqli_real_escape_string($config,$_POST['kjabatan']);
+			$statkar=mysqli_real_escape_string($config,$_POST['statkar']);
+			$stattug=mysqli_real_escape_string($config,$_POST['stattug']);
+			$gaji=mysqli_real_escape_string($config,$_POST['gaji']);
+			$tunjab=mysqli_real_escape_string($config,$_POST['tunjab']);
+			$tunfung=mysqli_real_escape_string($config,$_POST['tunfung']);
+			$tuntrans=mysqli_real_escape_string($config,$_POST['tuntrans']);
+			$tunut=mysqli_real_escape_string($config,$_POST['tunut']);
+			$tunper=mysqli_real_escape_string($config,$_POST['tunper']);
+			$tunkom=mysqli_real_escape_string($config,$_POST['tunkom']);
 			
-			$koig=mysqli_query($config,"INSERT INTO tbl_gaji_pokok(admin,gaji,status_karyawan,status_tugas,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi) VALUES('$kjabatan','$gaji','$statkar','$stattug','$tunjab','$tunfung','$tuntrans','$tunut','$tunper','$tunkom')");
+			$koig=mysqli_query($config,"INSERT INTO tbl_gaji_pokok(kelas_jabatan,gaji,status_karyawan,status_tugas,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi) VALUES('$kjabatan','$gaji','$statkar','$stattug','$tunjab','$tunfung','$tuntrans','$tunut','$tunper','$tunkom')");
 			echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
