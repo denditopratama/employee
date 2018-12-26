@@ -22,13 +22,41 @@
            
 
                 
-				$id_user = mysqli_real_escape_string($config,$_SESSION['id_user']);
+			
 				$karyawan = mysqli_real_escape_string($config,$_REQUEST['karyawan']);
 				$tgl_berangkat = mysqli_real_escape_string($config,$_REQUEST['tgl_berangkat']);
 				$tgl_pulang = mysqli_real_escape_string($config,$_REQUEST['tgl_pulang']);
 				$berangkat = mysqli_real_escape_string($config,$_REQUEST['berangkat']);
 				$destinasi = mysqli_real_escape_string($config,$_REQUEST['destinasi']);
-				$maksud = mysqli_real_escape_string($config,$_REQUEST['maksud']);
+                $maksud = mysqli_real_escape_string($config,$_REQUEST['maksud']);
+           
+                if($_SESSION['admin']==1){
+                    $mng=mysqli_query($config,"SELECT admin,divisi FROM tbl_user WHERE id_user='$karyawan'");
+                } else {
+                    $mng=mysqli_query($config,"SELECT admin,divisi FROM tbl_user WHERE id_user='$id_user'");
+                }
+                
+                list($ngadmin,$diviwiw)=mysqli_fetch_array($mng);
+                $perbedaan = mysqli_real_escape_string($config,date_diff(date_create($tgl_pulang), date_create($tgl_berangkat))->d+1);
+                if($ngadmin==1 || $ngadmin==2 || $ngadmin==3){
+                    $nduitsaku=500000;
+                    $nduitmakan=300000;
+                } else if ($ngadmin==4){
+                    $nduitsaku=400000;
+                    $nduitmakan=300000;
+                } else if($ngadmin==5){
+                    $nduitsaku=300000;
+                    $nduitmakan=200000;
+                } else if($ngadmin==6) {
+                    $nduitsaku=250000;
+                    $nduitmakan=200000;
+                } else if($ngadmin==7){
+                    $nduitsaku=225000;
+                    $nduitmakan=200000;
+                }
+                $duitsaku=$nduitsaku*$perbedaan;
+                $duitmakan=$nduitmakan*$perbedaan;
+                
                
 
                 //validasi input data
@@ -56,9 +84,9 @@
                                                                 move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
 																
 																if($_SESSION['admin']==1){
-                                                                $query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$karyawan',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud',status_sdm=1,file='$nfile' WHERE id='$id'");}
+                                                                $query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$karyawan',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud',status_sdm=1,file='$nfile',uang_makan='$duitmakan',uang_saku='$duitsaku',divisi='$diviwiw' WHERE id='$id'");}
 																else{
-																$query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$id_user',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud',file='$nfile' WHERE id='$id'");
+																$query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$id_user',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud',file='$nfile',uang_makan='$duitmakan',uang_saku='$duitsaku' WHERE id='$id'");
 																}
 																
                                                                 if($query == true){
@@ -81,9 +109,9 @@
 
                                                         //jika form file kosong akan mengeksekusi script dibawah ini
                                                         if($_SESSION['admin']==1){
-                                                                $query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$karyawan',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud' WHERE id='$id'");}
+                                                                $query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$karyawan',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud',uang_makan='$duitmakan',uang_saku='$duitsaku',divisi='$diviwiw' WHERE id='$id'");}
 																else{
-																$query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$id_user',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud' WHERE id='$id'");}
+																$query = mysqli_query($config, "UPDATE tbl_sppd SET id_user='$id_user',keberangkatan='$berangkat',destinasi='$destinasi',tanggal_awal='$tgl_berangkat',tanggal_akhir='$tgl_pulang',deskripsi='$maksud',uang_makan='$duitmakan',uang_saku='$duitsaku' WHERE id='$id'");}
 																
 															
                                                         if($query == true){
@@ -263,7 +291,7 @@ while($rows=mysqli_fetch_array($okok)){?>
                             <button type="submit" name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
                         </div>
                         <div class="col 6">
-                           <a href="?page=sppd" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>
+                           <a href="?page=sppd" class="btn-large orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>
                         </div>
                     </div>
 

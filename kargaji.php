@@ -774,8 +774,13 @@
                             <i class="material-icons prefix md-prefix" >class</i><label>Potongan Lain</label><br/>	
                             <select class="browser-default" name="potongan" id="potongan">';
 					$querygs = mysqli_query($config,"SELECT * FROM tbl_ref_potongan");	
-							while ($rowx = mysqli_fetch_array($querygs)) {											
-								echo "<option value='".$rowx['id']."'>".$rowx['uraian']."</option>";}
+							while ($rowx = mysqli_fetch_array($querygs)) {
+								if($rowx['id']==28){
+								echo "<option value='".$rowx['id']."' selected>".$rowx['uraian']."</option>";
+								} else {
+								echo "<option value='".$rowx['id']."'>".$rowx['uraian']."</option>";
+								}											
+								}
 								echo '</select>
 								</div>
 								</div>
@@ -830,6 +835,7 @@
 				
                 var inputValue = $('#potongan').val();
 				var nilai = $('#potong').val();
+
 				
 				if(nilai==''){
 					alert('Data Tidak Boleh Kosong !');
@@ -842,8 +848,10 @@
 					location.reload();
 					
 		   });}
+		   
            
         });
+	
 		 });
 			   </script>
 			   
@@ -859,7 +867,7 @@
 								<div class="col m12" id="colres">
 								<ul class="collapsible">
 								<li>
-								 <div class="collapsible-header" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Ket. Presensi</h5></div>
+								 <div class="collapsible-header active" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Ket. Presensi</h5></div>
 								 <div class="collapsible-body" style="background-color:transparent!important">
                                 <div class="col m12" id="colres">
 									
@@ -911,18 +919,31 @@
 								echo '
                                           <script>
                                           $(document).ready(function(){
-                                          $(\'#tots\').click(function(){
-                                              var token = '.$tokent.';
-                                              var user = '.$id_user.';
-                                              $.post(\'./js/ajaxpresensi.php\', {id : '.$sikux.', token : token, user : user}, function(data){
-												  $("#anjas").html(data);
-												  var num = $("#telatbos").val()/'.$mkgg.'*'.$sub1.';
-												  var xz = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-												 
+											var token = '.$tokent.';
+											var user = '.$id_user.';
+											$.post(\'./js/ajaxpresensi.php\', {id : '.$sikux.', token : token, user : user}, function(data){
+												$("#anjas").html(data);
+												var num = $("#telatbos").val()/'.$mkgg.'*'.$sub1.';
+											var xz = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 											$("#hoak").html("Rp " + xz);
-                                              });
-                                          $(\'#modalsz\').openModal();
-                                          });
+											var xr = $(\'#hoak\').html().replace(/[^0-9]+/g, "");;
+											$(\'#potong\').val(xr);
+											});
+											
+                                          $(\'#tots\').click(function(){
+										  $(\'#modalsz\').openModal();
+										  });
+										 
+										
+											$(\'#potongan\').change(function(){
+												var mog=$(this).val();
+												if(mog == 28){
+													var xr = $(\'#hoak\').html().replace(/[^0-9]+/g, "");;
+													$(\'#potong\').val(xr);	
+												} else {
+												$("#potong").val(\'\');}
+											});
+																	
                                           });
 										  </script>';
 										  echo '<div id="modalsz" class="modal" style="width:80%">
@@ -945,7 +966,7 @@
 							<div class="col m12" id="colres">
 								<ul class="collapsible">
 								<li>
-								 <div class="collapsible-header" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Cuti</h5></div>
+								 <div class="collapsible-header active" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Cuti</h5></div>
 								 <div class="collapsible-body" style="background-color:transparent!important">
 							<div class="col m12" id="colres">
                         
@@ -957,10 +978,10 @@
                                         <th width="15%"style="color:#fff">Alasan</th>
 										<th width="12%"style="color:#fff">Tanggal Awal</th>
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
-										<th width="15%" style="color:#fff">Status Manager</th>
-										<th width="15%" style="color:#fff">Status GM</th>
-										<th width="15%" style="color:#fff">Status SDM</th>
-										<th width="20%" style="color:#fff">Tindakan</th>
+										<th width="10%" style="color:#fff">Status Manager</th>
+										<th width="10%" style="color:#fff">Status GM</th>
+										<th width="10%" style="color:#fff">Status SDM</th>
+										<th width="20%" style="color:#fff">Jumlah Hari</th>
 										
 									
                                 </tr>
@@ -1057,23 +1078,8 @@
 										><i class="material-icons">done</i> APPROVED</a></td>';	
 										}
 
-
-										echo'<td style="text-align:center">';
-										if($row['status_sdm']==1){
-										if($_SESSION['admin']==1){echo'
-										  <a class="btn small blue waves-effect waves-light" href="?page=cuti&act=edit&id='.$row['id'].'"><i class="material-icons">edit</i> EDIT</a>
-										  <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
-										<i class="material-icons">delete</i> DEL</a>';}
-										else {
-										echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
-										}}else {
-											echo'<a class="btn small blue waves-effect waves-light" href="?page=cuti&act=edit&id='.$row['id'].'"><i class="material-icons">edit</i> EDIT</a>
-										  <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
-										<i class="material-icons">delete</i> DEL</a>';
-										}
-											
-                                         echo '
-                                       </td>
+										$perkento = mysqli_real_escape_string($config,date_diff(date_create($row['tgl_akhir']), date_create($row['tgl_awal']))->d)+1;
+									echo'<td style="text-align:center">'.$perkento.' Hari</td>
                                     </tr>
                                 </tbody>';
                                 }
@@ -1089,10 +1095,10 @@
 							<div class="col m12" id="colres">
 								<ul class="collapsible">
 								<li>
-								 <div class="collapsible-header" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Lembur</h5></div>
+								 <div class="collapsible-header active" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Lembur</h5></div>
 								 <div class="collapsible-body" style="background-color:transparent!important">
 							<div class="col m12" id="colres">
-							
+							<small>* Baris berwarna kuning merupakan hari libur mingguan</small>
 							<table class="bordered" id="tblb">
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                             <tr>
@@ -1112,21 +1118,54 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr>';
+                                            ';
 										
                                         $query2d = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_user='$id_user' AND(MONTH(tanggal)='$blan' AND YEAR(tanggal)='$than')");
 										
+									$tat=array();
+									$tat1=array();
+									$nong=array();
 									
-
                                         if(mysqli_num_rows($query2d) > 0){
                                             $no = 0;
                                             while($row = mysqli_fetch_array($query2d)){
-												$titit=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
-												list($namas)=mysqli_fetch_array($titit);
-                                            $no++;
-                                             echo ' <td style="text-align:center">'.$no.'</td>
+												$titit=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
+												list($namas,$edmun)=mysqli_fetch_array($titit);
+												$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
+										
+										 if($edmun==1 || $edmun==2 || $edmun==3 || $edmun==4 || $edmun==5){
+											array_push($nong,100000);
+										 } else {
+											if(date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun'){
+												echo '<tr style="background-color:yellow">';
+												if($hourdiff<=7){
+													$byrlm=($sub1/173*2);
+													array_push($nong,$byrlm);
+												} else if($hourdiff>7 && $hourdiff<=8){
+													$byrlm=($sub1/173*3);
+													array_push($nong,$byrlm);
+												} else if($hourdiff>=8){
+													$byrlm=($sub1/173*4);
+													array_push($nong,$byrlm);
+												}
+											} else {
+												echo ' <tr>';
+												if($hourdiff>1){
+													$byrlm=($sub1/173*1.5)+($sub1/173*2*$hourdiff-1);
+													array_push($nong,$byrlm);
+												} else {
+													$byrlm=($sub1/173*1.5);
+													array_push($nong,$byrlm);
+												}
+											}
+											
+										 }
+											$no++;
+											
+											 echo'
+											 		<td style="text-align:center">'.$no.'</td>
                                                     <td style="text-align:center">'.$namas.'</td>
-                                                    <td style="text-align:center">'.$tanggal = date('d M Y ', strtotime($row['tanggal'])).'</td>
+                                                    <td style="text-align:center">'.date('d', strtotime($row['tanggal'])).' - '.date('M', strtotime($row['tanggal'])).' - '.date('Y', strtotime($row['tanggal'])).'</td>
 													<td style="text-align:center">'.$row['pekerjaan'].'</td>
 													<td style="text-align:center">'.$row['jam_awal'].'</td>
 													<td style="text-align:center">'.$row['jam_akhir'].'</td>';
@@ -1198,8 +1237,29 @@
 											echo'
 													
                                             </tr>
-                                        </tbody>';
-                                            }
+										</tbody>';
+										$ex=explode('.',$row['jam_awal']);
+										$exo=explode('.',$row['jam_akhir']);
+										array_push($tat,$exo[0]-$ex[0]);
+										array_push($tat1,$exo[1]-$ex[1]);
+										
+												
+												
+											}
+											$yowko=array_sum($tat);
+											$yowka=array_sum($tat1);
+											$cocoktanam=array_sum($nong);
+											if($yowka>=60){
+												$hgut=floor($yowka/60);
+												for($i=0;$i<$hgut;$i++){
+													$yowka=$yowka-60;
+													$yowko=$yowko+1;
+												}
+												
+											}
+										
+											echo '<tr><td style="text-align:center"colspan="9">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
+											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<b> Rp '.number_format($cocoktanam , 0, ',', '.').'</b></td></tr>';
                                         } else {
                                             echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                         }

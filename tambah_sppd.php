@@ -12,28 +12,72 @@
            
 
                 
-				$id_user = mysqli_real_escape_string($config,$_SESSION['id_user']);
+                $id_user = mysqli_real_escape_string($config,$_SESSION['id_user']);
+              
 				
 				$tgl_berangkat = mysqli_real_escape_string($config,$_REQUEST['tgl_berangkat']);
 				$tgl_pulang = mysqli_real_escape_string($config,$_REQUEST['tgl_pulang']);
 				$berangkat = mysqli_real_escape_string($config,$_REQUEST['berangkat']);
 				$destinasi = mysqli_real_escape_string($config,$_REQUEST['destinasi']);
 				$maksud = mysqli_real_escape_string($config,$_REQUEST['maksud']);
-				$berangkat = mysqli_real_escape_string($config,$_REQUEST['berangkat']);
+                $berangkat = mysqli_real_escape_string($config,$_REQUEST['berangkat']);
+                
                
 			   if($_SESSION['admin']==1){
-			   $karyawan = mysqli_real_escape_string($config,$_REQUEST['karyawan']);
-
+               $karyawan = mysqli_real_escape_string($config,$_REQUEST['karyawan']);
+               $mng=mysqli_query($config,"SELECT admin,divisi FROM tbl_user WHERE id_user='$karyawan'");
+                list($ngadmin,$diviwiw)=mysqli_fetch_array($mng);
                 //validasi input data
-               
-
-
+                $perbedaan = mysqli_real_escape_string($config,date_diff(date_create($tgl_pulang), date_create($tgl_berangkat))->d+1);
+                if($ngadmin==1 || $ngadmin==2 || $ngadmin==3){
+                    $nduitsaku=500000;
+                    $nduitmakan=300000;
+                } else if ($ngadmin==4){
+                    $nduitsaku=400000;
+                    $nduitmakan=300000;
+                } else if($ngadmin==5){
+                    $nduitsaku=300000;
+                    $nduitmakan=200000;
+                } else if($ngadmin==6) {
+                    $nduitsaku=250000;
+                    $nduitmakan=200000;
+                } else if($ngadmin==7){
+                    $nduitsaku=225000;
+                    $nduitmakan=200000;
+                }
+                $duitsaku=$nduitsaku*$perbedaan;
+                $duitmakan=$nduitmakan*$perbedaan;
                 $ekstensi = array('jpg','png','jpeg','doc','docx','pdf');
                 $file = $_FILES['file']['name'];
                 $x = explode('.', $file);
                 $eks = strtolower(end($x));
                 $ukuran = $_FILES['file']['size'];
-			    $target_dir = "upload/sppd/";} else {$file="";}
+                $target_dir = "upload/sppd/";} 
+                else {
+                $file="";
+
+                $mng=mysqli_query($config,"SELECT admin FROM tbl_user WHERE id_user='$id_user'");
+                list($ngadmin)=mysqli_fetch_array($mng);
+                $perbedaan = mysqli_real_escape_string($config,date_diff(date_create($tgl_pulang), date_create($tgl_berangkat))->d+1);
+                if($ngadmin==1 || $ngadmin==2 || $ngadmin==3){
+                    $nduitsaku=500000;
+                    $nduitmakan=300000;
+                } else if ($ngadmin==4){
+                    $nduitsaku=400000;
+                    $nduitmakan=300000;
+                } else if($ngadmin==5){
+                    $nduitsaku=300000;
+                    $nduitmakan=200000;
+                } else if($ngadmin==6) {
+                    $nduitsaku=250000;
+                    $nduitmakan=200000;
+                } else if($ngadmin==7){
+                    $nduitsaku=225000;
+                    $nduitmakan=200000;
+                }
+                $duitsaku=$nduitsaku*$perbedaan;
+                $duitmakan=$nduitmakan*$perbedaan;
+            }
 												
 
                                                     //jika form file tidak kosong akan mengeksekusi script dibawah ini
@@ -49,8 +93,8 @@
                                                                 move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
 																
 																
-                                                                $query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_sdm,file)
-																VALUES('$karyawan','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,'$nfile')");
+                                                                $query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_sdm,file,uang_saku,uang_makan)
+																VALUES('$karyawan','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,'$nfile','$duitsaku','$duitmakan')");
 																
 																
                                                                 if($query == true){
@@ -73,27 +117,20 @@
 
                                                         //jika form file kosong akan mengeksekusi script dibawah ini
                                                         if($_SESSION['admin']==1){
-                                                                $query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur)
-																VALUES('$karyawan','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,1)");}
-																else if($_SESSION['admin']==2){
-																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur)
-																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,1)");
-																}
-																else if($_SESSION['admin']==3){
-																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur)
-																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,1)");
-																}
-																else if($_SESSION['admin']==4){
-																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur,divisi)
-																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,0,'".$_SESSION['divisi']."')");
+                                                                $query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur,divisi,uang_saku,uang_makan)
+																VALUES('$karyawan','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,1,$diviwiw,$duitsaku,$duitmakan)");}
+															
+																else if($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2){
+																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,status_gm,status_direktur,divisi,uang_saku,uang_makan)
+																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,1,0,'".$_SESSION['divisi']."',$duitsaku,$duitmakan)");
 																}
 																else if($_SESSION['admin']==5 || $_SESSION['admin']==11 ){
-																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,divisi)
-																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,'".$_SESSION['divisi']."')");
+																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,status_manager,divisi,uang_saku,uang_makan)
+																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud',1,'".$_SESSION['divisi']."',$duitsaku,$duitmakan)");
 																}
 																else{
-																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,divisi)
-																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud','".$_SESSION['divisi']."')");
+																$query = mysqli_query($config, "INSERT INTO tbl_sppd(id_user,keberangkatan,destinasi,tanggal_awal,tanggal_akhir,deskripsi,divisi,uang_saku,uang_makan)
+																VALUES('$id_user','$berangkat','$destinasi','$tgl_berangkat','$tgl_pulang','$maksud','".$_SESSION['divisi']."',$duitsaku,$duitmakan)");
 																}
 																
 															

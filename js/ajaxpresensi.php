@@ -13,7 +13,8 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
 } else {
     $id=mysqli_real_escape_string($config,$_POST['id']);
     if(!empty($_POST['user'])){
-        $o=mysqli_query($config,"SELECT nip FROM tbl_user WHERE id_user='".$_POST['user']."'");
+        $mojok=mysqli_real_escape_string($config,$_POST['user']);
+        $o=mysqli_query($config,"SELECT nip FROM tbl_user WHERE id_user='$mojok'");
         list($nik)=mysqli_fetch_array($o);
     } else {
         $nik=$_SESSION['nip'];
@@ -82,7 +83,8 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
 										else{
 										$query2 = mysqli_query($config, "SELECT * FROM tbl_presensi_karyawan WHERE id_presensi='$id' AND nik='$nik'");	
                                         }
-										
+                                        $namp=mysqli_query($config,"SELECT id_user,admin FROM tbl_user WHERE nip='".$data['nik']."'");
+                                        list($id_users,$admin)=mysqli_fetch_array($namp);
                                        
                                             $nyoy=array();
                                             $nyoy2=array();
@@ -107,6 +109,17 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     if($row['terlambat']==''){
                                                         $row['terlambat']='00:00';
                                                     }
+                                           
+                                                    $mosc=strtotime($row['tanggal']);
+                                                    
+                                                    $kemang=mysqli_query($config,"SELECT tgl_awal,tgl_akhir FROM tbl_cuti WHERE id_user='$id_users'");
+                                                    list($gaspol,$ereun)=mysqli_fetch_array($kemang);
+                                                    $gaspol1=strtotime($gaspol);
+                                                    $gaspol2=strtotime($ereun);
+                                                    if($mosc >= $gaspol1 && $mosc <=$gaspol2){
+                                                        $row['keterangan']='Cuti';
+                                                    }
+                                                   
                                                     echo'
                                                     <td id="hahx" style="text-align:center">'.$row['terlambat'].'</td>
                                                     <td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan'].'" name="keter[]" type="text"></td>';
@@ -118,6 +131,8 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     ';
                                                     
                                                     $nyot=explode(':',$row['terlambat']);
+                                                    
+
                                                     if($row['keterangan']==''){
                                                         array_push($nyoy,$nyot[0]);
                                                         array_push($nyoy2,$nyot[1]);
@@ -137,8 +152,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                             <tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
                                             <input type="hidden" id="telatbos" value="'.$fok.'">
                                             <tr><td colspan="9" style="text-align:center">';
-                                            $namp=mysqli_query($config,"SELECT id_user,admin FROM tbl_user WHERE nip='".$data['nik']."'");
-                                            list($id_users,$admin)=mysqli_fetch_array($namp);
+                                          
                                            
                                             $bnz=mysqli_query($config,"SELECT status_manager,status_gm FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$id_users'");
                                             

@@ -54,7 +54,8 @@
 
                                     $tanggals = "";
                                     if(isset($Row[2])) {
-                                        $tanggals = mysqli_real_escape_string($config,$Row[2]);
+                                        $tanggald = mysqli_real_escape_string($config,$Row[2]);
+                                        $tanggals = date('d M y',strtotime($tanggald));
                                     }
 
                                     $jam_masuk = "";

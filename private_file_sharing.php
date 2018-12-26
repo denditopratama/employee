@@ -85,7 +85,23 @@ h11 {
                         </div>
                     </div>
                     <!-- Secondary Nav END -->
-                </div>';
+				</div>
+				<div class="col m12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title black-text"><i class="material-icons md-36" >note</i> Presensi</span>
+						
+						<p><span class="red-text">*</span> untuk menampilkan file divisi, pilih "File Divisi" di kolom tampilan dan klik pilih</p>
+						<p><span class="red-text">*</span> membagikan file dilakukan dengan cara klik tombol share (warna biru) lalu klik pilih</p>
+						<p><span class="red-text">*</span> Jika ingin mengirim file pribadi ke karyawan tertentu silahkan gunakan surat keluar</p>
+						<p><span class="red-text">*</span> Kotak file Berwarna oranye menandakan file sedang dibagikan / disharing dengan divisi </p>
+
+					  
+						
+						
+					</div>
+					</div>
+					</div>';
 			
                     
 				
@@ -290,7 +306,7 @@ h11 {
 												}
 												echo'
                                                         <div class="card-content">
-														<img id="gambarz" style="width:100%" class="file" src="./asset/img/jpg.png"><br>
+														<img id="gambarz" style="width:100%" class="file" src="./upload/file_sharing/'.$row['file'].'"><br>
 														
                                                             <strong>file :</strong> <a style="font-size:80%;text-align:left;" class="blue-text" href="./upload/file_sharing/'.$row['file'].'" target="_blank">'.$string.'</a>
 															

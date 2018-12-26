@@ -144,9 +144,10 @@
                             <div class="card">
                                 <div class="card-content">
                                     <span class="card-title black-text"><i class="material-icons md-36" >note</i> Presensi</span>
-                                    
-									<p class="kata">Untuk Presensi Pekerjaan Proyek silahkan Download Template presensi Kosong <strong><a class="btn small" href="./asset/template_presensi.xls" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_download</i> Klik Disini</a></strong></p>
-									<p class="kata"> Lalu kirimkan ke admin SDM. <strong><a class="btn small" href="?page=tsk&act=add" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_upload</i> Klik Disini</a></strong></p>
+                                    <div class="col s12" style="text-align:center">
+									<p class="kata">Untuk Presensi Pekerjaan Proyek silahkan Download Template presensi Kosong <strong><br><a class="btn small" id="ganteng" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_download</i> Klik Disini</a></strong></p>
+									<p class="kata"> Lalu kirimkan ke admin SDM. <strong><br><a class="btn small" href="?page=tsk&act=add" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_upload</i> Klik Disini</a></strong></p>
+                                    </div>
 									<p><span class="red-text">*</span> (Khusus Karyawan Proyek), jika ingin mengajukan lembur, silahkan mengirimkan presensi terlebih dahulu, lalu klik lembur pada presensi terkait yang telah di tambahkan oleh admin pada tabel di bawah ini</p>
 
                                   
@@ -281,6 +282,9 @@
                                               });
                                           $(\'#modalsz\').openModal();
                                           });
+                                          $("#ganteng").click(function(){
+                                            $(\'#moday\').openModal();
+                                          });
                                           });
                                           </script>';
 								
@@ -400,7 +404,34 @@
         
         </div>
       
-        </div>';       
+        </div>
+
+        <div id="moday" class="modal" style="width:90%">
+        
+        <div class="modal-content" style="background-color:rgb(160,160,160)" id="modays">
+
+        <div class="row">
+        <div class="col m6 s6"> 
+        <img src="asset/img/aturanpres.png" style="width:100%">
+        </div>
+        <div class="col m6 s6" style="text-align:center">
+        <p class="white-text" style="text-align:left">
+        Sebelum anda mengisi presensi anda pada file excel yang telah tersedia,
+        mohon perhatikan Beberapa hal berikut :<br><br><br>
+        1. Silahkan mengganti kolom NIK dan Nama dengan NIK dan Nama anda masing - masing.<br><br>
+        2. Baris tanggal mengikuti tanggal bulan presensi, jika baris tanggal kurang, silahkan tambahkan baris (contoh : bulan november 30 baris, sedangkan desember 31 baris, maka tambahkan 1 baris).<br><br>
+        3. Anda <b style="color:red">Dilarang</b> mengubah kolom terlambat (kolom yang berwarna kuning), mengganti rumus yang telah ada, mengganti format tabel seperti pada gambar disamping yang dilingkari lingkaran merah, mengubah format file selain <b>.xls</b>.<br><br>
+        4. Jika anda bermasalah saat membuka / mengedit file, coba untuk klik kanan file -> Properties -> Checklist di tulisan unblock -> lalu klik ok -> buka file -> klik enable editing.
+        <br><br>
+        5. Klik Download untuk mengunduh file.</p><br>
+        <a class="btn small" href="./asset/template_presensi.xls" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_download</i> Download</a>
+        </div>
+        
+        </div>
+      </div>
+
+        </div>
+        ';       
 
 ?>
 <script>

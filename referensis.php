@@ -61,7 +61,7 @@
         header("Location: ./");
         die();
     } else {
-		if(isset($_REQUEST['tambahjabat'])){
+		if(isset($_POST['tambahjabat'])){
 			$tambahkelas=mysqli_real_escape_string($config,$_POST['tambahkelas']);
 			$tambahadmin=mysqli_real_escape_string($config,$_POST['tambahadmin']);
 			$koig=mysqli_query($config,"INSERT INTO tbl_role(admin,role) VALUES('$tambahadmin','$tambahkelas')");
@@ -89,19 +89,19 @@
 						</script>';
 			
 		}
-		if(isset($_REQUEST['nambahjabat'])){
-			$tambahjabatan=mysqli_real_escape_string($config,$_REQUEST['tambahjabatan']);
-			$tambahsub=mysqli_real_escape_string($config,$_REQUEST['tambahsub']);
-			$tambahsubunit=mysqli_real_escape_string($config,$_REQUEST['tambahsubunit']);
+		if(isset($_POST['nambahjabat'])){
+			$tambahjabatan=mysqli_real_escape_string($config,$_POST['tambahjabatan']);
+			$tambahsub=mysqli_real_escape_string($config,$_POST['tambahsub']);
+			$tambahsubunit=mysqli_real_escape_string($config,$_POST['tambahsubunit']);
 			$mx=mysqli_query($config,"INSERT INTO tbl_ref_jabatan(jabatan,kode_unit,kode_sub) VALUES('$tambahjabatan','$tambahsub','$tambahsubunit')");
 			echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
 						</script>';
 		}
-		if(isset($_REQUEST['nambahsub'])){
-			$ketsub=mysqli_real_escape_string($config,$_REQUEST['ketsub']);
-			$nyub=mysqli_real_escape_string($config,$_REQUEST['nyub']);
+		if(isset($_POST['nambahsub'])){
+			$ketsub=mysqli_real_escape_string($config,$_POST['ketsub']);
+			$nyub=mysqli_real_escape_string($config,$_$_POST['nyub']);
 			
 		
 			
@@ -114,9 +114,9 @@
 					
 		}
 					
-		if(isset($_REQUEST['nambahunit'])){
-			$unitnya=mysqli_real_escape_string($config,$_REQUEST['unitnya']);
-			$kodeunit=mysqli_real_escape_string($config,$_REQUEST['kodeunit']);
+		if(isset($_POST['nambahunit'])){
+			$unitnya=mysqli_real_escape_string($config,$_POST['unitnya']);
+			$kodeunit=mysqli_real_escape_string($config,$_POST['kodeunit']);
 			$tukimans=mysqli_query($config,"SELECT * FROM tbl_department WHERE kode_unit='$kodeunit'");
 			
 				if(mysqli_num_rows($tukimans)<=0){
@@ -135,9 +135,9 @@
 			
 		}
 		
-		if(isset($_REQUEST['tambahpenerimaan'])){
+		if(isset($_POST['tambahpenerimaan'])){
 			
-			$uraianpenerimaan=mysqli_real_escape_string($config,$_REQUEST['uraianpenerimaan']);
+			$uraianpenerimaan=mysqli_real_escape_string($config,$_POST['uraianpenerimaan']);
 			$mvs=mysqli_query($config,"INSERT INTO tbl_jenis_penerimaan(uraian) VALUES('$uraianpenerimaan')");
 				if($mvs==true){
 					echo'<script>

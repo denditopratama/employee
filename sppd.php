@@ -220,6 +220,8 @@
 										<th width="12%"style="color:#fff">Tanggal Berangkat</th>
 										<th width="12%"style="color:#fff">Tanggal Pulang</th>
 										<th width="18%" style="color:#fff">Deskripsi</th>
+										<th width="10%" style="color:#fff">Uang Saku</th>
+										<th width="10%" style="color:#fff">Uang Makan</th>
 										<th width="20%" style="color:#fff">File</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 									
@@ -249,9 +251,10 @@
 										
                                       echo '
                                         <td style="text-align:center">'.$row['id'].'</td>';
-										$popo=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user='".$row['id_user']."'");
-										while($data=mysqli_fetch_array($popo)){ echo'
-										<td style="text-align:center">'.$data['nama'].'</td>';}
+										$popo=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
+										list($ngaran,$ngadmin)=mysqli_fetch_array($popo);
+										 echo'
+										<td style="text-align:center">'.$ngaran.'</td>';
 										
 										
 										echo'
@@ -261,6 +264,9 @@
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tanggal_awal'])).'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tanggal_akhir'])).'</td>
 										<td style="text-align:center">'.$row['deskripsi'].'</td>
+										<td style="text-align:center"> Rp '.number_format($row['uang_saku'] , 0, ',', '.').'</td>
+										<td style="text-align:center"> Rp '.number_format($row['uang_makan'] , 0, ',', '.').'</td>';
+										echo'
 										
 										<td style="text-align:center"><strong>File :</strong>';
 										if(!empty($row['file'])){
@@ -287,7 +293,7 @@
 									$popos=mysqli_query($config,"SELECT admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
 									list($admin)=mysqli_fetch_array($popos);
 									echo'
-									<tr><td colspan="10">
+									<tr><td colspan="11">
 									<div class="containers">
 										<ul class="progressbar">';
 										if($admin==1){
@@ -437,7 +443,7 @@
                                 }
 								echo' <script type="text/javascript" src="asset/js/halamanuser.js"></script> ';
                             } else {
-                                    echo '<tr><td colspan="12"><center><p class="add">Tidak ada data yang ditemukan</p></center></td></tr>';
+                                    echo '<tr><td colspan="11"><center><p class="add">Tidak ada data yang ditemukan</p></center></td></tr>';
                                 }
                               echo '</table><br/><br/>
                             </div>';
@@ -469,7 +475,7 @@
                                 </div>
 								</div>
 								</div>
-                        <div class="col m12" id="colres">
+                        <div class="col m12 s12" id="colres">
                         <table class="bordered" id="tbl">
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
@@ -480,6 +486,8 @@
 										<th width="12%"style="color:#fff">Tanggal Berangkat</th>
 										<th width="12%"style="color:#fff">Tanggal Pulang</th>
 										<th width="18%" style="color:#fff">Deskripsi</th>
+										<th width="10%" style="color:#fff">Uang Saku</th>
+										<th width="10%" style="color:#fff">Uang Makan</th>
 										<th width="20%" style="color:#fff">File</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 									
@@ -505,9 +513,10 @@
 										
                                       echo '
                                         <td style="text-align:center">'.$row['id'].'</td>';
-										$popo=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user='".$row['id_user']."'");
-										while($data=mysqli_fetch_array($popo)){ echo'
-										<td style="text-align:center">'.$data['nama'].'</td>';}
+										$popo=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
+										list($ngaran,$ngadmin)=mysqli_fetch_array($popo);
+										echo'
+										<td style="text-align:center">'.$ngaran.'</td>';
 										echo'<td style="text-align:center">'.$row['keberangkatan'].'</td>';
 										
 										
@@ -517,7 +526,9 @@
 										<td style="text-align:center">'.$row['destinasi'].'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tanggal_awal'])).'</td>
 										<td style="text-align:center">'.$tgl = date('d M Y ', strtotime($row['tanggal_akhir'])).'</td>
-										<td style="text-align:center">'.$row['deskripsi'].'</td>';
+										<td style="text-align:center">'.$row['deskripsi'].'</td>
+										<td style="text-align:center"> Rp '.number_format($row['uang_saku'] , 0, ',', '.').'</td>
+										<td style="text-align:center"> Rp '.number_format($row['uang_makan'] , 0, ',', '.').'</td>';
 										
 									echo'<td style="text-align:center"><strong>File :</strong>';
 										if(!empty($row['file'])){
@@ -546,7 +557,7 @@
 									$popos=mysqli_query($config,"SELECT admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
 									list($admin)=mysqli_fetch_array($popos);
 									echo'
-									<tr><td colspan="10">
+									<tr><td colspan="11">
 									<div class="containers">
 										<ul class="progressbar">';
 										if($admin==1){
@@ -696,7 +707,7 @@
                                 </tbody>';
                                 }
                             } else {
-                                echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
+                                echo '<tr><td colspan="11"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
                             }
                             echo '</table>';
 						

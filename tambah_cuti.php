@@ -162,6 +162,7 @@
 				$tgl_akhir=mysqli_real_escape_string($config,$_REQUEST['tgl_akhir']);
 				
 				$perbedaan = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d)+1;
+				$nyoc = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->m);
 				
 				
 				$oik=mysqli_query($config,"SELECT cuti FROM tbl_user WHERE id_user='$id_user'");
@@ -172,11 +173,11 @@
 					header("Location: ./admin.php?page=cuti");
 				} else{
 					if(strtotime($tgl_awal) > strtotime($tgl_akhir)){
-						$_SESSION['errs']="GAGAL, minimal cuti adalah satu hari, silahkan pilih hari yang berbeda";
+						$_SESSION['errs']="GAGAL silahkan pilih hari yang berbeda";
 					header("Location: ./admin.php?page=cuti");
 					} else {
 				$cutiyas=$cutiya-$perbedaan;
-				if($cutiyas<0)
+				if($cutiyas<0 || $nyoc >0)
 				{
 					$_SESSION['errs']="GAGAL, jatah cuti anda tidak mencukupi";
 					header("Location: ./admin.php?page=cuti");
