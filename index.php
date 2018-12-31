@@ -287,7 +287,7 @@ to {
 									$_SESSION['divisi'] = $divisi;
 									$_SESSION['sub_unit'] = $sub_unit;
                                     session_regenerate_id();
-										header('Location: ./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'');
+										header('Location: ./admin.php?');
                                     die();
                                 } else {
 
@@ -324,6 +324,7 @@ to {
                                     echo '<div id="maintenis" class="error green lighten-5"><div class="center"><i class="material-icons">warning</i> <strong> MAINTENANCE !</strong></div>
                                     '.$mtt.'</div>';
                                     unset($_SESSION['mtt']);
+                                    
                                 }
                             ?>
                         </div>

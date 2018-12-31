@@ -327,7 +327,7 @@ if($_SESSION['admin']!=1){
    
 			
 			
-			
+			if(isset($_REQUEST['page'])){
             $page = $_REQUEST['page'];
             switch ($page) {
                 case 'tsm':
