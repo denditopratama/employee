@@ -26,6 +26,16 @@ if($_SESSION['admin']!=1){
 	if($mnt==1){
 		$_SESSION['mtt'] = '<center>Mohon Maaf saat ini sistem sedang MAINTENANCE, silahkan coba beberapa saat lagi</center>';
 		unset($_SESSION['admin']);
+		unset($_SESSION['id_user']);
+		unset($_SESSION['id_user']);
+		unset($_SESSION['username']);
+		unset($_SESSION['nama']);
+		unset($_SESSION['nip']);
+		unset($_SESSION['admin']);
+		unset($_SESSION['role']);
+		unset($_SESSION['unit']);
+		unset($_SESSION['divisi']);
+		unset($_SESSION['sub_unit']); 
 		header("Location: ./");
         die();
 	}
@@ -314,13 +324,7 @@ if($_SESSION['admin']!=1){
 
     <?php
 	
-        if(isset($_REQUEST['page'])){
-			if($_SESSION['admin']!=1){
-				if($_GET['page']!='usr'){
-					echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
-					alert("Silahkan isi data anda terlebih dahulu");</script>';
-				} 
-			}
+   
 			
 			
 			
