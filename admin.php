@@ -305,12 +305,12 @@
     <?php
 	
         if(isset($_REQUEST['page'])){
-			// if($_SESSION['admin']!=1){
-			// 	if($_GET['page']!='usr'){
-			// 		echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
-			// 		alert("Silahkan isi data anda terlebih dahulu");</script>';
-			// 	} 
-			// }
+			if($_SESSION['admin']!=1){
+				if($_GET['page']!='usr'){
+					echo '<script>window.location.href="./admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'";
+					alert("Silahkan isi data anda terlebih dahulu");</script>';
+				} 
+			}
 			
 			
 			
@@ -821,20 +821,7 @@
 				
 				
 			   
-									/* $haribakti=date('z',strtotime($tgl_bakti));
-									$kabisatdulu=date('L',strtotime($tgl_bakti));
-									$kabisatsekarang=date('L');
-									if($kabisatdulu==1 && $kabisatsekarang==0){
-										$harisekarang=date('z')+1;
-									} else if($kabisatdulu==0 && $kabisatsekarang==1){
-										$harisekarang=date('z')-1;
-									} else if($kabisatdulu==0 && $kabisatsekarang==0){
-										$harisekarang=date('z');
-									}
-									
-									if($haribakti==$harisekarang){
-										$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti=12 WHERE id_user='".$_SESSION['id_user']."'");
-									} */
+							
 		
 			?>
 		
@@ -1000,7 +987,7 @@
 									
 									
 									$asmand=array();
-									$azmen=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%ASSISTANT%' OR jabatan LIKE '%BENDAHARA%'"); 
+									$azmen=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan NOT LIKE '%SITE%'"); 
 									while($row=mysqli_fetch_array($azmen)){									
 									$asb=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=6 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($asb)){
@@ -1009,22 +996,19 @@
 									}
 									
 									$so=array();
-									$soke=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%SENIOR%'"); 
-									while($row=mysqli_fetch_array($soke)){									
-									$sokap=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=7 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
+																	
+									$sokap=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin=7 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($sokap)){
 										array_push($so,$rowa['id_user']);
 									}
-									}
 									
-									$of=array();
-									$ofa=mysqli_query($config,"SELECT id FROM tbl_ref_jabatan WHERE jabatan LIKE '%OFFICER%'"); 
-									while($row=mysqli_fetch_array($ofa)){									
-									$sokaps=mysqli_query($config,"SELECT * FROM tbl_user WHERE jabatan='".$row['id']."' AND admin=8 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
+									
+									$of=array();					
+									$sokaps=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin=8 AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)"); 
 									while($rowa=mysqli_fetch_array($sokaps)){
 										array_push($of,$rowa['id_user']);
 									}
-									}
+									
 									
 									
 								
