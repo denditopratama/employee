@@ -245,6 +245,7 @@
 						    <div class="row jarak-form">
 
 <div class="col m12" id="colres">
+<small>* Baris berwarna biru merupakan user yang membutuhkan konfirmasi.</small>
     <table class="bordered" id="tblb">
         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
             <tr>
@@ -276,7 +277,19 @@
             while($row=mysqli_fetch_array($gk)){
                 $ku=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
                 list($namaz)=mysqli_fetch_array($ku);
-                echo '<tr>
+             
+                    $momok=mysqli_query($config,"SELECT status_gm FROM tbl_lembur WHERE id_presensi='$id' AND(id_user='".$row['id_user']."' AND (status_gm=0 OR status_manager=0))");
+                    if(mysqli_num_rows($momok)>0){
+                        echo '<tr style="background-color:rgba(176,224,230,0.5)">';
+                    } else {
+                        echo '<tr>';
+                    }
+                 
+                    
+                    
+                
+               
+                echo'
                 <td style="text-align:center!important">'.$nos++.'</td>
                 <td style="text-align:center!important">'.$namaz.'</td>
                 <td style="text-align:center!important"><a id="ket'.$row['id_user'].'" data-pres="'.$id.'" class="btn green">lihat</a></td>

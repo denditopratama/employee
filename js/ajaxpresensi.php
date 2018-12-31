@@ -92,7 +92,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                             
                                             $no = 0;
                                             while($row = mysqli_fetch_array($query2)){
-												
+											
                                             $no++;
                                             if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
                                                 echo '<tr style="background-color:yellow">'; 
@@ -103,9 +103,15 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                              echo'
                                                     <td id="hahx" style="text-align:center">'.$no.'</td>
                                                     <td id="hahx" style="text-align:center">'.$row['nama'].'</td>
-													<td id="hahx" style="text-align:center">'.date('d',strtotime($row['tanggal'])).' - '.date('M',strtotime($row['tanggal'])).' - '.date('Y',strtotime($row['tanggal'])).'</td>
-													<td id="hahx" style="text-align:center">'.$row['jam_masuk'].'</td>
-                                                    <td id="hahx" style="text-align:center">'.$row['jam_pulang'].'</td>';
+                                                    <td id="hahx" style="text-align:center">'.date('d',strtotime($row['tanggal'])).' - '.date('M',strtotime($row['tanggal'])).' - '.date('Y',strtotime($row['tanggal'])).'</td>';
+                                                    if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
+                                                        echo '<td id="hahx" style="text-align:center"><input type="text" name="jmmsk[]" style="text-align:center;font-size:18px" value="'.$row['jam_masuk'].'"></td>
+                                                        <td id="hahx" style="text-align:center"><input type="text" name="jmplg[]" style="text-align:center;font-size:18px"  value="'.$row['jam_pulang'].'"></td>';
+                                                    } else {
+                                                        echo '<td id="hahx" style="text-align:center">'.$row['jam_masuk'].'</td>
+                                                        <td id="hahx" style="text-align:center">'.$row['jam_pulang'].'</td>';
+                                                    }
+													
                                                     if($row['terlambat']==''){
                                                         $row['terlambat']='00:00';
                                                     }
@@ -132,11 +138,41 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     
                                                     $nyot=explode(':',$row['terlambat']);
                                                     
-
-                                                    if($row['keterangan']==''){
-                                                        array_push($nyoy,$nyot[0]);
-                                                        array_push($nyoy2,$nyot[1]);
+                                                    $konay=mysqli_query($config,"SELECT status_manager,status_gm FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$id_users'");
+                                                    list($stakm,$stakgm)=mysqli_fetch_array($konay);
+                                                  
+                                                    
+                                                    if($admin==1 || $admin==2 || $admin==3){
+                                                                array_push($nyoy,0);
+                                                                array_push($nyoy2,0);
+                                                    } else if($admin==5){
+                                                        if($stakgm==1){
+                                                            if($row['keterangan']==''){
+                                                                array_push($nyoy,$nyot[0]);
+                                                                array_push($nyoy2,$nyot[1]);
+                                                            }
+                                                        } else {
+                                                            array_push($nyoy,$nyot[0]);
+                                                            array_push($nyoy2,$nyot[1]);
+                                                        }
+                                                    } else if($admin==4) {
+                                                        if($row['keterangan']==''){
+                                                            array_push($nyoy,$nyot[0]);
+                                                            array_push($nyoy2,$nyot[1]);
+                                                        } 
+                                                    } else {
+                                                        if($stakm==1){
+                                                            if($row['keterangan']==''){
+                                                                array_push($nyoy,$nyot[0]);
+                                                                array_push($nyoy2,$nyot[1]);
+                                                            }
+                                                        } else {
+                                                            array_push($nyoy,$nyot[0]);
+                                                            array_push($nyoy2,$nyot[1]);  
+                                                        }
                                                     }
+
+                                                    
                                                    
                                                     
 											echo'

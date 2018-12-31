@@ -141,7 +141,18 @@
                    $showcutid=mysqli_query($config,"SELECT tgl_awal,tgl_akhir FROM tbl_cuti WHERE id='$id'");
                   list($tgl_awald,$tgl_akhird)=mysqli_fetch_array($showcutid);
                   $perbedaanawal = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhird), date_create($tgl_awald))->d)+1;
-
+                  $haritot=0;
+                  $nmp=array();
+                  for($i=0;$i<$perbedaanawal;$i++){
+                      
+                      $wikwik=date('Y-m-d', strtotime($tgl_awald.'+'.$haritot.' days'));	
+                      $yoo=date('N',strtotime($wikwik));
+                      $haritot=$haritot+1;
+                      if($yoo<6){
+                          array_push($nmp,1);
+                      }
+                  }
+                  $c=array_sum($nmp);
                 
         
 		
@@ -155,7 +166,24 @@
 				$tgl_awal=mysqli_real_escape_string($config,$_POST['tgl_awal']);
                 $tgl_akhir=mysqli_real_escape_string($config,$_POST['tgl_akhir']);
                 $perbedaanakhir = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d)+1;
-                if($perbedaanakhir != $perbedaanawal || strtotime($tgl_awal) > strtotime($tgl_akhir)){
+                if(date('N',strtotime($tgl_awal))>5){
+					$_SESSION['errs']="GAGAL, awal Cuti tidak bisa diambil di hari libur mingguan";
+                    header("Location: ./admin.php?page=cuti");
+                    die();
+                }
+                $haritost=0;
+                $nmps=array();
+                for($i=0;$i<$perbedaanakhir;$i++){
+                    
+                    $wikwiks=date('Y-m-d', strtotime($tgl_awal.'+'.$haritost.' days'));	
+                    $yoos=date('N',strtotime($wikwiks));
+                    $haritost=$haritost+1;
+                    if($yoos<6){
+                        array_push($nmps,1);
+                    }
+                }
+                $cs=array_sum($nmps);
+                if($cs != $c || strtotime($tgl_awal) > strtotime($tgl_akhir)){
                     echo '<script>
                     alert(\'Jumlah Hari cuti yang anda ambil tidak sama / hari tidak bisa diundur !\');
                     window.location.href="./admin.php?page=cuti&act=edit&id='.$id.'";
@@ -196,7 +224,7 @@
             echo '<div class ="col m12">
             <div class="card">
             <div class="card-content">
-            <h5> Jumlah Cuti yang anda ambil adalah : <b>'.$perbedaanawal.' Hari</b></h5>
+            <h5> Jumlah Cuti yang anda ambil adalah : <b>'.$c.' Hari</b></h5>
             </div>
             </div>
             </div>';

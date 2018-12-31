@@ -161,12 +161,28 @@
 				$tgl_awal=mysqli_real_escape_string($config,$_REQUEST['tgl_awal']);
 				$tgl_akhir=mysqli_real_escape_string($config,$_REQUEST['tgl_akhir']);
 				
-				$perbedaan = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d)+1;
+				$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d)+1;
 				$nyoc = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->m);
-				
-				
+				$haritot=0;
+				$nmp=array();
+
+				for($i=0;$i<$perbedaans;$i++){
+					
+					$wikwik=date('Y-m-d', strtotime($tgl_awal.'+'.$haritot.' days'));	
+					$yoo=date('N',strtotime($wikwik));
+					$haritot=$haritot+1;
+					if($yoo<6){
+						array_push($nmp,1);
+					}
+				}
+				$c=array_sum($nmp);
 				$oik=mysqli_query($config,"SELECT cuti FROM tbl_user WHERE id_user='$id_user'");
 				list($cutiya)=mysqli_fetch_array($oik);
+				if(date('N',strtotime($tgl_awal))>5){
+					$_SESSION['errs']="GAGAL, awal Cuti tidak bisa diambil di hari libur mingguan";
+					header("Location: ./admin.php?page=cuti");
+					die();
+				}
 				if($cutiya==0)
 				{
 					$_SESSION['errs']="GAGAL, jatah cuti anda telah habis";
@@ -176,7 +192,7 @@
 						$_SESSION['errs']="GAGAL silahkan pilih hari yang berbeda";
 					header("Location: ./admin.php?page=cuti");
 					} else {
-				$cutiyas=$cutiya-$perbedaan;
+				$cutiyas=$cutiya-$c;
 				if($cutiyas<0 || $nyoc >0)
 				{
 					$_SESSION['errs']="GAGAL, jatah cuti anda tidak mencukupi";

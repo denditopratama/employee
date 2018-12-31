@@ -80,7 +80,14 @@
                         $bzx = mysqli_real_escape_string($config,$_POST['keter'][$i]);
                         $kts= mysqli_real_escape_string($config,$_POST['aid'][$i]);
                         $naif = mysqli_real_escape_string($config,$_POST['naip'][$i]);
-                        $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+                        $aidpres=mysqli_real_escape_string($config,$_POST['idpres']);
+                        if(!empty($_POST['jmmsk']) || !empty($_POST['jmplg'])){
+                            $jamplg=mysqli_real_escape_string($config,$_POST['jmplg'][$i]);
+                            $jammsk=mysqli_real_escape_string($config,$_POST['jmmsk'][$i]);
+                            $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."',jam_masuk='".$jammsk."',jam_pulang='".$jamplg."' WHERE nik='".$naif."' AND(id_presensi='$aidpres' AND id='$kts')");
+                        } else {
+                            $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."' WHERE nik='".$naif."' AND(id_presensi='$aidpres' AND id='$kts')");
+                        }
     
                     }
                     $_SESSION['succAdd']='Keterangan telah disimpan';
@@ -202,6 +209,7 @@
                              <div class="row jarak-form">
 
 <div class="col m12" id="colres">
+<small>* Baris berwarna biru merupakan user yang membutuhkan konfirmasi.</small>
     <table class="bordered" id="tblb">
         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
             <tr>
@@ -218,16 +226,16 @@
             $_SESSION['tokent']=$tokenpresensi;
             $nos=1;
             if($_SESSION['admin']==1){
-                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                 tbl_status_keterangan_presensi.id_user=tbl_user.id_user ORDER by tbl_user.admin");  
             } else if ($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
-                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                 tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."' ORDER by tbl_user.admin");  
             } else if ($_SESSION['admin']==5) {
-                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.id_user,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                 tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND(tbl_user.divisi='".$_SESSION['divisi']."' AND tbl_user.admin<>4) ORDER by tbl_user.admin");  
             } else {
-                $gk=mysqli_query($config,"SELECT DISTINCT tbl_status_keterangan_presensi.id_user FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                $gk=mysqli_query($config,"SELECT DISTINCT tbl_status_keterangan_presensi.* FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                 tbl_status_keterangan_presensi.id_user='".$_SESSION['id_user']."' ORDER by tbl_user.admin");  
             }
             if(mysqli_num_rows($gk)<=0){
@@ -239,7 +247,12 @@
             while($row=mysqli_fetch_array($gk)){
                 $ku=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
                 list($namaz)=mysqli_fetch_array($ku);
-                echo '<tr>
+                if($row['status_manager']==0 || $row['status_gm']==0){
+                    echo '<tr style="background-color:rgba(176,224,230,0.5)">';
+                } else {
+                    echo '<tr>';
+                }
+               echo'
                 <td style="text-align:center!important">'.$nos++.'</td>
                 <td style="text-align:center!important">'.$namaz.'</td>
                 <td style="text-align:center!important"><a id="ket'.$row['id_user'].'" data-pres="'.$id.'" class="btn green">lihat</a></td>

@@ -54,7 +54,15 @@
                     $bzx = mysqli_real_escape_string($config,$_POST['keter'][$i]);
                     $kts= mysqli_real_escape_string($config,$_POST['aid'][$i]);
                     $naif = mysqli_real_escape_string($config,$_POST['naip'][$i]);
-                    $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+                    if(!empty($_POST['jmmsk']) || !empty($_POST['jmplg'])){
+                        $jamplg=mysqli_real_escape_string($config,$_POST['jamplg'][$i]);
+                        $jammsk=mysqli_real_escape_string($config,$_POST['jammsk'][$i]);
+                        $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."',jam_masuk='".$jammsk."',jam_pulang='".$jamplg."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+                    } else {
+                        $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+                    }
+
+                    
 
                 }
                 $_SESSION['succg']='Keterangan telah disimpan';
@@ -408,7 +416,7 @@
 
         <div id="moday" class="modal" style="width:90%">
         
-        <div class="modal-content" style="background-color:rgb(160,160,160)" id="modays">
+        <div class="modal-content" style="background-color:rgb(68,68,68)" id="modays">
 
         <div class="row">
         <div class="col m6 s6"> 
@@ -420,10 +428,12 @@
         mohon perhatikan Beberapa hal berikut :<br><br><br>
         1. Silahkan mengganti kolom NIK dan Nama dengan NIK dan Nama anda masing - masing.<br><br>
         2. Baris tanggal mengikuti tanggal bulan presensi, jika baris tanggal kurang, silahkan tambahkan baris (contoh : bulan november 30 baris, sedangkan desember 31 baris, maka tambahkan 1 baris).<br><br>
-        3. Anda <b style="color:red">Dilarang</b> mengubah kolom terlambat (kolom yang berwarna kuning), mengganti rumus yang telah ada, mengganti format tabel seperti pada gambar disamping yang dilingkari lingkaran merah, mengubah format file selain <b>.xls</b>.<br><br>
-        4. Jika anda bermasalah saat membuka / mengedit file, coba untuk klik kanan file -> Properties -> Checklist di tulisan unblock -> lalu klik ok -> buka file -> klik enable editing.
+        3. Anda <b style="color:red">Tidak Diperbolehkan</b> mengubah kolom terlambat (kolom yang berwarna kuning), mengganti rumus yang telah ada, mengganti format tabel seperti pada gambar disamping yang dilingkari lingkaran merah, mengubah format file selain <b>.xls</b>.<br><br>
+        4. Jika anda bermasalah saat membuka / mengedit file, coba untuk klik kanan file -> Properties -> Centang di tulisan unblock -> lalu klik ok -> buka file -> klik enable editing.
         <br><br>
-        5. Klik Download untuk mengunduh file.</p><br>
+        5. File presensi yang dikirim adalah per <b>Unit Kerja</b>, harap merekap presensi dalam 1 file dan dikirim dengan perihal presensi per unit kerja. (Contoh : terdapat 10 karyawan di unit kerja <b>Rest area ruas solo - ngawi</b>
+        maka gabungkan 10 orang dalam 1 file dan kirim dengan perihal "Presensi Unit Kerja Rest Area Solo Ngawi Bulan Desember 2018")<br><br>
+        6. Klik Download untuk mengunduh file.</p><br>
         <a class="btn small" href="./asset/template_presensi.xls" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_download</i> Download</a>
         </div>
         

@@ -230,7 +230,7 @@
 										  <form method="POST">
 										  <a class="btn small green darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Memproses Gaji" href="?page=pros&id='.$row['id'].'">
                                                     <i class="material-icons">done_all</i> PROSES</a>
-										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
+										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirmed()">
                                                     <i class="material-icons">delete</i>HAPUS</button>
 													</form>';
 										
@@ -341,7 +341,7 @@
 										  <form method="POST">
 										  <a class="btn small green darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Memproses Gaji" href="?page=pros&id='.$row['id'].'">
                                                     <i class="material-icons">done_all</i> PROSES</a>
-										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
+										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirmed()">
                                                     <i class="material-icons">delete</i>HAPUS</button>
 													</form>
 																			
@@ -461,3 +461,18 @@ $(document).ready(function(){';
 
 ?>
 <script type="text/javascript" src="asset/js/halamanuser.js"></script>
+<script>
+function confirmed(){
+    if(confirm('Anda yakin ingin menghapus data?')){
+        if(confirm('Sekali Lagi Anda yakin ingin menghapus data?')){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+     
+}
+
+</script>

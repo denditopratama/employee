@@ -16,9 +16,21 @@
 	
 	
 	$hapuskrg = date('Y-m-d');
-	
 	$perbedaan2 = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhircuti), date_create($tgl_awalcuti))->d)+1;
-	$cutiyas=$cutiya+$perbedaan2;
+	$haritot=0;
+				$nmp=array();
+				for($i=0;$i<$perbedaan2;$i++){
+					
+					$wikwik=date('Y-m-d', strtotime($tgl_awalcuti.'+'.$haritot.' days'));	
+					$yoo=date('N',strtotime($wikwik));
+					$haritot=$haritot+1;
+					if($yoo<6){
+						array_push($nmp,1);
+					}
+				}
+				$c=array_sum($nmp);
+	
+	$cutiyas=$cutiya+$c;
 	
 	if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 		if($file==''){

@@ -1,8 +1,18 @@
 
 <?php
-				$id_user=mysqli_real_escape_string($config,$_REQUEST['karyawan']);
-				
+session_start();
+require('../include/config.php');
+if(empty($_SESSION['admin'])){
+    echo '
+	<script>
+	alert(\'ACCESS DENIED WOI!\');
+	window.location.href=\'../\';
+    </script>';
+    die();
+}
 
+                $id=mysqli_real_escape_string($config,$_POST['id']);
+				$id_user=mysqli_real_escape_string($config,$_POST['karyawan']);
 							$pgntau=mysqli_query($config,"SELECT nama,kelas_jabatan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
 							list($tau,$kelas_jabatan,$status_tugas)=mysqli_fetch_array($pgntau);
 							$ddtd=mysqli_query($config,"SELECT bulan FROM tbl_bulan_gaji WHERE id='$id'");
@@ -1295,8 +1305,9 @@
 				<a name="simpanseluruh" style="line-height:30px!important" href="?page=pros&sub=dada&id='.$id.'&id_user='.$id_user.'" class="btn-large green waves-effect waves-light col s12" onclick="return confirm(\'Anda yakin ingin menyimpan data?\');"><i class="material-icons">done</i> SIMPAN</a>
 			
 				</div>
-					<!-- Row form END -->';
-				
+                    <!-- Row form END -->';
+                    
+                    $query = mysqli_query($config,"UPDATE tbl_gaji SET status=1 WHERE id_user='$id_user' AND id_gaji='$id'");
 					
 							
                   

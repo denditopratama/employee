@@ -256,8 +256,8 @@
                         <div id="modol" class="modal">
                         <div class="modal-content">
                         <div class="input-field col s12">
-                            <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label style="margin-top:-10px">Ditujukan</label><br/>	
-                           
+                            <i id="roro" class="material-icons prefix md-prefix" >account_circle</i><label style="margin-top:-10px">Ditujukan</label><br/><br>	
+                           <h6>* Klik pada baris kuning untuk pilihan per divisi</h6>
                             <div>
                             <?php
                             $gm=mysqli_query($config,"SELECT * FROM tbl_ref_divisi");

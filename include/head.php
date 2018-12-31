@@ -333,6 +333,7 @@
 </head>
 
 <?php
+
     } else {
         header("Location: ../");
         die();

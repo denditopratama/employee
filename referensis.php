@@ -1,6 +1,5 @@
 <style>
 #dds {
-	width: 100wh;
 	
 	color: transparent;
 	background: linear-gradient(-45deg,
@@ -101,7 +100,7 @@
 		}
 		if(isset($_POST['nambahsub'])){
 			$ketsub=mysqli_real_escape_string($config,$_POST['ketsub']);
-			$nyub=mysqli_real_escape_string($config,$_$_POST['nyub']);
+			$nyub=mysqli_real_escape_string($config,$_POST['nyub']);
 			
 		
 			
@@ -1066,7 +1065,67 @@
 				</div>
 				</div>
 				</div>
-				</div>		
+				</div>
+
+								<?php 
+								if(isset($_POST['tambahbaku'])){
+									$jumlah_cuti=mysqli_real_escape_string($config,$_POST['jumlahcuti']);
+									$menit_telat=mysqli_real_escape_string($config,$_POST['menittelat']);
+									$tarif_manager=mysqli_real_escape_string($config,$_POST['tarifmanager']);
+									$jam_bulan=mysqli_real_escape_string($config,$_POST['jambulan']);
+									$menit_kerja=mysqli_real_escape_string($config,$_POST['menitkerja']);
+
+									$updatebaku=mysqli_query($config,"UPDATE tbl_handle SET cuti='$jumlah_cuti',menit_telat='$menit_telat',tarif_manager='$tarif_manager',jam_bulan='$jam_bulan',menit_kerja='$menit_kerja' WHERE id=1");
+								}
+								
+								?>
+
+				<div id="modald9">
+				<div id="modals9" class="modal" style="background-color:white">
+                <div class="modal-content white">
+				<div class="input-field col s12">
+				<h5><i class="material-icons" style="margin-bottom:8px">lock</i> Tabel Referensi Nilai Baku</h5>
+				<small class="red-text">* Klik Tambah untuk menambah Data.</small><br>
+				<small class="red-text">* Tambah Data dilakukan <strong>HANYA JIKA</strong> ada perubahan keputusan.</small><br>
+				<small class="red-text">* <strong> HATI - HATI</strong> dalam mengubah dan menambah data karena dapat merubah kestabilan sistem.</small><br>
+				
+				<form method="POST">
+					<div class="col m12" id="colres">
+                        <table class="bordered">
+                            <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
+                                 <tr>
+										<th width="1%"style="color:#fff">Jumlah Cuti Pertahun</th>
+                                        <th width="10%"style="color:#fff">Menit Telat</th>
+										<th width="25%"style="color:#fff">Tarif Lembur Manager keatas</th>
+										<th width="20%"style="color:#fff">Jam Kerja Perbulan</th>
+										<th width="20%"style="color:#fff">Menit Kerja Perbulan</th>
+										<th width="20%"style="color:#fff">Tindakan</th>											
+                                </tr>
+								</thead>
+								<?php 
+								$kemski=mysqli_query($config,"SELECT cuti,menit_telat,tarif_manager,jam_bulan,menit_kerja FROM tbl_handle WHERE id=1");
+								list($jumlahcuti,$menittelat,$tarifmanager,$jambulan,$menitkerja)=mysqli_fetch_array($kemski);
+								?>
+								<tr>
+								<td style="text-align:center" ><input type="text" style="text-align:center" name="jumlahcuti" value="<?php echo $jumlahcuti; ?>"></td>
+								<td style="text-align:center"><input type="text" style="text-align:center" name="menittelat" value="<?php echo $menittelat; ?>"></td>
+								<td style="text-align:center"><input type="text" style="text-align:center" name="tarifmanager" value="<?php echo $tarifmanager; ?>"></td>
+								<td style="text-align:center"><input type="text" style="text-align:center" name="jambulan" value="<?php echo $jambulan; ?>"></td>
+								<td style="text-align:center"><input type="text" style="text-align:center" name="menitkerja" value="<?php echo $menitkerja; ?>"></td>
+								<td><button type="submit" name="tambahbaku" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm('Anda yakin ingin mengubah data ini?');">SIMPAN</button>
+								</td>
+								</tr>
+							
+                            
+							</table>
+							</div>
+												
+				
+				</form>
+				</div>
+				</div>
+				</div>
+				</div>				
 
 
 
@@ -1075,62 +1134,69 @@
 				
 				
 				
-				<div class="row jarak-form">
-				<div class="card col m4" id="dds" style="background-color:blue;margin-right:10px;width:100%">
+				<div class="row">
+				<div class="card col m4" id="dds" style="background-color:blue">
 				<div class="card-content" style="text-align:center!important">
 				<a class="btn small blue darken-4 waves-effect waves-light tooltipped" id="refjabatan" style="background-color: #39424c!important;color:white"data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Kode Jabatan">Tabel Referensi Kode Jabatan</a>					
 				</div>
 				</div>
 				
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refgaji" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Gaji">Tabel Referensi Gaji</a>
 				
 				</div>
 				</div>
 				
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refjabats" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Referensi Jabatan</a>
 				
 				</div>
 				</div>
 				
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refsubunit" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Sub Unit">Tabel Referensi Sub Unit</a>
 				
 				</div>
 				</div>
 				
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refunit" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Unit Kerja">Tabel Referensi Unit Kerja</a>
 				
 				</div>
 				</div>
 				
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refpenerimaan" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Penerimaan Lain">Tabel Referensi Penerimaan Lain</a>
 				
 				</div>
 				</div>
 				
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refpotongan" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Referensi Potongan Lain</a>
 				
 				</div>
 				</div>
 
-				<div class="card col m4" id="dds" style="background-color:orange;width:100%">
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
 				<div class="card-content" style="text-align:center!important">
 				<a style="background-color: #39424c!important;color:white" id="refbank" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Referensi Bank</a>
 				
 				</div>
 				</div>
 				
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
+				<div class="card-content" style="text-align:center!important">
+				<a style="background-color: #39424c!important;color:white" id="refbaku" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Nilai Baku</a>
+				
+				</div>
+				</div>
+
 				
 				</div>
 <?php }
@@ -1191,6 +1257,13 @@ $(document).ready(function(){
 	if(xd == true){
 	alert('Harap berhati - hati dalam melakukan penambahan data!');
 	$("#modals8").openModal()}
+						});
+
+	$("#refbaku").click(function(){
+	var xd = confirm('anda yakin?');
+	if(xd == true){
+	alert('Harap berhati - hati dalam melakukan penambahan data!');
+	$("#modals9").openModal()}
 						});
 
 

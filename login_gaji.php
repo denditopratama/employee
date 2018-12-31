@@ -3,7 +3,10 @@
         $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
         header("Location: ./");
         die();
-    } else { ?>
+    } else {
+        if(isset($_SESSION['gaji'])){
+            header("Location: ./admin.php?page=gjh");
+        }?>
 <style>
 #logo {
             display: block;
@@ -56,10 +59,10 @@ height: 50px;}
                     ?>
 
                     <?php
-                        if(isset($_REQUEST['submitf'])){
+                        if(isset($_POST['submitf'])){
 
                             //validasi form kosong
-                            if($_REQUEST['usernamef'] == "" || $_REQUEST['passwordf'] == ""){
+                            if($_POST['usernamef'] == "" || $_POST['passwordf'] == ""){
                                 echo '<div class="upss red-text"><i class="material-icons">error_outline</i> <strong>ERROR!</strong> Username dan Password wajib diisi.
                                 <a class="btn-large waves-effect waves-light blue-grey col s11" href="./" style="margin: 20px 0 0 5px;"><i class="material-icons md-24">arrow_back</i> Kembali ke login form</a></div>';
                             } else {

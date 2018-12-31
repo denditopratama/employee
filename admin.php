@@ -19,7 +19,17 @@
 
 <!-- Include Head START -->
 <!-- E-mployee JMP By Dendito Pratama || denditoprtm@gmail.com -->
-<?php include('include/head.php'); ?>
+<?php include('include/head.php'); 
+$anc=mysqli_query($config,"SELECT maintenance FROM tbl_akses_user WHERE id=1");
+list($mnt)=mysqli_fetch_array($anc);
+if($_SESSION['admin']!=1){
+	if($mnt==1){
+		$_SESSION['mtt'] = '<center>Mohon Maaf saat ini sistem sedang MAINTENANCE, silahkan coba beberapa saat lagi</center>';
+		unset($_SESSION['admin']);
+		header("Location: ./");
+        die();
+	}
+} ?>
 <!-- Include Head END -->
 
 <!-- Body START -->

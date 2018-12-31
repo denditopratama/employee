@@ -319,6 +319,12 @@ to {
                                     '.$err.'</div>';
                                     unset($_SESSION['err']);
                                 }
+                                if(isset($_SESSION['mtt'])){
+                                    $mtt = $_SESSION['mtt'];
+                                    echo '<div id="maintenis" class="error green lighten-5"><div class="center"><i class="material-icons">warning</i> <strong> MAINTENANCE !</strong></div>
+                                    '.$mtt.'</div>';
+                                    unset($_SESSION['mtt']);
+                                }
                             ?>
                         </div>
                         <div class="input-field col s12">
@@ -366,6 +372,7 @@ to {
     <!-- Jquery auto hide untuk menampilkan pesan error -->
     <script type="text/javascript">
         $("#alert-message").alert().delay(3000).slideUp('slow');
+        $("#maintenis").alert().delay(6000).slideUp('slow');
 	
 	(function($, interval, slides) {
 

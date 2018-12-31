@@ -96,15 +96,20 @@ label {
 					$nambulan=date('M',strtotime($bulan));
 					$tglbulan=date('Y',strtotime($bulan));
 					?>
-					<div class="col s12">
-                            <div class="card" style="background-color:rgba(0, 128, 255,0.4)">
+					<div class="col s12" style="text-align:center">
+                            <div class="card white-text" style="background-color:#39424c">
                                 <div class="card-content">
 								<h6>Penggajian Bulan : <strong><?php echo $nambulan.' '.$tglbulan; ?></strong></h6>
 								</div>
+								<div class="col s12 m12" style="text-align:center">
+								<button id="prosesseluruh" class="btn-large green"><i class="material-icons">done_all</i> proses keseluruhan</button></div>
+								
 							</div>
 					</div>
 					
-
+					<div class="col s12 m12" style="text-align:center">
+					
+					</div>
 					<div class="col m12" id="colres">
 								<ul class="collapsible" style="background-color:rgb(230,230,250)">
 								<li>
@@ -170,17 +175,46 @@ label {
 								 </div>
 					
 					
-				
+				<div class="con">
+				</div>
                     <!-- Secondary Nav END -->
                 </div>
 				<?php
 					if(isset($_GET['gjj'])==1){
 						include 'kargaji.php';
-						} ?>
-			
-            
-		<?php } ?>
-		
+						} 
+						
+								$tos=0;
+						$ngitun=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999 AND admin<>0 AND status_aktif=1)");
+						while($day=mysqli_fetch_array($ngitun)){	
+							echo '<input type="hidden" class="kolo" value="'.$day['id_user'].'">';
+							$tos++;
+						}
+						echo '
+							<script>
+						$(document).ready(function(){
+						$(\'#prosesseluruh\').click(function(){
+							var contol = confirm ("Anda yakin ingin memproses keseluruhan data gaji?");
+							if (contol == true) {
+								$(".kolo").each(function(){
+									var karjo = $(this).val();
+									console.log(karjo);
+									$.post(\'./js/ajaxprosesgaji.php\',{id : '.$id.' , karyawan : karjo},function(data){
+										$(".con").html(data);
+									});
+								});
+						var tos = '.$tos.';
+						alert("Sukses !"); }
+
+						});
+						});
+						</script>';
+						?>
 
 <script type="text/javascript" src="asset/js/halamangaji.js"></script>
+
+
+<?php 
+	
+	} ?>
 

@@ -21,7 +21,7 @@
                             $userlog=mysqli_real_escape_string($config,$_SESSION['id_user']);
                             $lastlog=mysqli_query($config,"SELECT last_log FROM tbl_user WHERE id_user='$userlog'");
                             list($last_login)=mysqli_fetch_array($lastlog);
-                            echo '<h6 style="display:inline!important">Login IP : <b><a style="margin-right:5px!important" id="ganting"></a></b>Lokasi Login : <b><a style="margin-right:5px!important" id="gontong"></a></b>Login Terakhir : <b><a>'.$last_login.'</a></b></h6><br>';
+                            echo '<h6 style="display:inline!important">Login IP : <b><a style="margin-right:5px!important" id="ganting"></a></b>Lokasi Login : <b><a style="margin-right:5px!important" id="gontong"></a></b>Aktivitas Terakhir : <b><a>'.$last_login.'</a></b></h6><br>';
                            
                            
                             $nyatetlogin=mysqli_real_escape_string($config,date('d M Y H:i:s'));
@@ -88,8 +88,52 @@
                                 });
                                 </script>';
                              }
-                             
+                             $anc=mysqli_query($config,"SELECT maintenance FROM tbl_akses_user WHERE id=1");
+                             list($mnt)=mysqli_fetch_array($anc);
+                             if($mnt==0){
+                                echo '<button id="maintenance" class="btn-small orange" value="1" style="color:white"><i class="material-icons">warning</i> HIDUPKAN MAINTENANCE MODE</button>'; 
+                             } else {
+                                echo '<button id="maintenance" class="btn-small red" value="0" style="color:white"><i class="material-icons">warning</i> MATIKAN MAINTENANCE MODE</button>';  
+                             }
+                            
+                             $tokenheaderadmin=mt_rand(0,99999);
+                             $_SESSION['tokenheaderadmin']=$tokenheaderadmin;
+                             echo '<script>
+                             $(document).ready(function(){
+                                $("#maintenance").click(function(){
+                                    var mt = $(this).val();
+                                    if(mt==1){
+                                    var c = confirm("Anda yakin ingin menutup akses sistem?");}
+                                    else {var c = confirm("Anda yakin ingin membuka akses sistem?");}
+                                    if (c==true){
+                                        if(mt==1){
+                                            var d = confirm("Sekali lagi Anda yakin ingin menutup akses sistem?");}
+                                            else {var d = confirm("Sekali lagi Anda yakin ingin membuka akses sistem?");}
+                                        if(d==true){
+                                            var tokens='.$tokenheaderadmin.';
+                                            
+                                            $.post(\'./js/maintenance.php\',{tokens : tokens, mt : mt},function(data){
+                                                if(mt==1){
+                                                 alert("Sukses ! akses user ke sistem telah ditutup");
+                                                alert("Maintenance Mode : ON");
+                                                window.location.href="./";}
+                                                else {
+                                                    alert("Sukses ! akses user ke sistem telah dibuka");
+                                                    alert("Maintenance Mode : OFF");
+                                                    window.location.href="./";
+                                                }
+                                                
+                                        
+                                       });
+                                        }
+                                    }
 
+
+                                });
+
+                             });
+
+                             </script>';
                              echo'
                              <br><hr><strong>NOTIFIKASI :</strong><br>';  
 						  } else {
