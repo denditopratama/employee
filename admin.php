@@ -695,7 +695,7 @@
 						
 			<?php 
 			$ulangtaun="";
-			
+			$hndlu=array();
 			$hbds=mysqli_query($config,"SELECT * FROM tbl_identitas");
 			while($row=mysqli_fetch_array($hbds)){
 				date_default_timezone_set("Asia/Bangkok");
@@ -708,15 +708,24 @@
 					if($bulan==$bulansekarang && $hari==$harisekarang){
 						$koit=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
 						while($kis=mysqli_fetch_array($koit)){
-							if(count($kis['nama'])>1){
+							array_push($hndlu,$kis['nama']);
+						}
 							
-							$ulangtaun=$ulangtaun.$kis['nama'].' , ';}
-							else{$ulangtaun=$ulangtaun.$kis['nama'];}
 							
-           }
+							
 						}
 						}
-						} if($ulangtaun!=""){
+						} 
+					
+							for($i=0;$i<count($hndlu);$i++){
+								if($hndlu[$i]!=end($hndlu)){
+								$ulangtaun=$ulangtaun.$hndlu[$i].' & ';}
+								else {
+									$ulangtaun=$ulangtaun.$hndlu[$i];	
+								}
+							}
+						
+						if($ulangtaun!=""){
 						echo'<marquee style="font-style:sans;font-size:20px;text-align:center" scrollamount="12"><h6>Selamat Ulang Tahun <strong>'.$ulangtaun.'</strong> !</h6></marquee>';}
 						else {echo'';}
 						

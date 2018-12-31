@@ -16,8 +16,22 @@
                             } else {
                                 echo '<h4 style="font-weight:bold;line-height:30px;">Dashboard Karyawan</h4>';
                             }
-							
+
+                            date_default_timezone_set('Asia/Jakarta');
+                            $userlog=mysqli_real_escape_string($config,$_SESSION['id_user']);
+                            $lastlog=mysqli_query($config,"SELECT last_log FROM tbl_user WHERE id_user='$userlog'");
+                            list($last_login)=mysqli_fetch_array($lastlog);
+                            echo '<h6 style="display:inline!important">Login IP : <b><a style="margin-right:5px!important" id="ganting"></a></b>Lokasi Login : <b><a style="margin-right:5px!important" id="gontong"></a></b>Login Terakhir : <b><a>'.$last_login.'</a></b></h6><br>';
                            
+                           
+                            $nyatetlogin=mysqli_real_escape_string($config,date('d M Y H:i:s'));
+                            $ngupdatelogin=mysqli_query($config,"UPDATE tbl_user SET last_log='$nyatetlogin' WHERE id_user='$userlog'");
+           
+                echo '<script>
+                $.get("https://ipinfo.io", function(response) {
+                   $("#ganting").html(response.ip);
+                   $("#gontong").html(response.country + ", " + response.city);
+                  }, "jsonp")</script>';
 
     // output data of each row
 		$jig=mysqli_query($config,"SELECT jabatan FROM tbl_user WHERE id_user='$id_user'");
@@ -78,7 +92,38 @@
 
                              echo'
                              <br><hr><strong>NOTIFIKASI :</strong><br>';  
-						  }
+						  } else {
+                            echo '<hr>
+                            <strong>NOTIFIKASI :</strong><br>';
+                              if($_SESSION['admin']==4){
+                                  $ketpres=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user
+                                   WHERE tbl_status_keterangan_presensi.status_gm=0 AND(tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."')");
+                                  $jumlahket=mysqli_num_rows($ketpres);
+                                $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 ");
+                                $jumlahna=mysqli_num_rows($gmjk);
+                                if($jumlahna>0){
+                                      echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahna.'</b></strong><strong> Orang telah menunggu konfirmasi Lembur dari anda.</strong><br>';
+                                }
+                                if($jumlahket>0){
+                                    echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahket.'</b></strong><strong> Orang telah menunggu konfirmasi Keterangan Presensi dari anda.</strong><br>';
+                                }
+                               
+                              } else if($_SESSION['admin']==5) {
+                                $ketpres=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user
+                                WHERE tbl_status_keterangan_presensi.status_manager=0 AND(tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."')");
+                               $jumlahket=mysqli_num_rows($ketpres);
+                                $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_manager=0 ");
+                                $jumlahna=mysqli_num_rows($gmjk);
+                                if($jumlahna>0){
+                                      echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahna.'</b></strong><strong> orang telah menunggu konfirmasi Lembur dari anda.</strong>';
+                                }
+                                if($jumlahket>0){
+                                    echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahket.'</b></strong><strong> Orang telah menunggu konfirmasi Keterangan Presensi dari anda.</strong><br>';
+                                }
+                               
+                              }
+                             
+                          }
 						  
 						  if($_SESSION['admin']==1  && $_SESSION['divisi']==2){
                           $cekkontrak=mysqli_query($config,"SELECT * FROM tbl_kontrak WHERE status='mauhabis'");
@@ -140,4 +185,6 @@
                    
                 </script>
                 ';}
+               
+                
 ?>
