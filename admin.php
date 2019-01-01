@@ -763,8 +763,7 @@ if($_SESSION['admin']!=1){
 									while($datz=mysqli_fetch_array($bakti)){
 									$hk=mysqli_query($config,"SELECT status_karyawan FROM tbl_user WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1) ");
 									list($nigga)=mysqli_fetch_array($hk);
-									$handlecu=mysqli_query($config,"SELECT handle_cuti FROM tbl_handle WHERE id=1");
-									list($handlecuti)=mysqli_fetch_array($handlecu);
+							
 
 									$jambakti=date('H');
 									$haribakti=date('d',strtotime($datz['tgl_bakti']));
