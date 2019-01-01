@@ -761,8 +761,12 @@ if($_SESSION['admin']!=1){
 									list($kuti)=mysqli_fetch_array($rox);
 									$bakti=mysqli_query($config,"SELECT * FROM tbl_identitas");
 									while($datz=mysqli_fetch_array($bakti)){
-									$hk=mysqli_query($config,"SELECT status_karyawan FROM tbl_user WHERE id_user='".$datz['id_user']."' AND admin<>1 ");
+									$hk=mysqli_query($config,"SELECT status_karyawan FROM tbl_user WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1) ");
 									list($nigga)=mysqli_fetch_array($hk);
+									$handlecu=mysqli_query($config,"SELECT handle_cuti FROM tbl_handle WHERE id=1");
+									list($handlecuti)=mysqli_fetch_array($handlecu);
+
+									$jambakti=date('H');
 									$haribakti=date('d',strtotime($datz['tgl_bakti']));
 									$harisekarang=date('d');
 									
@@ -774,16 +778,21 @@ if($_SESSION['admin']!=1){
 									if($nigga==5){
 										if($tahunsekarang-$tahunbakti ==1){
 											if($bulansekarang-$bulanbakti==0){
-											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$_datz['id_user']."' AND admin<>1");
+												if($harisekarang-$haribakti==0 && $jambakti==01){
+											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1)");
+											
+												}
+											
 											}
 										} else if ($tahunsekarang-$tahunbakti>1){
-											if($bulansekarang==1){
-												$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$_datz['id_user']."' AND admin<>1");
+											if($bulansekarang==1 && $harisekarang==1 && $jambakti==14){
+												$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1)");
+												
 											}
 										}
 									} else {
-										if($bulansekarang==1){
-											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$_datz['id_user']."' AND admin<>1");
+										if($bulansekarang==1 && $harisekarang==1 && $jambakti==14){
+											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1)");
 										}
 									}
 									
@@ -837,7 +846,7 @@ if($_SESSION['admin']!=1){
 				
 			
 				$timegame=date('H');
-				if($timegame=8){
+				if($timegame=08){
 					$tambahgame=mysqli_query($config,"UPDATE tbl_user SET waktugame=3600");
 				}
 				
