@@ -11,11 +11,168 @@ session_start();
 require('./include/config.php');
 
 
-		   
 
+    //cek session
+    if(empty($_SESSION['admin'])){
+        $_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
+        header("Location: ./");
+        die();
+	
+		
+    } else {
+		
+		echo'<style>
+		header, main {
+			padding-left: 0;
+		  }
+		table {
+                background: #fff;
+                padding: 5px;
+				border:0.5px solid black!important;
+            }
+            tr, td{
+                border: table-cell;
+                border: 0px  solid rgba(0,0,0,0);
+            }
+            tr,td {
+                vertical-align: top!important;
+				
+            }
+			tbody:hover{background-color:transparent!important;}
+            #right {
+                border-right: none !important;
+				 border-left: none !important;
+				  border-top: none !important;
+					border-bottom: none !important;
+					}
+			#kanan {
+                border-right: none !important;
+				 border-left: none !important;
+				  border-top: none !important;
+					border-bottom: none !important;
+					width:30%
+					}
+				#kanans {
+                border-right: none !important;
+				 border-left: none !important;
+				  border-top: none !important;
+					border-bottom: none !important;
+					width:10%
+					}
+					
+					
+		@media print{
+            
+              table {
+                background: transparent;
+                padding: 0px!important;
+				font-size:9px!important;
+				
+				
+            }
+			#row:nth-of-type(even) {
+				background-color:#F0F0F0!important;
+				}
+            tr, td {
+                border: table-cell;
+                border: 0px  solid rgba(0,0,0,0)!important;
+				width:10%;
+				vertical-align:middle!important;
+				text-align:left!important;
+				 page-break-after:auto;
+				
+            }
+			
+			th{
+				border: table-cell;
+				border:0.5px solid black!important;	
+				background-color:#c5e3ed!important;
+				text-align:center!important;
+				
+					}
+			#gelo{
+					width:1px!important;
+					text-align:center!important;
+					border:1px solid black!important;
+					}
+			#gelos{width:33%!important;}
+					
+            #right {
+                border-right: none !important;
+				 border-left: none !important;
+				  border-top: none !important;
+				   border-bottom: none !important;
+			}
+			#kanan {
+                border-right: none !important;
+				 border-left: none !important;
+				  border-top: none !important;
+					border-bottom: none !important;
+					width:30%
+					}
+			#kanans {
+                border-right: none !important;
+				 border-left: none !important;
+				  border-top: none !important;
+					border-bottom: none !important;
+					width:10%;
 
-  
-	echo'
+					}
+			p {
+				color:red!important;
+				display:inline!important;
+					}
+					
+					
+		}
+	@media print and (color) {				
+   th {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+   tr {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+   #row {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+   p {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+   
+   
+}
+
+@page  
+{ 
+    size: auto;   /* auto is the initial value */ 
+
+    /* this affects the margin in the printer settings */ 
+    margin: 12mm;
+} 
+
+body  
+{ 
+    /* this affects the margin on the content before sending to printer */ 
+    margin: 0px;  
+} 
+
+ 
+			
+					
+			
+		
+		
+		</style>
+
+    
+       
+
+        <body onload="window.print()">
+
         <!-- Container START -->
         <div class="container">
             <div id="colres">
@@ -31,7 +188,7 @@ require('./include/config.php');
 
 			<?php
 		   
-				   	
+				   
 					$current_album='';
 					$dptmn=mysqli_query($config,"SELECT * FROM tbl_department");
 					
@@ -42,7 +199,7 @@ require('./include/config.php');
 					
 					<table border="1">
 				<tbody>
-								<th id="gelo" style="width:1%!important;"><strong>No.</strong></th>
+								<th id="gelo" style="width:1%!important;border:1px"><strong>No.</strong></th>
 								<th id="gelo" style="width:8%!important;"><strong>Seksi</strong></th>
 								<th id="gelo" style="width:5%!important;"><strong>NIK</strong></th>
 								<th id="gelo" style="width:10%!important;"><strong>Nama</strong></th>
@@ -72,7 +229,7 @@ require('./include/config.php');
 							$fh=mysqli_query($config,"SELECT id FROM tbl_sub_unit WHERE kode_unit='".$row['kode_unit']."'");
 							list($idaja)=mysqli_fetch_array($fh);
 							
-							$seksi=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='$idaja'");
+							$seksi=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='$idaja' AND(admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 							list($seksih)=mysqli_fetch_array($seksi);
 							
 							
@@ -192,7 +349,7 @@ require('./include/config.php');
 							$hjg=mysqli_query($config,"SELECT sub_unit FROM tbl_sub_unit WHERE id='".$rowb['sub_unit']."'");
 							list($rowku)=mysqli_fetch_array($hjg);
 							
-							$waw=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='".$rowb['sub_unit']."'");
+							$waw=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE sub_unit ='".$rowb['sub_unit']."' AND (admin<>1 AND admin<>9 AND id_user<>9999 AND status_aktif=1)");
 							list($wawaw)=mysqli_fetch_array($waw);
 							
 							if ($current_album != $rowku) {
@@ -255,11 +412,17 @@ require('./include/config.php');
 				echo'<h6 style="text-align:right!important"><p>*</p> JUMLAH KESELURUHAN : <strong>'.$totalseluruh.'</strong> KARYAWAN</h6>';
 					
 					
-	
+					echo'
+    </div>
+    <!-- Container END -->
+
+    </body>';
+    }
 
 		
 
 
+?>
 
 					
 					
