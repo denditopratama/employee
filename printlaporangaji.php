@@ -284,7 +284,7 @@ $pdf->SetTextColor(255,69,0);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(46 ,6,'UNIT KERJA : '.$rows['unit_kerja'].' ',0,1);
 $pdf->SetTextColor(0,0,0);
-$gh=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$rows['kode_unit']."' AND(status_aktif=1 AND id_user<>9999 AND admin<>9 AND admin<>1) ORDER BY status_karyawan,kelas_jabatan ASC");
+$gh=mysqli_query($config,"SELECT * FROM tbl_user WHERE unit='".$rows['kode_unit']."' AND(status_aktif=1 AND id_user<>9999 AND admin<>9 AND admin<>1) ORDER BY status_karyawan,kelas_jabatan,nip ASC");
 $no=1;
 while($row=mysqli_fetch_array($gh)){
 	$ghg=mysqli_query($config,"SELECT nama,nip,unit,status_karyawan,status_tugas,admin,jabatan FROM tbl_user WHERE id_user='".$row['id_user']."'");

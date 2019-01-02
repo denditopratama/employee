@@ -828,30 +828,6 @@ if(empty($_SESSION['admin'])){
 				
 				$.post('./js/penerimaan_lain.php', { input : input, nilai : nilai, id_user :<?php echo $id_user; ?>,id_gaji :<?php echo $id; ?> });
 				
-			
-				
-			
-		   $('#potongans').click(function(){
-                //Selected value
-				
-                var inputValue = $('#potongan').val();
-				var nilai = $('#potong').val();
-
-				
-				if(nilai==''){
-					alert('Data Tidak Boleh Kosong !');
-				} else {
-                $.post('./js/potongan_lain.php', { nilai : nilai, id_user :<?php echo $id_user; ?>,id_select: inputValue,id_gaji :<?php echo $id; ?> }, function(data){
-                    
-                    
-					$("#potong").val(data);
-					alert('Data Berhasil Di Input !');
-					location.reload();
-					
-		   });}
-		   
-           
-        });
 	
 		 });
 			   </script>
@@ -923,16 +899,26 @@ if(empty($_SESSION['admin'])){
 											  $(\'#penerimaan\').val(5);
 											var token = '.$tokent.';
 											var user = '.$id_user.';
+											  
 											$.post(\'./js/ajaxpresensi.php\', {id : '.$sikux.', token : token, user : user}, function(data){
 												$("#anjas").html(data);
 												var hakhu=$("#telatbos").val();
 												var num = (hakhu/'.$mkgg.')*'.$sub1.';
 											var xz = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 											$("#hoak").html("Rp " + xz);
-											var xr = $(\'#hoak\').html().replace(/[^0-9]+/g, "");;
+											var xr = $(\'#hoak\').html().replace(/[^0-9]+/g, "");
 											$(\'#potong\').val(xr);
+										
 											});
 											
+											
+												$.post(\'./js/ajaxtelat.php\', {id : '.$sikux.', token : token, user : user, sub1 : '.$sub1.',id_gaji :'.$id.'  });
+											
+											
+										
+										
+										
+
                                           $(\'#tots\').click(function(){
 										  $(\'#modalsz\').openModal();
 										  });
@@ -962,7 +948,16 @@ if(empty($_SESSION['admin'])){
 										}
 									});	 
 								   
-																	
+											
+									var nis = $(\'#eding\').html();
+							if(nis!=""){
+								var ce = nis.replace(/[^0-9]+/g, "");
+								var input = \'lembirs\';
+								$.post(\'./js/penerimaan_lain.php\', { input : input, id_select : 5, nilai : ce, id_user :'.$id_user.',id_gaji :'.$id.' });
+							}
+							 
+						
+												
                                           });
 										  </script>';
 										  echo '<div id="modalsz" class="modal" style="width:80%">
@@ -1305,7 +1300,9 @@ if(empty($_SESSION['admin'])){
 				<a name="simpanseluruh" style="line-height:30px!important" href="?page=pros&sub=dada&id='.$id.'&id_user='.$id_user.'" class="btn-large green waves-effect waves-light col s12" onclick="return confirm(\'Anda yakin ingin menyimpan data?\');"><i class="material-icons">done</i> SIMPAN</a>
 			
 				</div>
-                    <!-- Row form END -->';
+					<!-- Row form END -->
+					
+				';
                     
                     $query = mysqli_query($config,"UPDATE tbl_gaji SET status=1 WHERE id_user='$id_user' AND id_gaji='$id'");
 					

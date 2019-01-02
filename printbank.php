@@ -153,7 +153,7 @@ $pdf->Cell(1 ,8,'',0,1);
 $pdf->SetFont('Arial','',9);
 $no=1;
 
-$konco=mysqli_query($config,"SELECT * FROM tbl_identitas WHERE jenis_bank='".$row['kode_bank']."' AND(id_user<>8 AND id_user<>1 AND id_user<>9999)");
+$konco=mysqli_query($config,"SELECT * FROM tbl_identitas INNER JOIN tbl_user ON tbl_user.id_user=tbl_identitas.id_user WHERE tbl_identitas.jenis_bank='".$row['kode_bank']."' AND(tbl_identitas.id_user<>8 AND tbl_identitas.id_user<>1 AND tbl_identitas.id_user<>9999) ORDER BY tbl_user.nip");
 while($rows=mysqli_fetch_array($konco)){
 $mu=mysqli_query($config,"SELECT nama,nip FROM tbl_user WHERE id_user='".$rows['id_user']."'");
 list($nama,$nip)=mysqli_fetch_array($mu);

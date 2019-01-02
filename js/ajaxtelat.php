@@ -4,7 +4,7 @@ session_start();
 require('../include/config.php');
 $tokent=mysqli_real_escape_string($config,$_POST['token']);
 $nyet=$_SESSION['tokent'];
-if(empty($_SESSION['admin']) || $tokent!=$nyet ){
+if(empty($_SESSION['admin'])){
 	echo '
 	<script>
 	alert(\'ACCESS DENIED WOI!\');
@@ -12,13 +12,12 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
 	</script>';
 } else {
     $id=mysqli_real_escape_string($config,$_POST['id']);
-    if(!empty($_POST['user'])){
+	$sub1=mysqli_real_escape_string($config,$_POST['sub1']);
+	$id_gaji=mysqli_real_escape_string($config,$_POST['id_gaji']);
         $mojok=mysqli_real_escape_string($config,$_POST['user']);
         $o=mysqli_query($config,"SELECT nip FROM tbl_user WHERE id_user='$mojok'");
         list($nik)=mysqli_fetch_array($o);
-    } else {
-        $nik=$_SESSION['nip'];
-    }
+ 
     
 
     echo'
@@ -186,7 +185,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                             echo '
                                             <input type="hidden" value="'.$id.'" name="idpres">
                                             <tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
-                                            <input type="hidden" id="telatbos" value="'.$fok.'">
+                                            <input type="hidden" id="telatbosd" value="'.$fok.'">
                                             <tr><td colspan="9" style="text-align:center">';
                                           
                                            
@@ -247,6 +246,13 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                             
                            
                             ';
-                                    }}
+									}
+									$nnngj=mysqli_query($config,"SELECT menit_telat FROM tbl_handle");
+								list($mkgg)=mysqli_fetch_array($nnngj);
+								$jostelat=($fok/$mkgg)*$sub1;
+								$kosd=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id_gaji','$mojok',28,'$jostelat')");
+
+								
+							}
                             ?>
                             

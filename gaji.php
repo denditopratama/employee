@@ -25,6 +25,9 @@
 		if(isset($_REQUEST['submitz'.$i.''])){
             $piceun=mysqli_query($config,"DELETE FROM tbl_bulan_gaji WHERE id='$i'");
             $mpus=mysqli_query($config,"DELETE FROM tbl_gaji WHERE id_gaji='$i'");
+            $mpusd=mysqli_query($config,"DELETE FROM tbl_potongan WHERE id_gaji='$i'");
+            $mpuzs=mysqli_query($config,"DELETE FROM tbl_penerimaan WHERE id_gaji='$i'");
+            
 			$_SESSION['succg'] = 'SUKSES ! Data Berhasil di Hapus';
 			header("Location: ./admin.php?page=gjh");
 			die();

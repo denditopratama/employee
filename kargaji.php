@@ -815,8 +815,8 @@
            
 				var nilai = $('#gajijma').val();
 				var input ='anjay';
-				
 				$.post('./js/penerimaan_lain.php', { input : input, nilai : nilai, id_user :<?php echo $id_user; ?>,id_gaji :<?php echo $id; ?> });
+				
 				
 			
 				
@@ -1295,7 +1295,9 @@
 				<a name="simpanseluruh" style="line-height:30px!important" href="?page=pros&sub=dada&id='.$id.'&id_user='.$id_user.'" class="btn-large green waves-effect waves-light col s12" onclick="return confirm(\'Anda yakin ingin menyimpan data?\');"><i class="material-icons">done</i> SIMPAN</a>
 			
 				</div>
-					<!-- Row form END -->';
+					<!-- Row form END -->
+					
+					';
 				
 					
 							

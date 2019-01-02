@@ -104,7 +104,7 @@ echo'
 										</tr>';
                                             
 											}} else {
-                                            echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                                            echo '<tr style="text-align:center"><td colspan="9"><center><p style="text-align:center" class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                         }
                                 echo '</table>
                                 </div>

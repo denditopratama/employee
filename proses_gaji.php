@@ -173,38 +173,73 @@ label {
 							</ul>
 								 
 								 </div>
-					
-					
-				<div class="con">
-				</div>
-                    <!-- Secondary Nav END -->
-                </div>
-				<?php
-					if(isset($_GET['gjj'])==1){
-						include 'kargaji.php';
-						} 
-						
-								$tos=0;
-						$ngitun=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(admin<>9 AND id_user<>9999 AND admin<>0 AND status_aktif=1)");
+					<?php
+						$tos=0;
+						$ngitun=mysqli_query($config,"SELECT * FROM tbl_gaji WHERE id_gaji='$id'");
 						while($day=mysqli_fetch_array($ngitun)){	
 							echo '<input type="hidden" class="kolo" value="'.$day['id_user'].'">';
 							$tos++;
 						}
+						?>
+					
+				
+<style>
+progress::-webkit-progress-value { background: blue; }
+</style>
+				<div id="modald">
+				<div id="modalgajih" class="modal" style="height:35%">
+                <div class="modal-content yellow" style="height:100%;padding-top:38px!important">
+                <div class="col m12 s12" style="text-align:center!important">
+				<h5>Sedang Memproses..</h5>
+				<h6 class="red-text">Dimohon untuk Tidak Menutup Browser anda dan jangan lakukan aktivitas lain</h6><br>
+				<progress max="<?php echo $tos; ?>" value="0" id="progress_bar" style="width:100%!important"></progress>
+				<h6 style="font-size:20px!important"><b id="hays"></b></h6>
+                </div>
+                </div>
+                </div>
+				</div>
+                    <!-- Secondary Nav END -->
+                </div>
+				<div class="con">
+				
+				<?php
+					if(isset($_GET['gjj'])==1){
+						include 'kargaji.php';
+						} 
+				echo '</div>';		
+							
 						echo '
 							<script>
 						$(document).ready(function(){
+							
 						$(\'#prosesseluruh\').click(function(){
-							var contol = confirm ("Anda yakin ingin memproses keseluruhan data gaji?");
+							var contol = confirm ("Anda yakin ingin memproses keseluruhan data gaji ? (Proses Keseluruhan Hanya dilakukan sekali saja, agar tidak terjadi timpa data)");
 							if (contol == true) {
+								$("#modalgajih").openModal();
+								var tos = '.$tos.';
+								var pers=1;
 								$(".kolo").each(function(){
 									var karjo = $(this).val();
-									console.log(karjo);
 									$.post(\'./js/ajaxprosesgaji.php\',{id : '.$id.' , karyawan : karjo},function(data){
 										$(".con").html(data);
+										var mkojo = (pers/tos)*100;
+									$("#hays").html(mkojo.toFixed(1) + \'%\');
+									$("#progress_bar").val(pers);
+									pers++;
+									
+									if(pers=='.($tos+1).'){
+											alert("Proses Penggajian Telah Selesai !");
+										window.location.href="admin.php?page=pros&id='.$id.'";	
+									
+										
+									}
+									
 									});
-								});
-						var tos = '.$tos.';
-						alert("Sukses !"); }
+								
+									
+										
+								});	
+						 }
 
 						});
 						});
