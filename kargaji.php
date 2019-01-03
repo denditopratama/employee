@@ -1087,8 +1087,24 @@
 										><i class="material-icons">done</i> APPROVED</a></td>';	
 										}
 
-										$perkento = mysqli_real_escape_string($config,date_diff(date_create($row['tgl_akhir']), date_create($row['tgl_awal']))->d)+1;
-									echo'<td style="text-align:center">'.$perkento.' Hari</td>
+										
+										
+										$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($row['tgl_akhir']), date_create($row['tgl_awal']))->d)+1;
+										$nyoc = mysqli_real_escape_string($config,date_diff(date_create($row['tgl_akhir']), date_create($row['tgl_awal']))->m);
+										$haritot=0;
+										$nmp=array();
+						
+										for($i=0;$i<$perbedaans;$i++){
+											
+											$wikwik=date('Y-m-d', strtotime($row['tgl_awal'].'+'.$haritot.' days'));	
+											$yoo=date('N',strtotime($wikwik));
+											$haritot=$haritot+1;
+											if($yoo<6){
+												array_push($nmp,1);
+											}
+										}
+										$c=array_sum($nmp);
+									echo'<td style="text-align:center">'.$c.' Hari</td>
                                     </tr>
                                 </tbody>';
                                 }

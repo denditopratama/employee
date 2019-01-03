@@ -211,7 +211,6 @@ progress::-webkit-progress-value { background: blue; }
 						echo '
 							<script>
 						$(document).ready(function(){
-							
 						$(\'#prosesseluruh\').click(function(){
 							var contol = confirm ("Anda yakin ingin memproses keseluruhan data gaji ? (Proses Keseluruhan Hanya dilakukan sekali saja, agar tidak terjadi timpa data)");
 							if (contol == true) {
@@ -220,7 +219,7 @@ progress::-webkit-progress-value { background: blue; }
 								var pers=1;
 								$(".kolo").each(function(){
 									var karjo = $(this).val();
-									$.post(\'./js/ajaxprosesgaji.php\',{id : '.$id.' , karyawan : karjo},function(data){
+									$.get(\'./js/ajaxprosesgaji.php\',{id : '.$id.' , karyawan : karjo},function(data){
 										$(".con").html(data);
 										var mkojo = (pers/tos)*100;
 									$("#hays").html(mkojo.toFixed(1) + \'%\');

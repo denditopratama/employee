@@ -59,8 +59,13 @@
 				$menitawal=mysqli_real_escape_string($config,$_REQUEST['menitawal']);
 				$jamakhir=mysqli_real_escape_string($config,$_REQUEST['jamakhir']);
 				$menitakhir=mysqli_real_escape_string($config,$_REQUEST['menitakhir']);
-				
-				$tambahlembur=mysqli_query($config,"INSERT INTO tbl_lembur (id_presensi,id_user,tanggal,pekerjaan,jam_awal,jam_akhir,divisi) VALUES('$id','".$_SESSION['id_user']."','$tanggallembur','$deskripsi','$jamawal.$menitawal','$jamakhir.$menitakhir','".$_SESSION['divisi']."')");
+                
+                if($_SESSION['admin']==4){
+                    $tambahlembur=mysqli_query($config,"INSERT INTO tbl_lembur (id_presensi,id_user,tanggal,pekerjaan,jam_awal,jam_akhir,status_manager,status_gm,divisi) VALUES('$id','".$_SESSION['id_user']."','$tanggallembur','$deskripsi','$jamawal.$menitawal','$jamakhir.$menitakhir',1,1,'".$_SESSION['divisi']."')");   
+                } else if($_SESSION['admin']==5){
+                $tambahlembur=mysqli_query($config,"INSERT INTO tbl_lembur (id_presensi,id_user,tanggal,pekerjaan,jam_awal,jam_akhir,status_manager,divisi) VALUES('$id','".$_SESSION['id_user']."','$tanggallembur','$deskripsi','$jamawal.$menitawal','$jamakhir.$menitakhir',1,'".$_SESSION['divisi']."')");}
+                else {
+                    $tambahlembur=mysqli_query($config,"INSERT INTO tbl_lembur (id_presensi,id_user,tanggal,pekerjaan,jam_awal,jam_akhir,divisi) VALUES('$id','".$_SESSION['id_user']."','$tanggallembur','$deskripsi','$jamawal.$menitawal','$jamakhir.$menitakhir','".$_SESSION['divisi']."')");}
 				$_SESSION['succEdit'] = 'SUKSES! Lembur berhasil diinput';
                                 header("Location: ./admin.php?page=lmbr&id=".$id."");
                                 die();

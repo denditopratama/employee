@@ -33,7 +33,13 @@ require('../include/config.php');
 												if($input=='anjay'){
 													$jm=mysqli_query($config,"UPDATE tbl_gaji SET gaji_jm='$nilai' WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
 												} else if ($input=='lembirs'){
-													$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");
+													$cekdulu=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id_gaji' AND(id_user='$id_user' AND kode_penerimaan=5)");
+													if(mysqli_num_rows($cekdulu)<=0){
+														$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user',5,'$nilai')");
+													} else {
+														$kos=mysqli_query($config,"UPDATE tbl_penerimaan SET jumlah='$nilai' WHERE id_gaji='$id_gaji' AND(id_user='$id_user' AND kode_penerimaan=5)");
+													}
+													
 												}
 											
 											}
