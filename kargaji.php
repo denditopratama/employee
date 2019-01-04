@@ -83,7 +83,7 @@
 													$ages = date_diff(date_create($lama), date_create('now'))->m + $agesd*12;
 												
 													
-													 if ($ages<=3 && $status_tugas==2){
+													 if ($ages<=3 && $status_karyawan==5){
 														$gajix=$gajix*80/100;
 														$mb='(80%)';
 													} else {$mb='';}

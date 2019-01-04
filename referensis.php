@@ -199,21 +199,21 @@
 			$cekmaks=mysqli_query($config,"SELECT MAX(id) FROM tbl_gaji_pokok");
 			list($maksimal)=mysqli_fetch_array($cekmaks);
 			for($i=1;$i<=$maksimal;$i++){
-				if(isset($_REQUEST['editgaji'.$i.''])){
+				if(isset($_POST['editgaji'.$i.''])){
 					
-					$keljab=mysqli_real_escape_string($config,$_REQUEST['keljab'.$i.'']);
-					$statkaryawan=mysqli_real_escape_string($config,$_REQUEST['statkaryawan'.$i.'']);
-					$stattugas=mysqli_real_escape_string($config,$_REQUEST['stattugas'.$i.'']);
-					$gajis=mysqli_real_escape_string($config,$_REQUEST['gajis'.$i.'']);
-					$tunjanganjabatan=mysqli_real_escape_string($config,$_REQUEST['tunjanganjabatan'.$i.'']);
-					$tunjanganfungsional=mysqli_real_escape_string($config,$_REQUEST['tunjanganfungsional'.$i.'']);
-					$tunjangantransport=mysqli_real_escape_string($config,$_REQUEST['tunjangantransport'.$i.'']);
-					$tunjanganutilitas=mysqli_real_escape_string($config,$_REQUEST['tunjanganutilitas'.$i.'']);
-					$tunjanganperumahan=mysqli_real_escape_string($config,$_REQUEST['tunjanganperumahan'.$i.'']);
-					$tunjangankomunikasi=mysqli_real_escape_string($config,$_REQUEST['tunjangankomunikasi'.$i.'']);
-				$simpang=mysqli_query($config,"UPDATE tbl_gaji_pokok SET admin='$keljab',gaji='$gajis',status_karyawan='$statkaryawan',status_tugas='$stattugas',t_jabatan='$tunjanganjabatan',t_fungsional='$tunjanganfungsional',t_transportasi='$tunjangantransport',t_utilitas='$tunjanganutilitas',t_perumahan='$tunjanganperumahan',t_komunikasi='$tunjangankomunikasi' WHERE id='$i'");}
+					$keljab=mysqli_real_escape_string($config,$_POST['keljab'.$i.'']);
+					$statkaryawan=mysqli_real_escape_string($config,$_POST['statkaryawan'.$i.'']);
+					$stattugas=mysqli_real_escape_string($config,$_POST['stattugas'.$i.'']);
+					$gajis=mysqli_real_escape_string($config,$_POST['gajis'.$i.'']);
+					$tunjanganjabatan=mysqli_real_escape_string($config,$_POST['tunjanganjabatan'.$i.'']);
+					$tunjanganfungsional=mysqli_real_escape_string($config,$_POST['tunjanganfungsional'.$i.'']);
+					$tunjangantransport=mysqli_real_escape_string($config,$_POST['tunjangantransport'.$i.'']);
+					$tunjanganutilitas=mysqli_real_escape_string($config,$_POST['tunjanganutilitas'.$i.'']);
+					$tunjanganperumahan=mysqli_real_escape_string($config,$_POST['tunjanganperumahan'.$i.'']);
+					$tunjangankomunikasi=mysqli_real_escape_string($config,$_POST['tunjangankomunikasi'.$i.'']);
+				$simpang=mysqli_query($config,"UPDATE tbl_gaji_pokok SET kelas_jabatan='$keljab',gaji='$gajis',status_karyawan='$statkaryawan',status_tugas='$stattugas',t_jabatan='$tunjanganjabatan',t_fungsional='$tunjanganfungsional',t_transportasi='$tunjangantransport',t_utilitas='$tunjanganutilitas',t_perumahan='$tunjanganperumahan',t_komunikasi='$tunjangankomunikasi' WHERE id='$i'");}
 				
-				if(isset($_REQUEST['hapusgaji'.$i.''])){
+				if(isset($_POST['hapusgaji'.$i.''])){
 					
 					$ngampung=mysqli_query($config,"DELETE FROM tbl_gaji_pokok WHERE id='$i'");
 				}
