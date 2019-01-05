@@ -21,11 +21,11 @@ INSERT INTO tabel_role VALUES("10006","10017","24064e6576a74af1b8eda89277c6b659"
 INSERT INTO tabel_role VALUES("10008","10020","c1722a7941d61aad6e651a35b65a9c3e","Donny Ikhwan","10020","4","0","General Manager","4","4","10","46","3","1","1");
 INSERT INTO tabel_role VALUES("10010","10023","7b8bc3700ce886e8627f41e799fe764f","Imad Zaky Mubarak","10023","4","0","General Manager","2","6","2","8","3","1","1");
 INSERT INTO tabel_role VALUES("10024","10040","f250daff6a09865ff432821b2adac54f","Mintari Yulianingsih","10040","4","0","General Manager","24","7","70","190","3","1","1");
-INSERT INTO tabel_role VALUES("10172","10004","d783823cc6284b929c2cd8df2167d212","Dian Agustian Hadi","10004","4","0","General Manager","18","3","50","95","3","1","1");
+INSERT INTO tabel_role VALUES("10172","10004","d783823cc6284b929c2cd8df2167d212","Dian Agustian Hadi","10049","4","0","General Manager","18","3","50","95","3","1","1");
 INSERT INTO tabel_role VALUES("10181","10051","a536fb5480db8bdbb84daffe345c675b","Saktia Lesan Dianasari","10051","4","0","General Manager","26","7","76","200","3","1","1");
 INSERT INTO tabel_role VALUES("10182","10050","eeb29740e8e9bcf14dc26c2fff8cca81","Aprilizayanti Putri","10050","4","0","General Manager","27","7","77","202","3","1","1");
 INSERT INTO tabel_role VALUES("9","10003","f5dffc111454b227fbcdf36178dfe6ac","Uci Sanusi","10003","5","0","Manager","18","3","52","98","3","1","1");
-INSERT INTO tabel_role VALUES("10","10007","9cdf26568d166bc6793ef8da5afa0846","R.A. Ayu Suzanne P","10007","5","0","Manager","4","4","11","49","4","1","2");
+INSERT INTO tabel_role VALUES("10","10007","9cdf26568d166bc6793ef8da5afa0846","R.A. Ayu Suzanne P","10007","5","0","Manager","4","4","11","49","3","1","2");
 INSERT INTO tabel_role VALUES("10001","10010","4bc457f7b180362dfb1ae8b0a3da32a7","Irwansyah Rinaldhi","10010","5","0","Manager","14","7","38","87","3","1","1");
 INSERT INTO tabel_role VALUES("10002","10011","a2369958a9645eac52b58a8134e2ef5a","Dede Ahmad Nurhadi","10011","5","0","Manager","13","7","36","147","3","1","1");
 INSERT INTO tabel_role VALUES("10004","10015","342b5fe6486788799659c39bbfc3fa02","Marlina Ririn Indriyani","10015","5","0","Manager","2","6","3","10","3","1","1");
@@ -52,6 +52,9 @@ INSERT INTO tabel_role VALUES("10101","10047","eccd9f7dc92858b741132fda313130cf"
 INSERT INTO tabel_role VALUES("10154","PK089","e8d09acfaad3ecf09242168db4788494","Wahju Widodo","PK089","5","0","Manager","5","4","15","62","5","1","2");
 INSERT INTO tabel_role VALUES("10180","10100","ac2d43ef3f26cc74de242202e822ecb0","Anggrainy","10100","5","0","Manager","19","2","54","108","3","1","1");
 INSERT INTO tabel_role VALUES("10183","10046","827a9e878169d065f4a9a6c451ba0207","Usep Widya Kusmayadi","10046","5","0","Manager","11","7","33","126","3","1","1");
+INSERT INTO tabel_role VALUES("10184","10101","6dfc35c47756e962ef055d1049f1f8ec","Tony Tri Hendarta","10101","5","0","Manager","19","2","56","119","3","1","1");
+INSERT INTO tabel_role VALUES("10187","10102","696b0709b9a2d7d9e2c25b71476ec255","Ihsanuddin Saputra, ST","10102","5","0","Manager","5","4","14","62","3","1","1");
+INSERT INTO tabel_role VALUES("10188","10103","f53eb4122d5e2ce81a12093f8f9ce922","Khrisnawan Arief Wicaksono, ST","10103","5","0","Manager","4","4","11","34","3","1","1");
 INSERT INTO tabel_role VALUES("10009","10021","f702defbc67edb455949f46babab0c18","Roni Wijaya","10021","6","0","Assistant Manager","2","6","3","12","3","1","1");
 INSERT INTO tabel_role VALUES("10013","10029","827051e35b2c76f7004a6cbc76f42d4a","Edmundus Edy Pancaningtyas","10029","6","0","Assistant Manager","19","2","55","111","3","1","1");
 INSERT INTO tabel_role VALUES("10015","10031","d2cb583f4b5bdc51b965ae555ee6bca5","Katni","10031","6","0","Assistant Manager","18","3","52","77","3","1","1");
@@ -66,6 +69,7 @@ INSERT INTO tabel_role VALUES("10055","PK043","e9f7574dc8aa752126443c5d3b2bf509"
 INSERT INTO tabel_role VALUES("10056","PK044","e8c3701613c6192f5578534912bc410f","Hendry","PK044","6","0","Assistant Manager","6","4","18","67","5","1","2");
 INSERT INTO tabel_role VALUES("10058","PK046","fdf1adf0071c444ec897f638453f5d67","Rizal Kamaruzzaman","PK046","6","0","Assistant Manager","4","4","11","67","5","1","2");
 INSERT INTO tabel_role VALUES("10060","PK048","064fa76b894021616335263a1c7fe7f2","Dian Ika Ningrum","PK048","6","0","Assistant Manager","19","2","55","110","5","1","2");
+INSERT INTO tabel_role VALUES("10062","PK050","343979a6222fcf5c4f50a8fd4ce710d1","Adya Kemara","PK050","6","0","Assistant Manager","2","6","59","27","5","1","2");
 INSERT INTO tabel_role VALUES("10066","PK054","9276d8c623b5f0930f93cf07fae0845f","Angga Saputra","PK054","6","0","Assistant Manager","2","1","3","63","5","0","2");
 INSERT INTO tabel_role VALUES("10078","PK069","a59eeaf48b22ebf1fee0b715731dc7ca","Arsindiany Alambago","PK069","6","0","Assistant Manager","18","3","51","97","5","0","0");
 INSERT INTO tabel_role VALUES("10087","PK078","24cbad67a9545c21b12b86ad024906e1","Arif Rahman","PK078","6","0","Assistant Manager","8","7","26","67","5","1","2");
@@ -89,7 +93,6 @@ INSERT INTO tabel_role VALUES("10034","PK020","a349c90fb067eae78defd650c86e942e"
 INSERT INTO tabel_role VALUES("10035","PK021","942e07c72a2f12ef5368b7dfd5c53116","Salmadi","PK021","7","0","Senior Officer","12","7","48","131","5","1","2");
 INSERT INTO tabel_role VALUES("10048","PK035","57bf2d8dc369f5238ad508888f101ef9","Reza Ahmad Fauzi","PK035","7","0","Senior Officer","5","5","13","71","5","1","2");
 INSERT INTO tabel_role VALUES("10061","PK049","6ff9c235860eb08d0fb2af6e5751c51a","Sofi Ratna Furi","PK049","7","0","Senior Officer","10","7","68","187","5","1","2");
-INSERT INTO tabel_role VALUES("10062","PK050","27d2613553b8d56a6a9df7251da90b86","Adya Kemara","PK050","7","0","Senior Officer","2","6","59","27","5","1","2");
 INSERT INTO tabel_role VALUES("10064","PK052","64eb6f33d79221581bfe7df31d065889","Ardo Yudha Barnesa","PK052","7","0","Senior Officer","3","5","6","36","5","1","2");
 INSERT INTO tabel_role VALUES("10065","PK053","2e1e200308d8c68e3d75bf9a079003f6","Melly Febriyanti","PK053","7","0","Senior Officer","2","6","3","15","5","1","2");
 INSERT INTO tabel_role VALUES("10069","PK057","ae5318388db0dae818a4ddefd1560130","Muhamad Rizki Cahyadi","PK057","7","0","Senior Officer","5","6","14","64","5","1","2");
@@ -145,7 +148,7 @@ INSERT INTO tabel_role VALUES("10136","10086","6412121cbb2dc2cb9e460cfee7046be2"
 INSERT INTO tabel_role VALUES("10137","10087","afc2637129ad904485e07d2c0e6b0688","Rahmadi Panjaitan","10087","7","0","Senior Officer","21","7","64","88","4","1","2");
 INSERT INTO tabel_role VALUES("10138","10088","42edd1ec1dc5f5c1f11fd74a959e96c9","Aris Widodo","10088","7","0","Senior Officer","17","7","49","88","4","1","2");
 INSERT INTO tabel_role VALUES("10139","10089","e710549329cbc30d8cfa23cdd4b97f2f","Saiful","10089","7","0","Senior Officer","17","7","49","88","4","1","2");
-INSERT INTO tabel_role VALUES("10141","10091","b219f59c2dd596abfadbcecfc2277659","IWAN DHANI GUNAWAN","10091","7","0","Senior Officer","11","7","33","88","4","1","2");
+INSERT INTO tabel_role VALUES("10141","10091","b219f59c2dd596abfadbcecfc2277659","Iwan Dhani Gunawan","10091","7","0","Senior Officer","11","7","33","88","4","1","2");
 INSERT INTO tabel_role VALUES("10142","10092","c0c3a9fb8385d8e03a46adadde9af3bf","Budi Lukman","10092","7","0","Senior Officer","11","7","33","88","4","1","2");
 INSERT INTO tabel_role VALUES("10143","10093","bffbc93c08bb822842c8991709fc7714","Dedi Kusnadi","10093","7","0","Senior Officer","11","7","33","88","4","1","2");
 INSERT INTO tabel_role VALUES("10144","10094","018a1b6ccd2ec81361657e259155895a","Deni Catur Wardani","10094","7","0","Senior Officer","11","7","33","88","4","1","2");
@@ -161,6 +164,7 @@ INSERT INTO tabel_role VALUES("10166","PK105","5c922c1bf3889a3683229da959290436"
 INSERT INTO tabel_role VALUES("10169","PK058","624717d9f15d1bf3e5f94d27a1a515b1","Anang Daus Soemartri","PK058","7","0","Senior Officer","3","5","9","43","5","1","2");
 INSERT INTO tabel_role VALUES("10170","PK091","e3dd589db435b6414ce32434460cc359","Fauzi Rachman Juang Pribadi","PK091","7","0","Senior Officer","5","4","15","69","5","1","2");
 INSERT INTO tabel_role VALUES("10171","PK103","28d3c0d6aeecdd362803440626770f52","Muhammad Nofi Risdianto","PK103","7","0","Senior Officer","5","1","13","68","5","1","2");
+INSERT INTO tabel_role VALUES("10186","PK109","e01de93068ff77e671502e4580f87011","Elisa Soedarto","PK109","7","0","Senior Officer","18","3","53","103","5","1","2");
 INSERT INTO tabel_role VALUES("10032","PK018","e8e68213a17dbac1bc8736e68af7732c","Mia Restu Oktavia Sutanty","PK018","8","0","Officer","12","7","48","129","5","1","2");
 INSERT INTO tabel_role VALUES("10033","PK019","cd86235826c87663d03da08dda19b5af","Rafika Afrianne Ichsan","PK019","8","0","Officer","12","7","48","128","5","1","2");
 INSERT INTO tabel_role VALUES("10036","PK022","0ac70a7ae64fce4225dcca0debaf939a","Julian Dwi Kusuma Lestari","PK022","8","0","Officer","12","7","48","132","5","1","2");
@@ -188,6 +192,7 @@ INSERT INTO tabel_role VALUES("10163","PK100","228b37d4d7094a73064949d8b1837970"
 INSERT INTO tabel_role VALUES("10164","PK101","95b3549132183db7c1d54f0c9257cbfd","Swanti","PK101","8","0","Officer","5","6","15","64","5","1","2");
 INSERT INTO tabel_role VALUES("10167","PK106","29a4d75a5d500aa76dbae56082a17c76","Yuni Nurmaya","PK106","8","0","Officer","5","6","13","65","5","1","2");
 INSERT INTO tabel_role VALUES("10168","PK107","6234e45cf0a69c9846ccf2df739b89db","Hasan Mauludi","PK107","8","0","Officer","5","5","13","65","4","1","2");
+INSERT INTO tabel_role VALUES("10185","PK108","7a0a87077cb3c4edd20ce4ae4d5ccc85","Yahya Ahmadi","PK108","8","0","Officer","2","6","3","9","5","1","2");
 INSERT INTO tabel_role VALUES("10152","K0005","a29e39366bc75d66b57f8e2536fe9312","Donny Arsal","K0005","10","0","Komisaris","0","1","0","1","1","1","1");
 
 
@@ -211,10 +216,11 @@ DROP TABLE tbl_akses_user;
 CREATE TABLE `tbl_akses_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(2) NOT NULL,
+  `maintenance` int(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_akses_user VALUES("1","0");
+INSERT INTO tbl_akses_user VALUES("1","0","1");
 
 
 
@@ -244,9 +250,6 @@ CREATE TABLE `tbl_bulan_gaji` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_bulan_gaji VALUES("3","2018-10-18","0","0");
-INSERT INTO tbl_bulan_gaji VALUES("5","2018-11-25","0","0");
-INSERT INTO tbl_bulan_gaji VALUES("6","2018-12-17","0","0");
 
 
 
@@ -384,29 +387,6 @@ CREATE TABLE `tbl_gaji` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_gaji VALUES("242","5","10025","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("243","5","10012","","20425317","927309","161880","0","849073","0","1335816","242820","0","849073","0","1","0","0","13438262","5087281","8350981");
-INSERT INTO tbl_gaji VALUES("252","5","6","","20425317","794500","161880","320000","1676224","0","0","242820","400000","1676224","0","0","0","0","20452604","2319044","18133560");
-INSERT INTO tbl_gaji VALUES("253","5","4","","0","263320","116000","232000","83724","0","379320","174000","290000","83515","0","1","0","0","6495044","1004935","5490109");
-INSERT INTO tbl_gaji VALUES("254","5","10","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","11500000","0","0");
-INSERT INTO tbl_gaji VALUES("255","5","10013","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("256","5","7","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("257","5","10003","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("258","5","10011","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("259","5","10002","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("260","5","10010","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("261","5","2","","0","263320","116000","232000","83724","0","379320","174000","290000","83515","0","0","0","0","6495044","926835","5568209");
-INSERT INTO tbl_gaji VALUES("262","5","1","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
-INSERT INTO tbl_gaji VALUES("263","5","10027","","0","0","0","0","-256579","0","0","0","0","-243750","-12188","0","0","0","-256579","-255938","0");
-INSERT INTO tbl_gaji VALUES("264","5","10101","","0","499400","220000","440000","754174","0","0","330000","550000","641048","107470","0","0","0","12913574","1628518","0");
-INSERT INTO tbl_gaji VALUES("265","5","10075","","0","263320","116000","232000","24513","0","379320","174000","290000","24452","0","0","0","0","6435833","867772","5568061");
-INSERT INTO tbl_gaji VALUES("266","5","10008","","0","794500","161880","320000","1742400","0","0","242820","400000","1742400","0","0","0","0","20518780","2385220","18133560");
-INSERT INTO tbl_gaji VALUES("267","6","4","","0","263320","116000","232000","83724","19250","379320","174000","290000","79538","23179","0","0","0","6899294","946036","5953257");
-INSERT INTO tbl_gaji VALUES("268","6","10011","","0","522100","161880","320000","834036","0","0","242820","400000","834036","0","1","0","0","13338016","1476856","11861160");
-INSERT INTO tbl_gaji VALUES("269","6","10005","","0","522100","161880","320000","635506","0","0","242820","400000","635506","0","1","0","0","13139486","1278326","11861160");
-INSERT INTO tbl_gaji VALUES("270","6","2","","0","263320","116000","232000","83724","0","379320","174000","290000","83515","0","1","0","0","6495044","926835","5568209");
-INSERT INTO tbl_gaji VALUES("271","6","10","","0","499400","161880","320000","741795","176470","719400","242820","400000","630525","287740","0","0","1","13899545","2396939","11502606");
-INSERT INTO tbl_gaji VALUES("272","6","10101","","0","499400","161880","320000","741795","0","0","242820","400000","741795","0","0","0","0","12723075","1384615","11338460");
 
 
 
@@ -435,7 +415,7 @@ INSERT INTO tbl_gaji_pokok VALUES("5","6","9000000","3","1","2500000","0","0","0
 INSERT INTO tbl_gaji_pokok VALUES("6","6","8500000","5","2","2500000","0","0","0","0","0");
 INSERT INTO tbl_gaji_pokok VALUES("7","8","7000000","3","1","0","1500000","0","0","0","0");
 INSERT INTO tbl_gaji_pokok VALUES("8","8","6500000","5","2","0","1500000","0","0","0","0");
-INSERT INTO tbl_gaji_pokok VALUES("9","9","5800000","4","2","0","500000","0","0","0","0");
+INSERT INTO tbl_gaji_pokok VALUES("9","9","5300000","4","2","0","500000","0","0","0","0");
 INSERT INTO tbl_gaji_pokok VALUES("10","9","5300000","5","2","0","500000","0","0","0","0");
 INSERT INTO tbl_gaji_pokok VALUES("11","10","4300000","5","2","0","350000","0","0","0","0");
 INSERT INTO tbl_gaji_pokok VALUES("12","6","9000000","4","2","2500000","0","0","0","0","0");
@@ -456,7 +436,7 @@ CREATE TABLE `tbl_handle` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_handle VALUES("1","8","10380","100000","173","480");
+INSERT INTO tbl_handle VALUES("1","12","10380","100000","173","480");
 
 
 
@@ -526,9 +506,9 @@ CREATE TABLE `tbl_identitas` (
   `bpjs_jamkes_nol` int(25) NOT NULL,
   `gaji_jm` int(255) NOT NULL,
   PRIMARY KEY (`id_identitas`)
-) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_identitas VALUES("5","10012","1986-04-01","","P","Nganjuk","1965-08-30","25","1","AB","Jl. Bawang III No. 70 RT.04 RW.03","Cibodasari","Cibodas","Tangerang","Banten","0","021-5511093","","4902-bopak.jpg","5846-Abot.jpg","597-Acas.jpg","5496-anang.jpg","2081-Akoeng.jpg","123124124","477980536402000","86J82012724","86J82012724","1290006068916","Sumarmi","1","0","1","20425317");
+INSERT INTO tbl_identitas VALUES("5","10012","2017-07-14","","P","Nganjuk","1965-08-30","25","1","O","Jl. Bawang III No. 70 RT.04 RW.03","Cibodasari","Cibodas","Tangerang","Banten","0","021-5511093","","4902-bopak.jpg","5846-Abot.jpg","597-Acas.jpg","5496-anang.jpg","2081-Akoeng.jpg","123124124","477980536402000","86J82012724","86J82012724","1290006068916","Sumarmi","1","0","1","20425317");
 INSERT INTO tbl_identitas VALUES("6","4","2018-03-05","","L","Bandung","1996-01-15","33","1","AB","Jl. Pesantren no. F-7 RT09 RW008","Cibabat","Cimahi Utara","Cimahi","Jawa Barat","40513","082262442703","","","","","","","3277031501960018","841836943421000","0001875571997","","9000015198055","Dendito Pratama Karmandia","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("7","6","2017-03-10","","L","","1968-09-19","25","1","A"," JL.KRAKATAU IV D21/14 RT08/05 ","PONDOK MELATI ","JATIWARNA"," BEKASI ","JAWA BARAT","0","","","","","","","","","478008121444000","","91J82012476","1290004420580","SUMARSONO","1","0","0","20425317");
 INSERT INTO tbl_identitas VALUES("8","10008","2016-12-01","","L","Medan","1975-05-22","24","1","A","KOMPLEK BINA MARGA NO.2 RT.001/05","KEL. CIPAYUNG","KEC. CIPAYUNG","JAKARTA TIMUR","JAKARTA","0","081267006800","","3229-angga.jpg","7578-ardiansyah.jpg","","","","3175102205750005","674580436015000","","04J80183678","1290010522536","DONY IKHWAN","1","0","0","0");
@@ -539,10 +519,9 @@ INSERT INTO tbl_identitas VALUES("12","10093","2018-07-01","","L","Jakarta","196
 INSERT INTO tbl_identitas VALUES("13","10027","2016-09-13","","L","Jakarta","1989-02-16","23","1","A","KOMP.CHANDRA INDAH BLOK C-48 RT. 001/015","KEL.JATIRAHAYU","KEC.PONDOK MELATI","BEKASI","JAWA BARAT","0","081296999697","","","","","","","3275121602890002","442007456432.000","","3275121602890002","1240005837886","HERDWIN NOFRIAN","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("14","10010","2017-03-10","","L","Jakarta","1987-09-09","24","1","A","Pondok Pekayon Indah Blok DD 15/25","Pekayon Jaya","Bekasi Selatan","Bekasi ","Jawa Barat","0","081315947070","","","","","","","3275080909870007","590974945432000","","10021654800","0060004531327","IMAD ZAKY MUBARAK","1","1","0","0");
 INSERT INTO tbl_identitas VALUES("15","7","2013-02-25","","L","Gresik","1987-05-23","23","1","O","Jl. Venus Timur VII No. 17 RT. 02/01","Kel. Manjah Lega","Kec. Ranca Sari","Bandung","Jawa Barat","40286","022.7562026","","","","","","","3273232305870002","794874487429000","","09022867106","1300010168337","Hubby Ramdhani","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("16","7","2013-02-25","","L","Gresik","1987-05-23","23","1","O","Jl. Venus Timur VII No. 17 RT. 02/01","Kel. Manjah Lega","Kec. Ranca Sari","Bandung","Jawa Barat","40286","022.7562026","","","","","","","3273232305870002","794874487429000","","09022867106","1300010168337","Hubby Ramdhani","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("17","10025","2015-06-12","","L","PEKANBARU","1970-09-26","24","1","A","J. DARMAWANGSA X/24  RT. 002/001","KEL. CIPETE UTARA","KEC. KEBAYORAN BARU ","JAKARTA SELATAN","JAKARTA","0","","","","","","","","3174072609700003","067800607019000","","15036665725","1560007351564","IRWAN ARTIGYO SUMADIYO","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("18","10063","2016-03-04","","L","TASIK MALAYA","1982-01-17","24","1","A","JL.RAYA PASAR MINGGU, Gg.SOSIAL NO.26 RT.011/001","KEL.PASAR MINGGU","KEC. PASAR MINGGU","JAKARTA SELATAN","JAKARTA","0","","","","","","","","3276021701820001","761687433017000","","13035229692","1240007135925","RIZALULLOH","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("19","10015","2018-02-01","","P","Jakarta","1968-04-27","25","1","A","Jl. Kemanggisan Pulo RT003 RW017","Palmerah","Palmerah","JAkarta Barat","Jakarta","0","","","","","","","","","472116144031000","0001629136045","98J82035076","1290010688832","KATNI","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("19","10015","2018-01-09","","P","Jakarta","1968-04-27","25","1","A","Jl. Kemanggisan Pulo RT003 RW017","Palmerah","Palmerah","JAkarta Barat","Jakarta","0","","","","","","","","","472116144031000","0001629136045","98J82035076","1290010688832","KATNI","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("20","10040","2016-07-11","","P","Jakarta","1992-09-19","22","1","A","Pondok Mitra Lestari C9 NO. 16 RT.10/13 ","Kel. Jati Rasa","Kec. Jati Asih","Bekasi","Jawa Barat","17424","081908170390","","","","","","","3275095909920007","710290065432000","0001369774629","14021840526","1670000095645","GATRI AYUNING LESTARI","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("21","10037","2016-05-01","","L","JAKARTA","1987-12-29","33","1","O","KOMP. AD. BULAK RANTAI G. 39 RT. 003/005","KEL. TENGAH","KEC. KRAMAT JATI","JAKARTA TIMUR","JAKARTA","0","081383639999","","3812-KTP.jpg","","175-NPWP.jpg","","","3175042912870004","728125337009000","","16029287683","1290009921723","WIDYADJI SASONO","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("22","10026","0000-00-00","","L","","0000-00-00","23","1","A","dsa","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
@@ -558,18 +537,18 @@ INSERT INTO tbl_identitas VALUES("31","10011","2017-07-01","","P","Jakarta","199
 INSERT INTO tbl_identitas VALUES("32","10014","2018-01-02","","L","","1978-01-15","24","1","A","Jl. Taman Raya C1 No.1 RT 014 RW 013 Taman Kalijaga Permai","Kalijaga","Harjamukti","Cirebon","Jawa Barat","45144","081320714029","","980-KTP ZL.jpg","4199-KK.jpg","1483-NPWP.jpg","4930-BPJS Tenaga Kerja.jpg","9173-BPJS Kes.pdf","3274031501780013","47.108.074.7-426.000","0001628581094","98J82031646000","1340013421366","IRWAN ZAINI LUTHFI","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("33","10023","2018-04-09","","L","","1987-10-26","24","1","A","dsa","","","","","0","","","","","","","","","450975032417000","","","1290009982782","ADE GUSTIKA","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("34","10","2015-04-15","","P","","1970-04-01","25","1","A","aaaa","","","","","0","","","","2373-KK.jpg","","","","","570216853005000","01JP0433691","01JP0433691","328654420","R.A. Ayu Suzanne P.","4","0","0","0");
-INSERT INTO tbl_identitas VALUES("35","10058","0000-00-00","","","","0000-00-00","","","","","","","","","0","","","1111-KTP.pdf","3845-KK Rizal.pdf","8019-NPWP.pdf","7192-BPJS.jpeg","6857-BPJS.jpeg","","","","","","","","0","0","0");
+INSERT INTO tbl_identitas VALUES("35","10058","2016-05-01","","L","","1982-08-17","33","1","A","a","a","a","","","0","","","1111-KTP.pdf","3845-KK Rizal.pdf","8019-NPWP.pdf","7192-BPJS.jpeg","6857-BPJS.jpeg","","a","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("36","10002","2016-01-01","","L","Kuningan","1974-05-24","24","1","O","PERMATA HARJAMUKTI BLOK L 7 NO. 4 RT. 009/016","KEL. KECAPI","KEC. HARJAMUKTI","CIREBON","JAWA BARAT","45142","08122355829","","1049-KTP Pak Dede609.jpg","5262-IMG-20181214-WA0013[1].jpg","2316-NPWP Pak Dede611.jpg","2937-IMG_20181214_141926[1].jpg","7898-IMG-20181214-WA0011[1].jpg","3274032405740010","471079939438000","0001629150625","93J80110443","1340098001299","DEDE AHMAD NURHADI","1","0","0","340197");
 INSERT INTO tbl_identitas VALUES("37","10052","2017-10-02","","L","JAKARTA","1975-05-31","24","1","AB","KOMP.UNILEVER A-21","Rempoa","Ciputat Timur","Tangerang Selatan","Banten","15412","087822203937","","4459-KTP Eko.pdf","1175-KK Eko_001.jpg","6475-NPWP Eko.pdf","","4500-KARTU_0001819347309.pdf","367405310575","69.787.607.0-411.000","0001819347309","","1290011230022","Eko Prabowo","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("38","10075","0000-00-00","","L","Jakarta","1992-03-10","24","1","A","Bumi Bekasi Baru Utara Jl. Selecta 1 no. 181 RT005 RW006","Pengasinan","Rawa Lumbu","BEKASI","Jawa Barat","0","","","991-ktp kiki-01.png","","","","","3175071003920010","aasd","","3175071003920010","5270698257","Rizki Ehsy Pangarso","2","0","0","0");
-INSERT INTO tbl_identitas VALUES("39","10101","1987-04-15","","P","Jakarta","1968-09-27","13","1","O","Puri Gading, Villa Kintamani, Blok A2/3A","Jati Melati","Pondok Melati","Bekasi","Jawa Barat","17415","0812 1373266","","8610-KTP.pdf","9091-KK.pdf","1393-NPWP.pdf","5206-JAMSOSTEK.pdf","4502-BPJS KESEHATAN.pdf","3275126709680005","47.802.230.4-407.000","0001629149635","87 J82019917","129-00-0423326-4","Yati Melasari","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("38","10075","2018-04-05","","L","Jakarta","1992-03-10","24","1","A","Bumi Bekasi Baru Utara Jl. Selecta 1 no. 181 RT005 RW006","Pengasinan","Rawa Lumbu","BEKASI","Jawa Barat","0","","","991-ktp kiki-01.png","","","","","3175071003920010","aasd","","3175071003920010","5270698257","Rizki Ehsy Pangarso","2","0","0","0");
+INSERT INTO tbl_identitas VALUES("39","10101","2018-09-01","","P","Jakarta","1968-09-27","13","1","O","Puri Gading, Villa Kintamani, Blok A2/3A","Jati Melati","Pondok Melati","Bekasi","Jawa Barat","17415","0812 1373266","","8610-KTP.pdf","9091-KK.pdf","1393-NPWP.pdf","5206-JAMSOSTEK.pdf","4502-BPJS KESEHATAN.pdf","3275126709680005","47.802.230.4-407.000","0001629149635","87 J82019917","129-00-0423326-4","Yati Melasari","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("40","10103","2018-10-01","","L","KUNINGAN","1974-03-11","24","1","O","Jl.Astina IV FB.31 No.01 Taman Tukmudal Indah","Tukmudal","Sumber","Cirebon","JAWA BARAT","0","0812 2211 5974","","","602-IMG20181213154426[1].jpg","3986-IMG20181213154542[1].jpg","6446-IMG20181213154514[1].jpg","","3210181103740001","3208221605120002","0001628582567","98J82031406000","134 00 1353 5041","YAYANG SUPIYAR","1","1","1","0");
 INSERT INTO tbl_identitas VALUES("41","10104","2018-10-01","","L","TEGAL","1971-05-24","25","1","B","PURI CIREBON LESTARI BLOK F1 NO 9 RT01RW07","KECOMBERAN","TALUN","CIREBON","JAWA BARAT","451710","081380718247 / 081573369859","","2311-ktp_ujang.jpg","1392-UJANG_Page_4.jpg","2952-UJANG_Page_3.jpg","376-BPJS UJANG.jpg","9995-BPJS UJANG.jpg","3209142405710002","595801481404000","0001632622814","0001632622814","1340013533475","Ujang","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("42","10105","2018-10-01","","L","CIREBON","1973-09-08","33","1","O","BUKEPIN II BLOK D2 NO 12 RT03 RW06","KEPONGPONGAN","TALUN","CIREBON","JAWA BARAT","0","081946810055","","8516-20181213_151456[1].jpg","9717-20181213_151228[1].jpg","1772-20181213_151425[1].jpg","4958-20181213_151417[1].jpg","7113-20181213_151409[1].jpg","3209140809730005","\'47.108.083.8-426.000","0001628576807","98J82031885","134 00 1352719-6","RD MOCH ERWIN SISWANTO","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("43","10106","2018-10-01","","L","SURABAYA","1972-11-05","24","1","B","PERMATA HARJAMUKTI III D6 NO 11 RT05 RW14","Kali Jaga","HARJAMUKTI","CIREBON","JAWA BARAT","45144","082128866902","","2177-20181214_090226.jpg","1633-IMG-20181214-WA0038.jpg","7167-20181214_090248.jpg","8314-20181214_090301.jpg","2015-20181214_090423.jpg","3274030511720005","47.108.000.2-426.000","0001628580137","3578140511720002","134-00-1353401-0","Deddy Khoirul Anam","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("44","10107","0000-00-00","","L","MALANG","1970-08-22","24","1","A","JL NGAGLIK IV-B / 51 RT01 RW 09","SUKUN","SUKUN","MALANG","JAWA TIMUR","0","","","","","","","","3573042208700006","3573041908080030","0001629575717","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("44","10107","2019-10-01","","L","MALANG","1970-08-22","24","1","A","JL NGAGLIK IV-B / 51 RT01 RW 09","SUKUN","SUKUN","MALANG","JAWA TIMUR","0","","","","","","","","3573042208700006","3573041908080030","0001629575717","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("45","10102","2018-10-01","","L","KUNINGAN","1976-04-20","25","1","A","DUSUN 03 KARANG ANYAR RT03 RW05","GUMULUNG LEBAK","Greged","Cirebon","Jawabarat","45170","085324482442","","","400-IMG_20181213_225606[1].jpg","4029-IMG_20181213_225023[1].jpg","2609-IMG-20181214-WA0004[1].jpg","","3209382004760003","3209381411080001","0000067803772","3209382004760003","134-00-1353402-8","Arif Hartono","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("46","10108","0000-00-00","","L","MALANG","1970-06-04","23","1","A","PERUM GOR RAGIL REGENCY BLOK D-12A RT05  RW01","WONOKOYO","Kedung kandang","MALANG","JAWA TIMUR","0","","","","","","","4767-IMG20181214143949.jpg","3514092706700001","3573031912120008","0001629576606","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("46","10108","2018-10-01","","L","MALANG","1970-06-04","23","1","A","PERUM GOR RAGIL REGENCY BLOK D-12A RT05  RW01","WONOKOYO","Kedung kandang","MALANG","JAWA TIMUR","0","","","","","","","4767-IMG20181214143949.jpg","3514092706700001","3573031912120008","0001629576606","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("47","10110","2018-10-01","","L","Jakarta","1976-06-13","24","1","A","BLOK KR JAMBE KIDUL RT11 RW05","Pekantingan","Klangenan","Cirebon","JAWA BARAT","0","","","5951-KTP Eko.jpg","8290-KK Eko.jpg","1854-NPWP eko.jpg","","","3209231306760011","3209232502090025","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("48","10109","2018-11-01","","L","Jakarta","1977-04-25","25","1","A","JL WIDARASARI I NO 07 RT01 RW03","SUTAWINANGUN","KEDAWUNG","cirebon","JAWA BARAT","0","","","","","","","","3209202504770003","3209202202100007","0001628578541","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("49","10111","2018-11-01","","L","CIREBON","1977-04-02","24","1","B","BLOK KAUM RT03 RW01","CANGKRING","PLERED","CIREBON","JAWA BARAT","0","08122064406","","7854-C360_2015-09-14-13-08-59-344.jpg","3388-KK (4).jpg","3625-NPWP 1.jpg","4315-BPJS  (3).jpg","7494-BPKS KES (2).jpg","3209360204770002","3209362904080019","0001628579452","","","","1","1","0","0");
@@ -579,13 +558,13 @@ INSERT INTO tbl_identitas VALUES("52","10114","2018-11-01","","L","BANDUNG","197
 INSERT INTO tbl_identitas VALUES("53","10115","2018-11-01","","L","Solo","1971-06-03","25","1","A","PERUM DINAR MAS UTARA I/68 RT01 RW19","METESEH","TEMBALANG","SEMARANG","JAWA TENGAH","50271","082135539638","","7670-IMG_20181211_115327.jpg","4015-IMG_20181211_115757.jpg","8512-IMG_20181211_115402.jpg","2320-IMG_20181211_115337.jpg","9076-IMG_20181211_115352.jpg","3374110306710005","3374111212051766","0001628613516","3374110306710005","900 00 2932720 3","suryo subono","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("54","10116","2018-11-01","","L","TUBAN","1968-12-31","24","1","A","JL. PARIKESIT RAYA RT10 RW02","BANYUMANIK","BANYUMANIK","Semarang","JAWA TENGAH","0","08122542984","","6356-Data Moeis.jpg","3215-KK Moeis.jpg","4965-Data Moeis.jpg","","1907-Data Moeis.jpg","3374113112680014","3374111212050485","0001079929157","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("55","10117","2018-11-01","","L","Pematang Siantar","1976-01-12","24","1","A","P4A BLOK F-123 JL GAMBYONG V RT07 RW011","PUDAKPAYUNG","BANYUMANIK","","","0","","","","","","","","3374111201760009","3374112605080023","0001628615373","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("56","10118","0000-00-00","","L","Tegal","1975-07-03","25","1","A","JL. RA KARTINI RT01 RW08","Slawi Kulon","SLAWI","TEGAL","JAWA TENGAH","0","","","","","","","","3328100307750004","3328102402081049","0001628615777","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("56","10118","2018-10-01","","L","Tegal","1975-07-03","25","1","A","JL. RA KARTINI RT01 RW08","Slawi Kulon","SLAWI","TEGAL","JAWA TENGAH","0","","","","","","","","3328100307750004","3328102402081049","0001628615777","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("57","10119","2018-11-01","","L","BLORA","1972-06-13","25","1","A","GEDAWANG PERMAI BLOK E-4 RT03 RW04","GEDAWANG","BANYUMANIK","SEMARANG","JAWA TENGAH","0","","","2892-ktp_1.jpg","1100-kk_1.jpg","9400-NPWP_1.jpg","5804-bpjs tenaga kerja_1.jpg","1196-1544249369169480038559.jpg","3374081306720002","3374111212054229","0001629423966","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("58","10120","2018-11-01","","L","Wonogiri","1976-03-30","24","1","A","BTN POLRI BLOK H NO 19 RT03 RW06","CEMPAKA","PLUMBON","CIREBON","JAWA BARAT","0","","","","","","","","3209183103760002","3374111212054229","0001628577876","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("59","10122","2018-11-01","","L","CIREBON","1973-02-14","25","1","A","JL SENA 3 BLOK H NO 1 BIMA PERMAI RT04 RW06","TUK","KEDAWUNG","Cirebon","JAWA BARAT","0","08112419489","","","","","","","3209201402730003","724596135426000","0001628578438","3209201402730003","1340013527204","Teddy.Arrisandi","1","1","0","0");
-INSERT INTO tbl_identitas VALUES("60","10123","0000-00-00","","L","CIREBON","1977-04-19","25","1","A","BLOK KUSUMA INDAH GG APEL NO 77 RT10 RW04","SETU KULON","WERU","Cirebon","JAWA BARAT","0","","","","","","","","3209191904770003","3209190810070253","0001628577977","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("60","10123","2018-10-01","","L","CIREBON","1977-04-19","25","1","A","BLOK KUSUMA INDAH GG APEL NO 77 RT10 RW04","SETU KULON","WERU","Cirebon","JAWA BARAT","0","","","","","","","","3209191904770003","3209190810070253","0001628577977","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("61","10124","2018-11-01","","L","Medan","1972-08-30","25","1","O","JL KATULAMPA RT01 RW09","KATULAMPA","BOGOR TIMUR","BOGOR","JAWA BARAT","0","082124083915","","","","","","","1271183008720001","3271020809160007","","","","","7","0","0","0");
-INSERT INTO tbl_identitas VALUES("62","10150","2018-08-13","","P","","1964-07-17","24","3","A","Jl. Bangun Cipta I Blok D-12 RT002 RW006","Dukuh","Kramat Jati","Jakarta Timur","Jakarta","0","","","","","","","","3175045707640003","478008485005000","","","1290001085485","IR. TITA PAULINA PURBASARI","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("62","10150","2018-08-06","","P","","1964-07-17","24","3","A","Jl. Bangun Cipta I Blok D-12 RT002 RW006","Dukuh","Kramat Jati","Jakarta Timur","Jakarta","0","","","","","","","","3175045707640003","478008485005000","","","1290001085485","IR. TITA PAULINA PURBASARI","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("63","10151","2018-10-02","","L","","1969-09-10","23","1","A","asdasdasd","","","","","0","","","","","","","","","170318943016000","","","1650000812710","DIAN TAKDIR BADRSYAH","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("64","10031","2015-08-18","","L","BANDUNG","1965-04-21","24","1","A","KP. NYALINDUNG RT. 002/009","KEL. SUKARAJA","KEC. SUKARAJA","SUKABUMI","JAWA BARAT","0","085759946093","","","","","","","3202332104650002","577267164405000","","12017031233","1290011061823","HANDA RUDITA","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("65","10149","2018-10-01","","L","Bandung","1971-02-03","24","1","B","Jl Kiara Sari Permai IV no 3 Komp Kiara Sari Bandung rt04 RT04 RW01","Marga Sari","Buah Batu","Bandung","JAWA BARAT","40286","081312529054","","9253-ktp.docx","7268-kk.docx","9579-npwp.docx","2814-bpjs ktnaga krjaan.docx","4377-bpjs kesehatan.docx","3273220302710006","271570442429000","0001632635289","91J82014324000","0513200003443","RONI YUSNANDAR","5","0","0","11442000");
@@ -602,7 +581,7 @@ INSERT INTO tbl_identitas VALUES("75","10131","2018-10-01","","L","Medan","1967-
 INSERT INTO tbl_identitas VALUES("76","10132","2018-10-01","","L","Medan","1968-12-19","25","1","B","JL M A SELATAN GG BUANA NO 300 A-","SUKARAMAI I","MEDAN AREA","Medan","SUMATRA UTARA","20216","081245977747","","2008-img003.jpg","3394-img007.jpg","6165-img006.jpg","5581-img004.jpg","2349-img005.jpg","1271101912680002","47.722.922.3-113.000","0001634457317","1271 1019 1268 0002","0081050013286533","Prins Handoyo","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("77","10133","2018-10-01","","L","Sigodong-godong","1945-02-10","24","1","A","Jl. Jermal X No A1 Medan ","Denai","Medan Denai","Medan","Sumatera Utara","20227","081370944002","","8086-WhatsApp Image 2018-12-14 at 9.45.52 AM.jpeg","5135-WhatsApp Image 2018-12-14 at 9.42.59 AM.jpeg","781-WhatsApp Image 2018-12-14 at 9.41.44 AM.jpeg","6670-WhatsApp Image 2018-12-14 at 9.44.30 AM (1).jpeg","9662-WhatsApp Image 2018-12-14 at 9.44.30 AM.jpeg","1271201004780002","47.800.051.6-122.000","0001634460153","96J80293721000","105-00-1329001-3","Bakti Sihombing","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("78","10134","2018-10-01","","L","Aek Nagaga","1973-06-11","24","1","O","DUSUN IV GANG LANGGAR RT06 RW02","TEMBUNG","PERCUT SEI TUAN","Deli Serdang","SUMATRA UTARA","20371","081266866109","","4266-KTP.jpeg","1013-Kartu Keluarga Julpikar.pdf","6998-NPWP.jpeg","1142-BPJS NAKER.jpeg","76-BPJS KES.jpeg","1271106707670007","1271201206070032","0001634457295","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("79","10135","2018-10-01","","P","Natal","1945-02-27","25","1","AB","JL.AR.Hakim ,Gg.Kolam No. 80 medan","Pasar Merah Timur","Medan Area","Medan","Sumatera Utara","20217","081263611393","","","","","","","1271106707670007","49.304.120-6-113.000","0001634457295","","","Rahmatul Aini","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("79","10135","2018-10-01","","P","Natal","1945-02-27","25","1","AB","JL.AR.Hakim ,Gg.Kolam No. 80 medan","Pasar Merah Timur","Medan Area","Medan","Sumatera Utara","20217","081263611393","","","","","2836-WhatsApp Image 2019-01-03 at 15.31.35.jpeg","","1271106707670007","49.304.120-6-113.000","0001634457295","","","Rahmatul Aini","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("80","10136","2018-10-01","","L","Sibaro","1969-09-05","25","1","B","JL SWADAYA PASAR II TIMUR NO 3 LK 23","RENGAS PULAU","MEDAN MARELAN","Medan","SUMATRA UTARA","20255","082234161541.085277336162","","5431-WhatsApp Image 2018-12-14 at 2.08.02 PM.jpeg","9191-WhatsApp Image 2018-12-14 at 4.17.24 PM.jpeg","6001-WhatsApp Image 2018-12-14 at 2.08.02 PM (1).jpeg","5374-WhatsApp Image 2018-12-14 at 2.08.01 PM.jpeg","1053-WhatsApp Image 2018-12-14 at 4.15.06 PM.jpeg","1271060509690005","478142581112000","0001633579874","93J80109494000","1060012883339","SUPRIADI","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("81","10137","2018-10-01","","L","Medan","1969-02-14","26","1","O","DUSUN III KOMP PRUMDAM I/BB NO 76","PATUMBAK KAMPUNG","PATUMBAK","Deli Serdang","Sumatera Utara","20361","082272999980","","","","","","","1207211402690003","1207211509096126","0001634458162","","1050013290063","Rachmadi Panjaitan","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("82","10138","2018-10-01","","L","Surabaya","1969-04-01","23","1","A","DK Jerawat RT01 RW03 ","Pakal","Babat Jerawat","Surabaya","Jawa Timur","0","","","","","","","","3216060104690033","3578301610130002","0001629569744","","","","1","0","0","0");
@@ -612,24 +591,24 @@ INSERT INTO tbl_identitas VALUES("85","10141","2018-10-01","","L","Bogor","1967-
 INSERT INTO tbl_identitas VALUES("86","10142","2018-10-01","","L","Bandung","1969-05-24","25","1","A","KP KIARA RT01 RW05","MANDALAWANGI","CIPATAT","Bandung Barat","JAWA BARAT","0","","","","","","","","3217072405690005","3217070302060015","0001632634942","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("87","10143","2018-10-01","","L","Bandung","1969-02-23","25","1","B","KOMP BBA BLOK C1 RT01 RW11","JELEKONG","BALEENDAH","Bandung","JAWA BARAT","40375","081214424739","","8151-ktp.jpg","7935-kk.jpg","6136-depke.jpg","","7388-bpjs.jpg","3204322302690001","320432.300305.3515","0001632633682","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("88","10144","2018-10-01","","L","BANDUNG BARAT","1967-04-20","26","1","A","PURI CIPAGERAN INDAH 2C-3/20  RT10 RW20","TANIMULYA","NGAMPRAH","Bandung Barat","JAWA BARAT","0","","","","","","","","3217062004670003","3217060305058976","0001632636178","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("89","10145","0000-00-00","","L","BANDUNG","1965-04-21","24","1","A","JL BELIBIS VI NO 8  RT10 RW06","TENGAH","KRAMAT JATI","JAKARTA TIMUR","JAKARTA","0","","","","","","","","3175102104650009","3175041207170034","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("89","10145","2018-10-01","","L","BANDUNG","1965-04-21","24","1","A","JL BELIBIS VI NO 8  RT10 RW06","TENGAH","KRAMAT JATI","JAKARTA TIMUR","JAKARTA","0","","","","","","","","3175102104650009","3175041207170034","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("90","10146","2018-10-01","","L","Gunung Meriah","1968-08-10","25","1","A","KATULAMPA RT02 RW09","KATULAMPA","BOGOR TIMUR","BOGOR","JAWA BARAT","0","","","7259-KTP_Boni.pdf","8673-KK_Boni.pdf","5129-NPWP_Boni.pdf","4368-BJS_Tenagakerja.pdf","7468-BPJS_BoniSehat.pdf","3271021008680003","3271020103073620","0001628600455","JJ080903","031901013277506","Boni Pasius Silalahi","7","0","0","0");
 INSERT INTO tbl_identitas VALUES("91","10147","2018-10-01","","L","Bandung","1970-03-15","25","1","A","JL BATU RADEN X RT06 RW 07","MEKARJAYA","RANCASARI","BANDUNG","JAWA BARAT","0","","","","","","","","3214011503700008","3273232212150003","0001710941668","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("92","10148","2018-10-01","","L","Sumedang","1974-08-12","24","1","A","KP SUKARASA DUSUN I RT06 RW02","TANGGULUN TIMUR","KALIJATI","SUBANG","JAWA BARAT","0","","","","","","","","3213041208740002","3213043003062267","0001632625277","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("93","10095","2018-07-01","","P","","0000-00-00","22","1","A","OOOO","","","","","0","","","","","","","","","711721738522000","","15022385247","1310012512614","TISA YUANISA","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("93","10095","2018-07-01","","P","","1990-06-13","23","1","A","OOOO","","","","","0","","","","","","","","","711721738522000","","15022385247","1310012512614","TISA YUANISA","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("94","10034","2016-03-07","","L","BOGOR","1984-04-21","22","1","A","JL. MENTENG BLK 52 NO. 16 RT. 002/004","KEL. MENTENG","KEC. BOGOR BARAT","BOGOR","JAWA BARAT","0","08568982737","","","","","","","3271042104840017","755380086404000","16017572393","16017572393","1330010927382","IBNU SARJONO","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("95","10038","0000-00-00","","P","BOGOR","1993-04-21","33","1","A","KP. GELONGGONG RT. 001/001","KEL. WARINGINJAYA","KEC. BOJONG GEDE","BOGOR","JAWA BARAT","0","087770826311","","","","","","","3201136104930002","759813660403000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("95","10038","2016-05-01","","P","BOGOR","1993-04-21","33","1","A","KP. GELONGGONG RT. 001/001","KEL. WARINGINJAYA","KEC. BOJONG GEDE","BOGOR","JAWA BARAT","0","087770826311","","","","","","","3201136104930002","759813660403000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("96","10039","2016-05-25","","P","Jakarta","1995-08-24","23","1","B","JL. OTISTA RAYA GG. MASJID  RT. 010/009","KEL. BIDARACINA","KEC. JATINEGARA","JAKARTA TIMUR","JAKARTA","0","089676043058","","","","","","","3175036408950002","760064246002000","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("97","10042","0000-00-00","","","","0000-00-00","","","","","","","","","0","","","4424-ktpoye.jpg","","8711-npwpoye.jpg","7133-jamsosteko oye.jpg","","","","","","","","","0","0","0");
-INSERT INTO tbl_identitas VALUES("98","10044","0000-00-00","","","","0000-00-00","","","","","","","","","0","","","9824-img460 (1).pdf","6227-KK_4.pdf","7111-img463.pdf","7071-img462.pdf","4432-img461.pdf","","","","","","","","0","0","0");
-INSERT INTO tbl_identitas VALUES("99","10048","0000-00-00","","L","Cianjur","1987-11-28","22","1","A","Blk Residence Jl. Binawan IX Blok 3 no. 1 RT002 RW015","Pamoyanan","Cianjur","Cianjur","Jawa Barat","0","","","","","","","","3203012811870006","545544298406000","","3203012811870006","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("97","10042","2017-04-01","","L","","1973-08-16","25","1","A","a","","","","","0","","","4424-ktpoye.jpg","","8711-npwpoye.jpg","7133-jamsosteko oye.jpg","","","a","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("98","10044","2017-05-02","","L","","1993-12-30","33","1","A","a","","","","","0","","","9824-img460 (1).pdf","6227-KK_4.pdf","7111-img463.pdf","7071-img462.pdf","4432-img461.pdf","","a","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("99","10048","2017-05-15","","L","Cianjur","1987-11-28","22","1","A","Blk Residence Jl. Binawan IX Blok 3 no. 1 RT002 RW015","Pamoyanan","Cianjur","Cianjur","Jawa Barat","0","","","","","","","","3203012811870006","545544298406000","","3203012811870006","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("100","10049","2017-06-02","","P","CIAMIS","1990-05-10","23","1","A","KP. SUGUTAMU RT.004/021","BAKTI JAYA","SUKMAJAYA","DEPOK","JAWA BARAT","0","","","","","","","","3276055005900009","353972342005000","","16033203544","6610632821","SITI ROSMAYANTI","2","0","0","0");
 INSERT INTO tbl_identitas VALUES("101","10050","2017-06-02","","P","Jakarta","1995-05-23","33","2","A","PERUM BUKIT CIRENDEU BOLK D3 N0.13 RT.001/008","PONDOK CABE ILIR","PAMULANG","Tanggerang Selatan","Banten","0","","","","","","","","3674066305950014","750216954453000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("102","10066","0000-00-00","","L","","0000-00-00","33","1","A","OOO","","","","","0","","","","","","","","","0000","0001109239997","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("103","10062","2017-06-01","","L","","1985-06-06","24","1","A","00","","","","","0","","","","","","","","","679031922008000","","15007504366","1240006922257","ADYA KEMARA","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("103","10062","2017-06-01","","L","Jakarta","1985-06-06","24","1","B","Perumahan Permata Timur 1, JL. Permata Timur VIII Blok D-8","Pondok Kelapa","Duren Sawit","Jakarta","DKI Jakarta","13450","081294063545","","","","","","","3175070606850023","679031922008000","","15007504366","1240006922257","ADYA KEMARA","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("104","10067","2018-01-02","","P","Surabaya","1993-08-25","33","1","O","Tegal Jaya Permai II/8 BR","Dalung","Kuta Utara","Badung","Bali","80361","081239915828","","584-Ktp Ayu Ratnasari.pdf","4746-KK Ayu Ratnasari.pdf","","","120-BPJS KESEHATAN.jpeg","5103066508930001","83.776.675.7.906.000","510.066508930001","","1410016408577","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("105","10083","2016-11-01","","L","JAKARTA","1975-05-21","22","1","A","JL. CEMPAKA PUTIH BARAT XX/5 RT. 005/007","KEL.CEMPAKA PUTIH BARAT","KEC. CEMPAKA PUTIH","jakarta pusat","dki. jakarta","10520","082111280088","","2049-KTP Indra.jpg","8287-Kartu Keluarga.pdf","583-npwp indra.jpg","6365-Kartu Peserta.jpeg","2648-bpjs kesehatan.pdf","3171052105750003","672422474024000","0001259693471","","7060284231","G.HERYAWAN INDRAYATNA","2","0","0","0");
-INSERT INTO tbl_identitas VALUES("106","10060","2014-11-10","","P","GUNUNG KIDUL","1992-01-19","33","1","O","KP. AREMAN NO. 30 RT. 01/08","KEL. TUGU","KEC. CIMANGGIS","DEPOK","JAWA BARAT","0","082299131078","","","","","","","3276025901920006","0000714796968412000","327602590192006","14038628724","1570003387017","DIAN IKA NINGRUM","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("106","10060","2017-12-01","","P","GUNUNG KIDUL","1992-01-19","33","1","O","KP. AREMAN NO. 30 RT. 01/08","KEL. TUGU","KEC. CIMANGGIS","DEPOK","JAWA BARAT","0","082299131078","","","","","","","3276025901920006","0000714796968412000","327602590192006","14038628724","1570003387017","DIAN IKA NINGRUM","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("107","10167","2018-10-01","","P","Sidoarjo","1984-06-02","23","1","O","DSN WATES RT 006 RW 002","KEDENSARI","KEDENSARI","TANGGULANGIN","Jawa Timur","61272","082299996706","","","","","","","3515064206840005","84.913.900.1-617.000","0001322742879","","1410017104118","Yuni Nurmaya","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("108","10069","2018-01-02","","L","Jakarta","1995-07-29","33","1","O","Jl. Pembina 1 No.20 Rt.001/006","Palmeriam","Matraman","Jakarta Timur","DKI Jakarta","13120","081293487645","","2994-WhatsApp Image 2018-12-07 at 14.30.03.jpeg","3650-WhatsApp Image 2018-12-07 at 14.40.46.jpeg","603-WhatsApp Image 2018-12-07 at 14.30.04.jpeg","","4621-WhatsApp Image 2018-12-07 at 14.33.39.jpeg","3175012907950003","838278299001000","0001215223187","","0060010244568","MUHAMAD RIZKI CAHYADI","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("109","10064","2017-09-11","","L","Palembang","1988-12-16","23","1","B","Jl. Cekatan no. 41 RT003 RW002","Kelapa Gading Barat","Kelapa Gading","Jakarta Utara","Jakarta","0","","","5709-1. KTP.pdf","","9568-NPWP.jpeg","","5662-BPJS kesehatan ardho.pdf","1971011612880003","981855851043000","0002332926955","","","","1","0","0","0");
@@ -662,7 +641,7 @@ INSERT INTO tbl_identitas VALUES("135","10168","2018-10-01","","L","Sampang","19
 INSERT INTO tbl_identitas VALUES("136","10169","2016-12-12","","L","SUMEDANG","1958-06-29","24","1","A","TAMAN WISMA ASRI BLOK AA.15 NO.41 RT.005/020","KEL.TELUK PUCUNG","KEC. BEKASI UTARA","BEKASI","JAWA BARAT","0","","","","","","","","3275032906580013","478007974407000","0001742259047","","094846736","ANANG DAUS SOEMANTRI","4","0","0","0");
 INSERT INTO tbl_identitas VALUES("137","10170","2018-08-01","","L","Malang","1987-07-18","23","1","A","JL. JOYOGRAND KAV. DEPAG II NO. 52 RT09 RW-9","MERJOSARI","LOWOKWARU","Malang","Jawa Timur","0","","","","","","","","0001299869087","88.025.088.1-520.000","0001299869087","","144.00.1768671.5","Fauzi Rachman Juang Pribadi","1","0","1","0");
 INSERT INTO tbl_identitas VALUES("138","10171","2018-08-15","","L","JOMBANG","1996-03-19","33","1","A","RT 01 /RW 05 DUSUN PARITAN DESA KERAS KECAMATAN DIWEK KABUPATEN JOMBANG","","DIWEK","JOMBANG","JAWA TIMUR","61471","","","8473-WhatsApp Image 2018-12-10 at 14.01.22.jpeg","8062-WhatsApp Image 2018-12-10 at 14.01.22 (1).jpeg","4974-WhatsApp Image 2018-12-10 at 14.04.28.jpeg","5718-WhatsApp Image 2018-12-10 at 14.01.23.jpeg","7251-WhatsApp Image 2018-12-10 at 14.01.23.jpeg","3517081903960003","72.491.098.9-727.000","0002257659011","0002257659011","1440017730794","MUHAMMAD NOFI RISDIANTO","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("139","10152","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("139","10152","2018-10-02","","L","","1970-06-24","24","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("140","10100","2018-08-01","","P","Jakarta","1995-08-14","33","1","B","Jl. Gandaria II Blok D.O/15 RT04 RW13","Tegal Gundil","Bogor Utara","Bogor","Jawa Barat","0","08111111423","","","","","","","3201015408950012","0000","0001629145809","","1330015291834","Sabila Adinda Puri Andarini","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("141","10009","2017-02-01","","L","MOJOKERTO","1976-07-18","25","1","A","VILLA NUSA INDAH 5 BLOK SJ 4 NO.15 RT.001/015","KEL.CIANGSANA","KEC.GUNUNG PUTRI","BOGOR","JAWA BARAT","16968","081314936176","","","","","","","3201021807760006","0000676632797403000","","96J80271875","1290007168202","RONI WIJAYA","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("142","10057","2016-05-02","","L","BANDUNG","1978-03-09","23","1","A","JL.H. MERIN KAV BRI BLOCK E NO.1E RT.003/004","MERUYA SELATAN","KEMBANGAN","JAKARTA BARAT","JAKARTA","0","","","","","","","","3273140703780008","542911276086000","","12038529454","9000005579967","ANDI RUSDIANA","1","0","0","0");
@@ -677,39 +656,44 @@ INSERT INTO tbl_identitas VALUES("150","10017","2018-02-01","","L","Bandung","19
 INSERT INTO tbl_identitas VALUES("151","10018","2018-02-01","","L","jakarta timur","1981-05-04","23","1","B","perum. kp.cerewet jln. durian 3 blok f 55 / 21 rt 013 rw 013","duren jaya","bekasi timur","bekasi","jawa barat","17111","08119544601","","4248-KTP.jpg","3424-KK.jpg","6613-NPWP.jpg","","7784-BPJS.jpg","3175010405810003","59.588.310.9-001.000","0001633620824","","0375902343","bagus sugiharto","4","0","0","0");
 INSERT INTO tbl_identitas VALUES("152","10084","2016-11-01","","L","Jakarta","1988-02-23","23","1","AB","JL. CEMERLANG NO.23 RT.006/002","KEL.JATIBENING BARU","KEC. PONDOK GEDE","BEKASI","JAWA BARAT","17612","087884472045","","1000-KTP1.jpg","9739-IMG-20181208-WA0089.jpg","9044-IMG_20181208_220436.jpg","5579-IMG_20181208_220342.jpg","3333-IMG_20181208_220518.jpg","3275082302880009","345081665432000","10016499617","10016499617","1570005429999","Ario Seto","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("153","10089","2018-05-02","","L","Surabaya","1973-08-12","24","1","A","Dusun Jati Sari RT03 RW 06","Pesanggrahan","Kuto Rejo","Mojokerto","Jawa Timur","0","","","","","","","","3516071206730002","0000","","","1520016508273","AGUS TRIWAHYUDI","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("154","10055","0000-00-00","","","","0000-00-00","","","","","","","","","0","","","1548-ktp.jpeg","7730-kk.jpeg","2656-npwp.jpeg","","8791-bpjs.jpeg","","","","","","","","0","0","0");
-INSERT INTO tbl_identitas VALUES("155","10046","0000-00-00","","L","","0000-00-00","33","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("156","10019","0000-00-00","","L","","0000-00-00","25","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("154","10055","2017-08-01","","L","","1981-08-19","24","1","A","d","","","","","0","","","1548-ktp.jpeg","7730-kk.jpeg","2656-npwp.jpeg","","8791-bpjs.jpeg","","a","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("155","10046","2017-05-02","","L","","1982-02-07","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("156","10019","2018-02-01","","L","","1967-12-21","25","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("157","10033","2016-03-07","","P","CIREBON","1986-09-03","22","1","A","GANG DESA NO. 20 RT. 004/001","KEL. PASINDANGAN","KEC. GUNUNGJATI","CIREBON","JAWA BARAT","0","081312474785","","5557-KTP584.pdf","2150-KK Mba Fika603.jpg","2188-NPWP Rafika599.jpg","6078-BPJSKT Rafika601.jpg","9382-BPJS Rafika600.jpg","3209214309860001","755214657426000","0001138437393","16017572385","134-00-06084528","Rafika Afrianne Ichsan","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("158","10020","2018-02-01","","L","Bekasi","1972-12-01","25","1","A","Jl.mawar III rt 01 rw 01","Kali baru","Medan Satria","Bekasi","Jawa Barat","0","082311267188","","","","","","","3275060112720013","0000","0001628601265","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("159","10021","2018-02-01","","L","Jakarta","1974-12-26","24","1","A","Citra indah city cluster ebony CE15/05","","Jonggol","Bogor","Jawa Barat","0","081314267100","","2293-ktp.jpg","9898-kartu keluarga.jpg","1218-IMG_0002.jpg","","1743-bpjs sandy.png","3216062612740007","38.312.393.2-009.000","0001633318571","","1680001227501","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("160","10022","0000-00-00","","L","","0000-00-00","14","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("161","10024","0000-00-00","","P","Jakarta","1989-07-29","33","1","O","Jl. Ciputat Baru No. 50","Sawah Lama","Ciputat","Tangerang Selatan","Banten","15413","","","","","","","","","0000","","","1290009982873","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("162","10041","0000-00-00","","L","JAKARTA","1989-06-04","22","1","A","BUKIT KEMIRI  2 BLOK A/XI NO.6 RT. 001/016","KEL.TUGU","KEC. CIMANGGIS","DEPOK","JAWA BARAT","16451","081219504134","","","","","","","3276020406890009","0000","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("163","10156","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("160","10022","2018-02-01","","L","","1968-05-25","25","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("161","10024","2018-05-10","","P","Jakarta","1989-07-29","33","1","O","Jl. Ciputat Baru No. 50","Sawah Lama","Ciputat","Tangerang Selatan","Banten","15413","","","","","","","","","0000","","","1290009982873","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("162","10041","2017-01-02","","L","JAKARTA","1989-06-04","22","1","A","BUKIT KEMIRI  2 BLOK A/XI NO.6 RT. 001/016","KEL.TUGU","KEC. CIMANGGIS","DEPOK","JAWA BARAT","16451","081219504134","","","","","","","3276020406890009","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("163","10156","2018-08-01","","L","","1991-09-21","33","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("164","10097","2018-07-02","","L","Magelang","1998-11-30","33","1","B","Citrosono 001/002","Citrosono","Grabag","Magelang","Jawa Tengah","56196","081225761130","","2601-KTP.PDF","5929-KK Copy.PDF","1018-NPWP.PDF","1233-BPJS Ketenagakerjaan.PDF","","3308183011980001","85.204.002.1-524.000","","18042045742","1290011433204","Muhammad Rizaq Nuriz Zaman","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("165","10090","2018-05-02","","L","Purwakarta","1989-10-28","22","1","A","Kp. Cimanglid RT 06/ RW 02","Sukatani","Sukatani","Purwakarta","Jawa Barat","41167","087779603344","","8607-IMG_20181214_181202.jpg","3948-IMG_20181214_181146.jpg","2823-IMG_20181214_181155.jpg","2522-IMG_20181214_181022.jpg","5159-IMG_20181214_180812.jpg","3214032810890001","84.669.244.0-409.000","0001447845502","3214032810890001","1660001116870","Robi Nugraha","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("166","10085","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("167","10088","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("166","10085","2018-05-02","","L","","1986-04-03","23","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("167","10088","2018-05-02","","L","","1982-04-03","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("168","10087","2018-05-01","","L","Tulungagung","1989-03-16","24","1","B","Perum Vila Bukit Tidar A4-175, RT 8 RW 11","Merjosari","Lowokwaru","Malang","Jawa Timur","65144","085655790709","","8074-KTP.PDF","7800-KK.pdf","4123-NPWP.PDF","4360-KARTU_PESERTA_18035643420.png","9409-Kartu BPJS Arif Rahman.pdf","3504141603890003","736789371629000","0000107298202","18035643420","0346628238","Arif Rahman","8","0","0","0");
-INSERT INTO tbl_identitas VALUES("169","10077","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","842639593001000","","","0060010272502","Ramdani Adam","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("169","10077","2018-03-05","","L","","1994-02-27","33","1","A","OOO","","","","","0","","","","","","","","","842639593001000","","","0060010272502","Ramdani Adam","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("170","10068","2018-01-02","","L","Bekasi","1996-12-05","33","1","AB","Blok rabu RT/RW 002/001 Desa Wanahayu","Wanahayu","Maja","Majalengka","Jawabarat","45461","081323401528","","2772-ktp390.jpg","5438-Kartu Keluarga Dicky590.jpg","2652-NPWP Dicky588.jpg","6993-IMG_20181213_223500.jpg","1394-BPJS Dicky589.jpg","3210060512960021","83.600.673.4-438.000","0001406047465","18004638310","1340010480621","Dicky Wahyu Pratama","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("171","10061","2016-09-01","","L","TASIK MALAYA","1980-12-07","24","1","O","DUSUN SADANG RT.003/006","KEL. CIBEUSI","KEC.JATINANGOR","SUMEDANG","JAWA BARAT","0","082116906653","","6662-KTP SOFI.jpg","","","4233-BPJS Sofi.pdf","9327-BPJS Sofi.pdf","3211154712800015","00","0001457755593","16044250898","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("172","10051","0000-00-00","","L","BANDUNG","1965-03-25","24","1","A","JL. CIHAMPELAS NO.246 A RT.007/004","KEL.CIPAGANTI","KEC.COBLONG","BANDUNG","JAWA BARAT","42031","08562188333","","","","","","","3273022503650001","71.072.796.423.000","","","1730001530089","Adhi Sujana","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("172","10051","2016-01-24","","L","BANDUNG","1965-03-25","24","1","A","JL. CIHAMPELAS NO.246 A RT.007/004","KEL.CIPAGANTI","KEC.COBLONG","BANDUNG","JAWA BARAT","42031","08562188333","","","","","","","3273022503650001","71.072.796.423.000","","","1730001530089","Adhi Sujana","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("173","10047","2017-05-02","","L","KEBUMEN","1974-03-20","23","1","B","SIKAMBANG RT.01/002","KARANGSARI","KUTOWINANGUN","JAWA TENGAH","Jawa Tengah","54393","082112434335","","9586-WhatsApp Image 2018-12-13 at 15.07.14.jpeg","7156-WhatsApp Image 2018-12-13 at 15.08.06.jpeg","7742-WhatsApp Image 2018-12-13 at 15.07.33.jpeg","7736-WhatsApp Image 2018-12-13 at 15.18.27.jpeg","1323-WhatsApp Image 2018-12-13 at 15.06.41.jpeg","3305102003740007","82.010.398.4-523.000","0001146263804","3305102003740007","166-00-0187187-0","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("174","10032","2016-03-01","","P","CIREBON","1976-10-06","23","1","B","JL. KARIMUN JAWA NO. 56 BTN NUSANTARA RT. 003/002","KEL. ARGASUNYA","KEC. HARJAMUKTI","CIREBON","JAWA BARAT","45145","085295509299","","3569-KTP Mia.pdf","3071-KK Mia.pdf","9911-NPWP Mia.pdf","4680-KARTU_PESERTA_16017572377.png","9276-BPJS Kesehatan Mia.pdf","327434610760010","58.614.050.1-426.000","0001136500446","16017572377","1340005786057","MIA RESTU OKTAVIA SUTANTY","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("175","10036","2016-03-07","","P","CIREBON","1988-07-03","33","1","O","DUSUN 03 RT. 025/008","DESA LEMAHABANG KULON","KEC. LEMAHABANG","CIREBON","JAWA BARAT","45183","085643908951","","3235-KTP COMPRESS.jpg","5036-KK.jpeg","2094-NPWP.jpg","5085-16017572419.png","3889-BPJS Kesehatan.jpg","3209074307880006","755215134426000","0001142504021","16017572419","1340010290103","Julian Dwi Kusuma Lestari","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("176","10029","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("177","10035","2016-03-07","","L","CIREBON","1985-03-12","24","1","O","Perum Istana Banjar Blok J No20 Rt.005.Rw.001","KEL. Banjarwangunan","KEC. Mundu","CIREBON","JAWA BARAT","45173","081320267160","","4442-KTP Salmadi.pdf","5557-KK Salmadi.pdf","2459-NPWP Salmadi.pdf","","569-Bpjs Kesehatan.pdf","3209101203860016","75.509.174.1-426.000","0001142504043","","1340010266111","Salmadi","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("178","10079","2018-04-02","","L","Mojokerto","1997-02-16","33","1","O","Ds.lengkong.dsn lengkong","Lengkong","Mojoanyar","Mojokerto","Jawa timur","0","","","5356-IMG-20181212-WA0006.jpg","6739-IMG-20181211-WA0004.jpg","","495-IMG-20181211-WA0007.jpg","3404-IMG-20181211-WA0005.jpg","3516181602970001","123","","","458968516","Wega Tommy Dwi Pamungkas","4","0","0","0");
-INSERT INTO tbl_identitas VALUES("179","10071","0000-00-00","","L","","0000-00-00","22","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("180","10172","0000-00-00","","L","JAKARTA","1985-08-07","25","1","A","JL. PUSKEMAS NO. 73 RT.004/003","KEL. SETU","KEC. CIPAYUNG","JAKARTA TIMUR","JAKARTA","13880","021.84593809","","","","","","","3175100708850006","670112747009000","09017717068","","0700005342964","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("179","10071","2018-04-02","","L","","1988-01-10","33","1","A","OOO","","","","","0","","","","","","","","","0000","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("180","10172","2018-10-01","","L","JAKARTA","1985-08-07","25","1","A","JL. PUSKEMAS NO. 73 RT.004/003","KEL. SETU","KEC. CIPAYUNG","JAKARTA TIMUR","JAKARTA","13880","021.84593809","","","","","","","3175100708850006","670112747009000","09017717068","","0700005342964","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("181","10054","0000-00-00","","P","","0000-00-00","24","1","A","dd","","","","","0","","","","","","","","","d","","","","","1","0","0","0");
 INSERT INTO tbl_identitas VALUES("182","10078","0000-00-00","","P","","0000-00-00","23","1","A","dd","","","","","0","","","","","","","","","dd","","","","","1","0","0","0");
-INSERT INTO tbl_identitas VALUES("183","10180","0000-00-00","","","","0000-00-00","","","","","","","","","0","","","5072-KTP Anggre.pdf","6362-KK.pdf","7505-NPWP.pdf","3173-Jamsostek.pdf","207-BPJS2.pdf","","","","","","","","0","0","0");
-INSERT INTO tbl_identitas VALUES("184","10181","2018-09-24","","P","Surakarta","1988-10-29","24","1","A","Jl. Behape I Blok CC No.8","Kampung Dukuh","","Jakarta Timue","DKI Jakarta","13550","","","","","","","","","458793668526000","","","1290009982964","Saktia Lesan Dianasari","1","0","0","14113075");
-INSERT INTO tbl_identitas VALUES("185","10182","2018-09-24","","P","Depok","1986-04-05","24","1","A","Jl. Jatimulya No. 21 RT 03 RW 03","Jatimulya","Cilodong","Depok","Jawa Barat","16413","","","","","","","","","573465564412000","08020812163000","08020812163000","1570000719246","Aprilizayanti Putri","1","0","1","21000688");
-INSERT INTO tbl_identitas VALUES("186","10183","0000-00-00","","L","Sumedang","1970-08-09","24","1","A","Jl. Tubagus Ismail Bawah No. 32 B","Lebak Gede","Coblong","Bandung","Jawa Barat","40132","08122029945","","6601-ID uwk.docx","","9639-NPWP UWK.docx","3256-BPJS TK uwk.docx","6755-BPJS UWK.docx","3273020908700009","67.663.270.6-423.000","0001629146103","3273 0209 0870 0010","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("183","10180","2018-11-01","","P","","1975-07-22","25","1","A","o","","","","","0","","","5072-KTP Anggre.pdf","6362-KK.pdf","7505-NPWP.pdf","3173-Jamsostek.pdf","207-BPJS2.pdf","","o","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("184","10181","2018-09-26","","P","Surakarta","1988-10-29","24","1","A","Jl. Behape I Blok CC No.8","Kampung Dukuh","","Jakarta Timue","DKI Jakarta","13550","","","","","","","","","458793668526000","","","1290009982964","Saktia Lesan Dianasari","1","0","0","14113075");
+INSERT INTO tbl_identitas VALUES("185","10182","2018-09-26","","P","Depok","1986-04-05","24","1","A","Jl. Jatimulya No. 21 RT 03 RW 03","Jatimulya","Cilodong","Depok","Jawa Barat","16413","","","","","","","","","573465564412000","08020812163000","08020812163000","1570000719246","Aprilizayanti Putri","1","0","1","21000688");
+INSERT INTO tbl_identitas VALUES("186","10183","2018-08-10","","L","Sumedang","1970-08-09","24","1","A","Jl. Tubagus Ismail Bawah No. 32 B","Lebak Gede","Coblong","Bandung","Jawa Barat","40132","08122029945","","6601-ID uwk.docx","","9639-NPWP UWK.docx","3256-BPJS TK uwk.docx","6755-BPJS UWK.docx","3273020908700009","67.663.270.6-423.000","0001629146103","3273 0209 0870 0010","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("187","10184","2019-01-02","","L","","1990-05-11","22","1","A","a","","","","","0","","","","","","","","","a","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("188","10186","2019-01-02","","P","","1996-08-13","33","1","A","a","","","","","0","","","","","","","","","a","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("189","10185","2018-11-02","","L","","1996-09-02","33","1","A","a","","","Surabaya","Jawa Timur","0","","","","","","","","","a","","","","","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("190","10187","2019-01-02","","L","JAMBI","0000-00-00","32","1","A","JALUR I B MEKAR SARI MAKMUR, RT 002/000  ","DESA MEKAR SARI MAKMUR","SUNGAI BAHAR","JAMBI","JAMBI","0","085266856876","","3007-KTP IHSANUDIN.jpg","3238-KK IHSANUDIN.jpg","1388-NPWP IHSANUDIN.jpg","3301-BPJS TENAGA KERJA IHSANUDDIN.jpg","3553-BPJS KES IHSANUDIN.jpg","1505072302910002","72.320.369.1-331.000","0001299019149","1505 0723 0291 0002","1100006089780","IHSANUDDIN SAPUTRA","1","0","0","0");
+INSERT INTO tbl_identitas VALUES("191","10188","2018-11-02","","L","SERANG","0000-00-00","32","1","A","BUMI PASUNDAN ESTATE KAV. 20","PASIR IMPUN","MANDALAJATI","BANDUNG","JAWA BARAT","0","","","2110-BERKAS KRISNAWAN.jpg","5944-img007.jpg","7369-BERKAS KRISNAWAN.jpg","7915-BERKAS KRISNAWAN.jpg","4398-BERKAS KRISNAWAN.jpg","3273301407920002","767796121429000","0001877008274","327301407920002","1360007409672","KHRISNAWAN ARIEF WICAKSONO","1","0","0","0");
 
 
 
@@ -782,7 +766,7 @@ CREATE TABLE `tbl_jabatan` (
   `tanggal` date NOT NULL,
   `no_sk` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
 
 INSERT INTO tbl_jabatan VALUES("1","10012","Perawats","","Biro Adm.Kepegawaian","1992-08-11","EB.HK1-KPTS.031");
 INSERT INTO tbl_jabatan VALUES("2","10012","Tata Usaha Keselamatan dan Kesehatan Kerja","","Biro SDM Sub Bag. Sumber Daya Manusia","2018-09-20","CC.HK1-KPTS.042");
@@ -871,6 +855,8 @@ INSERT INTO tbl_jabatan VALUES("94","10143","SENIOR OFFICER","","TCM","0000-00-0
 INSERT INTO tbl_jabatan VALUES("95","10080","Marketing Support","3610-SK 6 Bulan Feby.docx","","2018-07-02","060/AA-JMP/PKWT/VII/2018");
 INSERT INTO tbl_jabatan VALUES("96","10080","Marketing Support","5711-SK 3 Bulan Feby.docx","","2018-04-02","025/AA-JMP/PKWT/IV/2018");
 INSERT INTO tbl_jabatan VALUES("97","10139","SUPERVISOR","","SUPERVISOR KM 725A SURABAYA MOJOKERTO","2018-10-01","046/AA.P-3b/X/2018");
+INSERT INTO tbl_jabatan VALUES("98","10187","","","","0000-00-00","");
+INSERT INTO tbl_jabatan VALUES("99","10188","","","","0000-00-00","");
 
 
 
@@ -1344,21 +1330,21 @@ INSERT INTO tbl_kontrak VALUES("26","10058","2018-11-01","2019-04-30","","","");
 INSERT INTO tbl_kontrak VALUES("27","10062","2018-06-04","2019-05-31","","","");
 INSERT INTO tbl_kontrak VALUES("29","10060","2017-12-04","2018-11-30","","","habis");
 INSERT INTO tbl_kontrak VALUES("30","10065","2018-01-02","2018-12-31","","28","habis");
-INSERT INTO tbl_kontrak VALUES("31","10065","2018-01-02","2018-12-31","","0","mauhabis");
+INSERT INTO tbl_kontrak VALUES("31","10065","2018-01-02","2018-12-31","","0","habis");
 INSERT INTO tbl_kontrak VALUES("32","10064","2018-01-02","2018-12-31","","28","habis");
-INSERT INTO tbl_kontrak VALUES("33","10064","2018-01-02","2018-12-31","","0","mauhabis");
+INSERT INTO tbl_kontrak VALUES("33","10064","2018-01-02","2018-12-31","","0","habis");
 INSERT INTO tbl_kontrak VALUES("34","10067","2018-07-02","2019-06-02","","","");
 INSERT INTO tbl_kontrak VALUES("35","10069","2018-11-01","2019-04-30","","","");
 INSERT INTO tbl_kontrak VALUES("36","10075","2018-07-04","2019-06-30","","","");
-INSERT INTO tbl_kontrak VALUES("37","10169","2018-07-02","2018-12-31","","0","mauhabis");
+INSERT INTO tbl_kontrak VALUES("37","10169","2018-07-02","2018-12-31","","0","habis");
 INSERT INTO tbl_kontrak VALUES("38","4","2018-06-04","2019-05-31","","","");
 INSERT INTO tbl_kontrak VALUES("39","10070","2018-06-04","2019-05-31","","","");
 INSERT INTO tbl_kontrak VALUES("40","10074","2018-06-04","2019-05-31","","","");
 INSERT INTO tbl_kontrak VALUES("41","2","2018-06-04","2019-05-31","","","");
 INSERT INTO tbl_kontrak VALUES("42","10076","2018-06-04","2019-05-31","","","");
 INSERT INTO tbl_kontrak VALUES("43","10081","2018-07-02","2019-06-30","","","");
-INSERT INTO tbl_kontrak VALUES("44","10080","2018-06-02","2018-12-31","","0","mauhabis");
-INSERT INTO tbl_kontrak VALUES("45","10089","2018-08-01","2018-12-31","","0","mauhabis");
+INSERT INTO tbl_kontrak VALUES("44","10080","2018-06-02","2018-12-31","","0","habis");
+INSERT INTO tbl_kontrak VALUES("45","10089","2018-08-01","2018-12-31","","0","habis");
 INSERT INTO tbl_kontrak VALUES("46","10082","2018-05-02","2019-04-30","","","");
 INSERT INTO tbl_kontrak VALUES("47","10083","2018-05-02","2019-04-30","","","");
 INSERT INTO tbl_kontrak VALUES("48","10099","2018-10-01","2019-09-30","","","");
@@ -1473,7 +1459,7 @@ CREATE TABLE `tbl_pendidikan` (
   `tgl_akhir` date NOT NULL,
   `tempat` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=398 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=latin1;
 
 INSERT INTO tbl_pendidikan VALUES("1","10012","1","1","SD Ringinanom","","1971","XIII.Aa 164603","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_pendidikan VALUES("2","10012","2","0","","","0","","Komunikasi Yang efektif","1995-01-31","1995-01-31","Jakarta");
@@ -1816,6 +1802,8 @@ INSERT INTO tbl_pendidikan VALUES("394","10139","2","0","","","0","","PELATIHAN 
 INSERT INTO tbl_pendidikan VALUES("395","10158","1","3","SMK Negeri 3 Surabaya","Teknik Multimedia","0","","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_pendidikan VALUES("396","10158","2","0","","","0",""," DKV (S1) - Umaha","2015-09-04","2016-12-14","Surabaya");
 INSERT INTO tbl_pendidikan VALUES("397","10158","1","8","Umar Usman Business School","Bisnis Syariah","0","","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_pendidikan VALUES("398","10187","1","4","UNIVERSITAS SUMATERA UTARA","TEKNIK SIPIL","2014","12758/UN5.2.1.4/LLS/S-1/2014","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_pendidikan VALUES("399","10188","1","4","UNIVERSITAS DIPONEGORO","TEKNIK SIPIL","2011","U:14748/ST/F:19681","","0000-00-00","0000-00-00","");
 
 
 
@@ -1830,9 +1818,6 @@ CREATE TABLE `tbl_penerimaan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_penerimaan VALUES("3","6","4","5","385000");
-INSERT INTO tbl_penerimaan VALUES("4","6","10","6","500000");
-INSERT INTO tbl_penerimaan VALUES("5","6","10","16","500000");
 
 
 
@@ -1847,12 +1832,6 @@ CREATE TABLE `tbl_potongan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_potongan VALUES("1","5","4","28","78100");
-INSERT INTO tbl_potongan VALUES("2","5","10012","7","2100000");
-INSERT INTO tbl_potongan VALUES("3","5","10012","1","181067");
-INSERT INTO tbl_potongan VALUES("4","5","10012","9","364506");
-INSERT INTO tbl_potongan VALUES("5","5","10012","22","14000");
-INSERT INTO tbl_potongan VALUES("7","6","10","16","116454");
 
 
 
@@ -4718,169 +4697,169 @@ CREATE TABLE `tbl_user` (
   KEY `fff` (`admin`),
   KEY `unit` (`unit`),
   CONSTRAINT `fsa` FOREIGN KEY (`admin`) REFERENCES `tbl_role` (`admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=10184 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10189 DEFAULT CHARSET=latin1;
 
-INSERT INTO tbl_user VALUES("1","sdm","13bb8b589473803f26a02e338f949b8c","Admin SDM - Umum","-","1","0","","19","","","4","0","2","","1","0","3600","2","0","0","");
-INSERT INTO tbl_user VALUES("2","PK068","556f17c2cd7d50470fd0cb03588a10da","Aprillia Hermansyah","PK068","7","0","6422-april.jpg","4","10","47","5","0","4","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("1","sdm","13bb8b589473803f26a02e338f949b8c","Admin SDM - Umum","-","1","0","","19","","","4","0","2","","1","0","3600","2","0","0","04 Jan 2019 16:26:09");
+INSERT INTO tbl_user VALUES("2","PK068","556f17c2cd7d50470fd0cb03588a10da","Aprillia Hermansyah","PK068","7","0","6422-april.jpg","4","10","47","5","0","4","","1","0","3600","2","9","0","02 Jan 2019 09:05:23");
 INSERT INTO tbl_user VALUES("4","PK060","d69ed7e8520a6ee31d5ab1d597726f34","Dendito Pratama","PK060","7","0","1167-dendito.jpg","19","57","123","5","12","2","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("6","10022","93a27b0bd99bac3e68a440b48aa421ab","Sumarsono","10022","4","0","3032-ono.jpg","19","54","106","3","12","2","","1","0","3600","1","4","0","");
-INSERT INTO tbl_user VALUES("7","10001","52d5c97cf60257405716d84b9a885d31","Hubby Ramdhani","10001","4","0","8578-Hubby.jpg","10","30","75","3","0","7","","1","0","3600","1","4","1","");
-INSERT INTO tbl_user VALUES("8","admin","d69ed7e8520a6ee31d5ab1d597726f34","Super Admin","-","1","0","5911-Logo Master JMP video.jpg","0","","BANG ADMIN","0","999999","2","","1","55","3600","0","0","0","");
-INSERT INTO tbl_user VALUES("9","10003","f5dffc111454b227fbcdf36178dfe6ac","Uci Sanusi","10003","5","0","2493-uci.jpg","18","52","98","3","0","3","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10","10007","9cdf26568d166bc6793ef8da5afa0846","R.A. Ayu Suzanne P","10007","5","0","2770-ayu.jpg","4","11","49","4","0","4","","1","0","3600","2","7","0","");
+INSERT INTO tbl_user VALUES("7","10001","52d5c97cf60257405716d84b9a885d31","Hubby Ramdhani","10001","4","0","8578-Hubby.jpg","10","30","75","3","12","7","","1","0","3600","1","4","1","");
+INSERT INTO tbl_user VALUES("8","admin","d69ed7e8520a6ee31d5ab1d597726f34","Super Admin","-","1","0","5911-Logo Master JMP video.jpg","0","","BANG ADMIN","0","999999","2","","1","55","3600","0","0","0","04 Jan 2019 17:32:23");
+INSERT INTO tbl_user VALUES("9","10003","f5dffc111454b227fbcdf36178dfe6ac","Uci Sanusi","10003","5","0","2493-uci.jpg","18","52","98","3","12","3","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10","10007","9cdf26568d166bc6793ef8da5afa0846","R.A. Ayu Suzanne P","10007","5","0","2770-ayu.jpg","4","11","49","3","12","4","","1","0","3600","2","7","0","");
 INSERT INTO tbl_user VALUES("9999","tampung","tampung","-","tampung","1","0","","0","","","0","0","0","","0","0","3600","0","0","0","");
-INSERT INTO tbl_user VALUES("10001","10010","4bc457f7b180362dfb1ae8b0a3da32a7","Irwansyah Rinaldhi","10010","5","0","7717-WhatsApp Image 2018-12-10 at 21.29.30.jpeg","14","38","87","3","0","7","","1","0","3600","1","6","1","");
-INSERT INTO tbl_user VALUES("10002","10011","a2369958a9645eac52b58a8134e2ef5a","Dede Ahmad Nurhadi","10011","5","0","2940-dede.jpg","13","36","147","3","0","7","","1","0","3600","1","6","1","");
-INSERT INTO tbl_user VALUES("10003","10014","7b9d31aa17b849b238ab79cef0733041","Meta Herlina Puspitaningtyas","10014","4","0","155-Meta H.jpg","3","6","32","3","0","5","","1","0","3600","1","4","0","");
-INSERT INTO tbl_user VALUES("10004","10015","342b5fe6486788799659c39bbfc3fa02","Marlina Ririn Indriyani","10015","5","0","8201-liena.jpg","2","3","10","3","0","6","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10005","10016","1ce9168a60deae4a994dbd5b2d145699","Engkun Purkonudin","10016","5","0","7464-engkun.jpg","11","33","87","3","0","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10001","10010","4bc457f7b180362dfb1ae8b0a3da32a7","Irwansyah Rinaldhi","10010","5","0","7717-WhatsApp Image 2018-12-10 at 21.29.30.jpeg","14","38","87","3","12","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10002","10011","a2369958a9645eac52b58a8134e2ef5a","Dede Ahmad Nurhadi","10011","5","0","2940-dede.jpg","13","36","147","3","12","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10003","10014","7b9d31aa17b849b238ab79cef0733041","Meta Herlina Puspitaningtyas","10014","4","0","155-Meta H.jpg","3","6","32","3","12","5","","1","0","3600","1","4","0","");
+INSERT INTO tbl_user VALUES("10004","10015","342b5fe6486788799659c39bbfc3fa02","Marlina Ririn Indriyani","10015","5","0","8201-liena.jpg","2","3","10","3","12","6","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10005","10016","1ce9168a60deae4a994dbd5b2d145699","Engkun Purkonudin","10016","5","0","7464-engkun.jpg","11","33","87","3","12","7","","1","0","3600","1","6","1","");
 INSERT INTO tbl_user VALUES("10006","10017","24064e6576a74af1b8eda89277c6b659","Sri Rejeki Handayani","10017","4","0","","18","50","95","3","5","3","","0","0","3600","1","4","0","");
-INSERT INTO tbl_user VALUES("10007","10019","fd32b50714854403e9e1001a44becc65","Hanna Farida Tampubolon","10019","5","0","8427-hanna.jpg","10","32","83","3","0","7","","1","0","3600","1","6","1","");
-INSERT INTO tbl_user VALUES("10008","10020","c1722a7941d61aad6e651a35b65a9c3e","Donny Ikhwan","10020","4","0","5784-donny.jpg","4","10","46","3","0","4","","1","0","3600","1","4","0","");
-INSERT INTO tbl_user VALUES("10009","10021","f702defbc67edb455949f46babab0c18","Roni Wijaya","10021","6","0","6013-cakroni.jpg","2","3","12","3","0","6","","1","0","3600","1","8","0","");
-INSERT INTO tbl_user VALUES("10010","10023","7b8bc3700ce886e8627f41e799fe764f","Imad Zaky Mubarak","10023","4","0","8515-zaky.jpg","2","2","8","3","0","6","","1","0","3600","1","4","0","");
-INSERT INTO tbl_user VALUES("10011","10025","76d0baca6075c45cd8a3a55fa6a23c05","Tria Oktaviani","10025","5","0","6110-tria.jpg","4","11","48","3","0","4","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10012","10027","3882c5a9869d86def6b7be879605522e","Sumarmi","10027","5","0","5295-sumarmi.jpg","19","55","108","3","8","2","3","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10013","10029","827051e35b2c76f7004a6cbc76f42d4a","Edmundus Edy Pancaningtyas","10029","6","0","6744-edmundus.jpg","19","55","111","3","0","2","","1","0","3600","1","8","0","");
-INSERT INTO tbl_user VALUES("10014","10030","b42f87724dee54c6fc1ccf14a0e536d4","Irwan Zaini Luthfi","10030","5","0","7475-Irwan ZL.jpg","13","35","147","3","0","7","","1","0","3600","1","6","1","");
-INSERT INTO tbl_user VALUES("10015","10031","d2cb583f4b5bdc51b965ae555ee6bca5","Katni","10031","6","0","8673-katni.jpg","18","52","77","3","0","3","","1","0","3600","1","8","0","");
-INSERT INTO tbl_user VALUES("10016","10032","6aeb68d1bdff2c5e503eed93c51dd74d","Muhamad Agus Sunardi","10032","7","0","8598-Agus.jpg","14","39","156","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10017","10033","b4dda6951b6af2e9d06224a597eac5fe","Setya Prayitno","10033","7","0","8152-setya.jpg","14","42","156","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10018","10034","dbc6904b9ae5239ad74f90306daae0ad","Bagus Sugiharto","10034","7","0","7915-IMG-20181211-WA0034.jpg","8","26","164","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10019","10035","329d1ea6acb272924f991d523b2d2b80","Karmin","10035","7","0","","8","27","148","4","0","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10007","10019","fd32b50714854403e9e1001a44becc65","Hanna Farida Tampubolon","10019","5","0","8427-hanna.jpg","10","32","83","3","12","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10008","10020","c1722a7941d61aad6e651a35b65a9c3e","Donny Ikhwan","10020","4","0","5784-donny.jpg","4","10","46","3","12","4","","1","0","3600","1","4","0","");
+INSERT INTO tbl_user VALUES("10009","10021","f702defbc67edb455949f46babab0c18","Roni Wijaya","10021","6","0","6013-cakroni.jpg","2","3","12","3","12","6","","1","0","3600","1","8","0","");
+INSERT INTO tbl_user VALUES("10010","10023","7b8bc3700ce886e8627f41e799fe764f","Imad Zaky Mubarak","10023","4","0","8515-zaky.jpg","2","2","8","3","12","6","","1","0","3600","1","4","0","");
+INSERT INTO tbl_user VALUES("10011","10025","76d0baca6075c45cd8a3a55fa6a23c05","Tria Oktaviani","10025","5","0","6110-tria.jpg","4","11","48","3","12","4","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10012","10027","3882c5a9869d86def6b7be879605522e","Sumarmi","10027","5","0","5295-sumarmi.jpg","19","55","108","3","12","2","3","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10013","10029","827051e35b2c76f7004a6cbc76f42d4a","Edmundus Edy Pancaningtyas","10029","6","0","6744-edmundus.jpg","19","55","111","3","12","2","","1","0","3600","1","8","0","");
+INSERT INTO tbl_user VALUES("10014","10030","b42f87724dee54c6fc1ccf14a0e536d4","Irwan Zaini Luthfi","10030","5","0","7475-Irwan ZL.jpg","13","35","147","3","12","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10015","10031","d2cb583f4b5bdc51b965ae555ee6bca5","Katni","10031","6","0","8673-katni.jpg","18","52","77","3","12","3","","1","0","3600","1","8","0","");
+INSERT INTO tbl_user VALUES("10016","10032","6aeb68d1bdff2c5e503eed93c51dd74d","Muhamad Agus Sunardi","10032","7","0","8598-Agus.jpg","14","39","156","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10017","10033","b4dda6951b6af2e9d06224a597eac5fe","Setya Prayitno","10033","7","0","8152-setya.jpg","14","42","156","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10018","10034","dbc6904b9ae5239ad74f90306daae0ad","Bagus Sugiharto","10034","7","0","7915-IMG-20181211-WA0034.jpg","8","26","164","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10019","10035","329d1ea6acb272924f991d523b2d2b80","Karmin","10035","7","0","","8","27","148","4","12","7","","1","0","3600","2","9","1","");
 INSERT INTO tbl_user VALUES("10020","10036","7c127e0c66f06e58c7c7310a7c6fa488","Rudi tatang","10036","7","0","","13","37","148","5","0","7","","1","0","3600","2","9","1","");
 INSERT INTO tbl_user VALUES("10021","10037","c38f0ea6e6c3aa84b9f662bb03673c97","Sandy Irawan","10037","7","0","3124-IMG20181128095424.jpg","14","43","156","5","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10022","10038","0f6b1f657ac30ab76519ed4c677e9909","Irwan Pahala Simanungkalit","10038","7","0","","17","49","180","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10023","10039","2a8009525763356ad5e3bb48b7475b4d","Ade Gustika","10039","5","0","","3","58","186","3","0","5","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10024","10040","f250daff6a09865ff432821b2adac54f","Mintari Yulianingsih","10040","4","0","","24","70","190","3","0","7","","1","0","3600","1","4","1","");
-INSERT INTO tbl_user VALUES("10025","D0005","fed2bb44e5db4d3b34370d2ed061fbbd","Irwan Artigyo Sumadiyo","D0005","2","0","3093-irwan.jpg","1","1","4","2","0","1","","1","0","3600","2","2","0","");
-INSERT INTO tbl_user VALUES("10027","PK102","04e246e949e3a9b2b80c4d7d3bef872d","Herdwin Nofrian","PK102","5","0","5473-ewin.jpg","18","53","101","5","5","3","","1","0","3600","2","6","0","");
-INSERT INTO tbl_user VALUES("10031","PK016","04ce83bf1967d561285890241abf11eb","Handa Rudita","PK016","5","0","3204-handa.jpg","3","9","41","5","0","5","","1","0","3600","2","6","1","");
-INSERT INTO tbl_user VALUES("10032","PK018","e8e68213a17dbac1bc8736e68af7732c","Mia Restu Oktavia Sutanty","PK018","8","0","7777-mia.jpg","12","48","129","5","0","7","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10033","PK019","cd86235826c87663d03da08dda19b5af","Rafika Afrianne Ichsan","PK019","8","0","1774-fika.jpg","12","48","128","5","0","7","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10034","PK020","a349c90fb067eae78defd650c86e942e","Ibnu Sarjono","PK020","7","0","8448-ibnu.jpg","5","16","71","5","0","4","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10035","PK021","942e07c72a2f12ef5368b7dfd5c53116","Salmadi","PK021","7","0","7847-salmadi.jpg","12","48","131","5","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10036","PK022","0ac70a7ae64fce4225dcca0debaf939a","Julian Dwi Kusuma Lestari","PK022","8","0","9621-pas foto.jpg","12","48","132","5","0","7","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10037","PK023","ff06415acd8ad03505030f2baac4607c","Widyadji Sasono","PK023","6","0","4368-loudy.jpg","18","51","97","5","5","3","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10038","PK024","59332b589a064382226ec34492419cba","Riyen Haryani","PK024","8","0","298-riyen.jpg","2","3","30","5","0","6","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10039","PK025","29bff3632b1337102fd98773e64bfc36","Risma Nurjannah","PK025","8","0","6824-risma.jpg","19","55","116","5","0","7","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10040","PK027","dced105c62a12c5b94280160612ad040","Gatri Ayuning Lestari","PK027","6","0","5588-gatri.jpg","18","53","102","5","5","3","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10041","PK028","bfb3852b4814d2e61598f2ad07d46298","Kevin Dwiagy Emerald","PK028","8","0","6146-kevin.jpg","19","57","124","5","0","2","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10042","PK029","594eee4c191bc382c7e3c749a3444b8a","Isna Rifai","PK029","6","0","4689-IMG_20181128_122928.jpg","5","15","67","5","0","7","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10043","PK030","73b4c1b7b7ddaf5ae9850b114b6bf558","Resy Alifiyanti Suprapto","PK030","8","0","1616-resy.jpg","5","14","116","5","0","2","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10044","PK031","3168f142ce3904a787b2ab3f68ae5968","Abdurrahman","PK031","6","0","5645-rahman.jpg","4","12","49","5","0","4","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10045","PK032","3384d017ec0e7f0f17d2c3d18b608c24","Muhammad Fahri","PK032","6","0","7468-fahri.jpg","6","18","67","5","0","4","","1","0","3600","2","8","1","");
-INSERT INTO tbl_user VALUES("10046","PK033","14c96390890cda796ba8a0100f647a4f","Saipul Anwar","PK033","8","0","","11","33","91","5","0","5","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10047","PK034","1872f655b7c18c6774a606268f9e8397","Muhamad Nur Baedi","PK034","8","0","4062-WhatsApp Image 2018-12-13 at 15.52.26.jpeg","12","48","130","5","0","7","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10048","PK035","57bf2d8dc369f5238ad508888f101ef9","Reza Ahmad Fauzi","PK035","7","0","6421-rezaahmad.jpg","5","13","71","5","0","5","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10049","PK036","7cc3666509e65e7209d2517003c984d9","Siti Rosmayanti","PK036","8","0","9550-rosma.jpg","2","3","29","5","0","6","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10050","PK037","5eb0614e5a420717938116ce87e358fd","Maylisa Marsita Anggreina Siahaya","PK037","8","0","3452-ica.jpg","2","3","20","5","0","6","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10051","PK038","beb1c0c148f8a01a9b7a19e4f7d009c1","Adhi Sujana","PK038","5","0","2234-adhi.jpg","11","33","87","5","0","7","","1","0","3600","2","6","1","");
-INSERT INTO tbl_user VALUES("10052","PK039","679247a792c1a50731ba8f48425e58ed","Eko Prabowo","PK039","8","0","","7","20","72","5","0","5","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10053","PK040","c2797a8ce242cb02cd045f49b1754740","Edi Junaedi","PK040","6","0","9496-edi.jpg","6","18","67","5","0","4","","1","0","3600","2","8","1","");
+INSERT INTO tbl_user VALUES("10022","10038","0f6b1f657ac30ab76519ed4c677e9909","Irwan Pahala Simanungkalit","10038","7","0","","17","49","180","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10023","10039","2a8009525763356ad5e3bb48b7475b4d","Ade Gustika","10039","5","0","","3","58","186","3","12","5","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10024","10040","f250daff6a09865ff432821b2adac54f","Mintari Yulianingsih","10040","4","0","","24","70","190","3","12","7","","1","0","3600","1","4","1","");
+INSERT INTO tbl_user VALUES("10025","D0005","fed2bb44e5db4d3b34370d2ed061fbbd","Irwan Artigyo Sumadiyo","D0005","2","0","3093-irwan.jpg","1","1","4","2","12","1","","1","0","3600","2","2","0","");
+INSERT INTO tbl_user VALUES("10027","PK102","04e246e949e3a9b2b80c4d7d3bef872d","Herdwin Nofrian","PK102","5","0","5473-ewin.jpg","18","53","101","5","12","3","","1","0","3600","2","6","0","");
+INSERT INTO tbl_user VALUES("10031","PK016","04ce83bf1967d561285890241abf11eb","Handa Rudita","PK016","5","0","3204-handa.jpg","3","9","41","5","12","5","","1","0","3600","2","6","1","");
+INSERT INTO tbl_user VALUES("10032","PK018","e8e68213a17dbac1bc8736e68af7732c","Mia Restu Oktavia Sutanty","PK018","8","0","7777-mia.jpg","12","48","129","5","12","7","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10033","PK019","cd86235826c87663d03da08dda19b5af","Rafika Afrianne Ichsan","PK019","8","0","1774-fika.jpg","12","48","128","5","12","7","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10034","PK020","a349c90fb067eae78defd650c86e942e","Ibnu Sarjono","PK020","7","0","8448-ibnu.jpg","5","16","71","5","12","4","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10035","PK021","942e07c72a2f12ef5368b7dfd5c53116","Salmadi","PK021","7","0","7847-salmadi.jpg","12","48","131","5","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10036","PK022","0ac70a7ae64fce4225dcca0debaf939a","Julian Dwi Kusuma Lestari","PK022","8","0","9621-pas foto.jpg","12","48","132","5","12","7","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10037","PK023","ff06415acd8ad03505030f2baac4607c","Widyadji Sasono","PK023","6","0","4368-loudy.jpg","18","51","97","5","12","3","","1","0","3600","2","8","0","");
+INSERT INTO tbl_user VALUES("10038","PK024","59332b589a064382226ec34492419cba","Riyen Haryani","PK024","8","0","298-riyen.jpg","2","3","30","5","12","6","","1","0","3600","2","10","0","");
+INSERT INTO tbl_user VALUES("10039","PK025","29bff3632b1337102fd98773e64bfc36","Risma Nurjannah","PK025","8","0","6824-risma.jpg","19","55","116","5","12","7","","1","0","3600","2","10","0","");
+INSERT INTO tbl_user VALUES("10040","PK027","dced105c62a12c5b94280160612ad040","Gatri Ayuning Lestari","PK027","6","0","5588-gatri.jpg","18","53","102","5","12","3","","1","0","3600","2","8","0","");
+INSERT INTO tbl_user VALUES("10041","PK028","bfb3852b4814d2e61598f2ad07d46298","Kevin Dwiagy Emerald","PK028","8","0","6146-kevin.jpg","19","57","124","5","12","2","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10042","PK029","594eee4c191bc382c7e3c749a3444b8a","Isna Rifai","PK029","6","0","4689-IMG_20181128_122928.jpg","5","15","67","5","12","7","","1","0","3600","2","8","0","");
+INSERT INTO tbl_user VALUES("10043","PK030","73b4c1b7b7ddaf5ae9850b114b6bf558","Resy Alifiyanti Suprapto","PK030","8","0","1616-resy.jpg","5","14","116","5","12","2","","1","0","3600","2","10","0","");
+INSERT INTO tbl_user VALUES("10044","PK031","3168f142ce3904a787b2ab3f68ae5968","Abdurrahman","PK031","6","0","5645-rahman.jpg","4","12","49","5","12","4","","1","0","3600","2","8","0","02 Jan 2019 09:04:39");
+INSERT INTO tbl_user VALUES("10045","PK032","3384d017ec0e7f0f17d2c3d18b608c24","Muhammad Fahri","PK032","6","0","7468-fahri.jpg","6","18","67","5","12","4","","1","0","3600","2","8","1","");
+INSERT INTO tbl_user VALUES("10046","PK033","14c96390890cda796ba8a0100f647a4f","Saipul Anwar","PK033","8","0","","11","33","91","5","12","5","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10047","PK034","1872f655b7c18c6774a606268f9e8397","Muhamad Nur Baedi","PK034","8","0","4062-WhatsApp Image 2018-12-13 at 15.52.26.jpeg","12","48","130","5","12","7","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10048","PK035","57bf2d8dc369f5238ad508888f101ef9","Reza Ahmad Fauzi","PK035","7","0","6421-rezaahmad.jpg","5","13","71","5","12","5","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10049","PK036","7cc3666509e65e7209d2517003c984d9","Siti Rosmayanti","PK036","8","0","9550-rosma.jpg","2","3","29","5","12","6","","1","0","3600","2","10","0","");
+INSERT INTO tbl_user VALUES("10050","PK037","5eb0614e5a420717938116ce87e358fd","Maylisa Marsita Anggreina Siahaya","PK037","8","0","3452-ica.jpg","2","3","20","5","12","6","","1","0","3600","2","10","0","");
+INSERT INTO tbl_user VALUES("10051","PK038","beb1c0c148f8a01a9b7a19e4f7d009c1","Adhi Sujana","PK038","5","0","2234-adhi.jpg","11","33","87","5","12","7","","1","0","3600","2","6","1","");
+INSERT INTO tbl_user VALUES("10052","PK039","679247a792c1a50731ba8f48425e58ed","Eko Prabowo","PK039","8","0","","7","20","72","5","12","5","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10053","PK040","c2797a8ce242cb02cd045f49b1754740","Edi Junaedi","PK040","6","0","9496-edi.jpg","6","18","67","5","12","4","","1","0","3600","2","8","1","");
 INSERT INTO tbl_user VALUES("10054","PK041","e900266bd33ff5bbf04c76871467509a","Lucyanna Nilasary","PK041","6","0","","19","56","121","5","0","1","","0","0","3600","0","8","0","");
-INSERT INTO tbl_user VALUES("10055","PK043","e9f7574dc8aa752126443c5d3b2bf509","Agus Setyawan","PK043","6","0","3902-FOTO.jpeg","7","20","67","5","0","5","","1","0","3600","2","8","1","");
-INSERT INTO tbl_user VALUES("10056","PK044","e8c3701613c6192f5578534912bc410f","Hendry","PK044","6","0","8563-hendry.jpg","6","18","67","5","0","4","","1","0","3600","2","8","1","");
-INSERT INTO tbl_user VALUES("10057","PK045","0e0f18e07ffc9e2d40ac8e0f2d3246fd","Andi Rusdiana","PK045","5","0","2909-andirus.jpg","5","15","62","5","0","4","","1","0","3600","2","6","1","");
-INSERT INTO tbl_user VALUES("10058","PK046","fdf1adf0071c444ec897f638453f5d67","Rizal Kamaruzzaman","PK046","6","0","5830-WhatsApp Image 2018-12-15 at 10.03.10.jpeg","4","11","67","5","0","4","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10059","PK047","00ea5c35f3381114e4471f36b26998e1","Mustofa","PK047","5","0","","6","17","62","5","0","4","","1","0","3600","2","6","1","");
-INSERT INTO tbl_user VALUES("10060","PK048","064fa76b894021616335263a1c7fe7f2","Dian Ika Ningrum","PK048","6","0","9022-didi.jpg","19","55","110","5","0","2","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10061","PK049","6ff9c235860eb08d0fb2af6e5751c51a","Sofi Ratna Furi","PK049","7","0","463-sofi.jpg","10","68","187","5","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10062","PK050","27d2613553b8d56a6a9df7251da90b86","Adya Kemara","PK050","7","0","","2","59","27","5","0","6","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10063","PK051","c579bd5d9a445f646be67f38a3547b78","Rizalulloh","PK051","5","0","3163-rizalullah.jpg","5","13","62","5","0","4","","1","0","3600","2","6","1","");
-INSERT INTO tbl_user VALUES("10064","PK052","64eb6f33d79221581bfe7df31d065889","Ardo Yudha Barnesa","PK052","7","0","8086-ardo.jpg","3","6","36","5","0","5","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10065","PK053","2e1e200308d8c68e3d75bf9a079003f6","Melly Febriyanti","PK053","7","0","2881-melly.jpg","2","3","15","5","0","6","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10055","PK043","e9f7574dc8aa752126443c5d3b2bf509","Agus Setyawan","PK043","6","0","3902-FOTO.jpeg","7","20","67","5","12","5","","1","0","3600","2","8","1","");
+INSERT INTO tbl_user VALUES("10056","PK044","e8c3701613c6192f5578534912bc410f","Hendry","PK044","6","0","8563-hendry.jpg","6","18","67","5","12","4","","1","0","3600","2","8","1","");
+INSERT INTO tbl_user VALUES("10057","PK045","0e0f18e07ffc9e2d40ac8e0f2d3246fd","Andi Rusdiana","PK045","5","0","2909-andirus.jpg","5","15","62","5","12","4","","1","0","3600","2","6","1","");
+INSERT INTO tbl_user VALUES("10058","PK046","fdf1adf0071c444ec897f638453f5d67","Rizal Kamaruzzaman","PK046","6","0","5830-WhatsApp Image 2018-12-15 at 10.03.10.jpeg","4","11","67","5","12","4","","1","0","3600","2","8","0","");
+INSERT INTO tbl_user VALUES("10059","PK047","00ea5c35f3381114e4471f36b26998e1","Mustofa","PK047","5","0","","6","17","62","5","12","4","","1","0","3600","2","6","1","");
+INSERT INTO tbl_user VALUES("10060","PK048","064fa76b894021616335263a1c7fe7f2","Dian Ika Ningrum","PK048","6","0","9022-didi.jpg","19","55","110","5","12","2","","1","0","3600","2","8","0","");
+INSERT INTO tbl_user VALUES("10061","PK049","6ff9c235860eb08d0fb2af6e5751c51a","Sofi Ratna Furi","PK049","7","0","463-sofi.jpg","10","68","187","5","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10062","PK050","343979a6222fcf5c4f50a8fd4ce710d1","Adya Kemara","PK050","6","0","","2","59","27","5","12","6","","1","0","3600","2","8","0","02 Jan 2019 09:05:01");
+INSERT INTO tbl_user VALUES("10063","PK051","c579bd5d9a445f646be67f38a3547b78","Rizalulloh","PK051","5","0","3163-rizalullah.jpg","5","13","62","5","12","4","","1","0","3600","2","6","1","");
+INSERT INTO tbl_user VALUES("10064","PK052","64eb6f33d79221581bfe7df31d065889","Ardo Yudha Barnesa","PK052","7","0","8086-ardo.jpg","3","6","36","5","12","5","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10065","PK053","2e1e200308d8c68e3d75bf9a079003f6","Melly Febriyanti","PK053","7","0","2881-melly.jpg","2","3","15","5","12","6","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10066","PK054","9276d8c623b5f0930f93cf07fae0845f","Angga Saputra","PK054","6","0","","2","3","63","5","0","1","","0","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10067","PK055","69d932de20a7f913c654a9e87a1e814d","Ayu Ratnasari","PK055","8","0","","5","14","66","5","0","5","","1","0","3600","2","10","0","");
 INSERT INTO tbl_user VALUES("10068","PK056","39622b96050721a046d2b04977b2e9b7","Dicky Wahyu Pratama","PK056","8","0","5176-22815122_814469842058608_1534603846351866508_n.jpg","11","33","89","5","0","7","","1","0","3600","2","10","1","");
 INSERT INTO tbl_user VALUES("10069","PK057","ae5318388db0dae818a4ddefd1560130","Muhamad Rizki Cahyadi","PK057","7","0","3509-iki.jpg","5","14","64","5","0","6","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10070","PK059","f5264fb5dd9e7a5f0625ead4cf99748a","Bimo Firizki Diadi","PK059","7","0","4776-bimo.jpg","4","11","54","5","0","4","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10071","PK061","bbf6eb76300e11c07204fcb6b37c592f","Bayu Budi Utomo","PK061","7","0","","7","20","68","5","0","4","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10071","PK061","bbf6eb76300e11c07204fcb6b37c592f","Bayu Budi Utomo","PK061","7","0","","7","20","68","5","12","4","","1","0","3600","2","9","1","");
 INSERT INTO tbl_user VALUES("10072","PK062","4af94e2228b66f54061c29cd57f1ef9e","Nur Asty Pratiwi","PK062","7","0","7579-asty.jpg","4","11","50","5","0","4","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10073","PK063","aea7634c3ec2f35111a39f83e50b9d4b","Sholahuddin Triwidinata","PK063","7","0","4759-soleh.jpg","5","13","68","5","0","4","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10074","PK064","0310be8ba79e4380d9807fc0e56e7cc1","Bukry Chamma Siburian","PK064","7","0","3158-bukry.jpg","4","11","57","5","0","4","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10075","PK065","b67923e5a6170f34c52e19086ea1aeed","Rizki Ehsy Pangarso","PK065","7","0","7580-kiki.jpg","2","3","17","5","0","6","","1","2","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10075","PK065","b67923e5a6170f34c52e19086ea1aeed","Rizki Ehsy Pangarso","PK065","7","0","7580-kiki.jpg","2","3","17","5","12","6","","1","2","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10076","PK066","54a9676df022c0b88a9b43bba829add2","Latifah","PK066","7","0","1168-pas.png","2","3","17","5","0","1","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10077","PK067","3046f57a2a27fdd1edece2fbb3c9ffae","Ramdani Adam","PK067","7","0","","10","68","82","5","0","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10077","PK067","3046f57a2a27fdd1edece2fbb3c9ffae","Ramdani Adam","PK067","7","0","","10","68","82","5","12","7","","1","0","3600","2","9","1","");
 INSERT INTO tbl_user VALUES("10078","PK069","a59eeaf48b22ebf1fee0b715731dc7ca","Arsindiany Alambago","PK069","6","0","","18","51","97","5","0","3","","0","0","3600","0","8","0","");
 INSERT INTO tbl_user VALUES("10079","PK070","dc8734f7a1b8c973d64b78ca4d0b1121","Wega Tommy Dwi Pamungkas","PK070","8","0","8165-IMG-20181211-WA0015.jpg","15","44","72","5","0","7","","1","0","3600","2","10","1","");
 INSERT INTO tbl_user VALUES("10080","PK071","ab47cbbc8714426e14ac62e2b8a8e81d","Nur Fitriyah Febriana","PK071","8","0","1071-1537965857749.jpg","5","14","65","5","0","6","","1","0","3600","2","10","0","");
 INSERT INTO tbl_user VALUES("10081","PK072","6b62c56b6c78e81e262fc435b158f880","Mohamad Reza Pahlevi","PK072","7","0","2278-rezap.jpg","18","53","103","5","0","3","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10082","PK073","a76982be20687afd6e3b55b5c2b75c63","Vishnu Damar Sasongko","PK073","5","0","7259-vishnu.jpg","18","51","96","5","0","3","","1","0","3600","2","6","0","");
-INSERT INTO tbl_user VALUES("10083","PK074","731b2949bd21b228de95f6750ff35e70","G. Heryawan Indrayatna","PK074","5","0","9899-indra.jpg","2","5","25","5","0","1","","1","0","3600","2","6","0","");
-INSERT INTO tbl_user VALUES("10084","PK075","0f533944d5c73e05c49c8d4c4cca2196","Ario Seto","PK075","7","0","3461-IMG-20181209-WA0006.jpg","15","44","70","5","0","3","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10085","PK076","856adc13bd0c5999ed10315e300e76e3","Andi Afriansyah","PK076","8","0","","10","30","78","5","0","7","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10082","PK073","a76982be20687afd6e3b55b5c2b75c63","Vishnu Damar Sasongko","PK073","5","0","7259-vishnu.jpg","18","51","96","5","12","3","","1","0","3600","2","6","0","");
+INSERT INTO tbl_user VALUES("10083","PK074","731b2949bd21b228de95f6750ff35e70","G. Heryawan Indrayatna","PK074","5","0","9899-indra.jpg","2","5","25","5","12","1","","1","0","3600","2","6","0","");
+INSERT INTO tbl_user VALUES("10084","PK075","0f533944d5c73e05c49c8d4c4cca2196","Ario Seto","PK075","7","0","3461-IMG-20181209-WA0006.jpg","15","44","70","5","12","3","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10085","PK076","856adc13bd0c5999ed10315e300e76e3","Andi Afriansyah","PK076","8","0","","10","30","78","5","12","7","","1","0","3600","2","10","1","");
 INSERT INTO tbl_user VALUES("10086","PK077","b5d757bf5b47ab148a9fcb8fcf0ce365","Lowig Caesar S.","PK077","5","0","7968-IMG_20181213_112231.jpg","8","26","62","5","0","4","","1","0","3600","2","6","1","");
 INSERT INTO tbl_user VALUES("10087","PK078","24cbad67a9545c21b12b86ad024906e1","Arif Rahman","PK078","6","0","7301-IMG-20181208-WA0012.jpg","8","26","67","5","0","7","","1","0","3600","2","8","1","");
-INSERT INTO tbl_user VALUES("10088","PK079","4d81e61f13169060aaef7103749b888a","Antonius Catur Satriono","PK079","6","0","","6","17","67","5","0","7","","1","0","3600","2","8","1","");
+INSERT INTO tbl_user VALUES("10088","PK079","4d81e61f13169060aaef7103749b888a","Antonius Catur Satriono","PK079","6","0","","6","17","67","5","12","7","","1","0","3600","2","8","1","");
 INSERT INTO tbl_user VALUES("10089","PK080","c11a2864e145cb5f0ec4ae89b12e390f","Agus Triwahyudi","PK080","7","0","","5","15","68","5","0","4","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10090","PK083","2b1a48519736b7da7d581e9647443f09","Robi Nugraha","PK083","7","0","1756-2018-06-10 08.36.51 3.jpg","10","32","85","5","0","7","","1","0","3600","2","9","1","");
 INSERT INTO tbl_user VALUES("10091","PK084","3cfab66abaf1adf0e948a6e53c599410","Tania Intan Sari","PK084","8","0","4060-tania.jpg","4","10","47","5","0","4","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10092","10041","6d38b80c1da3bd9d8717ce47fea2acd7","Kristiana Live Sonya","10041","6","0","4433-kristin.jpg","2","3","26","3","0","6","","1","0","3600","1","8","0","");
-INSERT INTO tbl_user VALUES("10093","10042","425f116bf53f051c57d1670a04fb4a0c","Slamet Purwanto","10042","5","0","9599-slamet.jpg","19","57","122","3","0","2","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10094","10043","15f937f0a5598016008f107d8cbdf0a2","Indri Kurnia Lestari","10043","5","0","7518-foto indri kurnia.jpeg","3","7","34","3","0","5","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10095","10044","9c16b0e83f09596202f402261f25c8a9","Tisa Yuanita","10044","5","0","","2","4","18","3","0","6","","1","0","3600","1","6","0","");
-INSERT INTO tbl_user VALUES("10096","10045","997e65474a248252883b485717f7d098","Evil Ramadhani","10045","5","0","","4","12","55","3","0","4","","1","0","3600","1","6","1","");
-INSERT INTO tbl_user VALUES("10097","PK087","a3fb120d1e9c2d67aabe358cf47eb1df","Muhammad Rizaq Nuriz Zaman","PK087","8","0","","7","20","157","5","0","5","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10098","PK086","f256f296f10bde8e132f22fd463862bd","Syamsul Fadly","PK086","7","0","4054-syamsul.jpg","4","12","59","5","0","4","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10092","10041","6d38b80c1da3bd9d8717ce47fea2acd7","Kristiana Live Sonya","10041","6","0","4433-kristin.jpg","2","3","26","3","12","6","","1","0","3600","1","8","0","");
+INSERT INTO tbl_user VALUES("10093","10042","425f116bf53f051c57d1670a04fb4a0c","Slamet Purwanto","10042","5","0","9599-slamet.jpg","19","57","122","3","12","2","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10094","10043","15f937f0a5598016008f107d8cbdf0a2","Indri Kurnia Lestari","10043","5","0","7518-foto indri kurnia.jpeg","3","7","34","3","12","5","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10095","10044","9c16b0e83f09596202f402261f25c8a9","Tisa Yuanita","10044","5","0","","2","4","18","3","12","6","","1","0","3600","1","6","0","");
+INSERT INTO tbl_user VALUES("10096","10045","997e65474a248252883b485717f7d098","Evil Ramadhani","10045","5","0","","4","12","55","3","12","4","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10097","PK087","a3fb120d1e9c2d67aabe358cf47eb1df","Muhammad Rizaq Nuriz Zaman","PK087","8","0","959-Muhammad-Rizaq-Nuriz-Zaman.jpg","7","20","157","5","0","5","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10098","PK086","f256f296f10bde8e132f22fd463862bd","Syamsul Fadly","PK086","7","0","4054-syamsul.jpg","4","12","59","5","0","4","","1","0","3600","2","9","0","02 Jan 2019 09:27:44");
 INSERT INTO tbl_user VALUES("10099","PK085","34b4f080b684b4105983b5c7d0ca04a0","Bayuaji Prabowo Nugroho","PK085","7","0","939-bayuaj.jpg","5","14","73","5","0","4","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10100","PK095","ed3230f53e8c255c8d2a29c3e04a559f","Sabila Adinda Puri Andarini","PK095","8","0","","19","55","115","5","0","2","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10101","10047","eccd9f7dc92858b741132fda313130cf","Yati Melasari","10047","5","0","7884-mela.jpg","19","55","109","3","0","2","","1","0","3600","1","7","0","");
-INSERT INTO tbl_user VALUES("10102","10052","d6f8d124087ad4c23fe66b89b7893523","Arief Hartono","10052","7","0","","12","48","127","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10103","10054","bef4d169d8bddd17d68303877a3ea945","Yayang Supiyar","10054","7","0","","12","48","127","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10104","10053","7fbfc161a3b873bf2119c788ed93d1f4","Ujang","10053","7","0","","12","48","127","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10105","10055","e4191d610537305de1d294adb121b513","Rd Mochamad Erwin Siswanto","10055","7","0","292-IMG-20181213-WA0175[1].jpg","12","48","127","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10106","10056","7d74f0aa3521a78533a8e8d6a6b5b8a1","Deddy Khoirul Anam","10056","7","0","1900-IMG-20180824-WA0008.jpg","17","49","180","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10107","10057","27bc42aaeb1540e87949a69ebeb4eb4c","Agus Winarto","10057","7","0","","25","73","197","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10108","10058","1c395dd594baa47728d72ffbc4258994","Mochamad Subechan","10058","7","0","","20","61","164","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10109","10059","e7ba053d8ba932b77348b3987ea0e40b","Adri Rachman","10059","7","0","","13","35","148","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10110","10060","e64928412aae022e2c27456df62dda09","Eko Hermansyah","10060","7","0","","13","35","17","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10111","10061","7fe3d16a83f683a0a7f1c029536bebe7","Suparjo","10061","7","0","8488-IMG-20181005-WA0000.jpg","13","35","17","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10112","10062","f892447540d0e840049183faa3109b1b","Juwadi","10062","7","0","","6","17","17","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10113","10063","c9f2f917078bd2db12f23c3b413d9cba","Fitri Handayani","10063","7","0","1918-20171221_194943.jpg","25","75","195","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10114","10064","41bacf567aefc61b3076c74d8925128f","Sukandana","10064","7","0","","15","44","164","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10115","10065","ffa4eb0e32349ae57f7a0ee8c7cd7c11","Suryo Subono","10065","7","0","","25","73","196","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10116","10066","955fd82131e15e7b5199cbc8f983306a","Abdul Moeis Boedijono","10066","7","0","","15","44","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10117","10067","792dd774336314c3c27a04bb260cf2cf","Jansen Jaya Rolas Hutagaol","10067","7","0","","13","37","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10118","10068","a4982cba8b4cbeb32a439f0367273fc8","Hery Muryanto","10068","7","0","","15","45","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10119","10069","530ad673015b98fcf4cdd5a68cb93d6c","Sigit Wahyu Ichtijar","10069","7","0","9481-IMG20180828120409.jpg","13","37","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10120","10070","1aab7baa714e14868fe9eac65fcbd315","Mulyato","10070","7","0","7607-IMG_20181214_215023.jpg","15","45","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10121","10071","4910fcdaedc2be5c5f05533b7a9cb8c2","M. Chairul Anam","10071","7","0","","14","40","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10122","10072","cc2b1ba0368ccd98d5bed7e2e97b4bb0","Teddy Arrisandi","10072","7","0","","15","44","92","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10123","10073","657e31ff3231b847d7604f6647a2dfc9","Aries Askandar","10073","7","0","","7","20","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10124","10074","95a2e3eab8bf82eef0459536d23be6a3","Muhammad Arsyad","10074","7","0","","14","38","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10125","10075","2e5050938e0df629a2f2c5ff24fe66c6","Dedy Sutikno","10075","7","0","","14","38","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10126","10076","11ed516444b2593eaba7f2c2bb63483e","Edwin Andry Sumala","10076","7","0","","7","23","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10127","10077","0e15048bf23f8cf2c4d71fe8d5272c15","Ismail","10077","7","0","3716-IMG-20181208-WA0012.jpg","15","44","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10128","10078","2754518221cfbc8d25c13a06a4cb8421","Afri Tri Haryono","10078","7","0","","8","26","187","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10129","10079","273a8a2958ffca969e62c57ee568d522","Helmi Yunus","10079","7","0","","16","46","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10130","10080","ebd774c929a7f6c7e5df19e355f61e23","Andri Munandar","10080","7","0","5653-Andre Munandar 4x6.jpg","21","64","180","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10131","10081","725215ed82ab6306919b485b81ff9615","Sudarmadi","10081","7","0","","21","64","192","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10132","10082","9b22a40256b079f338827b0ff1f4792b","Prins Handoyo","10082","7","0","","21","64","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10133","10083","a46703c2f2e1c83edd4ffc41aa93a150","Bakti Sihombing","10083","7","0","893-BAKTI SIHOMBING 4x6 2.jpg","21","64","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10134","10084","b2df8d1dc5317b2b7951398ed39a00ac","Julpikar","10084","7","0","4310-JULPIKAR.jpeg","21","64","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10135","10085","5e62c1998206e0110459a6143546fe2e","Rahmatul Aini","10085","7","0","","21","64","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10136","10086","6412121cbb2dc2cb9e460cfee7046be2","Supriadi","10086","7","0","8026-WhatsApp Image 2018-12-14 at 2.10.50 PM.jpeg","21","64","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10137","10087","afc2637129ad904485e07d2c0e6b0688","Rahmadi Panjaitan","10087","7","0","","21","64","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10138","10088","42edd1ec1dc5f5c1f11fd74a959e96c9","Aris Widodo","10088","7","0","","17","49","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10139","10089","e710549329cbc30d8cfa23cdd4b97f2f","Saiful","10089","7","0","","17","49","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10140","10090","4392e631da381761421d5e1e0c3de25f","Hery Wahyu Noertjahyo","10090","8","0","","17","49","91","4","0","7","","1","0","3600","2","10","1","");
-INSERT INTO tbl_user VALUES("10141","10091","b219f59c2dd596abfadbcecfc2277659","IWAN DHANI GUNAWAN","10091","7","0","","11","33","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10142","10092","c0c3a9fb8385d8e03a46adadde9af3bf","Budi Lukman","10092","7","0","","11","33","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10143","10093","bffbc93c08bb822842c8991709fc7714","Dedi Kusnadi","10093","7","0","7968-20181214_200044.jpg","11","33","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10144","10094","018a1b6ccd2ec81361657e259155895a","Deni Catur Wardani","10094","7","0","","11","33","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10145","10095","253d812cbfbb77c03b910f9897e9487d","Asep Sugiri","10095","7","0","","11","33","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10146","10096","ee4117572afbc0cf760f70714af0ec52","Boni Pasius Silalahi","10096","7","0","5285-WhatsApp Image 2018-12-17 at 12.41.16.jpeg","11","33","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10147","10097","23b702c4c421ddb2d023fee968c0d839","Dadan Kusnidar","10097","7","0","","11","34","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10148","10098","c876914f82ce54cb533b186afd41166e","Aa Dedih","10098","7","0","","11","34","88","4","0","7","","1","0","3600","2","9","1","");
-INSERT INTO tbl_user VALUES("10149","10099","b5d4eea20a5609fc4663e196962f6499","Roni Yusnandar","10099","6","0","3805-roniyusnandar.jpg","19","55","111","3","0","2","","1","0","3600","1","8","0","");
-INSERT INTO tbl_user VALUES("10150","D0008","0630f67b2c1133eb96171a870d5147a9","Tita Paulina Purbasari","D0008","3","0","6682-tita.jpg","1","1","5","3","0","1","","1","0","3600","1","3","0","");
-INSERT INTO tbl_user VALUES("10151","D0009","0cd125dfbdbe9d67ada8ebd76246f41c","Dian Takdir Badrsyah","D0009","3","0","9529-dian takdir.jpg","1","1","6","2","0","1","","1","0","3600","2","3","0","");
-INSERT INTO tbl_user VALUES("10152","K0005","a29e39366bc75d66b57f8e2536fe9312","Donny Arsal","K0005","10","0","","0","0","1","1","0","1","","1","0","3600","1","1","0","");
-INSERT INTO tbl_user VALUES("10153","PK088","e8112adaafb932bcab8dfdb9e2a7802c","Arief Fauzi","PK088","6","0","6417-ariffauzi.jpg","18","52","100","5","0","3","","1","0","3600","2","8","0","");
-INSERT INTO tbl_user VALUES("10154","PK089","e8d09acfaad3ecf09242168db4788494","Wahju Widodo","PK089","5","0","","5","15","62","5","0","4","","1","0","3600","2","6","0","");
+INSERT INTO tbl_user VALUES("10101","10047","eccd9f7dc92858b741132fda313130cf","Yati Melasari","10047","5","0","7884-mela.jpg","19","55","109","3","12","2","","1","0","3600","1","7","0","");
+INSERT INTO tbl_user VALUES("10102","10052","d6f8d124087ad4c23fe66b89b7893523","Arief Hartono","10052","7","0","","12","48","127","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10103","10054","bef4d169d8bddd17d68303877a3ea945","Yayang Supiyar","10054","7","0","","12","48","127","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10104","10053","7fbfc161a3b873bf2119c788ed93d1f4","Ujang","10053","7","0","1210-2311-ktp_ujang.jpg","12","48","127","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10105","10055","e4191d610537305de1d294adb121b513","Rd Mochamad Erwin Siswanto","10055","7","0","292-IMG-20181213-WA0175[1].jpg","12","48","127","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10106","10056","7d74f0aa3521a78533a8e8d6a6b5b8a1","Deddy Khoirul Anam","10056","7","0","1900-IMG-20180824-WA0008.jpg","17","49","180","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10107","10057","27bc42aaeb1540e87949a69ebeb4eb4c","Agus Winarto","10057","7","0","","25","73","197","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10108","10058","1c395dd594baa47728d72ffbc4258994","Mochamad Subechan","10058","7","0","","20","61","164","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10109","10059","e7ba053d8ba932b77348b3987ea0e40b","Adri Rachman","10059","7","0","","13","35","148","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10110","10060","e64928412aae022e2c27456df62dda09","Eko Hermansyah","10060","7","0","","13","35","17","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10111","10061","7fe3d16a83f683a0a7f1c029536bebe7","Suparjo","10061","7","0","8488-IMG-20181005-WA0000.jpg","13","35","17","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10112","10062","f892447540d0e840049183faa3109b1b","Juwadi","10062","7","0","628-2061-KTP.jpg","6","17","17","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10113","10063","c9f2f917078bd2db12f23c3b413d9cba","Fitri Handayani","10063","7","0","1918-20171221_194943.jpg","25","75","195","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10114","10064","41bacf567aefc61b3076c74d8925128f","Sukandana","10064","7","0","","15","44","164","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10115","10065","ffa4eb0e32349ae57f7a0ee8c7cd7c11","Suryo Subono","10065","7","0","","25","73","196","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10116","10066","955fd82131e15e7b5199cbc8f983306a","Abdul Moeis Boedijono","10066","7","0","","15","44","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10117","10067","792dd774336314c3c27a04bb260cf2cf","Jansen Jaya Rolas Hutagaol","10067","7","0","","13","37","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10118","10068","a4982cba8b4cbeb32a439f0367273fc8","Hery Muryanto","10068","7","0","","15","45","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10119","10069","530ad673015b98fcf4cdd5a68cb93d6c","Sigit Wahyu Ichtijar","10069","7","0","9481-IMG20180828120409.jpg","13","37","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10120","10070","1aab7baa714e14868fe9eac65fcbd315","Mulyato","10070","7","0","7607-IMG_20181214_215023.jpg","15","45","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10121","10071","4910fcdaedc2be5c5f05533b7a9cb8c2","M. Chairul Anam","10071","7","0","","14","40","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10122","10072","cc2b1ba0368ccd98d5bed7e2e97b4bb0","Teddy Arrisandi","10072","7","0","","15","44","92","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10123","10073","657e31ff3231b847d7604f6647a2dfc9","Aries Askandar","10073","7","0","","7","20","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10124","10074","95a2e3eab8bf82eef0459536d23be6a3","Muhammad Arsyad","10074","7","0","","14","38","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10125","10075","2e5050938e0df629a2f2c5ff24fe66c6","Dedy Sutikno","10075","7","0","","14","38","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10126","10076","11ed516444b2593eaba7f2c2bb63483e","Edwin Andry Sumala","10076","7","0","","7","23","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10127","10077","0e15048bf23f8cf2c4d71fe8d5272c15","Ismail","10077","7","0","3716-IMG-20181208-WA0012.jpg","15","44","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10128","10078","2754518221cfbc8d25c13a06a4cb8421","Afri Tri Haryono","10078","7","0","","8","26","187","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10129","10079","273a8a2958ffca969e62c57ee568d522","Helmi Yunus","10079","7","0","","16","46","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10130","10080","ebd774c929a7f6c7e5df19e355f61e23","Andri Munandar","10080","7","0","5653-Andre Munandar 4x6.jpg","21","64","180","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10131","10081","725215ed82ab6306919b485b81ff9615","Sudarmadi","10081","7","0","","21","64","192","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10132","10082","9b22a40256b079f338827b0ff1f4792b","Prins Handoyo","10082","7","0","","21","64","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10133","10083","a46703c2f2e1c83edd4ffc41aa93a150","Bakti Sihombing","10083","7","0","893-BAKTI SIHOMBING 4x6 2.jpg","21","64","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10134","10084","b2df8d1dc5317b2b7951398ed39a00ac","Julpikar","10084","7","0","4310-JULPIKAR.jpeg","21","64","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10135","10085","5e62c1998206e0110459a6143546fe2e","Rahmatul Aini","10085","7","0","1179-pp.jpg","21","64","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10136","10086","6412121cbb2dc2cb9e460cfee7046be2","Supriadi","10086","7","0","8026-WhatsApp Image 2018-12-14 at 2.10.50 PM.jpeg","21","64","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10137","10087","afc2637129ad904485e07d2c0e6b0688","Rahmadi Panjaitan","10087","7","0","","21","64","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10138","10088","42edd1ec1dc5f5c1f11fd74a959e96c9","Aris Widodo","10088","7","0","","17","49","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10139","10089","e710549329cbc30d8cfa23cdd4b97f2f","Saiful","10089","7","0","","17","49","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10140","10090","4392e631da381761421d5e1e0c3de25f","Hery Wahyu Noertjahyo","10090","8","0","","17","49","91","4","12","7","","1","0","3600","2","10","1","");
+INSERT INTO tbl_user VALUES("10141","10091","b219f59c2dd596abfadbcecfc2277659","Iwan Dhani Gunawan","10091","7","0","","11","33","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10142","10092","c0c3a9fb8385d8e03a46adadde9af3bf","Budi Lukman","10092","7","0","","11","33","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10143","10093","bffbc93c08bb822842c8991709fc7714","Dedi Kusnadi","10093","7","0","7968-20181214_200044.jpg","11","33","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10144","10094","018a1b6ccd2ec81361657e259155895a","Deni Catur Wardani","10094","7","0","","11","33","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10145","10095","253d812cbfbb77c03b910f9897e9487d","Asep Sugiri","10095","7","0","","11","33","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10146","10096","ee4117572afbc0cf760f70714af0ec52","Boni Pasius Silalahi","10096","7","0","5285-WhatsApp Image 2018-12-17 at 12.41.16.jpeg","11","33","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10147","10097","23b702c4c421ddb2d023fee968c0d839","Dadan Kusnidar","10097","7","0","","11","34","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10148","10098","c876914f82ce54cb533b186afd41166e","Aa Dedih","10098","7","0","","11","34","88","4","12","7","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10149","10099","b5d4eea20a5609fc4663e196962f6499","Roni Yusnandar","10099","6","0","3805-roniyusnandar.jpg","19","55","111","3","12","2","","1","0","3600","1","8","0","");
+INSERT INTO tbl_user VALUES("10150","D0008","0630f67b2c1133eb96171a870d5147a9","Tita Paulina Purbasari","D0008","3","0","6682-tita.jpg","1","1","5","3","12","1","","1","0","3600","1","3","0","");
+INSERT INTO tbl_user VALUES("10151","D0009","0cd125dfbdbe9d67ada8ebd76246f41c","Dian Takdir Badrsyah","D0009","3","0","9529-dian takdir.jpg","1","1","6","2","12","1","","1","0","3600","2","3","0","");
+INSERT INTO tbl_user VALUES("10152","K0005","a29e39366bc75d66b57f8e2536fe9312","Donny Arsal","K0005","10","0","","0","0","1","1","12","1","","1","0","3600","1","1","0","");
+INSERT INTO tbl_user VALUES("10153","PK088","e8112adaafb932bcab8dfdb9e2a7802c","Arief Fauzi","PK088","6","0","6417-ariffauzi.jpg","18","52","100","5","12","3","","1","0","3600","2","8","0","");
+INSERT INTO tbl_user VALUES("10154","PK089","e8d09acfaad3ecf09242168db4788494","Wahju Widodo","PK089","5","0","","5","15","62","5","12","4","","1","0","3600","2","6","0","");
 INSERT INTO tbl_user VALUES("10155","PK090","71123e6a0057aaca15f4d9ef40d51f1d","Sofyan Wahyudi","PK090","8","0","1978-24059057_1572125759546627_497678161923898257_n.jpg","5","14","64","5","0","6","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10156","PK092","c6f3b2844dbaf9894dd271601421d43c","Arief Rachman Eka Putra","PK092","7","0","","14","38","68","5","0","5","","1","0","3600","2","9","1","");
+INSERT INTO tbl_user VALUES("10156","PK092","c6f3b2844dbaf9894dd271601421d43c","Arief Rachman Eka Putra","PK092","7","0","","14","38","68","5","12","5","","1","0","3600","2","9","1","");
 INSERT INTO tbl_user VALUES("10157","PK093","0bc89c6d26889cac577a464e7b77e594","Mohammad Rizal Syarief","PK093","6","0","2092-rizal latar merah.jpg","5","14","67","5","0","4","","1","0","3600","2","8","0","");
 INSERT INTO tbl_user VALUES("10158","PK094","7a2fe59579b1a0becdcaab873d563560","Een Ahmadan Yoga Wilanda","PK094","7","0","358-Wildan 1.jpg","5","14","64","5","0","6","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10159","PK096","b0dc070f96ee8d600d2680e8329e1b29","Indah Susanti","PK096","6","0","1030-indah.jpg","2","4","19","5","0","6","","1","0","3600","2","8","0","");
@@ -4892,21 +4871,26 @@ INSERT INTO tbl_user VALUES("10164","PK101","95b3549132183db7c1d54f0c9257cbfd","
 INSERT INTO tbl_user VALUES("10165","PK104","167abe53c7adf82af922c36296c1f889","M. Syaiful Rifqi adi Khrisna","PK104","7","0","","5","15","70","5","0","4","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10166","PK105","5c922c1bf3889a3683229da959290436","Salma Jounarasti Hasniza","PK105","7","0","1851-salma.jpg","3","7","36","5","0","1","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10167","PK106","29a4d75a5d500aa76dbae56082a17c76","Yuni Nurmaya","PK106","8","0","3221-WhatsApp Image 2018-12-11 at 16.33.08.jpeg","5","13","65","5","0","6","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10168","PK107","6234e45cf0a69c9846ccf2df739b89db","Hasan Mauludi","PK107","8","0","4007-1.png","5","13","65","4","0","5","","1","0","3600","2","10","0","");
-INSERT INTO tbl_user VALUES("10169","PK058","624717d9f15d1bf3e5f94d27a1a515b1","Anang Daus Soemartri","PK058","7","0","9609-anang.jpg","3","9","43","5","0","5","","1","0","3600","2","9","0","");
+INSERT INTO tbl_user VALUES("10168","PK107","6234e45cf0a69c9846ccf2df739b89db","Hasan Mauludi","PK107","8","0","4007-1.png","5","13","65","4","12","5","","1","0","3600","2","10","0","");
+INSERT INTO tbl_user VALUES("10169","PK058","624717d9f15d1bf3e5f94d27a1a515b1","Anang Daus Soemartri","PK058","7","0","9609-anang.jpg","3","9","43","5","12","5","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10170","PK091","e3dd589db435b6414ce32434460cc359","Fauzi Rachman Juang Pribadi","PK091","7","0","","5","15","69","5","0","4","","1","0","3600","2","9","0","");
 INSERT INTO tbl_user VALUES("10171","PK103","28d3c0d6aeecdd362803440626770f52","Muhammad Nofi Risdianto","PK103","7","0","6760-WhatsApp Image 2018-12-11 at 16.15.01.jpeg","5","13","68","5","0","1","","1","0","3600","2","9","0","");
-INSERT INTO tbl_user VALUES("10172","10004","d783823cc6284b929c2cd8df2167d212","Dian Agustian Hadi","10004","4","0","","18","50","95","3","0","3","","1","0","3600","1","4","0","");
+INSERT INTO tbl_user VALUES("10172","10004","d783823cc6284b929c2cd8df2167d212","Dian Agustian Hadi","10049","4","0","","18","50","95","3","12","3","","1","0","3600","1","4","0","");
 INSERT INTO tbl_user VALUES("10173","marketing","c769c2bd15500dd906102d9be97fdceb","Admin Marketing","0","1","0","","","","","4","0","6","","1","0","3600","0","0","0","");
 INSERT INTO tbl_user VALUES("10174","direktur","4fbfd324f5ffcdff5dbf6f019b02eca8","Admin Direktur","0","1","0","","","","","0","0","0","","0","0","3600","0","0","0","");
 INSERT INTO tbl_user VALUES("10175","pengembangan","7111494d4869feeddd17652b086e0b67","Admin Pengembangan Bisnis","0","1","0","","","","","0","0","0","","0","0","3600","0","0","0","");
 INSERT INTO tbl_user VALUES("10176","teknik","58029eb6d2dd138b3da6ee4b2bb71d8c","Admin Teknik","0","1","0","","","","","0","0","0","","0","0","3600","0","0","0","");
 INSERT INTO tbl_user VALUES("10177","jmrbtip","498ab3e5fa941a600ac8b28da348791d","Admin TIP","0","1","0","","","","","0","0","0","","1","0","3600","0","0","0","");
 INSERT INTO tbl_user VALUES("10178","keuangan","a4151d4b2856ec63368a7c784b1f0a6e","Admin Keuangan","0","1","0","","","","","0","0","0","","0","0","3600","0","0","0","");
-INSERT INTO tbl_user VALUES("10180","10100","ac2d43ef3f26cc74de242202e822ecb0","Anggrainy","10100","5","0","","19","54","108","3","0","2","","1","0","3600","1","6","1","");
-INSERT INTO tbl_user VALUES("10181","10051","a536fb5480db8bdbb84daffe345c675b","Saktia Lesan Dianasari","10051","4","0","","26","76","200","3","0","7","","1","0","3600","1","4","1","");
-INSERT INTO tbl_user VALUES("10182","10050","eeb29740e8e9bcf14dc26c2fff8cca81","Aprilizayanti Putri","10050","4","0","","27","77","202","3","0","7","","1","0","3600","1","4","1","");
-INSERT INTO tbl_user VALUES("10183","10046","827a9e878169d065f4a9a6c451ba0207","Usep Widya Kusmayadi","10046","5","0","","11","33","126","3","0","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10180","10100","ac2d43ef3f26cc74de242202e822ecb0","Anggrainy","10100","5","0","4343-5072-KTP-Anggre.jpg","19","54","108","3","12","2","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10181","10051","a536fb5480db8bdbb84daffe345c675b","Saktia Lesan Dianasari","10051","4","0","","26","76","200","3","12","7","","1","0","3600","1","4","1","");
+INSERT INTO tbl_user VALUES("10182","10050","eeb29740e8e9bcf14dc26c2fff8cca81","Aprilizayanti Putri","10050","4","0","","27","77","202","3","12","7","","1","0","3600","1","4","1","");
+INSERT INTO tbl_user VALUES("10183","10046","827a9e878169d065f4a9a6c451ba0207","Usep Widya Kusmayadi","10046","5","0","5523-USEP.png","11","33","126","3","12","7","","1","0","3600","1","6","1","");
+INSERT INTO tbl_user VALUES("10184","10101","6dfc35c47756e962ef055d1049f1f8ec","Tony Tri Hendarta","10101","5","0","","19","56","119","3","0","2","","1","0","","1","6","0","");
+INSERT INTO tbl_user VALUES("10185","PK108","7a0a87077cb3c4edd20ce4ae4d5ccc85","Yahya Ahmadi","PK108","8","0","","2","3","9","5","0","6","","1","0","","2","10","0","");
+INSERT INTO tbl_user VALUES("10186","PK109","e01de93068ff77e671502e4580f87011","Elisa Soedarto","PK109","7","0","","18","53","103","5","0","3","","1","0","","2","9","0","");
+INSERT INTO tbl_user VALUES("10187","10102","696b0709b9a2d7d9e2c25b71476ec255","Ihsanuddin Saputra, ST","10102","5","0","1753-IHSAN.jpg","5","14","62","3","0","4","","1","0","","1","6","0","");
+INSERT INTO tbl_user VALUES("10188","10103","f53eb4122d5e2ce81a12093f8f9ce922","Khrisnawan Arief Wicaksono, ST","10103","5","0","76-KRISNAWAN.jpg","4","11","34","3","0","4","","1","0","","1","6","0","");
 
 
 

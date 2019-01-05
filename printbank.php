@@ -92,9 +92,9 @@ $ngitung=0;
 $konco=mysqli_query($config,"SELECT * FROM tbl_ref_bank");
 while($row=mysqli_fetch_array($konco)){
 	$hasilbanks=0;
-	$jhg=mysqli_query($config,"SELECT COUNT(*) FROM tbl_identitas WHERE jenis_bank='".$row['kode_bank']."'");
-	list($jumlahkeun)=mysqli_fetch_array($jhg);
-	$mng=mysqli_query($config,"SELECT * FROM tbl_identitas WHERE jenis_bank='".$row['kode_bank']."'");
+	
+	$mng=mysqli_query($config,"SELECT tbl_identitas.id_user,tbl_user.status_aktif,tbl_user.id_user FROM tbl_identitas,tbl_user WHERE jenis_bank='".$row['kode_bank']."' AND (tbl_user.id_user=tbl_identitas.id_user AND tbl_user.status_aktif=1)");
+	$jumlahkeun=mysqli_num_rows($mng);
 	while($rows=mysqli_fetch_array($mng)){
 	$koncak=mysqli_query($config,"SELECT penerimaan_bersih FROM tbl_gaji WHERE id_gaji='$id_gaji' AND id_user='".$rows['id_user']."'");
 	list($hasilbank)=mysqli_fetch_array($koncak);

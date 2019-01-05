@@ -295,7 +295,7 @@ $pdf->Line($x+61,$y,$x+91,$y);
 $pdf->Cell(8.5 ,6,'',0,0);
 $pdf->Cell(53 ,6,'Total Potongan',0,0);
 $pdf->Cell(30 ,6,'Rp '.number_format($jumlahpotong+$potjamsostek+$potbpjsjamkes+$potbpjsjampes+$potpph21ttp+$potpph21tdk, 0, ',', '.').'',0,1,'R');
-$gjd=$jumlahpotong+$potjamsostek+$potbpjsjamkes+$potbpjsjampes+$potpph21ttp+$potpph21tdk+$totpen;
+$gjd=$totpen-($jumlahpotong+$potjamsostek+$potbpjsjamkes+$potbpjsjampes+$potpph21ttp+$potpph21tdk);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(10 ,5,'',0,1);
 $pdf->Cell(60 ,6,'C. Gaji Yang Dibayarkan (A-B) :',0,0);

@@ -93,7 +93,7 @@ if($_SESSION['admin']!=1){
 													$ages = date_diff(date_create($lama), date_create('now'))->m + $agesd*12;
 												
 													
-													 if ($ages<=3 && $status_tugas==2){
+													if ($ages<=3 && $status_karyawan==5){
 														$gajix=$gajix*80/100;
 														$mb='(80%)';
 													} else {$mb='';}
@@ -1416,10 +1416,18 @@ if($_SESSION['admin']!=1){
 													}
 													$nnngj=mysqli_query($config,"SELECT menit_telat FROM tbl_handle");
 												list($mkgg)=mysqli_fetch_array($nnngj);
-												$jostelat=($fok/$mkgg)*$sub1;
+												if($fok!="" || $fok!=0){
+													$jostelat=($fok/$mkgg)*$sub1;
+												} else {
+													$jostelat=0;
+												}
+												
 												$ceklagi=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id' AND (id_user='$id_user' AND kode_potongan=28)");
 												if(mysqli_num_rows($ceklagi)<=0){
-													$kosd=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id','$id_user',28,'$jostelat')");
+													if($fok!="" || $fok!=0){
+														$kosd=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id','$id_user',28,'$jostelat')");
+													}
+													
 												} else {
 													$kosd=mysqli_query($config,"UPDATE tbl_potongan SET jumlah='$jostelat' WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_potongan=28)");
 												}
