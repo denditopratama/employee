@@ -210,13 +210,14 @@
                         <table class="bordered" id="tblr">
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
-									<th width="1%"style="color:#fff">Nomor</th>
+									<th width="1%"style="color:#fff">No.</th>
                                         <th width="20%"style="color:#fff">Nama</th>
                                         <th width="15%"style="color:#fff">Alasan</th>
 										<th width="12%"style="color:#fff">Tanggal Awal</th>
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
-										<th width="15%" style="color:#fff">Status Manager</th>
-										<th width="15%" style="color:#fff">Status GM</th>
+										<th width="10%" style="color:#fff">Status Manager</th>
+                                        <th width="10%" style="color:#fff">Status GM</th>
+                                        <th width="10%" style="color:#fff">Status Direktur</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 										
 									
@@ -228,7 +229,9 @@
 
                                 //script untuk mencari data
 								if($_SESSION['admin']==1){
-							$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE alasan LIKE '%$cari%' OR tgl_awal LIKE '%$cari%' OR tgl_akhir LIKE '%$cari%' OR nama LIKE '%$cari%' ORDER by id DESC");}
+                            $query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE alasan LIKE '%$cari%' OR tgl_awal LIKE '%$cari%' OR tgl_akhir LIKE '%$cari%' OR nama LIKE '%$cari%' ORDER by id DESC");}
+                            else if($_SESSION['admin']==3 || $_SESSION['admin']==2)
+                            {$query = mysqli_query($config, "SELECT tbl_cuti.*,tbl_user.admin FROM tbl_cuti,tbl_user WHERE tbl_cuti.id_user=tbl_user.id_user AND(tbl_cuti.alasan LIKE '%$cari%' OR tbl_cuti.tgl_awal LIKE '%$cari%' OR tbl_cuti.tgl_akhir LIKE '%$cari%' OR tbl_cuti.nama LIKE '%$cari%') AND(tbl_user.admin=4 OR tbl_user.admin=3) ORDER by id DESC");}
 							else
 							{$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' AND(alasan LIKE '%$cari%' OR tgl_awal LIKE '%$cari%' OR tgl_akhir LIKE '%$cari%' OR nama LIKE '%$cari%') ORDER by id DESC");}
 								 
@@ -285,21 +288,73 @@
 										else if($row['status_gm']==0){	
 									echo'
 									<td style="text-align:center">
-                                 	<a class="btn small light-green waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Cuti sudah disetujui">
-                                    <i class="material-icons">done</i> APPROVED</a></td>';
+                                 	<a class="btn small red waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Cuti sudah disetujui">
+                                    <i class="material-icons">highlight_off</i> APPROVED</a></td>';
 									} else {
 										echo'
 										<td style="text-align:center">
-										<a class="btn small red waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Cuti belum disetujui">
-                                    <i class="material-icons">highlight_off</i> APPROVE</a></td>';}
+										<a class="btn small light-green waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Cuti belum disetujui">
+                                    <i class="material-icons">done</i> APPROVE</a></td>';}
 										
-										
-										
-										
-										  echo'<td style="text-align:center">
+									if($row['status_sdm']==0){
+										echo'
+										<td style="text-align:center">
+										<a class="btn small red waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Klik Untuk menerima / approve Cuti"';
+										if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){echo'
+										href="?page=cuti&act=approves&ids=zZz&id='.$row['id'].'" 
+										onclick="return confirm(\'Anda yakin ingin menyetujui cuti?\');"';}
+										echo'
+										><i class="material-icons">highlight_off</i> APPROVE</a></td>';}
+										else{
+										echo'
+										<td style="text-align:center">
+										<a class="btn small light-green waves-effect waves-light tooltipped" name="simpans"  data-position="left" data-tooltip="Klik Untuk membatalkan Persetujuan"';
+										if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){echo'
+										href="?page=cuti&act=approves&ids=ZzZ&id='.$row['id'].'" 
+										onclick="return confirm(\'Anda yakin ingin membatalkan cuti?\');"';}
+										echo'
+										><i class="material-icons">done</i> APPROVED</a></td>';	
+										}
+
+
+                                        echo'<td style="text-align:center">';
+                                        if($row['file']!='-'){
+										if($row['status_sdm']==1){
+										if($_SESSION['admin']==1){echo'
 										  <a class="btn small blue waves-effect waves-light" href="?page=cuti&act=edit&id='.$row['id'].'"><i class="material-icons">edit</i> EDIT</a>
-										  <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'">
-                                                    <i class="material-icons">delete</i> DEL</a></td>';
+										  <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
+										<i class="material-icons">delete</i> DEL</a>';}
+										else {
+										echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+										}}else {
+                                            if($_SESSION['admin']==1 || $row['id_user']==$_SESSION['id_user']){
+											echo'<a class="btn small blue waves-effect waves-light" href="?page=cuti&act=edit&id='.$row['id'].'"><i class="material-icons">edit</i> EDIT</a>
+										  <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
+                                        <i class="material-icons">delete</i> DEL</a>';}
+                                        else {
+                                            echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+                                        }
+										}} else {
+                                            if($row['status_sdm']!=1){
+                                            if($_SESSION['admin']==1 || $row['id_user']==$_SESSION['id_user']){
+                                                echo'
+                                                <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
+                                              <i class="material-icons">delete</i> DEL</a>';  
+                                            } else {
+                                                echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+                                            }
+                                            } else {
+                                                if($_SESSION['admin']==1){
+                                                    echo'
+                                                <a class="btn small deep-orange waves-effect waves-light" href="?page=cuti&act=hapus&id='.$row['id'].'" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">
+                                              <i class="material-icons">delete</i> DEL</a>'; 
+                                                } else {
+                                                    echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
+                                                }
+                                            }
+                                        }
+										 
+										 echo '</td>';
 										
 										
 											
@@ -326,14 +381,14 @@
                         <table class="bordered" id="tblr">
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
-									<th width="1%"style="color:#fff">Nomor</th>
+									<th width="1%"style="color:#fff">No.</th>
                                         <th width="20%"style="color:#fff">Nama</th>
                                         <th width="15%"style="color:#fff">Alasan</th>
 										<th width="12%"style="color:#fff">Tanggal Awal</th>
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
-										<th width="15%" style="color:#fff">Status Manager</th>
-										<th width="15%" style="color:#fff">Status GM</th>
-										<th width="15%" style="color:#fff">Status SDM</th>
+										<th width="10%" style="color:#fff">Status Manager</th>
+										<th width="10%" style="color:#fff">Status GM</th>
+                                        <th width="10%" style="color:#fff">Status Direktur</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 										
 									
@@ -345,7 +400,9 @@
 
                             //script untuk mencari data
 							if($_SESSION['admin']==1){
-							$query = mysqli_query($config, "SELECT * FROM tbl_cuti ORDER by id DESC LIMIT $curr, $limit");}
+                            $query = mysqli_query($config, "SELECT * FROM tbl_cuti ORDER by id DESC LIMIT $curr, $limit");}
+                            else if($_SESSION['admin']==3 || $_SESSION['admin']==2)
+							{$query = mysqli_query($config, "SELECT tbl_cuti.*,tbl_user.admin FROM tbl_cuti,tbl_user WHERE tbl_cuti.id_user=tbl_user.id_user AND(tbl_user.admin=3 OR tbl_user.admin=4) ORDER by tbl_cuti.id DESC LIMIT $curr, $limit");}
 							else
 							{$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' ORDER by id DESC LIMIT $curr, $limit");}
 								 
@@ -424,7 +481,7 @@
 										echo'
 										<td style="text-align:center">
 										<a class="btn small red waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Klik Untuk menerima / approve Cuti"';
-										if($_SESSION['admin']==1){echo'
+										if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){echo'
 										href="?page=cuti&act=approves&ids=zZz&id='.$row['id'].'" 
 										onclick="return confirm(\'Anda yakin ingin menyetujui cuti?\');"';}
 										echo'
@@ -433,7 +490,7 @@
 										echo'
 										<td style="text-align:center">
 										<a class="btn small light-green waves-effect waves-light tooltipped" name="simpans"  data-position="left" data-tooltip="Klik Untuk membatalkan Persetujuan"';
-										if($_SESSION['admin']==1){echo'
+										if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){echo'
 										href="?page=cuti&act=approves&ids=ZzZ&id='.$row['id'].'" 
 										onclick="return confirm(\'Anda yakin ingin membatalkan cuti?\');"';}
 										echo'
