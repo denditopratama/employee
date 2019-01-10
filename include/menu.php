@@ -78,7 +78,7 @@
 								<?php echo'
 								<li><a href="?page=cv&id_user='.$_SESSION['id_user'].'">Cetak CV</a></li>';?>
 								<li><a href="?page=subgem">Game</a></li>
-                                <li><a href="logout.php">Logout</a></li>
+                                <li><a href="logout.php" onclick="signOut();">Logout</a></li>
                             </ul>
                         </div>
                     </li>
@@ -86,7 +86,20 @@
             </li>
             <li><a href="./"><i class="material-icons middle">dashboard</i>Beranda</a></li>
             <li class="no-padding">
-               
+            <script>
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+  </script>
                 <ul class="collapsible collapsible-accordion">
                     <li>
                        <a class="collapsible-header"><i class="material-icons">repeat</i>Transaksi Surat</a>
