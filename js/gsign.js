@@ -11,7 +11,7 @@
         if(profile){
          $.post('js/login_gmail.php',{id_token:id_token}, function(data){
                      
-                           window.location.href=data;
+                       
                     
                  
               });
