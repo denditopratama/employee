@@ -47,7 +47,7 @@ session_start();
            die();
                                        } else {
                                            $_SESSION['errLog'] = '<center>Akun Google anda tidak terdaftar di Sistem !</center>';
-                                          echo 'index.php';
+                                          echo './';
                                            
                                        }
     } else {
