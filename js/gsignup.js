@@ -21,7 +21,7 @@
                       var auth2 = gapi.auth2.getAuthInstance();
                       auth2.signOut().then(function(){
                         auth2.disconnect();
-                          window.location = "admin.php?page=usr&act=edit&gmail=1";
+                          window.location = "admin.php?page=usr&gmail=1";
                           
                       });
                       
