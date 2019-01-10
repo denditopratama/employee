@@ -12,7 +12,7 @@
          $.post('js/login_gmail.php',{id_token:id_token}, function(data){
     
                      if(data==' xx'){
-                      location.reload();
+                    
                         gapi.load('auth2', function() {
                             gapi.auth2.init({
                   client_id: '49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com'

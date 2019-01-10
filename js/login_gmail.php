@@ -14,7 +14,7 @@ session_start();
            $user_id = $token_data['payload']['sub'];
            $daf=mysqli_query($config,"UPDATE tbl_user SET gmail='$user_id' WHERE id_user='".$_SESSION['id_user']."'");
            $_SESSION['tokengmail'] = $id_token;
-           echo 'admin.php?page=usr&act=edit&id_user='.$_SESSION['id_user'].'';
+           echo 'y';
        } else {
            echo 'TOKEN SALAH';
        }
