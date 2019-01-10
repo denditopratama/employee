@@ -84,7 +84,19 @@ th,td,tr{
                         <!-- Secondary Nav END -->
                     </div>
                     <!-- Row END -->';
-
+                    if(isset($_GET['gmail'])){
+                        if($_GET['gmail']==1){
+                            echo '<div id="alert-message" class="row">
+                            <div class="col m12">
+                                <div class="card green lighten-5">
+                                    <div class="card-content notif">
+                                        <span class="card-title green-text"><i class="material-icons md-36">done</i> <center>Akun Google anda berhasil diganti / ditambah</center></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+                        }
+                    }
                     if(isset($_SESSION['succAdd'])){
                         $succAdd = $_SESSION['succAdd'];
                         echo '<div id="alert-message" class="row">
