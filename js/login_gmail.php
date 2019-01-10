@@ -28,7 +28,7 @@ session_start();
            list($id_user, $username, $nama, $nip, $admin,$role,$unit,$sub_unit,$divisi,$status_aktif) = mysqli_fetch_array($query);
            if($status_aktif==0){
            $_SESSION['errLog'] = '<center>User tidak Aktif!, silahkan hubungi admin</center>';
-           echo 'index.php';
+           echo 'xx';
             die();
                    }
          
@@ -47,8 +47,7 @@ session_start();
            die();
                                        } else {
                                            $_SESSION['errLog'] = '<center>Akun Google anda tidak terdaftar di Sistem !</center>';
-                                          echo './';
-                                          die();
+                                          echo 'xx';
                                            
                                        }
     } else {

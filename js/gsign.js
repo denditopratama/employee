@@ -10,16 +10,14 @@
        
         if(profile){
          $.post('js/login_gmail.php',{id_token:id_token}, function(data){
-                     
-          var doneTheStuff;
-function whatever() {
-  if (!doneTheStuff) {
-    doneTheStuff = true;
-    window.location.href=data;
-                    
-  }
-}
+    
+                     if(data==' xx'){
+                      location.reload();
+                     } else {
+                       window.location.href=data;
+                     }
                            
+                    
                  
               });
         }
