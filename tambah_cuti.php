@@ -198,9 +198,11 @@
 					$_SESSION['errs']="GAGAL, jatah cuti anda tidak mencukupi";
 					header("Location: ./admin.php?page=cuti");
 				} else {
-				if($_SESSION['admin']==4 || $_SESSION['admin']==1){
-				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_gm,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."')");	
-				} else if($_SESSION['admin']==5 || $_SESSION['admin']==1){
+				if($_SESSION['admin']==4){
+				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."')");	
+				} else if($_SESSION['admin']==1 || $_SESSION['admin']==3 || $_SESSION['admin']==2){
+					$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."')");	
+					} else if($_SESSION['admin']==5){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."')");	
 				} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir','".$_SESSION['nama']."','".$_SESSION['divisi']."')");}
@@ -247,16 +249,18 @@
 
                                                                 move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
 																
-				if($_SESSION['admin']==4 || $_SESSION['admin']==1){
-				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
-				} else if($_SESSION['admin']==5 || $_SESSION['admin']==1){
+				if($_SESSION['admin']==4){
+				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
+				} else if($_SESSION['admin']==5){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
+				} else if($_SESSION['admin']==3 || $_SESSION['admin']==2 || $_SESSION['admin']==1){
+					$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
 				} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir','".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");}
 				
                                                               
 																
-                                                                if($query == true){
+                                                                if($cutikeun == true){
                                                                     $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
 																	header("Location: ./admin.php?page=cuti"); 
                                                                     die();
@@ -293,13 +297,15 @@
 			
 			$alasan='Cuti Bersalin yang diperkirakan oleh Dokter/Bidan akan melahirkan tanggal '.date("d",strtotime($tgl_melahirkan)).'-'.date("M",strtotime($tgl_melahirkan)).'-'.date("Y",strtotime($tgl_melahirkan)).'';
 			
-			if($_SESSION['admin']==4 || $_SESSION['admin']==1){
-				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
-				} else if($_SESSION['admin']==5 || $_SESSION['admin']==1){
+			if($_SESSION['admin']==4){
+				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
+				} else if($_SESSION['admin']==5){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
-				} else {
+				} else if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){
+					$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
+					} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs','".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");}
-				if($query == true){
+				if($cutikeun == true){
                         $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
 						header("Location: ./admin.php?page=cuti"); 
                         die();
@@ -338,16 +344,18 @@
 
                                                                 move_uploaded_file($_FILES['filegugur']['tmp_name'], $target_dir.$nfile);
 																
-				if($_SESSION['admin']==4 || $_SESSION['admin']==1){
-				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
-				} else if($_SESSION['admin']==5 || $_SESSION['admin']==1){
+				if($_SESSION['admin']==4){
+				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
+				} else if($_SESSION['admin']==5){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
-				} else {
+				}  else if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){
+					$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir',1,1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");	
+					} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awal','$tgl_akhir','".$_SESSION['nama']."','".$_SESSION['divisi']."','$nfile')");}
 				
                                                               
 																
-                                                                if($query == true){
+                                                                if($cutikeun == true){
                                                                     $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
 																	header("Location: ./admin.php?page=cuti"); 
                                                                     die();
@@ -593,11 +601,13 @@
 			
 			
 			
-			if($_SESSION['admin']==4 || $_SESSION['admin']==1){
-				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
-				} else if($_SESSION['admin']==5 || $_SESSION['admin']==1){
+			if($_SESSION['admin']==4){
+				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
+				} else if($_SESSION['admin']==5){
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
-				} else {
+				}  else if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3){
+					$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs',1,1,1,'".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");	
+					} else {
 				$cutikeun=mysqli_query($config,"INSERT INTO tbl_cuti(id_user,alasan,tgl_awal,tgl_akhir,nama,divisi,file) VALUES ('".$_SESSION['id_user']."','$alasan','$tgl_awals','$tgl_akhirs','".$_SESSION['nama']."','".$_SESSION['divisi']."','-')");}
 				if($cutikeun == true){
                         $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';

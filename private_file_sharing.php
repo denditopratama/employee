@@ -135,7 +135,7 @@ h11 {
 											echo'
                                             </select>
                                         </div>
-                                          <button type="submit" name="filters" style="text-align:center;width:100%;color:white!important" class="btn small orange waves-effect waves-light">pilih</button>
+                                      
                                     </div>
 									</form>
 										
@@ -574,6 +574,15 @@ $(document).ready(function(){
 $('#halaman').change(function(){
 	var x = $(this).val();
 	window.location.href='admin.php?page=files&pg='+ x;
+		});
+
+		$('#filtershare').change(function(){
+			var xx = $(this).val();
+			if(xx==1){
+				window.location.href='admin.php?page=files&sub=private';
+			} else  {
+				window.location.href='admin.php?page=files';
+			}
 		});
 	
 	});	

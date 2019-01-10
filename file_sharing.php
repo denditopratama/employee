@@ -112,7 +112,7 @@ h11 {
 				echo'
 				
                                         <form method="post" action="?page=files">
-                                            <div class="input-field col m4" style="margin-top:30px">
+                                            <div class="input-field col m4 s12" style="margin-top:30px">
                                                 <input id="searchs" type="search" name="cari" placeholder="Ketik dan tekan enter mencari data..." style="background-color:transparent" required>
                                                 <label for="searchs"><i class="material-icons">search</i></label>
                                                 <input type="submit" name="submita" class="hidden">
@@ -120,7 +120,7 @@ h11 {
                                         </form>
 										
 										<form method="post">
-										<div class="input-field col m4" style="margin-top:-16px">
+										<div class="input-field col m4 s12" style="margin-top:-16px">
                                         <i style="margin-top:10px" class="material-icons prefix md-prefix">group</i><label>Tampilan</label><br/>
                                         <div class="input-field col s12" style="margin-top:9px">
                                             <select name="filtershare" id="filtershare">';
@@ -136,7 +136,7 @@ h11 {
 											echo'
                                             </select>
                                         </div>
-                                          <button type="submit" name="filters" style="text-align:center;width:100%;color:white!important" class="btn small orange waves-effect waves-light">pilih</button>
+                                          
                                     </div>
 									</form>
 										
@@ -661,6 +661,15 @@ $('#halaman').change(function(){
 	window.location.href='admin.php?page=files&pg='+ x;
 		});
 	
+		$('#filtershare').change(function(){
+			var xx = $(this).val();
+			if(xx==1){
+				window.location.href='admin.php?page=files&sub=private';
+			} else  {
+				window.location.href='admin.php?page=files';
+			}
+		});
+
 	});	
 
 

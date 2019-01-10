@@ -127,7 +127,7 @@ th,td,tr{
 					
 					if(isset($_REQUEST['submit'])){
 						$cari=mysqli_real_escape_string($config,$_REQUEST['cari']);
-						$querykeun=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(nama LIKE '%$cari%' OR nip LIKE '%$cari%' AND admin<>1) ORDER BY kelas_jabatan ASC");
+						$querykeun=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND(admin<>1 AND nama LIKE '%$cari%' OR nip LIKE '%$cari%') ORDER BY kelas_jabatan ASC");
 						
 						echo '
                     <!-- Row form Start -->

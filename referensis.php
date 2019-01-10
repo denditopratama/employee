@@ -323,6 +323,31 @@
 				}
 			}
 
+			if(isset($_POST['tambahmerah'])){
+				$tglmerah=mysqli_real_escape_string($config,$_POST['tglmerah']);
+				$updatemerah=mysqli_query($config,"INSERT INTO tbl_ref_tgl_merah(tgl_merah) VALUES ('".$tglmerah."') ");
+			}
+
+			if(isset($_POST['simpanmerah'])){
+				$bv=count($_POST['tgl_merah']);
+				for($i=0;$i<$bv;$i++){
+					$tgl_merah=mysqli_real_escape_string($config,$_POST['tgl_merah'][$i]);
+					$sim=mysqli_query($config,"UPDATE tbl_ref_tgl_merah SET tgl_merah='$tgl_merah' WHERE id='$i'");
+
+				}
+			}
+
+			$makssubs=mysqli_query($config,"SELECT MAX(id) FROM tbl_ref_tgl_merah");
+			list($maksubs)=mysqli_fetch_array($makssubs);
+			for($i=1;$i<=$maksubs;$i++){
+				if(isset($_REQUEST['hapusmerah'.$i.''])){
+					$ngampunz=mysqli_query($config,"DELETE FROM tbl_ref_tgl_merah WHERE id='$i'");
+				}
+			}
+
+
+
+
 
 		?>
 		
@@ -1125,7 +1150,81 @@
 				</div>
 				</div>
 				</div>
-				</div>				
+				</div>		
+
+<style>
+.picker--opened .picker__holder{
+	height:150%!important;
+}
+</style>
+
+
+
+
+
+
+
+					<div id="modald10">
+				<div id="modals10" class="modal" style="background-color:white">
+                <div class="modal-content white">
+				<div class="input-field col s12">
+				<h5><i class="material-icons" style="margin-bottom:8px">lock</i> Tabel Referensi Tanggal Merah</h5>
+				<small class="red-text">* Klik Tambah untuk menambah Data.</small><br>
+				<small class="red-text">* Klik Simpan untuk mengubah data pada baris tertentu.</small><br>
+				
+				
+				<form method="POST">
+					<div class="col m12" id="colres">
+                        <table class="bordered">
+                            <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
+                                 <tr>
+										<th width="1%"style="color:#fff">No.</th>
+                                        <th width="50%"style="color:#fff">Tanggal</th>
+										<th width="20%"style="color:#fff">Tindakan</th>											
+                                </tr>
+								</thead>
+								<tbody>
+								<tr>
+								<td style="text-align:center" >-</td>
+								<td style="text-align:center"><input type="text" class="datepicker" id="tgl_surat" style="text-align:center" name="tglmerah"></td>
+								<td><button type="submit" name="tambahmerah" style="width:100%;color:white!important" class="btn small green waves-effect waves-light" onclick="return confirm('Anda yakin ingin menambah data ini?');">TAMBAH</button>
+								</td>
+								</tr>
+								</tbody>
+								<thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
+                                 <tr>
+										<th width="1%"style="color:#fff">No.</th>
+                                        <th width="50%"style="color:#fff">Tanggal</th>
+										<th width="20%"style="color:#fff">Tindakan</th>											
+                                </tr>
+								</thead>
+								<tbody>
+								<?php 
+								$no=1;
+								$kemsking=mysqli_query($config,"SELECT * FROM tbl_ref_tgl_merah ORDER BY tgl_merah DESC LIMIT 20");
+								while($row=mysqli_fetch_array($kemsking)){
+							echo'
+								<tr>
+								<td style="text-align:center" >'.$no++.'</td>
+								<td style="text-align:center"><input type="text" class="datepicker" id="tgl_surat" style="text-align:center" name="tgl_merah[]" value="'.date('d - F - Y',strtotime($row['tgl_merah'])).'"></td>
+								<td>
+								
+								<button type="submit" name="simpanmerah" style="width:100%;color:white!important" class="btn small blue waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin mengubah data ini?\');">SIMPAN</button>
+								<button type="submit" name="hapusmerah'.$row['id'].'" style="width:100%;color:white!important" class="btn small red waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\');">HAPUS</button>
+								
+								</td>
+								</tr>';}
+							?>
+                            </tbody>
+							</table>
+							</div>
+												
+				
+				</form>
+				</div>
+				</div>
+				</div>
+				</div>			
 
 
 
@@ -1197,6 +1296,13 @@
 				</div>
 				</div>
 
+
+				<div class="card col s12 m4" id="dds" style="background-color:orange">
+				<div class="card-content" style="text-align:center!important">
+				<a style="background-color: #39424c!important;color:white" id="refmerah" class="btn small blue darken-4 waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Klik Untuk Melihat Tabel Jabatan">Tabel Tanggal Merah</a>
+				
+				</div>
+				</div>
 				
 				</div>
 <?php }
@@ -1264,6 +1370,13 @@ $(document).ready(function(){
 	if(xd == true){
 	alert('Harap berhati - hati dalam melakukan penambahan data!');
 	$("#modals9").openModal()}
+						});
+
+	$("#refmerah").click(function(){
+	var xd = confirm('anda yakin?');
+	if(xd == true){
+	alert('Harap berhati - hati dalam melakukan penambahan data!');
+	$("#modals10").openModal()}
 						});
 
 

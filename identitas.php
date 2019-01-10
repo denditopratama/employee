@@ -12,11 +12,11 @@ if(empty($_SESSION['admin'])){
 		
 	?>
 			
-			<div class="input-field col s6" style="width:100%;text-align:center">
+			<div class="input-field col s12 m6" style="width:100%;text-align:center">
 						<h5><u><i class="material-icons md-36">perm_identity</i>Identitas</u></h5><br>
 						</div>
                               <form method="POST" enctype="multipart/form-data">
-								<div class="input-field col s6">
+								<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">group_add</i><label>Status Keluarga</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="status_keluarga" id="status_keluarga" required>
@@ -109,7 +109,7 @@ if(empty($_SESSION['admin'])){
 										  
 										   
                                     </div>	
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">wc</i><label>Jenis Kelamin</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="jenis_kelamin" id="jenis_kelamin" style="margin-bottom:24px;" required>
@@ -135,7 +135,7 @@ if(empty($_SESSION['admin'])){
                                           
                                     </div>	
 									
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
                                 <i class="material-icons prefix md-prefix">date_range</i>
                                 <input id="tgl_surat" type="text" name="tgl_bakti" class="datepicker" value="<?php echo $tgl_bakti ;?>" required>
                                    
@@ -144,14 +144,14 @@ if(empty($_SESSION['admin'])){
 								
 							  
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">place</i>
                                         <input id="tempat_lahir" type="text" name="tempat_lahir" value="<?php echo $tempat_lahir ;?>">
 										
                                         <label for="tempat_lahir">Tempat Lahir</label>
                                     </div>
 								
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">wc</i><label>Golongan Darah</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="goldarah" id="goldarah" style="margin-bottom:24px;">
@@ -190,7 +190,7 @@ if(empty($_SESSION['admin'])){
                                         </div>
                                           
                                     </div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">wb_sunny</i><label>Agama</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="agama" id="agama" style="margin-bottom:24px;" required>
@@ -259,81 +259,81 @@ if(empty($_SESSION['admin'])){
                                         </div>
                                           
                                     </div>	
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
                                 <i class="material-icons prefix md-prefix">cake</i>
                                 <input id="tgl_awal" type="text" name="tanggal_lahir" class="datepicker" value="<?php echo $tanggal_lahir ;?>" required>
                                     
                                 <label for="tgl_lahir" id="tgl_awal">Tanggal Lahir</label>
                             </div>
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">home</i>
                                         <input id="alamat" type="text" name="alamat" value="<?php echo $alamat ;?>" required>
                                         <label for="alamat">Alamat</label>
                                     </div>
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">turned_in</i>
                                         <input id="kelurahan" type="text" name="kelurahan" value="<?php echo $kelurahan ;?>">
                                         <label for="kelurahan">Kelurahan</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">turned_in_not</i>
                                         <input id="kecamatan" type="text" name="kecamatan" value="<?php echo $kecamatan ;?>">
                                         <label for="kecamatan">Kecamatan</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">flag</i>
                                         <input id="kota" type="text" name="kota" value="<?php echo $kota ;?>">
                                         <label for="kota">Kota</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">public</i>
                                         <input id="propinsi" type="text" name="propinsi" value="<?php echo $propinsi ;?>">
                                         <label for="propinsi">Propinsi</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">markunread_mailbox</i>
                                         <input id="kodepos" type="text" name="kode_pos" value="<?php echo $kode_pos ;?>">
                                         <label for="kodepos">Kode Pos</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">phone</i>
                                         <input id="telepon" type="text" name="no_telpon" value="<?php echo $no_telpon ;?>">
                                         <label for="telepon">No. Telepon</label>
                                     </div>
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">credit_card</i>
                                         <input id="noktp" type="text" name="no_ktp" value="<?php echo $noktp ;?>">
                                         <label for="no_ktp">No. KTP</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">credit_card</i>
                                         <input id="nonpwp" type="text" name="no_npwp" value="<?php echo $nonpwp ;?>" required>
                                         <label for="no_npwp">No. NPWP</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">credit_card</i>
                                         <input id="nobpjsks" type="text" name="no_bpjsks" value="<?php echo $nobpjsks ;?>">
                                         <label for="no_bpjsks">No. BPJS Kesehatan</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">credit_card</i>
                                         <input id="nobpjskt" type="text" name="no_bpjskt" value="<?php echo $nobpjskt ;?>">
                                         <label for="no_bpjskt">No. BPJS Ketenagakerjaan</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">attach_money</i>
                                         <input id="norekening" type="text" name="no_rekening" value="<?php echo $no_rekening ;?>">
                                         <label for="no_rekening">Nomor Rekening</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">style</i>
                                         <input id="atasnama" type="text" name="atas_nama" value="<?php echo $atas_nama ;?>">
                                         <label for="atas_nama">Atas Nama</label>
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">account_balance</i><label>Jenis Bank</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="jenis_bank" id="jenisbank" style="margin-bottom:24px;" required>
@@ -361,7 +361,7 @@ if(empty($_SESSION['admin'])){
                                           
                                     </div>
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">not_interested</i><label>BPJS Jaminan Pensiun Di-nolkan</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="bpjsjampesnol" id="bpjsjampesnol" style="margin-bottom:24px;" required>
@@ -388,7 +388,7 @@ if(empty($_SESSION['admin'])){
                                           
                                     </div>
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">not_interested</i><label>BPJS Jaminan Kesehatan Di-nolkan</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="bpjsjamkesnol" id="bpjsjamkesnol" style="margin-bottom:24px;" required>
@@ -416,7 +416,7 @@ if(empty($_SESSION['admin'])){
                                        	
                                           
                                     </div>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">attach_money</i>
                                         <label for="gaji_jm">Gaji Jasa Marga</label>
                                         <?php
@@ -473,7 +473,7 @@ if(empty($_SESSION['admin'])){
 									<div class="col s12 m12">
 									  <div class="card blue-grey darken-1" style="background-color:white!important">
 										<div class="card-content black-text">
-									<div class="input-field col s6" style="width:100%;text-align:center">
+									<div class="input-field col s12 m6" style="width:100%;text-align:center">
 						<h5><u><i class="material-icons md-36">account_balance</i>Departemen</u></h5><br>
 						</div>
 						
@@ -481,7 +481,7 @@ if(empty($_SESSION['admin'])){
 					
 		
 		
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">account_balance</i><label>Unit Kerja</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="unit_kerja" id="unit_kerja" style="margin-bottom:24px;" required>
@@ -529,7 +529,7 @@ if(empty($_SESSION['admin'])){
         });
 									
 								</script>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">wc</i><label>Sub Unit Kerja</label><br/>
                                         <div class="input-field col s11 right">
 										<?php $jio=mysqli_query($config,"SELECT sub_unit FROM tbl_user WHERE id_user='$id_user'");
@@ -544,7 +544,7 @@ if(empty($_SESSION['admin'])){
                                           
                                     </div>	
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">star</i><label>Jabatan</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="jabatan" id="jabatan" style="margin-bottom:24px;" required>
@@ -581,7 +581,7 @@ if(empty($_SESSION['admin'])){
 									
 									
 									
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">star</i><label>Kelas Jabatan</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="keljab" id="keljab" style="margin-bottom:24px;" required>
@@ -630,7 +630,7 @@ if(empty($_SESSION['admin'])){
 								</script>	
 								
 								
-								<div class="input-field col s6">
+								<div class="input-field col s12 m6">
                                         <i class="material-icons prefix md-prefix">directions</i><label>JMP / JMRB</label><br/>
                                         <div class="input-field col s11 right">
                                             <select class="browser-default" name="jmrb" id="jmrb" style="margin-bottom:24px;" required>
@@ -685,11 +685,11 @@ if(empty($_SESSION['admin'])){
 		
 									
 					<?php } ?>
-									<div class="input-field col s6" style="width:100%;text-align:center">
+									<div class="input-field col s12 m6" style="width:100%;text-align:center">
 						<h5><u><i class="material-icons md-36">attach_file</i>Attachment</u></h5><br>
 						</div>
 						
-									<div class="input-field col s6"><h6> - KTP</h6>
+									<div class="input-field col s12 m6"><h6> - KTP</h6>
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload KTP">
                                 <div class="btn light-green darken-1">
                                     <span>File</span>
@@ -705,7 +705,7 @@ if(empty($_SESSION['admin'])){
 							
                         </div>
 						
-						<div class="input-field col s6"><h6> - Kartu Keluarga</h6>
+						<div class="input-field col s12 m6"><h6> - Kartu Keluarga</h6>
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload Kartu Keluarga">
                                 <div class="btn light-green darken-1">
                                     <span>File</span>
@@ -719,7 +719,7 @@ if(empty($_SESSION['admin'])){
                             </div>
                         </div>
 						
-						<div class="input-field col s6"><h6> - NPWP</h6>
+						<div class="input-field col s12 m6"><h6> - NPWP</h6>
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload NPWP">
                                 <div class="btn light-green darken-1">
                                     <span>File</span>
@@ -733,7 +733,7 @@ if(empty($_SESSION['admin'])){
                             </div>
                         </div>
 						
-						<div class="input-field col s6"><h6> - BPJS Ketenagakerjaan</h6>
+						<div class="input-field col s12 m6"><h6> - BPJS Ketenagakerjaan</h6>
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload BPJS Ketenagakerjaan">
                                 <div class="btn light-green darken-1">
                                     <span>File</span>
@@ -747,7 +747,7 @@ if(empty($_SESSION['admin'])){
                             </div>
                         </div>
 						
-						<div class="input-field col s6"><h6> - BPJS Kesehatan</h6>
+						<div class="input-field col s12 m6"><h6> - BPJS Kesehatan</h6>
                             <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload BPJS Kesehatan">
                                 <div class="btn light-green darken-1">
                                     <span>File</span>
@@ -762,7 +762,7 @@ if(empty($_SESSION['admin'])){
                             </div>
                         </div>
 										
-									<div class="input-field col s6" style="width:100%;text-align:left">	
+									<div class="input-field col s12 m6" style="width:100%;text-align:left">	
                                     <?php 
                                     $yow=mysqli_query($config,"SELECT status FROM tbl_akses_user WHERE id=1");
                                     list($akses)=mysqli_fetch_array($yow);

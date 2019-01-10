@@ -311,13 +311,13 @@
 								</div>
 						<?php if($_SESSION['admin']!=1){
 									echo'
-							<div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Isikan password lama Anda">
+							<div class="input-field col s12 m6 tooltipped" data-position="top" data-tooltip="Isikan password lama Anda">
                                 <i class="material-icons prefix md-prefix">lock_outline</i>
                                 <input id="password_lama" type="password" class="validate" name="password_lama" placeholder="	             		 (Kosongkan Jika tidak ingin mengganti Password)">
                                 <label for="password_lama">Password Lama</label>
 						</div>';}?>
 							
-							  <div class="input-field col s6 tooltipped" data-position="top" data-tooltip="Password minimal 5 karakter">
+							  <div class="input-field col s12 m6 tooltipped" data-position="top" data-tooltip="Password minimal 5 karakter">
                             <i class="material-icons prefix md-prefix">lock</i>
                             <input id="password" type="password" class="validate" name="password" placeholder="	                       (Kosongkan Jika tidak ingin mengganti Password)"> 
                             <label for="password">Password Baru</label>
@@ -430,7 +430,7 @@
 									$yaman=mysqli_query($config,"SELECT foto FROM tbl_user WHERE id_user =$id_user");
 									list($foto)=mysqli_fetch_array($yaman);
 									?>
-									<div class="input-field col s6">
+									<div class="input-field col s12 m6">
                                 <div class="file-field input-field tooltipped" data-position="top" data-tooltip="Upload Foto Profile">
                                     <div class="btn light-green darken-1">
                                         <span>File</span>
@@ -455,13 +455,58 @@
                                     </div>
                                 </div>
                             </div>
-							  <div class="input-field col s6">	
+							  <div class="input-field col m6 s12" style="text-align:center!important">	
+							  <style>
+                        .g-signin2{
+                            width: 100%;
+                            }
+
+                            .g-signin2 > div{
+                            margin: 0 auto;
+                            }
+                            .abcRioButton{
+                                width:200%;
+                            }
+                        </style>
+						
+						<h6> Akun Google anda terdaftar atas nama : <b id="ans"></b></h6><br>
+							  <div id="DivID" data-width="250" class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-theme="light"></div><br>
                                         <button type="submit" name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
                                         <a href="?page=usr" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>
+										<?php 
+										if(!empty($_SESSION['tokengmail'])){
+											echo '
+											<script>
+											$.get(\'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='.$_SESSION['tokengmail'].'\', function(response){
+	
+												$("#ans").html(response.email);
+											});
+											</script>
+											';
+										}
+										 ?>
                                 </div>
+						<script>
+						$(document).ready(function(){
+							setTimeout(function () {
+        $('#DivID div div span span:last').text("Tambahkan Akun Google Anda");
+        $('#DivID div div span span:first').text("Tambahkan Akun Google Anda");
+	}, 100);
+
+	
+	  
+
+						});
 						
-				
-						
+						</script>
+				 <script>
+
+
+
+
+
+    </script>
+				<script type="text/javascript" src="js/gsignup.js"></script>
 						<br/>
 								
                               

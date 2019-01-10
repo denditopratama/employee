@@ -15,7 +15,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
-	
+    <meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id" content="49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+   
+    
    <link rel="icon" href="./upload/logo.png" type="image/x-icon">
     
     <!-- Meta END -->

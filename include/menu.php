@@ -61,7 +61,16 @@
             <li class="no-padding blue-grey darken-4">
                 <ul class="collapsible collapsible-accordion">
                     <li>
-                        <a style="text-align:left!important" class="collapsible-header"><i class="material-icons">account_circle</i><?php echo $_SESSION['nama']; ?></a>
+                    <?php 
+                      $stringd = strip_tags($_SESSION['nama']);
+                      if (strlen($stringd) > 18) { $stringCutd = substr($stringd, 0, 15);
+                      $endPointd = strrpos($stringCutd, 15);
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                $stringd = $endPointd? substr($stringCutd, 0, $endPointd) : substr($stringCutd, 0);
+                                    $stringd .= '';}    
+                    ?>
+                        <a style="text-align:left!important" class="collapsible-header"><i class="material-icons">account_circle</i><?php echo $stringd; ?></a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="?page=pro">Profil</a></li>

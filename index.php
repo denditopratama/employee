@@ -25,6 +25,9 @@
 	<meta name="author" content="Dendito Pratama">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <?php
         $query = mysqli_query($config, "SELECT logo from tbl_instansi");
         list($logo) = mysqli_fetch_array($query);
@@ -33,6 +36,7 @@
         } else {
             echo '<link rel="icon" href="./asset/img/logo.png" type="image/x-icon">';
         }
+        
     ?>
     <!-- Meta END -->
 
@@ -55,7 +59,7 @@
 		
         .bg::before {
             content: '';
-            background-image: url('./asset/img/background1.jpg');
+         
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
@@ -199,8 +203,8 @@ to {
 <!-- Head END -->
 
 <!-- Body START -->
-
-<body class="blue-grey lighten-3" id="slideshow" style="background-image:url('./upload/overlay3.jpg');background-repeat: no-repeat;
+<?php $rang=mt_rand(1,4); ?>
+<body class="blue-grey lighten-3" id="slideshow" style="background-repeat: no-repeat;
             background-size: cover;">
 
     <!-- Container START -->
@@ -268,13 +272,6 @@ to {
 									}
                                     session_start();
 
-									
-									
-									
-									
-									
-									
-									
                                     //buat session
 								
                                     $_SESSION['id_user'] = $id_user;
@@ -302,7 +299,7 @@ to {
                     ?>
 
                     <!-- Form START -->
-                    <form class="col s12 m12 offset-4 offset-4" method="POST" action="" >
+                    <form class="col s12 m12 offset-4 offset-4" method="POST" >
 					
 
                         <div class="row">
@@ -339,9 +336,23 @@ to {
                             <label for="password">Password</label>
 
                         </div>
+                        <style>
+                        .g-signin2{
+                            width: 100%;
+                            }
+
+                            .g-signin2 > div{
+                            margin: 0 auto;
+                            }
+                            .abcRioButton{
+                                width:200%;
+                            }
+                        </style>
                         <div class="input-field col s12">
-                            <button id="bn" type="submit" class="btn-large waves-effect waves-light blue-grey col s12" name="submit">LOGIN</button>
-							
+                            <button id="bn" type="submit" class="btn-large waves-effect waves-light blue-grey col s12" name="submit">LOGIN</button><br>
+                            <p style="text-align:center;font-size:12px">OR</p>
+							<div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-theme="light"></div>
+   
                         </div>
                     </form>
                     <!-- Form END -->
@@ -368,20 +379,25 @@ to {
     <script type="text/javascript" src="asset/js/materialize.min.js"></script>
     <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
     <script data-pace-options='{ "ajax": false }' src='asset/js/pace.min.js'></script>
+    <script type="text/javascript" src="js/gsign.js"></script>
 	
 
     <!-- Jquery auto hide untuk menampilkan pesan error -->
+    <?php 
+ 
+    echo '
     <script type="text/javascript">
-        $("#alert-message").alert().delay(3000).slideUp('slow');
-        $("#maintenis").alert().delay(6000).slideUp('slow');
-	
+        $("#alert-message").alert().delay(3000).slideUp(\'slow\');
+        $("#maintenis").alert().delay(6000).slideUp(\'slow\');
+    
+        $(\'body\').css("background-image", "url(\'./upload/overlay1.jpg\')");
 	(function($, interval, slides) {
 
     var i = 0;
     var handle = setInterval(function () {
 
-		
-        $('body').css("background-image", "url('" + slides[i] + "')");
+        	
+        $(\'body\').css("background-image", "url(\'" + slides[i] + "\')");
 
         i++;
 
@@ -391,21 +407,21 @@ to {
     }, interval);
 
 })(jQuery, 5000, [
-    "./upload/overlay4.jpg",
     "./upload/overlay2.jpg",
-    "./upload/overlay1.jpg"
+    "./upload/overlay3.jpg",
+    "./upload/overlay4.jpg"
 ]);
 
 									
 $(document).ready(function(){
 
-$('#login').fadeIn(1500);
+$(\'#login\').fadeIn(1500);
 
 
 });							
 								
 
-    </script>
+    </script>'; ?>
     <!-- Javascript END -->
 
     <noscript>

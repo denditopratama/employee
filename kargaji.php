@@ -1151,6 +1151,8 @@
 									$tat=array();
 									$tat1=array();
 									$nong=array();
+									$mingguan=array();
+									$tmpminggu=array();
 									
                                         if(mysqli_num_rows($query2d) > 0){
                                             $no = 0;
@@ -1158,27 +1160,40 @@
 												$titit=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
 												list($namas,$edmun)=mysqli_fetch_array($titit);
 												$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
+												
 												if(date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun'){
 													echo '<tr style="background-color:yellow">';}
-										
+													$ex=explode('.',$row['jam_awal']);
+													$exo=explode('.',$row['jam_akhir']);
+													if($row['status_gm']==1 && $row['status_manager']==1){
+														array_push($tat,$exo[0]-$ex[0]);
+														array_push($tat1,$exo[1]-$ex[1]);
+													}
+												
 										if($row['status_gm']==1 && $row['status_manager']==1){
 										 if($edmun==1 || $edmun==2 || $edmun==3 || $edmun==4 || $edmun==5){
 											array_push($nong,$tarfman);
 										 } else {
+											 
+											 
+
 											if(date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun'){
 												echo '<tr style="background-color:yellow">';
 												if($hourdiff<=7){
-													$byrlm=($sub1/$jam_lembur*2);
+													$byrlm=($sub1/$jam_lembur*2)*$hourdiff;
 													array_push($nong,$byrlm);
 												} else if($hourdiff>7 && $hourdiff<=8){
-													$byrlm=($sub1/$jam_lembur*3);
+													$byrlm=(($sub1/$jam_lembur*2)*7)+($sub1/$jam_lembur*3);
 													array_push($nong,$byrlm);
 												} else if($hourdiff>=8){
-													$byrlm=($sub1/$jam_lembur*4);
+													$byrlm=(($sub1/$jam_lembur*2)*7)+($sub1/$jam_lembur*3)+(($sub1/$jam_lembur*4)*$hourdiff);
 													array_push($nong,$byrlm);
 												}
 											} else {
 												echo ' <tr>';
+												if($hourdiff>3){
+													$hourdiff=3;
+												}
 												if($hourdiff>1){
 													$byrlm=($sub1/$jam_lembur*1.5)+((2/$jam_lembur*$sub1)*($hourdiff-1));
 													array_push($nong,$byrlm);
@@ -1267,12 +1282,7 @@
 													
                                             </tr>
 										</tbody>';
-										$ex=explode('.',$row['jam_awal']);
-										$exo=explode('.',$row['jam_akhir']);
-										if($row['status_gm']==1 && $row['status_manager']==1){
-											array_push($tat,$exo[0]-$ex[0]);
-											array_push($tat1,$exo[1]-$ex[1]);
-										}
+										
 										
 										
 												
@@ -1289,7 +1299,7 @@
 												}
 												
 											}
-										
+											
 											echo '<tr><td style="text-align:center"colspan="9">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
 											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.number_format($cocoktanam , 0, ',', '.').'</b></h6></td></tr>';
                                         } else {
