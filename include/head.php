@@ -17,23 +17,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     <meta name="google-signin-scope" content="profile email">
 	<meta name="google-signin-client_id" content="49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=signOut" async defer></script>
-    <script>
-    function signOut() {
-        gapi.load('auth2', function() {
-        gapi.auth2.init(
-            {
-  client_id: '49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com'
-}
-        );
-      });
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
-    }
-
-  </script>
+    
     
    <link rel="icon" href="./upload/logo.png" type="image/x-icon">
     

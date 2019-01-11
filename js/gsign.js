@@ -11,7 +11,7 @@
         if(profile){
          $.post('js/login_gmail.php',{id_token:id_token}, function(data){
     
-                     if(data==' xx' || data==' dd'){
+                     if(data==' xx'){
                     
                         gapi.load('auth2', function() {
                             gapi.auth2.init({

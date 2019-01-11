@@ -501,8 +501,23 @@
 						
 						</script>
 				 
-				 <script src="https://apis.google.com/js/platform.js" async defer></script>
+				 <script src="https://apis.google.com/js/platform.js?onload=signOut" async defer></script>
+    <script>
+    function signOut() {
+        gapi.load('auth2', function() {
+        gapi.auth2.init(
+            {
+  client_id: '49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com'
+}
+        );
+      });
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
 
+  </script>
 
 				<script type="text/javascript" src="js/gsignup.js"></script>
 						<br/>
