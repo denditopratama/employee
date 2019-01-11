@@ -86,6 +86,7 @@
             </li>
             <li><a href="./"><i class="material-icons middle">dashboard</i>Beranda</a></li>
             <li class="no-padding">
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
             <script>
     function signOut() {
         gapi.load('auth2', function() {
