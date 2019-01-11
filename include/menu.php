@@ -86,8 +86,9 @@
             </li>
             <li><a href="./"><i class="material-icons middle">dashboard</i>Beranda</a></li>
             <li class="no-padding">
-            <script src="https://apis.google.com/js/platform.js" async defer></script>
+            <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
             <script>
+            
     function signOut() {
         gapi.load('auth2', function() {
             gapi.auth2.init({
@@ -98,6 +99,21 @@
                     window.location = "./logout.php";
                 });
                 auth2.disconnect();
+            });
+
+        });
+    }
+   
+    window.onLoadCallback = function(){
+        gapi.load('auth2', function() {
+            gapi.auth2.init({
+  client_id: '49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com'
+}).then(function(){
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function(){
+                    auth2.disconnect();
+                });
+                
             });
 
         });
