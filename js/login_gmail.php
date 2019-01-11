@@ -7,6 +7,13 @@ session_start();
  $client = new Google_Client(['client_id' => $clienid]);  // Specify the CLIENT_ID of the app that accesses the backend
  $client->setAuthConfigFile('../client_secret_49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com.json');
  $token_data = $client->verifyIdToken($id_token)->getAttributes();
+ $anc=mysqli_query($config,"SELECT maintenance FROM tbl_akses_user WHERE id=1");
+list($mnt)=mysqli_fetch_array($anc);
+if($_SESSION['admin']!=1){
+	if($mnt==1){
+        $_SESSION['mtt'] = '<center>Mohon Maaf saat ini sistem sedang MAINTENANCE, silahkan coba beberapa saat lagi</center>';
+    echo 'dd';}
+        else {
  if(!empty($_POST['daftar'])){
     $daftar=mysqli_real_escape_String($config,$_POST['daftar']);
     $id_user=mysqli_real_escape_String($config,$_POST['kong']);
@@ -57,7 +64,7 @@ session_start();
 
  }
  
- 
+}
 
 
  
