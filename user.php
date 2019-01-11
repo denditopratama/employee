@@ -90,7 +90,7 @@ th,td,tr{
                             <div class="col m12">
                                 <div class="card green lighten-5">
                                     <div class="card-content notif">
-                                        <span class="card-title green-text"><i class="material-icons md-36">done</i> <center>Akun Google anda berhasil diganti / ditambah</center></span>
+                                        <span class="card-title green-text"><i class="material-icons md-36">done</i> Akun Google anda berhasil diganti / ditambah</span>
                                     </div>
                                 </div>
                             </div>
