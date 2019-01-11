@@ -7,27 +7,20 @@
 
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
-           
+        
         if(profile){
-         $.post('js/login_gmail.php',{id_token:id_token, daftar : 1}, function(data){
+          var kong = jQuery('#namyeng').val();
+          
+         $.post('js/login_gmail.php',{id_token:id_token, daftar : 1, kong : kong}, function(data){
                     
                     
           if(data==' y'){
             
-              gapi.load('auth2', function() {
-                  gapi.auth2.init({
-        client_id: '49446115720-gacrc8lhqmdj9rpn3efdpdsa3kh74usu.apps.googleusercontent.com'
-      }).then(function(){
-                      var auth2 = gapi.auth2.getAuthInstance();
-                      auth2.signOut().then(function(){
-                        auth2.disconnect();
-                          window.location = "admin.php?page=usr&gmail=1";
-                          
-                      });
-                      
-                  });
-      
-              });
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+              console.log(kong);
+              window.location.href='./admin.php?page=usr&gmail=1';
+            });
           
            } else {
              window.location.href=data;

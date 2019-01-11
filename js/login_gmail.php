@@ -9,11 +9,12 @@ session_start();
  $token_data = $client->verifyIdToken($id_token)->getAttributes();
  if(!empty($_POST['daftar'])){
     $daftar=mysqli_real_escape_String($config,$_POST['daftar']);
+    $id_user=mysqli_real_escape_String($config,$_POST['kong']);
     if($daftar==1){
        if ($token_data) {
            $user_id = $token_data['payload']['sub'];
-           $daf=mysqli_query($config,"UPDATE tbl_user SET gmail='$user_id' WHERE id_user='".$_SESSION['id_user']."'");
-           $_SESSION['tokengmail'] = $id_token;
+           $daf=mysqli_query($config,"UPDATE tbl_user SET gmail='$user_id' WHERE id_user='$id_user'");
+           
            echo 'y';
        } else {
            echo 'TOKEN SALAH';

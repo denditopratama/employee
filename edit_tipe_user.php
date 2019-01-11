@@ -470,8 +470,9 @@
                         </style>
 						
 						<h6> Akun Google anda terdaftar atas nama : <b id="ans"></b></h6><br>
-							  <div id="DivID" data-width="250" class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-theme="light"></div><br>
-                                        <button type="submit" name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
+						<input type="hidden" id="namyeng" value="<?php echo $id_user; ?>">
+							  <div id="DivID" data-width="250" class="g-signin2"  data-onsuccess="onSignIn" data-longtitle="true" data-theme="light"></div><br>
+                                        <button type="submit"  name="submit" class="btn-large blue waves-effect waves-light">SIMPAN <i class="material-icons">done</i></button>
                                         <a href="?page=usr" class="btn-large deep-orange waves-effect waves-light">BATAL <i class="material-icons">clear</i></a>
 										<?php 
 										if(!empty($_SESSION['tokengmail'])){
@@ -499,13 +500,10 @@
 						});
 						
 						</script>
-				 <script>
+				 
+				 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
-
-
-
-    </script>
 				<script type="text/javascript" src="js/gsignup.js"></script>
 						<br/>
 								
