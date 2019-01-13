@@ -45,7 +45,7 @@
             }
         } else {
 
-           
+         
 
             //pagging
             $limit = 20;
@@ -152,12 +152,15 @@
                             <div class="card">
                                 <div class="card-content">
                                    <span class="card-title black-text"><i class="material-icons md-36" style="margin-top:-11px;!important">beach_access</i> Cuti</span>
-								   <p class="kata">Proses pengajuan Cuti dibagi menjadi beberapa tahapan sesuai dengan tingkat jabatan anda</p>
-								   <p class="kata"><span class="red-text"><strong>*</strong></span> Untuk Jabatan <strong>Manager</strong>, dibutuhkan konfirmasi dari <strong>General Manager</strong></p>
-								   <p class="kata"><span class="red-text"><strong>*</strong></span> Untuk Jabatan <strong>Assistant Manager dan Lain - Lain</strong>, dibutuhkan konfirmasi dari <strong>Manager</strong> dan <strong>General Manager</strong></p>
+								   <p class="kata"><span class="red-text"><strong>*</strong></span> Proses pengajuan Cuti dibagi menjadi beberapa tahapan sesuai dengan tingkat jabatan anda</p>
 								   <p class="kata"><span class="red-text"><strong>*</strong></span> Total cuti telah dipotong <strong>Hari Cuti Bersama</strong></p>
+                                   <p class="kata"><span class="red-text"><strong>*</strong></span> Menghapus pengajuan cuti akan menambah kembali saldo cuti anda</p>
+                                   <p class="kata"><span class="red-text"><strong>*</strong></span> Penghapusan pengajuan cuti tidak bisa dilakukan jika tanggal awal pengajuan cuti sudah <strong>MELEBIHI</strong>
+                                   atau <strong>SAMA</strong> dengan Hari ini.</strong></p>
                                     <?php $cutie=mysqli_query($config,"SELECT cuti FROM tbl_user WHERE id_user='".$_SESSION['id_user']."'");
-									list($cuti)=mysqli_fetch_array($cutie);
+                                    list($cuti)=mysqli_fetch_array($cutie);
+                                    $cuties=mysqli_query($config,"SELECT cuti FROM tbl_handle WHERE id=1");
+									list($cutixx)=mysqli_fetch_array($cuties);
 									?>
 									
 									<p class="kata">Sisa Jatah Cuti Anda : 
@@ -171,22 +174,23 @@
 									$alaysss=array(1,0);
 									if(in_array($cuti,$alay)){
 									echo'
-									<strong style="color:blue;font-size:30px">'.$cuti.'</strong></p>';}
+									<strong style="color:blue;font-size:30px">'.$cuti.'</strong>&nbsp Dari <strong style="color:black;font-size:30px">'.$cutixx.'</strong></p>';}
 									else if(in_array($cuti,$alays)){
 									echo'
-									<strong style="color:yellow;font-size:30px">'.$cuti.'</strong></p>';}
+									<strong style="color:yellow;font-size:30px">'.$cuti.'</strong>&nbsp Dari <strong style="color:black;font-size:30px">'.$cutixx.'</strong></p>';}
 									else if(in_array($cuti,$alayss)){
 									echo'
-									<strong style="color:orange;font-size:30px">'.$cuti.'</strong></p>';}
+									<strong style="color:orange;font-size:30px">'.$cuti.'</strong>&nbsp Dari <strong style="color:black;font-size:30px">'.$cutixx.'</strong></p>';}
 									else if(in_array($cuti,$alaysss)){
 									echo'
-									<strong style="color:red;font-size:30px">'.$cuti.'</strong></p>';}
+									<strong style="color:red;font-size:30px">'.$cuti.'</strong>&nbsp Dari <strong style="color:black;font-size:30px">'.$cutixx.'</strong></p>';}
 									else if($cuti>6){
-									echo'<strong style="color:blue;font-size:30px">'.$cuti.'</strong></p>';
+									echo'<strong style="color:blue;font-size:30px">'.$cuti.'</strong>&nbsp Dari <strong style="color:black;font-size:30px">'.$cutixx.'</strong></p>';
 									}
 									
 									?>
-
+                                
+                                
                                    
 									
 									
@@ -366,6 +370,12 @@
 											
                                          echo '
                                        
+                                    </tr>
+                                    <tr>
+                                    <td colspan="6"><input style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>
+                                    <td style="text-align:center">Dari :</td>
+                                    <td style="text-align:center"><b></b></td>
+                                    <td><button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">add</i> Ket</button></td>
                                     </tr>
                                 </tbody>';
                                 }
@@ -547,6 +557,12 @@
                                         }
                                          echo '
                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="6"><input style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>
+                                    <td style="text-align:center">Dari :</td>
+                                    <td style="text-align:center"><b></b></td>
+                                    <td><button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">add</i> Ket</button></td>
                                     </tr>
                                 </tbody>';
                                 }
