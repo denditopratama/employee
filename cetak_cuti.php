@@ -136,14 +136,22 @@ if($admin>5){
     
     
 } else if($admin==4){
-    $hj=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND tbl_user.id_user='$id_user'");
+    $hj=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND(tbl_ref_jabatan.jabatan LIKE '%DIREKTUR%' AND tbl_user.admin=3)");
     if(mysqli_num_rows($hj)>0){
         list($jbtn,$atasan)=mysqli_fetch_array($hj);
-        $pdf->Cell(120 ,1,''.ucwords(strtolower(str_replace("GENERAL MANAGER","DIREKTUR",$jbtn))).'',0,1);
+      
+        $pdf->Cell(120 ,1,''.ucwords(strtolower($jbtn)).'',0,1);
     } 
     
    
-}
+} else if($admin==3 || $admin==2){
+    $jh=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND tbl_user.admin=2");
+        list($jbtn,$atasan)=mysqli_fetch_array($jh);
+        $pdf->Cell(120 ,1,''.ucwords(strtolower($jbtn)).'',0,1);
+    } 
+    
+   
+
 $pdf->SetFont('Arial','',12);
 $pdf->Cell(15 ,1,'',0,0);
 $pdf->Cell(8 ,10,'PT Jasamarga Properti',0,1);
@@ -246,10 +254,10 @@ $pdf->Cell(37 ,6,''.($sisa+$konx).' Hari',0,1,'L');
 
 
 $pdf->Line(23,170,187,170);
-$pdf->Line(23,253,187,253);
-$pdf->Line(23,170,23,253);
-$pdf->Line(187,170,187,253);
-$pdf->Line(115,170,115,253);
+$pdf->Line(23,255,187,255);
+$pdf->Line(23,170,23,255);
+$pdf->Line(187,170,187,255);
+$pdf->Line(115,170,115,255);
 $pdf->Line(23,188,187,188);
 $pdf->Line(23,205,115,205);
 
