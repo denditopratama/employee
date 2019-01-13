@@ -40,6 +40,7 @@
 				case 'approves':
                     include "approves_cuti.php";
                     break;
+                    
                
             }
         } else {
@@ -217,7 +218,7 @@
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
 										<th width="10%" style="color:#fff">Status Manager</th>
                                         <th width="10%" style="color:#fff">Status GM</th>
-                                        <th width="10%" style="color:#fff">Status Direktur</th>
+                                        <th width="10%" style="color:#fff">Status Direktur / SDM</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 										
 									
@@ -353,6 +354,11 @@
                                                 }
                                             }
                                         }
+                                        if($row['id_user']==$_SESSION['id_user'] || $_SESSION['admin']==1){
+                                            echo'
+                                            <a class="btn small orange waves-effect waves-light tooltipped" data-tooltip="Klik untuk mencetak data" href="cetak_cuti.php?id='.base64_encode($row['id']).'" onclick="return confirm(\'Anda yakin ingin mencetak data ini?\');">
+                                          <i class="material-icons">print</i> CETAK</a>'; 
+                                        }
 										 
 										 echo '</td>';
 										
@@ -388,7 +394,7 @@
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
 										<th width="10%" style="color:#fff">Status Manager</th>
 										<th width="10%" style="color:#fff">Status GM</th>
-                                        <th width="10%" style="color:#fff">Status Direktur</th>
+                                        <th width="10%" style="color:#fff">Status Direktur / SDM</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 										
 									
@@ -534,7 +540,11 @@
                                                 }
                                             }
                                         }
-											
+                                        if($row['id_user']==$_SESSION['id_user'] || $_SESSION['admin']==1){
+                                            echo'
+                                            <a class="btn small orange waves-effect waves-light tooltipped" data-tooltip="Klik untuk mencetak data" href="cetak_cuti.php?id='.base64_encode($row['id']).'" onclick="return confirm(\'Anda yakin ingin mencetak data ini?\');">
+                                          <i class="material-icons">print</i> CETAK</a>'; 
+                                        }
                                          echo '
                                        </td>
                                     </tr>
