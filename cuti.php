@@ -222,7 +222,7 @@
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
 										<th width="10%" style="color:#fff">Status Manager</th>
                                         <th width="10%" style="color:#fff">Status GM</th>
-                                        <th width="10%" style="color:#fff">Status Direktur / SDM</th>
+                                        <th width="10%" style="color:#fff">Status Direktur</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 										
 									
@@ -404,7 +404,7 @@
 										<th width="12%"style="color:#fff">Tanggal Akhir</th>
 										<th width="10%" style="color:#fff">Status Manager</th>
 										<th width="10%" style="color:#fff">Status GM</th>
-                                        <th width="10%" style="color:#fff">Status Direktur / SDM</th>
+                                        <th width="10%" style="color:#fff">Status Direktur</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 										
 									

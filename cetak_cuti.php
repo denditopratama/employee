@@ -136,7 +136,12 @@ if($admin>5){
     
     
 } else if($admin==4){
-    $hj=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND(tbl_ref_jabatan.jabatan LIKE '%DIREKTUR%' AND tbl_user.admin=3)");
+    if($divisi==4){
+        $hj=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND(tbl_ref_jabatan.jabatan LIKE '%DIREKTUR TEKNIK%' AND tbl_user.admin=3)");  
+    } else {
+        $hj=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND(tbl_ref_jabatan.jabatan LIKE '%DIREKTUR KEUANGAN%' AND tbl_user.admin=3)");
+    }
+    
     if(mysqli_num_rows($hj)>0){
         list($jbtn,$atasan)=mysqli_fetch_array($hj);
       
