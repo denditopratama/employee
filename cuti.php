@@ -372,10 +372,26 @@
                                        
                                     </tr>
                                     <tr>
-                                    <td colspan="6"><input style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>
+                                    ';
+                                    if($_SESSION['admin']!=1){
+                                        if($row['id_user']==$_SESSION['id_user'] || $row['admin']<=$_SESSION['admin']){
+                                            echo '<td colspan="6"><input name="keterangan" value="'.$row['ket'].'" style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..." disabled></input></td>';
+                                        } else {
+                                            echo '
+                                            <form method="POST" action="keterangan_cuti.php">
+                                            <td colspan="6"><input name="keterangan" value="'.$row['ket'].'" style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>';
+                                        }
+                                    } else {
+                                        echo '
+                                        <form method="POST" action="keterangan_cuti.php">
+                                        <td colspan="6"><input name="keterangan" value="'.$row['ket'].'" style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>';  
+                                    }
+                                    echo'
                                     <td style="text-align:center">Dari :</td>
-                                    <td style="text-align:center"><b></b></td>
-                                    <td><button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">add</i> Ket</button></td>
+                                    <td style="text-align:center"><b>'.$row['dari'].'</b></td>
+                                    <input type="hidden" name="dari" value="'.$_SESSION['nama'].'">
+                                    <td><button type="submit" name="subsub" value="'.base64_encode($row['id']).'" class="btn small blue-grey waves-effect waves-light"><i class="material-icons">add</i> Ket</button></td>
+                                    </form>
                                     </tr>
                                 </tbody>';
                                 }
@@ -416,11 +432,11 @@
 
                             //script untuk mencari data
 							if($_SESSION['admin']==1){
-                            $query = mysqli_query($config, "SELECT * FROM tbl_cuti ORDER by id DESC LIMIT $curr, $limit");}
+                            $query = mysqli_query($config, "SELECT tbl_cuti.*,tbl_user.admin FROM tbl_cuti,tbl_user WHERE tbl_cuti.id_user=tbl_user.id_user ORDER by id DESC LIMIT $curr, $limit");}
                             else if($_SESSION['admin']==3 || $_SESSION['admin']==2)
 							{$query = mysqli_query($config, "SELECT tbl_cuti.*,tbl_user.admin FROM tbl_cuti,tbl_user WHERE tbl_cuti.id_user=tbl_user.id_user AND(tbl_user.admin=3 OR tbl_user.admin=4) ORDER by tbl_cuti.id DESC LIMIT $curr, $limit");}
 							else
-							{$query = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' ORDER by id DESC LIMIT $curr, $limit");}
+							{$query = mysqli_query($config, "SELECT tbl_cuti.*,tbl_user.admin FROM tbl_cuti,tbl_user WHERE tbl_cuti.id_user=tbl_user.id_user AND tbl_cuti.divisi='".$_SESSION['divisi']."' ORDER by id DESC LIMIT $curr, $limit");}
 								 
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
@@ -556,14 +572,32 @@
                                           <i class="material-icons">print</i> CETAK</a>'; 
                                         }
                                          echo '
+                                        
                                        </td>
                                     </tr>
                                     <tr>
-                                    <td colspan="6"><input style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>
+                                    ';
+                                    if($_SESSION['admin']!=1){
+                                        if($row['id_user']==$_SESSION['id_user'] || $row['admin']<=$_SESSION['admin']){
+                                            echo '<td colspan="6"><input name="keterangan" value="'.$row['ket'].'" style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..." disabled></input></td>';
+                                        } else {
+                                            echo '
+                                            <form method="POST" action="keterangan_cuti.php">
+                                            <td colspan="6"><input name="keterangan" value="'.$row['ket'].'" style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>';
+                                        }
+                                    } else {
+                                        echo '
+                                        <form method="POST" action="keterangan_cuti.php">
+                                        <td colspan="6"><input name="keterangan" value="'.$row['ket'].'" style="width:100%;height:60px;text-align:center;background-color:yellow" placeholder="Ketik disini dan tekan tombol + KET untuk memberikan catatan dari pejabat yang berwenang..."></input></td>';  
+                                    }
+                                    echo'
                                     <td style="text-align:center">Dari :</td>
-                                    <td style="text-align:center"><b></b></td>
-                                    <td><button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">add</i> Ket</button></td>
+                                    <td style="text-align:center"><b>'.$row['dari'].'</b></td>
+                                    <input type="hidden" name="dari" value="'.$_SESSION['nama'].'">
+                                    <td><button type="submit" name="subsub" value="'.base64_encode($row['id']).'" class="btn small blue-grey waves-effect waves-light"><i class="material-icons">add</i> Ket</button></td>
+                                    </form>
                                     </tr>
+                                    
                                 </tbody>';
                                 }
                             } else {

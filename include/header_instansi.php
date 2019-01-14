@@ -145,11 +145,16 @@
                                   $jumlahket=mysqli_num_rows($ketpres);
                                 $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 ");
                                 $jumlahna=mysqli_num_rows($gmjk);
+                                $cuts=mysqli_query($config,"SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 ");
+                                $jumlahcutiw=mysqli_num_rows($cuts);
                                 if($jumlahna>0){
                                       echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahna.'</b></strong><strong> Orang telah menunggu konfirmasi Lembur dari anda.</strong><br>';
                                 }
                                 if($jumlahket>0){
                                     echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahket.'</b></strong><strong> Orang telah menunggu konfirmasi Keterangan Presensi dari anda.</strong><br>';
+                                }
+                                if($jumlahcutiw>0){
+                                    echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahcutiw.'</b></strong><strong> Orang telah menunggu konfirmasi Cuti dari anda.</strong><br>';
                                 }
                                
                               } else if($_SESSION['admin']==5) {
@@ -158,14 +163,19 @@
                                $jumlahket=mysqli_num_rows($ketpres);
                                 $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_manager=0 ");
                                 $jumlahna=mysqli_num_rows($gmjk);
+                                $cuts=mysqli_query($config,"SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' AND status_manager=0 ");
+                                $jumlahcutiw=mysqli_num_rows($cuts);
                                 if($jumlahna>0){
                                       echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahna.'</b></strong><strong> orang telah menunggu konfirmasi Lembur dari anda.</strong>';
                                 }
                                 if($jumlahket>0){
                                     echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahket.'</b></strong><strong> Orang telah menunggu konfirmasi Keterangan Presensi dari anda.</strong><br>';
                                 }
+                                if($jumlahcutiw>0){
+                                    echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahcutiw.'</b></strong><strong> Orang telah menunggu konfirmasi Cuti dari anda.</strong><br>';
+                                }
                                
-                              }
+                              } 
                              
                           }
 						  

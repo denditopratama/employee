@@ -1123,7 +1123,8 @@
 								 <div class="collapsible-header active" style="background-color:transparent"><i class="material-icons prefix md-36" style="margin-top:-9px!important">add</i><h5>Lembur</h5></div>
 								 <div class="collapsible-body" style="background-color:transparent!important">
 							<div class="col m12" id="colres">
-							<small>* Baris berwarna kuning merupakan hari libur mingguan</small>
+							<small>* Baris berwarna kuning merupakan hari libur mingguan</small><br>
+							<small>* Baris berwarna merah merupakan Tanggal Merah tahunan</small>
 							<table class="bordered" id="tblb">
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                             <tr>
@@ -1157,17 +1158,26 @@
                                         if(mysqli_num_rows($query2d) > 0){
                                             $no = 0;
                                             while($row = mysqli_fetch_array($query2d)){
+												$tglbereum=date('Y-m-d',strtotime($row['tanggal']));
+												 $yaw=mysqli_query($config,"SELECT * FROM tbl_ref_tgl_merah WHERE tgl_merah='$tglbereum'");
+												 
 												$titit=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
 												list($namas,$edmun)=mysqli_fetch_array($titit);
 												$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
 												
-												if(date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun'){
-													echo '<tr style="background-color:yellow">';}
+											
+													
 													$ex=explode('.',$row['jam_awal']);
 													$exo=explode('.',$row['jam_akhir']);
 													if($row['status_gm']==1 && $row['status_manager']==1){
-														array_push($tat,$exo[0]-$ex[0]);
-														array_push($tat1,$exo[1]-$ex[1]);
+														if($exo[0]-$ex[0]>3 && date('D', strtotime($row['tanggal']))!='Sat' && date('D', strtotime($row['tanggal']))!='Sun' && mysqli_num_rows($yaw)<=0){
+															array_push($tat,3);	
+														} else {
+															array_push($tat,$exo[0]-$ex[0]);
+															array_push($tat1,$exo[1]-$ex[1]);
+														}
+														
+														
 													}
 												
 										if($row['status_gm']==1 && $row['status_manager']==1){
@@ -1190,7 +1200,12 @@
 													array_push($nong,$byrlm);
 												}
 											} else {
-												echo ' <tr>';
+												if(mysqli_num_rows($yaw)>0){
+													echo '<tr style="background-color:red">';	
+												} else {
+													echo ' <tr>';
+												}
+												
 												if($hourdiff>3){
 													$hourdiff=3;
 												}
@@ -1293,12 +1308,15 @@
 											$cocoktanam=array_sum($nong);
 											if($yowka>=60){
 												$hgut=floor($yowka/60);
-												for($i=0;$i<$hgut;$i++){
+												for($i=0;$i<$hgut;$i++){	
 													$yowka=$yowka-60;
 													$yowko=$yowko+1;
+													
 												}
 												
+												
 											}
+										
 											
 											echo '<tr><td style="text-align:center"colspan="9">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
 											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.number_format($cocoktanam , 0, ',', '.').'</b></h6></td></tr>';

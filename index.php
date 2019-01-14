@@ -407,8 +407,8 @@ to {
     }, interval);
 
 })(jQuery, 5000, [
-    "./upload/overlay2.jpg",
     "./upload/overlay3.jpg",
+    "./upload/overlay2.jpg",
     "./upload/overlay4.jpg"
 ]);
 
