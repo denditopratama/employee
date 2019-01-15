@@ -17,10 +17,7 @@ require('../include/config.php');
 
 												$nilai=mysqli_real_escape_string($config,	
 												str_replace('.', '', $_POST['nilai']));
-												
-												$kos=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");
-												
-												
+
 												if(!empty($_POST['input'])){
 													$input=mysqli_real_escape_string($config,$_POST['input']);
 													if($input==12){
@@ -28,6 +25,17 @@ require('../include/config.php');
 													} 
 												
 												}
+												
+												$cek=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id_gaji' AND(id_user='$id_user' AND kode_potongan='$id_select')");
+												if(mysqli_num_rows($cek)>0){
+													$up=mysqli_query($config,"UPDATE tbl_potongan SET jumlah='$nilai' WHERE id_gaji='$id_gaji' AND(id_user='$id_user' AND kode_potongan='$id_select')");
+												} else {
+													$kos=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");
+												}
+												
+												
+												
+												
 }
 											
 											?>

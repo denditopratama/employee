@@ -48,7 +48,8 @@ function sort($p) {
 	
 	document.getElementById("buttons").innerHTML = pageButtons($pageCount,$p);
 	// CSS Stuff
-	document.getElementById("id"+$p).setAttribute("class","active");
+	
+	document.getElementById("id"+$p).setAttribute("class","activedd");
 
 	
 }

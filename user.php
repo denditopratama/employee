@@ -5,10 +5,12 @@ th,td,tr{
 #oi{
 	text-align:center!important;
 }
-
+.activedd{
+    color:yellow;
+    background-color:#003366;
+}
 </style>
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
 
 <?php
     //session

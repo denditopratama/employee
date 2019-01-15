@@ -25,7 +25,13 @@ require('../include/config.php');
 												echo $nilai;}
 												
 												else if($id_select!=1 && empty($_POST['input'])){
-												$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");}	
+													$vk=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id_gaji' AND(id_user='$id_user' AND kode_penerimaan='$id_select')");
+													if(mysqli_num_rows($vk)>0){
+														$bb=mysqli_query($config,"UPDATE tbl_penerimaan SET jumlah='$nilai' WHERE id_gaji='$id_gaji' AND(id_user='$id_user' AND kode_penerimaan='$id_select')");
+													} else {
+														$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id_gaji','$id_user','$id_select','$nilai')");
+													}
+												}	
 													
 												
 												if(!empty($_POST['input'])){

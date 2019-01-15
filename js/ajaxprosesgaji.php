@@ -13,8 +13,16 @@ if($_SESSION['admin']!=1){
 
                 $id=mysqli_real_escape_string($config,$_GET['id']);
 				$id_user=mysqli_real_escape_string($config,$_GET['karyawan']);
-							$pgntau=mysqli_query($config,"SELECT nama,kelas_jabatan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
-							list($tau,$kelas_jabatan,$status_tugas)=mysqli_fetch_array($pgntau);
+							$pgntau=mysqli_query($config,"SELECT nama,kelas_jabatan,status_tugas,admin FROM tbl_user WHERE id_user='$id_user'");
+							list($tau,$kelas_jabatan,$status_tugas,$admins)=mysqli_fetch_array($pgntau);
+							if($admins==4){
+								$vk=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_penerimaan=8)");
+								if(mysqli_num_rows($vk)>0){
+									$bb=mysqli_query($config,"UPDATE tbl_penerimaan SET jumlah=7500000 WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_penerimaan=8)");
+								} else {
+									$kos=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id','$id_user',8,7500000)");
+								}
+							}
 							$ddtd=mysqli_query($config,"SELECT bulan FROM tbl_bulan_gaji WHERE id='$id'");
 					list($bln)=mysqli_fetch_array($ddtd);
 					$blans=date('m',strtotime($bln));
