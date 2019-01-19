@@ -55,7 +55,7 @@
                                     $tanggals = "";
                                     if(isset($Row[2])) {
                                         $tanggald = mysqli_real_escape_string($config,$Row[2]);
-                                        $tanggals = date('d M y',strtotime($tanggald));
+                                        $tanggals = date('d-M-y',strtotime($tanggald));
                                     }
 
                                     $jam_masuk = "";
@@ -77,7 +77,7 @@
                                     } else {
                                         $kom=mysqli_query($config,"SELECT * FROM tbl_presensi_karyawan WHERE nik='$nik' AND(tanggal='$tanggals' AND id_presensi='$id') ");
                                    if(mysqli_num_rows($kom)<=0){
-                                    if($nik!='' || $nama!='' || $tanggals!=''){
+                                    if($nik!='' && $nama!='' && $tanggals!=''){
                                      $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$id','$nik','$nama','$tanggals','$jam_masuk','$jam_pulang','$terlambat','')");  
                                     }              
                                     } else {

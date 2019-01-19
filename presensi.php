@@ -153,7 +153,7 @@
                                 <div class="card-content">
                                     <span class="card-title black-text"><i class="material-icons md-36" >note</i> Presensi</span>
                                     <div class="col s12" style="text-align:center">
-									<p class="kata">Untuk Presensi Pekerjaan Proyek silahkan Download Template presensi Kosong <strong><br><a class="btn small" id="ganteng" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_download</i> Klik Disini</a></strong></p>
+									<p class="kata">Untuk Presensi Pekerjaan Proyek silahkan Download Template presensi Kosong <strong><br><a href="asset/template_presensi.xls" class="btn small" id="ganteng" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_download</i> Klik Disini</a></strong></p>
 									<p class="kata"> Lalu kirimkan ke admin SDM. <strong><br><a class="btn small" href="?page=tsk&act=add" style="color:white"><i style="font-size:20px;margin-top:-3px" class="material-icons md-36">file_upload</i> Klik Disini</a></strong></p>
                                     </div>
 									<p><span class="red-text">*</span> (Khusus Karyawan Proyek), jika ingin mengajukan lembur, silahkan mengirimkan presensi terlebih dahulu, lalu klik lembur pada presensi terkait yang telah di tambahkan oleh admin pada tabel di bawah ini</p>

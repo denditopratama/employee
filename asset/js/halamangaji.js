@@ -47,8 +47,10 @@ function sort($p) {
 	// create the pagination buttons
 	
 	document.getElementById("buttons").innerHTML = pageButtons($pageCount,$p);
+	
+	
 	// CSS Stuff
-	document.getElementById("id"+$p).setAttribute("class","active");
+	document.getElementById("id"+$p).setAttribute("class","active123");
 
 	
 }

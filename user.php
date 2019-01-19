@@ -8,6 +8,10 @@ th,td,tr{
 .activedd{
     color:yellow;
     background-color:#003366;
+    margin : 5px;
+}
+#buttons{
+	text-align:center!important;
 }
 </style>
 

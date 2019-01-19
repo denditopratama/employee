@@ -110,6 +110,52 @@
                             </div>';
                         unset($_SESSION['succDel']);
                     }
+                    
+                   
+                    $jia=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1 AND jmrb=0)");
+                    list($jumlahuser)=mysqli_fetch_array($jia);
+                    $elisa=mysqli_query($config,"SELECT * FROM tbl_bulan_gaji");
+                    while($dats=mysqli_fetch_array($elisa)){
+                        $totjmp[$dats['id']]=0;
+                        $kio=mysqli_query($config,"SELECT tbl_user.id_user,(SELECT COUNT(*) FROM tbl_gaji WHERE tbl_gaji.id_gaji='".$dats['id']."' AND(tbl_gaji.status='1' AND tbl_gaji.id_user=tbl_user.id_user)) AS tot FROM tbl_user WHERE tbl_user.admin<>1 AND(tbl_user.id_user<>9999 AND tbl_user.admin<>9 AND tbl_user.status_aktif=1 AND tbl_user.jmrb=0)");
+                       
+                       while($g=mysqli_fetch_array($kio)){
+                           if($g['tot']==1){
+                            $totjmp[$dats['id']]++;
+                           }
+                       
+                       }
+                        
+                       if($totjmp[$dats['id']]==$jumlahuser){
+                        $querybc=mysqli_query($config,"UPDATE tbl_bulan_gaji SET status_proses=1 WHERE id='".$dats['id']."'");
+                        }
+                     
+                      
+                        
+                    }
+                    
+                    $jias=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1 AND jmrb=1)");
+                    list($jumlahuserjmrb)=mysqli_fetch_array($jias);
+                    $elisa=mysqli_query($config,"SELECT * FROM tbl_bulan_gaji");
+                    while($dats=mysqli_fetch_array($elisa)){
+                        $totjmrb[$dats['id']]=0;
+                        $kiod=mysqli_query($config,"SELECT tbl_user.id_user,(SELECT COUNT(*) FROM tbl_gaji WHERE tbl_gaji.id_gaji='".$dats['id']."' AND(tbl_gaji.status=1 AND tbl_gaji.id_user=tbl_user.id_user)) AS tot FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1 AND jmrb=1)");
+                      
+                        while($gs=mysqli_fetch_array($kiod)){
+                            if($gs['tot']==1){
+                             $totjmrb[$dats['id']]++;
+                            }
+                        
+                        }
+                       
+                        if($totjmrb[$dats['id']]==$jumlahuserjmrb){
+                            $querybc=mysqli_query($config,"UPDATE tbl_bulan_gaji SET status_jmrb=1 WHERE id='".$dats['id']."'");
+                            }
+                            
+                        
+                    }
+                   
+
                 ?>
 				
 				
@@ -157,7 +203,8 @@
                                      <tr>
 										<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Bulan</th>
-										<th width="20%"style="color:#fff">Status</th>
+                                        <th width="20%"style="color:#fff">Status JMP</th>
+                                        <th width="20%"style="color:#fff">Status JMRB</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
                                 </thead>
 
@@ -220,7 +267,13 @@
 										}
 										
 										
-										  
+                                        if($row['status_jmrb']==0){
+											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji belum selesai">
+                                                    <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
+										} else {
+											echo '<td style="text-align:center"><a class="btn small green waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji sudah selesai">
+                                                    <i class="material-icons">done</i> SUDAH SELESAI</a></td>';
+										}
 								
                                         
 									
@@ -235,14 +288,90 @@
                                                     <i class="material-icons">done_all</i> PROSES</a>
 										<button name="submitz'.$row['id'].'" class="btn small red darken-3 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Menghapus Histori Gaji" onclick="return confirmed()">
                                                     <i class="material-icons">delete</i>HAPUS</button>
-													</form>';
+                                                    </form>
+                                                    
+                                                    <button id="lapor'.$row['id'].'" class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji">
+                                                    <i class="material-icons">assignment_turned_in</i> PELAPORAN GAJI</button>';
 										
 									
 											
                                          echo '
                                        
                                     </tr>
-                                </tbody>';
+                                </tbody>
+                                <div id="modald">
+								<div id="modals'.$row['id'].'" class="modal" style="background-color:yellow">
+								<div class="modal-content yellow" style="padding-top:1px!important;background-color:#ffff00!important">
+								<div class="input-field col s12">
+								<h5><i class="material-icons" style="margin-bottom:8px">assignment_turned_in</i> Pelaporan Gaji</h5>
+								<small class="blue-text">* Silahkan pilih jenis laporan.</small><br><br>
+								
+									
+									<div class="col m12" id="colres">
+									  <form method="POST" action="printlaporangaji.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI PENGHASILAN BULANAN</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printbank.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI TOTAL PENGHASILAN BERDASARKAN BANK</button>
+									</form>
+											</div>
+											
+										<div class="col m12" id="colres">
+									  <form method="POST" action="printpenerimaanlain.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI TOTAL PENGHASILAN PENERIMAAN LAIN</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printpotonganlain.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> REKAPITULASI TOTAL PENGHASILAN POTONGAN LAIN</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printlampirangaji.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAMPIRAN NOTA GAJI</button>
+									</form>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printlaporansdm.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN GAJI KHUSUS SDM</button>
+									</form>
+											</div>
+											<div>
+											</div>
+											
+											<div class="col m12" id="colres">
+									  <form method="POST" action="printlaporanbpjs.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN PREMI BPJS KETENAGAKERJAAN</button>
+									</form>
+											</div>
+											<div>
+											</div>
+																
+								
+								</div>
+								</div>
+								</div>
+								</div>';
                                     }
                                 } else {
                                     echo '<tr><td colspan="12"><center><p class="add">Tidak ada data yang ditemukan</p></center></td></tr>';
@@ -256,8 +385,7 @@
 
                     } else {
 						
-						$jia=mysqli_query($config,"SELECT COUNT(*) FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1)");
-						list($jumlahuser)=mysqli_fetch_array($jia);
+						
                         echo '
                         <div class="col m12" id="colres">
                         <table class="bordered" id="tblr">
@@ -265,7 +393,8 @@
                                  <tr>
 									<th width="1%"style="color:#fff">Nomor</th>
                                         <th width="25%"style="color:#fff">Bulan</th>
-										<th width="20%"style="color:#fff">Status</th>
+                                        <th width="20%"style="color:#fff">Status JMP</th>
+                                        <th width="20%"style="color:#fff">Status JMRB</th>
 										<th width="20%" style="color:#fff">Tindakan</th>
 									
                                 </tr>
@@ -322,14 +451,17 @@
 										
 										
 						
-							$kio=mysqli_query($config,"SELECT COUNT(*) FROM tbl_gaji WHERE id_gaji='".$row['id']."' AND status=1");
-							list($userproses)=mysqli_fetch_array($kio);
 							
-							if($userproses==$jumlahuser){
-							$querybc=mysqli_query($config,"UPDATE tbl_bulan_gaji SET status_proses=1 WHERE id='".$row['id']."'");
-							}
 							
 										if($row['status_proses']==0){
+											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji belum selesai">
+                                                    <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
+										} else {
+											echo '<td style="text-align:center"><a class="btn small green waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji sudah selesai">
+                                                    <i class="material-icons">done</i> SUDAH SELESAI</a></td>';
+                                        }
+                                        
+                                        if($row['status_jmrb']==0){
 											echo '<td style="text-align:center"><a class="btn small red waves-effect waves-light tooltipped"data-position="left" data-tooltip="Proses Gaji belum selesai">
                                                     <i class="material-icons">highlight_off</i> BELUM SELESAI</a></td>';
 										} else {

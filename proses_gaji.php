@@ -19,7 +19,14 @@ label {
 .btn.small{
 	margin-bottom:0px!important;
 }
-
+.active123{
+	color:yellow;
+    background-color:#003366;
+	margin : 5px;
+}
+#buttons{
+	text-align:center!important;
+}
 
 
 
@@ -102,7 +109,8 @@ label {
 								<h6>Penggajian Bulan : <strong><?php echo $nambulan.' '.$tglbulan; ?></strong></h6>
 								</div>
 								<div class="col s12 m12" style="text-align:center">
-								<button id="prosesseluruh" class="btn-large green"><i class="material-icons">done_all</i> proses keseluruhan</button></div>
+								<button id="prosesseluruh" class="btn-large green"><i class="material-icons">done_all</i> Proses seluruh JMP</button>
+								<button id="prosesseluruhjmrb" class="btn-large green"><i class="material-icons">done_all</i> Proses seluruh JMRB</button></div>
 								
 							</div>
 					</div>
@@ -128,8 +136,8 @@ label {
 											
                                         </thead>
 
-                                       
-									<?php $jia=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1) ORDER BY nip");
+										<tr><td style="text-align:center!important;background-color:yellow" colspan="5"><b>JMP</b></td></tr>
+									<?php $jia=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1 AND jmrb=0) ORDER BY nip");
 									$no=1;
 									while($row=mysqli_fetch_array($jia)){
 										echo'
@@ -162,9 +170,45 @@ label {
 											
 											</tr>
 											</tbody>
-										 </tbody>	
-											</tbody>
+										
 											';}?>
+									<tr><td style="text-align:center!important;background-color:yellow" colspan="5"><b>JMRB</b></td></tr>
+									<?php $jias=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(id_user<>9999 AND admin<>9 AND status_aktif=1 AND jmrb=1) ORDER BY nip");
+									$no=1;
+									while($row=mysqli_fetch_array($jias)){
+										echo'
+										<tbody>
+                                            <tr>
+											<td style="text-align:center!important">'.$no++.'</td>
+											<td style="text-align:center!important">'.$row['nip'].'</td>
+											<td style="text-align:center!important">'.$row['nama'].'</td>
+											';
+										$way=mysqli_query($config,"SELECT status FROM tbl_gaji WHERE id_user='".$row['id_user']."' AND id_gaji='$id'");
+										list($statis)=mysqli_fetch_array($way);
+											echo'
+											<td style="text-align:center!important">
+											<a href="?page=pros&gjj=1&id='.$id.'&karyawan='.$row['id_user'].'" class="btn small green waves-effect waves-light"><i class="material-icons">add</i> Proses</a>
+											</td>';
+											if($statis==0){
+												echo'
+												<td style="text-align:center!important">
+											<a class="btn small red waves-effect waves-light"><i class="material-icons">highlight_off</i> Belum Selesai</a>
+											</td>
+												';} else {
+													echo'
+												<td style="text-align:center!important">
+											<a class="btn small green waves-effect waves-light"><i class="material-icons">done</i> Sudah Selesai</a>
+											</td>
+												';
+												}
+											
+											echo'
+											
+											</tr>
+											</tbody>
+										
+											';}?>
+											
 											
 									</table>
 							</div>
@@ -175,10 +219,18 @@ label {
 								 </div>
 					<?php
 						$tos=0;
-						$ngitun=mysqli_query($config,"SELECT * FROM tbl_gaji WHERE id_gaji='$id'");
-						while($day=mysqli_fetch_array($ngitun)){	
-							echo '<input type="hidden" class="kolo" value="'.$day['id_user'].'">';
-							$tos++;
+						$tos2=0;
+						$ngitun=mysqli_query($config,"SELECT tbl_gaji.*,tbl_user.jmrb FROM tbl_gaji,tbl_user WHERE tbl_gaji.id_gaji='$id' AND tbl_gaji.id_user=tbl_user.id_user");
+						while($day=mysqli_fetch_array($ngitun)){
+							if($day['jmrb']==0)	{
+								echo '<input type="hidden" class="kolo" value="'.$day['id_user'].'">';
+								$tos++;
+							} else {
+								echo '<input type="hidden" class="kolos" value="'.$day['id_user'].'">';
+								$tos2++;
+							}
+							
+							
 						}
 						?>
 					
@@ -241,6 +293,38 @@ progress::-webkit-progress-value { background: blue; }
 						 }
 
 						});
+
+						$(\'#prosesseluruhjmrb\').click(function(){
+							var contol = confirm ("Anda yakin ingin memproses keseluruhan data gaji ? (Proses Keseluruhan Hanya dilakukan sekali saja, agar tidak terjadi timpa data)");
+							if (contol == true) {
+								$("#modalgajih").openModal();
+								var tos = '.$tos2.';
+								var pers=1;
+								$(".kolos").each(function(){
+									var karjo = $(this).val();
+									$.get(\'./js/ajaxprosesgaji.php\',{id : '.$id.' , karyawan : karjo},function(data){
+										$(".con").html(data);
+										var mkojo = (pers/tos)*100;
+									$("#hays").html(mkojo.toFixed(1) + \'%\');
+									$("#progress_bar").val(pers);
+									pers++;
+									
+									if(pers=='.($tos2+1).'){
+											alert("Proses Penggajian Telah Selesai !");
+										window.location.href="admin.php?page=pros&id='.$id.'";	
+									
+										
+									}
+									
+									});
+								
+									
+										
+								});	
+						 }
+
+						});
+
 						});
 						</script>';
 						?>
