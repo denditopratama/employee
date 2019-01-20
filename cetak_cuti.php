@@ -7,8 +7,8 @@
 		 require('include/config.php');
 		 
 	$id=mysqli_real_escape_string($config,base64_decode($_GET['id']));
-	$is=mysqli_query($config,"SELECT id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi,status_sdm,file FROM tbl_cuti WHERE id='$id'");
-    list($id_user,$alasan,$tgl_awal,$tgl_akhir,$status_manager,$status_gm,$status_sdm,$nama,$divisi,$status_sdm,$file)=mysqli_fetch_array($is);
+	$is=mysqli_query($config,"SELECT id_user,alasan,tgl_awal,tgl_akhir,status_manager,status_gm,status_sdm,nama,divisi,status_sdm,file,ket FROM tbl_cuti WHERE id='$id'");
+    list($id_user,$alasan,$tgl_awal,$tgl_akhir,$status_manager,$status_gm,$status_sdm,$nama,$divisi,$status_sdm,$file,$keterangans)=mysqli_fetch_array($is);
     $gb=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
     list($tgl_bakti)=mysqli_fetch_array($gb);
     $mb=mysqli_query($config,"SELECT admin,jabatan,divisi,sub_unit,nip FROM tbl_user WHERE id_user='$id_user'");
@@ -149,7 +149,7 @@ if($admin>5){
     } 
     
    
-} else if($admin==3 || $admin==2){
+} else if($admin==3 || $admin==2 || $admin==1){
     $jh=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND tbl_user.admin=2");
         list($jbtn,$atasan)=mysqli_fetch_array($jh);
         $pdf->Cell(120 ,1,''.ucwords(strtolower($jbtn)).'',0,1);
@@ -350,7 +350,8 @@ $pdf->Cell(12, 8, '', 0, 0,'C');
 $pdf->Cell(60, 8, 'Jakarta, '.date('d').' '.$nmdx.' '.date('Y').' ', 0, 1,'C');
 $pdf->Cell(25 ,6,'',0,1);
 $pdf->Cell(15 ,6,'',0,0);
-$pdf->Cell(20 ,6,'Catatan :',0,1);
+$pdf->Cell(20 ,6,'Catatan :',0,0);
+$pdf->Cell(20 ,6,''.$keterangans.'',0,1);
 
 $pdf->SetFont('Arial','BU',12);
 $pdf->Cell(25 ,6,'',0,1);
