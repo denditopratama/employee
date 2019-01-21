@@ -217,9 +217,9 @@
 				$simpang=mysqli_query($config,"UPDATE tbl_gaji_pokok SET kelas_jabatan='$keljab',gaji='$gajis',status_karyawan='$statkaryawan',status_tugas='$stattugas',t_jabatan='$tunjanganjabatan',t_fungsional='$tunjanganfungsional',t_transportasi='$tunjangantransport',t_utilitas='$tunjanganutilitas',t_perumahan='$tunjanganperumahan',t_komunikasi='$tunjangankomunikasi',custom='$gajikhus' WHERE id='$i'");}
 				
 				if(isset($_POST['hapusgaji'.$i.''])){
-					
+					$gajikhus=mysqli_real_escape_string($config,$_POST['gajikhus'.$i.'']);
 					$ngampung=mysqli_query($config,"DELETE FROM tbl_gaji_pokok WHERE id='$i'");
-					if($gajikhus!=0){
+					if($gajikhus!=0 && $gajikhus!=''){
 						$ngampung=mysqli_query($config,"DELETE FROM tbl_custom_gaji WHERE kode='$gajikhus'");	
 					}
 				}
