@@ -80,8 +80,10 @@
 			$tunut=mysqli_real_escape_string($config,$_POST['tunut']);
 			$tunper=mysqli_real_escape_string($config,$_POST['tunper']);
 			$tunkom=mysqli_real_escape_string($config,$_POST['tunkom']);
+			$gajikhusus=mysqli_real_escape_string($config,$_POST['gajikhusus']);
 			
-			$koig=mysqli_query($config,"INSERT INTO tbl_gaji_pokok(kelas_jabatan,gaji,status_karyawan,status_tugas,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi) VALUES('$kjabatan','$gaji','$statkar','$stattug','$tunjab','$tunfung','$tuntrans','$tunut','$tunper','$tunkom')");
+			$koig=mysqli_query($config,"INSERT INTO tbl_gaji_pokok(kelas_jabatan,gaji,status_karyawan,status_tugas,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi,custom) VALUES('$kjabatan','$gaji','$statkar','$stattug','$tunjab','$tunfung','$tuntrans','$tunut','$tunper','$tunkom','$gajikhusus')");
+			$kods=mysqli_query($config,"INSERT INTO tbl_custom_gaji(kode) VALUES('$gajikhusus')");
 			echo'<script>
 						
 						window.location.href="./admin.php?page=sett&sub=ref";
@@ -211,7 +213,8 @@
 					$tunjanganutilitas=mysqli_real_escape_string($config,$_POST['tunjanganutilitas'.$i.'']);
 					$tunjanganperumahan=mysqli_real_escape_string($config,$_POST['tunjanganperumahan'.$i.'']);
 					$tunjangankomunikasi=mysqli_real_escape_string($config,$_POST['tunjangankomunikasi'.$i.'']);
-				$simpang=mysqli_query($config,"UPDATE tbl_gaji_pokok SET kelas_jabatan='$keljab',gaji='$gajis',status_karyawan='$statkaryawan',status_tugas='$stattugas',t_jabatan='$tunjanganjabatan',t_fungsional='$tunjanganfungsional',t_transportasi='$tunjangantransport',t_utilitas='$tunjanganutilitas',t_perumahan='$tunjanganperumahan',t_komunikasi='$tunjangankomunikasi' WHERE id='$i'");}
+					$gajikhus=mysqli_real_escape_string($config,$_POST['gajikhus'.$i.'']);
+				$simpang=mysqli_query($config,"UPDATE tbl_gaji_pokok SET kelas_jabatan='$keljab',gaji='$gajis',status_karyawan='$statkaryawan',status_tugas='$stattugas',t_jabatan='$tunjanganjabatan',t_fungsional='$tunjanganfungsional',t_transportasi='$tunjangantransport',t_utilitas='$tunjanganutilitas',t_perumahan='$tunjanganperumahan',t_komunikasi='$tunjangankomunikasi',custom='$gajikhus' WHERE id='$i'");}
 				
 				if(isset($_POST['hapusgaji'.$i.''])){
 					
@@ -431,6 +434,7 @@
                             <thead class="blue lighten-4" style="background-color:#39424c!important;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="head">
                                  <tr>
 										<th width="1%"style="color:#fff">Nomor</th>
+										<th width="1%"style="color:#fff">Kode Gaji Khusus</th>
                                         <th width="15%"style="color:#fff;text-align:center">Kelas Jabatan</th>
 										<th width="15%"style="color:#fff;text-align:center">Status Karyawan</th>
 										<th width="15%"style="color:#fff;text-align:center">Status Tugas</th>
@@ -447,6 +451,7 @@
 								
 								<tr>
 								<td style="text-align:center" >-</td>
+								<td style="text-align:center"><input style="text-align:center" type="number" name="gajikhusus"></td>
 								<td style="text-align:center">
 								<select name="kjabatan" class="browser-default">
 								<?php 
@@ -514,6 +519,23 @@
                             <tbody>
 							<tr>
 							<td style="text-align:center" >'.$no++.'</td>
+							
+							<td style="text-align:center" >
+							<select name="gajikhus'.$row['id'].'" class="browser-default" style="width:100px!important">';
+							$cos=mysqli_query($config,"SELECT * FROM tbl_custom_gaji");
+							while($d=mysqli_fetch_array($cos)){
+								if($row['custom']==$d['kode']){
+							echo' 
+								<option value="'.$d['kode'].'" selected>'.$d['kode'].'</option>';}
+								else {
+							echo' 
+							<option value="'.$d['kode'].'">'.$d['kode'].'</option>';
+								}
+							}
+							echo'
+							</select>
+							</td>
+
 							<td style="text-align:center" >
 							<select name="keljab'.$row['id'].'" class="browser-default" style="width:100px!important">';
 							$co=mysqli_query($config,"SELECT * FROM tbl_kelas_jabatan");

@@ -655,8 +655,50 @@ if(empty($_SESSION['admin'])){
 											
                                             </select>
                                         </div>
+
+                                        
                                           
                                     </div>
+
+                                    <div class="input-field col s12 m6">
+                                        <i class="material-icons prefix md-prefix">attach_money</i><label style="background-color:yellow;font-weight:bold">Gaji Khusus (untuk gaji tertentu)</label><br/>
+                                        <div class="input-field col s11 right">
+                                            <select class="browser-default" name="customgaji" id="customgaji" style="margin-bottom:24px;" required>
+											
+											<?php
+														
+														$kn=mysqli_query($config,"SELECT * FROM tbl_custom_gaji");
+														while($rod=mysqli_fetch_array($kn)){
+                                                            $g=mysqli_query($config,"SELECT custom FROM tbl_user WHERE id_user='$id_user'");
+                                                            list($custom)=mysqli_fetch_array($g);
+                                                            if($custom==$rod['kode']){
+                                                                if($rod['kode']==0){
+                                                                    echo ' <option value="'.$rod['kode'].'" selected>Tidak ada gaji khusus</option>';
+                                                                } else {
+                                                                    echo ' <option value="'.$rod['kode'].'" selected>Tipe '.$rod['kode'].'</option>';
+                                                                }
+                                                            } else {
+                                                                if($rod['kode']==0){
+                                                                    echo ' <option value="'.$rod['kode'].'">Tidak ada gaji khusus</option>';
+                                                                } else {
+                                                                    echo ' <option value="'.$rod['kode'].'">Tipe '.$rod['kode'].'</option>';
+                                                                }
+                                                            }
+                                                            
+                                                            
+                                                        }
+												
+														?>
+														
+														
+											
+                                            </select>
+                                        </div>
+
+                                        
+                                          
+                                    </div>
+
 								<script type="text/javascript">
 								
             $(document).ready(function(){

@@ -573,11 +573,12 @@
 							$no_rekening=mysqli_real_escape_string($config,$_REQUEST['no_rekening']);
 							$atas_nama=mysqli_real_escape_string($config,$_REQUEST['atas_nama']);
 							$jenis_bank=mysqli_real_escape_string($config,$_REQUEST['jenis_bank']);
+							$customgaji=mysqli_real_escape_string($config,$_POST['customgaji']);
 							$gaji_jm=mysqli_real_escape_string($config,str_replace('.', '', $_POST['gaji_jm']));
 							
 							$apdet=mysqli_query($config,"UPDATE tbl_identitas SET tgl_bakti='$tgl_bakti',jenis_kelamin='$jenis_kelamin',tempat_lahir='$tempat_lahir',tanggal_lahir='$tanggal_lahir',status_keluarga='$status_keluarga',agama='$agama',goldarah='$goldarah',alamat='$alamat',kelurahan='$kelurahan',kecamatan='$kecamatan',kota='$kota',propinsi='$propinsi',kode_pos='$kode_pos',no_telpon='$no_telpon',no_ktp='$no_ktp',no_npwp='$no_npwp',no_bpjsks='$no_bpjsks',no_bpjskt='$no_bpjskt',no_rekening='$no_rekening',atas_nama='$atas_nama',jenis_bank='$jenis_bank',gaji_jm='$gaji_jm' WHERE id_user='$id_user'");
 							if($_SESSION['admin']==1){
-								$apdepartment=mysqli_query($config,"UPDATE tbl_user SET unit='$unit_kerja',sub_unit='$sub_unit',jabatan='$jabatan' WHERE id_user='$id_user'");
+								$apdepartment=mysqli_query($config,"UPDATE tbl_user SET unit='$unit_kerja',sub_unit='$sub_unit',jabatan='$jabatan',custom='$customgaji' WHERE id_user='$id_user'");
 							} else {
 								$apdepartment=true;
 							}
