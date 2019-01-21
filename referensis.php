@@ -219,6 +219,9 @@
 				if(isset($_POST['hapusgaji'.$i.''])){
 					
 					$ngampung=mysqli_query($config,"DELETE FROM tbl_gaji_pokok WHERE id='$i'");
+					if($gajikhus!=0){
+						$ngampung=mysqli_query($config,"DELETE FROM tbl_custom_gaji WHERE kode='$gajikhus'");	
+					}
 				}
 			}
 			
