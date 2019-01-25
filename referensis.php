@@ -499,6 +499,7 @@
 								<tbody>
 								<tr style="background-color:#39424c!important">
 										<th width="1%"style="color:#fff">Nomor</th>
+										<th width="1%"style="color:#fff">Kode Gaji Khusus</th>
                                         <th width="20%"style="color:#fff;text-align:center">Kelas Jabatan</th>
 										<th width="10%"style="color:#fff;text-align:center">Status Karyawan</th>
 										<th width="10%"style="color:#fff;text-align:center">Status Tugas</th>

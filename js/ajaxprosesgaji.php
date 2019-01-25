@@ -188,7 +188,7 @@ if($_SESSION['admin']!=1){
 													if($status_tugas==1){
 														if($sub1>=$gajipusat){
 														$jamgaji=4.54/100*$sub1;
-														$potjamgaji=6.54/100*$gajipusat;	
+														$potjamgaji=6.54/100*$sub1;	
 														} else {
 														$jamgaji=4.54/100*$gajipusat;
 														$potjamgaji=6.54/100*$gajipusat;}
