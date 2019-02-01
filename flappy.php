@@ -29,7 +29,7 @@ if($waktusisa <=0){
       <div id="gamecontainer">
          <div id="gamescreen">
             <div id="sky" class="animated">
-               <div id="flyarea" style="height:90%!important;">
+               <div id="flyarea">
                   <div id="ceiling" class="animated"></div>
                   <!-- This is the flying and pipe area container -->
                   <div id="player" class="bird animated"></div>
@@ -38,7 +38,7 @@ if($waktusisa <=0){
                   
                   <div id="splash"></div>
                   
-                  <div id="scoreboard"style="margin-top:-100px!important;">
+                  <div id="scoreboard"style="margin-top:-50px!important;">
                      <div id="medal"></div>
                      <div id="currentscore"></div>
                      <div id="highscore"></div>
