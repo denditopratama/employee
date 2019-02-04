@@ -89,7 +89,7 @@ h11 {
 				<div class="col m12">
 				<div class="card">
 					<div class="card-content">
-						<span class="card-title black-text"><i class="material-icons md-36" >note</i> Presensi</span>
+						<span class="card-title black-text"><i class="material-icons md-36" >cloud</i> File Sharing</span>
 						
 						<p><span class="red-text">*</span> untuk menampilkan file divisi, pilih "File Divisi" di kolom tampilan dan klik pilih</p>
 						<p><span class="red-text">*</span> membagikan file dilakukan dengan cara klik tombol share (warna biru) lalu klik pilih</p>
