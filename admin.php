@@ -845,7 +845,7 @@ if($_SESSION['admin']!=1){
 				
 			
 				$timegame=date('H');
-				if($timegame=08){
+				if($timegame=='08'){
 					$tambahgame=mysqli_query($config,"UPDATE tbl_user SET waktugame=3600");
 				}
 				
