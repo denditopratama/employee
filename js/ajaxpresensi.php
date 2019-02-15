@@ -97,17 +97,19 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
 
                                             $mosc=strtotime($row['tanggal']);
                                                     
-                                                    $kemang=mysqli_query($config,"SELECT tgl_awal,tgl_akhir FROM tbl_cuti WHERE id_user='$id_users'");
-                                                    list($gaspol,$ereun)=mysqli_fetch_array($kemang);
+                                                    $kemang=mysqli_query($config,"SELECT tgl_awal,tgl_akhir,status_manager,status_gm FROM tbl_cuti WHERE id_user='$id_users'");
+                                                    list($gaspol,$ereun,$goreng,$patut)=mysqli_fetch_array($kemang);
                                                     $gaspol1=strtotime($gaspol);
                                                     $gaspol2=strtotime($ereun);
                                                     $tglbereum=date('Y-m-d',strtotime($row['tanggal']));
                                                     $yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
+                                                 
+                                                    
                                                     
                                             if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
                                                 echo '<tr style="background-color:yellow">'; 
                                                 $row['terlambat']='00:00';
-                                            } else if($mosc >= $gaspol1 && $mosc <=$gaspol2){
+                                            } else if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 || $patut==1){
                                                 $row['keterangan']='Cuti';
                                                 echo '<tr style="background-color:green">'; 
                                             } else if(mysqli_num_rows($yaw)>0){
@@ -132,7 +134,10 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     if($row['terlambat']==''){
                                                         $row['terlambat']='00:00';
                                                     }
-                                           
+                                                   
+                                                    if($row['jam_masuk']=='' && $row['jam_pulang']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
+                                                        $row['terlambat']='08:00';
+                                                    }
                                                     
                                                    
                                                     echo'
