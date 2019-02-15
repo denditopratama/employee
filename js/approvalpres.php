@@ -14,7 +14,7 @@ if(empty($_SESSION['admin']) ){
 
     if($aksi=='gm1'){
         if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3 || $_SESSION['admin']==4){
-            $mov=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_gm=1 WHERE id_presensi='$id' AND id_user='$id_users'");
+            $mov=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_gm=1,status_manager=1 WHERE id_presensi='$id' AND id_user='$id_users'");
             $_SESSION['succAdd']='SUKSES ! Data berhasil disetujui';
             header("Location: ./admin.php?page=pres&act=ketpres&id=$id");
             die();

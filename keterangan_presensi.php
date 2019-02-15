@@ -63,7 +63,7 @@
                             
                     }
 					else if($_SESSION['admin']==1){
-                    $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_gm=1 WHERE id_presensi='$id'");
+                    $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_gm=1,status_manager=1 WHERE id_presensi='$id'");
                             
                     }
                     if($itj==true){
