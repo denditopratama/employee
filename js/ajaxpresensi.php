@@ -109,7 +109,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                             if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
                                                 echo '<tr style="background-color:yellow">'; 
                                                 $row['terlambat']='00:00';
-                                            } else if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 || $patut==1){
+                                            } else if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
                                                 $row['keterangan']='Cuti';
                                                 echo '<tr style="background-color:green">'; 
                                             } else if(mysqli_num_rows($yaw)>0){
