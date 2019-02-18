@@ -7,7 +7,7 @@ $nyet=$_SESSION['tokent'];
 if(empty($_SESSION['admin']) || $tokent!=$nyet ){
 	echo '
 	<script>
-	alert(\'ACCESS DENIED WOI!\');
+	alert(\'ACCESS TOKEN ANDA EXPIRED !\');
 	window.location.href=\'../\';
 	</script>';
 } else {
