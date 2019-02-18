@@ -135,7 +135,15 @@ if($admin>5){
     }
     
     
-} else if($admin==4){
+} else if($admin==5){
+   
+   
+        $jh=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND(tbl_user.admin=4 AND tbl_user.divisi='$divisi')");
+        list($jbtn,$atasan)=mysqli_fetch_array($jh);
+        $pdf->Cell(120 ,1,''.ucwords(strtolower($jbtn)).'',0,1);
+    }
+
+    else if($admin==4){
     if($divisi==4){
         $hj=mysqli_query($config,"SELECT tbl_ref_jabatan.jabatan,tbl_user.nama,tbl_user.jabatan FROM tbl_user,tbl_ref_jabatan WHERE tbl_user.jabatan=tbl_ref_jabatan.id AND(tbl_ref_jabatan.jabatan LIKE '%DIREKTUR TEKNIK%' AND tbl_user.admin=3)");  
     } else {
