@@ -1195,25 +1195,28 @@
 											 
 											 
 
-											if(date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun'){
+											if((date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun') && mysqli_num_rows($yaw)==false){
+												if($hourdiff>3){
+													$hourdiff=3;
+												}
 												echo '<tr style="background-color:yellow">';
-												if($hourdiff<=7){
 													$byrlm=($sub1/$jam_lembur*2)*$hourdiff;
 													array_push($nong,$byrlm);
-												} else if($hourdiff>7 && $hourdiff<=8){
-													$byrlm=(($sub1/$jam_lembur*2)*7)+($sub1/$jam_lembur*3);
+											
+											} else if(mysqli_num_rows($yaw)>0){
+												echo '<tr style="background-color:red">';	
+												if($hourdiff<=7){
+													$byrlm=(2/$jam_lembur*$sub1)*$hourdiff;
 													array_push($nong,$byrlm);
-												} else if($hourdiff>=8){
-													$byrlm=(($sub1/$jam_lembur*2)*7)+($sub1/$jam_lembur*3)+(($sub1/$jam_lembur*4)*$hourdiff);
+												} else if($hourdiff>7 && $hourdiff<=8){
+													$byrlm=((2/$jam_lembur*$sub1)*7)+(3/$jam_lembur*$sub1);
+													array_push($nong,$byrlm);
+												} else if($hourdiff>8){
+													$byrlm=((2/$jam_lembur*$sub1)*7)+(3/$jam_lembur*$sub1)+((4/$jam_lembur*$sub1)*$hourdiff);
 													array_push($nong,$byrlm);
 												}
 											} else {
-												if(mysqli_num_rows($yaw)>0){
-													echo '<tr style="background-color:red">';	
-												} else {
 													echo ' <tr>';
-												}
-												
 												if($hourdiff>3){
 													$hourdiff=3;
 												}
@@ -1325,7 +1328,7 @@
 												
 											}
 										
-											
+										
 											echo '<tr><td style="text-align:center"colspan="9">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
 											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.number_format($cocoktanam , 0, ',', '.').'</b></h6></td></tr>';
                                         } else {

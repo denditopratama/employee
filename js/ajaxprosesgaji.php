@@ -1092,35 +1092,38 @@ if($_SESSION['admin']!=1){
 														
 													}
 												
-										if($row['status_gm']==1 && $row['status_manager']==1){
-										 if($edmun==1 || $edmun==2 || $edmun==3 || $edmun==4 || $edmun==5){
-											array_push($nong,$tarfman);
-										 } else {
-											 
-											 
-
-											if(date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun'){
-												echo '<tr style="background-color:yellow">';
-												if($hourdiff<=7){
-													$byrlm=($sub1/$jam_lembur*2)*$hourdiff;
-													array_push($nong,$byrlm);
-												} else if($hourdiff>7 && $hourdiff<=8){
-													$byrlm=(($sub1/$jam_lembur*2)*7)+($sub1/$jam_lembur*3);
-													array_push($nong,$byrlm);
-												} else if($hourdiff>=8){
-													$byrlm=(($sub1/$jam_lembur*2)*7)+($sub1/$jam_lembur*3)+(($sub1/$jam_lembur*4)*$hourdiff);
-													array_push($nong,$byrlm);
-												}
-											} else {
-												if(mysqli_num_rows($yaw)>0){
-													echo '<tr style="background-color:red">';	
-												} else {
-													echo ' <tr>';
-												}
-												
-												if($hourdiff>3){
-													$hourdiff=3;
-												}
+													if($row['status_gm']==1 && $row['status_manager']==1){
+														if($edmun==1 || $edmun==2 || $edmun==3 || $edmun==4 || $edmun==5){
+														   array_push($nong,$tarfman);
+														} else {
+															
+															
+			   
+														   if((date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun') && mysqli_num_rows($yaw)==false){
+															   if($hourdiff>3){
+																   $hourdiff=3;
+															   }
+															   echo '<tr style="background-color:yellow">';
+																   $byrlm=($sub1/$jam_lembur*2)*$hourdiff;
+																   array_push($nong,$byrlm);
+														   
+														   } else if(mysqli_num_rows($yaw)>0){
+															   echo '<tr style="background-color:red">';	
+															   if($hourdiff<=7){
+																   $byrlm=(2/$jam_lembur*$sub1)*$hourdiff;
+																   array_push($nong,$byrlm);
+															   } else if($hourdiff>7 && $hourdiff<=8){
+																   $byrlm=((2/$jam_lembur*$sub1)*7)+(3/$jam_lembur*$sub1);
+																   array_push($nong,$byrlm);
+															   } else if($hourdiff>8){
+																   $byrlm=((2/$jam_lembur*$sub1)*7)+(3/$jam_lembur*$sub1)+((4/$jam_lembur*$sub1)*$hourdiff);
+																   array_push($nong,$byrlm);
+															   }
+														   } else {
+																   echo ' <tr>';
+															   if($hourdiff>3){
+																   $hourdiff=3;
+															   }
 															   if($hourdiff>1){
 																   $byrlm=($sub1/$jam_lembur*1.5)+((2/$jam_lembur*$sub1)*($hourdiff-1));
 																   array_push($nong,$byrlm);
@@ -1131,7 +1134,7 @@ if($_SESSION['admin']!=1){
 														   }
 														   
 														}}
-											$no++;
+														   $no++;
 											
 											 echo'
 											 		<td style="text-align:center">'.$no.'</td>
