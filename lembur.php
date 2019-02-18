@@ -266,10 +266,15 @@
             $tokenlembur = bin2hex(mt_rand(0,9999));
             $_SESSION['tokenlembur']=$tokenlembur;
             $nos=1;
+            $ambi=mysqli_query($config,"SELECT sub_unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
+            list($nyub)=mysqli_fetch_array($ambi);
+            $nyubs=mysqli_real_escape_string($config,$nyub);
             if($_SESSION['admin']==1){
                 $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id'");  
-            } else if ($_SESSION['admin']==5 || $_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
+            } else if ($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
                 $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");
+            } else if ($_SESSION['admin']==5) {
+                $gk=mysqli_query($config,"SELECT tbl_lembur.*,tbl_user.sub_unit FROM tbl_lembur,tbl_user WHERE tbl_lembur.id_presensi='$id' AND(tbl_lembur.id_user=tbl_user.id_user AND tbl_lembur.divisi='".$_SESSION['divisi']."' AND tbl_user.sub_unit='$nyubs') GROUP BY tbl_lembur.id_user");
             } else {
                 $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id' AND id_user='".$_SESSION['id_user']."'");
 			}
