@@ -81,7 +81,7 @@ $pdf->SetFont('Arial','B',10);
 $pdf->Cell(100 ,1,'A. Penerimaan :',0,0);
 $pdf->Cell(130 ,1,'Rincian Penerimaan Lain :',0,0);
 
-					
+$totalpenerimaan=0;		
 $totaljabatan=0;
 $totalfungsional=0;				
 $totalkomunikasi=0;
@@ -95,16 +95,16 @@ $bpjsjampes=0;
 $tunpph21ttp=0;
 $tunpph21tt=0;
 //summary
-$yok=mysqli_query($config,"SELECT SUM(total_penerimaan) FROM tbl_gaji WHERE id_gaji='$id_gaji'");
-list($totalpenerimaan)=mysqli_fetch_array($yok);
+
 
 $yoks=mysqli_query($config,"SELECT * FROM tbl_gaji WHERE id_gaji='$id_gaji' AND status=1");
 while($row=mysqli_fetch_array($yoks)){
 	$jis=mysqli_query($config,"SELECT kelas_jabatan,status_karyawan,status_tugas FROM tbl_user WHERE id_user='".$row['id_user']."'");
 	list($admin,$statkar,$statugas)=mysqli_fetch_array($jis);
 	
-	$jiz=mysqli_query($config,"SELECT t_jabatan,t_fungsional,t_komunikasi,t_transportasi,t_utilitas,t_perumahan FROM tbl_gaji_pokok WHERE kelas_jabatan='$admin' AND(status_karyawan='$statkar' AND status_tugas='$statugas')");
-	list($totaljabatans,$totalfungsionals,$totalkomunikasis,$totaltransportasis,$totalutilitass,$totalperumahans)=mysqli_fetch_array($jiz);
+	$jiz=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_komunikasi,t_transportasi,t_utilitas,t_perumahan FROM tbl_gaji_pokok WHERE kelas_jabatan='$admin' AND(status_karyawan='$statkar' AND status_tugas='$statugas')");
+	list($jerinx,$totaljabatans,$totalfungsionals,$totalkomunikasis,$totaltransportasis,$totalutilitass,$totalperumahans)=mysqli_fetch_array($jiz);
+	$totalpenerimaan=$totalpenerimaan+$jerinx;
 	$totaljabatan=$totaljabatan+$totaljabatans;
 	$totalfungsional=$totalfungsional+$totalfungsionals;
 	$totalkomunikasi=$totalkomunikasi+$totalkomunikasis;
