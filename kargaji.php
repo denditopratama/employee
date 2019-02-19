@@ -1140,7 +1140,8 @@
                                                 <th width="20%" rowspan="2">Nama</th>
                                                 <th width="15%" rowspan="2">Tanggal</th>
 												<th width="16%" rowspan="2">Deskripsi Pekerjaan</th>
-                                                <th width="14%" colspan="2" style="border-bottom:1px solid black">Jam Lembur</th>
+												<th width="14%" colspan="2" style="border-bottom:1px solid black">Jam Lembur</th>
+												<th width="1%" rowspan="2">Terhitung</th>
 												<th width="14%" rowspan="2">Status Manager</th>
 												<th width="14%" rowspan="2">Status GM</th>
                                                 <th width="10%" rowspan="2">Tindakan</th>
@@ -1171,12 +1172,16 @@
 												 
 												$titit=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
 												list($namas,$edmun)=mysqli_fetch_array($titit);
-												$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
 												
-											
-													
 													$ex=explode('.',$row['jam_awal']);
 													$exo=explode('.',$row['jam_akhir']);
+													if($exo[1]>30){
+														$hourdiff = ceil(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
+													} else {
+														$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
+													}
+													
+
 													if($row['status_gm']==1 && $row['status_manager']==1){
 														if($exo[0]-$ex[0]>3 && date('D', strtotime($row['tanggal']))!='Sat' && date('D', strtotime($row['tanggal']))!='Sun' && mysqli_num_rows($yaw)<=0){
 															array_push($tat,3);	
@@ -1200,7 +1205,8 @@
 													$hourdiff=3;
 												}
 												echo '<tr style="background-color:yellow">';
-													$byrlm=($sub1/$jam_lembur*2)*$hourdiff;
+												
+													$byrlm=(2/$jam_lembur*$sub1)*$hourdiff;
 													array_push($nong,$byrlm);
 											
 											} else if(mysqli_num_rows($yaw)>0){
@@ -1227,6 +1233,7 @@
 													$byrlm=($sub1/$jam_lembur*1.5);
 													array_push($nong,$byrlm);
 												}
+											
 											}
 											
 										 }}
@@ -1242,6 +1249,8 @@
 
 										
 										echo'
+										
+										<td style="text-align:center">'.$hourdiff.' Jam</td>
 										<td style="text-align:center">';
 										if($_SESSION['admin']==1 || $_SESSION['admin']==5){
 										if($row['status_manager']==1){										
@@ -1309,9 +1318,6 @@
                                             </tr>
 										</tbody>';
 										
-										
-										
-												
 												
 											}
 											$yowko=array_sum($tat);
@@ -1329,10 +1335,10 @@
 											}
 										
 										
-											echo '<tr><td style="text-align:center"colspan="9">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
-											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.number_format($cocoktanam , 0, ',', '.').'</b></h6></td></tr>';
+											echo '<tr><td style="text-align:center"colspan="10">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
+											echo '<tr><td style="text-align:center"colspan="10">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.floor(number_format($cocoktanam , 0, ',', '.')).'.000</b></h6></td></tr>';
                                         } else {
-                                            echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                                            echo '<tr><td colspan="10"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                         }
                                 echo '</table>
 								</div>

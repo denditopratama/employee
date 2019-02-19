@@ -1075,12 +1075,14 @@ if($_SESSION['admin']!=1){
 												 
 												$titit=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
 												list($namas,$edmun)=mysqli_fetch_array($titit);
-												$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
-												
-											
-													
+
 													$ex=explode('.',$row['jam_awal']);
 													$exo=explode('.',$row['jam_akhir']);
+													if($exo[1]>30){
+														$hourdiff = ceil(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
+													} else {
+														$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
+													}
 													if($row['status_gm']==1 && $row['status_manager']==1){
 														if($exo[0]-$ex[0]>3 && date('D', strtotime($row['tanggal']))!='Sat' && date('D', strtotime($row['tanggal']))!='Sun' && mysqli_num_rows($yaw)<=0){
 															array_push($tat,3);	
@@ -1236,7 +1238,7 @@ if($_SESSION['admin']!=1){
 											}
 										
 											echo '<tr><td style="text-align:center"colspan="9">Total Jam Lembur adalah :<b> '.$yowko.'</b> Jam <b>'.$yowka.'</b> Menit</td></tr>';
-											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.number_format($cocoktanam , 0, ',', '.').'</b></h6></td></tr>';
+											echo '<tr><td style="text-align:center"colspan="9">Total Estimasi Bayaran Lembur:<h6 id="eding"> <b>Rp '.floor(number_format($cocoktanam , 0, ',', '.')).'.000</b></h6></td></tr>';
                                         } else {
                                             echo '<tr><td colspan="9"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                         }
