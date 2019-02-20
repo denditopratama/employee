@@ -104,6 +104,24 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     $tglbereum=date('Y-m-d',strtotime($row['tanggal']));
                                                     $yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
                                                  
+
+                                                    $sa=explode(':',$row['jam_masuk']);
+                                                    $bx='08:00';
+                                                    if(strtotime($row['jam_masuk'])>strtotime($bx)){
+                                                        $miu=$sa[0]-8;
+                                                        if($miu<0){
+                                                            $miu=00;
+                                                        }
+                                                        $miu2=$sa[1]-0;
+                                                        if(strlen($miu)<2){
+                                                            $miu='0'.$miu;
+                                                        }
+                                                        if(strlen($miu2)<2){
+                                                            $miu2='0'.$miu2;
+                                                        }
+                                                        $row['terlambat']=$miu.':'.$miu2;
+                                                    }
+                                                   
                                                     
                                                     
                                             if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
@@ -133,11 +151,13 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
 													
                                                     if($row['terlambat']==''){
                                                         $row['terlambat']='00:00';
-                                                    }
-                                                   
+                                                    } 
+                                                       
+                                                     
                                                     if($row['jam_masuk']=='' && $row['jam_pulang']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
-                                                        $row['terlambat']='08:00';
-                                                    }
+                                                        $row['terlambat']='08:00';}
+                                                    
+                                                    
                                                     
                                                    
                                                     echo'
