@@ -348,6 +348,10 @@ th,td,tr{
                                             <a class="btn small green waves-effect waves-light" href="?page=cv&id_user='.$row['id_user'].'">
                                             <i class="material-icons">print</i> CETAK CV</a>';
                                         }
+                                        if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
+                                            echo ' <a class="btn small blue darken-4 waves-effect waves-light" onclick="return confirm(\'Anda yakin ingin mengakses user ini?\');" href="tukersesssion.php?dodi='.$row['id_user'].'">
+                                            <i class="material-icons">people</i> AKSES USER</a>';
+                                        }
                                      echo '</td>
                                     </tr>
                                 </tbody>';
