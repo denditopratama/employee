@@ -79,10 +79,58 @@
                                    if(mysqli_num_rows($kom)<=0){
                                     if($nik!='' && $nama!='' && $tanggals!=''){
                                      $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$id','$nik','$nama','$tanggals','$jam_masuk','$jam_pulang','$terlambat','')");  
-                                    }              
+                                     $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='$nik'");
+                                     list($nyj,$aiduser)=mysqli_fetch_array($yj);
+                                     $kjd=mysqli_query($config,"SELECT * FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$aiduser'");
+                                     if(mysqli_num_rows($kjd)<=0){
+                                         if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                             $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                             VALUES('$id','$aiduser','1','1')");
+                                         } else if($nyj==5){
+                                             $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                             VALUES('$id','$aiduser','1','0')");
+                                         } else {
+                                             $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                             VALUES('$id','$aiduser','0','0')");
+                                         }
+                                     } else {
+                                         if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                             $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='1' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                         } else if($nyj==5){
+                                             $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                         } else {
+                                             $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='0',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                         }
+                      
+                  }
+                                        }              
                                     } else {
                                     $gi=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET nik='$nik',nama='$nama',tanggal='$tanggals',jam_masuk='$jam_masuk',jam_pulang='$jam_pulang',terlambat='$terlambat' WHERE nik='$nik' AND(tanggal='$tanggals' AND id_presensi='$id')");
-                                     }
+                                    $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='$nik'");
+                                    list($nyj,$aiduser)=mysqli_fetch_array($yj);
+                                    $kjd=mysqli_query($config,"SELECT * FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$aiduser'");
+                                    if(mysqli_num_rows($kjd)<=0){
+                                        if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                            $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                            VALUES('$id','$aiduser','1','1')");
+                                        } else if($nyj==5){
+                                            $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                            VALUES('$id','$aiduser','1','0')");
+                                        } else {
+                                            $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
+                                            VALUES('$id','$aiduser','0','0')");
+                                        }
+                                    } else {
+                                        if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
+                                            $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='1' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                        } else if($nyj==5){
+                                            $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                        } else {
+                                            $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='0',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
+                                        }
+                     
+                 } 
+                                }
                                        
                                     }
                                        $nampang++; 
@@ -90,33 +138,7 @@
                                  }
                             
                              }
-                                 $mogo=mysqli_query($config,"SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE id_presensi='$id'");
-                                     while($datang=mysqli_fetch_array($mogo)){
-                                        $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='".$datang['nik']."'");
-                                                        list($nyj,$aiduser)=mysqli_fetch_array($yj);
-                                                        $kjd=mysqli_query($config,"SELECT * FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$aiduser'");
-                                                        if(mysqli_num_rows($kjd)<=0){
-                                                            if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
-                                                                $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
-                                                                VALUES('$id','$aiduser','1','1')");
-                                                            } else if($nyj==5){
-                                                                $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
-                                                                VALUES('$id','$aiduser','1','0')");
-                                                            } else {
-                                                                $got=mysqli_query($config,"INSERT INTO tbl_status_keterangan_presensi(id_presensi,id_user,status_manager,status_gm) 
-                                                                VALUES('$id','$aiduser','0','0')");
-                                                            }
-                                                        } else {
-                                                            if($nyj==1 || $nyj==2 || $nyj==3 || $nyj ==4){
-                                                                $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='1' WHERE id_user='$aiduser' AND id_presensi='$id'");
-                                                            } else if($nyj==5){
-                                                                $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='1',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
-                                                            } else {
-                                                                $got=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager='0',status_gm='0' WHERE id_user='$aiduser' AND id_presensi='$id'");
-                                                            }
-                                         
-                                     }
-                                    }
+                                
                                     unlink($targetPath);
                                     header("Location: ./admin.php?page=pres");
                                    die();
