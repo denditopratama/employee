@@ -13,6 +13,46 @@ th,td,tr{
 #buttons{
 	text-align:center!important;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {.stok{
+        max-width:210%;
+    height:auto;
+    }} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {.stok{
+        max-width:210%;
+    height:auto;
+    }} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {.stok{
+        max-width:210%;
+    height:auto;
+    }} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {  .stok{
+        max-width:100%;
+    height:auto;
+    }} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {  .stok{
+        max-width:100%;
+    height:auto;
+    }}
+
+   
+      
+ 
+
+
+
+        
+ 
+
 </style>
 
 
@@ -157,11 +197,12 @@ th,td,tr{
                                 <thead class="blue lighten-4" id="head">
                                     <tr>
                                         <th id="oi" width="1%">No</th>
+                                        <th id="oi" width="15%">Foto</th>
                                         <th id="oi" width="20%">Nama</th>
                                         <th id="oi" width="10%">NIP</th>
-										<th id="oi" width="15%">Unit Kerja</th>
+										
 										<th id="oi" width="15%">Jabatan</th>
-                                        <th id="oi" width="12%">Kelas Jabatan</th>
+                                        <th id="oi" width="12%">Unit Kerja</th>
 										<th id="oi" width="10%">Status</th>
                                         <th id="oi" width="16%">Tindakan</th>
 										
@@ -176,7 +217,12 @@ th,td,tr{
                                     while($row = mysqli_fetch_array($querykeun)){
 										$mhg=mysqli_query($config,"SELECT uraian_jabatan FROM tbl_kelas_jabatan WHERE kelas_jabatan='".$row['kelas_jabatan']."'");
 										list($rolenyax)=mysqli_fetch_array($mhg);
-										echo '<td id="oi" >'.$no++.'</td>';
+                                        echo '<td id="oi" >'.$no++.'</td>';
+                                        if($row['foto']!=''){
+                                            echo  '<td id="oi" ><img class="stok" src="upload/foto/'.$row['foto'].'"></td>';
+                                        } else {
+                                            echo  '<td id="oi" ><img class="stok" src="upload/foto/batman.jpg"></td>';
+                                        }
 
 														
 									
@@ -191,9 +237,8 @@ th,td,tr{
 											$subunit=ucwords(strtolower($row['sub_unit']));
 											$jabatung=ucwords(strtolower($subkeuns));
 											echo'
-                                            <td id="oi" >'.$unid.'</td>
 											<td id="oi" >'.$jabatung.'</td>
-											<td id="oi" >'.$rolenyax.'</td>';
+											<td id="oi" >'.$unid.'</td>';
 											if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 											if($row['status_aktif']==1){
 												echo'
@@ -272,11 +317,11 @@ th,td,tr{
                                 <thead class="blue lighten-4" id="head">
                                     <tr>
                                         <th id="oi"  width="1%">No</th>
+                                        <th id="oi"  width="15%">Foto</th>
                                         <th id="oi"  width="20%">Nama</th>
                                         <th id="oi"  width="10%">NIP</th>
-										<th id="oi"  width="15%">Unit Kerja</th>
 										<th id="oi"  width="15%">Jabatan</th>
-                                        <th id="oi"  width="12%">Kelas Jabatan</th>
+                                        <th id="oi"  width="12%">Unit Kerja</th>
 										<th id="oi"  width="10%">Status</th>
                                         <th id="oi"  width="16%">Tindakan</th>
                                     </tr>
@@ -288,25 +333,32 @@ th,td,tr{
 								   $no=1;
                                     while($row = mysqli_fetch_array($querykeunsd)){
 										$mhsg=mysqli_query($config,"SELECT uraian_jabatan FROM tbl_kelas_jabatan WHERE kelas_jabatan='".$row['kelas_jabatan']."'");
-										list($rolenyaxs)=mysqli_fetch_array($mhsg);
-									echo '<td id="oi" >'.$no++.'</td>';
+                                        list($rolenyaxs)=mysqli_fetch_array($mhsg);
+                                        $kerja=mysqli_query($config,"SELECT unit_kerja FROM tbl_department WHERE kode_unit='".$row['unit']."'");
+                                        list($unitz)=mysqli_fetch_array($kerja);
+                                        $subkeun=mysqli_query($config,"SELECT jabatan FROM tbl_ref_jabatan WHERE id='".$row['jabatan']."'");
+                                        list($subkeuns)=mysqli_fetch_array($subkeun);
+                                        $unid=ucwords(strtolower($unitz));
+                                        $subunit=ucwords(strtolower($row['sub_unit']));
+                                        $jabatung=ucwords(strtolower($subkeuns));
+                                    echo '<td id="oi" >'.$no++.'</td>';
+                                    if($row['foto']!=''){
+                                        echo  '<td id="oi" ><img class="stok" src="upload/foto/'.$row['foto'].'"></td>';
+                                    } else {
+                                        echo  '<td id="oi" ><img class="stok" src="upload/foto/batman.jpg"></td>';
+                                    }
+                                   
 									
 														
 									
 									
 									echo '<td id="oi" >'.$row['nama'].'</td>
                                             <td id="oi" >'.$row['nip'].'</td>';
-											$kerja=mysqli_query($config,"SELECT unit_kerja FROM tbl_department WHERE kode_unit='".$row['unit']."'");
-											list($unitz)=mysqli_fetch_array($kerja);
-											$subkeun=mysqli_query($config,"SELECT jabatan FROM tbl_ref_jabatan WHERE id='".$row['jabatan']."'");
-											list($subkeuns)=mysqli_fetch_array($subkeun);
-											$unid=ucwords(strtolower($unitz));
-											$subunit=ucwords(strtolower($row['sub_unit']));
-											$jabatung=ucwords(strtolower($subkeuns));
+										
 											echo'
-                                            <td id="oi" >'.$unid.'</td>
+                                           
 											<td id="oi" >'.$jabatung.'</td>
-											<td id="oi" >'.$rolenyaxs.'</td>';
+											<td id="oi" >'.$unid.'</td>';
 											
 											if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
 											if($row['status_aktif']==1){
