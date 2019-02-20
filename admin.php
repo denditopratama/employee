@@ -905,23 +905,12 @@ if($_SESSION['admin']!=1){
      <div class="card-content">
 	 
 	<?php  
-			$rekapkel=0;
-			$rekapkels=0;
-			$nbmb=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(status_aktif=1 AND id_user<>9999 AND admin<>9)");
-			while($dab=mysqli_fetch_array($nbmb)){
-				$rekapjenkel=mysqli_query($config,"SELECT jenis_kelamin FROM tbl_identitas WHERE jenis_kelamin='L' AND id_user='".$dab['id_user']."'");
-				list($rekapkelb)=mysqli_fetch_array($rekapjenkel);
-				$rekapbz=count($rekapkelb);
-				$rekapkel+=$rekapbz;
-			}
+		
+			$nbmb=mysqli_query($config,"SELECT tbl_user.*,tbl_identitas.jenis_kelamin FROM tbl_user,tbl_identitas WHERE tbl_user.admin<>1 AND(tbl_user.status_aktif=1 AND tbl_user.id_user<>9999 AND tbl_user.admin<>9 AND tbl_identitas.jenis_kelamin='L' AND tbl_user.id_user=tbl_identitas.id_user)");
+		$rekapkel=mysqli_num_rows($nbmb);
 			
-			$nbmbf=mysqli_query($config,"SELECT * FROM tbl_user WHERE admin<>1 AND(status_aktif=1 AND id_user<>9999 AND admin<>9)");
-			while($dabs=mysqli_fetch_array($nbmbf)){
-				$rekapjenkels=mysqli_query($config,"SELECT jenis_kelamin FROM tbl_identitas WHERE jenis_kelamin='P' AND id_user='".$dabs['id_user']."'");
-				list($rekapkelsd)=mysqli_fetch_array($rekapjenkels);
-				$rekapbzd=count($rekapkelsd);
-				$rekapkels+=$rekapbzd;
-			}
+		$nbmbf=mysqli_query($config,"SELECT tbl_user.*,tbl_identitas.jenis_kelamin FROM tbl_user,tbl_identitas WHERE tbl_user.admin<>1 AND(tbl_user.status_aktif=1 AND tbl_user.id_user<>9999 AND tbl_user.admin<>9 AND tbl_identitas.jenis_kelamin='P' AND tbl_user.id_user=tbl_identitas.id_user)");
+		$rekapkels=mysqli_num_rows($nbmbf);
 
 		
 			
