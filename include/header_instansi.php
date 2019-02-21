@@ -143,9 +143,9 @@
                                   $ketpres=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user
                                    WHERE tbl_status_keterangan_presensi.status_gm=0 AND(tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."')");
                                   $jumlahket=mysqli_num_rows($ketpres);
-                                $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 ");
+                                $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 GROUP BY id_user");
                                 $jumlahna=mysqli_num_rows($gmjk);
-                                $cuts=mysqli_query($config,"SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 ");
+                                $cuts=mysqli_query($config,"SELECT * FROM tbl_cuti WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 GROUP BY id_user");
                                 $jumlahcutiw=mysqli_num_rows($cuts);
                                 if($jumlahna>0){
                                       echo '<strong>*</strong><strong class="red-text"> <b>'.$jumlahna.'</b></strong><strong> Orang telah menunggu konfirmasi Lembur dari anda.</strong><br>';
