@@ -365,8 +365,27 @@
 									</form>
 											</div>
 											<div>
+                                            </div>
+                                            
+                                            	<div class="col m12" id="colres">
+									  <form method="POST" action="printpotonganinstansi.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN POTONGAN INSTANSI</button>
+									</form>
 											</div>
-																
+											<div>
+											</div>
+                                                
+                                             	<div class="col m12" id="colres">
+									  <form method="POST" action="printpotonganberdasar.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN POTONGAN INSTANSI (BERDASARKAN JENIS POTONGAN)</button>
+									</form>
+											</div>
+											<div>
+											</div>
 								
 								</div>
 								</div>
@@ -554,6 +573,26 @@
 									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
 									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
                                                     <i class="material-icons">assignment_turned_in</i> LAPORAN PREMI BPJS KETENAGAKERJAAN</button>
+									</form>
+											</div>
+											<div>
+                                            </div>
+
+                                            	<div class="col m12" id="colres">
+									  <form method="POST" action="printpotonganinstansi.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN POTONGAN INSTANSI</button>
+									</form>
+											</div>
+											<div>
+                                            </div>
+                                            
+                                            <div class="col m12" id="colres">
+									  <form method="POST" action="printpotonganberdasar.php">
+									<input type="hidden" value="'.$row['id'].'" name="id_gaji">
+									<button class="btn small grey darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                    <i class="material-icons">assignment_turned_in</i> LAPORAN POTONGAN INSTANSI (BERDASARKAN JENIS POTONGAN)</button>
 									</form>
 											</div>
 											<div>
