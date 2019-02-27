@@ -432,6 +432,9 @@ if($_SESSION['admin']!=1){
                     break;
 				case 'reportsppd':
                     include "report_sppd.php";
+										break;
+				case 'inve':
+                    include "inventaris.php";
                     break;
 									
 				
@@ -1268,8 +1271,7 @@ function drawChart() {
        
 
 </script>
-	
-	
+
 	
     <!-- container END -->
 

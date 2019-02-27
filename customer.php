@@ -129,7 +129,7 @@
                                        <div class="input-field col s11 right">
                                            <select class="browser-default" name="stataktif" id="stataktif" style="margin-bottom:24px;" required>
                                            <option value="1">Aktif</option>
-                                           <option value="2">Tidak Aktif</option>
+                                           <option value="0">Tidak Aktif</option>
                                                    
                                            </select>
                                        </div>

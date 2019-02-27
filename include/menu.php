@@ -126,9 +126,9 @@
                             <ul>   
                                
 							
-								<li><a href="?page=tsm">Surat Masuk</a></li>
-								<li><a href="?page=tsk">Surat Keluar</a></li>
-								<li><a href="?page=kpts">KPTS</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsm">Surat Masuk</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=tsk">Surat Keluar</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=kpts">KPTS</a></li>
 								
                                
 								
@@ -144,24 +144,25 @@
                         <a class="collapsible-header"><i class="material-icons">account_circle</i> Karyawan</a>
                         <div class="collapsible-body">
                             <ul>
-								<li><a href="?page=usr">Data Karyawan</a></li>
-                                <li><a href="?page=pres">Presensi</a></li>
-                                <li><a href="?page=cuti">Cuti</a></li>
-                                <li><a href="?page=sppd">SPPD</a></li>
-								<li><a href="?page=files">File</a></li>
-							
-							<hr>	
-                    <li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=usr">Data Karyawan</a></li>
+                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pres">Presensi</a></li>
+                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=cuti">Cuti</a></li>
+                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sppd">SPPD</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=files">File</a></li>
+                                
+							<hr>
+                            	
+              
                         <a class="collapsible-header" data-activates="col"><i class="material-icons">attach_money</i> Gaji</a>
                         
                             <ul id="col">
 							<?php if($_SESSION['admin']==1) { ?>	
-								<li><a href="?page=loggjh">Proses Gaji</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=loggjh">Proses Gaji</a></li>
 									<?php } ?>	
-								<li><a href="?page=slip">Slip Gaji</a></li>
+								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=slip">Slip Gaji</a></li>
 								 </ul>
                         
-                    </li>
+             
               
 						
 								
@@ -196,6 +197,7 @@
                         <ul>
                           
                             <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a  <?php if($_SESSION['id_user']!=8){ echo 'onclick="belumjadi();"';} else {echo 'href="indexnyatm.php"';}?> >Tenancy Management</a></li>
+                            <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=inve">Inventaris</a></li>
                             
                         </ul>
                     </div>

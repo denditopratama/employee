@@ -140,7 +140,8 @@ font-size:14px!important;
                     <script>
                     alert(\'Data Berhasil di Input !\');
                     </script>';
-                    
+                    header('Location:./daftar_customer.php');
+                    die();
         
                 }  
                 

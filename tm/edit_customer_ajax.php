@@ -163,12 +163,12 @@ $.post(\'./tm/proses_kota.php\', { propinsi : propinsi }, function(data){
         if($status==1){
             echo 
             '<option value="1" selected>Aktif</option>
-            <option value="2">Tidak Aktif</option>';
+            <option value="0">Tidak Aktif</option>';
             
         } else {
             echo 
             '<option value="1">Aktif</option>
-            <option value="2" selected>Tidak Aktif</option>';
+            <option value="0" selected>Tidak Aktif</option>';
         }
            echo'
         </select>

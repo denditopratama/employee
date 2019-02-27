@@ -193,7 +193,7 @@ th,td,tr{
 
                         <div class="col m12" id="colres">
                             <!-- Table START -->
-                            <table class="bordered" id="tbl">
+                            <table class="bordered" id="tblr">
                                 <thead class="blue lighten-4" id="head">
                                     <tr>
                                         <th id="oi" width="1%">No</th>

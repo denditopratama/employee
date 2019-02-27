@@ -11,7 +11,7 @@ require('../include/config.php');
 
                     $token=mysqli_real_escape_string($configtm,$_POST['token']);
 
-                    if($_SESSION['tokeneditcustomer']==$token)
+                    if($_SESSION['tokeneditcustomers']==$token)
                     { $id=mysqli_real_escape_string($configtm,$_POST['id']);
                         $nama_depan=mysqli_real_escape_string($configtm,$_POST['nama_depan']); 
                         $nama_belakang=mysqli_real_escape_string($configtm,$_POST['nama_belakang']);
@@ -30,12 +30,12 @@ require('../include/config.php');
                       $youkg=mysqli_query($configtm,"UPDATE tbl_customer SET nama='$nama_depan',namab='$nama_belakang',propinsi='$provinsi',
                       kota='$kota',alamat='$alamat',kodepos='$kode_pos',hp='$nomorhp',phone='$telepon',email='$email',npwp='$npwp',status='$stataktif'
                       ,unit='$unit',pic='$pic' WHERE id='$id'");
-                     $_SESSION['tokeneditcustomer']==0;
+                     $_SESSION['tokeneditcustomers']==0;
                     }
                       else {
                         echo '
                         <script>
-                        alert(\'ACCESS DENIED WOI!\');
+                        alert(\'ACCESS KEMANAN TIDAK VALID!\');
                         window.location.href=\'../\';
                         </script>'; 
                       }
