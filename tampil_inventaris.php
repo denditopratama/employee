@@ -141,10 +141,11 @@ if($m=="" || $m ==0){$nm="";}
   
 
 }
-echo '</span></div>';
+
 echo '
 <form method="POST">
 <input type="hidden" value="'.$idd.'" name="fs">
-<button type="submit" name="toto" style="width:50%;text-align:center!important;margin:auto" class="btn small blue">KLIK UNTUK PINDAH KEPEMILIKAN</button>
+<button type="submit" name="toto" style="width:80%;text-align:center!important;margin:auto" class="btn small blue">KLIK UNTUK PINDAH KEPEMILIKAN</button>
 </form>';
+echo '</span></div>';
 ?>
