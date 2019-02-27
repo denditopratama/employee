@@ -9,11 +9,12 @@
    ?>
   
     <script type="text/javascript" src="js/instascan.min.js"></script>
-	<video id="preview"></video>
+	<video playsinline controls="true" id="preview"></video>
 
     <script type="text/javascript">
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
+          
         window.location.href=content;
       });
       Instascan.Camera.getCameras().then(function (cameras) {
