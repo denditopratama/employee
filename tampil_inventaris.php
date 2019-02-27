@@ -76,7 +76,7 @@ if(isset($_POST['toto'])){
     $k=mysqli_query($config,"SELECT sub_unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
     list($nnn)=mysqli_fetch_array($k);
     $fs=mysqli_real_escape_string($config,$_POST['fs']);
-    $mm=mysqli_query($config,"UPDATE tbl_inventaris SET pj='".$_SESSION['id_user']."',KD_UNIT='$k' WHERE id_invent='$fs'");
+    $mm=mysqli_query($config,"UPDATE tbl_inventaris SET pj='".$_SESSION['id_user']."',KD_UNIT='$nnn' WHERE id_invent='$fs'");
     echo '
     <script>
     alert("Penanggung Jawab Berhasil Diubah");
