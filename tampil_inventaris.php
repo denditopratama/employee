@@ -63,8 +63,26 @@
     }}
  </style>
 <?php
+session_start();
+if(empty($_SESSION['admin'])){
+    $_SESSION['err'] = '<center>Anda harus login terlebih dahulu!</center>';
+    header("Location: ./");
+    die();
+}
+
 include('/include/config.php');
 $idd=mysqli_real_escape_string($config,base64_decode($_GET['id']));
+if(isset($_POST['toto'])){
+    $k=mysqli_query($config,"SELECT sub_unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
+    list($nnn)=mysqli_fetch_array($k);
+    $fs=mysqli_real_escape_string($config,$_POST['fs']);
+    $mm=mysqli_query($config,"UPDATE tbl_inventaris SET pj='".$_SESSION['id_user']."',KD_UNIT='$k' WHERE id_invent='$fs'");
+    echo '
+    <script>
+    alert("Penanggung Jawab Berhasil Diubah");
+    window.location.href="admin.php?page=inve"; 
+    </script>';
+}
 echo '
 
 <div style="margin:auto;text-align:center">';
@@ -124,5 +142,9 @@ if($m=="" || $m ==0){$nm="";}
 
 }
 echo '</span></div>';
-echo '<a style="width:50%;text-align:center!important;margin:auto" class="btn small blue" href="https://employee.jasamargaproperti.co.id/scan.php">KLIK UNTUK PINDAH KEPEMILIKAN</a>';
+echo '
+<form method="POST">
+<input type="hidden" value="'.$idd.'" name="fs">
+<button type="submit" name="toto" style="width:50%;text-align:center!important;margin:auto" class="btn small blue">KLIK UNTUK PINDAH KEPEMILIKAN</button>
+</form>';
 ?>

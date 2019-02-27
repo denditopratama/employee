@@ -170,7 +170,13 @@
                 ?>
 							
                 <!-- Row form Start -->
+                <div class="row">
+                    <div style="text-align:center" class="col s12 m12">
+                    <a href="scan.php" class="btn small blue">SCAN QR CODE</a>
+                    </div>
+                </div>
                 <div class="row jarak-form">
+                
                 <div class="col m12" id="colres">
                             <table class="bordered" id="tblr">
                                 <thead class="blue lighten-4" id="head"  >

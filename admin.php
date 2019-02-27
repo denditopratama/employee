@@ -703,7 +703,7 @@ if($_SESSION['admin']!=1){
                 <div class="modal-content white">
 				<div class="input-field col s12">
 				</div>
-				<h5 style="text-align:center;">Selamat Datang Di Dashboard Karyawan E-mployee JMP V3.3</h5>
+				<h5 style="text-align:center;">Selamat Datang Di Dashboard Karyawan E-mployee JMP v3.4</h5>
 				<h6 style="text-align:center;"></h6>
 				<h6 style="text-align:center;"></h6>
 				<h6 style="text-align:center;"></h6>
