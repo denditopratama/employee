@@ -18,8 +18,10 @@
         window.location.href=content;
       });
       Instascan.Camera.getCameras().then(function (cameras) {
-        if(cameras[1]){ scanner.start(cameras[1]); } else { scanner.start(cameras[0]); }
-     
+          
+    
+          scanner.start(cameras[0]);
+       
       }).catch(function (e) {
         console.error(e);
       });
