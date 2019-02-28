@@ -216,17 +216,20 @@ if($_SESSION['admin']!=1){
 													
 													if($jampesnol==0){
 													
-													if($sub1>= 7703500 || $gajipusat>= 8000000){
+													if($sub1>= 8094000 || $gajipusat>= 8094000){
 													
-														$bpjspensiun=161880;
-														$potbpjspensiun=242820;	
+														$bpjspensiun=2/100*8094000;
+														$potbpjspensiun=3/100*8094000;	
+														$jpk=1/100*8094000;
 													} else {
 														if($sub1>=$gajipusat){
 														$bpjspensiun=2/100*$sub1;
-														$potbpjspensiun=3/100*$sub1;}
+														$potbpjspensiun=3/100*$sub1;
+														$jpk=1/100*$sub1;}
 														else {
 														$bpjspensiun=4.54/100*$gajipusat;
 														$potbpjspensiun=6.54/100*$gajipusat;
+														$jpk=1/100*$gajipusat;
 														}
 													}
 													
@@ -251,17 +254,20 @@ if($_SESSION['admin']!=1){
 													
 													
 													if($jamkesnol==0){
-												if ($sub1>= 7703500 || $gajipusat>= 8000000){
-														$bpjskesehatan=320000;
-														$potbpjskesehatan=400000;
+												if ($sub1>= 8000000 || $gajipusat>= 8000000){
+													$bpjskesehatan=4/100*8000000;
+													$potbpjskesehatan=5/100*8000000;
+													$iubpjs=1/100*8000000;
 													}
 													else {
 														if($sub1>=$gajipusat){
 														$bpjskesehatan=4/100*$sub1;
-														$potbpjskesehatan=5/100*$sub1;	
+														$potbpjskesehatan=5/100*$sub1;
+														$iubpjs=1/100*$sub1;	
 														} else {
 														$bpjskesehatan=4/100*$gajipusat;
-														$potbpjskesehatan=5/100*$gajipusat;}
+														$potbpjskesehatan=5/100*$gajipusat;
+														$iubpjs=1/100*$gajipusat;}
 													}
 													
 													if($kelas_jabatan==2 || $kelas_jabatan==3) {
@@ -285,8 +291,8 @@ if($_SESSION['admin']!=1){
 													</tr>';
 													
 													
-													$sub2=$bpjskesehatan+$bpjspensiun+$jamgaji;
-													
+													$sub2=$bpjskesehatan+$bpjspensiun+(54/10000*$sub1)+(30/10000*$sub1);
+												
 													$sum1=$sub2+$sub1;
 													
 													$duda=array();
@@ -305,8 +311,8 @@ if($_SESSION['admin']!=1){
 											$satu=($sum1*12)+$jumlahx;
 											$satu1=($sum1*12);
 											
-											$dua=5/100*$satu;
-											$dua2=5/100*$satu1;
+											$dua=(5/100*$satu)+$iubpjs+$jpk+(2/100*$sub1);
+											$dua2=(5/100*$satu1)+$iubpjs+$jpk+(2/100*$sub1);
 											if($dua>=6000000 || $dua2 >=6000000){
 												$dua=6000000;
 												$dua2=6000000;
@@ -325,7 +331,7 @@ if($_SESSION['admin']!=1){
 											if($statkel==32 || $statkel==33){
 												$ptkp=54000000;
 											} else if(in_array($statkel,$duda) || in_array($statkel,$kawin)) {
-												if($statkel==0 || $statkel==23){
+												if($statkel==0 || $statkel==22){
 													$ptkp=58500000;
 												} else if($statkel==1 || $statkel==23){
 													$ptkp=63000000;
@@ -364,6 +370,7 @@ if($_SESSION['admin']!=1){
 											
 											
 											$jang21=floor($tunj21);
+										
 											$jang21tidak=floor($tunj21tdk);
 											
 											$tunpph21tdktetap=$jang21-$jang21tidak;
@@ -524,11 +531,12 @@ if($_SESSION['admin']!=1){
 													
 											   
 											$satuw=($sum1*12)+$jumlahx+$tottunpph21;
-											$duaw=5/100*$satuw;
+											$duaw=(5/100*$satuw)+$iubpjs+$jpk+(2/100*$sub1);
 											if($duaw>=6000000){
 												$duaw=6000000;
 											}
 											$tigaz=$satuw-$duaw;
+											
 														
 											$pkps=$tigaz-$ptkp;
 											if($pkps<=50000000){
@@ -541,7 +549,7 @@ if($_SESSION['admin']!=1){
 												$pottunj21=(($pkps-500000000)*30/100)+95000000;
 											} 
 											
-											
+										
 											if($pkp1<=50000000){
 												$pottunj21tidak=5/100*$pkp1;
 											} else if($pkp1<=250000000){
@@ -554,10 +562,11 @@ if($_SESSION['admin']!=1){
 											
 											
 											
-											
+										
 											
 											
 											$pottunpph21tetap=$pottunj21tidak/12;
+											
 											$pottunpph21tdktetap=$pottunj21-$pottunj21tidak;
 											if($sum1<=4500000){
 												$pottunpph21tetap=0;
