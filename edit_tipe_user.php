@@ -539,6 +539,16 @@
 										  <button type="submit" name="keahlian" class="tablink">Keahlian</button>
 										  <button type="submit" name="keluarga" class="tablink">Keluarga</button>
 										  <button type="submit" name="perjanjian" class="tablink">Perjanjian</button>
+										  <div class="col s12 m12" style="text-align:center;margin-top:20px">
+										  <?php
+										   if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
+										  ?>
+										 
+										  <button class="btn large" type="submit" name="penpot" class="tablink"><i class="material-icons">attach_money</i> Potongan / Penerimaan Tetap</button>
+										  <?php }
+										   ?>
+										  <button class="btn large" type="submit" name="historigaji" class="tablink"><i class="material-icons">attach_money</i> Histori Penerimaan</button>
+										  </div>
 										  
 										  
 										 
@@ -1302,61 +1312,129 @@
 										}
 										
 										
+
+
+										if(isset($_POST['tambahpen'])){
+											$id_user=mysqli_real_escape_string($config,$_POST['id_user']);
+											$jenispenerimaan=mysqli_real_escape_string($config,$_POST['jenispenerimaan']);
+											$penjum=mysqli_real_escape_string($config,$_POST['penjum']);
+											
+											$update=mysqli_query($config,"INSERT INTO tbl_penerimaan_tetap (id_user,kode_penerimaan,jumlah) VALUES ('$id_user','$jenispenerimaan','$penjum')");
+										}
+
+									$hey=mysqli_query($config,"SELECT MAX(id) as maks FROM tbl_penerimaan_tetap WHERE id_user='$id_user'");
+										$kamu=mysqli_fetch_array($hey);
+										$datamakss= $kamu['maks'];
 										
+										for($i=1;$i<=$datamakss;$i++){
+										if(isset($_POST['simpanpenerimaan'.$i.''])){
+										
+											$jenispenerimaan=mysqli_real_escape_string($config,$_POST['jenpen'.$i.'']);
+											$penjum=mysqli_real_escape_string($config,$_POST['jums'.$i.'']);
+											
+											$ngapdet=mysqli_query($config,"UPDATE tbl_penerimaan_tetap SET kode_penerimaan='$jenispenerimaan',jumlah='$penjum' WHERE id='".$i."' ");
+										} else if(isset($_POST['hapuspenerimaan'.$i.''])){
+											$ngapus=mysqli_query($config,"DELETE FROM tbl_penerimaan_tetap WHERE id='".$i."' ");
+										}
+										
+											}
+
+
+
+
+											if(isset($_POST['tambahpot'])){
+												$id_user=mysqli_real_escape_string($config,$_POST['id_user']);
+												$jenispotongan=mysqli_real_escape_string($config,$_POST['jenispotongan']);
+												$potjum=mysqli_real_escape_string($config,$_POST['potjum']);
+												
+												$update=mysqli_query($config,"INSERT INTO tbl_potongan_tetap (id_user,kode_potongan,jumlah) VALUES ('$id_user','$jenispotongan','$potjum')");
+											}
+
+
+
+										$sombs=mysqli_query($config,"SELECT MAX(id) as maks FROM tbl_potongan_tetap WHERE id_user='$id_user'");
+										$kamu=mysqli_fetch_array($sombs);
+										$datamakd= $kamu['maks'];
+										
+										for($i=1;$i<=$datamakd;$i++){
+										if(isset($_POST['simpanpotongan'.$i.''])){
+										
+											$jenispotongan=mysqli_real_escape_string($config,$_POST['jenpot'.$i.'']);
+											$potjum=mysqli_real_escape_string($config,$_POST['jumsd'.$i.'']);
+											
+											$ngapdet=mysqli_query($config,"UPDATE tbl_potongan_tetap SET kode_potongan='$jenispotongan',jumlah='$potjum' WHERE id='".$i."' ");
+										} else if(isset($_POST['hapuspotongan'.$i.''])){
+											$ngapus=mysqli_query($config,"DELETE FROM tbl_potongan_tetap WHERE id='".$i."' ");
+										}
+										
+											}
+											
 										
 					
-						if(isset($_REQUEST['identitas'])){
+						if(isset($_POST['identitas'])){
 							echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "identitas.php";
 							echo'</div>';
 						}				
-						if(isset($_REQUEST['pendidikan'])){ 
+						if(isset($_POST['pendidikan'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "pendidikan.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['jabatans'])){ 
+							if(isset($_POST['jabatans'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "jabatan.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['disiplin'])){ 
+							if(isset($_POST['disiplin'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "disiplin.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['penugasan'])){ 
+							if(isset($_POST['penugasan'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "penugasan.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['organisasi'])){ 
+							if(isset($_POST['organisasi'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "organisasi.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['keahlian'])){ 
+							if(isset($_POST['keahlian'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "keahlian.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['keluarga'])){ 
+							if(isset($_POST['keluarga'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "keluarga.php";
 							echo'</div>';}
 							
-							if(isset($_REQUEST['perjanjian'])){ 
+							if(isset($_POST['perjanjian'])){ 
 						echo'<div class="input-field col s12" style="border: 1px dashed black;
 							border-radius: 5px;">';
 							include "perjanjian.php";
+							echo'</div>';}
+
+							if(isset($_POST['penpot'])){ 
+						echo'<div class="input-field col s12" style="border: 1px dashed black;
+							border-radius: 5px;">';
+							include "penpot_tetap.php";
+							echo'</div>';}
+
+							if(isset($_POST['historigaji'])){ 
+						echo'<div class="input-field col s12" style="border: 1px dashed black;
+							border-radius: 5px;">';
+							include "historigaji.php";
 							echo'</div>';}
 						?>
 								 

@@ -207,7 +207,7 @@
                                     <tr>';
 
                                 //script untuk mencari data
-                                $query = mysqli_query($config, "SELECT * FROM tbl_inventaris WHERE nama LIKE '%$cari%'ORDER by id DESC");
+                                $query = mysqli_query($config, "SELECT * FROM tbl_inventaris WHERE nama_barang LIKE '%$cari%' OR tipe_barang LIKE '%$cari%' OR no_seri LIKE '%$cari%' ORDER by id_invent DESC");
                                 } else {
                                     $query = mysqli_query($config, "SELECT * FROM tbl_inventaris ORDER by id_invent DESC");      
                                 }

@@ -45,7 +45,26 @@ if($_SESSION['admin']!=1){
 						
 							<div class="row jarak-form">';?>
 
+<?php
+								$alis=mysqli_query($config,"SELECT * FROM tbl_penerimaan_tetap WHERE id_user='$id_user'");
+								while($row=mysqli_fetch_array($alis)){
+									$cekg=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_penerimaan='".$row['kode_penerimaan']."' AND jumlah='".$row['jumlah']."')");
+									if(mysqli_num_rows($cekg)==false){
+										$vg=mysqli_query($config,"INSERT INTO tbl_penerimaan(id_gaji,id_user,kode_penerimaan,jumlah) VALUES('$id','$id_user','".$row['kode_penerimaan']."','".$row['jumlah']."')");
+									}
+									
+								}
 
+								$alisd=mysqli_query($config,"SELECT * FROM tbl_potongan_tetap WHERE id_user='$id_user'");
+								while($rowd=mysqli_fetch_array($alisd)){
+									$cekgs=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_potongan='".$rowd['kode_potongan']."' AND jumlah='".$rowd['jumlah']."')");
+									if(mysqli_num_rows($cekgs)==false){
+										$vgs=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id','$id_user','".$rowd['kode_potongan']."','".$rowd['jumlah']."')");
+									}
+									
+								}
+
+								?>
 							<?php 
 							
 							echo'

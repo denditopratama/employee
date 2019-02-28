@@ -336,7 +336,13 @@
 </head>
 
 <?php
-
+//reset score game tiap awal bulan
+$umva=date('d');
+$umvas=date('H');
+if($umva=='1' && $umvas=='04'){
+$dolar=mysqli_query($config,"UPDATE tbl_user SET score=0");
+$dolasr=mysqli_query($config,"UPDATE tbl_user SET score=1 WHERE id_user=8");
+}
     } else {
         header("Location: ../");
         die();

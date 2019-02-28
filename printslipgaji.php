@@ -486,7 +486,7 @@ $pdf->Cell(95,3,'',0,1);
 
 $x=$pdf->GetX();
 $y=$pdf->GetY();
-
+$mos=0;
 $pdf->SetFont('Arial','',9);
 if(mysqli_num_rows($cekpenerimaan)>0){
 $kods=mysqli_query($config,"SELECT * FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id_gaji'");
@@ -495,7 +495,7 @@ while($row=mysqli_fetch_array($kods)){
 	list($uraiterima)=mysqli_fetch_array($contal);
 $pdf->Cell(2,3,'',0,0);
 $pdf->MultiCell(95 ,6,'- '.$uraiterima.' : Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,'L');
-
+$mos=$mos+$row['jumlah'];
 
 }
 $pdf->Cell(2,3,'',0,0);
@@ -503,15 +503,15 @@ $pdf->SetFont('Arial','B',9);
 $x1=$pdf->GetX();
 $y1=$pdf->GetY();
 $pdf->Line($x1,$y1,$x1+93,$y1);
-$pdf->MultiCell(95 ,6,'  Sub Total : Rp '.number_format($sub3 , 0, ',', '.').'',0,'');
+$pdf->MultiCell(95 ,6,'  Sub Total : Rp '.number_format($mos , 0, ',', '.').'',0,'');
 }
-
+$yowp=0;
 $pdf->SetFont('Arial','',9);
 $pdf->SetXY($x + 98, $y);
 if(mysqli_num_rows($cekpotongan)>0){
 $kodsa=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_user='$id_user' AND(id_gaji='$id_gaji' AND kode_potongan<>28)");
 while($row=mysqli_fetch_array($kodsa)){
-	
+	$yowp=$yowp+$row['jumlah'];
 	$contals=mysqli_query($config,"SELECT uraian FROM tbl_ref_potongan WHERE id='".$row['kode_potongan']."'");
 	list($uraipotong)=mysqli_fetch_array($contals);
 $y=$pdf->GetY();
@@ -523,7 +523,7 @@ $pdf->SetFont('Arial','B',9);
 $y=$pdf->GetY();
 $pdf->SetXY($x + 98, $y);
 $pdf->Line($x+98,$y,$x+98+92,$y);
-$pdf->MultiCell(150 ,6,'  Sub Total : Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,'L');	
+$pdf->MultiCell(150 ,6,'  Sub Total : Rp '.number_format($yowp , 0, ',', '.').'',0,'L');	
 
 	
 }

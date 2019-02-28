@@ -85,7 +85,9 @@ if(isset($_POST['toto'])){
 }
 echo '
 
-<div style="margin:auto;text-align:center">';
+<div style="margin:auto;text-align:center;border:2px dotted black">
+<div style="margin:15px">
+<img class="stok" style="margin-top:10px" src="upload/screenshot.png">';
 $gow=mysqli_query($config,"SELECT * FROM tbl_inventaris WHERE id_invent='$idd'");
 while($row=mysqli_fetch_array($gow)){
     $m=mysqli_query($config,"SELECT jenis_barang FROM tbl_ref_jenis_barangs WHERE id='".$row['kode_jenis_barang']."' ");
@@ -145,7 +147,7 @@ if($m=="" || $m ==0){$nm="";}
 echo '
 <form method="POST">
 <input type="hidden" value="'.$idd.'" name="fs">
-<button type="submit" name="toto" style="width:80%;text-align:center!important;margin:auto" class="btn small blue">KLIK UNTUK PINDAH KEPEMILIKAN</button>
+<button onclick="return confirm(\'Anda yakin ingin memindahkan pertanggung jawaban barang?\')" type="submit" name="toto" style="width:80%;text-align:center!important;margin:auto" class="btn small blue">KLIK UNTUK BERPINDAH PIC</button>
 </form>';
-echo '</span></div>';
+echo '</span></div></div>';
 ?>
