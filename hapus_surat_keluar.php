@@ -20,7 +20,18 @@
             unset($_SESSION['errQ']);
         }
 
-    	$id_surat = mysqli_real_escape_string($config, $_REQUEST['id_surat']);
+		$id_surat=mysqli_real_escape_string($config,$_REQUEST['id_surat']);
+		$nbmn=mysqli_query($config,"SELECT tujuan,id_user FROM tbl_surat_keluar WHERE id_surat='$id_surat'");
+        list($df,$dfs)=mysqli_fetch_array($nbmn);
+		if($df!=$_SESSION['nama'] && $dfs!=$_SESSION['id_user']){
+            if($_SESSION['admin']==1){}
+                else { echo '<script language="javascript">
+                    window.alert("ERROR! Anda tidak diperbolehkan mengedit surat lain");
+                    window.location.href="./admin.php?page=tsk";
+                  </script>';}
+           
+			                
+		}
     	$query = mysqli_query($config, "SELECT * FROM tbl_surat_keluar WHERE id_surat='$id_surat'");
 
     	if(mysqli_num_rows($query) > 0){
