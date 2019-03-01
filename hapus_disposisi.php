@@ -20,7 +20,17 @@
             unset($_SESSION['errQ']);
         }
 
-    	$id_disposisi = mysqli_real_escape_string($config, $_REQUEST['id_disposisi']);
+		$id_disposisi = mysqli_real_escape_string($config, $_REQUEST['id_disposisi']);
+		
+		$brok=mysqli_query($config,"SELECT tbl_disposisi.nama,tbl_disposisi.dari,tbl_surat_masuk.tujuan,tbl_surat_masuk.id_user FROM tbl_disposisi,tbl_surat_masuk WHERE tbl_disposisi.id_surat=tbl_surat_masuk.id_surat AND (tbl_disposisi.id_disposisi='$id_disposisi' AND tbl_surat_masuk.id_surat='$id_surat') ");
+        list($mana,$irad,$tuj,$aid)=mysqli_fetch_array($brok);
+        if($mana!=$_SESSION['nama'] && $irad!=$_SESSION['nama'] || $tuj!=$_SESSION['nama'] && $aid!=$_SESSION['id_user']){
+            echo '<script language="javascript">
+            window.alert("ERROR! Anda tidak memiliki hak akses untuk mengubah data ini");
+            window.location.href="./admin.php?page=tsm";
+          </script>';
+        }
+
 
     	$query = mysqli_query($config, "SELECT * FROM tbl_disposisi WHERE id_disposisi='$id_disposisi'");
 
