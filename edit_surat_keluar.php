@@ -6,6 +6,19 @@
         die();
     } else {
 
+
+        $id_surat=mysqli_real_escape_string($config,$_REQUEST['id_surat']);
+		$nbmn=mysqli_query($config,"SELECT tujuan,id_user FROM tbl_surat_keluar WHERE id_surat='$id_surat'");
+        list($df,$dfs)=mysqli_fetch_array($nbmn);
+		if($df!=$_SESSION['nama'] && $dfs!=$_SESSION['id_user']){
+            if($_SESSION['admin']==1){}
+                else { echo '<script language="javascript">
+                    window.alert("ERROR! Anda tidak diperbolehkan mengedit surat lain");
+                    window.location.href="./admin.php?page=tsk";
+                  </script>';}
+           
+			                
+		}
         if(isset($_REQUEST['submit'])){
 
             //validasi form kosong
@@ -15,13 +28,13 @@
                     echo '<script language="javascript">window.history.back();</script>';
             } else {
 
-                $id_surat = $_REQUEST['id_surat'];
-                $no_surat = $_REQUEST['no_surat'];
-                $tujuan = $_REQUEST['tujuan'];
-                $isi = $_REQUEST['isi'];
+                $id_surat=mysqli_real_escape_string($config,$_REQUEST['id_surat']);
+                $no_surat = mysqli_real_escape_string($config,$_REQUEST['no_surat']);
+                $tujuan = mysqli_real_escape_string($config,$_REQUEST['tujuan']);
+                $isi = mysqli_real_escape_string($config,$_REQUEST['isi']);
              
-                $tgl_surat = $_REQUEST['tgl_surat'];
-                $keterangan = $_REQUEST['keterangan'];
+                $tgl_surat = mysqli_real_escape_string($config,$_REQUEST['tgl_surat']);
+                $keterangan = mysqli_real_escape_string($config,$_REQUEST['keterangan']);
                 $id_user = $_SESSION['id_user'];
 				$tunjukan=mysqli_real_escape_string($config,$_POST['tunjukan']);
 				$ditujukan=mysqli_real_escape_string($config,$_POST['ditujukan']);

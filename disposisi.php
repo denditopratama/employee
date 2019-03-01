@@ -29,12 +29,17 @@
 	else {
 		$id_surat=mysqli_real_escape_string($config,$_REQUEST['id_surat']);
 		$nbmn=mysqli_query($config,"SELECT nama FROM tbl_disposisi WHERE id_surat='$id_surat'");
-		list($df)=mysqli_fetch_array($nbmn);
-		if($df!=$_SESSION['nama'] && $_SESSION['admin']!=1){
-			                echo '<script language="javascript">
-                        window.alert("ERROR! Anda tidak diperbolehkan mengedit surat lain");
-                        window.location.href="./admin.php?page=tsm";
-                      </script>';
+        list($df)=mysqli_fetch_array($nbmn);
+        $nbmns=mysqli_query($config,"SELECT id_user FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
+		list($dfs)=mysqli_fetch_array($nbmns);
+		if($df!=$_SESSION['nama'] && $dfs!=$_SESSION['id_user']){
+            if($_SESSION['admin']==1){}
+                else { echo '<script language="javascript">
+                    window.alert("ERROR! Anda tidak diperbolehkan mengedit surat lain");
+                    window.location.href="./admin.php?page=tsm";
+                  </script>';}
+           
+			                
 		}
 		
 		if(isset($_POST['submits'])){
