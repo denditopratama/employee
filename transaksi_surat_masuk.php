@@ -173,7 +173,7 @@
 								
 					$query = mysqli_query($config, "SELECT * FROM tabel_surat WHERE id_user='".$_SESSION['id_user']."' AND (isi LIKE '%$cari%' OR keterangan LIKE '%$cari%' OR nama LIKE '%$cari%' OR kode LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tgl_diterima LIKE '%$cari%' OR asal_surat LIKE '%$cari%' OR no_agenda LIKE '%$cari%') OR id_surat='".$id_surats."' ORDER by id_surat");
 					
-								$queryf = mysqli_query($config, "SELECT * FROM tabel_surat WHERE id_user='".$_SESSION['id_user']."' OR id_surat='".$id_surats."' AND (isi LIKE '%$cari%' OR keterangan LIKE '%$cari%' OR nama LIKE '%$cari%' OR kode LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tgl_diterima LIKE '%$cari%' OR asal_surat LIKE '%$cari%')");
+								$queryf = mysqli_query($config, "SELECT * FROM tabel_surat WHERE id_user='".$_SESSION['id_user']."' OR id_surat='".$id_surats."' AND (isi LIKE '%$cari%' OR keterangan LIKE '%$cari%' OR nama LIKE '%$cari%' OR kode LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' OR tgl_diterima LIKE '%$cari%' OR asal_surat LIKE '%$cari%' OR no_agenda LIKE '%$cari%')");
 								$cdata=0;}
 					else {
                          

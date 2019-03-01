@@ -6,9 +6,21 @@
         die();
     } else {
 
+
+        $id_surat = mysqli_real_escape_string($config,$_REQUEST['id_surat']);
+        $id_disposisi = mysqli_real_escape_string($config,$_REQUEST['id_disposisi']);
+        $brok=mysqli_query($config,"SELECT tbl_disposisi.nama,tbl_disposisi.dari,tbl_surat_masuk.tujuan,tbl_surat_masuk.id_user FROM tbl_disposisi,tbl_surat_masuk WHERE tbl_disposisi.id_surat=tbl_surat_masuk.id_surat AND (tbl_disposisi.id_disposisi='$id_disposisi' AND tbl_surat_masuk.id_surat='$id_surat') ");
+        list($mana,$irad,$tuj,$aid)=mysqli_fetch_array($brok);
+        if($mana!=$_SESSION['nama'] && $irad!=$_SESSION['nama'] || $tuj!=$_SESSION['nama'] && $aid!=$_SESSION['id_user']){
+            echo '<script language="javascript">
+            window.alert("ERROR! Anda tidak memiliki hak akses untuk mengubah data ini");
+            window.location.href="./admin.php?page=tsm";
+          </script>';
+        }
+
         if(isset($_REQUEST['submit'])){
 
-            $id_surat = $_REQUEST['id_surat'];
+        
             $query = mysqli_query($config, "SELECT * FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
             list($id_surat) = mysqli_fetch_array($query);
 		
@@ -20,12 +32,12 @@
                 echo '<script language="javascript">window.history.back();</script>';
             } else {
 
-                $id_disposisi = $_REQUEST['id_disposisi'];
+               
                // $nama = $_REQUEST['nama'];
-                $isi_disposisi = $_REQUEST['isi_disposisi'];
-                $sifat = $_REQUEST['sifat'];
-                $batas_waktu = $_REQUEST['batas_waktu'];
-                $catatan = $_REQUEST['catatan'];
+                $isi_disposisi = mysqli_real_escape_string($config,$_REQUEST['isi_disposisi']);
+                $sifat = mysqli_real_escape_string($config,$_REQUEST['sifat']);
+                $batas_waktu = mysqli_real_escape_string($config,$_REQUEST['batas_waktu']);
+                $catatan = mysqli_real_escape_string($config,$_REQUEST['catatan']);
                 $id_user = $_SESSION['id_user'];
 				$idzuser=mysqli_real_escape_string($config,$_POST['idzuser']);
 
@@ -74,7 +86,7 @@
 
             $id_disposisi = mysqli_real_escape_string($config, $_REQUEST['id_disposisi']);
             $querys = mysqli_query($config, "SELECT * FROM tbl_disposisi WHERE id_disposisi='$id_disposisi'");
-            if(mysqli_num_rows($query) > 0){
+            if(mysqli_num_rows($querys) > 0){
                 $no = 1;
                 while($rows = mysqli_fetch_array($querys)){?>
 

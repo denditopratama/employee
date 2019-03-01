@@ -28,11 +28,11 @@
 
 	else {
 		$id_surat=mysqli_real_escape_string($config,$_REQUEST['id_surat']);
-		$nbmn=mysqli_query($config,"SELECT nama FROM tbl_disposisi WHERE id_surat='$id_surat'");
-        list($df)=mysqli_fetch_array($nbmn);
+		$nbmn=mysqli_query($config,"SELECT nama FROM tbl_disposisi WHERE id_surat='$id_surat' AND (nama='".$_SESSION['nama']."') ");
+      
         $nbmns=mysqli_query($config,"SELECT id_user FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
 		list($dfs)=mysqli_fetch_array($nbmns);
-		if($df!=$_SESSION['nama'] && $dfs!=$_SESSION['id_user']){
+		if(mysqli_num_rows($nbmn)<0 && $dfs!=$_SESSION['id_user']){
             if($_SESSION['admin']==1){}
                 else { echo '<script language="javascript">
                     window.alert("ERROR! Anda tidak diperbolehkan mengedit surat lain");
@@ -261,12 +261,12 @@
 										echo'<form method="POST" action="">';
 										if($row['status']==1){										
 											  echo'
-										<button class="btn small red waves-effect waves-light tooltipped" type="submits" name="submits" value="submit" data-position="left" data-tooltip="Surat Belum Selesai Diproses">
+										<button class="btn small red waves-effect waves-light tooltipped" type="submits" onclick="return confirm(\'Anda yakin ingin mengubah data ini ?\');" name="submits" value="submit" data-position="left" data-tooltip="Surat Belum Selesai Diproses">
 										<i class="material-icons">highlight_off</i> BELUM SELESAI</button>';
 									} 
 									else if($row['status']==2) {
 										echo'
-										<a class="btn small light-green waves-effect waves-light tooltipped" data-position="left" data-tooltip="Surat Telah Selesai Diproses">
+										<a class="btn small light-green waves-effect waves-light tooltipped"  data-position="left" data-tooltip="Surat Telah Selesai Diproses">
                                     <i class="material-icons">done_all</i> SUDAH SELESAI</a>';}
 									else {echo'';}
 										echo'</form>';
