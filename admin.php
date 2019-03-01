@@ -1192,7 +1192,22 @@ if($_SESSION['admin']!=1){
 	
 	
 	</div>
-		
+
+	<!-- <div class="card blue accent-1">
+     <div class="card-content">
+	 
+	<?php  
+	
+			
+			?> 		
+			<div style="text-align:center"><i class="material-icons prefix md-prefix">people</i><p style="text-align:center;display:inline"><strong> Pertumbuhan Jumlah Karyawan</strong></p></div>
+			<div id="chart_wraps" style="height:270px!important">
+			<div id="piechartku" style="text-align:center"></div>
+			</div>
+	</div>
+	</div> -->
+	
+	</div>
 	</div>
 		 <?php
         }
@@ -1271,6 +1286,42 @@ function drawChart() {
        
 
 </script>
+
+
+<!-- <script type="text/javascript">
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Gender', 'Number'],
+	<?php 
+		// echo"['Komisaris',".$komisarisv."],";
+		// echo"['Direksi',".$direksiv."],";
+		// echo"['Karyawan Perbantuan',".$karyawanbantuv."],";
+		// echo"['Karyawan Tetap',".$karyawantetapv."],";
+		// echo"['PKWT',".$pkwtv."],";
+	
+  ?>
+ 
+ 
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {is3D: true,legend: {position:'top',alignment:'center'}, width:'100%', height:'200px',backgroundColor: 'transparent',colors:['#FFCC00','#1e558d','#f2f40b','#fd9735','#737373']};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.ColumnChart(document.getElementById('piechartku'));
+  chart.draw(data, options);
+}
+
+
+    
+       
+
+</script> -->
 
 	
     <!-- container END -->
