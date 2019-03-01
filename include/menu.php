@@ -73,7 +73,7 @@
                         <a style="text-align:left!important" class="collapsible-header"><i class="material-icons">account_circle</i><?php echo $stringd; ?></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="?page=pro">Profil</a></li>
+                                <li><a href="?page=usr&act=edit&id_user=<?php echo $_SESSION['id_user']; ?>">Profil</a></li>
                                 <li><a href="?page=pro&sub=pass">Ubah Password</a></li>
 								<?php echo'
 								<li><a href="?page=cv&id_user='.$_SESSION['id_user'].'">Cetak CV</a></li>';?>
