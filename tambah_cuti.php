@@ -591,6 +591,10 @@
 			else if($_POST['alasanpenting']==9){
 				$alasan='Istirahat Panjang';
 				$tgl_akhirs=date('Y-m-d', strtotime($tgl_awals.'+180 days'));
+			} else {
+				$_SESSION['errs'] = 'Alasan Cuti Khusus Harus Dipilih';
+				header("Location: ./admin.php?page=cuti");
+				die();			
 			}
 			
 													if($tgl_awals==''){
