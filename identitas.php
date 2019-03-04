@@ -445,7 +445,7 @@ if(empty($_SESSION['admin'])){
                 $.post('./js/bpjsnol.php', { bpjs : jampes , input : inputValue , id_user : <?php echo $id_user; ?>}, function(data){
                     
                     //do after submission operation in DOM
-					$("#keljab").html(data);
+					$("#bpjsjampesnol").html(data);
                 });
             });
 			
@@ -459,7 +459,7 @@ if(empty($_SESSION['admin'])){
                 $.post('./js/bpjsnol.php', { bpjs : jamkes , input : inputValue , id_user : <?php echo $id_user; ?>}, function(data){
                     
                     //do after submission operation in DOM
-					$("#keljab").html(data);
+					$("#bpjsjamkesnol").html(data);
                 });
             });
         });
