@@ -248,10 +248,14 @@
 													
 														$bpjspensiun=0;
 														$potbpjspensiun=0;
-														
+														$jpk=1/100*8094000;
 													} } else {
 														$bpjspensiun=0;
 														$potbpjspensiun=0;
+														if($sub1>= 8094000 || $gajipusat>= 8094000){
+														
+															$jpk=1/100*8094000;
+														}
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jampes='$bpjspensiun' WHERE id_user='$id_user' AND id_gaji='$id'");
 													echo'
@@ -284,9 +288,15 @@
 													if($kelas_jabatan==2 || $kelas_jabatan==3) {
 														$bpjskesehatan=0;
 														$potbpjskesehatan=0;
+														$iubpjs=1/100*8000000;
+														
 													} } else {
 														$bpjskesehatan=0;
 														$potbpjskesehatan=0;
+														if ($sub1>= 8000000 || $gajipusat>= 8000000){
+												
+															$iubpjs=1/100*8000000;
+															}
 													}
 													
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jamkes='$bpjskesehatan' WHERE id_user='$id_user' AND id_gaji='$id'");
