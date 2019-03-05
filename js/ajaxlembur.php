@@ -40,7 +40,7 @@ $user=mysqli_real_escape_string($config,$_POST['user']);
 										if($_SESSION['admin']==1){
                                         $query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND id_user='$user'");}
 										else if($_SESSION['admin']==4 || $_SESSION['admin']==5){
-										$query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND(divisi='".$_SESSION['divisi']."' AND id_user='$user')");	
+										$query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND id_user='$user'");	
 									
                                         }else{
 										$query2 = mysqli_query($config, "SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND id_user='$user'");
