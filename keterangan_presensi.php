@@ -56,7 +56,10 @@
                         }
 					} else if($_SESSION['admin']==5){
                         
-                            $wa=mysqli_query($config,"SELECT id_user FROM tbl_user WHERE divisi='".$_SESSION['divisi']."' ");
+                        $ambi=mysqli_query($config,"SELECT sub_unit,unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
+                        list($nyubs,$nyabs)=mysqli_fetch_array($ambi);
+                        $wa=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.sub_unit,tbl_user.unit FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                        tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND(tbl_user.admin>5 AND tbl_user.status_aktif=1) AND (tbl_user.unit='$nyabs' OR tbl_user.sub_unit='$nyubs') ORDER by tbl_user.admin"); 
                             while($dats=mysqli_fetch_array($wa)){
                                 $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager=1 WHERE id_presensi='$id' AND id_user='".$dats['id_user']."' ");
                             }
