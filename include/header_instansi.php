@@ -161,7 +161,7 @@
                                 $ambi=mysqli_query($config,"SELECT sub_unit,unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
                                 list($nyubs,$nyabs)=mysqli_fetch_array($ambi);
                                 $ketpres=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.unit,tbl_user.sub_unit FROM tbl_status_keterangan_presensi,tbl_user
-                                WHERE tbl_status_keterangan_presensi.status_manager=0 AND tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND (tbl_user.unit='$nyabs' OR tbl_user.sub_unit='$nyubs')");
+                                WHERE tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_status_keterangan_presensi.status_manager=0  AND (tbl_user.unit='$nyabs' OR tbl_user.sub_unit='$nyubs')");
                                $jumlahket=mysqli_num_rows($ketpres);
                                
                                $gmjk=mysqli_query($config,"SELECT tbl_lembur.*,tbl_user.sub_unit FROM tbl_lembur,tbl_user WHERE tbl_lembur.id_user=tbl_user.id_user AND tbl_lembur.status_manager=0 AND (tbl_user.sub_unit='$nyubs' OR tbl_user.unit='$nyabs')  GROUP BY tbl_lembur.id_user");

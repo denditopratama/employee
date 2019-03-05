@@ -274,7 +274,7 @@
             } else if ($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
                 $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id' AND divisi='".$_SESSION['divisi']."'");
             } else if ($_SESSION['admin']==5) {
-                $gk=mysqli_query($config,"SELECT tbl_lembur.*,tbl_user.sub_unit FROM tbl_lembur,tbl_user WHERE tbl_lembur.id_presensi='$id' AND(tbl_lembur.id_user=tbl_user.id_user) AND (tbl_user.sub_unit='$nyubs' OR tbl_user.unit='$nyabs') GROUP BY tbl_lembur.id_user");
+                $gk=mysqli_query($config,"SELECT tbl_lembur.*,tbl_user.sub_unit FROM tbl_lembur,tbl_user WHERE tbl_lembur.id_presensi='$id' AND tbl_lembur.id_user=tbl_user.id_user AND (tbl_user.sub_unit='$nyubs' OR tbl_user.unit='$nyabs') GROUP BY tbl_lembur.id_user");
             } else {
                 $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id' AND id_user='".$_SESSION['id_user']."'");
 			}
