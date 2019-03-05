@@ -268,7 +268,7 @@
             $nos=1;
             $ambi=mysqli_query($config,"SELECT sub_unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
             list($nyubs)=mysqli_fetch_array($ambi);
-            $nyubs=mysqli_real_escape_string($config,$nyub);
+         
             if($_SESSION['admin']==1){
                 $gk=mysqli_query($config,"SELECT DISTINCT id_user FROM tbl_lembur WHERE id_presensi='$id'");  
             } else if ($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
