@@ -61,7 +61,7 @@
                         $wa=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.sub_unit,tbl_user.unit FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                         tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND(tbl_user.admin>5 AND tbl_user.status_aktif=1) AND (tbl_user.unit='$nyabs' OR tbl_user.sub_unit='$nyubs') ORDER by tbl_user.admin"); 
                             while($dats=mysqli_fetch_array($wa)){
-                                $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager=1 WHERE id_presensi='$id' AND id_user='".$dats['id_user']."' ");
+                                $itj=mysqli_query($config,"UPDATE tbl_status_keterangan_presensi SET status_manager=1,status_gm=1 WHERE id_presensi='$id' AND id_user='".$dats['id_user']."' ");
                             }
                             
                     }
