@@ -120,7 +120,7 @@ $user=mysqli_real_escape_string($config,$_POST['user']);
 													
 										echo'
 										<td style="text-align:center">';
-										if($row['id_user']!=$_SESSION['id_user'] && $_SESSION['admin']!=1){
+										if($row['id_user']!=$_SESSION['id_user'] && $_SESSION['admin']!=1 && $_SESSION['admin']!=4){
 											echo '<button class="btn small blue-grey waves-effect waves-light"><i class="material-icons">error</i> No Action</button>';
 										}
 										else{
