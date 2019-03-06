@@ -141,7 +141,7 @@
                             <strong>NOTIFIKASI :</strong><br>';
                               if($_SESSION['admin']==4){
                                   $ketpres=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user
-                                   WHERE tbl_status_keterangan_presensi.status_gm=0 AND(tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."')");
+                                   WHERE tbl_status_keterangan_presensi.status_gm=0 AND(tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.divisi='".$_SESSION['divisi']."' AND tbl_user.admin=5)");
                                   $jumlahket=mysqli_num_rows($ketpres);
                                 $gmjk=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE divisi='".$_SESSION['divisi']."' AND status_gm=0 GROUP BY id_user");
                                 $jumlahna=mysqli_num_rows($gmjk);

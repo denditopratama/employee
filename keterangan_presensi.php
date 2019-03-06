@@ -231,9 +231,12 @@
             if($_SESSION['admin']==1){
                 $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                 tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND tbl_user.status_aktif=1 ORDER by tbl_user.admin");  
-            } else if ($_SESSION['admin']==4 || $_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
+            } else if ($_SESSION['admin']==3 || $_SESSION['admin']==2 ) {
                 $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
                 tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND (tbl_user.divisi='".$_SESSION['divisi']."' AND tbl_user.status_aktif=1) ORDER by tbl_user.admin");  
+            } else if ($_SESSION['admin']==4) {
+                $gk=mysqli_query($config,"SELECT tbl_status_keterangan_presensi.*,tbl_user.divisi FROM tbl_status_keterangan_presensi,tbl_user WHERE id_presensi='$id' AND 
+                tbl_status_keterangan_presensi.id_user=tbl_user.id_user AND (tbl_user.divisi='".$_SESSION['divisi']."' AND tbl_user.status_aktif=1 AND tbl_user.admin=5) ORDER by tbl_user.admin");  
             } else if ($_SESSION['admin']==5) {
                 $ambi=mysqli_query($config,"SELECT sub_unit,unit FROM tbl_user WHERE id_user='".$_SESSION['id_user']."' ");
                 list($nyubs,$nyabs)=mysqli_fetch_array($ambi);

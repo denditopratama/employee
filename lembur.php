@@ -288,12 +288,31 @@
                 $ku=mysqli_query($config,"SELECT nama FROM tbl_user WHERE id_user='".$row['id_user']."'");
                 list($namaz)=mysqli_fetch_array($ku);
              
+                if($_SESSION['admin']==4){
+                    $momok=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND(id_user='".$row['id_user']."' AND (status_gm=0))");
+                    if(mysqli_num_rows($momok)>0){
+                        echo '<tr style="background-color:rgba(176,224,230,0.5)">';
+                    } else {
+                        echo '<tr>';
+                    }
+                } else if($_SESSION['admin']==5){
+                    $momok=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND(id_user='".$row['id_user']."' AND (status_manager=0))");
+                    if(mysqli_num_rows($momok)>0){
+                        echo '<tr style="background-color:rgba(176,224,230,0.5)">';
+                    } else {
+                        echo '<tr>';
+                    }
+                } else {
                     $momok=mysqli_query($config,"SELECT * FROM tbl_lembur WHERE id_presensi='$id' AND(id_user='".$row['id_user']."' AND (status_gm=0 OR status_manager=0))");
                     if(mysqli_num_rows($momok)>0){
                         echo '<tr style="background-color:rgba(176,224,230,0.5)">';
                     } else {
                         echo '<tr>';
                     }
+                }
+                    
+
+                    
                  
                     
                     
