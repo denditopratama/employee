@@ -780,20 +780,20 @@ if($_SESSION['admin']!=1){
 									if($nigga==5){
 										if($tahunsekarang-$tahunbakti ==1){
 											if($bulansekarang-$bulanbakti==0){
-												if($harisekarang-$haribakti==0 && $jambakti==01){
+												if($jambakti==14){
 											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1)");
 											
 												}
 											
 											}
 										} else if ($tahunsekarang-$tahunbakti>1){
-											if($bulansekarang==1 && $harisekarang==1 && $jambakti==14){
+											if($bulansekarang==3 && $harisekarang==6 && $jambakti==14){
 												$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1)");
 												
 											}
 										}
 									} else {
-										if($bulansekarang==1 && $harisekarang==1 && $jambakti==14){
+										if($bulansekarang==3 && $harisekarang==6 && $jambakti==14){
 											$tambahcuti=mysqli_query($config,"UPDATE tbl_user SET cuti='$kuti' WHERE id_user='".$datz['id_user']."' AND (admin<>1 AND status_aktif=1)");
 										}
 									}
