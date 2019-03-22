@@ -32,12 +32,16 @@
       
         $nbmns=mysqli_query($config,"SELECT id_user FROM tbl_surat_masuk WHERE id_surat='$id_surat'");
 		list($dfs)=mysqli_fetch_array($nbmns);
-		if(mysqli_num_rows($nbmn)<0 && $dfs!=$_SESSION['id_user']){
+		if(mysqli_num_rows($nbmn)<=0){
+
+        if($dfs!=$_SESSION['id_user']){
             if($_SESSION['admin']==1){}
                 else { echo '<script language="javascript">
                     window.alert("ERROR! Anda tidak diperbolehkan mengedit surat lain");
                     window.location.href="./admin.php?page=tsm";
                   </script>';}
+        }
+         
            
 			                
 		}
