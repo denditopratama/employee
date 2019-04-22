@@ -156,13 +156,15 @@ $('.button-collapse').sideNav({
 });
 
 //jquery datepicker
-$('#tgl_surat,#batas_waktu,#dari_tanggal,#sampai_tanggal,#tgl_awal,#tgl_akhir').pickadate({
+$('#tgl_surat,#batas_waktu,#dari_tanggal,#sampai_tanggal,#tgl_awal,#tgl_akhir,#cutiawal,#cutiakhir').pickadate({
     selectMonths: true,
     selectYears: 200,
     min: [1945,1,1],
   max: [2050,1,1],
     format: "yyyy-mm-dd"
 });
+
+
 
 //jquery teaxtarea
 $('#isi_ringkas').val('');

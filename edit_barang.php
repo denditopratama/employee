@@ -45,8 +45,8 @@
                                                                 move_uploaded_file($_FILES['file']['tmp_name'], $target_dir.$nfile);
 																
 
-                                                                $query = mysqli_query($config, "INSERT INTO tbl_inventaris(nama_barang,tipe_barang,kode_jenis_barang,no_seri,tanggal_invent,pj,KD_UNIT,foto)
-                                                                        VALUES('$nama_barang','$tipebarang','$jenis_barang','$nomorseri','$tgl_invent','$pic','$sub_unit','$nfile')");
+                                                                $query = mysqli_query($config, "UPDATE tbl_inventaris  SET nama_barang='$nama_barang',tipe_barang='$tipebarang',kode_jenis_barang='$jenis_barang',no_seri='$nomorseri',tanggal_invent='$tgl_invent',pj='$pic',KD_UNIT='$sub_unit',foto='$nfile' WHERE id_invent='$id_barang'");
+                                                                       
 																
                                                                 if($query == true){
                                                                     $_SESSION['succg'] = 'SUKSES! Data berhasil ditambahkan';
@@ -66,11 +66,8 @@
                                                         }
                                                     } else {
 
-                                                        //jika form file kosong akan mengeksekusi script dibawah ini
-                                                        $query = mysqli_query($config, "INSERT INTO tbl_inventaris(nama_barang,tipe_barang,kode_jenis_barang,no_seri,tanggal_invent,pj,KD_UNIT)
-                                                        VALUES('$nama_barang','$tipebarang','$jenis_barang','$nomorseri','$tgl_invent','$pic','$sub_unit')");
-															
-                                                            if($query == true){
+                                                        $query = mysqli_query($config, "UPDATE tbl_inventaris  SET nama_barang='$nama_barang',tipe_barang='$tipebarang',kode_jenis_barang='$jenis_barang',no_seri='$nomorseri',tanggal_invent='$tgl_invent',pj='$pic',KD_UNIT='$sub_unit' WHERE id_invent='$id_barang'");
+                                                        if($query == true){
                                                                 $_SESSION['succg'] = 'SUKSES! Data berhasil ditambahkan';
                                                                 header("Location: ./admin.php?page=inve"); 
                                                                 die();
@@ -90,7 +87,7 @@
                     <nav class="secondary-nav">
                         <div class="nav-wrapper blue-grey darken-1">
                             <ul class="left">
-                                <li class="waves-effect waves-light"><a href="?page=inve&act=add" class="judul"><i class="material-icons">devices</i> Tambah Barang</a></li>
+                                <li class="waves-effect waves-light"><a href="?page=inve&act=add" class="judul"><i class="material-icons">devices</i> Edit Barang</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -192,6 +189,8 @@
                          
                          </div>
                          </div>
+
+
 						
 						<div class="input-field col s12 m6">
 						<i class="material-icons prefix md-prefix">people</i><label  style="margin-top:-8px!important" for="namabarang">PIC</label>
@@ -199,8 +198,16 @@
 						<select class="browser-default" name="pic" id="pic">
                         <?php 
                         $us=mysqli_query($config,"SELECT * FROM tbl_user WHERE status_aktif=1 AND(admin<>9 AND id_user<>9999)");
+                        $g=mysqli_query($config,"SELECT pj FROM tbl_inventaris WHERE id_invent='$id_barang'");
+                            list($tggjwb)=mysqli_fetch_array($g);
                         while($z=mysqli_fetch_array($us)){
-                            echo '<option value="'.$z['id_user'].'">'.$z['nama'].'</option>';
+                            
+                            if($tggjwb==$z['id_user']){
+                                echo '<option value="'.$z['id_user'].'" selected>'.$z['nama'].'</option>';
+                            } else {
+                                echo '<option value="'.$z['id_user'].'">'.$z['nama'].'</option>';
+                            }
+                           
                         }
                         ?>
                         </select>

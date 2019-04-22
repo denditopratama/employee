@@ -955,14 +955,20 @@
 								echo '
                                           <script>
                                           $(document).ready(function(){
+											  
 											  $(\'#penerimaan\').val(5);
 											var token = '.$tokent.';
 											var user = '.$id_user.';
 											$.post(\'./js/ajaxpresensi.php\', {id : '.$sikux.', token : token, user : user}, function(data){
 												$("#anjas").html(data);
 												var hakhu=$("#telatbos").val();
+												var hakhus=$("#cepatbos").val();
 												var num = (hakhu/'.$mkgg.')*'.$sub1.';
-											var xz = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+												var num1 = (hakhus/'.$mkgg.')*'.$sub1.';
+												var nums = num+num1;
+												var xz = nums.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+												
+											
 											$("#hoak").html("Rp " + xz);
 											var xr = $(\'#hoak\').html().replace(/[^0-9]+/g, "");;
 											$(\'#potong\').val(xr);

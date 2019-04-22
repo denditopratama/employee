@@ -71,7 +71,9 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                 <th width="5%" rowspan="2">Jam Masuk</th>
                                                 <th width="5%" rowspan="2">Jam Pulang</th>
                                                 <th width="5%" rowspan="2">Terlambat</th>
-                                                <th width="20%" rowspan="2">Keterangan</th>
+                                                <th width="5%" rowspan="2">Pulang Cepat</th>
+                                                <th width="20%" rowspan="2">Keterangan Datang</th>
+                                                <th width="20%" rowspan="2">Keterangan Pulang</th>
                                             </tr>
 											
                                         </thead>
@@ -88,6 +90,8 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                        
                                             $nyoy=array();
                                             $nyoy2=array();
+                                            $nyoys=array();
+                                            $nyoys2=array();
                                         if(mysqli_num_rows($query2) > 0){
                                             
                                             $no = 0;
@@ -122,17 +126,55 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                         $row['terlambat']=$miu.':'.$miu2;
                                                     }
                                                    
+                                                    $sas=explode(':',$row['jam_pulang']);
+                                                    $bxs='17:00';
+                                                    if(strtotime($row['jam_pulang'])<strtotime($bxs)){
+                                                        $mius=17-$sas[0];
+                                                        if($mius<0){
+                                                            $mius=00;
+                                                        } else if($mius==1){
+                                                            $mius='00';
+                                                        } else if($mius>1){
+                                                            $mius=$mius-1;
+                                                        }
+
+                                                        if($row['jam_pulang']!=''){
+                                                            $mius2=60-$sas[1];
+                                                        } else {
+                                                            $mius2=0;
+                                                        }
+                                                      
+
+                                                        if(strlen($mius)<2 && $mius2!=''){
+                                                            $mius='0'.$mius;
+                                                        }
+                                                        if(strlen($mius2)<2 && $mius2!=''){
+                                                            $mius2='0'.$mius2;
+                                                        }
+                                                        $row['plg_cepat']=$mius.':'.$mius2;
+                                                    } else {
+                                                        $mius='00';
+                                                        $mius2='00';
+                                                        $row['plg_cepat']=$mius.':'.$mius2;
+                                                    }
                                                     
                                                     
                                             if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
                                                 echo '<tr style="background-color:yellow">'; 
                                                 $row['terlambat']='00:00';
+                                                $row['plg_cepat']='00:00';
                                             } else if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
                                                 $row['keterangan']='Cuti';
+                                                $row['keterangan_plg']='Cuti';
+                                                $row['plg_cepat']='00:00';
                                                 echo '<tr style="background-color:green">'; 
                                             } else if(mysqli_num_rows($yaw)>0){
                                                 echo '<tr style="background-color:red">'; 
                                                 $row['keterangan']='Tanggal Merah';
+                                                $row['keterangan_plg']='Tanggal Merah';
+                                                $row['plg_cepat']='00:00';
+                                                
+                                                
                                                
                                             } else {
                                                 echo '<tr>';
@@ -148,21 +190,48 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                         echo '<td id="hahx" style="text-align:center">'.$row['jam_masuk'].'</td>
                                                         <td id="hahx" style="text-align:center">'.$row['jam_pulang'].'</td>';
                                                     }
-													
+                                                  
                                                     if($row['terlambat']==''){
                                                         $row['terlambat']='00:00';
                                                     } 
-                                                       
                                                      
-                                                    if($row['jam_masuk']=='' && $row['jam_pulang']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
+                                                    if($row['plg_cepat']==''){
+                                                        $row['plg_cepat']='00:00';
+                                                    } 
+                                                     
+                                                    if($row['jam_masuk']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
                                                         $row['terlambat']='08:00';}
                                                     
+                                                        if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
+                                                            $row['plg_cepat']='02:00';}
                                                     
+                                                            if($row['keterangan_plg']!=''){
+                                                                $row['plg_cepat']='00:00';
+                                                            }
                                                     
-                                                   
+                                                      if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
+                                                        $row['terlambat']='08:00';
+                                                        $row['plg_cepat']='00:00';
+                                                       }  
+                                                       if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
+                                                        $row['keterangan']='Cuti';
+                                                        $row['keterangan_plg']='Cuti';
+                                                        $row['plg_cepat']='00:00';
+                                                      $row['terlambat']='00:00';
+                                                    } else if(mysqli_num_rows($yaw)>0){
+                                                    
+                                                        $row['keterangan']='Tanggal Merah';
+                                                        $row['keterangan_plg']='Tanggal Merah';
+                                                        $row['plg_cepat']='00:00';
+                                                        $row['terlambat']='00:00';
+                                                        
+                                                       
+                                                    } 
                                                     echo'
                                                     <td id="hahx" style="text-align:center">'.$row['terlambat'].'</td>
-                                                    <td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan'].'" name="keter[]" type="text"></td>';
+                                                    <td id="hahx" style="text-align:center">'.$row['plg_cepat'].'</td>
+                                                    <td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan'].'" name="keter[]" type="text"></td>
+                                                    <td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan_plg'].'" name="keterplg[]" type="text"></td>';
                                                    
                                                
                                                     echo'
@@ -171,6 +240,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     ';
                                                     
                                                     $nyot=explode(':',$row['terlambat']);
+                                                    $nyat=explode(':',$row['plg_cepat']);
                                                     
                                                     $konay=mysqli_query($config,"SELECT status_manager,status_gm FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$id_users'");
                                                     list($stakm,$stakgm)=mysqli_fetch_array($konay);
@@ -185,24 +255,41 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                                 array_push($nyoy,$nyot[0]);
                                                                 array_push($nyoy2,$nyot[1]);
                                                             }
+                                                            if($row['keterangan_plg']==''){
+                                                                array_push($nyoys,$nyat[0]);
+                                                                array_push($nyoys2,$nyat[1]);
+                                                            }
                                                         } else {
                                                             array_push($nyoy,$nyot[0]);
                                                             array_push($nyoy2,$nyot[1]);
+                                                            array_push($nyoys,$nyat[0]);
+                                                            array_push($nyoys2,$nyat[1]);
                                                         }
                                                     } else if($admin==4) {
                                                         if($row['keterangan']==''){
                                                             array_push($nyoy,$nyot[0]);
                                                             array_push($nyoy2,$nyot[1]);
                                                         } 
+                                                        if($row['keterangan_plg']==''){
+                                                            array_push($nyoys,$nyat[0]);
+                                                            array_push($nyoys2,$nyat[1]);
+                                                        }
                                                     } else {
                                                         if($stakm==1){
                                                             if($row['keterangan']==''){
                                                                 array_push($nyoy,$nyot[0]);
                                                                 array_push($nyoy2,$nyot[1]);
                                                             }
+                                                            if($row['keterangan_plg']==''){
+                                                                array_push($nyoys,$nyat[0]);
+                                                                array_push($nyoys2,$nyat[1]);
+                                                            }
                                                         } else {
                                                             array_push($nyoy,$nyot[0]);
                                                             array_push($nyoy2,$nyot[1]);  
+                                                            array_push($nyoys,$nyat[0]);
+                                                            array_push($nyoys2,$nyat[1]);
+                                                            
                                                         }
                                                     }
 
@@ -217,10 +304,15 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                             $mb=array_sum($nyoy)*60;
                                             $mbz=array_sum($nyoy2);
                                             $fok=$mb+$mbz;
+                                            $mb1=array_sum($nyoys)*60;
+                                            $mbz1=array_sum($nyoys2);
+                                            $fok1=$mb1+$mbz1;
                                             echo '
                                             <input type="hidden" value="'.$id.'" name="idpres">
                                             <tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
                                             <input type="hidden" id="telatbos" value="'.$fok.'">
+                                            <tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Pulang Cepat : <b>'.$fok1.'</b> Menit</td></tr>
+                                            <input type="hidden" id="cepatbos" value="'.$fok1.'">
                                             <tr><td colspan="9" style="text-align:center">';
                                           
                                            

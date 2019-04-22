@@ -74,11 +74,16 @@ require_once('vendor/SpreadsheetReader.php');
                                     if(isset($Row[5])) {
                                         $terlambat = mysqli_real_escape_string($config,$Row[5]);
                                     }
+
+                                    $plg_cepat = "";
+                                    if(isset($Row[6])) {
+                                        $plg_cepat = mysqli_real_escape_string($config,$Row[6]);
+                                    }
                                     if($nampang < $nampung){
 
                                     } else {
                                         if($nik!='' || $nama!='' || $tanggal!=''){
-                                            $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$ng','$nik','$nama','$tanggal','$jam_masuk','$jam_pulang','$terlambat','')");
+                                            $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,plg_cepat) values('$ng','$nik','$nama','$tanggal','$jam_masuk','$jam_pulang','$terlambat','$plg_cepat')");
                                         }
                                         
                                     }

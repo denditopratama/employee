@@ -85,7 +85,8 @@
                 $query = mysqli_query($config, "SELECT bulan FROM tbl_presensi WHERE id='$id'");
 				list($bulan)=mysqli_fetch_array($query);
 				$bulans=date('M Y',strtotime($bulan));
-                
+                $bunkon=date('m',strtotime($bulan));
+                $tankon=date('Y',strtotime($bulan));
 
                  
 
@@ -201,7 +202,7 @@
 										
 										
 										<td style="text-align:center">
-										<input id="tgl_surat" class="datepicker" type="text" name="tanggallembur" style="text-align:center">
+										<input id="tgl_suratku" class="datepicker" type="text" name="tanggallembur" style="text-align:center">
 										</td>
 										
 										<td style="text-align:center">
@@ -219,7 +220,7 @@
 										</td>
 										
 										<td style="text-align:center">
-										<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+							      			<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										<td style="text-align:center">
@@ -367,3 +368,12 @@ $(\'#modals\').openModal();
     }
 	
 ?>
+<script>
+$(document).ready(function(){
+    $('#tgl_suratku').pickadate({
+    
+    format: '<?php echo $tankon.'-'.$bunkon; ?>-dd' });
+
+});
+
+</script>

@@ -696,15 +696,15 @@
 					 <div class="row">
 						<div class="input-field col s12">
 						 <i class="material-icons prefix md-prefix">date_range</i>
-                            <input id="tgl_surat" type="text" name="tgl_awal" class="datepicker" required>
-                            <label for="tgl_surat">Tanggal Awal</label>
+                            <input id="tgl_awal" type="text" name="tgl_awal" class="datepicker" required>
+                            <label for="tgl_awal">Tanggal Awal</label>
                        </div> 
 						</div>
 					
 					<div class="row">
 						<div class="input-field col s12">
 						 <i class="material-icons prefix md-prefix">date_range</i>
-                            <input id="tgl_surat" type="text" name="tgl_akhir" class="datepicker" required>
+                            <input id="tgl_akhir" type="text" name="tgl_akhir" class="datepicker" required>
                             <label for="tgl_akhir">Tanggal Akhir</label>
                        </div> 
 						</div>

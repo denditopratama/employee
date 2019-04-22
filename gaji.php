@@ -385,7 +385,16 @@
 									</form>
 											</div>
 											<div>
-											</div>
+                                            </div>
+                                            <div class="col m12" id="colres">
+                                            <form method="POST" action="printexcel.php">
+                                          <input type="hidden" value="'.$row['id'].'" name="id_gaji">
+                                          <button class="btn small green darken-2 waves-effect waves-light tooltipped" data-position="left" data-tooltip="Klik Untuk Mencetak Laporan Gaji" onclick="return confirm(\'Anda yakin ingin melakukan pelaporan data?\');">
+                                                          <i class="material-icons">assignment_turned_in</i> EXPORT EXCEL</button>
+                                          </form>
+                                                  </div>
+                                                  <div>
+                                                  </div>
 								
 								</div>
 								</div>

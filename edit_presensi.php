@@ -72,13 +72,17 @@
                                     if(isset($Row[5])) {
                                         $terlambat = mysqli_real_escape_string($config,$Row[5]);
                                     }
+                                    $plg_cepat = "";
+                                    if(isset($Row[6])) {
+                                        $plg_cepat = mysqli_real_escape_string($config,$Row[6]);
+                                    }
                                     if($nampang < $nampung){
 
                                     } else {
                                         $kom=mysqli_query($config,"SELECT * FROM tbl_presensi_karyawan WHERE nik='$nik' AND(tanggal='$tanggals' AND id_presensi='$id') ");
                                    if(mysqli_num_rows($kom)<=0){
                                     if($nik!='' && $nama!='' && $tanggals!=''){
-                                     $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,keterangan) values('$id','$nik','$nama','$tanggals','$jam_masuk','$jam_pulang','$terlambat','')");  
+                                     $query = mysqli_query($config, "INSERT INTO tbl_presensi_karyawan(id_presensi,nik,nama,tanggal,jam_masuk,jam_pulang,terlambat,plg_cepat) values('$id','$nik','$nama','$tanggals','$jam_masuk','$jam_pulang','$terlambat','$plg_cepat')");  
                                      $yj=mysqli_query($config,"SELECT admin,id_user FROM tbl_user WHERE nip='$nik'");
                                      list($nyj,$aiduser)=mysqli_fetch_array($yj);
                                      $kjd=mysqli_query($config,"SELECT * FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$aiduser'");

@@ -52,8 +52,8 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
 	</tr>';
 	$no=1;
 	$notals=1;
-	$mon=mysqli_query($config,"SELECT tbl_gaji.*,tbl_user.status_tugas,tbl_user.status_karyawan,tbl_user.kelas_jabatan,tbl_user.nip,tbl_user.nama,tbl_user.jabatan,tbl_user.id_user FROM tbl_gaji,tbl_user WHERE tbl_user.jmrb=0 AND(tbl_user.admin<>1 AND tbl_user.admin<>9 AND tbl_user.id_user<>9999 AND tbl_user.status_aktif=1 AND tbl_user.id_user=tbl_gaji.id_user) ORDER BY tbl_user.status_aktif,tbl_user.admin");
-	while($row=mysqli_fetch_array($mon)){
+	$mona=mysqli_query($config,"SELECT tbl_gaji.*,tbl_user.status_tugas,tbl_user.status_karyawan,tbl_user.kelas_jabatan,tbl_user.nip,tbl_user.nama,tbl_user.jabatan,tbl_user.id_user FROM tbl_gaji,tbl_user WHERE tbl_user.jmrb=0 AND(tbl_user.admin<>1 AND tbl_user.admin<>9 AND tbl_user.id_user<>9999 AND tbl_user.status_aktif=1 AND tbl_user.id_user=tbl_gaji.id_user AND tbl_gaji.status=1 AND tbl_gaji.id_gaji='$idgaji') ORDER BY tbl_user.status_aktif,tbl_user.admin");
+	while($row=mysqli_fetch_array($mona)){
 		echo'
 		<tr>
 		<td>'.$no++.'</td>
@@ -140,7 +140,7 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
 	</tr>';
 	$nod=1;
 	$notalsd=1;
-	$mond=mysqli_query($config,"SELECT tbl_gaji.*,tbl_user.status_tugas,tbl_user.status_karyawan,tbl_user.kelas_jabatan,tbl_user.nip,tbl_user.nama,tbl_user.jabatan,tbl_user.id_user FROM tbl_gaji,tbl_user WHERE tbl_user.jmrb=1 AND(tbl_user.admin<>1 AND tbl_user.admin<>9 AND tbl_user.id_user<>9999 AND tbl_user.status_aktif=1 AND tbl_user.id_user=tbl_gaji.id_user) ORDER BY tbl_user.status_aktif,tbl_user.admin");
+	$mond=mysqli_query($config,"SELECT tbl_gaji.*,tbl_user.status_tugas,tbl_user.status_karyawan,tbl_user.kelas_jabatan,tbl_user.nip,tbl_user.nama,tbl_user.jabatan,tbl_user.id_user FROM tbl_gaji,tbl_user WHERE tbl_user.jmrb=1 AND(tbl_user.admin<>1 AND tbl_user.admin<>9 AND tbl_user.id_user<>9999 AND tbl_user.status_aktif=1 AND tbl_user.id_user=tbl_gaji.id_user AND tbl_gaji.status=1 AND tbl_gaji.id_gaji='$idgaji') ORDER BY tbl_user.status_aktif,tbl_user.admin");
 	while($rowd=mysqli_fetch_array($mond)){
 		echo'
 		<tr>
@@ -183,7 +183,7 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
         echo '
         <td>'.$penla.'</td>
         <td>'.$potla.'</td>
-        <td>'.$row['penerimaan_bersih'].'</td>';
+        <td>'.$rowd['penerimaan_bersih'].'</td>';
 		
 	
 		

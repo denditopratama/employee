@@ -83,14 +83,15 @@
                         $bzx = mysqli_real_escape_string($config,$_POST['keter'][$i]);
                         $kts= mysqli_real_escape_string($config,$_POST['aid'][$i]);
                         $naif = mysqli_real_escape_string($config,$_POST['naip'][$i]);
+                        $naif1 = mysqli_real_escape_string($config,$_POST['keterplg'][$i]);
                         $aidpres=mysqli_real_escape_string($config,$_POST['idpres']);
                         if(!empty($_POST['jmmsk']) || !empty($_POST['jmplg'])){
                             $jamplg=mysqli_real_escape_string($config,$_POST['jmplg'][$i]);
                             $jammsk=mysqli_real_escape_string($config,$_POST['jmmsk'][$i]);
-                            $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."',jam_masuk='".$jammsk."',jam_pulang='".$jamplg."' WHERE nik='".$naif."' AND(id_presensi='$aidpres' AND id='$kts')");
-                        } else {
-                            $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."' WHERE nik='".$naif."' AND(id_presensi='$aidpres' AND id='$kts')");
-                        }
+                            $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."',keterangan_plg='".$naif1."',jam_masuk='".$jammsk."',jam_pulang='".$jamplg."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+                    } else {
+                        $c=mysqli_query($config,"UPDATE tbl_presensi_karyawan SET keterangan='".$bzx."',keterangan_plg='".$naif1."' WHERE nik='".$naif."' AND(id_presensi='".$_POST['idpres']."' AND id='$kts')");
+                    }
     
                     }
                     $_SESSION['succAdd']='Keterangan telah disimpan';
