@@ -207,14 +207,14 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     if($row['jam_masuk']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
                                                         $row['terlambat']='06:00';}
 
-                                                        if($row['keterangan']!=''){
+                                                        if ($row['keterangan']!=''){
                                                             $row['terlambat']='00:00';
                                                         }
                                                     
                                                         if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
                                                             $row['plg_cepat']='02:00';}
                                                     
-                                                            if($row['keterangan_plg']!=''){
+                                                            if ($row['keterangan_plg']!=''){
                                                                 $row['plg_cepat']='00:00';
                                                             }
                                                     
@@ -222,6 +222,15 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                         $row['terlambat']='06:00';
                                                         $row['plg_cepat']='02:00';
                                                        }  
+
+                                                       if ($row['keterangan_plg']!=''){
+                                                        $row['plg_cepat']='00:00';
+                                                    }
+
+                                                    if ($row['keterangan']!=''){
+                                                        $row['terlambat']='00:00';
+                                                    }
+                                                
                                                        if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
                                                         $row['keterangan']='Cuti';
                                                         $row['keterangan_plg']='Cuti';
@@ -231,7 +240,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     
                                                         $row['keterangan']='Tanggal Merah';
                                                         $row['keterangan_plg']='Tanggal Merah';
-                                                        $row['plg_cepat']='0:00';
+                                                        $row['plg_cepat']='00:00';
                                                         $row['terlambat']='00:00';
                                                         
                                                        
