@@ -1409,6 +1409,11 @@ if($_SESSION['admin']!=1){
 																	}
 																	$row['terlambat']=$miu.':'.$miu2;
 																}
+																else {
+																	$miu='00';
+																	$miu2='00';
+																	$row['terlambat']=$miu.':'.$miu2;
+																}
 															   
 																$sas=explode(':',$row['jam_pulang']);
 																$bxs='17:00';
@@ -1424,28 +1429,23 @@ if($_SESSION['admin']!=1){
 			
 																	if($row['jam_pulang']!=''){
 																		$mius2=60-$sas[1];
-																		$row['plg_cepat']=$mius.':'.$mius2;
-																		if(strlen($mius)<2 && $mius2!=''){
-																			$mius='0'.$mius;
-																		}
-																		if(strlen($mius2)<2 && $mius2!=''){
-																			$mius2='0'.$mius2;
-																		}
 																	} else {
-																		$row['jam_pulang']='';
-																		
+																		$mius2=0;
 																	}
 																  
 			
-																
-																	
-																} else {
+																	if(strlen($mius)<2 && $mius2!=''){
+																		$mius='0'.$mius;
+																	}
+																	if(strlen($mius2)<2 && $mius2!=''){
+																		$mius2='0'.$mius2;
+																	}
+																	$row['plg_cepat']=$mius.':'.$mius2;
+																 } else {
 																	$mius='00';
 																	$mius2='00';
 																	$row['plg_cepat']=$mius.':'.$mius2;
-																}
-																
-																
+																}	
 														if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
 															echo '<tr style="background-color:yellow">'; 
 															$row['terlambat']='00:00';
@@ -1487,33 +1487,37 @@ if($_SESSION['admin']!=1){
 																} 
 																 
 																if($row['jam_masuk']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
-																	$row['terlambat']='08:00';}
+																	$row['terlambat']='06:00';}
 																
+																	if($row['keterangan']!=''){
+																		$row['terlambat']='00:00';
+																	}
+			
 																	if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
 																		$row['plg_cepat']='02:00';}
 																
 																		if($row['keterangan_plg']!=''){
 																			$row['plg_cepat']='00:00';
 																		}
-																		
-																		if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
-																			$row['terlambat']='08:00';
-																			$row['plg_cepat']='00:00';
-																		   }  
-																		   if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
-																			$row['keterangan']='Cuti';
-																			$row['keterangan_plg']='Cuti';
-																			$row['plg_cepat']='00:00';
-																		  $row['terlambat']='00:00';
-																		} else if(mysqli_num_rows($yaw)>0){
-																		
-																			$row['keterangan']='Tanggal Merah';
-																			$row['keterangan_plg']='Tanggal Merah';
-																			$row['plg_cepat']='00:00';
-																			$row['terlambat']='00:00';
-																			
-																		   
-																		} 
+																
+																  if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
+																	$row['terlambat']='06:00';
+																	$row['plg_cepat']='02:00';
+																   }  
+																   if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
+																	$row['keterangan']='Cuti';
+																	$row['keterangan_plg']='Cuti';
+																	$row['plg_cepat']='00:00';
+																  $row['terlambat']='00:00';
+																} else if(mysqli_num_rows($yaw)>0){
+																
+																	$row['keterangan']='Tanggal Merah';
+																	$row['keterangan_plg']='Tanggal Merah';
+																	$row['plg_cepat']='00:00';
+																	$row['terlambat']='00:00';
+																	
+																   
+																}
 															   
 																echo'
 																<td id="hahx" style="text-align:center">'.$row['terlambat'].'</td>
@@ -1620,31 +1624,32 @@ if($_SESSION['admin']!=1){
 										   
 											';
 													}
-													if(mysqli_num_rows($query2)!=0){
-														$nnngj=mysqli_query($config,"SELECT menit_telat FROM tbl_handle");
-														list($mkgg)=mysqli_fetch_array($nnngj);
-														if($fok!="" || $fok!=0){
-															$jostelat=($fok/$mkgg)*$sub1;
-														} else {
-															$jostelat=0;
-														}
+													// if(mysqli_num_rows($query2)!=0){
+													// 	$nnngj=mysqli_query($config,"SELECT menit_telat FROM tbl_handle");
+													// 	list($mkgg)=mysqli_fetch_array($nnngj);
+													// 	if($fok!="" || $fok!=0){
+													// 		$jostelat=($fok/$mkgg)*$sub1;
+													// 	} else {
+													// 		$jostelat=0;
+													// 	}
 		
-														if($fok1!="" || $fok1!=0){
-															$joscepat=($fok1/$mkgg)*$sub1;
-														} else {
-															$joscepat=0;
-														}
-														$jossemua=$joscepat+$jostelat;
-														$ceklagi=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id' AND (id_user='$id_user' AND kode_potongan=28)");
-														if(mysqli_num_rows($ceklagi)<=0){
-															if($fok!="" || $fok!=0 || $fok1!='' || $fok1!=0){
-																$kosd=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id','$id_user',28,'$jossemua')");
-															}
+													// 	if($fok1!="" || $fok1!=0){
+													// 		$joscepat=($fok1/$mkgg)*$sub1;
+													// 	} else {
+													// 		$joscepat=0;
+													// 	}
+													// 	$jossemua=$joscepat+$jostelat;
+													// 	$ceklagi=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id' AND (id_user='$id_user' AND kode_potongan=28)");
+													// 	if(mysqli_num_rows($ceklagi)<=0){
+													// 		if($fok!="" || $fok!=0 || $fok1!="" || $fok1!=0){
+													// 			$kosd=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id','$id_user',28,'$jossemua')");
+													// 		}
 															
-														} else {
-															$kosd=mysqli_query($config,"UPDATE tbl_potongan SET jumlah='$jossemua' WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_potongan=28)");
-														}
-													}
+													// 	 } 
+													// 	 else {
+													// 		$kosd=mysqli_query($config,"UPDATE tbl_potongan SET jumlah='$jossemua' WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_potongan=28)");
+													// 	}
+													// }
 												
 												
 					

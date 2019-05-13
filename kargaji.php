@@ -613,7 +613,7 @@
 													echo'
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
-													<td style="text-align:center"><strong>Sub Total</strong></td>
+													<td style="text-align:center" ><strong>Sub Total</strong></td>
 													<td style="text-align:right" ><strong>Rp '.number_format($subtotpot , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
@@ -786,8 +786,8 @@
 				}
 				
 				
-				
-           
+
+				           
         });
 		 });
 			</script>				

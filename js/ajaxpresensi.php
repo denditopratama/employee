@@ -125,6 +125,11 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                         }
                                                         $row['terlambat']=$miu.':'.$miu2;
                                                     }
+                                                    else {
+                                                        $miu='00';
+                                                        $miu2='00';
+                                                        $row['terlambat']=$miu.':'.$miu2;
+                                                    }
                                                    
                                                     $sas=explode(':',$row['jam_pulang']);
                                                     $bxs='17:00';
@@ -152,7 +157,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                             $mius2='0'.$mius2;
                                                         }
                                                         $row['plg_cepat']=$mius.':'.$mius2;
-                                                    } else {
+                                                     } else {
                                                         $mius='00';
                                                         $mius2='00';
                                                         $row['plg_cepat']=$mius.':'.$mius2;
@@ -200,7 +205,11 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     } 
                                                      
                                                     if($row['jam_masuk']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
-                                                        $row['terlambat']='08:00';}
+                                                        $row['terlambat']='06:00';}
+
+                                                        if($row['keterangan']!=''){
+                                                            $row['terlambat']='00:00';
+                                                        }
                                                     
                                                         if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
                                                             $row['plg_cepat']='02:00';}
@@ -210,8 +219,8 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                             }
                                                     
                                                       if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
-                                                        $row['terlambat']='08:00';
-                                                        $row['plg_cepat']='00:00';
+                                                        $row['terlambat']='06:00';
+                                                        $row['plg_cepat']='02:00';
                                                        }  
                                                        if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
                                                         $row['keterangan']='Cuti';
@@ -222,7 +231,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     
                                                         $row['keterangan']='Tanggal Merah';
                                                         $row['keterangan_plg']='Tanggal Merah';
-                                                        $row['plg_cepat']='00:00';
+                                                        $row['plg_cepat']='0:00';
                                                         $row['terlambat']='00:00';
                                                         
                                                        

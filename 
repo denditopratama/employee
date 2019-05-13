@@ -1,0 +1,587 @@
+[33mcommit eecee8e99db0d768c56da5870ef4649e52466d81[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: unknown <denditoprtm@gmail.com>
+Date:   Mon May 13 09:02:29 2019 +0700
+
+    versi 3.5
+
+[33mcommit 9e4cf2eb88bc6b00736a77c8b8802867e9b04553[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Apr 22 23:14:54 2019 +0700
+
+    V 3.5 -KETERANGAN PULANG -POTONGAN PULANG CEPAT -PERBAIKAN EDIT INVENTARIS -PERBAIKAN LAPORAN EXCEL GAJI -FIX TANGGAL LEMBUR
+
+[33mcommit 8c017a1823ace1029c64d2c431a6aa85397e3179[m[33m ([m[1;31mgithub/master[m[33m)[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sat Apr 6 19:04:53 2019 +0700
+
+    hapus latihan
+
+[33mcommit 1c0663c61d77916aa904fa6e315895c85c1a7a39[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sat Apr 6 19:01:36 2019 +0700
+
+    perbaikan konfirmasi
+
+[33mcommit c7531669947a23522d5cdb57b4f09cfc899ba43b[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Mar 22 21:19:55 2019 +0700
+
+    perbaikan bug id_surat
+
+[33mcommit 2e50ef166f255c81c9da00ef593c25b9bf341cb8[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Mar 14 21:31:42 2019 +0700
+
+    perbaikan qr code
+
+[33mcommit 47b0d69582632d741dddf8dfe577eb5dc414b138[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Mar 14 21:29:07 2019 +0700
+
+    qr code fixed
+
+[33mcommit 4a287d409d891b90d6f349f1bd47efc7b5347d1b[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Mar 14 11:17:07 2019 +0700
+
+    perbaikan format lembur
+
+[33mcommit 2af00202215883101828645218abc173ea42433a[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Mar 6 15:42:59 2019 +0700
+
+    asd
+
+[33mcommit 2c5db4fac119e621b49c07a57981eed047c77379[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Mar 6 14:44:59 2019 +0700
+
+    asd
+
+[33mcommit f97d85318269e691e3328ad246c5a6a9d01617f5[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Mar 6 14:42:14 2019 +0700
+
+    asd
+
+[33mcommit 023e49ab60edac1086dc2f6280835017d9bd28d2[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Mar 6 14:15:40 2019 +0700
+
+    tambah GM hapus lembur
+
+[33mcommit 3f79640cc503448f9fce9ee31c9bd45d370397c0[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 15:33:35 2019 +0700
+
+    perbaikan ajax lembur
+
+[33mcommit d411dc1b9d313c390f1eaf6d06afb5b79b609d54[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 15:11:41 2019 +0700
+
+    perbaikan accept presensi
+
+[33mcommit 3dd95281b852dfe97f49a7ddab1c7ecf294e2c57[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 15:09:55 2019 +0700
+
+    perbaikan accept all data
+
+[33mcommit f7ffd2464f1d7f4f141f58f7c78d693caf07565e[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 15:06:44 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit 88844bfd389a0ddaa53f28d7fc4d8d6d4f94df64[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 14:30:55 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit 268b018f5bb209346a021e4bb66db572e3ea658f[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 14:28:13 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit d742e6184ac6f578232470efb26d0a7f6fd684be[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 14:17:30 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit bdc6622ccfee03976ec47838b36eebfb4407d668[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 14:13:45 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit 366ee48fef85e83148f4bcd3bfd78b1f67dc6641[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 14:11:03 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit 2ce6d4a17727633d69600f3e371ea68a6b4ed82d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 12:02:00 2019 +0700
+
+    perbaikan lembur
+
+[33mcommit 9845203be0b0729a7eeb1e5bf3ad713dcc2fee82[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 12:01:13 2019 +0700
+
+    perbaikan lembur
+
+[33mcommit 5b11680b3070ab94e38de6864998dbd7df012311[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 12:00:13 2019 +0700
+
+    perbaikan lembur
+
+[33mcommit e93a77acb707dbb49f37cdb912d4ae12fdfdf73f[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 11:53:58 2019 +0700
+
+    pembaharuan
+
+[33mcommit 72c19b9fed8d6526c93f7ebb9dd95529c9d30f8c[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 11:48:11 2019 +0700
+
+    pembaharuan
+
+[33mcommit 9e7b0fce484357220e1fff18125ff8144bd66882[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Mar 5 11:47:54 2019 +0700
+
+    perbaharuan
+
+[33mcommit d3514ca37f6b119971c23cdc110ab8e0e2ba3d6d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Mar 4 12:02:48 2019 +0700
+
+    perbaikan gaji bpjs nol
+
+[33mcommit 219176702462a73beedbd9aadda732668b2762e9[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Mar 4 10:54:24 2019 +0700
+
+    perbaikan ajax bpjs
+
+[33mcommit d0a31c48b9ef31a306f5e81863c866c54392d639[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Mar 3 01:24:35 2019 +0700
+
+    perbaikan cuti khusus
+
+[33mcommit 1869a3786dad56bf9f15975c71d2424f30662f0e[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sat Mar 2 02:26:20 2019 +0700
+
+    perbaikan hapus disposisi
+
+[33mcommit d45705ec76c76260be8794eb4764c69445f353ce[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sat Mar 2 02:07:49 2019 +0700
+
+    perbaikan disposisi dan pembersihan bug
+
+[33mcommit 1feed8b290d774d5a0e41351b386f6e9da5b86be[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sat Mar 2 00:09:31 2019 +0700
+
+    perbaikan hapus surat
+
+[33mcommit 8028ee5a4a01221182b485361a14973db8b6e71f[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Mar 1 23:30:10 2019 +0700
+
+    perbaikan akses surat
+
+[33mcommit 62395ef0ea833e78b79897104b8a6db151b30130[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Mar 1 22:16:37 2019 +0700
+
+    perubahan menu
+
+[33mcommit 9c564c47d3cbe6dbdbcbd38670518b6b731a2678[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Mar 1 18:02:45 2019 +0700
+
+    perubahan link profil
+
+[33mcommit 2c3baea43943566a4e3c954dc29330f52f10dadd[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 22:27:53 2019 +0700
+
+    perbaikan gaji, penambahan histori gaji,potongan dan penerimaan tetap
+
+[33mcommit 2ca15c90ef942612a5fd1e3bcde9846bb08185cc[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 13:35:51 2019 +0700
+
+    perbaikan perhitungan PPH 21 Penggajian
+
+[33mcommit e1fa2e5d55410d4704045024539a55e44fa6316a[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 00:39:04 2019 +0700
+
+    perbaikan tampil inventaris
+
+[33mcommit 4a589e9c2286f5395adb3097ecba5df1bfce8275[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 00:37:48 2019 +0700
+
+    perbaikan camera
+
+[33mcommit d21b8d6a5e1d586f9dcaf518243378a577286ad6[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 00:32:25 2019 +0700
+
+    perbaikan camera
+
+[33mcommit 7b9beb25fd096d5443d50f283b6366adf35e4807[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 00:27:48 2019 +0700
+
+    penambahan barcode scanner
+
+[33mcommit 1ced1b4554c51244eba097ebb8918fd41bac7326[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 28 00:13:59 2019 +0700
+
+    test
+
+[33mcommit bd0456e7c21b5df7e53107701e6db015fbd7032d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 23:56:44 2019 +0700
+
+    test
+
+[33mcommit a300f5bf18ee0d371d7034056d1a3f9bc585e734[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 23:54:42 2019 +0700
+
+    test
+
+[33mcommit 8bb8223f0dd3a16b95b0101d7667fa88e8102170[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 23:50:19 2019 +0700
+
+    test
+
+[33mcommit ea681d4dd6e3d3380333f0a7d1114c9624246652[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 22:53:22 2019 +0700
+
+    test
+
+[33mcommit e1af32e524ac8270bdbff563cff037fe6a271762[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 22:49:22 2019 +0700
+
+    test
+
+[33mcommit a8bc50e5e565f0a3509e78c44245c585f891dbe2[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 22:43:01 2019 +0700
+
+    tes
+
+[33mcommit 99c616b47f425f584da2ec7d02ead086d0d508fe[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 22:37:56 2019 +0700
+
+    tes
+
+[33mcommit 7009452a6a611b311ed120b07e50ed7c7a2915d7[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 27 22:21:11 2019 +0700
+
+    tes qr code
+
+[33mcommit e4970388ef11c309a23fd9e027d5a41481c3793d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Feb 24 17:21:59 2019 +0700
+
+    penambahan laporan gaji
+
+[33mcommit 6fba1ff8ba8ff9252d7a4e763b6b098738f11ad1[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 21 08:58:26 2019 +0700
+
+    perbaikan notifikasi approval lembur
+
+[33mcommit 9db26876de5c881acd7e1baf671e5085c8db2d64[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Thu Feb 21 08:52:40 2019 +0700
+
+    perbaikan notifikasi
+
+[33mcommit ef654b44b0970935b31b09a709cbaf9a25ba7bf1[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 20 23:23:51 2019 +0700
+
+    efisiensi koding 1
+
+[33mcommit d1286eac3f6451f75180422fe3b5be50512599d3[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 20 22:16:47 2019 +0700
+
+    penambahan foto di tampilan user
+
+[33mcommit f10857af545ec39f35aefeea9a8a622e71fb3ac9[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 20 20:55:44 2019 +0700
+
+    perbaikan perhitungan tabel terlambat
+
+[33mcommit ea7e78a1574844bb1a8e6217ae244267cc445cdb[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 20 17:49:15 2019 +0700
+
+    tuker session 2
+
+[33mcommit 74afb3f4fdaf632137db014fc845bbbe1f071179[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 20 17:47:59 2019 +0700
+
+    tuker session
+
+[33mcommit e1da092e9ab160188b0f17a3122a037e5654ff54[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Wed Feb 20 15:05:02 2019 +0700
+
+    perbaikan edit presensi
+
+[33mcommit 7f0948ffe4c23ef767fb5f9f06b0fbde2d94893f[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Feb 19 22:43:29 2019 +0700
+
+    perbaikan laporan gaji
+
+[33mcommit 00cad015a737e55087be8c7c376c8b242e8a33d8[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Feb 19 22:06:55 2019 +0700
+
+    perbaikan hitungan lembur
+
+[33mcommit 99adf7fb280b2522714a3c2059b96debb8cc40ae[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Feb 19 00:37:45 2019 +0700
+
+    perbaikan hitungan lembur
+
+[33mcommit 6ba24cc08cc60274e4dec03a61bbdadb5d9f5094[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 18 21:29:21 2019 +0700
+
+    notiftoken
+
+[33mcommit 7161efdadf13978dd0ab3262c8a0540366624e48[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 18 21:24:13 2019 +0700
+
+    perbaikan status aktif
+
+[33mcommit 985f30a3847811b0955ecfc1001a239fcb31ab65[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 18 18:39:38 2019 +0700
+
+    pembagian berdasarkan sub unit
+
+[33mcommit 7068fc171e846d1ca10339d213716ef6207d0d0c[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 18 18:08:01 2019 +0700
+
+    perbaikan sisi manager lembur
+
+[33mcommit f595472a545d31e0673a86461f0cfed8a124b709[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 18 17:49:00 2019 +0700
+
+    perbaikan surat manager
+
+[33mcommit 4647c6f30836149f7bc91f3bda1ac04fb939a547[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Feb 15 23:47:28 2019 +0700
+
+    perbaikan approval
+
+[33mcommit 134e902f38f650dacd2fd21166ee41e11ba1bced[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Feb 15 23:37:08 2019 +0700
+
+    perbaikan approval presensi
+
+[33mcommit be206827e7aabef80485cc7fd8971e8a4cb2e315[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Feb 15 20:15:41 2019 +0700
+
+    -perbaikan cuti
+
+[33mcommit e8b025824fc2617cfd78d6c6b5d0242b28a39f23[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Feb 15 19:54:39 2019 +0700
+
+    perbaikan perhitungan alpha
+
+[33mcommit f58992870ec95ed3db6279bb3bd608410c28b1e0[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 4 15:59:53 2019 +0700
+
+    perbaikan waktugame
+
+[33mcommit eb76372e01df7e9659654c1c42fb8b1060decc76[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Feb 4 14:18:01 2019 +0700
+
+    perbaikan judul
+
+[33mcommit 352156ee5afef1f32b58c23c5c4b3f36d07c55fc[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Feb 1 13:56:19 2019 +0700
+
+    perbaikan pipa
+
+[33mcommit 425c16bda9bd1a88f4ede23ec5f48d6d30f5173c[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 25 11:37:13 2019 +0700
+
+    rev 25 jan 2019
+
+[33mcommit f290682f882a34d8a08e72419213311647df421f[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Jan 21 13:43:24 2019 +0700
+
+    perbaikan hapus kode custom gaji
+
+[33mcommit 0cd49a1f46c95fa5ef0b491c1f42d24921adfe6f[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Jan 21 13:35:50 2019 +0700
+
+    rev custom gaji 1
+
+[33mcommit 28ecc57fade12a3277c9da6e44ec925ce3bd8ab8[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Jan 21 13:25:37 2019 +0700
+
+    add custom gaji
+
+[33mcommit 408907a1d19672d4d6f8fe6c4dd56931ad94c1bc[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Jan 20 22:15:07 2019 +0700
+
+    rev cetak cuti
+
+[33mcommit 2234a0ad675afb312870e7aebcf135165633192d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Jan 20 00:44:21 2019 +0700
+
+    +jmrb gaji
+
+[33mcommit c18729ea0b196575506183cd119e170d5270ad6d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Tue Jan 15 23:30:02 2019 +0700
+
+    halaman js fix color selected
+
+[33mcommit e3bc5c700290595f9d05b069e975de18d4e01bc1[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Mon Jan 14 22:44:11 2019 +0700
+
+    perbaikan lembur
+
+[33mcommit c7ded163f7966a58debdefb6237509881c534689[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Jan 13 23:17:36 2019 +0700
+
+    rev
+
+[33mcommit b747995f4a34324ec7064a1a6e5234a0ac596fa2[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Jan 13 23:13:03 2019 +0700
+
+    perbaikan 1
+
+[33mcommit 74bf385ae7a29070d763035fcc0f3d98056ee747[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Jan 13 22:50:39 2019 +0700
+
+    rev cuti part 1
+
+[33mcommit 610766e360b9b8031d040fd4faa1abecee8bfd1d[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Sun Jan 13 21:57:47 2019 +0700
+
+    dok ket cuti part 1
+
+[33mcommit 2deb4a1f260bf44a246e9935ba1f12e50957ba82[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 19:53:05 2019 +0700
+
+    revbug
+
+[33mcommit 5a3629fffd9815c5427f4b7b0fe9fac32cbe47a2[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 19:43:21 2019 +0700
+
+    rev bug google
+
+[33mcommit 0821334502a29f1d210e892268588a747613bc51[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 18:57:41 2019 +0700
+
+    tai
+
+[33mcommit 3b93ad58fb5f0059163cf543a922a11720bd3185[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 18:32:04 2019 +0700
+
+    tai
+
+[33mcommit 629b496f8997d8f90b149bff98d7868710ff49e6[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 18:26:58 2019 +0700
+
+    tes
+
+[33mcommit 8c4a080bb84a41e5ff14d89e308759524edb48ab[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 18:11:46 2019 +0700
+
+    rev bug google sign in
+
+[33mcommit dcf5167b285b6b4a5ae44e5eb12da90ba4580ad9[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 14:31:04 2019 +0700
+
+    revisi gmail
+
+[33mcommit ad9741f96f4ad4166d69e3c6d0ae7b79f922c121[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 02:31:40 2019 +0700
+
+    last
+
+[33mcommit cd897247b5fc92a568adf5f1039be347d97b03d1[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 02:29:02 2019 +0700
+
+    rev bug
+
+[33mcommit 44a37573c263c38feb8d80bc998f005fb20e27af[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 02:27:07 2019 +0700
+
+    cape
+
+[33mcommit b126bfb9b4ea7d12c875615eb96d3a9b532f6e0a[m
+Author: denditopratama <denditoprtm@gmail.com>
+Date:   Fri Jan 11 02:21:35 2019 +0700
+
+    Asd
