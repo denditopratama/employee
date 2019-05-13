@@ -59,7 +59,7 @@
                 }
 			  $database = 'Backup';
                 $file = $database.'_'.date("d_M_Y").'_'.time().'.sql';
-              backup("localhost","root","","dbjmproperti",$file,"*");     
+              backup("localhost","root","euiver7v","dbjmproperti",$file,"*");     
 						
 						
 // Include and instantiate PHPMailer()

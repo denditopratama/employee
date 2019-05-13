@@ -152,17 +152,17 @@
                                 
 							<hr>
                             	
-              
+             
                         <a class="collapsible-header" data-activates="col"><i class="material-icons">attach_money</i> Gaji</a>
                         
                             <ul id="col">
-							<?php if($_SESSION['admin']==1) { ?>	
+							 <?php if($_SESSION['admin']==1) { ?>	
 								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=loggjh">Proses Gaji</a></li>
-									<?php } ?>	
+									      <?php } ?>	
 								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=slip">Slip Gaji</a></li>
 								 </ul>
                         
-             
+       
               
 						
 								
