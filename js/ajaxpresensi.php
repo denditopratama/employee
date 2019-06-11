@@ -65,15 +65,16 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                     <hr>
                                         <thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
                                             <tr>
-                                                <th width="1%" rowspan="2">No</th>
+                                                <th width="2%" rowspan="2">No</th>
                                                 <th width="15%" rowspan="2">Nama</th>
                                                 <th width="16%" rowspan="2">Tanggal</th>
                                                 <th width="5%" rowspan="2">Jam Masuk</th>
                                                 <th width="5%" rowspan="2">Jam Pulang</th>
                                                 <th width="5%" rowspan="2">Terlambat</th>
                                                 <th width="5%" rowspan="2">Pulang Cepat</th>
-                                                <th width="20%" rowspan="2">Keterangan Datang</th>
-                                                <th width="20%" rowspan="2">Keterangan Pulang</th>
+                                                <th width="15%" rowspan="2">Keterangan Datang</th>
+                                                <th width="2%%" rowspan="2"></th>
+                                                <th width="15%" rowspan="2">Keterangan Pulang</th>
                                             </tr>
 											
                                         </thead>
@@ -106,7 +107,9 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     $gaspol1=strtotime($gaspol);
                                                     $gaspol2=strtotime($ereun);
                                                     $tglbereum=date('Y-m-d',strtotime($row['tanggal']));
+                                                    $tglpuasa=date('Y-m-d',strtotime($row['tanggal']));
                                                     $yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
+                                                    $puasa=mysqli_query($config,"SELECT tgl_puasa FROM tbl_ref_tgl_puasa WHERE tgl_puasa='".$tglpuasa."' ");
                                                  
 
                                                     $sa=explode(':',$row['jam_masuk']);
@@ -132,9 +135,17 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     }
                                                    
                                                     $sas=explode(':',$row['jam_pulang']);
-                                                    $bxs='17:00';
+                                                    if(mysqli_num_rows($puasa)>0){
+                                                        $bxs='16:00';
+                                                        $telat=16;
+
+                                                    }
+                                                    else {
+                                                        $bxs='17:00';
+                                                        $telat=17;
+                                                    } 
                                                     if(strtotime($row['jam_pulang'])<strtotime($bxs)){
-                                                        $mius=17-$sas[0];
+                                                        $mius=$telat-$sas[0];
                                                         if($mius<0){
                                                             $mius=00;
                                                         } else if($mius==1){
@@ -213,6 +224,8 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     
                                                         if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
                                                             $row['plg_cepat']='02:00';}
+                                                            if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
+                                                                $row['plg_cepat']='01:00';}
                                                     
                                                             if ($row['keterangan_plg']!=''){
                                                                 $row['plg_cepat']='00:00';
@@ -221,6 +234,10 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                       if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
                                                         $row['terlambat']='06:00';
                                                         $row['plg_cepat']='02:00';
+                                                       }  
+                                                       if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
+                                                        $row['terlambat']='06:00';
+                                                        $row['plg_cepat']='01:00';
                                                        }  
 
                                                        if ($row['keterangan_plg']!=''){
@@ -249,6 +266,7 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                     <td id="hahx" style="text-align:center">'.$row['terlambat'].'</td>
                                                     <td id="hahx" style="text-align:center">'.$row['plg_cepat'].'</td>
                                                     <td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan'].'" name="keter[]" type="text"></td>
+                                                    <td id="hahx" style="text-align:center"></td>
                                                     <td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan_plg'].'" name="keterplg[]" type="text"></td>';
                                                    
                                                
@@ -327,11 +345,11 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                             $fok1=$mb1+$mbz1;
                                             echo '
                                             <input type="hidden" value="'.$id.'" name="idpres">
-                                            <tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
+                                            <tr style="background-color:yellow"><td colspan="10" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
                                             <input type="hidden" id="telatbos" value="'.$fok.'">
-                                            <tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Pulang Cepat : <b>'.$fok1.'</b> Menit</td></tr>
+                                            <tr style="background-color:yellow"><td colspan="10" style="text-align:center">Total Pulang Cepat : <b>'.$fok1.'</b> Menit</td></tr>
                                             <input type="hidden" id="cepatbos" value="'.$fok1.'">
-                                            <tr><td colspan="9" style="text-align:center">';
+                                            <tr><td colspan="10" style="text-align:center">';
                                           
                                            
                                             $bnz=mysqli_query($config,"SELECT status_manager,status_gm FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$id_users'");
@@ -377,10 +395,10 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                                                 
                                             } 
                                             echo'</td></tr>
-                                            <tr><td colspan="9" style="text-align:center"><button type="submit" name="simpanket" class="btn green"><i class="material-icons">add</i> simpan</button></td></tr>
+                                            <tr><td colspan="10" style="text-align:center"><button type="submit" name="simpanket" class="btn green"><i class="material-icons">add</i> simpan</button></td></tr>
                                             </form>';
                                         } else { 
-                                            echo '<tr><td colspan="9"><center><p style="text-align:center" class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                                            echo '<tr><td colspan="10"><center><p style="text-align:center" class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                         }
                                 echo '</table>
                                 </div>
@@ -391,6 +409,9 @@ if(empty($_SESSION['admin']) || $tokent!=$nyet ){
                             
                            
                             ';
+                            
                                     }}
+
+
                             ?>
                             

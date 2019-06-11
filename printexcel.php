@@ -46,8 +46,9 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
     <th>Pot. BPJSTK Jamkes</th>
     <th>Pot. PPh-21 TP</th>
     <th>Pot. PPh-21 TT</th>
-    <th>Penerimaan Lain</th>
-    <th>Potongan Lain</th>
+	<th>Penerimaan Lain</th>
+	<th>Menit Keterlambatan</th>
+	<th>Potongan Lain</th>
     <th>Penerimaan Bersih</th>
 	</tr>';
 	$no=1;
@@ -91,11 +92,15 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
         $kl=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='".$row['id_user']."' AND id_gaji='$idgaji'");
         list($penla)=mysqli_fetch_array($kl);
         $kls=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='".$row['id_user']."' AND id_gaji='$idgaji'");
-        list($potla)=mysqli_fetch_array($kls);
+		list($potla)=mysqli_fetch_array($kls);
+		$klmenit=mysqli_query($config,"SELECT total_menit FROM tbl_potongan WHERE id_user='".$row['id_user']."' AND id_gaji='$idgaji'");
+		list($totmenit)=mysqli_fetch_array($klmenit);
+		$bersihbos = $row['penerimaan_bersih'] - $potla;
         echo '
-        <td>'.$penla.'</td>
+		<td>'.$penla.'</td>
+		<td>'.$totmenit.'</td>
         <td>'.$potla.'</td>
-        <td>'.$row['penerimaan_bersih'].'</td>';
+        <td>'.$bersihbos.'</td>';
 		
 	}
 	echo'
@@ -134,9 +139,10 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
     <th>Pot. BPJSTK Jamkes</th>
     <th>Pot. PPh-21 TP</th>
     <th>Pot. PPh-21 TT</th>
-    <th>Penerimaan Lain</th>
-    <th>Potongan Lain</th>
-    <th>Penerimaan Bersih</th>
+	<th>Penerimaan Lain</th>
+	<th>Menit Keterlambatan</th>
+	<th>Potongan Lain</th>
+	<th>Total Keterlambatan</th>
 	</tr>';
 	$nod=1;
 	$notalsd=1;
@@ -179,9 +185,12 @@ header("Content-Disposition: attachment; filename=Gaji-JMP-$bulan-$tahun.xls");
         $kl=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='".$rowd['id_user']."' AND id_gaji='$idgaji'");
         list($penla)=mysqli_fetch_array($kl);
         $kls=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='".$rowd['id_user']."' AND id_gaji='$idgaji'");
-        list($potla)=mysqli_fetch_array($kls);
+		list($potla)=mysqli_fetch_array($kls);
+		$klmenit=mysqli_query($config,"SELECT total_menit FROM tbl_potongan WHERE id_user='".$row['id_user']."' AND id_gaji='$idgaji'");
+        list($totmenit)=mysqli_fetch_array($klmenit);
         echo '
-        <td>'.$penla.'</td>
+		<td>'.$penla.'</td>
+		<td>'.$totmenit.'</td>
         <td>'.$potla.'</td>
         <td>'.$rowd['penerimaan_bersih'].'</td>';
 		

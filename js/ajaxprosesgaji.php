@@ -13,6 +13,8 @@ if($_SESSION['admin']!=1){
 
                 $id=mysqli_real_escape_string($config,$_GET['id']);
 				$id_user=mysqli_real_escape_string($config,$_GET['karyawan']);
+
+				
 							$pgntau=mysqli_query($config,"SELECT nama,kelas_jabatan,status_tugas,admin FROM tbl_user WHERE id_user='$id_user'");
 							list($tau,$kelas_jabatan,$status_tugas,$admins)=mysqli_fetch_array($pgntau);
 						
@@ -115,8 +117,8 @@ if($_SESSION['admin']!=1){
 													
 													if ($ages<=3 && $status_karyawan==5){
 														$gajix=$gajix*80/100;
-														$mb='(80%)';
-													} else {$mb='';}
+														$mbg='(80%)';
+													} else {$mbg='';}
 													
 													echo'
 													<tr>
@@ -1313,60 +1315,17 @@ if($_SESSION['admin']!=1){
 				});
 				</script>';
 					$query = mysqli_query($config,"UPDATE tbl_gaji SET status=1 WHERE id_user='$id_user' AND id_gaji='$id'");
-					
 
-
-					
-						$o=mysqli_query($config,"SELECT nip FROM tbl_user WHERE id_user='$id_user'");
+					$o=mysqli_query($config,"SELECT nip FROM tbl_user WHERE id_user='$id_user'");
 						list($nik)=mysqli_fetch_array($o);
-				 
-					
-				
-					echo'
-					
-					<style>
-					#hahx{
-						padding:0px!important;
-					}
-					</style>
-					<div class="row jarak-form">
-					';
-					
 					
 					$jjg=mysqli_query($config,"SELECT DISTINCT nik FROM tbl_presensi_karyawan WHERE nik='$nik'");    
 					
 					
 					if(mysqli_num_rows($jjg)<0){
-					   echo '<p style="text-align:center" class="add">Presensi Belum Diupload.</p>';
 						} else {
 														while($data=mysqli_fetch_array($jjg)){
-															echo'
-															<form method="POST">
-												<div class="col m12" id="colres">
-													<table class="bordered" id="tblb">
-													<small>KETERANGAN :</small><br>
-													<small>* Baris berwarna kuning merupakan hari libur mingguan</small><br>
-													<small>* Klik Tombol Simpan Untuk menyimpan keterangan</small><br>
-													<small>* Klik Tombol Persetujuan untuk menyetujui presensi</small><br>
-													<hr>
-														<thead class="blue lighten-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)">
-															<tr>
-															<th width="1%" rowspan="2">No</th>
-															<th width="15%" rowspan="2">Nama</th>
-															<th width="16%" rowspan="2">Tanggal</th>
-															<th width="5%" rowspan="2">Jam Masuk</th>
-															<th width="5%" rowspan="2">Jam Pulang</th>
-															<th width="5%" rowspan="2">Terlambat</th>
-															<th width="5%" rowspan="2">Pulang Cepat</th>
-															<th width="20%" rowspan="2">Keterangan Datang</th>
-															<th width="20%" rowspan="2">Keterangan Pulang</th>
-															</tr>
-															
-														</thead>
-														
-														<tbody>
-															';
-													
+												
 														$query2 = mysqli_query($config, "SELECT * FROM tbl_presensi_karyawan WHERE id_presensi='$sikux' AND nik='".$data['nik']."' ");
 														
 														$namp=mysqli_query($config,"SELECT id_user,admin FROM tbl_user WHERE nip='".$data['nik']."'");
@@ -1390,7 +1349,9 @@ if($_SESSION['admin']!=1){
 																$gaspol1=strtotime($gaspol);
 																$gaspol2=strtotime($ereun);
 																$tglbereum=date('Y-m-d',strtotime($row['tanggal']));
-																$yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
+																$tglpuasa=date('Y-m-d',strtotime($row['tanggal']));
+                                                    			$yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
+                                                    			$puasa=mysqli_query($config,"SELECT tgl_puasa FROM tbl_ref_tgl_puasa WHERE tgl_puasa='".$tglpuasa."' ");
 															 
 			
 																$sa=explode(':',$row['jam_masuk']);
@@ -1416,7 +1377,15 @@ if($_SESSION['admin']!=1){
 																}
 															   
 																$sas=explode(':',$row['jam_pulang']);
-																$bxs='17:00';
+																if(mysqli_num_rows($puasa)>0){
+																	$bxs='16:00';
+																	$telat=16;
+			
+																}
+																else {
+																	$bxs='17:00';
+																	$telat=17;
+																} 
 																if(strtotime($row['jam_pulang'])<strtotime($bxs)){
 																	$mius=17-$sas[0];
 																	if($mius<0){
@@ -1447,36 +1416,22 @@ if($_SESSION['admin']!=1){
 																	$row['plg_cepat']=$mius.':'.$mius2;
 																}	
 														if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
-															echo '<tr style="background-color:yellow">'; 
+														
 															$row['terlambat']='00:00';
 															$row['plg_cepat']='00:00';
 														} else if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
 															$row['keterangan']='Cuti';
 															$row['keterangan_plg']='Cuti';
 															$row['plg_cepat']='00:00';
-															echo '<tr style="background-color:green">'; 
+											
 														} else if(mysqli_num_rows($yaw)>0){
-															echo '<tr style="background-color:red">'; 
 															$row['keterangan']='Tanggal Merah';
 															$row['keterangan_plg']='Tanggal Merah';
 															$row['plg_cepat']='00:00';
 															
-															
+														
 														   
-														} else {
-															echo '<tr>';
-														}
-														 echo'
-																<td id="hahx" style="text-align:center">'.$no.'</td>
-																<td id="hahx" style="text-align:center">'.$row['nama'].'</td>
-																<td id="hahx" style="text-align:center">'.date('d',strtotime($row['tanggal'])).' - '.date('M',strtotime($row['tanggal'])).' - '.date('Y',strtotime($row['tanggal'])).'</td>';
-																if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
-																	echo '<td id="hahx" style="text-align:center"><input type="text" name="jmmsk[]" style="text-align:center;font-size:18px" value="'.$row['jam_masuk'].'"></td>
-																	<td id="hahx" style="text-align:center"><input type="text" name="jmplg[]" style="text-align:center;font-size:18px"  value="'.$row['jam_pulang'].'"></td>';
-																} else {
-																	echo '<td id="hahx" style="text-align:center">'.$row['jam_masuk'].'</td>
-																	<td id="hahx" style="text-align:center">'.$row['jam_pulang'].'</td>';
-																}
+														} 
 																
 																if($row['terlambat']==''){
 																	$row['terlambat']='00:00';
@@ -1495,6 +1450,8 @@ if($_SESSION['admin']!=1){
 			
 																	if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
 																		$row['plg_cepat']='02:00';}
+																		if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
+																			$row['plg_cepat']='01:00';}
 																
 																		if($row['keterangan_plg']!=''){
 																			$row['plg_cepat']='00:00';
@@ -1503,7 +1460,11 @@ if($_SESSION['admin']!=1){
 																  if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
 																	$row['terlambat']='06:00';
 																	$row['plg_cepat']='02:00';
-																   }  
+																   }
+																	if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
+																	$row['terlambat']='06:00';
+																	$row['plg_cepat']='01:00';
+																	}  
 																   if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
 																	$row['keterangan']='Cuti';
 																	$row['keterangan_plg']='Cuti';
@@ -1519,18 +1480,7 @@ if($_SESSION['admin']!=1){
 																   
 																}
 															   
-																echo'
-																<td id="hahx" style="text-align:center">'.$row['terlambat'].'</td>
-																<td id="hahx" style="text-align:center">'.$row['plg_cepat'].'</td>
-																<td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan'].'" name="keter[]" type="text"></td>
-																<td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan_plg'].'" name="keterplg[]" type="text"></td>';
-															   
-														   
-																echo'
-																<input type="hidden" value="'.$row['id'].'" name="aid[]">
-																<input type="hidden" value="'.$row['nik'].'" name="naip[]">
-																';
-																
+														
 																$nyot=explode(':',$row['terlambat']);
 																$nyat=explode(':',$row['plg_cepat']);
 																
@@ -1581,79 +1531,53 @@ if($_SESSION['admin']!=1){
 																		array_push($nyoy2,$nyot[1]);  
 																		array_push($nyoys,$nyat[0]);
 																		array_push($nyoys2,$nyat[1]);
-																		
 																	}
 																}
 			
-																
-															   
-																
-														echo'
-																
-														</tr>
-													</tbody>';
+				
 														}
 														$mb=array_sum($nyoy)*60;
 														$mbz=array_sum($nyoy2);
 														$fok=$mb+$mbz;
-														$mb1=array_sum($nyoys)*60;
+														$mb1=array_sum($nyoys)*60; 
 														$mbz1=array_sum($nyoys2);
 														$fok1=$mb1+$mbz1;
-														echo '
-														<input type="hidden" value="'.$id.'" name="idpres">
-														<tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
-														<input type="hidden" id="telatbos" value="'.$fok.'">
-														<tr style="background-color:yellow"><td colspan="9" style="text-align:center">Total Pulang Cepat : <b>'.$fok1.'</b> Menit</td></tr>
-														<input type="hidden" id="cepatbos" value="'.$fok1.'">
-														<tr><td colspan="9" style="text-align:center">';
-														  
-														 
-															echo'</td></tr>
-															<tr><td colspan="9" style="text-align:center"><button type="submit" name="simpanket" class="btn green"><i class="material-icons">add</i> simpan</button></td></tr>
-															</form>';
-														} else { 
-															echo '<tr><td colspan="9"><center><p style="text-align:center" class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
-														}
-												echo '</table>
-												</div>
-											</div>
-											
-											
-											<!-- Row form END -->
-											
-										   
-											';
-													}
-													// if(mysqli_num_rows($query2)!=0){
-													// 	$nnngj=mysqli_query($config,"SELECT menit_telat FROM tbl_handle");
-													// 	list($mkgg)=mysqli_fetch_array($nnngj);
-													// 	if($fok!="" || $fok!=0){
-													// 		$jostelat=($fok/$mkgg)*$sub1;
-													// 	} else {
-													// 		$jostelat=0;
-													// 	}
-		
-													// 	if($fok1!="" || $fok1!=0){
-													// 		$joscepat=($fok1/$mkgg)*$sub1;
-													// 	} else {
-													// 		$joscepat=0;
-													// 	}
-													// 	$jossemua=$joscepat+$jostelat;
-													// 	$ceklagi=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id' AND (id_user='$id_user' AND kode_potongan=28)");
-													// 	if(mysqli_num_rows($ceklagi)<=0){
-													// 		if($fok!="" || $fok!=0 || $fok1!="" || $fok1!=0){
-													// 			$kosd=mysqli_query($config,"INSERT INTO tbl_potongan(id_gaji,id_user,kode_potongan,jumlah) VALUES('$id','$id_user',28,'$jossemua')");
-													// 		}
-															
-													// 	 } 
-													// 	 else {
-													// 		$kosd=mysqli_query($config,"UPDATE tbl_potongan SET jumlah='$jossemua' WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_potongan=28)");
-													// 	}
-													// }
+													
+														} 
+										
+											// ini potongan code buat masukin data potongan gaji telat ke tbl_potongan
+												if($fok!="" || $fok!=0){				
+													$jumlahPotonganTerlambat = $fok / $mkgg * $sub1;}
+												else {
+													$jumlahPotonganTerlambat = 0;
+												}
+												if($fok1!="" || $fok1!=0){	
+												$jumlahPotonganPulangcepat = $fok1 / $mkgg * $sub1;}
+												else {
+													$jumlahPotonganPulangcepat = 0;
+												}
+												$jumlahPotongan = $jumlahPotonganTerlambat + $jumlahPotonganPulangcepat;
+												$jumlahPotonganmenit = $fok + $fok1;
 												
+												echo '<script>console.log("'.$jumlahPotongan.'");</script>';
+												echo '<script>console.log("'.$jumlahPotonganPulangcepat.'");</script>';
+												echo '<script>console.log("'.$jumlahPotonganTerlambat.'");</script>';
+												echo '<script>console.log("'.$jumlahPotonganmenit.'");</script>';
+
+												$potonganExists=mysqli_query($config,"SELECT DISTINCT(id) FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id'AND kode_potongan=28");
 												
-					
-												} 
+												if (mysqli_num_rows($potonganExists) == 1) {
+													$potonganUpdate=mysqli_query($config,"UPDATE tbl_potongan SET jumlah='$jumlahPotongan', total_menit='$jumlahPotonganmenit' WHERE id_user='$id_user' AND id_gaji='$id'AND kode_potongan=28");
+													echo '<script>console.log("updatebos");</script>';
+												} else {
+													$potonganInsert=mysqli_query($config,"INSERT INTO tbl_potongan (id_gaji, id_user, kode_potongan, jumlah, total_menit) VALUES ('$id', '$id_user', 28, '$jumlahPotongan', '$jumlahPotonganmenit')");
+													echo '<script>console.log("masukbos");</script>';
+											}
+											// selsai
+													}} 
+											
+
+												
                   
 			
 					

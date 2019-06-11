@@ -1,6 +1,7 @@
 
 
 <?php
+
 				$id_user=mysqli_real_escape_string($config,$_REQUEST['karyawan']);
 				
 
@@ -617,7 +618,7 @@
 													<td style="text-align:right" ><strong>Rp '.number_format($subtotpot , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
-													
+													##
 													echo'
 													<tr>
 													<td style="text-align:center" colspan="4"><strong>Potongan Lain</strong></td>
@@ -1002,8 +1003,6 @@
 												$(\'#terima\').val(\'\');
 										}
 									});	 
-								   
-																	
                                           });
 										  </script>';
 										  echo '<div id="modalsz" class="modal" style="width:80%">
