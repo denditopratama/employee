@@ -200,7 +200,6 @@ th,td,tr{
                                         <th id="oi" width="15%">Foto</th>
                                         <th id="oi" width="20%">Nama</th>
                                         <th id="oi" width="10%">NIP</th>
-										
 										<th id="oi" width="15%">Jabatan</th>
                                         <th id="oi" width="12%">Unit Kerja</th>
 										<th id="oi" width="10%">Status</th>

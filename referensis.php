@@ -475,7 +475,7 @@
 									<option value="3">Karyawan Perbantuan</option>
 									<option value="4">Karyawan Tetap</option>
 									<option value="5">PKWT</option>
-									<option value="6">Koperasi</option>
+								
 								</select>
 								</td>
 								<td>

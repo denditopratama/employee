@@ -1387,7 +1387,7 @@ if($_SESSION['admin']!=1){
 																	$telat=17;
 																} 
 																if(strtotime($row['jam_pulang'])<strtotime($bxs)){
-																	$mius=17-$sas[0];
+																	$mius=$telat-$sas[0];
 																	if($mius<0){
 																		$mius=00;
 																	} else if($mius==1){

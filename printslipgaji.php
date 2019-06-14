@@ -250,7 +250,22 @@ $pdf->Cell(20,6,'                          :   '.$status_karyawan,0,1, 'L');
 					list($gajix,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 					
 					$numpangf=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,koreksi_pph21 FROM tbl_gaji WHERE id_gaji='$id_gaji' AND id_user='$id_user'");
-					list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak,$koreksipph)=mysqli_fetch_array($numpangf);
+                    list($pen_jamsostek,$bpjstk_jampes,$bpjstk_jamkes,$tun_pph21_tetap,$tun_pph21_tidak,$pot_jamsostek_kar,$pot_bpjstk_jampes,$pot_bpjstk_jamkes,$pot_pph21_tetap,$pot_pph21_tidak,$koreksipph)=mysqli_fetch_array($numpangf);
+                    
+                    $ngambil=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
+					list($lama)=mysqli_fetch_array($ngambil);
+                    $nambah = date_diff(date_create('2019-06-30'), date_create($lama))->y;
+					$nambahh = date_diff(date_create('2019-06-30'), date_create($lama))->m + $nambah*12;
+                    $agesd = date_diff(date_create($lama), date_create('now'))->y;
+					$ages = date_diff(date_create($lama), date_create('now'))->m + $agesd*12;
+                    if ($ages<=3 && $status_karyawan==5){
+                        $gajix=$gajix*80/100;
+                        $mb='(80%)';
+                    } else {$mb='(100%)';}
+                    if ($nambahh>=12 && $status_karyawan==5){
+                        $gajix=$gajix+500000;
+                    } else {
+                        $gajix=$gajix;}
 //summary
 $pdf->Cell(1 ,5,'',0,1);
 $pdf->Cell(1 ,5,'',0,0);
@@ -277,9 +292,9 @@ $pdf->Cell(15 ,6,'Rp '.number_format($kehadiran , 0, ',', '.').'',0,1,'R');
 
 $pdf->Line(68,115,103,115);
 
-$pdf->Cell(27,6,'',0,0);
+$pdf->Cell(17,6,'',0,0);
 $pdf->SetFont('Arial','B',9);
-$pdf->Cell(16.8 ,6,'Sub Total',0,0);
+$pdf->Cell(26.8 ,6,'Sub Total '.$mb,0,0);
 $pdf->Cell(36.5 ,6,':',0,0);
 
 $pdf->Line(161,115,196,115);

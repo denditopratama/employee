@@ -187,13 +187,13 @@
                                    <tr>
                                                
                                                 <th width="15%" rowspan="2">Tanggal Lembur</th>
-												<th width="16%" rowspan="2">Deskripsi Pekerjaan</th>
-                                                <th width="14%" colspan="4" style="border-bottom:1px solid black">Jam Lembur</th>
-												<th width="16%" rowspan="2">Tindakan</th>
+												<th width="15%" rowspan="2">Deskripsi Pekerjaan</th>
+                                                <th width="15%" colspan="6" style="border-bottom:3px solid black">Jam Lembur</th>
+												<th width="15%" rowspan="2">Tindakan</th>
                                             </tr>
 											<tr>
-											 <th width="7%" colspan="2">Awal</th>
-                                                <th width="7%" colspan="2">Akhir</th>
+											 <th width="15%" colspan="3">Awal</th>
+                                                <th width="15%" colspan="3">Akhir</th>
 											</tr>
 										</thead>
 										
@@ -212,19 +212,26 @@
 										
 										
 										<td style="text-align:center">
-										<input type="number" name="jamawal" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										<input type="minutes" name="jamawal" style="text-align:center" min="00" max="23"  maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										</td>
+                                        <td style="text-align:center">
+										<a>:</a>
+										</td>
+										
+										
+										<td style="text-align:center">
+										<input type="number" name="menitawal" style="text-align:center" min="00" max="59" maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										<td style="text-align:center">
-										<input type="number" name="menitawal" style="text-align:center" min="00" max="59" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+							      			<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										</td>
+										<td style="text-align:center">
+										<a>:</a>
 										</td>
 										
 										<td style="text-align:center">
-							      			<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
-										</td>
-										
-										<td style="text-align:center">
-										<input type="number" name="menitakhir" style="text-align:center" min="00" max="59" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										<input type="number" name="menitakhir" style="text-align:center" min="00" max="59" maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
 										
 										

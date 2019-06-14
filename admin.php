@@ -307,10 +307,6 @@ if($_SESSION['admin']!=1){
   animation-iteration-count: infinite;
 }
 
-
-
-
-
 				</style>
 
 

@@ -147,7 +147,7 @@
 								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=usr">Data Karyawan</a></li>
                                 <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=pres">Presensi</a></li>
                                 <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=cuti">Cuti</a></li>
-                                <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sppd">SPPD</a></li>
+                                <!-- <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=sppd">SPPD</a></li> -->
 								<li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=files">File</a></li>
                                 
 							<hr>
@@ -196,7 +196,7 @@
                     <div class="collapsible-body">
                         <ul>
                           
-                            <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a  <?php if($_SESSION['id_user']!=8){ echo 'onclick="belumjadi();"';} else {echo 'href="indexnyatm.php"';}?> >Tenancy Management</a></li>
+                            <!-- <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a  <?php if($_SESSION['id_user']!=8){ echo 'onclick="belumjadi();"';} else {echo 'href="indexnyatm.php"';}?> >Tenancy Management</a></li> -->
                             <li onmouseover="this.style.backgroundColor='#f9c60b'" onmouseout="this.style.backgroundColor=''"><a href="?page=inve">Inventaris</a></li>
                             
                         </ul>
