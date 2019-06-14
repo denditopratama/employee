@@ -212,7 +212,7 @@
 										
 										
 										<td style="text-align:center">
-										<input type="minutes" name="jamawal" style="text-align:center" min="00" max="23"  maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										<input type="number" name="jamawal" style="text-align:center" min="00" max="23"  maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
 										</td>
                                         <td style="text-align:center">
 										<a>:</a>
