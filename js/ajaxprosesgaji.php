@@ -196,9 +196,7 @@ if($_SESSION['admin']!=1){
 													<tr>
 													<td style="text-align:center" colspan="4"><strong>Penerimaan Umum</strong></td>
 													</tr>';
-													
-													
-													
+												
 													if($status_tugas==1){
 														if($sub1>=$gajipusat){
 														$jamgaji=4.54/100*$sub1;
@@ -1336,7 +1334,7 @@ if($_SESSION['admin']!=1){
 														$nyoys=array();
 														$nyoys2=array();
 													if(mysqli_num_rows($query2) > 0){
-														
+                                            
 														$no = 0;
 														while($row = mysqli_fetch_array($query2)){
 														
@@ -1350,8 +1348,8 @@ if($_SESSION['admin']!=1){
 																$gaspol2=strtotime($ereun);
 																$tglbereum=date('Y-m-d',strtotime($row['tanggal']));
 																$tglpuasa=date('Y-m-d',strtotime($row['tanggal']));
-                                                    			$yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
-                                                    			$puasa=mysqli_query($config,"SELECT tgl_puasa FROM tbl_ref_tgl_puasa WHERE tgl_puasa='".$tglpuasa."' ");
+																$yaw=mysqli_query($config,"SELECT tgl_merah FROM tbl_ref_tgl_merah WHERE tgl_merah='".$tglbereum."' ");
+																$puasa=mysqli_query($config,"SELECT tgl_puasa FROM tbl_ref_tgl_puasa WHERE tgl_puasa='".$tglpuasa."' ");
 															 
 			
 																$sa=explode(':',$row['jam_masuk']);
@@ -1414,25 +1412,41 @@ if($_SESSION['admin']!=1){
 																	$mius='00';
 																	$mius2='00';
 																	$row['plg_cepat']=$mius.':'.$mius2;
-																}	
+																}
+																
+																
 														if(date('D',strtotime($row['tanggal']))=='Sat' || date('D',strtotime($row['tanggal']))=='Sun'){
-														
+															echo '<tr style="background-color:yellow">'; 
 															$row['terlambat']='00:00';
 															$row['plg_cepat']='00:00';
 														} else if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
 															$row['keterangan']='Cuti';
 															$row['keterangan_plg']='Cuti';
 															$row['plg_cepat']='00:00';
-											
+															echo '<tr style="background-color:green">'; 
 														} else if(mysqli_num_rows($yaw)>0){
+															echo '<tr style="background-color:red">'; 
 															$row['keterangan']='Tanggal Merah';
 															$row['keterangan_plg']='Tanggal Merah';
 															$row['plg_cepat']='00:00';
 															
-														
+															
 														   
-														} 
-																
+														} else {
+															echo '<tr>';
+														}
+														 echo'
+																<td id="hahx" style="text-align:center">'.$no.'</td>
+																<td id="hahx" style="text-align:center">'.$row['nama'].'</td>
+																<td id="hahx" style="text-align:center">'.date('d',strtotime($row['tanggal'])).' - '.date('M',strtotime($row['tanggal'])).' - '.date('Y',strtotime($row['tanggal'])).'</td>';
+																if($_SESSION['admin']==1 && $_SESSION['divisi']==2){
+																	echo '<td id="hahx" style="text-align:center"><input type="text" name="jmmsk[]" style="text-align:center;font-size:18px" value="'.$row['jam_masuk'].'"></td>
+																	<td id="hahx" style="text-align:center"><input type="text" name="jmplg[]" style="text-align:center;font-size:18px"  value="'.$row['jam_pulang'].'"></td>';
+																} else {
+																	echo '<td id="hahx" style="text-align:center">'.$row['jam_masuk'].'</td>
+																	<td id="hahx" style="text-align:center">'.$row['jam_pulang'].'</td>';
+																}
+															  
 																if($row['terlambat']==''){
 																	$row['terlambat']='00:00';
 																} 
@@ -1443,28 +1457,37 @@ if($_SESSION['admin']!=1){
 																 
 																if($row['jam_masuk']=='' && $row['keterangan']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
 																	$row['terlambat']='06:00';}
-																
-																	if($row['keterangan']!=''){
+			
+																	if ($row['keterangan']!=''){
 																		$row['terlambat']='00:00';
 																	}
-			
+																
 																	if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
 																		$row['plg_cepat']='02:00';}
 																		if($row['jam_pulang']=='' && $row['keterangan_plg']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
 																			$row['plg_cepat']='01:00';}
 																
-																		if($row['keterangan_plg']!=''){
+																		if ($row['keterangan_plg']!=''){
 																			$row['plg_cepat']='00:00';
 																		}
 																
 																  if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun'){
 																	$row['terlambat']='06:00';
 																	$row['plg_cepat']='02:00';
-																   }
-																	if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
+																   }  
+																   if($row['jam_masuk']=='' && $row['jam_pulang']=='' && date('D',strtotime($row['tanggal']))!='Sat' && date('D',strtotime($row['tanggal']))!='Sun' && (mysqli_num_rows($puasa)>0)){
 																	$row['terlambat']='06:00';
 																	$row['plg_cepat']='01:00';
-																	}  
+																   }  
+			
+																   if ($row['keterangan_plg']!=''){
+																	$row['plg_cepat']='00:00';
+																}
+			
+																if ($row['keterangan']!=''){
+																	$row['terlambat']='00:00';
+																}
+															
 																   if($mosc >= $gaspol1 && $mosc <=$gaspol2 && $goreng==1 && $patut==1){
 																	$row['keterangan']='Cuti';
 																	$row['keterangan_plg']='Cuti';
@@ -1478,9 +1501,20 @@ if($_SESSION['admin']!=1){
 																	$row['terlambat']='00:00';
 																	
 																   
-																}
+																} 
+																echo'
+																<td id="hahx" style="text-align:center">'.$row['terlambat'].'</td>
+																<td id="hahx" style="text-align:center">'.$row['plg_cepat'].'</td>
+																<td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan'].'" name="keter[]" type="text"></td>
+																<td id="hahx" style="text-align:center"></td>
+																<td id="hahx" style="text-align:center"><input style="text-align:center" value="'.$row['keterangan_plg'].'" name="keterplg[]" type="text"></td>';
 															   
-														
+														   
+																echo'
+																<input type="hidden" value="'.$row['id'].'" name="aid[]">
+																<input type="hidden" value="'.$row['nik'].'" name="naip[]">
+																';
+																
 																$nyot=explode(':',$row['terlambat']);
 																$nyat=explode(':',$row['plg_cepat']);
 																
@@ -1531,19 +1565,79 @@ if($_SESSION['admin']!=1){
 																		array_push($nyoy2,$nyot[1]);  
 																		array_push($nyoys,$nyat[0]);
 																		array_push($nyoys2,$nyat[1]);
+																		
 																	}
 																}
 			
-				
+																
+															   
+																
+														echo'
+																
+														</tr>
+													</tbody>';
 														}
 														$mb=array_sum($nyoy)*60;
 														$mbz=array_sum($nyoy2);
 														$fok=$mb+$mbz;
-														$mb1=array_sum($nyoys)*60; 
+														$mb1=array_sum($nyoys)*60;
 														$mbz1=array_sum($nyoys2);
 														$fok1=$mb1+$mbz1;
-													
+														echo '
+														<input type="hidden" value="'.$id.'" name="idpres">
+														<tr style="background-color:yellow"><td colspan="10" style="text-align:center">Total Terlambat : <b>'.$fok.'</b> Menit</td></tr>
+														<input type="hidden" id="telatbos" value="'.$fok.'">
+														<tr style="background-color:yellow"><td colspan="10" style="text-align:center">Total Pulang Cepat : <b>'.$fok1.'</b> Menit</td></tr>
+														<input type="hidden" id="cepatbos" value="'.$fok1.'">
+														<tr><td colspan="10" style="text-align:center">';
+													  
+													   
+														$bnz=mysqli_query($config,"SELECT status_manager,status_gm FROM tbl_status_keterangan_presensi WHERE id_presensi='$id' AND id_user='$id_users'");
+														
+														if($bnz==true){
+															list($statm,$statgm)=mysqli_fetch_array($bnz);
+															if($admin==1 || $admin==2 || $admin==3 || $admin==4){
+																echo '<a class="btn green"><i class="material-icons">done</i> tidak membutuhkan persetujuan</a>' ; 
+															
+															} else
+															if ($admin==5){
+																if($statgm==0){
+																	if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3 || $_SESSION['admin']==4){
+																		echo '<a class="btn red"  href="?page=pres&act=ketpres&sub=approval&id='.$id.'&aksi=gm1&id_user='.$id_users.'"><i class="material-icons">close</i> belum disetujui GM</a>' ;
+																	} else {
+																		echo '<a class="btn red"><i class="material-icons">close</i> belum disetujui GM</a>' ;
+																	}
+																	
+																} else {
+																	if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3 || $_SESSION['admin']==4){
+																	echo '<a class="btn green"  href="?page=pres&act=ketpres&sub=approval&id='.$id.'&aksi=gm0&id_user='.$id_users.'"><i class="material-icons">done</i> sudah disetujui GM</a>' ;
+																	} else {
+																		echo '<a class="btn green"><i class="material-icons">done</i> sudah disetujui GM</a>' ;    
+																	}
+																}
+															} else {
+																if($statm==0){
+																	if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3 || $_SESSION['admin']==4 || $_SESSION['admin']==5){
+																	echo '<a class="btn red"  href="?page=pres&act=ketpres&sub=approval&id='.$id.'&aksi=m1&id_user='.$id_users.'"><i class="material-icons">close</i> belum disetujui manager</a>' ;
+																	} else {
+																		echo '<a class="btn red"><i class="material-icons">close</i> belum disetujui manager</a>' ;   
+																	}
+																} else {
+																	if($_SESSION['admin']==1 || $_SESSION['admin']==2 || $_SESSION['admin']==3 || $_SESSION['admin']==4 || $_SESSION['admin']==5){
+																	echo '<a class="btn green" href="?page=pres&act=ketpres&sub=approval&id='.$id.'&aksi=m0&id_user='.$id_users.'"><i class="material-icons">done</i> sudah disetujui manager</a>' ;
+																	} else {
+																		echo '<a class="btn green"><i class="material-icons">done</i> sudah disetujui manager</a>' ;   
+																	}
+																} 
+															}
+															
+			
+															
 														} 
+														echo'</td></tr>
+														<tr><td colspan="10" style="text-align:center"><button type="submit" name="simpanket" class="btn green"><i class="material-icons">add</i> simpan</button></td></tr>
+														</form>';
+													}
 										
 											// ini potongan code buat masukin data potongan gaji telat ke tbl_potongan
 												if($fok!="" || $fok!=0){				
@@ -1558,11 +1652,12 @@ if($_SESSION['admin']!=1){
 												}
 												$jumlahPotongan = $jumlahPotonganTerlambat + $jumlahPotonganPulangcepat;
 												$jumlahPotonganmenit = $fok + $fok1;
-												
-												echo '<script>console.log("'.$jumlahPotongan.'");</script>';
-												echo '<script>console.log("'.$jumlahPotonganPulangcepat.'");</script>';
-												echo '<script>console.log("'.$jumlahPotonganTerlambat.'");</script>';
+												if ($id_user == 10209){
+												echo '<script>console.log("'.$fok.'");</script>';
+												echo '<script>console.log("'.$fok.'");</script>';
+												echo '<script>console.log("'.$fok1.'");</script>';
 												echo '<script>console.log("'.$jumlahPotonganmenit.'");</script>';
+												}
 
 												$potonganExists=mysqli_query($config,"SELECT DISTINCT(id) FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id'AND kode_potongan=28");
 												
