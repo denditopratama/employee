@@ -111,14 +111,20 @@ if($_SESSION['admin']!=1){
 													
 													$ngambil=mysqli_query($config,"SELECT tgl_bakti FROM tbl_identitas WHERE id_user='$id_user'");
 													list($lama)=mysqli_fetch_array($ngambil);
+													$nambah = date_diff(date_create('2019-06-30'), date_create($lama))->y;
+													$nambahh = date_diff(date_create('2019-06-30'), date_create($lama))->m + $nambah*12;
 													$agesd = date_diff(date_create($lama), date_create('now'))->y;
 													$ages = date_diff(date_create($lama), date_create('now'))->m + $agesd*12;
 												
-													
+											
 													if ($ages<=3 && $status_karyawan==5){
 														$gajix=$gajix*80/100;
 														$mbg='(80%)';
-													} else {$mbg='';}
+													} else {$mbg='(100%)';}
+													if ($nambahh>=12 && $status_karyawan==5){
+														$gajix=$gajix+800000;
+													} else {
+														$gajix=$gajix;}
 													
 													echo'
 													<tr>

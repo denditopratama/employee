@@ -113,7 +113,7 @@
 														$mb='(80%)';
 													} else {$mb='';}
 													if ($nambahh>=12 && $status_karyawan==5){
-														$gajix=$gajix+500000;
+														$gajix=$gajix+800000;
 													} else {
 														$gajix=$gajix;}
 													
