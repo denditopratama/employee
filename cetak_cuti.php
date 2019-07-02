@@ -215,7 +215,7 @@ $pdf->Cell(30 ,6,'Cuti Tahunan yang ke',0,0);
 $pdf->Cell(20 ,6,':',0,0,'R');
 $pdf->Cell(37 ,6,''.($kog+1).' Tahun '.$thn.'',0,1,'L');
 
-$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->d)+1;
+$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->days);
 $pdf->Cell(25 ,6,'',0,0);
 $pdf->Cell(7.5 ,6,'b.',0,0);
 $pdf->Cell(30.5 ,6,'Lamanya Cuti / Tanggal',0,0);
@@ -228,7 +228,7 @@ if($perbedaans>9){
 }
 
 $pdf->SetFont('Arial','',12);
-$pdf->Cell(8 ,6,'Hari / '.date('d',strtotime($tgl_awal)).' '.$nms.' '.date('Y',strtotime($tgl_awal)).' s/d '.date('d',strtotime($tgl_akhir)).' '.$nmd.' '.date('Y',strtotime($tgl_akhir)).'',0,1,'L');
+$pdf->Cell(8 ,6,' Hari / '.date('d',strtotime($tgl_awal)).' '.$nms.' '.date('Y',strtotime($tgl_awal)).' s/d '.date('d',strtotime($tgl_akhir)).' '.$nmd.' '.date('Y',strtotime($tgl_akhir)).'',0,1,'L');
 
 $pdf->Cell(25 ,6,'',0,0);
 $pdf->Cell(7.5 ,6,'c.',0,0);
@@ -252,7 +252,7 @@ if(mysqli_num_rows($mgz)<0){
     $mgz=mysqli_query($config,"SELECT * FROM tbl_cuti WHERE YEAR(tgl_awal)='$thn' AND(id_user='$id_user' AND id>'$id')"); 
 }
 while($x=mysqli_fetch_array($mgz)){
-    $perbedaanx = mysqli_real_escape_string($config,date_diff(date_create($x['tgl_akhir']), date_create($x['tgl_awal']))->d)+1; 
+    $perbedaanx = mysqli_real_escape_string($config,date_diff(date_create($x['tgl_akhir']), date_create($x['tgl_awal']))->days); 
     array_push($per,$perbedaanx); 
 }
 $konx=array_sum($per);
