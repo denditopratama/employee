@@ -479,7 +479,7 @@ $pdf->Cell(64 ,6,' Keterangan :',0,1);
 $pdf->SetFont('Arial','',9);
 
 $pdf->Cell(80.8 ,5,'    1.Jamsostek merupakan tunjangan yang dibayarkan Perusahaan (4,54 %) dan Karyawan (2 %)',0,1);
-$pdf->Cell(80.8 ,5,'    2.PJS Tenaga Kerja Jaminan Pensiun dibayarkan Perusahaan (2%) dan Karyawan (1%), Maks Penghasilan Rp. 7.703.500',0,1);
+$pdf->Cell(80.8 ,5,'    2.PJS Tenaga Kerja Jaminan Pensiun dibayarkan Perusahaan (2%) dan Karyawan (1%), Maks Penghasilan Rp. 8.512.400',0,1);
 $pdf->Cell(80.8 ,5,'    3.BPJS Tenaga Kerja Jaminan Kesehatan dibayarkan Perusahaan (4%) dan Karyawan (1%), Maks Penghasilan Rp. 8.000.000',0,1);
 $pdf->Cell(80.8 ,5,'    4.PPh 21 adalah jumlah Pajak yang seharusnya disetor ke Kantor Pajak',0,1);
 

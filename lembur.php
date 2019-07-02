@@ -209,10 +209,19 @@
 										<input type="text" name="deskripsi" style="text-align:center" required oninvalid="this.setCustomValidity('data tidak boleh kosong')" oninput="setCustomValidity('')">
 										</td>
 										
-										
-										
+                                        <!-- 00 value scrip -->
+										<script>
+                                        function leadingZeros(input) {
+                                        if(!isNaN(input.value) && input.value.length === 1) {
+                                            input.value = '0' + input.value;
+                                        }
+                                        }
+                                        </script>
+                                        <!--END of  00 value scrip -->
+                                                                            
 										<td style="text-align:center">
-										<input type="number" name="jamawal" style="text-align:center" min="00" max="23"  maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										<input type="number" name="jamawal" style="text-align:center" min="00" max="23"  maxLength="2"  oninput="this.value=this.value.slice(0,this.maxLength)" value="00"
+                                         onchange="leadingZeros(this)" onkeyup="leadingZeros(this)" onclick="leadingZeros(this)" required >
 										</td>
                                         <td style="text-align:center">
 										<a>:</a>
@@ -220,18 +229,21 @@
 										
 										
 										<td style="text-align:center">
-										<input type="number" name="menitawal" style="text-align:center" min="00" max="59" maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										<input type="number" name="menitawal" style="text-align:center" min="00" max="59" maxLength="2"  oninput="this.value=this.value.slice(0,this.maxLength)" value="00"
+                                          onchange="leadingZeros(this)" onkeyup="leadingZeros(this)" onclick="leadingZeros(this)" required>
 										</td>
 										
 										<td style="text-align:center">
-							      			<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+							      		<input type="number" name="jamakhir" style="text-align:center" min="00" max="23" maxLength="2" oninput="this.value=this.value.slice(0,this.maxLength)" value="00"
+                                         onchange="leadingZeros(this)" onkeyup="leadingZeros(this)" onclick="leadingZeros(this)" required>
 										</td>
 										<td style="text-align:center">
 										<a>:</a>
 										</td>
 										
 										<td style="text-align:center">
-										<input type="number" name="menitakhir" style="text-align:center" min="00" max="59" maxLength="2" placeholder="00" oninput="this.value=this.value.slice(0,this.maxLength)" required>
+										<input type="number" name="menitakhir" style="text-align:center" min="00" max="59" maxLength="2"  oninput="this.value=this.value.slice(0,this.maxLength)" value="00"
+                                        onchange="leadingZeros(this)" onkeyup="leadingZeros(this)" onclick="leadingZeros(this)" required>
 										</td>
 										
 										

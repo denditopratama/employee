@@ -92,7 +92,7 @@ th,td,tr{
                     $curr = ($pg - 1) * $limit;
                 }
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_user WHERE id_user <>9999 LIMIT $curr, $limit");
+                $query = mysqli_query($config, "SELECT * FROM tbl_user WHERE id_user <>9999 LIMIT $curr, $limit AND status_aktif = 1 ");
                 echo '<!-- Row Start -->
                     <div class="row">
                         <!-- Secondary Nav START -->

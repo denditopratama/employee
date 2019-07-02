@@ -441,7 +441,7 @@
                                 if(mysqli_num_rows($query) > 0){
                                     $no = 1;
                                     while($row = mysqli_fetch_array($query)){
-										$ioko=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'");
+										$ioko=mysqli_query($config,"SELECT nama,admin FROM tbl_user WHERE id_user='".$row['id_user']."'AND status_aktif=1 ");
 										list($nama,$admin)=mysqli_fetch_array($ioko);
                                       echo '
                                         <td style="text-align:center">'.$no++.'</td>

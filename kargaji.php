@@ -111,7 +111,7 @@
 													if ($ages<=3 && $status_karyawan==5){
 														$gajix=$gajix*80/100;
 														$mb='(80%)';
-													} else {$mb='';}
+						 							} else {$mb='';}
 													if ($nambahh>=12 && $status_karyawan==5){
 														$gajix=$gajix+800000;
 													} else {
@@ -227,11 +227,11 @@
 													
 													if($jampesnol==0){
 													
-													if($sub1>= 8094000 || $gajipusat>= 8094000){
+													if($sub1>= 8512400 || $gajipusat>= 8512400){
 													
-														$bpjspensiun=2/100*8094000;
-														$potbpjspensiun=3/100*8094000;	
-														$jpk=1/100*8094000;
+														$bpjspensiun=2/100*8512400;
+														$potbpjspensiun=3/100*8512400;	
+														$jpk=1/100*8512400;
 													} else {
 														if($sub1>=$gajipusat){
 														$bpjspensiun=2/100*$sub1;
@@ -248,13 +248,13 @@
 													
 														$bpjspensiun=0;
 														$potbpjspensiun=0;
-														$jpk=1/100*8094000;
+														$jpk=1/100*8512400;
 													} } else {
 														$bpjspensiun=0;
 														$potbpjspensiun=0;
-														if($sub1>= 8094000 || $gajipusat>= 8094000){
+														if($sub1>= 8512400 || $gajipusat>= 8512400){
 														
-															$jpk=1/100*8094000;
+															$jpk=1/100*8512400;
 														}
 													}
 													$wakd=mysqli_query($config,"UPDATE tbl_gaji SET bpjstk_jampes='$bpjspensiun' WHERE id_user='$id_user' AND id_gaji='$id'");
@@ -490,6 +490,9 @@
 													<td style="text-align:center" colspan="2"><strong>Total Penerimaan</strong></td>
 													<td style="text-align:center" colspan="2"><strong>Rp '.number_format($jumlah , 0, ',', '.').'</strong></td>
 													</tr>';
+													echo '<script>console.log("'.$jumlahx.'");</script>';
+													echo '<script>console.log("'.$subtotpenlain.'");</script>';
+													echo '<script>console.log("'.$sub1.'");</script>';
                             echo '</table>';
 							echo'</div>
 							
