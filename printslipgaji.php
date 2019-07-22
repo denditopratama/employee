@@ -243,10 +243,10 @@ $pdf->Cell(20,6,'                          :   '.$status_karyawan,0,1, 'L');
 
 //Numbers are right-aligned so we give 'R' after new line parameter
 
-				$numpang=mysqli_query($config,"SELECT kelas_jabatan,status_karyawan,status_tugas FROM tbl_user WHERE id_user='$id_user'");
-					list($admin,$status_karyawan,$status_tugas)=mysqli_fetch_array($numpang);
+				$numpang=mysqli_query($config,"SELECT kelas_jabatan,status_karyawan,status_tugas,custom FROM tbl_user WHERE id_user='$id_user'");
+					list($admin,$status_karyawan,$status_tugas,$custom)=mysqli_fetch_array($numpang);
 										
-				$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas')");
+				$gajing=mysqli_query($config,"SELECT gaji,t_jabatan,t_fungsional,t_transportasi,t_utilitas,t_perumahan,t_komunikasi FROM tbl_gaji_pokok WHERE kelas_jabatan='$admin' AND(status_karyawan='$status_karyawan' AND status_tugas='$status_tugas' AND custom='$custom')");
 					list($gajix,$tun_jabatan,$tun_fungsional,$tun_transportasi,$tun_utilitas,$tun_perumahan,$tun_komunikasi)=mysqli_fetch_array($gajing);
 					
 					$numpangf=mysqli_query($config,"SELECT pen_jamsostek,bpjstk_jampes,bpjstk_jamkes,tun_pph21_tetap,tun_pph21_tidak,pot_jamsostek_kar,pot_bpjstk_jampes,pot_bpjstk_jamkes,pot_pph21_tetap,pot_pph21_tidak,koreksi_pph21 FROM tbl_gaji WHERE id_gaji='$id_gaji' AND id_user='$id_user'");
@@ -266,6 +266,7 @@ $pdf->Cell(20,6,'                          :   '.$status_karyawan,0,1, 'L');
                         $gajix=$gajix+800000;
                     } else {
                         $gajix=$gajix;}
+                        
 //summary
 $pdf->Cell(1 ,5,'',0,1);
 $pdf->Cell(1 ,5,'',0,0);
@@ -531,7 +532,10 @@ while($row=mysqli_fetch_array($kodsa)){
 	list($uraipotong)=mysqli_fetch_array($contals);
 $y=$pdf->GetY();
 $pdf->SetXY($x + 98, $y);
-$pdf->MultiCell(150 ,6,'- '.$uraipotong.' : Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,'L');	
+$pdf->Cell(48.9 ,6,'  '.$uraipotong.'',0,0);
+$pdf->Cell(29 ,6,':',0,0);
+$pdf->Cell(15 ,6,'Rp '.number_format($row['jumlah'] , 0, ',', '.').'',0,1,'R');
+
 
 }
 $pdf->SetFont('Arial','B',9);

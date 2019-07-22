@@ -1,10 +1,8 @@
 
 
 <?php
-
 				$id_user=mysqli_real_escape_string($config,$_REQUEST['karyawan']);
 				
-
 							$pgntau=mysqli_query($config,"SELECT nama,kelas_jabatan,status_tugas,admin FROM tbl_user WHERE id_user='$id_user'");
 							list($tau,$kelas_jabatan,$status_tugas,$admins)=mysqli_fetch_array($pgntau);
 							
@@ -38,7 +36,6 @@
 									}
 									
 								}
-
 								$alisd=mysqli_query($config,"SELECT * FROM tbl_potongan_tetap WHERE id_user='$id_user'");
 								while($rowd=mysqli_fetch_array($alisd)){
 									$cekgs=mysqli_query($config,"SELECT * FROM tbl_potongan WHERE id_gaji='$id' AND(id_user='$id_user' AND kode_potongan='".$rowd['kode_potongan']."' AND jumlah='".$rowd['jumlah']."')");
@@ -47,7 +44,6 @@
 									}
 									
 								}
-
 								?>
 
 
@@ -75,11 +71,10 @@
                                             </tr>
 											
                                         </thead>
-
                                         <tbody>
                                             <tr>';
 									
-                                        
+                                        //start
 										$jmk = mysqli_query($config, "SELECT gaji_jm FROM tbl_identitas WHERE id_user='$id_user'");
 										list($gajipusat)=mysqli_fetch_array($jmk);
 										
@@ -107,7 +102,6 @@
 													$agesd = date_diff(date_create($lama), date_create('now'))->y;
 													$ages = date_diff(date_create($lama), date_create('now'))->m + $agesd*12;
 													echo '<script>console.log("'.$nambahh.'");</script>';
-
 													if ($ages<=3 && $status_karyawan==5){
 														$gajix=$gajix*80/100;
 														$mb='(80%)';
@@ -271,17 +265,17 @@
 													if($jamkesnol==0){
 												if ($sub1>= 8000000 || $gajipusat>= 8000000){
 													$bpjskesehatan=4/100*8000000;
-													$potbpjskesehatan=5/100*8000000;
+													$potbpjskesehatan=0.05*8000000;
 													$iubpjs=1/100*8000000;
 													}
 													else {
 														if($sub1>=$gajipusat){
 														$bpjskesehatan=4/100*$sub1;
-														$potbpjskesehatan=5/100*$sub1;
+														$potbpjskesehatan=0.05*$sub1;
 														$iubpjs=1/100*$sub1;	
 														} else {
 														$bpjskesehatan=4/100*$gajipusat;
-														$potbpjskesehatan=5/100*$gajipusat;
+														$potbpjskesehatan=0.05*$gajipusat;
 														$iubpjs=1/100*$gajipusat;}
 													}
 													
@@ -310,9 +304,11 @@
 													
 													</td>
 													</tr>';
+
+													$faygg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_potongan WHERE id_user='$id_user' AND id_gaji='$id'");
+													list($jumla)=mysqli_fetch_array($faygg);	
 													
-													
-													$sub2=$bpjskesehatan+$bpjspensiun+(54/10000*$sub1)+(30/10000*$sub1);
+													$sub2=(454/10000*$sub1);
 												
 													$sum1=$sub2+$sub1;
 													
@@ -328,26 +324,27 @@
 											   array_push($kawin,$i);   
 											   }
 											   
-											  
-											$satu=($sum1*12)+$jumlahx;
-											$satu1=($sum1*12);
+											$satu=($sum1)+$jumlahx;
+											$satu1=($sum1);
+										
 											
-											$dua=(5/100*$satu)+$iubpjs+$jpk+(2/100*$sub1);
-											$dua2=(5/100*$satu1)+$iubpjs+$jpk+(2/100*$sub1);
-											if($dua>=6000000 || $dua2 >=6000000){
-												$dua=6000000;
-												$dua2=6000000;
+											$bijab= (0.05*$satu);
+											if ($bijab>=500000){
+												$bijab=500000;
 											}
-											$tiga=$satu-$dua;
-											$tiga3=$satu1-$dua2;
+											$dua=$bijab+(0.02*$sub1)+$jpk+$iubpjs+$jumla;
+											$dua2=$bijab+(0.02*$sub1)+$iubpjs+$jpk;
 											
-											
+											$tig = $satu-$dua;
+											$tig3 = $satu1-$dua2;
+											$tiga= $tig*12;
+											$tiga3= $tig3*12;
+										
 											$ambil=mysqli_query($config,"SELECT status_keluarga,jenis_kelamin FROM tbl_identitas WHERE id_user='$id_user'");
 											list($statkel,$jenkel)=mysqli_fetch_array($ambil);
 											if($jenkel=='P'){
 												$ptkp=54000000;
 											}
-
 											else if($jenkel=='L'){
 											if($statkel==32 || $statkel==33){
 												$ptkp=54000000;
@@ -368,34 +365,51 @@
 															}
 															
 											$pkp=$tiga-$ptkp;
-											if($pkp<=47500000){
-												$tunj21=($pkp-0)*5/95+0;
-											} else if($pkp<=217500000){
-												$tunj21=($pkp-47500000)*15/85+2500000;
-											} else if($pkp<=405000000){
-												$tunj21=($pkp-217500000)*25/75+32500000;
-											} else if($pkp>405000000){
-												$tunj21=($pkp-405000000)*30/70+95000000;
+											if($pkp<=50000000){
+												$tunj21=($pkp)*0.05;
+											} else if($pkp<=250000000){
+												$tunj21=($pkp-50000000)*0.15+2500000;
+											} else if($pkp<=500000000){
+												$tunj21=($pkp-250000000)*0.25+32500000;
+											} else if($pkp>500000000){
+												$tunj21=($pkp-500000000)*0.3+95000000;
 											} 
+
+											
 											
 											$pkp1=$tiga3-$ptkp;
-											if($pkp1<=47500000){
-												$tunj21tdk=($pkp1-0)*5/95+0;
-											} else if($pkp1<=217500000){
-												$tunj21tdk=($pkp1-47500000)*15/85+2500000;
-											} else if($pkp1<=405000000){
-												$tunj21tdk=($pkp1-217500000)*25/75+32500000;
-											} else if($pkp1>405000000){
-												$tunj21tdk=($pkp1-405000000)*30/70+95000000;
+												if($pkp1<=50000000){
+													$tunj21tdk=($pkp1)*0.05;
+												} else if($pkp1<=250000000){
+													$tunj21tdk=($pkp1-50000000)*0.15+2500000;
+												} else if($pkp1<=500000000){
+													$tunj21tdk=($pkp1-250000000)*0.25+32500000;
+												} else if($pkp1>500000000){
+													$tunj21tdk=($pkp1-500000000)*0.3+95000000;
+												} 
+											
+
+											
+											$jang21=floor($tunj21);
+											$jangtahun=floor($jang21/12);
+										
+											$jang21tidak=floor($tunj21tdk);
+											$jang21tidaktahun=floor($jang21tidak/12);
+
+											$tunpph21tdktetap=floor($jangtahun- $jang21tidaktahun);
+											$tunpph21tetap= floor($jang21/12);
+											if ($tunpph21tetap < 0){
+												$tunpph21tetap=0;
+											}
+											$tunpph21tetapkoreksi=floor($tunpph21tetap - $tunpph21tdktetap);
+											if($tunpph21tetapkoreksi < 0 ){
+												$tunpph21tetapkoreksi=0;
 											}
 											
 											
-											$jang21=floor($tunj21);
-										
-											$jang21tidak=floor($tunj21tdk);
+
 											
-											$tunpph21tdktetap=$jang21-$jang21tidak;
-											$tunpph21tetap=$jang21tidak/12;
+											
 											
 											$fayg=mysqli_query($config,"SELECT SUM(jumlah) FROM tbl_penerimaan WHERE id_user='$id_user' AND id_gaji='$id'");
 											list($jumlahx2)=mysqli_fetch_array($fayg);
@@ -406,10 +420,73 @@
 												$tunpph21tdktetap=0;
 											
 											}
-											$tottunpph21=$tunpph21tdktetap+$tunpph21tetap;
+											$tottunpph21=$tunpph21tetapkoreksi+$tunpph21tdktetap;
+										
+											//gross
+											
+											$satugross=($sum1)+$jumlahx+$tottunpph21;
+											$satu1gross=($sum1)+$tottunpph21;
+											
+											$duagross=$bijab+(0.02*$sub1)+$jpk+$jumla+$iubpjs;
+											$dua2gross=$bijab+(0.02*$sub1)+$jpk+$iubpjs;
+											
+											$tiggross = $satugross-$duagross;
+											$tig3gross = $satu1gross-$dua2gross;
+											$tigagross= $tiggross*12;
+											$tiga3gross= $tig3gross*12;
+										 
+
+
+																
+											$pkpgross=$tigagross-$ptkp;
+											if($pkpgross<=50000000){
+												$tunj21gross=($pkpgross)*0.05;
+											} else if($pkpgross<=250000000){
+												$tunj21gross=($pkpgross-50000000)*0.15+2500000;
+											} else if($pkpgross<=500000000){
+												$tunj21gross=($pkpgross-250000000)*0.25+32500000;
+											} else if($pkpgross>500000000){
+												$tunj21gross=($pkpgross-500000000)*0.3+95000000;
+											} 
+
 											
 											
-											$kojag=mysqli_query($config,"UPDATE tbl_gaji SET tun_pph21_tetap='$tunpph21tetap',tun_pph21_tidak='$tunpph21tdktetap' WHERE id_user='$id_user' AND id_gaji='$id'");
+											$pkp1gross=$tiga3gross-$ptkp;
+												if($pkp1gross<=50000000){
+													$tunj21tdkgross=($pkp1gross)*0.05;
+												} else if($pkp1gross<=250000000){
+													$tunj21tdkgross=($pkp1gross-50000000)*0.15+2500000;
+												} else if($pkp1gross<=500000000){
+													$tunj21tdkgross=($pkp1gross-250000000)*0.25+32500000;
+												} else if($pkp1gross>500000000){
+													$tunj21tdkgross=($pkp1gross-500000000)*0.3+95000000;
+												} 
+												$jang21gross=floor($tunj21gross);
+												$jangtahungross=floor($jang21gross/12);
+											
+												$jang21tidakgross=floor($tunj21tdkgross);
+												$jang21tidaktahungross=floor($jang21tidakgross/12);
+	
+												$tunpph21tdktetapgross=floor($jangtahungross- $jang21tidaktahungross);
+												$tunpph21tetapgross= floor($jang21gross/12);
+												if ($tunpph21tdktetapgross < 0){
+													$tunpph21tdktetapgross=0;
+												}
+												$tunpph21tetapkoreksigross=floor($tunpph21tetapgross - $tunpph21tdktetapgross);
+												if($tunpph21tetapkoreksigross < 0 ){
+													$tunpph21tetapkoreksigross=0;
+												}
+
+												$tottunpph21gross=$tunpph21tetapkoreksigross + $tunpph21tdktetapgross;
+
+												echo '<script>console.log("start");</script>';   
+												echo '<script>console.log("'.$tottunpph21gross.'");</script>'; 
+												echo '<script>console.log("'.$tottunpph21gross.'");</script>';  
+												echo '<script>console.log("'.$tottunpph21gross.'");</script>'; 
+												echo '<script>console.log("'.$tottunpph21gross.'");</script>';  
+												echo '<script>console.log("end");</script>';  
+
+											$kojag=mysqli_query($config,"UPDATE tbl_gaji SET tun_pph21_tetap='$tunpph21tetapkoreksigross',tun_pph21_tidak='$tunpph21tdktetapgross' WHERE id_user='$id_user' AND id_gaji='$id'");
 											$jmks = mysqli_query($config, "SELECT tun_pph21_tetap,tun_pph21_tidak,pot_pph21_tetap,pot_pph21_tidak FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
 										list($pph21tetapku,$pph21tidakku,$potpph21tetapku,$potpph21tidakku)=mysqli_fetch_array($jmks);
 													
@@ -431,7 +508,7 @@
 													
 													
 													
-													$subtotpenlain=$bpjskesehatan+$bpjspensiun+$jamgaji+$tunpph21tdktetap+$tunpph21tetap;
+													$subtotpenlain=$bpjskesehatan+$bpjspensiun+$jamgaji+$tottunpph21gross;
 													
 													
 													echo'
@@ -490,9 +567,7 @@
 													<td style="text-align:center" colspan="2"><strong>Total Penerimaan</strong></td>
 													<td style="text-align:center" colspan="2"><strong>Rp '.number_format($jumlah , 0, ',', '.').'</strong></td>
 													</tr>';
-													echo '<script>console.log("'.$jumlahx.'");</script>';
-													echo '<script>console.log("'.$subtotpenlain.'");</script>';
-													echo '<script>console.log("'.$sub1.'");</script>';
+													
                             echo '</table>';
 							echo'</div>
 							
@@ -512,7 +587,6 @@
                                             </tr>
 											
                                         </thead>
-
                                         <tbody>
                                             <tr>';
                                         
@@ -550,64 +624,18 @@
 													
 													
 													$sub3=$potbpjskesehatan+$potbpjspensiun+$potjamgaji;
-													
-													
-											   
-											$satuw=($sum1*12)+$jumlahx+$tottunpph21;
-											$duaw=(5/100*$satuw)+$iubpjs+$jpk+(2/100*$sub1);
-											if($duaw>=6000000){
-												$duaw=6000000;
-											}
-											$tigaz=$satuw-$duaw;
-											
-														
-											$pkps=$tigaz-$ptkp;
-											if($pkps<=50000000){
-												$pottunj21=5/100*$pkps;
-											} else if($pkps<=250000000){
-												$pottunj21=(($pkps-50000000)*15/100)+2500000;
-											} else if($pkps<=500000000){
-												$pottunj21=(($pkps-250000000)*25/100)+32500000;
-											} else if($pkps>500000000){
-												$pottunj21=(($pkps-500000000)*30/100)+95000000;
-											} 
-											
+												
 										
-											if($pkp1<=50000000){
-												$pottunj21tidak=5/100*$pkp1;
-											} else if($pkp1<=250000000){
-												$pottunj21tidak=(($pkp1-50000000)*15/100)+2500000;
-											} else if($pkp1<=500000000){
-												$pottunj21tidak=(($pkp1-250000000)*25/100)+32500000;
-											} else if($pkp1>500000000){
-												$pottunj21tidak=(($pkp1-500000000)*30/100)+95000000;
-											}
-											
-											
-											
-											
-											$pottunpph21tetap=$pottunj21tidak/12;
-											
-											$pottunpph21tdktetap=$pottunj21-$pottunj21tidak;
-											if($sum1<=4500000){
-												$pottunpph21tetap=0;
-												$pottunpph21tdktetap=0;
-											
-											}
-											$totpotpph21=$pottunpph21tdktetap+$pottunpph21tetap;
-											if($jumlahx==0){
-												$pottunpph21tetap=$pottunpph21tetap+$pottunpph21tdktetap;
-												$pottunpph21tdktetap=0;
-											}
-										
-											$kojags=mysqli_query($config,"UPDATE tbl_gaji SET pot_pph21_tetap='$pottunpph21tetap',pot_pph21_tidak='$pottunpph21tdktetap' WHERE id_user='$id_user' AND id_gaji='$id'");
-											
+												
+											$kojags=mysqli_query($config,"UPDATE tbl_gaji SET pot_pph21_tetap='$tunpph21tetapkoreksigross',pot_pph21_tidak='$tunpph21tdktetapgross' WHERE id_user='$id_user' AND id_gaji='$id'");
+											$jmkss = mysqli_query($config, "SELECT tun_pph21_tetap,tun_pph21_tidak,pot_pph21_tetap,pot_pph21_tidak FROM tbl_gaji WHERE id_user='$id_user' AND id_gaji='$id'");
+											list($pph21tetapku,$pph21tidakku,$potpph21tetapku,$potpph21tidakku)=mysqli_fetch_array($jmkss);
 										
 													echo'
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Potongan PPh-21 Tetap</td>
-													<td style="text-align:right">Rp '.number_format($pottunpph21tetap , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($potpph21tetapku , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
@@ -615,11 +643,11 @@
 													<tr>
 													<td style="text-align:center">-</td>
 													<td style="text-align:center">Potongan PPh-21 Tidak Tetap</td>
-													<td style="text-align:right">Rp '.number_format($pottunpph21tdktetap , 0, ',', '.').'</td>
+													<td style="text-align:right">Rp '.number_format($potpph21tidakku , 0, ',', '.').'</td>
 													<td style="text-align:center">-</td>
 													</tr>';
 													
-													$subtotpot=$sub3+$totpotpph21;
+													$subtotpot=$sub3+$tottunpph21gross;
 													echo'
 													<tr style="border-top:2px solid black">
 													<td style="text-align:center" ><strong></strong></td>
@@ -627,7 +655,7 @@
 													<td style="text-align:right" ><strong>Rp '.number_format($subtotpot , 0, ',', '.').'</strong></td>
 													<td style="text-align:center" ><strong></strong></td>
 													</tr>';
-													##
+													
 													echo'
 													<tr>
 													<td style="text-align:center" colspan="4"><strong>Potongan Lain</strong></td>
@@ -653,7 +681,9 @@
 										</tr>';
                                             
 										
-                                }
+								}
+								
+								//end
                             } else {
                                 echo '<tr><td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u></u> </p></center></td></tr>';
                             }		
@@ -678,7 +708,7 @@
 							<div class="col s12" style="text-align:center;background-color:rgba(255,255,0,0.9)">
 							<h6><strong>Koreksi PPh-21 :</strong></h6>';
 							$kor1=$tunpph21tdktetap+$tunpph21tetap;
-							$kor2=$pottunpph21tdktetap+$pottunpph21tetap;
+							$kor2=$tunpph21tdktetap+$tunpph21tetap;
 							$koreksis=$kor2-$kor1;
 							if($koreksis>0){
 								$koreksiz=$koreksis;
@@ -747,7 +777,6 @@
 					
                 <?php
                     
-
                         echo '
                        			<div class="col m7">
 								<div class="card">
@@ -796,7 +825,6 @@
 				}
 				
 				
-
 				           
         });
 		 });
@@ -881,7 +909,6 @@
 				
                 var inputValue = $('#potongan').val();
 				var nilai = $('#potong').val();
-
 				
 				if(nilai==''){
 					alert('Data Tidak Boleh Kosong !');
@@ -928,7 +955,6 @@
                                             </tr>
 											
                                         </thead>
-
                                         <tbody>
                                             <tr>';
 										 $sekut=mysqli_query($config,"SELECT id,bulan FROM tbl_presensi WHERE MONTH(bulan)='$blan' AND YEAR(bulan)='$than'");
@@ -949,7 +975,6 @@
 													<td style="text-align:center"><h6 id="hoak"></h6></td>';
 										
 									
-
 											echo'
 													
                                             
@@ -997,7 +1022,6 @@
 												} else {
 												$("#potong").val(\'\');}
 											});
-
 											var mo = $(\'#eding\').html().replace(/[^0-9]+/g, "");;
 											$(\'#terima\').val(mo);
 										
@@ -1054,7 +1078,6 @@
 									
                                 </tr>
                             </thead>
-
                             <tbody>
                                 <tr>';
 							$queryq = mysqli_query($config, "SELECT * FROM tbl_cuti WHERE id_user='$id_user' AND(MONTH(tgl_awal)='$blan' AND YEAR(tgl_awal)='$than')");
@@ -1124,7 +1147,6 @@
                                  	<a class="btn small light-green waves-effect waves-light tooltipped" name="simpans" data-position="left" data-tooltip="Cuti sudah disetujui">
                                     <i class="material-icons">done</i> APPROVED</a></td>';}}
 										
-
 											
 										if($row['status_sdm']==0){
 										echo'
@@ -1145,7 +1167,6 @@
 										echo'
 										><i class="material-icons">done</i> APPROVED</a></td>';	
 										}
-
 										
 										
 										$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($row['tgl_akhir']), date_create($row['tgl_awal']))->d)+1;
@@ -1202,7 +1223,6 @@
                                                 <th width="7%">Akhir</th>
 											</tr>
                                         </thead>
-
                                         <tbody>
                                             ';
 										
@@ -1232,7 +1252,6 @@
 														$hourdiff = floor(round((strtotime($row['jam_akhir']) - strtotime($row['jam_awal']))/3600, 1));
 													}
 													
-
 													if($row['status_gm']==1 && $row['status_manager']==1){
 														if($exo[0]-$ex[0]>3 && date('D', strtotime($row['tanggal']))!='Sat' && date('D', strtotime($row['tanggal']))!='Sun' && mysqli_num_rows($yaw)<=0){
 															array_push($tat,3);	
@@ -1250,7 +1269,6 @@
 										 } else {
 											 
 											 
-
 											if((date('D', strtotime($row['tanggal']))=='Sat' || date('D', strtotime($row['tanggal']))=='Sun') && mysqli_num_rows($yaw)==false){
 												if($hourdiff>3){
 													$hourdiff=3;
@@ -1297,7 +1315,6 @@
 													<td style="text-align:center">'.$row['pekerjaan'].'</td>
 													<td style="text-align:center">'.$row['jam_awal'].'</td>
 													<td style="text-align:center">'.$row['jam_akhir'].'</td>';
-
 										
 										echo'
 										
@@ -1363,7 +1380,6 @@
 										echo'
 										<a class="btn small deep-orange waves-effect waves-light tooltipped"data-position="left" data-tooltip="Klik untuk menghapus Lembur" href="?page=lmbr&sub=del&id='.$row['id'].'&id_presensi='.$row['id_presensi'].'" onclick="return confirm(\'Anda yakin ingin menghapus data?\');">
 										<i class="material-icons">delete</i> DEL</a></td>';}
-
 											echo'
 													
                                             </tr>
@@ -1412,10 +1428,4 @@
 					';
 				
 					
-							
-                 
 					
-					
-								
-								
-            

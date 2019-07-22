@@ -215,7 +215,7 @@ $pdf->Cell(30 ,6,'Cuti Tahunan yang ke',0,0);
 $pdf->Cell(20 ,6,':',0,0,'R');
 $pdf->Cell(37 ,6,''.($kog+1).' Tahun '.$thn.'',0,1,'L');
 
-$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->days);
+$perbedaans = mysqli_real_escape_string($config,date_diff(date_create($tgl_akhir), date_create($tgl_awal))->days+1);
 $pdf->Cell(25 ,6,'',0,0);
 $pdf->Cell(7.5 ,6,'b.',0,0);
 $pdf->Cell(30.5 ,6,'Lamanya Cuti / Tanggal',0,0);

@@ -18,7 +18,7 @@
 <html lang="en">
 
 <!-- Include Head START -->
-<!-- E-mployee JMP By Dendito Pratama || denditoprtm@gmail.com -->
+<!-- E-mployee JMP By Dendito Pratama , Rezki Riandy || denditoprtm@gmail.com , sayarezky@gmail.com-->
 <?php include('include/head.php');
 $anc=mysqli_query($config,"SELECT maintenance FROM tbl_akses_user WHERE id=1");
 list($mnt)=mysqli_fetch_array($anc);
@@ -700,7 +700,7 @@ if($_SESSION['admin']!=1){
                 <div class="modal-content white">
 				<div class="input-field col s12">
 				</div>
-				<h5 style="text-align:center;">Selamat Datang Di Dashboard Karyawan E-mployee JMP v3.5</h5>
+				<h5 style="text-align:center;">Selamat Datang Di Dashboard Karyawan E-mployee JMRB v3.6</h5>
 				<h6 style="text-align:center;"></h6>
 				<h6 style="text-align:center;"></h6>
 				<h6 style="text-align:center;"></h6>

@@ -327,7 +327,9 @@ th,td,tr{
                                 </thead>
                                 <tbody>
                                     <tr id="oi">';
-								$querykeunsd=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND admin<> 1 ORDER by kelas_jabatan ASC");			
+                                 if($_SESSION['admin']==1) { $querykeunsd=mysqli_query($config,"SELECT * FROM tbl_user WHERE id_user<>9999 AND admin<> 1 ORDER by kelas_jabatan ASC");			
+                                 } else {
+								$querykeunsd=mysqli_query($config,"SELECT * FROM tbl_user WHERE status_aktif = 1 AND id_user<>9999 AND admin<> 1 ORDER by kelas_jabatan ASC"); }			
                                 if(mysqli_num_rows($querykeunsd) > 0){ 
 								   $no=1;
                                     while($row = mysqli_fetch_array($querykeunsd)){
