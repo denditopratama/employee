@@ -18,7 +18,7 @@
 <html lang="en">
 
 <!-- Include Head START -->
-<!-- E-mployee JMP By Dendito Pratama , Rezki Riandy || denditoprtm@gmail.com , sayarezky@gmail.com-->
+<!-- E-mployee JMP By Dendito Pratama || denditoprtm@gmail.com -->
 <?php include('include/head.php');
 $anc=mysqli_query($config,"SELECT maintenance FROM tbl_akses_user WHERE id=1");
 list($mnt)=mysqli_fetch_array($anc);
